@@ -27,7 +27,21 @@ jobs:
           security set-keychain-settings -lut 21600 "$KC"
           security unlock-keychain -p temp "$KC"
           echo "$P12" | base64 --decode > $RUNNER_TEMP/cert.p12
-          security import $RUNNER_TEMP/cert.p12 -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KC"
+          if ! security import $RUNNER_TEMP/cert.p12 -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KC"; then
+            echo "Dogrudan import olmadi; p12 OpenSSL 3 ile olusturulmus olabilir, eski formata ceviriliyor..."
+            OSSL=$(ls /opt/homebrew/opt/openssl@3/bin/openssl /usr/local/opt/openssl@3/bin/openssl 2>/dev/null | head -1)
+            [ -z "$OSSL" ] && { brew install openssl@3 >/dev/null; OSSL=$(brew --prefix openssl@3)/bin/openssl; }
+            if ! "$OSSL" pkcs12 -in $RUNNER_TEMP/cert.p12 -passin env:P12_PASSWORD -nodes -out $RUNNER_TEMP/cert.pem 2>$RUNNER_TEMP/ossl.err \
+               && ! "$OSSL" pkcs12 -legacy -in $RUNNER_TEMP/cert.p12 -passin env:P12_PASSWORD -nodes -out $RUNNER_TEMP/cert.pem 2>>$RUNNER_TEMP/ossl.err; then
+              cat $RUNNER_TEMP/ossl.err
+              echo "::error::p12 sifresi yanlis (IOS_P12_PASSWORD) ya da dosya bozuk."
+              exit 1
+            fi
+            "$OSSL" pkcs12 -export -legacy -in $RUNNER_TEMP/cert.pem -out $RUNNER_TEMP/cert2.p12 -passout env:P12_PASSWORD
+            security import $RUNNER_TEMP/cert2.p12 -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KC"
+            rm -f $RUNNER_TEMP/cert.pem
+          fi
+          security find-identity -v -p codesigning "$KC"
           security set-key-partition-list -S apple-tool:,apple: -k temp "$KC"
           security list-keychain -d user -s "$KC"
           echo "$PROFILE" | base64 --decode > $RUNNER_TEMP/p.mobileprovision
