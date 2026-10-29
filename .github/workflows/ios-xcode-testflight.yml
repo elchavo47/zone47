@@ -6,9 +6,18 @@ on:
 
 jobs:
   testflight:
-    runs-on: macos-15
+    runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
+
+      - name: Select Xcode 26 (App Store requires the iOS 26 SDK)
+        run: |
+          X=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          [ -z "$X" ] && X=$(ls -d /Applications/Xcode*.app | sort -V | tail -1)
+          echo "Using $X"
+          sudo xcode-select -s "$X/Contents/Developer"
+          xcodebuild -version
+          xcodebuild -version | grep -q "Xcode 2[6-9]" || { echo "::error::Xcode 26 bulunamadi"; exit 1; }
 
       - name: Restore Unity engine library (kept zipped in git, GitHub 100 MB limit)
         run: |
