@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479af168fec0ae946a130630aa13610a, type: 3}
+  m_Name: Z47Refs
+  m_EditorClassIdentifier: Assembly-CSharp::Zone47.Z47Refs
+  swatModel: {fileID: 919132149155446097, guid: 3b0d2d282e8dae243b1937762baa1b29, type: 3}
+  gasModel: {fileID: 919132149155446097, guid: 19b2075db6e20fe43b086e7a8e384675, type: 3}
+  bodyController: {fileID: 9100000, guid: 21a0b7c90cd608b43ad7a30fd3fae676, type: 2}
+  armsController: {fileID: 9100000, guid: e6cb0951f02a37f4e8951a9d724b6b1b, type: 2}
+  weapons:
+  - id: m4
+    displayName: M4A1
+    kind: 0
+    prefab: {fileID: 5866531864089150580, guid: a557d5510f2be0344ac05e6f70ecc12e, type: 3}
+    forePoint: {x: 0, y: 0.0235013, z: 0.19797207}
+    muzzlePoint: {x: 0, y: 0, z: 0.5504}
+    topY: 0.099093586
+    damage: 26
+    fireInterval: 0.085
+    automatic: 1
+    magSize: 30
+    reserve: 150
+    reloadTime: 2.3
+    hipSpread: 2.4
+    adsSpread: 0.35
+    recoil: 0.9
+    range: 180
+    adsFov: 52
+    scope: 0
+    shot: {fileID: 8300000, guid: bf35955b7c2ce284c85d9f37eaef4367, type: 3}
+    hipOffset: {x: 0.115, y: -0.125, z: 0.2}
+  - id: ak
+    displayName: AK-47
+    kind: 0
+    prefab: {fileID: 7094528390161837675, guid: 17553003ba0ca4e4d923a9cf6b98d07a, type: 3}
+    forePoint: {x: 0, y: 0.02356593, z: 0.2824517}
+    muzzlePoint: {x: 0, y: -0.000000014901161, z: 0.6517}
+    topY: 0.13678071
+    damage: 31
+    fireInterval: 0.1
+    automatic: 1
+    magSize: 30
+    reserve: 150
+    reloadTime: 2.5
+    hipSpread: 2.8
+    adsSpread: 0.45
+    recoil: 1.2
+    range: 170
+    adsFov: 52
+    scope: 0
+    shot: {fileID: 8300000, guid: 19820df5afd7aa443b5f57d23d39bb1b, type: 3}
+    hipOffset: {x: 0.12, y: -0.14, z: 0.2}
+  - id: awp
+    displayName: AWP
+    kind: 1
+    prefab: {fileID: 4475544728878516258, guid: a27dc37d9713d4742948da71b081fee4, type: 3}
+    forePoint: {x: 0, y: 0.004575027, z: 0.34048885}
+    muzzlePoint: {x: 0, y: 0.0000000037252903, z: 0.8366}
+    topY: 0.12623605
+    damage: 115
+    fireInterval: 1.25
+    automatic: 0
+    magSize: 5
+    reserve: 25
+    reloadTime: 3
+    hipSpread: 6
+    adsSpread: 0.05
+    recoil: 3.5
+    range: 320
+    adsFov: 18
+    scope: 1
+    shot: {fileID: 8300000, guid: 7dc5e17ed401b3b4894e234d64a13258, type: 3}
+    hipOffset: {x: 0.115, y: -0.13, z: 0.17}
+  - id: glock
+    displayName: GLOCK 17
+    kind: 2
+    prefab: {fileID: 8667631049474345302, guid: efc2643df01724e40859e4db9a88f012, type: 3}
+    forePoint: {x: 0, y: -0.012589386, z: 0.006435074}
+    muzzlePoint: {x: 0, y: 0, z: 0.178}
+    topY: 0.061659835
+    damage: 22
+    fireInterval: 0.14
+    automatic: 0
+    magSize: 15
+    reserve: 75
+    reloadTime: 1.6
+    hipSpread: 1.6
+    adsSpread: 0.5
+    recoil: 1.6
+    range: 90
+    adsFov: 60
+    scope: 0
+    shot: {fileID: 8300000, guid: 663894afa7a67ed4f9e89f6e43e023c6, type: 3}
+    hipOffset: {x: 0.1, y: -0.11, z: 0.26}
+  grenadePrefab: {fileID: 3087410195533179847, guid: 9da8f611bd6d513439d88c1f58af8fa9, type: 3}
+  mapPrefab: {fileID: 6743131410289090053, guid: 333594f531904fd4fa1e60e336c4bbfd, type: 3}
+  skybox: {fileID: 2100000, guid: 0ec8709e5f6bf8143bc23a6f78a45624, type: 2}
+  crateMat: {fileID: 2100000, guid: e44aa72f32e65f64eadbb6c6f18e6e79, type: 2}
+  concreteMat: {fileID: 2100000, guid: 99d828f6600219e45820674450d9bd4d, type: 2}
+  sandbagMat: {fileID: 2100000, guid: fc747a03329b4d34fbfef06b7005e010, type: 2}
+  barrelMat: {fileID: 2100000, guid: 2e53c79044e422e4e8ca487a1d72cd68, type: 2}
+  flashMat: {fileID: 2100000, guid: 95ab79452a932ad4780f818779febdf3, type: 2}
+  smokeMat: {fileID: 2100000, guid: 677b414ceaf877445b8513d6a5841f6a, type: 2}
+  sparkMat: {fileID: 2100000, guid: c043f72e3e2d103419a1fcf8daf43b01, type: 2}
+  holeMat: {fileID: 2100000, guid: f3c18742ffd52f6428860964cf38adbc, type: 2}
+  tracerMat: {fileID: 2100000, guid: 072b17e547479a244b78f28746bad774, type: 2}
+  fireMat: {fileID: 2100000, guid: 8f12d548ae7a945409743ab817bc1bfe, type: 2}
+  headFont: {fileID: 12800000, guid: ae2847d533c31ae4da3f17d0781f25f3, type: 3}
+  bodyFont: {fileID: 12800000, guid: bd0b04e8227664d43a0b4d130bedcf25, type: 3}
+  logo: {fileID: 2800000, guid: 54d3def74527aa645b858dc466f17e06, type: 3}
+  reload: {fileID: 8300000, guid: 1d763b7d005d79142bcc36c77f67ed93, type: 3}
+  dryFire: {fileID: 8300000, guid: 5754fe791dcacfb44b7af13eba066285, type: 3}
+  explosion: {fileID: 8300000, guid: 988ec540f5c7f744d94f58e6aec6d7ce, type: 3}
+  impact: {fileID: 8300000, guid: 3148e28ae1c2ad64bbc0d80ec156b5c4, type: 3}
+  flyby: {fileID: 8300000, guid: a3a472486a3488d45be26016c572b21a, type: 3}
+  pin: {fileID: 8300000, guid: fe5bf115a3801084bb7cb761a5d9e8db, type: 3}
+  casing: {fileID: 8300000, guid: 20d5d0d53ded8a2499a39bf9185e05a0, type: 3}
+  bodyFall: {fileID: 8300000, guid: 0df1ee4feefd34842b194e0064375772, type: 3}
+  awpBolt: {fileID: 8300000, guid: 2a8113271cb25184d9cb88140d66dc78, type: 3}
+  steps:
+  - {fileID: 8300000, guid: 7dc833b9fc4b5fb48adfb51cf364a25a, type: 3}
+  - {fileID: 8300000, guid: b2852a9c3a8911340b38e235ef601769, type: 3}
+  - {fileID: 8300000, guid: 183f26967a9ef4b4782aa90802e4ce94, type: 3}
+  - {fileID: 8300000, guid: 1389f78d89a7d1641a067a2f9301d600, type: 3}
+  ambience: {fileID: 8300000, guid: 1b420fce5e4391349a0c9f26e0a61c08, type: 3}
+  menuMusic: {fileID: 8300000, guid: 42e6cdff8e85a9d489d228be53f68d7d, type: 3}

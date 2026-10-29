@@ -1,0 +1,20 @@
+ZONE 47 / BÖLGE 47  —  v0.1  (AYD Works Games)
+
+KURULUM
+1) Unity Hub > New Project > "Universal 3D" şablonu > adı: Zone47 > Create
+2) Bu zip'ten çıkan "Zone47" klasörünü projenin Assets klasörünün içine sürükle
+3) Unity dosyaları içe aktarınca "Zone 47 kurulumu yapılsın mı?" penceresi çıkar > KUR
+   (Çıkmazsa üst menüden: Zone47 > Kurulumu Yap (Setup))
+4) Kurulum bitince Assets/Zone47/Scenes/Zone47 sahnesi açık olur > Play
+
+EDİTÖRDE TEST
+WASD yürü · Sağ tık basılı + fare = bak · F = ateş · Q = nişan
+R = şarjör · G = bomba · 1/2/3 = silah · Space = zıpla · C = eğil · Esc = duraklat
+Game penceresini yatay telefona ayarla (ör. 2532x1170).
+
+iOS
+File > Build Profiles > iOS > Switch Platform > Build (Xcode projesi çıkar)
+Bundle ID: com.aydworks.zone47 (kurulum otomatik ayarlar)
+
+HATA OLURSA
+Console penceresinin (Window > General > Console) ekran görüntüsünü at.
