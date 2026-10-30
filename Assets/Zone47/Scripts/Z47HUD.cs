@@ -25,6 +25,9 @@ namespace Zone47
         public static Sprite Ring => ring ??= Make(true);
         static Sprite arrow;
         public static Sprite Arrow => arrow ??= MakeArrow();
+        /// Circle split as a 9-slice: any rect drawn with it gets fully rounded ends (pill switches).
+        static Sprite pill;
+        public static Sprite Pill => pill ??= Sprite.Create(Circle.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(63, 63, 63, 63));
         static Sprite MakeArrow()
         {
             int n = 64; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
@@ -40,6 +43,46 @@ namespace Zone47
             t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp;
             return Sprite.Create(t, new Rect(0, 0, n, n), new Vector2(0.5f, 0.5f), 100);
         }
+
+        /// PUBG-style hit direction marker: a soft triangle pointing up (outwards), brightest at the tip.
+        static Sprite dmgTri;
+        public static Sprite DmgTri => dmgTri ??= MakeDmgTri();
+        static Sprite MakeDmgTri()
+        {
+            int w = 128, h = 96; var t = new Texture2D(w, h, TextureFormat.RGBA32, false);
+            var px = new Color32[w * h];
+            Vector2 A = new Vector2(0.5f, 0.94f), B = new Vector2(0.06f, 0.1f), C = new Vector2(0.94f, 0.1f);
+            for (int y = 0; y < h; y++) for (int x = 0; x < w; x++)
+            {
+                float acc = 0f, glow = 0f;
+                for (int sy = 0; sy < 3; sy++) for (int sx = 0; sx < 3; sx++)
+                {
+                    var p = new Vector2((x + (sx + 0.5f) / 3f) / w, (y + (sy + 0.5f) / 3f) / h);
+                    float d = Mathf.Min(EdgeDist(p, A, B), Mathf.Min(EdgeDist(p, B, C), EdgeDist(p, C, A)));
+                    bool inside = Inside(p, A, B, C);
+                    if (inside) acc += 1f;
+                    glow += inside ? 1f : Mathf.Clamp01(1f - d / 0.07f) * 0.45f;
+                }
+                acc /= 9f; glow /= 9f;
+                float v = (y + 0.5f) / h;
+                float a = Mathf.Max(acc * Mathf.Lerp(0.55f, 1f, v), glow * 0.5f);
+                px[y * w + x] = new Color32(255, 255, 255, (byte)(Mathf.Clamp01(a) * 255));
+            }
+            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp;
+            return Sprite.Create(t, new Rect(0, 0, w, h), new Vector2(0.5f, 0.5f), 100);
+        }
+        static float Cross(Vector2 a, Vector2 b, Vector2 p) => (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x);
+        static bool Inside(Vector2 p, Vector2 a, Vector2 b, Vector2 c)
+        {
+            float d1 = Cross(a, b, p), d2 = Cross(b, c, p), d3 = Cross(c, a, p);
+            return !((d1 < 0 || d2 < 0 || d3 < 0) && (d1 > 0 || d2 > 0 || d3 > 0));
+        }
+        static float EdgeDist(Vector2 p, Vector2 a, Vector2 b)
+        {
+            Vector2 ab = b - a; float k = Mathf.Clamp01(Vector2.Dot(p - a, ab) / ab.sqrMagnitude);
+            return (p - (a + ab * k)).magnitude;
+        }
+
         static Sprite Make(bool isRing)
         {
             int n = 128; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
@@ -55,35 +98,133 @@ namespace Zone47
             return Sprite.Create(t, new Rect(0, 0, n, n), new Vector2(0.5f, 0.5f), 100);
         }
 
-        public static Texture2D Vignette()
+        /// Blood on the screen edges: noisy dark-red splatter that thickens toward the corners.
+        static Texture2D blood;
+        public static Texture2D Blood()
         {
-            int n = 256; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
-            var px = new Color32[n * n];
-            for (int y = 0; y < n; y++) for (int x = 0; x < n; x++)
+            if (blood != null) return blood;
+            int w = 320, h = 180; var t = new Texture2D(w, h, TextureFormat.RGBA32, false);
+            var px = new Color32[w * h];
+            var rnd = new System.Random(47);
+            var spots = new List<Vector3>();
+            for (int i = 0; i < 26; i++)
             {
-                float dx = x / (n - 1f) * 2 - 1, dy = y / (n - 1f) * 2 - 1;
-                float r = Mathf.Clamp01((Mathf.Sqrt(dx * dx + dy * dy) - 0.8f) / 0.6f);
-                px[y * n + x] = new Color32(160, 10, 5, (byte)(r * r * 255));
+                float ang = (float)rnd.NextDouble() * Mathf.PI * 2f;
+                Vector2 dir = new Vector2(Mathf.Cos(ang), Mathf.Sin(ang));
+                float k = 1f / Mathf.Max(Mathf.Abs(dir.x), Mathf.Abs(dir.y));
+                Vector2 c = dir * k * (0.88f + (float)rnd.NextDouble() * 0.16f);
+                spots.Add(new Vector3(c.x, c.y, 0.06f + (float)rnd.NextDouble() * 0.14f));
             }
-            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp; return t;
+            for (int y = 0; y < h; y++) for (int x = 0; x < w; x++)
+            {
+                float dx = x / (w - 1f) * 2 - 1, dy = y / (h - 1f) * 2 - 1;
+                float edge = Mathf.Max(Mathf.Pow(Mathf.Abs(dx), 2.6f), Mathf.Pow(Mathf.Abs(dy), 2.8f)) * 0.75f + new Vector2(dx * 0.8f, dy).magnitude * 0.25f;
+                float n = Mathf.PerlinNoise(x * 0.035f, y * 0.035f) * 0.55f + Mathf.PerlinNoise(x * 0.11f + 30f, y * 0.11f) * 0.3f + Mathf.PerlinNoise(x * 0.3f, y * 0.3f + 70f) * 0.15f;
+                float v = edge + (n - 0.5f) * 0.6f;
+                foreach (var sp in spots)
+                {
+                    float d = new Vector2((dx - sp.x) * 1.7f, dy - sp.y).magnitude;
+                    v = Mathf.Max(v, (1f - d / sp.z) * 1.1f + (n - 0.5f) * 0.45f);
+                }
+                // crisp blotches on top of a soft red haze toward the edges
+                float crisp = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.74f, 0.80f, v));
+                float haze = Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(0.35f, 0.95f, edge));
+                float a = Mathf.Max(crisp * 0.95f, haze * 0.4f);
+                float dark = Mathf.Clamp01((v - 0.82f) * 2.5f);
+                byte r = crisp > 0.01f ? (byte)Mathf.Lerp(125, 55, dark) : (byte)95;
+                byte g = crisp > 0.01f ? (byte)Mathf.Lerp(4, 0, dark) : (byte)0;
+                px[y * w + x] = new Color32(r, g, 0, (byte)(Mathf.Clamp01(a) * 255));
+            }
+            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp;
+            return blood = t;
         }
 
+        /// Sniper scope: crisp black reticle with mil-dots and thick posts, red centre dot,
+        /// dark tube rim and a faint glass reflection.
+        static Texture2D scope;
         public static Texture2D Scope()
         {
-            int n = 512; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
+            if (scope != null) return scope;
+            int n = 1024; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
             var px = new Color32[n * n];
+            float pxw = 2f / n;
             for (int y = 0; y < n; y++) for (int x = 0; x < n; x++)
             {
                 float dx = (x + 0.5f) / n * 2 - 1, dy = (y + 0.5f) / n * 2 - 1; float r = Mathf.Sqrt(dx * dx + dy * dy);
-                float a = Mathf.Clamp01((r - 0.97f) * 60f);
-                float edge = Mathf.Clamp01(1f - Mathf.Abs(r - 0.97f) * 40f) * 0.6f;
-                bool line = (Mathf.Abs(dx) < 0.003f && Mathf.Abs(dy) > 0.04f) || (Mathf.Abs(dy) < 0.003f && Mathf.Abs(dx) > 0.04f);
-                bool thick = (Mathf.Abs(dx) < 0.012f && Mathf.Abs(dy) > 0.55f) || (Mathf.Abs(dy) < 0.012f && Mathf.Abs(dx) > 0.55f);
-                float v = Mathf.Max(a, Mathf.Max(edge, (line || thick) ? 0.95f : 0f));
-                px[y * n + x] = new Color32(0, 0, 0, (byte)(Mathf.Clamp01(v) * 255));
+                float ax = Mathf.Abs(dx), ay = Mathf.Abs(dy);
+                // tube: solid outside, steep dark falloff on the inner rim
+                float rim = Mathf.Clamp01((r - 0.985f) / pxw);
+                float shade = Mathf.Pow(Mathf.Clamp01((r - 0.72f) / 0.27f), 2.2f) * 0.9f;
+                // reticle
+                float thin = 0.0028f, thick = 0.016f;
+                float lv = ay > 0.035f ? Mathf.Clamp01((thin - ax) / pxw + 0.5f) : 0f;
+                float lh = ax > 0.035f ? Mathf.Clamp01((thin - ay) / pxw + 0.5f) : 0f;
+                float pv = ay > 0.5f ? Mathf.Clamp01((thick - ax) / pxw + 0.5f) : 0f;
+                float ph = ax > 0.5f ? Mathf.Clamp01((thick - ay) / pxw + 0.5f) : 0f;
+                float dots = 0f;
+                if (ax < 0.02f || ay < 0.02f) for (int k = 1; k <= 5; k++)
+                {
+                    float o = k * 0.085f;
+                    dots = Mathf.Max(dots, Mathf.Clamp01((0.0075f - new Vector2(ax, ay - o).magnitude) / pxw + 0.5f));
+                    dots = Mathf.Max(dots, Mathf.Clamp01((0.0075f - new Vector2(ax - o, ay).magnitude) / pxw + 0.5f));
+                }
+                float ret = Mathf.Max(Mathf.Max(lv, lh), Mathf.Max(Mathf.Max(pv, ph), dots));
+                float red = Mathf.Clamp01((0.0055f - r) / pxw + 0.5f);
+                // faint reflection arc, top-left
+                float refl = Mathf.Clamp01(1f - Mathf.Abs(r - 0.8f) / 0.06f) * Mathf.Clamp01((-dx + dy) * 1.2f - 0.4f) * 0.07f;
+                float a = Mathf.Max(Mathf.Max(rim, shade), ret);
+                Color c = new Color(0, 0, 0, a);
+                if (refl > 0f && a < 0.5f) c = new Color(0.8f, 0.9f, 1f, Mathf.Max(a, refl));
+                if (red > 0f) c = Color.Lerp(c, new Color(1f, 0.1f, 0.05f, 1f), red);
+                px[y * n + x] = c;
             }
-            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp; return t;
+            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp;
+            return scope = t;
         }
+    }
+
+    /// Where the touch buttons sit. Saved per button (centre position + size) and editable in the layout editor.
+    public static class HudLayout
+    {
+        public class Item { public string id, label; public bool left, accent; public Vector2 pos; public float size; public Vector2 defPos; public float defSize; }
+
+        public static Item[] Defaults() => new[]
+        {
+            new Item { id = "move",    label = "b_move",    left = true,  pos = new Vector2(430, 390),  size = 260 },
+            new Item { id = "fire",    label = "b_fire",    left = false, pos = new Vector2(-285, 305), size = 190, accent = true },
+            new Item { id = "fire2",   label = "b_fire",    left = true,  pos = new Vector2(215, 585),  size = 130, accent = true },
+            new Item { id = "aim",     label = "b_aim",     left = false, pos = new Vector2(-465, 215), size = 130 },
+            new Item { id = "jump",    label = "b_jump",    left = false, pos = new Vector2(-170, 490), size = 120 },
+            new Item { id = "crouch",  label = "b_crouch",  left = false, pos = new Vector2(-357, 437), size = 115 },
+            new Item { id = "reload",  label = "b_reload",  left = false, pos = new Vector2(-492, 382), size = 105 },
+            new Item { id = "grenade", label = "b_grenade", left = false, pos = new Vector2(-612, 252), size = 105 },
+        };
+
+        public static Item[] Load()
+        {
+            var a = Defaults();
+            foreach (var it in a)
+            {
+                it.defPos = it.pos; it.defSize = it.size;
+                var s = PlayerPrefs.GetString("z_L_" + it.id, "");
+                var p = s.Split(';');
+                if (p.Length == 3 && float.TryParse(p[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var x)
+                    && float.TryParse(p[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var y)
+                    && float.TryParse(p[2], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var z))
+                { it.pos = new Vector2(x, y); it.size = z; }
+            }
+            return a;
+        }
+
+        public static void Save(Item[] items)
+        {
+            var ci = System.Globalization.CultureInfo.InvariantCulture;
+            foreach (var it in items) PlayerPrefs.SetString("z_L_" + it.id, it.pos.x.ToString(ci) + ";" + it.pos.y.ToString(ci) + ";" + it.size.ToString(ci));
+            PlayerPrefs.Save();
+        }
+
+        public static Item Get(Item[] a, string id) { foreach (var it in a) if (it.id == id) return it; return null; }
+        public static Vector2 Anchor(Item it) => it.left ? Vector2.zero : new Vector2(1, 0);
     }
 
     public class HUD : MonoBehaviour
@@ -99,14 +240,18 @@ namespace Zone47
         RectTransform[] xh = new RectTransform[4];
         Image hitMark; float hitT; bool hitKill;
         RawImage vignette; float dmgT;
-        RawImage scopeImg; Image scopeL, scopeR;
+        RawImage scopeImg; Image scopeL, scopeR, scopeBlink; float blinkT; bool wasScoped;
+        RectTransform full, scopeGroup; Image centerDot, scopeT, scopeB; Vector2 scopeDrift; Vector3 lastFwd;
+        AudioSource breathSrc, heartSrc; float lowHpT; float lastSat = -999f;
+        int cMag = -1, cRes = -1, cS0 = -1, cS1 = -1, cTime = -1, cGren = -1; string cWep;
         RectTransform feed;
         readonly List<(Text t, float time)> feedItems = new List<(Text, float)>();
         GameObject deathPanel, endPanel, pausePanel;
         Text deathTxt, deathTimer;
         float deathAt;
-        Image[] slotImgs = new Image[3];
-        Text[] slotTxt = new Text[3];
+        Image[] slotImgs = new Image[4];
+        Text[] slotTxt = new Text[4];
+        int slotN = 3;
 
         // joystick
         RectTransform joyBase, joyKnob; Vector2 joyOrigin;
@@ -126,25 +271,35 @@ namespace Zone47
             I.Build();
         }
 
-        void OnDestroy() { if (I == this) I = null; Time.timeScale = 1f; }
+        void OnDestroy()
+        {
+            if (I == this) I = null; Time.timeScale = 1f;
+            if (Boot.Exposure != null) Boot.Exposure.saturation.Override(-8f);
+        }
 
         void Build()
         {
             canvas = UIK.Canvas("HUDCanvas", 10);
             canvas.transform.SetParent(transform);
+            // full-screen layer (ignores the notch safe area) for scope, blood and fades
+            full = UIK.Full(canvas.transform, "full");
             root = UIK.Full(canvas.transform, "root");
             var safe = root.gameObject.AddComponent<SafeArea>();
 
-            // damage vignette & scope (behind everything)
-            vignette = UIK.Full(root, "vignette").gameObject.AddComponent<RawImage>();
-            vignette.texture = Gfx.Vignette(); vignette.color = new Color(1, 1, 1, 0); vignette.raycastTarget = false;
+            vignette = UIK.Full(full, "blood").gameObject.AddComponent<RawImage>();
+            vignette.texture = Gfx.Blood(); vignette.color = new Color(1, 1, 1, 0); vignette.raycastTarget = false;
 
-            var scopeR_ = UIK.Rect(root, "scope", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1080, 1080));
+            // scope group moves as one piece (drift with look/movement); black bars overshoot the screen so no gaps show
+            scopeGroup = UIK.Full(full, "scopeGroup");
+            var scopeR_ = UIK.Rect(scopeGroup, "scope", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1080, 1080));
             scopeImg = scopeR_.gameObject.AddComponent<RawImage>(); scopeImg.texture = Gfx.Scope(); scopeImg.raycastTarget = false;
-            scopeL = UIK.Img(root, "scopeL", Color.black, new Vector2(0, 0), new Vector2(0.5f, 1), new Vector2(-540, 0), Vector2.zero);
-            scopeL.rectTransform.pivot = new Vector2(1, 0.5f); scopeL.rectTransform.offsetMax = new Vector2(-540, 0); scopeL.rectTransform.offsetMin = Vector2.zero;
-            scopeR = UIK.Img(root, "scopeR", Color.black, new Vector2(0.5f, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero);
-            scopeR.rectTransform.offsetMin = new Vector2(540, 0); scopeR.rectTransform.offsetMax = Vector2.zero;
+            scopeL = UIK.Img(scopeGroup, "scopeL", Color.black, new Vector2(0, 0), new Vector2(0.5f, 1), Vector2.zero, Vector2.zero);
+            scopeL.rectTransform.offsetMin = new Vector2(-400, -400); scopeL.rectTransform.offsetMax = new Vector2(-539, 400);
+            scopeR = UIK.Img(scopeGroup, "scopeR", Color.black, new Vector2(0.5f, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero);
+            scopeR.rectTransform.offsetMin = new Vector2(539, -400); scopeR.rectTransform.offsetMax = new Vector2(400, 400);
+            scopeT = UIK.Img(scopeGroup, "scopeT", Color.black, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 539 + 200), new Vector2(1100, 400));
+            scopeB = UIK.Img(scopeGroup, "scopeB", Color.black, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -539 - 200), new Vector2(1100, 400));
+            scopeBlink = UIK.Img(full, "blink", new Color(0, 0, 0, 0), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
             SetScope(false);
 
             // crosshair
@@ -154,7 +309,7 @@ namespace Zone47
                 im.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.5f);
                 xh[i] = im.rectTransform;
             }
-            UIK.Img(root, "dot", new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 3));
+            centerDot = UIK.Img(root, "dot", new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 3));
             hitMark = UIK.Img(root, "hit", Color.white, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34));
             hitMark.color = new Color(1, 1, 1, 0);
             for (int i = 0; i < 4; i++)
@@ -163,7 +318,7 @@ namespace Zone47
                 l.rectTransform.localRotation = Quaternion.Euler(0, 0, 45 + 90 * i);
                 l.rectTransform.anchoredPosition = Quaternion.Euler(0, 0, 45 + 90 * i) * new Vector2(0, 11);
             }
-            hitMark.enabled = false;
+            hitMark.gameObject.SetActive(false);   // hides the 4 child lines too (disabling the parent Image alone left them on screen)
 
             // score bar: three separated blocks (allies | clock | enemies) with progress toward the kill target
             var sb = UIK.Rect(root, "scorebar", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -18), new Vector2(620, 70));
@@ -174,9 +329,9 @@ namespace Zone47
             UIK.Txt(clock.transform, "goal", (Settings.Turkish ? "HEDEF " : "TARGET ") + MatchManager.KillTarget, 13, Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 14), new Vector2(118, 18), true);
 
             // kill feed
-            feed = UIK.Rect(root, "feed", new Vector2(1, 1), new Vector2(1, 1), new Vector2(-24, -24), new Vector2(380, 200));
+            feed = UIK.Rect(root, "feed", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24), new Vector2(380, 200));
             var vl = feed.gameObject.AddComponent<VerticalLayoutGroup>();
-            vl.childAlignment = TextAnchor.UpperRight; vl.spacing = 6; vl.childControlHeight = false; vl.childControlWidth = false; vl.childForceExpandHeight = false;
+            vl.childAlignment = TextAnchor.UpperLeft; vl.spacing = 6; vl.childControlHeight = false; vl.childControlWidth = false; vl.childForceExpandHeight = false;
 
             // health
             hpBack = UIK.Img(root, "hpBack", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 26), new Vector2(380, 10));
@@ -184,13 +339,16 @@ namespace Zone47
             hpFill.rectTransform.pivot = new Vector2(0, 0.5f); hpFill.rectTransform.anchoredPosition = new Vector2(2, 0);
 
             // weapon slots
-            string[] names = { "M4A1", "AWP", "GLOCK" };
-            for (int i = 0; i < 3; i++)
+            var lp0 = PlayerController.Local;
+            slotN = lp0 != null ? Mathf.Min(lp0.SlotCount, slotImgs.Length) : 3;
+            for (int i = 0; i < slotN; i++)
             {
                 int idx = i;
-                var b = UIK.Img(root, "slot" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i - 1) * 128, 78), new Vector2(120, 42), true);
+                string nm = lp0 != null ? lp0.SlotDef(i).displayName : "";
+                if (nm == "GLOCK 17") nm = "GLOCK";
+                var b = UIK.Img(root, "slot" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i - (slotN - 1) * 0.5f) * 128, 78), new Vector2(120, 42), true);
                 slotImgs[i] = b;
-                slotTxt[i] = UIK.Txt(b.transform, "t", names[i], 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                slotTxt[i] = UIK.Txt(b.transform, "t", nm, 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
                 var tp = b.gameObject.AddComponent<TouchPad>(); tp.down = e => PInput.select = idx;
             }
 
@@ -205,22 +363,36 @@ namespace Zone47
             killText.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.6f);
             BuildControls();
 
-            // pause button
-            var pb = UIK.Btn(root, "II", new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, -55), new Vector2(84, 70), TogglePause, 40);
+            BuildPauseButton();
 
             BuildDeath(); BuildPause();
             controls.gameObject.SetActive(TouchUI);
         }
 
         // ------------------------------------------------------------ touch controls
+        void BuildPauseButton()
+        {
+            var pb = UIK.Img(root, "pause", new Color(0.03f, 0.035f, 0.03f, 0.7f), new Vector2(1, 1), new Vector2(1, 1), new Vector2(-(24 + RadarR * 2 + 12), -24), new Vector2(64, 64), true);
+            UIK.Img(pb.transform, "a", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-8, 0), new Vector2(7, 24));
+            UIK.Img(pb.transform, "b", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(8, 0), new Vector2(7, 24));
+            UIK.Img(pb.transform, "line", Pal.Accent, new Vector2(0, 0), new Vector2(1, 0), Vector2.zero, new Vector2(0, 3));
+            var b = pb.gameObject.AddComponent<Button>(); b.onClick.AddListener(() => { Sfx.UI(); TogglePause(); });
+        }
+
+        /// Rebuild the touch buttons (after the layout editor saved new positions).
+        public void RebuildControls()
+        {
+            if (controls != null) Destroy(controls.gameObject);
+            fireButtons.Clear(); PInput.fireHeld = false; PInput.move = Vector2.zero;
+            BuildControls();
+            controls.gameObject.SetActive(TouchUI && !deathPanel.activeSelf && endPanel == null);
+        }
+
         void BuildControls()
         {
             controls = UIK.Full(root, "controls");
             controls.SetAsFirstSibling();
-            scopeR.transform.SetAsFirstSibling();
-            scopeL.transform.SetAsFirstSibling();
-            scopeImg.transform.SetAsFirstSibling();
-            vignette.transform.SetAsFirstSibling();
+            var lay = HudLayout.Load();
 
             // look area (right 62%)
             var look = UIK.Img(controls, "look", new Color(0, 0, 0, 0), new Vector2(0.38f, 0), new Vector2(1, 0.86f), Vector2.zero, Vector2.zero, true);
@@ -229,38 +401,44 @@ namespace Zone47
 
             // joystick area (left 38%)
             var joyArea = UIK.Img(controls, "joyArea", new Color(0, 0, 0, 0), new Vector2(0, 0), new Vector2(0.38f, 0.75f), Vector2.zero, Vector2.zero, true);
-            joyBase = UIK.Img(controls, "joyBase", new Color(1, 1, 1, 0.16f), new Vector2(0, 0), new Vector2(0, 0), new Vector2(300, 260), new Vector2(260, 260)).rectTransform;
+            var mv = HudLayout.Get(lay, "move");
+            joyBase = UIK.Img(controls, "joyBase", new Color(1, 1, 1, 0.16f), new Vector2(0, 0), new Vector2(0, 0), mv.pos, Vector2.one * mv.size).rectTransform;
+            joyBase.pivot = new Vector2(0.5f, 0.5f); joyBase.anchoredPosition = mv.pos;
+            joyScale = mv.size / 260f;
             joyBase.GetComponent<Image>().sprite = Gfx.Circle;
             var ring = UIK.Img(joyBase, "ring", new Color(1, 1, 1, 0.4f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); ring.sprite = Gfx.Ring;
-            joyKnob = UIK.Img(joyBase, "knob", new Color(1, 1, 1, 0.75f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(110, 110)).rectTransform;
+            joyKnob = UIK.Img(joyBase, "knob", new Color(1, 1, 1, 0.75f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(110, 110) * joyScale).rectTransform;
             joyKnob.GetComponent<Image>().sprite = Gfx.Circle;
             Vector2 home = joyBase.anchoredPosition;
             joyPad = joyArea.gameObject.AddComponent<TouchPad>();
             joyPad.down = e =>
             {
                 RectTransformUtility.ScreenPointToLocalPointInRectangle(controls, e.position, null, out var lp2);
-                joyBase.anchoredPosition = lp2 + controls.rect.size * 0.5f; joyOrigin = e.position;
+                joyBase.anchoredPosition = lp2 + controls.rect.size * 0.5f; joyOrigin = e.position;   // pivot is centred: base sits under the thumb
                 UpdateJoy(e.position);
             };
             joyPad.drag = e => UpdateJoy(e.position);
             joyPad.up = e => { PInput.move = Vector2.zero; joyKnob.anchoredPosition = Vector2.zero; joyBase.anchoredPosition = home; };
 
             // buttons
-            RoundButton(Settings.Turkish ? "ATEŞ" : "FIRE", new Vector2(-190, 210), 190, Pal.Accent, true, null, fire: true);
-            if (Settings.LeftFire) RoundButton(Settings.Turkish ? "ATEŞ " : "FIRE ", new Vector2(0, 0), 130, Pal.Accent, true, null, fire: true, left: true);
-            aimBtnImg = RoundButton(Settings.Turkish ? "NİŞAN" : "AIM", new Vector2(-400, 150), 130, Color.white, false, () => { AimToggled = !AimToggled; PInput.aim = AimToggled; });
-            RoundButton(Settings.Turkish ? "ZIPLA" : "JUMP", new Vector2(-110, 430), 120, Color.white, false, () => PInput.jump = true);
-            RoundButton(Settings.Turkish ? "EĞİL" : "CROUCH", new Vector2(-300, 380), 115, Color.white, false, () => PInput.crouchToggle = true);
-            RoundButton(Settings.Turkish ? "ŞARJÖR" : "RELOAD", new Vector2(-440, 330), 105, Color.white, false, () => PInput.reload = true);
-            var gb = RoundButton(Settings.Turkish ? "BOMBA" : "GRENADE", new Vector2(-560, 200), 105, Color.white, false, () => PInput.grenade = true);
+            RoundButton(HudLayout.Get(lay, "fire"), Pal.Accent, true, null, fire: true);
+            if (Settings.LeftFire) RoundButton(HudLayout.Get(lay, "fire2"), Pal.Accent, true, null, fire: true);
+            aimBtnImg = RoundButton(HudLayout.Get(lay, "aim"), Color.white, false, () => { AimToggled = !AimToggled; PInput.aim = AimToggled; });
+            RoundButton(HudLayout.Get(lay, "jump"), Color.white, false, () => PInput.jump = true);
+            RoundButton(HudLayout.Get(lay, "crouch"), Color.white, false, () => PInput.crouchToggle = true);
+            RoundButton(HudLayout.Get(lay, "reload"), Color.white, false, () => PInput.reload = true);
+            var gb = RoundButton(HudLayout.Get(lay, "grenade"), Color.white, false, () => PInput.grenade = true);
             grenadeTxt = UIK.Txt(gb.transform, "n", "2", 26, Pal.Accent, TextAnchor.UpperRight, Vector2.one, Vector2.one, new Vector2(-12, -10), new Vector2(40, 30), true);
+            cGren = -1;
         }
+        float joyScale = 1f;
 
-        Image RoundButton(string label, Vector2 pos, float size, Color c, bool fill, Action onDown, bool fire = false, bool left = false)
+        Image RoundButton(HudLayout.Item it, Color c, bool fill, Action onDown, bool fire = false)
         {
-            Vector2 anchor = left ? new Vector2(0, 0) : new Vector2(1, 0);
-            Vector2 p = left ? new Vector2(150, 520) : pos;
-            var img = UIK.Img(controls, label, fill ? new Color(c.r, c.g, c.b, 0.55f) : new Color(0, 0, 0, 0.35f), anchor, anchor, p, new Vector2(size, size), true);
+            string label = L.S(it.label); float size = it.size;
+            Vector2 anchor = HudLayout.Anchor(it);
+            var img = UIK.Img(controls, it.id, fill ? new Color(c.r, c.g, c.b, 0.55f) : new Color(0, 0, 0, 0.35f), anchor, anchor, it.pos, new Vector2(size, size), true);
+            img.rectTransform.pivot = new Vector2(0.5f, 0.5f); img.rectTransform.anchoredPosition = it.pos;
             img.sprite = Gfx.Circle;
             var ring = UIK.Img(img.transform, "ring", new Color(c.r, c.g, c.b, 0.85f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); ring.sprite = Gfx.Ring;
             UIK.Txt(img.transform, "t", label, Mathf.RoundToInt(size * 0.2f), fill ? Color.white : Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
@@ -284,11 +462,11 @@ namespace Zone47
 
         void UpdateJoy(Vector2 screenPos)
         {
-            float radius = 110f * Screen.height / 1080f;
+            float radius = 110f * joyScale * Screen.height / 1080f;
             Vector2 d = screenPos - joyOrigin;
             Vector2 v = Vector2.ClampMagnitude(d / radius, 1.25f);
             PInput.move = Vector2.ClampMagnitude(v, 1f) * (v.magnitude > 1.1f ? 1f : 0.84f);
-            joyKnob.anchoredPosition = Vector2.ClampMagnitude(v, 1f) * 110f;
+            joyKnob.anchoredPosition = Vector2.ClampMagnitude(v, 1f) * 110f * joyScale;
         }
 
         // ------------------------------------------------------------ panels
@@ -307,7 +485,7 @@ namespace Zone47
             UIK.Img(pausePanel.transform, "bg", new Color(0, 0, 0, 0.75f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             UIK.Txt(pausePanel.transform, "t", L.S("paused"), 80, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 240), new Vector2(1000, 120), true);
             UIK.Btn(pausePanel.transform, L.S("resume"), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 80), new Vector2(520, 96), TogglePause, 44, true);
-            UIK.Btn(pausePanel.transform, L.S("settings"), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -40), new Vector2(520, 96), () => Boot.I.ShowSettings(canvas.transform, null), 44);
+            UIK.Btn(pausePanel.transform, L.S("settings"), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -40), new Vector2(520, 96), () => { pausePanel.SetActive(false); Boot.I.ShowSettings(canvas.transform, () => { if (Paused) pausePanel.SetActive(true); }, true); }, 44);
             UIK.Btn(pausePanel.transform, L.S("mainmenu"), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -160), new Vector2(520, 96), () => Boot.I.ToMenu(), 44);
             pausePanel.SetActive(false);
         }
@@ -374,8 +552,9 @@ namespace Zone47
         public void HitMarker(bool kill, bool head)
         {
             hitT = kill ? 0.45f : 0.18f; hitKill = kill || head;
-            hitMark.enabled = true;
-            if (kill) Sfx.Play2D(Z47Refs.I.casing, 0.25f, 0.05f);
+            hitMark.gameObject.SetActive(true);
+            if (head) Sfx.Play2D(Z47Refs.I.headshot, 0.6f, 0.04f);
+            else if (kill) Sfx.Play2D(Z47Refs.I.casing, 0.25f, 0.05f);
             else Sfx.Play2D(Z47Refs.I.impact, 0.14f, 0.1f);
         }
 
@@ -383,8 +562,12 @@ namespace Zone47
         {
             dmgT = 1f;
             var p = PlayerController.Local; if (p == null) return;
-            var ind = indicators[indIdx]; indIdx = (indIdx + 1) % indicators.Length;
-            ind.from = from; ind.t = 1.4f;
+            // refresh an existing marker pointing the same way instead of stacking them
+            Vector3 to = (from - p.transform.position).Flat();
+            Ind ind = null;
+            foreach (var x in indicators) if (x.t > 0 && Vector3.Angle((x.from - p.transform.position).Flat(), to) < 18f) { ind = x; break; }
+            if (ind == null) { ind = indicators[indIdx]; indIdx = (indIdx + 1) % indicators.Length; ind.pop = 1f; }
+            ind.from = from; ind.t = 1.6f;
         }
 
         public void Fired() { }
@@ -393,8 +576,8 @@ namespace Zone47
         {
             string kn = killer != null && killer != victim ? Colored(killer) : "";
             string line = (kn != "" ? kn + "  <color=#B0A890>»</color>  " : "") + Colored(victim) + (headshot ? "  <color=#F29E1F>[" + L.S("headshot") + "]</color>" : "");
-            var bg = UIK.Img(feed, "k", new Color(0, 0, 0, 0.45f), new Vector2(1, 1), new Vector2(1, 1), Vector2.zero, new Vector2(380, 30));
-            var t = UIK.Txt(bg.transform, "t", line, 19, Pal.Text, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-14, 0), new Vector2(-28, 0));
+            var bg = UIK.Img(feed, "k", new Color(0, 0, 0, 0.45f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(380, 30));
+            var t = UIK.Txt(bg.transform, "t", line, 19, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(14, 0), new Vector2(-28, 0));
             t.supportRichText = true;
             bg.transform.SetAsFirstSibling();
             feedItems.Add((t, Time.time));
@@ -442,7 +625,7 @@ namespace Zone47
         float Px => RadarR / RadarRange;                       // pixels per metre
         void BuildRadar()
         {
-            var bg = UIK.Img(root, "radar", new Color(0.03f, 0.035f, 0.03f, 0.7f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -96), new Vector2(RadarR * 2, RadarR * 2));
+            var bg = UIK.Img(root, "radar", new Color(0.03f, 0.035f, 0.03f, 0.7f), new Vector2(1, 1), new Vector2(1, 1), new Vector2(-24, -24), new Vector2(RadarR * 2, RadarR * 2));
             radar = bg.rectTransform;
             bg.gameObject.AddComponent<RectMask2D>();
             radarRot = UIK.Rect(radar, "rot", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
@@ -494,13 +677,14 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ damage direction
-        class Ind { public Image img; public Vector3 from; public float t; }
-        Ind[] indicators = new Ind[5]; int indIdx;
+        class Ind { public Image img; public Vector3 from; public float t, pop; }
+        Ind[] indicators = new Ind[6]; int indIdx;
         void BuildIndicators()
         {
             for (int i = 0; i < indicators.Length; i++)
             {
-                var im = UIK.Img(root, "dmgInd", new Color(1f, 0.15f, 0.1f, 0f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(150, 16));
+                var im = UIK.Img(root, "dmgInd", new Color(1f, 0.15f, 0.1f, 0f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(64, 48));
+                im.sprite = Gfx.DmgTri; im.rectTransform.pivot = new Vector2(0.5f, 0.5f);
                 indicators[i] = new Ind { img = im, t = 0 };
             }
         }
@@ -514,10 +698,12 @@ namespace Zone47
                 Vector3 to = (ind.from - p.transform.position).Flat();
                 Vector3 f = p.cam.transform.forward.Flat();
                 float a = Vector3.SignedAngle(f, to, Vector3.up);
-                float r = 190f;
+                ind.pop = Mathf.MoveTowards(ind.pop, 0f, Time.deltaTime * 5f);
+                float r = 165f + ind.pop * 18f;
                 ind.img.rectTransform.anchoredPosition = new Vector2(Mathf.Sin(a * Mathf.Deg2Rad), Mathf.Cos(a * Mathf.Deg2Rad)) * r;
                 ind.img.rectTransform.localRotation = Quaternion.Euler(0, 0, -a);
-                ind.img.color = new Color(1f, 0.15f, 0.1f, Mathf.Clamp01(ind.t) * 0.9f);
+                ind.img.rectTransform.localScale = Vector3.one * (1f + ind.pop * 0.35f);
+                ind.img.color = new Color(1f, 0.12f, 0.08f, Mathf.Clamp01(ind.t * 1.4f) * 0.95f);
             }
         }
 
@@ -543,11 +729,10 @@ namespace Zone47
                 float dist = to.magnitude;
                 if (dist > 70f || Vector3.Dot(to, cam.transform.forward) <= 0) continue;
                 bool ally = a.team == p.team;
-                if (!ally)
-                {
-                    if (Vector3.Angle(cam.transform.forward, a.ChestPos - cam.transform.position) > 2.5f) continue;
-                    if (Ballistics.Cast(cam.transform.position, (a.ChestPos - cam.transform.position).normalized, dist + 1f, p, out var h) && Actor.FromCollider(h.collider) != a) continue;
-                }
+                if (!ally && Vector3.Angle(cam.transform.forward, a.ChestPos - cam.transform.position) > 2.5f) continue;
+                // only show a tag when the soldier is actually visible (tags through containers looked like people stuck inside them)
+                Vector3 eyeTo = a.ChestPos + Vector3.up * 0.5f - cam.transform.position;
+                if (Ballistics.Cast(cam.transform.position, eyeTo.normalized, eyeTo.magnitude + 0.5f, p, out var h) && Actor.FromCollider(h.collider) != a) continue;
                 Vector3 sp = cam.WorldToScreenPoint(head);
                 if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(root, sp, null, out var lp)) continue;
                 var t = tags[n++];
@@ -561,9 +746,43 @@ namespace Zone47
         }
         void ShowToast(string s, float t) { toast.text = s; toastT = t; }
 
+        // ------------------------------------------------------------ low health: blood, heavy breathing, heartbeat, colour drain
+        void LowHealth(PlayerController p)
+        {
+            if (breathSrc == null)
+            {
+                breathSrc = MakeLoop(Z47Refs.I.breath); heartSrc = MakeLoop(Z47Refs.I.heartbeat);
+            }
+            // starts below 75 hp, full at 25; fades out slowly while health regenerates
+            float target = p.Alive ? Mathf.Clamp01((75f - p.hp) / 50f) : 0f;
+            lowHpT = Mathf.MoveTowards(lowHpT, target, Time.deltaTime * (target > lowHpT ? 3f : (p.Alive ? 0.45f : 2f)));
+            float vol = Settings.Sfx * lowHpT;
+            if (breathSrc != null) { breathSrc.volume = vol * 0.9f; breathSrc.pitch = 1f + lowHpT * 0.1f; }
+            if (heartSrc != null) { heartSrc.volume = vol * vol * 0.8f; heartSrc.pitch = 1f + lowHpT * 0.2f; }
+
+            dmgT = Mathf.MoveTowards(dmgT, 0, Time.deltaTime * 1.8f);
+            float beat = Mathf.Pow(0.5f + 0.5f * Mathf.Sin(Time.time * Mathf.PI * 2f * 1.3f * (1f + lowHpT * 0.2f)), 6f);
+            float low = lowHpT * (0.55f + 0.25f * beat);
+            vignette.color = new Color(1, 1, 1, Mathf.Clamp01(Mathf.Max(dmgT * 0.85f, low)));
+
+            if (Boot.Exposure != null)
+            {
+                float sat = Mathf.Lerp(-8f, -62f, lowHpT);
+                if (Mathf.Abs(sat - lastSat) > 0.5f) { lastSat = sat; Boot.Exposure.saturation.Override(sat); }
+            }
+        }
+
+        AudioSource MakeLoop(AudioClip c)
+        {
+            if (c == null) return null;
+            var a = gameObject.AddComponent<AudioSource>();
+            a.clip = c; a.loop = true; a.spatialBlend = 0f; a.volume = 0f; a.playOnAwake = false; a.Play();
+            return a;
+        }
+
         void SetScope(bool on)
         {
-            scopeImg.enabled = on; scopeL.enabled = on; scopeR.enabled = on;
+            scopeImg.enabled = on; scopeL.enabled = on; scopeR.enabled = on; scopeT.enabled = on; scopeB.enabled = on;
         }
 
         // ------------------------------------------------------------ update
@@ -572,47 +791,64 @@ namespace Zone47
             var p = PlayerController.Local;
             if (p == null) return;
 
-            allyScore.text = mm.score[0].ToString();
-            enemyScore.text = mm.score[1].ToString();
-            allyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(mm.score[0] / (float)MatchManager.KillTarget), 1, 1);
-            enemyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(mm.score[1] / (float)MatchManager.KillTarget), 1, 1);
+            // only touch Text when the value changed: no per-frame string garbage / canvas rebuilds
+            if (mm.score[0] != cS0) { cS0 = mm.score[0]; allyScore.text = cS0.ToString(); allyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS0 / (float)MatchManager.KillTarget), 1, 1); }
+            if (mm.score[1] != cS1) { cS1 = mm.score[1]; enemyScore.text = cS1.ToString(); enemyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS1 / (float)MatchManager.KillTarget), 1, 1); }
             int s = Mathf.CeilToInt(mm.timeLeft);
-            timer.text = (s / 60) + ":" + (s % 60).ToString("00");
+            if (s != cTime) { cTime = s; timer.text = (s / 60) + ":" + (s % 60).ToString("00"); }
 
             hpFill.rectTransform.localScale = new Vector3(Mathf.Clamp01(p.hp / p.maxHp), 1, 1);
             hpFill.color = p.hp < 35 ? Pal.Enemy : Pal.Text;
 
             var d = p.Cur;
-            ammo.text = p.Mag + "<size=40><color=#9E998C> / " + p.Reserve + "</color></size>";
-            ammo.supportRichText = true;
-            weaponName.text = d.displayName;
-            grenadeTxt.text = p.grenades.ToString();
-            for (int i = 0; i < 3; i++)
+            if (p.Mag != cMag || p.Reserve != cRes) { cMag = p.Mag; cRes = p.Reserve; ammo.supportRichText = true; ammo.text = cMag + "<size=40><color=#9E998C> / " + cRes + "</color></size>"; }
+            if (d.id != cWep)
             {
-                bool on = (i == 0 && d.id == "m4") || (i == 1 && d.id == "awp") || (i == 2 && d.id == "glock");
-                slotImgs[i].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.8f) : Pal.Panel;
+                cWep = d.id; weaponName.text = d.displayName;
+                for (int i = 0; i < slotN; i++)
+                {
+                    bool on = i == p.CurSlot;
+                    slotImgs[i].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.8f) : Pal.Panel;
+                }
             }
+            if (p.grenades != cGren) { cGren = p.grenades; grenadeTxt.text = cGren.ToString(); }
             if (aimBtnImg != null) aimBtnImg.color = AimToggled ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
 
             // crosshair
             bool scoped = p.Scoped;
             SetScope(scoped);
+            if (scoped != wasScoped) { blinkT = scoped ? 1f : 0.6f; wasScoped = scoped; }   // short black blink like putting the eye to the glass
+            blinkT = Mathf.MoveTowards(blinkT, 0f, Time.deltaTime * 6f);
+            scopeBlink.color = new Color(0, 0, 0, blinkT * 0.9f);
+            // scope drift: the tube lags behind fast turns and bobs while walking, like a real eye-to-glass
+            Vector3 fwd = p.cam.transform.forward;
+            if (scoped && Time.deltaTime > 0f)
+            {
+                Vector3 lf = p.cam.transform.InverseTransformDirection(lastFwd);
+                Vector2 turn = new Vector2(-lf.x, -lf.y) / Time.deltaTime;           // rad/s
+                float spd = p.MoveSpeed;
+                Vector2 bob = new Vector2(Mathf.Sin(Time.time * 7f), Mathf.Abs(Mathf.Cos(Time.time * 7f)) - 0.5f) * Mathf.Clamp01(spd / 4f) * 26f;
+                Vector2 target = Vector2.ClampMagnitude(-turn * 70f, 90f) + bob;
+                scopeDrift = Vector2.Lerp(scopeDrift, target, Time.deltaTime * 8f);
+            }
+            else scopeDrift = Vector2.zero;
+            scopeGroup.anchoredPosition = scopeDrift;
+            lastFwd = fwd;
             float gap = 8f + p.spreadNow * 9f;
             bool showX = !scoped && !p.Aiming;
             xh[0].anchoredPosition = new Vector2(0, gap + 8); xh[1].anchoredPosition = new Vector2(0, -gap - 8);
             xh[2].anchoredPosition = new Vector2(gap + 8, 0); xh[3].anchoredPosition = new Vector2(-gap - 8, 0);
             foreach (var x in xh) x.gameObject.SetActive(showX && p.Alive);
+            centerDot.enabled = showX && p.Alive;
 
             if (hitT > 0)
             {
                 hitT -= Time.deltaTime;
                 foreach (var im in hitMark.GetComponentsInChildren<Image>()) if (im != hitMark) im.color = hitKill ? new Color(1f, 0.3f, 0.2f, hitT * 4f) : new Color(1, 1, 1, hitT * 5f);
-                if (hitT <= 0) hitMark.enabled = false;
+                if (hitT <= 0) hitMark.gameObject.SetActive(false);
             }
 
-            dmgT = Mathf.MoveTowards(dmgT, 0, Time.deltaTime * 2.5f);
-            float low = p.Alive ? Mathf.Clamp01(1f - p.hp / 40f) * 0.32f : 0f;
-            vignette.color = new Color(1, 1, 1, Mathf.Max(dmgT * 0.45f, low));
+            LowHealth(p);
 
             if (p.Reloading) toast.text = L.S("reloading");
             else if (toastT > 0) { toastT -= Time.deltaTime; if (toastT <= 0) toast.text = ""; }

@@ -33,11 +33,11 @@ namespace Zone47
         bool crouched, grounded;
         float stepDist;
         float shake;
-        float recoilPitch, recoilYaw;
+        float recoilPitch, recoilYaw, recoilPitchVel, recoilYawVel;
         float landDip;
 
         // weapons
-        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; }
+        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; }
         Slot[] slots;
         int cur;
         float nextFire;
@@ -47,7 +47,8 @@ namespace Zone47
         float boltT;
         public int grenades = 2;
         float throwT = -1f;
-        Vector3 kickPos; float kickRot;
+        Vector3 kickPos, kickPosVel; float kickRot, kickRoll, kickYaw, kickRotVel, kickRollVel, kickYawVel;
+        static void Spring(ref float x, ref float v, float k, float c, float dt) { v += (-k * x - c * v) * dt; x += v * dt; }
         int shotIdx; float lastShotAt = -9f;
         Vector3 swayPos; Vector3 swayRot; float strafeTilt;
         float adsT;
@@ -62,10 +63,14 @@ namespace Zone47
 
         public bool Aiming => PInput.aim && !reloading && switchT <= 0 && throwT < 0;
         public WeaponDef Cur => slots[cur].def;
+        public int SlotCount => slots.Length;
+        public WeaponDef SlotDef(int i) => slots[i].def;
+        public int CurSlot => cur;
         public int Mag => slots[cur].mag;
         public int Reserve => slots[cur].reserve;
         public bool Reloading => reloading;
         public bool Scoped => Aiming && Cur.scope && adsT > 0.85f;
+        public float MoveSpeed => cc != null ? new Vector2(cc.velocity.x, cc.velocity.z).magnitude : 0f;
 
         public override Vector3 EyePos => cam != null ? cam.transform.position : transform.position + Vector3.up * 1.6f;
         public override Vector3 ChestPos => transform.position + Vector3.up * (crouched ? 0.8f : 1.25f);
@@ -85,7 +90,7 @@ namespace Zone47
             Local = this;
             foreach (var c in casings) if (c != null) Destroy(c);
             casings.Clear();
-            isPlayer = true; team = 0; callsign = L.S("you");
+            isPlayer = true; team = 0; callsign = Settings.Callsign;
             cc = gameObject.AddComponent<CharacterController>();
             cc.height = 1.8f; cc.radius = 0.35f; cc.center = new Vector3(0, 0.9f, 0); cc.stepOffset = 0.45f; cc.slopeLimit = 50f;
             cc.skinWidth = 0.04f;
@@ -98,13 +103,13 @@ namespace Zone47
             camGo.tag = "MainCamera";
             var data = cam.GetUniversalAdditionalCameraData();
             data.renderPostProcessing = Settings.PostFx;
-            data.antialiasing = Settings.Quality >= 2 ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
+            data.antialiasing = Settings.AA;
 
             viewRoot = new GameObject("ViewRoot").transform;
             viewRoot.SetParent(camGo.transform, false);
 
             var R = Z47Refs.I;
-            string[] ids = { "m4", "awp", "glock" };
+            string[] ids = R.HasWeapon("carbine") ? new[] { "m4", "awp", "glock", "carbine" } : new[] { "m4", "awp", "glock" };
             slots = new Slot[ids.Length];
             for (int i = 0; i < ids.Length; i++)
             {
@@ -114,7 +119,11 @@ namespace Zone47
                 Util.SetShadows(w, ShadowCastingMode.Off);
                 foreach (var c in w.GetComponentsInChildren<Collider>()) Destroy(c);
                 w.SetActive(i == 0);
-                slots[i] = new Slot { def = d, go = w, mag = d.magSize, reserve = d.reserve, mag3d = Util.FindDeep(w.transform, "Mag") };
+                slots[i] = new Slot { def = d, go = w, mag = d.magSize, reserve = d.reserve, mag3d = Util.FindDeep(w.transform, "Mag"),
+                                      anim = d.animated ? w.GetComponentInChildren<Animation>() : null, rends = w.GetComponentsInChildren<Renderer>(), reloadDur = d.reloadTime };
+                var adsRet = Util.FindDeep(w.transform, "ReticleADS");
+                if (adsRet != null) slots[i].adsReticle = adsRet.GetComponent<Renderer>();
+                if (slots[i].anim != null) { var an = slots[i].anim; an.playAutomatically = false; an.cullingType = AnimationCullingType.AlwaysAnimate; foreach (AnimationState st in an) st.wrapMode = st.name == "idle" || st.name == "hold" ? WrapMode.Loop : WrapMode.Once; }
             }
 
             // muzzle flash quad
@@ -199,6 +208,8 @@ namespace Zone47
                 if (k.digit1Key.wasPressedThisFrame) PInput.select = 0;
                 if (k.digit2Key.wasPressedThisFrame) PInput.select = 1;
                 if (k.digit3Key.wasPressedThisFrame) PInput.select = 2;
+                if (k.digit4Key.wasPressedThisFrame) PInput.select = 3;
+                if (k.iKey.wasPressedThisFrame && slots[cur].anim != null && !reloading && switchT <= 0) PlayAnim(slots[cur], "inspect", 0.15f);
                 if (k.escapeKey.wasPressedThisFrame) HUD.I?.TogglePause();
                 if (Mouse.current != null) { float sc = Mouse.current.scroll.ReadValue().y; if (sc < -0.1f) PInput.next = true; else if (sc > 0.1f) PInput.select = (cur + slots.Length - 1) % slots.Length; }
             }
@@ -227,11 +238,14 @@ namespace Zone47
             Vector2 d = PInput.look * sens;
             if (Scoped) d += new Vector2(Mathf.PerlinNoise(Time.time * 0.6f, 3f) - 0.5f, Mathf.PerlinNoise(7f, Time.time * 0.6f) - 0.5f) * Time.deltaTime * (crouched ? 1.2f : 2.5f); // breathing sway
             if (Settings.AimAssist && TargetUnderCrosshair(4f) != null) d *= 0.55f;
+            d += GyroDelta() * (Aiming ? (Cur.scope ? 0.5f : 0.8f) : 1f);
             yaw += d.x;
             pitch = Mathf.Clamp(pitch - d.y, -80f, 80f);
 
-            recoilPitch = Mathf.Lerp(recoilPitch, 0, Time.deltaTime * 9f);
-            recoilYaw = Mathf.Lerp(recoilYaw, 0, Time.deltaTime * 9f);
+            // camera recoil on a spring: sharp kick, slight overshoot, settles (feels like a real stock in the shoulder)
+            float sdt = Mathf.Min(Time.deltaTime, 0.033f);
+            Spring(ref recoilPitch, ref recoilPitchVel, 110f, 17f, sdt);
+            Spring(ref recoilYaw, ref recoilYawVel, 110f, 17f, sdt);
             transform.rotation = Quaternion.Euler(0, yaw, 0);
 
             shake = Mathf.MoveTowards(shake, 0, Time.deltaTime * 2.2f);
@@ -242,6 +256,26 @@ namespace Zone47
             adsT = Mathf.MoveTowards(adsT, Aiming ? 1f : 0f, Time.deltaTime * 6f);
             cam.fieldOfView = Mathf.Lerp(70f, fovT, adsT);
             if (vmCam != null) vmCam.fieldOfView = Mathf.Lerp(56f, 44f, adsT);
+        }
+
+        /// Gyro aim (landscape): turning the phone left/right yaws, tilting it pitches. Degrees this frame.
+        Vector2 GyroDelta()
+        {
+#if ENABLE_INPUT_SYSTEM
+            int mode = Settings.Gyro;
+            if (mode == 0 || (mode == 1 && !Aiming)) return Vector2.zero;
+            var g = UnityEngine.InputSystem.Gyroscope.current;
+            if (g == null) return Vector2.zero;
+            if (!g.enabled) { InputSystem.EnableDevice(g); g.samplingFrequency = 60f; return Vector2.zero; }
+            Vector3 w = g.angularVelocity.ReadValue();                     // rad/s, device axes
+            Vector2 r = new Vector2(-w.x, -w.y) * Mathf.Rad2Deg * Time.deltaTime;
+            if (Screen.orientation == ScreenOrientation.LandscapeRight) r = -r;
+            if (Settings.GyroInvert) r = -r;
+            if (r.sqrMagnitude < 0.0004f) return Vector2.zero;               // ignore sensor noise when holding still
+            return r * Settings.GyroSens;
+#else
+            return Vector2.zero;
+#endif
         }
 
         Actor TargetUnderCrosshair(float deg)
@@ -321,6 +355,7 @@ namespace Zone47
                     cur = pendingSlot; pendingSlot = -1;
                     slots[cur].go.SetActive(true);
                     AttachFlash();
+                    PlayAnim(slots[cur], "draw", 0f);
                 }
                 return;
             }
@@ -338,14 +373,19 @@ namespace Zone47
             // reload
             if ((PInput.reload || (s.mag == 0 && Firing && s.reserve > 0)) && !reloading && s.mag < d.magSize && s.reserve > 0)
             {
-                reloading = true; reloadT = 0f;
+                reloading = true; reloadT = 0f; s.reloadDur = d.reloadTime;
+                if (s.anim != null)
+                {
+                    string clip = s.mag == 0 && s.anim["reload_empty"] != null ? "reload_empty" : "reload";
+                    if (s.anim[clip] != null) { s.reloadDur = s.anim[clip].length; PlayAnim(s, clip, 0.08f); }
+                }
                 Sfx.Play2D(d.kind == WeaponKind.Sniper ? Z47Refs.I.awpBolt : Z47Refs.I.reload, 0.8f, 0.02f);
             }
             if (reloading)
             {
                 reloadT += Time.deltaTime;
-                if (s.mag3d != null) s.mag3d.gameObject.SetActive(reloadT < d.reloadTime * 0.3f || reloadT > d.reloadTime * 0.55f);
-                if (reloadT >= d.reloadTime)
+                if (s.mag3d != null) s.mag3d.gameObject.SetActive(reloadT < s.reloadDur * 0.3f || reloadT > s.reloadDur * 0.55f);
+                if (reloadT >= s.reloadDur)
                 {
                     int need = d.magSize - s.mag; int take = Mathf.Min(need, s.reserve);
                     s.mag += take; s.reserve -= take; reloading = false;
@@ -375,6 +415,7 @@ namespace Zone47
             if (to == cur && pendingSlot < 0) return;
             reloading = false; if (slots[cur].mag3d != null) slots[cur].mag3d.gameObject.SetActive(true);
             pendingSlot = to; switchT = 0.45f;
+            Sfx.Play2D(Z47Refs.I.equip, 0.55f, 0.06f);
         }
 
         void Shoot(Slot s)
@@ -384,25 +425,54 @@ namespace Zone47
             nextFire = Time.time + d.fireInterval;
             if (d.kind == WeaponKind.Sniper) boltT = 1.15f;
 
-            float spread = Scoped ? 0.05f : spreadNow;
+            // aimed fire is honest: first round goes where the sight is, follow-ups bloom a little
+            bool aimed = Aiming && adsT > 0.85f;
+            float spread = Scoped ? 0.05f : aimed ? d.adsSpread * (Time.time - lastShotAt > 0.35f ? 0.2f : 1f) + Mathf.Max(0f, spreadNow - d.adsSpread) * 0.5f : spreadNow;
             Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread) * 0.5f, Random.Range(-spread, spread) * 0.5f, 0) * cam.transform.forward;
             Vector3 muzzleWorld = s.go.transform.TransformPoint(d.muzzlePoint);
-            Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !Scoped && Random.value < 0.6f, out _);
+            // no tracer while aiming: a streak from the muzzle (below the eye) to the target read as "bullets going crooked"
+            Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !aimed && Random.value < 0.5f, out _);
 
             Sfx.Play2D(d.shot, d.kind == WeaponKind.Sniper ? 1f : 0.85f, 0.05f);
             if (Random.value < 0.5f) StartCoroutine(Delayed(0.35f, () => Sfx.Play2D(Z47Refs.I.casing, 0.12f, 0.2f)));
             if (d.kind == WeaponKind.Sniper) StartCoroutine(Delayed(0.45f, () => Sfx.Play2D(Z47Refs.I.awpBolt, 0.6f)));
 
-            float rk = d.recoil * (Aiming ? 0.6f : 1f) * (crouched ? 0.8f : 1f);
+            float rk = d.recoil * (aimed ? 0.75f : 1f) * (crouched ? 0.8f : 1f);
             if (Time.time - lastShotAt > 0.35f) shotIdx = 0;
             shotIdx++; lastShotAt = Time.time;
-            float climb = Mathf.Lerp(1f, 0.55f, Mathf.Clamp01(shotIdx / 12f));      // first shots climb most
-            recoilPitch += rk * climb; pitch -= rk * 0.32f * climb;
-            float side = Mathf.Sin(shotIdx * 0.75f) * 0.45f + Random.Range(-0.15f, 0.15f); // readable S-pattern
-            recoilYaw += rk * side; yaw += rk * side * 0.12f;
+            float climb = Mathf.Lerp(1f, 0.6f, Mathf.Clamp01(shotIdx / 10f));      // first rounds climb most
+            // camera: impulse into the spring (visual kick) + a permanent share the player has to pull down
+            recoilPitchVel += rk * climb * 22f;
+            pitch -= rk * 0.3f * climb;
+            float side = Mathf.Sin(shotIdx * 0.8f) * 0.5f + Random.Range(-0.25f, 0.25f);
+            recoilYawVel += rk * side * 9f; yaw += rk * side * 0.1f;
             EjectCasing(s);
-            kickPos += new Vector3(0, 0.004f, -0.035f) * (d.kind == WeaponKind.Sniper ? 2f : 1f);
-            kickRot += d.kind == WeaponKind.Sniper ? 9f : 3.5f;
+            if (s.anim != null) PlayAnim(s, "fire", 0f);
+
+            // weapon kick (position snaps, springs return it). Aimed: almost straight back so the sight stays on target.
+            Vector3 kp; float kr, kroll, kyaw;
+            switch (d.kind)
+            {
+                case WeaponKind.Sniper:
+                    kp = new Vector3(0f, 0.012f, -0.1f); kr = 11f; kroll = Random.Range(-2f, 2f); kyaw = Random.Range(-1f, 1f);
+                    shake = Mathf.Max(shake, 0.18f); break;
+                case WeaponKind.Pistol:
+                    kp = aimed ? new Vector3(0f, 0.008f, -0.035f) : new Vector3(Random.Range(-0.003f, 0.004f), 0.014f, -0.05f);
+                    kr = aimed ? Random.Range(5f, 7f) : Random.Range(12f, 16f);
+                    kroll = aimed ? Random.Range(-1f, 1f) : Random.Range(2.5f, 6f) * (Random.value < 0.8f ? 1f : -1f);
+                    kyaw = aimed ? Random.Range(-0.6f, 0.6f) : Random.Range(-2.5f, 2.5f);
+                    if (!aimed) shake = Mathf.Max(shake, 0.1f); break;
+                default:
+                    float heavy = d.id == "carbine" ? 0.85f : 1f;
+                    kp = (aimed ? new Vector3(Random.Range(-0.001f, 0.001f), 0.002f, -0.03f) : new Vector3(Random.Range(-0.004f, 0.004f), 0.007f, -0.05f)) * heavy;
+                    kr = (aimed ? Random.Range(0.6f, 1.1f) : Random.Range(3f, 4.5f)) * heavy;
+                    kroll = (aimed ? Random.Range(-0.5f, 0.5f) : Random.Range(-2f, 2f)) * heavy;
+                    kyaw = (aimed ? Random.Range(-0.3f, 0.3f) : Random.Range(-1.2f, 1.2f)) * heavy;
+                    shake = Mathf.Max(shake, aimed ? 0.02f : 0.05f); break;
+            }
+            if (s.anim != null) { kp *= 0.45f; kr *= 0.45f; }
+            kickPos += kp; kickRot += kr; kickRoll += kroll; kickYaw += kyaw;
+            kickPosVel += kp * 6f;          // a little follow-through so it doesn't feel like a teleport
 
             if (!Scoped)
             {
@@ -440,7 +510,8 @@ namespace Zone47
             Vector3 hip = d.hipOffset;
             // aim over the sights: top of the gun sits just under the screen centre, red-dot drawn by the HUD
             // look straight down the sights: the top of the gun lines up with the screen centre
-            Vector3 ads = new Vector3(0f, -d.topY + 0.002f, d.kind == WeaponKind.Pistol ? 0.24f : d.kind == WeaponKind.Sniper ? 0.12f : 0.13f);
+            Vector3 ads = d.adsZ > 0f ? new Vector3(0f, -d.topY, d.adsZ)
+                : new Vector3(0f, -d.topY + 0.002f, d.kind == WeaponKind.Pistol ? 0.24f : d.kind == WeaponKind.Sniper ? 0.12f : 0.13f);
             Vector3 pos = Vector3.Lerp(hip, ads, adsT);
             Quaternion rot = Quaternion.identity;
 
@@ -461,14 +532,20 @@ namespace Zone47
             if (crouched) pos += new Vector3(-0.01f, 0.005f, 0);
 
             // kick
-            kickPos = Vector3.Lerp(kickPos, Vector3.zero, Time.deltaTime * 14f);
-            kickRot = Mathf.Lerp(kickRot, 0, Time.deltaTime * 12f);
-            pos += kickPos; rot *= Quaternion.Euler(-kickRot, 0, 0);
+            // weapon kick springs: stiff and slightly under-damped -> crisp thump with a small settle
+            float kdt = Mathf.Min(Time.deltaTime, 0.033f);
+            Spring(ref kickPos.x, ref kickPosVel.x, 260f, 24f, kdt);
+            Spring(ref kickPos.y, ref kickPosVel.y, 260f, 24f, kdt);
+            Spring(ref kickPos.z, ref kickPosVel.z, 200f, 20f, kdt);
+            Spring(ref kickRot, ref kickRotVel, 220f, 20f, kdt);
+            Spring(ref kickRoll, ref kickRollVel, 180f, 18f, kdt);
+            Spring(ref kickYaw, ref kickYawVel, 180f, 18f, kdt);
+            pos += kickPos; rot *= Quaternion.Euler(-kickRot, kickYaw, -kickRoll);
 
             // reload / switch / throw
-            if (reloading)
+            if (reloading && s.anim == null)
             {
-                float t = reloadT / d.reloadTime; float w = Mathf.Sin(Mathf.Clamp01(t) * Mathf.PI);
+                float t = reloadT / s.reloadDur; float w = Mathf.Sin(Mathf.Clamp01(t) * Mathf.PI);
                 pos += new Vector3(-0.03f, -0.07f, -0.02f) * w;
                 rot *= Quaternion.Euler(18f * w, 10f * w, 32f * w);
             }
@@ -488,14 +565,42 @@ namespace Zone47
             tr.localRotation = rot;
 
             bool hide = Scoped;
-            foreach (var r in s.go.GetComponentsInChildren<Renderer>()) r.enabled = !hide;
+            foreach (var r in s.rends) r.enabled = !hide;
+            if (s.adsReticle != null) s.adsReticle.enabled = !hide && adsT > 0.65f;      // red dot only lights up when looking through it
+            if (s.anim != null) AnimTick(s);
             if (arms != null)
             {
-                arms.Visible = !hide;
+                arms.Visible = !hide && s.anim == null;          // animated weapons bring their own arms
                 float leftW = 1f;
-                if (reloading) { float t = reloadT / d.reloadTime; leftW = (t > 0.2f && t < 0.7f) ? 0f : 1f; }
+                if (reloading) { float t = reloadT / s.reloadDur; leftW = (t > 0.2f && t < 0.7f) ? 0f : 1f; }
                 if (throwT >= 0) leftW = 0f;
-                arms.SetTargets(tr.TransformPoint(Vector3.zero), tr.TransformPoint(d.forePoint), tr.rotation, leftW);
+                arms.SetTargets(tr.TransformPoint(Vector3.zero), tr.TransformPoint(d.forePoint), tr.rotation, leftW, d.kind == WeaponKind.Pistol);
+            }
+        }
+
+        // ------------------------------------------------------------ animated weapon (legacy Animation)
+        void PlayAnim(Slot s, string clip, float fade)
+        {
+            if (s.anim == null || s.anim[clip] == null) return;
+            s.anim[clip].time = 0f;
+            if (fade > 0f) s.anim.CrossFade(clip, fade, PlayMode.StopAll);
+            else { s.anim.Stop(); s.anim.Play(clip, PlayMode.StopAll); }
+        }
+
+        /// Between one-shot clips: a still "hold" pose as the base, with the authored breathing idle mixed in
+        /// at low weight and slowed down (at full strength/speed it read as the gun shaking). Pure hold while aiming.
+        void AnimTick(Slot s)
+        {
+            var a = s.anim;
+            if (reloading) return;
+            bool busy = (a.IsPlaying("fire") && a["fire"].time < a["fire"].length) || a.IsPlaying("draw") || a.IsPlaying("inspect");
+            if (busy && !(Aiming && a.IsPlaying("inspect"))) return;
+            if (a["hold"] == null) return;
+            if (!a.IsPlaying("hold")) a.CrossFade("hold", 0.15f, PlayMode.StopAll);
+            if (a["idle"] != null)
+            {
+                a["idle"].speed = 0.4f;
+                a.Blend("idle", Aiming ? 0f : 0.35f, 0.25f);
             }
         }
 
@@ -577,7 +682,8 @@ namespace Zone47
             cam.transform.localRotation = Quaternion.identity;
             hp = maxHp; grenades = 2; reloading = false; throwT = -1; switchT = 0; pendingSlot = -1;
             foreach (var sl in slots) { sl.mag = sl.def.magSize; sl.reserve = sl.def.reserve; sl.go.SetActive(false); if (sl.mag3d) sl.mag3d.gameObject.SetActive(true); }
-            cur = 0; slots[cur].go.SetActive(true); AttachFlash();
+            slots[cur].go.SetActive(true); AttachFlash();      // keep the weapon you died with
+            foreach (var sl in slots) if (sl.anim != null) sl.anim.Stop();
             if (arms != null) arms.Visible = true;
             HUD.I?.HideDeath();
         }
@@ -590,15 +696,20 @@ namespace Zone47
         }
     }
 
-    /// First-person arms: a copy of the soldier model whose hands are IK-pinned to the weapon.
+    /// First-person arms (gloved FPS arms rig). Two-bone IK puts each hand on the weapon:
+    /// right hand on the pistol grip, left hand under the handguard (or cupping the pistol grip).
     public class ArmsRig : MonoBehaviour
     {
-        Animator anim;
+        class Arm
+        {
+            public Transform a, b, c, knuckle, tip;
+        }
         Transform cam;
-        Vector3 rightT, leftT; Quaternion gunRot; float leftW = 1f;
+        Arm R, L;
+        Transform[] bones; Quaternion[] restRot;
         Renderer[] rends;
         bool visible = true;
-        Transform head, lLeg, rLeg;
+        Vector3 gripT, foreT; Quaternion gunRot; float leftW = 1f; bool pistol; bool hasTarget;
 
         public bool Visible
         {
@@ -609,53 +720,89 @@ namespace Zone47
         public static ArmsRig Create(Transform cam)
         {
             var R = Z47Refs.I;
-            var go = Instantiate(R.swatModel);
-            go.name = "Arms";
+            if (R.armsPrefab == null) { Debug.LogError("[Zone47] FPS kollar yok: Z47Refs.armsPrefab bos. Zone47 > Kurulumu Yap'i tekrar calistir (Art/Arms/fp_arms.fbx olmali)."); return null; }
+            var go = Instantiate(R.armsPrefab, cam);
+            go.name = "FPArms";
+            go.transform.localPosition = Vector3.zero; go.transform.localRotation = Quaternion.identity;
             var rig = go.AddComponent<ArmsRig>();
             rig.cam = cam;
-            rig.anim = go.GetComponent<Animator>();
-            if (rig.anim == null) rig.anim = go.AddComponent<Animator>();
-            rig.anim.runtimeAnimatorController = R.armsController;
-            rig.anim.cullingMode = AnimatorCullingMode.AlwaysAnimate;
-            rig.anim.applyRootMotion = false;
             rig.rends = go.GetComponentsInChildren<Renderer>();
+            if (go.GetComponentInChildren<SkinnedMeshRenderer>() == null) Debug.LogError("[Zone47] FPS kollar: SkinnedMeshRenderer yok. Zone47 > Kurulumu Yap'i tekrar calistir.");
+            else Debug.Log("[Zone47] FPS kollar yuklendi (" + rig.rends.Length + " renderer)");
             foreach (var r in rig.rends) { r.shadowCastingMode = ShadowCastingMode.Off; if (r is SkinnedMeshRenderer smr) smr.updateWhenOffscreen = true; }
-            rig.head = rig.anim.GetBoneTransform(HumanBodyBones.Head);
-            rig.lLeg = rig.anim.GetBoneTransform(HumanBodyBones.LeftUpperLeg);
-            rig.rLeg = rig.anim.GetBoneTransform(HumanBodyBones.RightUpperLeg);
-            go.transform.SetParent(cam.parent, true); // under the player
+            rig.R = rig.Find("R"); rig.L = rig.Find("L");
+            var list = new System.Collections.Generic.List<Transform>();
+            foreach (var t in go.GetComponentsInChildren<Transform>()) if (t.name.StartsWith("R_") || t.name.StartsWith("L_")) list.Add(t);
+            rig.bones = list.ToArray(); rig.restRot = new Quaternion[rig.bones.Length];
+            for (int i = 0; i < rig.bones.Length; i++) rig.restRot[i] = rig.bones[i].localRotation;
+            if (rig.R.a == null || rig.R.b == null || rig.R.c == null || rig.L.a == null) { Debug.LogError("[Zone47] FPS kollar: kemikler bulunamadi (R_arm/R_elbow/R_wrist/L_arm)"); Destroy(go); return null; }
             return rig;
         }
 
-        public void SetTargets(Vector3 grip, Vector3 fore, Quaternion rot, float lw)
+        Arm Find(string s)
         {
-            rightT = grip; leftT = fore; gunRot = rot; leftW = Mathf.MoveTowards(leftW, lw, Time.deltaTime * 6f);
-            // place the body so its eyes sit at the camera
-            transform.rotation = cam.rotation;
-            transform.position = cam.position - cam.rotation * new Vector3(0.0f, 1.6f, -0.06f);
+            var root = transform;
+            return new Arm
+            {
+                a = Util.FindDeep(root, s + "_arm"), b = Util.FindDeep(root, s + "_elbow"), c = Util.FindDeep(root, s + "_wrist"),
+                knuckle = Util.FindDeep(root, s + "_middle1"), tip = Util.FindDeep(root, s + "_middle4")
+            };
         }
 
-        void OnAnimatorIK(int layer)
+        public void SetTargets(Vector3 grip, Vector3 fore, Quaternion rot, float lw, bool isPistol)
         {
-            if (anim == null) return;
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
-            anim.SetIKPosition(AvatarIKGoal.RightHand, rightT + gunRot * new Vector3(0.012f, -0.02f, -0.02f));
-            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
-            anim.SetIKRotation(AvatarIKGoal.RightHand, gunRot * Quaternion.Euler(0, 0, -90f));
-            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftW);
-            anim.SetIKPosition(AvatarIKGoal.LeftHand, leftT + gunRot * new Vector3(-0.015f, -0.03f, 0f));
-            anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0f);
-            anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0.6f);
-            anim.SetIKHintPosition(AvatarIKHint.RightElbow, cam.position + cam.rotation * new Vector3(0.35f, -0.45f, -0.05f));
-            anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0.6f * leftW);
-            anim.SetIKHintPosition(AvatarIKHint.LeftElbow, cam.position + cam.rotation * new Vector3(-0.3f, -0.5f, 0.1f));
+            gripT = grip; foreT = fore; gunRot = rot; pistol = isPistol; hasTarget = true;
+            leftW = Mathf.MoveTowards(leftW, lw, Time.deltaTime * 5f);
         }
 
         void LateUpdate()
         {
-            if (head != null) head.localScale = Vector3.one * 0.001f;
-            if (lLeg != null) lLeg.localScale = Vector3.one * 0.001f;
-            if (rLeg != null) rLeg.localScale = Vector3.one * 0.001f;
+            if (!hasTarget || !visible) return;
+            for (int i = 0; i < bones.Length; i++) bones[i].localRotation = restRot[i];
+
+            Vector3 gf = gunRot * Vector3.forward, gu = gunRot * Vector3.up, gr = gunRot * Vector3.right;
+            Vector3 cu = cam.up, cr = cam.right;
+
+            // right hand wraps the pistol grip from the right side
+            // palm centre sits down the pistol grip (gripT = its top-back corner), right of it; fingers wrap forward around it
+            Solve(R, gripT + gr * 0.03f - gf * 0.012f - gu * 0.05f, (gf * 0.94f - gu * 0.34f).normalized, -gr, -cu + cr * 0.6f);
+
+            // left hand: under the handguard (rifles) or cupping the grip (pistol)
+            Vector3 lp, lfd, lpalm;
+            if (pistol) { lp = gripT - gr * 0.03f - gu * 0.035f; lfd = (gf * 0.6f - gu * 0.5f + gr * 0.4f).normalized; lpalm = (gu * 0.4f + gr).normalized; }
+            else { lp = foreT - gr * 0.025f - gu * 0.046f;   // hand wraps the left/under side of the handguard instead of sinking into it
+                   lfd = (gf * 0.85f + gr * 0.5f).normalized; lpalm = (gu + gr * 0.35f).normalized; }
+            Vector3 lowered = cam.TransformPoint(new Vector3(-0.16f, -0.42f, 0.12f));      // hand drops away during reload/throw
+            lp = Vector3.Lerp(lowered, lp, leftW);
+            Solve(L, lp, lfd, lpalm, -cu - cr * 0.8f);
+        }
+
+        void Solve(Arm arm, Vector3 palmTarget, Vector3 fingerDir, Vector3 palmDir, Vector3 pole)
+        {
+            // hand frame in the (rest) pose
+            Vector3 w = arm.c.position, k = arm.knuckle.position, tp = arm.tip.position;
+            Vector3 fd = (k - w).normalized;
+            Vector3 palm = Vector3.ProjectOnPlane(tp - k, fd).normalized;
+            Vector3 pc = (w + k) * 0.5f + palm * 0.018f;
+            Quaternion off = Quaternion.Inverse(Quaternion.LookRotation(fd, palm)) * arm.c.rotation;
+            Quaternion qt = Quaternion.LookRotation(fingerDir, palmDir) * off;
+            Vector3 pcLocal = Quaternion.Inverse(arm.c.rotation) * (pc - w);
+            Vector3 wt = palmTarget - qt * pcLocal;
+
+            // analytic two-bone IK with a pole direction
+            Vector3 a = arm.a.position, b = arm.b.position, c = arm.c.position;
+            float lab = (b - a).magnitude, lcb = (c - b).magnitude;
+            Vector3 at = wt - a;
+            float lat = Mathf.Clamp(at.magnitude, 1e-4f, lab + lcb - 1e-4f);
+            float d1 = (lab * lab - lcb * lcb + lat * lat) / (2f * lat);
+            float h = Mathf.Sqrt(Mathf.Max(lab * lab - d1 * d1, 0f));
+            Vector3 n = at.normalized;
+            Vector3 pd = Vector3.ProjectOnPlane(pole, n).normalized;
+            Vector3 e = a + n * d1 + pd * h;
+            arm.a.rotation = Quaternion.FromToRotation(b - a, e - a) * arm.a.rotation;
+            b = arm.b.position; c = arm.c.position;
+            arm.b.rotation = Quaternion.FromToRotation(c - b, a + n * lat - b) * arm.b.rotation;
+            arm.c.rotation = qt;
         }
     }
 }

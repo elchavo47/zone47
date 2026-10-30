@@ -15,6 +15,8 @@ namespace Zone47
         public Vector3 forePoint;          // left hand
         public Vector3 muzzlePoint;
         public float topY;                 // highest point above grip (sight line)
+        public float adsZ;                 // optional: weapon z while aiming (optics)
+        public bool animated;              // has its own arms + legacy Animation clips (fire/reload/reload_empty/idle/hold/draw/inspect)
         public float damage = 25f;
         public float fireInterval = 0.08f;
         public bool automatic = true;
@@ -38,6 +40,7 @@ namespace Zone47
         public GameObject gasModel;
         public RuntimeAnimatorController bodyController;
         public RuntimeAnimatorController armsController;
+        public GameObject armsPrefab;
 
         [Header("Weapons")]
         public WeaponDef[] weapons;
@@ -45,6 +48,9 @@ namespace Zone47
 
         [Header("World")]
         public GameObject mapPrefab;
+        public GameObject lobbyPrefab;
+        public GameObject portPrefab;
+        public Material lobbySkyMat, rainMat;
         public Material skybox;
         public Material crateMat, concreteMat, sandbagMat, barrelMat;
 
@@ -54,10 +60,10 @@ namespace Zone47
         [Header("UI")]
         public Font headFont;
         public Font bodyFont;
-        public Texture2D logo;
+        public Texture2D logo, lobbyLogo;
 
         [Header("Audio")]
-        public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt;
+        public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt, breath, heartbeat, hurt, headshot, equip, bounce, rain;
         public AudioClip[] steps;
         public AudioClip ambience, menuMusic;
 
@@ -70,6 +76,8 @@ namespace Zone47
                 return _i;
             }
         }
+
+        public bool HasWeapon(string id) { if (weapons != null) foreach (var w in weapons) if (w.id == id && w.prefab != null) return true; return false; }
 
         public WeaponDef Weapon(string id)
         {

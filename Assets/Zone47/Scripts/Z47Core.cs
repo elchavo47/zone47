@@ -20,10 +20,20 @@ namespace Zone47
         public static bool Turkish { get => PlayerPrefs.GetInt("z_tr", Application.systemLanguage == SystemLanguage.Turkish ? 1 : 0) == 1; set => PlayerPrefs.SetInt("z_tr", value ? 1 : 0); }
         public static bool AimAssist { get => PlayerPrefs.GetInt("z_aa", 1) == 1; set => PlayerPrefs.SetInt("z_aa", value ? 1 : 0); }
         public static bool LeftFire { get => PlayerPrefs.GetInt("z_lf", 1) == 1; set => PlayerPrefs.SetInt("z_lf", value ? 1 : 0); }
-        public static bool ShowArms { get => PlayerPrefs.GetInt("z_arms", 0) == 1; set => PlayerPrefs.SetInt("z_arms", value ? 1 : 0); }
-        public static float Brightness { get => PlayerPrefs.GetFloat("z_bright", 0.5f); set => PlayerPrefs.SetFloat("z_bright", value); }
-        public static float ExposureValue => Mathf.Lerp(-0.35f, 0.85f, Brightness);   // 50% = the original look
+        public static bool ShowArms { get => PlayerPrefs.GetInt("z_arms3", 1) == 1; set => PlayerPrefs.SetInt("z_arms3", value ? 1 : 0); }
+        // phones show the scene darker than the editor: they start brighter (75% here == the old 100%)
+        // brighter by default: the old "100%" look is now the starting point, with headroom above it
+        public static float Brightness { get => PlayerPrefs.GetFloat("z_bright4", 0.6f); set => PlayerPrefs.SetFloat("z_bright4", value); }
+        public static float ExposureValue => Mathf.Lerp(0f, 2.1f, Brightness);
         public static int Difficulty { get => PlayerPrefs.GetInt("z_diff", 1); set => PlayerPrefs.SetInt("z_diff", value); } // 0..2
+        // gyroscope: 0 off, 1 only while aiming, 2 always
+        public static int Gyro { get => PlayerPrefs.GetInt("z_gyro", 0); set => PlayerPrefs.SetInt("z_gyro", value); }
+        public static float GyroSens { get => PlayerPrefs.GetFloat("z_gsens", 1f); set => PlayerPrefs.SetFloat("z_gsens", value); }
+        public static bool GyroInvert { get => PlayerPrefs.GetInt("z_ginv", 0) == 1; set => PlayerPrefs.SetInt("z_ginv", value ? 1 : 0); }
+        public static bool Mobile => Application.isMobilePlatform;
+        public static int Map { get => PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
+        public static string PlayerName { get => PlayerPrefs.GetString("z_name", ""); set => PlayerPrefs.SetString("z_name", value); }
+        public static string Callsign => string.IsNullOrWhiteSpace(PlayerName) ? L.S("you") : PlayerName.Trim();
 
         public static void Apply()
         {
@@ -32,18 +42,26 @@ namespace Zone47
             var urp = (QualitySettings.renderPipeline ?? GraphicsSettings.defaultRenderPipeline) as UniversalRenderPipelineAsset;
             if (urp != null)
             {
-                float[] scale = { 0.7f, 0.85f, 1f, 1f };
-                float[] shadow = { 0f, 35f, 60f, 90f };
-                int[] msaa = { 1, 1, 2, 4 };
+                // phones render at native ~2500px wide; full res + MSAA + SMAA + HDR is what cooked the device.
+                // Mobile presets keep the look (same lights/post) but render fewer pixels and cheaper shadows.
+                float[] scale = Mobile ? new[] { 0.55f, 0.65f, 0.75f, 0.85f } : new[] { 0.7f, 0.85f, 1f, 1f };
+                float[] shadow = Mobile ? new[] { 0f, 22f, 35f, 50f } : new[] { 0f, 35f, 60f, 90f };
+                int[] msaa = Mobile ? new[] { 1, 1, 1, 2 } : new[] { 1, 1, 2, 4 };
                 urp.renderScale = scale[Quality];
                 urp.shadowDistance = shadow[Quality];
                 urp.msaaSampleCount = msaa[Quality];
+                urp.shadowCascadeCount = Mobile || Quality < 2 ? 1 : 2;
+                urp.maxAdditionalLightsCount = Mobile ? 2 : 4;
                 // the iOS (Mobile) pipeline ships with HDR off; ACES tonemapping on LDR crushes the image dark
                 urp.supportsHDR = true;
             }
+            if (RenderSettings.sun != null) RenderSettings.sun.shadows = Mobile && Quality < 3 ? LightShadows.Hard : LightShadows.Soft;
             AudioListener.volume = 1f;
             PlayerPrefs.Save();
         }
+
+        /// SMAA is expensive on phones; FXAA there, SMAA on desktop high+.
+        public static AntialiasingMode AA => !Mobile && Quality >= 2 ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
 
         public static bool PostFx => Quality >= 1;
     }
@@ -75,7 +93,7 @@ namespace Zone47
             {"music", new[]{"MÜZİK","MUSIC"}},
             {"sfx", new[]{"EFEKTLER","EFFECTS"}},
             {"lang", new[]{"DİL","LANGUAGE"}},
-            {"arms", new[]{"KOLLAR (DENEYSEL)","ARMS (EXPERIMENTAL)"}},
+            {"arms", new[]{"KOLLAR","ARMS"}},
             {"aimassist", new[]{"NİŞAN YARDIMI","AIM ASSIST"}},
             {"leftfire", new[]{"SOL ATEŞ TUŞU","LEFT FIRE BUTTON"}},
             {"on", new[]{"AÇIK","ON"}},
@@ -98,6 +116,64 @@ namespace Zone47
             {"firstto", new[]{"İLK 40 LEŞE ULAŞAN KAZANIR","FIRST TO 40 KILLS WINS"}},
             {"headshot", new[]{"KAFADAN","HEADSHOT"}},
             {"you", new[]{"SEN","YOU"}},
+            {"deploy", new[]{"SAVAŞA GİR","DEPLOY"}},
+            {"callsign", new[]{"ASKER ADI","CALLSIGN"}},
+            {"change", new[]{"DEĞİŞTİR","CHANGE"}},
+            {"callsign_q", new[]{"ASKER ADIN NE?","YOUR CALLSIGN?"}},
+            {"callsign_h", new[]{"Ölüm duyurularında ve skor tablosunda görünür","Shown in the kill feed and scoreboard"}},
+            {"callsign_ph", new[]{"Adını yaz","Type your name"}},
+            {"callsign_short", new[]{"En az 2 harf","At least 2 letters"}},
+            {"ok", new[]{"TAMAM","OK"}},
+            {"map", new[]{"HARİTA","MAP"}},
+            {"mapname", new[]{"BÖLGE 47 · ÇÖL KASABASI","ZONE 47 · DESERT TOWN"}},
+            {"mapinfo", new[]{"5v5 TAKIM ÖLÜM MAÇI · 40 LEŞ · 8 DK","5v5 TEAM DEATHMATCH · 40 KILLS · 8 MIN"}},
+            {"newmap", new[]{"YENİ HARİTA","NEW MAP"}},
+            {"mapname2", new[]{"LİMAN · KONTEYNER SAHASI","PORT · CONTAINER YARD"}},
+            {"mapinfo2", new[]{"YAKIN MESAFE · KONTEYNER ARALARI · DEPOLAR","CLOSE QUARTERS · CONTAINER LANES · WAREHOUSES"}},
+            {"selected", new[]{"SEÇİLİ","SELECTED"}},
+            {"credits_l", new[]{"Emeği geçenler","Credits"}},
+            {"credits_d", new[]{"Kullanılan modeller, sesler ve lisanslar","Models, sounds and licenses used"}},
+            {"open", new[]{"AÇ","OPEN"}},
+            {"comingsoon", new[]{"YAKINDA","COMING SOON"}},
+            {"squads", new[]{"KADROLAR","SQUADS"}},
+            {"t_gfx", new[]{"GRAFİK","GRAPHICS"}},
+            {"t_ctrl", new[]{"KONTROLLER","CONTROLS"}},
+            {"t_audio", new[]{"SES","AUDIO"}},
+            {"t_general", new[]{"GENEL","GENERAL"}},
+            {"quality", new[]{"Grafik kalitesi","Graphics quality"}},
+            {"quality_d", new[]{"Telefon ısınıyorsa ORTA önerilir","Use MEDIUM if your phone runs hot"}},
+            {"fps_l", new[]{"Kare hızı","Frame rate"}},
+            {"bright_l", new[]{"Parlaklık","Brightness"}},
+            {"arms_l", new[]{"FPS kollar","FPS arms"}},
+            {"sens_l", new[]{"Bakış hassasiyeti","Look sensitivity"}},
+            {"adssens_l", new[]{"Nişan hassasiyeti","Aim sensitivity"}},
+            {"gyro_l", new[]{"Jiroskop","Gyroscope"}},
+            {"gyro_d", new[]{"Telefonu çevirerek nişan al","Aim by moving your phone"}},
+            {"gyrosens_l", new[]{"Jiroskop hassasiyeti","Gyro sensitivity"}},
+            {"gyroinv_l", new[]{"Jiroskop yönünü ters çevir","Invert gyroscope"}},
+            {"aimassist_l", new[]{"Nişan yardımı","Aim assist"}},
+            {"leftfire_l", new[]{"Sol ateş tuşu","Left fire button"}},
+            {"layout_l", new[]{"Tuş düzeni","Button layout"}},
+            {"layout_d", new[]{"Tuşların yerini ve boyutunu değiştir","Move and resize buttons"}},
+            {"edit", new[]{"DÜZENLE","EDIT"}},
+            {"music_l", new[]{"Müzik","Music"}},
+            {"sfx_l", new[]{"Efektler","Effects"}},
+            {"lang_l", new[]{"Dil","Language"}},
+            {"diff_l", new[]{"Bot zorluğu","Bot difficulty"}},
+            {"aimonly", new[]{"NİŞANDA","AIMING"}},
+            {"always", new[]{"HER ZAMAN","ALWAYS"}},
+            {"reset", new[]{"SIFIRLA","RESET"}},
+            {"save", new[]{"KAYDET","SAVE"}},
+            {"cancel", new[]{"İPTAL","CANCEL"}},
+            {"size", new[]{"BOYUT","SIZE"}},
+            {"layout_hint", new[]{"Tuşu sürükleyip bırak · seçili tuşu BOYUT ile büyüt/küçült","Drag a button to move it · resize the selected one with SIZE"}},
+            {"b_fire", new[]{"ATEŞ","FIRE"}},
+            {"b_aim", new[]{"NİŞAN","AIM"}},
+            {"b_jump", new[]{"ZIPLA","JUMP"}},
+            {"b_crouch", new[]{"EĞİL","CROUCH"}},
+            {"b_reload", new[]{"ŞARJÖR","RELOAD"}},
+            {"b_grenade", new[]{"BOMBA","GRENADE"}},
+            {"b_move", new[]{"HAREKET","MOVE"}},
         };
         public static string S(string k) => T.TryGetValue(k, out var v) ? v[Settings.Turkish ? 0 : 1] : k;
     }

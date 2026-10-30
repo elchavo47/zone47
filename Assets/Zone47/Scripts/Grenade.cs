@@ -18,7 +18,7 @@ namespace Zone47
 
         void OnCollisionEnter(Collision c)
         {
-            if (c.relativeVelocity.magnitude > 2f) Sfx.Play3D(Z47Refs.I.casing, transform.position, 0.5f, 2f, 25f, 0.2f);
+            if (c.relativeVelocity.magnitude > 2f) Sfx.Play3D(Z47Refs.I.bounce, transform.position, Mathf.Clamp01(c.relativeVelocity.magnitude / 10f) * 0.8f, 2f, 30f, 0.12f);
         }
 
         void Explode()

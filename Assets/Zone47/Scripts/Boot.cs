@@ -44,7 +44,7 @@ namespace Zone47
             sun.type = LightType.Directional;
             sun.color = new Color(1f, 0.86f, 0.7f);
             sun.intensity = 1.55f;
-            sun.shadows = LightShadows.Soft;
+            sun.shadows = Settings.Mobile && Settings.Quality < 3 ? LightShadows.Hard : LightShadows.Soft;
             sun.shadowStrength = 0.85f;
             sg.transform.rotation = Quaternion.Euler(32f, -38f, 0f);
             RenderSettings.sun = sun;
@@ -72,7 +72,7 @@ namespace Zone47
             volume.isGlobal = true; volume.priority = 1;
             var prof = ScriptableObject.CreateInstance<VolumeProfile>();
             var tm = prof.Add<Tonemapping>(true); tm.mode.Override(TonemappingMode.ACES);
-            var bl = prof.Add<Bloom>(true); bl.intensity.Override(0.55f); bl.threshold.Override(1.05f); bl.scatter.Override(0.6f);
+            var bl = prof.Add<Bloom>(true); bl.intensity.Override(0.55f); bl.threshold.Override(1.05f); bl.scatter.Override(0.6f); bl.highQualityFiltering.Override(!Settings.Mobile);
             var ca = prof.Add<ColorAdjustments>(true); ca.postExposure.Override(Settings.ExposureValue); ca.contrast.Override(14f); ca.saturation.Override(-8f);
             Exposure = ca;
             ca.colorFilter.Override(new Color(1f, 0.95f, 0.88f));
@@ -84,11 +84,11 @@ namespace Zone47
 
         public static ColorAdjustments Exposure;
 
-        void ApplyCameraFx(Camera c)
+        public static void ApplyCameraFx(Camera c)
         {
             var d = c.GetUniversalAdditionalCameraData();
             d.renderPostProcessing = Settings.PostFx;
-            d.antialiasing = Settings.Quality >= 2 ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
+            d.antialiasing = Settings.AA;
         }
 
         // ------------------------------------------------------------ splash
@@ -126,41 +126,207 @@ namespace Zone47
             Time.timeScale = 1f; AudioListener.pause = false;
             FX.ClearHoles();
             menuRoot = new GameObject("Menu");
-            var map = Instantiate(R.mapPrefab, menuRoot.transform);
             var camGo = new GameObject("MenuCam"); camGo.transform.SetParent(menuRoot.transform);
             menuCam = camGo.AddComponent<Camera>(); menuCam.fieldOfView = 50; menuCam.farClipPlane = 500;
             ApplyCameraFx(menuCam);
-            camGo.AddComponent<MenuOrbit>().center = MapCenter(map);
+
+            if (R.lobbyPrefab != null) BuildLobbyScene(R, camGo);
+            else
+            {
+                var map = Instantiate(R.mapPrefab, menuRoot.transform);
+                camGo.AddComponent<MenuOrbit>().center = MapCenter(map);
+            }
 
             menuCanvas = UIK.Canvas("MenuCanvas", 20);
             menuCanvas.transform.SetParent(menuRoot.transform);
+            var full = UIK.Full(menuCanvas.transform, "full");
+            // readability: dark band behind the left menu and the right info column
+            // soft side gradients (dark at the screen edge, fading to clear) instead of flat grey slabs
+            var gl = UIK.Rect(full, "shadeL", new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(1000, 0)); gl.pivot = new Vector2(0, 0.5f); gl.anchoredPosition = Vector2.zero;
+            var gli = gl.gameObject.AddComponent<RawImage>(); gli.texture = EdgeGradient(); gli.color = new Color(0, 0, 0, 0.78f); gli.raycastTarget = false;
+            var gr = UIK.Rect(full, "shadeR", new Vector2(1, 0), new Vector2(1, 1), Vector2.zero, new Vector2(1000, 0)); gr.pivot = new Vector2(1, 0.5f); gr.anchoredPosition = Vector2.zero;
+            var gri = gr.gameObject.AddComponent<RawImage>(); gri.texture = EdgeGradient(); gri.color = new Color(0, 0, 0, 0.72f); gri.raycastTarget = false;
+            gri.uvRect = new Rect(1, 0, -1, 1);
             var root = UIK.Full(menuCanvas.transform, "root");
             root.gameObject.AddComponent<SafeArea>();
-            var shade = UIK.Img(root, "shade", new Color(0, 0, 0, 0.55f), new Vector2(0, 0), new Vector2(0.5f, 1), Vector2.zero, Vector2.zero);
 
-            if (R.logo != null)
+            // ---- left: logo, callsign, menu
+            var logoTex = R.lobbyLogo != null ? R.lobbyLogo : R.logo;
+            if (logoTex != null)
             {
-                var lg = UIK.Rect(root, "logo", new Vector2(0, 1), new Vector2(0, 1), new Vector2(90, -40), new Vector2(400, 400));
-                var ri = lg.gameObject.AddComponent<RawImage>(); ri.texture = R.logo; ri.raycastTarget = false;
+                // transparent logo, no dark tile behind it: as wide as the menu column (560) and up to 270 tall
+                float aspect = logoTex.width / (float)logoTex.height;
+                Vector2 sz = aspect >= 560f / 270f ? new Vector2(560f, 560f / aspect) : new Vector2(270f * aspect, 270f);
+                var lg = UIK.Rect(root, "logo", new Vector2(0, 1), new Vector2(0, 1), new Vector2(80 + (560f - sz.x) * 0.5f, -12), sz);
+                var ri = lg.gameObject.AddComponent<RawImage>(); ri.texture = logoTex; ri.raycastTarget = false;
             }
-            UIK.Txt(root, "mode", L.S("tdm"), 30, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(95, -452), new Vector2(700, 40), true);
+            var chip = UIK.Img(root, "callsign", new Color(1, 1, 1, 0.07f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(80, -290), new Vector2(560, 92), true);
+            UIK.Img(chip.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(6, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
+            UIK.Txt(chip.transform, "lbl", L.S("callsign"), 18, Pal.Dim, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(24, -12), new Vector2(-48, -24), true);
+            nameTxt = UIK.Txt(chip.transform, "name", Settings.Callsign.ToUpper(), 38, Pal.Text, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(24, 10), new Vector2(-48, -20), true);
+            UIK.Txt(chip.transform, "edit", L.S("change"), 18, Pal.Accent, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-20, 0), new Vector2(-40, 0), true);
+            chip.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); ShowNameDialog(false); });
+            UIK.Txt(root, "mode", L.S("tdm"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(84, -400), new Vector2(700, 36), true);
 
-            UIK.Btn(root, L.S("play"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(90, -100), new Vector2(560, 110), StartMatch, 56, true);
-            var diffBtn = UIK.Btn(root, DiffLabel(), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(90, -225), new Vector2(560, 84), null, 34);
+            UIK.Btn(root, L.S("deploy"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -30), new Vector2(560, 110), StartMatch, 52, true);
+            var diffBtn = UIK.Btn(root, DiffLabel(), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -152), new Vector2(560, 80), null, 30);
             diffBtn.onClick.AddListener(() => { Settings.Difficulty = (Settings.Difficulty + 1) % 3; diffBtn.GetComponentInChildren<Text>().text = DiffLabel(); });
-            UIK.Btn(root, L.S("settings"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(90, -325), new Vector2(560, 84), () => ShowSettings(menuCanvas.transform, RebuildMenu), 34);
-            UIK.Btn(root, L.S("credits"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(90, -425), new Vector2(560, 84), ShowCredits, 34);
-            UIK.Txt(root, "foot", "AYD WORKS GAMES  ·  v0.1", 22, Pal.Dim, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 30), new Vector2(420, 30), true);
+            UIK.Btn(root, L.S("settings"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -244), new Vector2(560, 80), () => ShowSettings(menuCanvas.transform, RebuildMenu), 30);
 
-            Sfx.Music(R.menuMusic, 0.7f);
+            // ---- right: map + squads
+            var col = UIK.Rect(root, "info", new Vector2(1, 1), new Vector2(1, 1), new Vector2(-70, -40), new Vector2(560, 980));
+            UIK.Txt(col, "mh", L.S("map"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, 0), new Vector2(0, 30), true);
+            // two selectable map cards
+            var cards = new System.Collections.Generic.List<(Image bg, Image bar, Text sel, int id)>();
+            int nMaps = R.portPrefab != null ? 2 : 1;
+            if (Settings.Map >= nMaps) Settings.Map = 0;
+            for (int mi = 0; mi < nMaps; mi++)
+            {
+                int id = mi;
+                var card = UIK.Img(col, "card" + mi, new Color(0.05f, 0.055f, 0.05f, 0.82f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -36 - mi * 122), new Vector2(0, 110), true);
+                var bar = UIK.Img(card.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(6, 0)); bar.rectTransform.pivot = new Vector2(0, 0.5f);
+                UIK.Txt(card.transform, "t", L.S(mi == 0 ? "mapname" : "mapname2"), 30, Pal.Text, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(26, -14), new Vector2(-52, -28), true);
+                UIK.Txt(card.transform, "i", L.S(mi == 0 ? "mapinfo" : "mapinfo2"), 17, Pal.Dim, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(26, 14), new Vector2(-52, -28), true);
+                var sel = UIK.Txt(card.transform, "s", L.S("selected"), 16, Pal.Accent, TextAnchor.UpperRight, Vector2.zero, Vector2.one, new Vector2(-18, -14), new Vector2(-36, -28), true);
+                cards.Add((card, bar, sel, id));
+                card.gameObject.AddComponent<Button>().onClick.AddListener(() =>
+                {
+                    Sfx.UI(); Settings.Map = id; PlayerPrefs.Save();
+                    foreach (var c in cards) { bool on = c.id == Settings.Map; c.bar.enabled = on; c.sel.enabled = on; c.bg.color = new Color(0.05f, 0.055f, 0.05f, on ? 0.88f : 0.55f); }
+                });
+            }
+            foreach (var c in cards) { bool on = c.id == Settings.Map; c.bar.enabled = on; c.sel.enabled = on; c.bg.color = new Color(0.05f, 0.055f, 0.05f, on ? 0.88f : 0.55f); }
+
+            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -290), new Vector2(0, 30), true);
+            for (int t = 0; t < 2; t++)
+            {
+                var c = t == 0 ? Pal.Ally : Pal.Enemy;
+                float x0 = t == 0 ? 0 : 290;
+                UIK.Txt(col, "th" + t, L.S(t == 0 ? "allies" : "enemies"), 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, -330), new Vector2(270, 32), true);
+                for (int i = 0; i < 5; i++)
+                {
+                    string n = t == 0 ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[(i - 1) % MatchManager.AllyNames.Length]) : MatchManager.EnemyNames[i % MatchManager.EnemyNames.Length];
+                    var row = UIK.Img(col, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, -370 - i * 46), new Vector2(270, 40));
+                    UIK.Img(row.transform, "s", c, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
+                    var tx = UIK.Txt(row.transform, "n", n, 22, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-24, 0), false);
+                    tx.fontStyle = FontStyle.Bold;
+                    if (t == 0 && i == 0) rosterMe = tx;
+                }
+            }
+            UIK.Txt(root, "foot", "AYD WORKS GAMES  ·  v0.9", 20, Pal.Dim, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 24), new Vector2(420, 30), true);
+
+            Sfx.Music(R.menuMusic, R.lobbyPrefab != null && R.rain != null ? 0.4f : 0.7f);
+            if (string.IsNullOrWhiteSpace(Settings.PlayerName)) ShowNameDialog(true);
+        }
+
+        Text nameTxt, rosterMe;
+        static Texture2D edgeGrad;
+        static Texture2D EdgeGradient()
+        {
+            if (edgeGrad != null) return edgeGrad;
+            edgeGrad = new Texture2D(256, 1, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp };
+            var px = new Color32[256];
+            for (int i = 0; i < 256; i++) { float t = i / 255f; float a = Mathf.Clamp01(1f - Mathf.SmoothStep(0.45f, 1f, t)); px[i] = new Color32(255, 255, 255, (byte)(a * 255)); }
+            edgeGrad.SetPixels32(px); edgeGrad.Apply();
+            return edgeGrad;
+        }
+
+        void BuildLobbyScene(Z47Refs R, GameObject camGo)
+        {
+            var lob = Instantiate(R.lobbyPrefab, menuRoot.transform);
+            Transform pc = Util.FindDeep(lob.transform, "PT_cam"), pl = Util.FindDeep(lob.transform, "PT_look"),
+                      ps = Util.FindDeep(lob.transform, "PT_soldier"), pf = Util.FindDeep(lob.transform, "PT_face");
+            menuCam.fieldOfView = 46f; menuCam.nearClipPlane = 0.05f; menuCam.farClipPlane = 200f;
+            menuCam.clearFlags = CameraClearFlags.SolidColor;
+            menuCam.backgroundColor = new Color(0.6f, 0.63f, 0.66f);                 // overcast sky, like the scan
+            var cd = menuCam.GetUniversalAdditionalCameraData();
+            cd.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;   // menu only: best AA, the scan + character edges shimmer otherwise
+            cd.antialiasingQuality = AntialiasingQuality.High;
+            RenderSettings.fog = false;
+            // stormy sky dome (inside-out sphere) behind everything
+            if (R.lobbySkyMat != null && pc != null)
+            {
+                var sky = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                Destroy(sky.GetComponent<Collider>());
+                sky.name = "LobbySky"; sky.transform.SetParent(menuRoot.transform, false);
+                sky.transform.position = pc.position; sky.transform.localScale = new Vector3(-180f, 180f, 180f);
+                var sr = sky.GetComponent<MeshRenderer>(); sr.sharedMaterial = R.lobbySkyMat;
+                sr.shadowCastingMode = ShadowCastingMode.Off; sr.receiveShadows = false;
+            }
+            if (pc != null && pl != null) BuildRain(R, pc.position, pl.position);
+            if (R.rain != null) Sfx.Ambience(R.rain, 0.55f);
+            if (pc != null && pl != null) camGo.AddComponent<LobbyCam>().Init(pc.position, pl.position);
+            if (ps != null)
+            {
+                Vector3 to = pf != null ? pf.position - ps.position : -Vector3.forward; to.y = 0;
+                SpawnPoser(R.swatModel, ps.position, Quaternion.LookRotation(to).eulerAngles.y, true);
+            }
+        }
+
+        /// Rain: stretched streak particles in a box in front of the lobby camera (world space, light wind).
+        void BuildRain(Z47Refs R, Vector3 camPos, Vector3 look)
+        {
+            if (R.rainMat == null) return;
+            Vector3 fwd = (look - camPos); fwd.y = 0; fwd.Normalize();
+            var go = new GameObject("Rain"); go.transform.SetParent(menuRoot.transform, false);
+            go.transform.position = camPos + fwd * 7f + Vector3.up * 5f;
+            go.transform.rotation = Quaternion.LookRotation(fwd);
+            var ps = go.AddComponent<ParticleSystem>();
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            var main = ps.main;
+            main.loop = true; main.playOnAwake = true; main.duration = 5f;
+            main.startLifetime = 0.75f; main.startSpeed = 0f;
+            main.startSize = new ParticleSystem.MinMaxCurve(0.012f, 0.02f);
+            main.startColor = new Color(0.85f, 0.88f, 0.92f, 0.3f);
+            main.maxParticles = 4000; main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.prewarm = true;
+            var em = ps.emission; em.rateOverTime = 2600f;
+            var sh = ps.shape; sh.shapeType = ParticleSystemShapeType.Box; sh.scale = new Vector3(14f, 0.2f, 14f);
+            var vel = ps.velocityOverLifetime; vel.enabled = true; vel.space = ParticleSystemSimulationSpace.World;
+            vel.x = new ParticleSystem.MinMaxCurve(-1.4f, -0.8f); vel.y = new ParticleSystem.MinMaxCurve(-12f, -10f); vel.z = new ParticleSystem.MinMaxCurve(-0.3f, 0.3f);
+            var r = go.GetComponent<ParticleSystemRenderer>();
+            r.renderMode = ParticleSystemRenderMode.Stretch; r.velocityScale = 0.04f; r.lengthScale = 1f;
+            r.sharedMaterial = R.rainMat; r.shadowCastingMode = ShadowCastingMode.Off; r.receiveShadows = false;
+            ps.Play();
+        }
+
+        // ------------------------------------------------------------ callsign dialog
+        void ShowNameDialog(bool first)
+        {
+            var panel = UIK.Full(menuCanvas.transform, "NameDialog");
+            UIK.Img(panel, "bg", new Color(0, 0, 0, 0.8f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            var box = UIK.Img(panel, "box", new Color(0.05f, 0.055f, 0.05f, 0.97f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 60), new Vector2(820, 430));
+            UIK.Img(box.transform, "top", Pal.Accent, new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 6)).rectTransform.pivot = new Vector2(0.5f, 1);
+            UIK.Txt(box.transform, "t", L.S("callsign_q"), 44, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -70), new Vector2(760, 60), true);
+            UIK.Txt(box.transform, "h", L.S("callsign_h"), 22, Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -122), new Vector2(760, 36), false);
+            var fieldBg = UIK.Img(box.transform, "field", new Color(1, 1, 1, 0.08f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -10), new Vector2(640, 86), true);
+            UIK.Img(fieldBg.transform, "line", Pal.Accent, new Vector2(0, 0), new Vector2(1, 0), Vector2.zero, new Vector2(0, 3)).rectTransform.pivot = new Vector2(0.5f, 0);
+            var txt = UIK.Txt(fieldBg.transform, "t", "", 40, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-40, 0), true);
+            txt.supportRichText = false; txt.horizontalOverflow = HorizontalWrapMode.Wrap;
+            var ph = UIK.Txt(fieldBg.transform, "ph", L.S("callsign_ph"), 36, new Color(1, 1, 1, 0.25f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-40, 0), true);
+            var input = fieldBg.gameObject.AddComponent<InputField>();
+            input.textComponent = txt; input.placeholder = ph; input.characterLimit = 14;
+            input.lineType = InputField.LineType.SingleLine;
+            input.text = Settings.PlayerName;
+            UIK.Btn(box.transform, L.S("ok"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(first ? 0 : 150, 50), new Vector2(first ? 420 : 280, 86), () =>
+            {
+                string n = input.text.Trim();
+                if (n.Length < 2) { ph.text = L.S("callsign_short"); input.text = ""; return; }
+                Settings.PlayerName = n; PlayerPrefs.Save();
+                if (nameTxt != null) nameTxt.text = n.ToUpper();
+                if (rosterMe != null) rosterMe.text = n;
+                Destroy(panel.gameObject);
+            }, 36, true);
+            if (!first) UIK.Btn(box.transform, L.S("cancel"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-150, 50), new Vector2(280, 86), () => Destroy(panel.gameObject), 32);
+            input.ActivateInputField();
         }
 
         string DiffLabel() => L.S("difficulty") + ":  " + L.S(Settings.Difficulty == 0 ? "easy" : Settings.Difficulty == 1 ? "normal" : "hard");
 
-        void SpawnPoser(GameObject prefab, Vector3 pos, float yaw)
+        void SpawnPoser(GameObject prefab, Vector3 pos, float yaw, bool exact = false)
         {
             var g = Instantiate(prefab, menuRoot.transform);
-            g.transform.position = new Vector3(pos.x, Util.GroundY(pos) + 0.01f, pos.z);
+            g.transform.position = exact ? pos : new Vector3(pos.x, Util.GroundY(pos) + 0.01f, pos.z);
             g.transform.rotation = Quaternion.Euler(0, yaw, 0);
             var a = g.GetComponent<Animator>();
             if (a != null) { a.runtimeAnimatorController = Z47Refs.I.bodyController; a.SetBool("Aim", false); }
@@ -190,6 +356,7 @@ namespace Zone47
         {
             yield return null; // let destroyed objects go
             Sfx.Music(null, 0);
+            RenderSettings.fog = true;
             matchRoot = new GameObject("Match");
             var mm = matchRoot.AddComponent<MatchManager>();
             mm.Begin();
@@ -207,48 +374,12 @@ namespace Zone47
         IEnumerator MenuNextFrame() { yield return null; BuildMenu(); }
 
         // ------------------------------------------------------------ settings
-        public void ShowSettings(Transform parent, Action onClose)
-        {
-            var panel = UIK.Full(parent, "Settings");
-            UIK.Img(panel, "bg", new Color(0.03f, 0.03f, 0.03f, 0.94f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-            UIK.Txt(panel, "title", L.S("settings"), 72, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -90), new Vector2(1000, 100), true);
-
-            string[] q = { "low", "medium", "high", "ultra" };
-            int row = 0;
-            Row(panel, row++, L.S("graphics"), () => L.S(q[Settings.Quality]), d => { Settings.Quality = Mathf.Clamp(Settings.Quality + d, 0, 3); });
-            Row(panel, row++, L.S("bright"), () => Mathf.RoundToInt(Settings.Brightness * 100) + "%", d => { Settings.Brightness = Mathf.Clamp(Settings.Brightness + d * 0.1f, 0f, 1f); if (Exposure != null) Exposure.postExposure.Override(Settings.ExposureValue); });
-            Row(panel, row++, L.S("fps"), () => Settings.Fps.ToString(), d => { int[] f = { 30, 60, 120 }; int i = Array.IndexOf(f, Settings.Fps); Settings.Fps = f[Mathf.Clamp((i < 0 ? 1 : i) + d, 0, 2)]; });
-            Row(panel, row++, L.S("sens"), () => Settings.Sens.ToString("0.0"), d => Settings.Sens = Mathf.Clamp(Settings.Sens + d * 0.1f, 0.2f, 3f));
-            Row(panel, row++, L.S("adssens"), () => Settings.AdsSens.ToString("0.0"), d => Settings.AdsSens = Mathf.Clamp(Settings.AdsSens + d * 0.1f, 0.2f, 2f));
-            Row(panel, row++, L.S("music"), () => Mathf.RoundToInt(Settings.Music * 100) + "%", d => { Settings.Music = Mathf.Clamp01(Settings.Music + d * 0.1f); Sfx.Music(Z47Refs.I.menuMusic, menuRoot != null ? 0.7f : 0f); });
-            Row(panel, row++, L.S("sfx"), () => Mathf.RoundToInt(Settings.Sfx * 100) + "%", d => Settings.Sfx = Mathf.Clamp01(Settings.Sfx + d * 0.1f));
-            Row(panel, row++, L.S("aimassist"), () => L.S(Settings.AimAssist ? "on" : "off"), d => Settings.AimAssist = !Settings.AimAssist);
-            Row(panel, row++, L.S("leftfire"), () => L.S(Settings.LeftFire ? "on" : "off"), d => Settings.LeftFire = !Settings.LeftFire);
-            Row(panel, row++, L.S("arms"), () => L.S(Settings.ShowArms ? "on" : "off"), d => Settings.ShowArms = !Settings.ShowArms);
-            Row(panel, row++, L.S("lang"), () => Settings.Turkish ? "TÜRKÇE" : "ENGLISH", d => Settings.Turkish = !Settings.Turkish);
-
-            UIK.Btn(panel, L.S("back"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 90), new Vector2(480, 96), () =>
-            {
-                Settings.Apply();
-                foreach (var c in FindObjectsByType<Camera>(FindObjectsSortMode.None)) ApplyCameraFx(c);
-                Destroy(panel.gameObject);
-                onClose?.Invoke();
-            }, 44, true);
-        }
-
-        void Row(RectTransform panel, int i, string label, Func<string> val, Action<int> change)
-        {
-            float y = -165 - i * 68;
-            UIK.Txt(panel, "l", label, 34, Pal.Dim, TextAnchor.MiddleRight, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(-260, y), new Vector2(560, 60), true);
-            var v = UIK.Txt(panel, "v", val(), 36, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(230, y), new Vector2(300, 60), true);
-            UIK.Btn(panel, "<", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(40, y), new Vector2(76, 62), () => { change(-1); v.text = val(); }, 40);
-            UIK.Btn(panel, ">", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(420, y), new Vector2(76, 62), () => { change(1); v.text = val(); }, 40);
-        }
+        public void ShowSettings(Transform parent, Action onClose, bool inMatch = false) => SettingsUI.Show(parent, onClose, inMatch);
 
         // ------------------------------------------------------------ credits
-        void ShowCredits()
+        public void ShowCredits(Transform parent)
         {
-            var panel = UIK.Full(menuCanvas.transform, "Credits");
+            var panel = UIK.Full(parent, "Credits");
             UIK.Img(panel, "bg", new Color(0.03f, 0.03f, 0.03f, 0.95f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             UIK.Txt(panel, "title", L.S("credits"), 72, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -90), new Vector2(1200, 100), true);
             var t = UIK.Txt(panel, "body", CreditsText, 24, Pal.Text, TextAnchor.UpperCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -170), new Vector2(1700, 820));
@@ -264,9 +395,17 @@ namespace Zone47
             "\"AWP\" by forestie — CC BY 4.0 (sketchfab.com/3d-models/awp-b7101f0325aa4b0dad8512d0ec67bfa1)\n" +
             "\"Glock Gun 3d Model Free Download\" by thronetools — CC BY 4.0 (skfb.ly/pNyF7)\n" +
             "\"Grenade\" by DJMaesen — CC BY 4.0 (skfb.ly/6AnKC)\n" +
+            "\"fps arms\" by DJMaesen — CC BY 4.0 (skfb.ly/6R6yX)\n" +
+            "\"Liman / Port\" map, textures & procedural audio: AYD Works Games\n" +
+            "\"Conteiner\" by pbk (Rafael_Oliveira) — CC BY 4.0 (sketchfab.com/3d-models/conteiner-8b5a55e3059d41699e4e3aa9c0c1baa4)\n" +
+            "\"Forklift Truck\" by Kray Ewan — CC BY 4.0 (sketchfab.com/3d-models/forklift-truck-1567f5f71c1a40eebe487b1b8f570250)\n" +
+            "\"Fort Worden Gun Battery Ash\" by peter54 — CC BY 4.0 (sketchfab.com/3d-models/fort-worden-gun-battery-ash-a0bc6bcaaa234e94855be78c20fb11c1)\n" +
+            "\"fps animated carbine\" by DJMaesen — CC BY 4.0 (sketchfab.com/3d-models/fps-animated-carbine-62977bb4c53047a185b9f3a0cdf56b87)\n" +
+            "\"Free - Holographic sight game ready\" by Karnaval — CC BY 4.0 (skfb.ly/oWDxG)\n" +
             "Characters & animations: Mixamo (Adobe)\n\n" +
             "Sounds (freesound.org): mnslugger20, 18hiltc, evanboyerman, synth2, gfl7, fastson,\n" +
-            "rammbostein, fusionwolf3740, nicktermer, ogsoundfx, qubodup, designerschoice (Nicholas Judy), jaklocke\n" +
+            "rammbostein, fusionwolf3740, nicktermer, ogsoundfx, qubodup, designerschoice (Nicholas Judy), jaklocke, ceberation,\n" +
+            "dirtjm, silverillusionist, baggonotes, patrick_corra, speakwithanimals (rain)\n" +
             "Music: \"Viking/Medieval Theme\" by Mark_Murray (freesound.org)\n\n" +
             "Fonts: Black Ops One, Rajdhani — SIL Open Font License\n" +
             "Licenses: creativecommons.org/licenses/by/4.0";
@@ -284,6 +423,20 @@ namespace Zone47
             if (c == null) return;
             if (c != null) transform.SetPositionAndRotation(c.transform.position, c.transform.rotation);
             Sfx.ListenerPos = transform.position;
+        }
+    }
+
+    /// Lobby camera: fixed shot (any drift makes the photo-scan shimmer; the rain provides the motion).
+    public class LobbyCam : MonoBehaviour
+    {
+        Vector3 basePos, look;
+        public void Init(Vector3 p, Vector3 l) { basePos = p; look = l; Update(); }
+        void Update()
+        {
+            float t = Time.time;
+            Vector3 fwd = (look - basePos).normalized, right = Vector3.Cross(Vector3.up, fwd).normalized;
+            transform.position = basePos;
+            transform.rotation = Quaternion.LookRotation(look - basePos);
         }
     }
 

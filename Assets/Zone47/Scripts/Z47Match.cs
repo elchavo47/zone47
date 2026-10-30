@@ -27,8 +27,8 @@ namespace Zone47
         public readonly List<Vector3> waypoints = new List<Vector3>();
         public Transform worldRoot;
 
-        static readonly string[] AllyNames = { "Bozkurt", "Şahin", "Kartal", "Atmaca", "Pars", "Doğan", "Yıldırım", "Kaplan" };
-        static readonly string[] EnemyNames = { "Viper", "Ghost", "Raven", "Cobra", "Jackal", "Wolf", "Reaper", "Hyena" };
+        public static readonly string[] AllyNames = { "Bozkurt", "Şahin", "Kartal", "Atmaca", "Pars", "Doğan", "Yıldırım", "Kaplan" };
+        public static readonly string[] EnemyNames = { "Viper", "Ghost", "Raven", "Cobra", "Jackal", "Wolf", "Reaper", "Hyena" };
 
         public void Begin()
         {
@@ -42,7 +42,7 @@ namespace Zone47
             var R = Z47Refs.I;
             worldRoot = new GameObject("World").transform;
             worldRoot.SetParent(transform);
-            var map = Instantiate(R.mapPrefab, worldRoot);
+            var map = Instantiate(Settings.Map == 1 && R.portPrefab != null ? R.portPrefab : R.mapPrefab, worldRoot);
             map.name = "Map";
             Physics.SyncTransforms();
             yield return null;
@@ -87,7 +87,8 @@ namespace Zone47
             foreach (var r in map.GetComponentsInChildren<Renderer>())
             {
                 if (first) { b = r.bounds; first = false; } else b.Encapsulate(r.bounds);
-                if (r.name.ToLower().Contains("ground")) ground = r;
+                // the main ground is the biggest "ground" surface (indoor floors are also called Ground_*)
+                if (r.name.ToLower().Contains("ground") && (ground == null || r.bounds.size.x * r.bounds.size.z > ground.bounds.size.x * ground.bounds.size.z)) ground = r;
             }
             var gb = ground != null ? ground.bounds : b;
             mapCenter = new Vector3(gb.center.x, 0, gb.center.z);
@@ -107,10 +108,16 @@ namespace Zone47
         public Vector3 SpawnPoint(int team, int idx)
         {
             Vector3 side = Vector3.Cross((spawnCenter[1 - team] - spawnCenter[team]).normalized, Vector3.up);
-            for (int tries = 0; tries < 12; tries++)
+            for (int tries = 0; tries < 24; tries++)
             {
-                Vector3 p = spawnCenter[team] + side * ((idx - 2) * 2.2f + Random.Range(-1.5f, 1.5f)) + Random.insideUnitSphere.Flat() * 2.5f;
-                if (NavMesh.SamplePosition(p, out var h, 4f, NavMesh.AllAreas)) return h.position;
+                float spread = tries < 12 ? 1f : 2f;
+                Vector3 p = spawnCenter[team] + side * ((idx - 2) * 2.2f + Random.Range(-1.5f, 1.5f)) * spread + Random.insideUnitSphere.Flat() * 2.5f * spread;
+                if (!NavMesh.SamplePosition(p, out var h, 4f, NavMesh.AllAreas)) continue;
+                // must be on the ground (not a container roof) and free of any solid object
+                if (h.position.y > spawnCenter[team].y + 1f) continue;
+                Vector3 q = h.position;
+                if (Physics.CheckCapsule(q + Vector3.up * 0.65f, q + Vector3.up * 1.6f, 0.38f, ~0, QueryTriggerInteraction.Ignore)) continue;
+                return q;
             }
             return spawnCenter[team] + Vector3.up * 0.1f;
         }

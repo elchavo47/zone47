@@ -28,6 +28,7 @@ namespace Zone47
         public abstract Vector3 ChestPos { get; }
         public abstract float HeadHeight { get; }   // world y above which a hit counts as headshot
 
+        float lastGrunt = -9f;
         public virtual void Damage(float amount, Actor from, Vector3 fromPos, bool headshot)
         {
             if (!Alive || MatchManager.I == null || !MatchManager.I.Running) return;
@@ -37,6 +38,12 @@ namespace Zone47
             lastDamageTime = Time.time;
             lastDamageFrom = fromPos;
             OnHurt(from, fromPos);
+            if (Time.time - lastGrunt > 0.55f)
+            {
+                lastGrunt = Time.time;
+                if (isPlayer) Sfx.Play2D(Z47Refs.I.hurt, 0.55f, 0.1f);
+                else Sfx.Play3D(Z47Refs.I.hurt, ChestPos, 0.75f, 3f, 45f, 0.18f);
+            }
             if (hp <= 0f)
             {
                 hp = 0f;
