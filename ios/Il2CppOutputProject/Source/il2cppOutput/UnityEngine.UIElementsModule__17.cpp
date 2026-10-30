@@ -374,7 +374,6 @@ IL2CPP_EXTERN_C String_t* _stringLiteral3A8DD7C6F5FEA2DBEEF52342AA6C2BC5C2CC5292
 IL2CPP_EXTERN_C String_t* _stringLiteral4374CADE904051A293368F226AEADB752CCE83E6;
 IL2CPP_EXTERN_C String_t* _stringLiteral4379B0249B80A34ABC2748B5F0D030FD7D4E007C;
 IL2CPP_EXTERN_C String_t* _stringLiteral47E8CCB1C331C9476E88F8A6179C1466CBA62167;
-IL2CPP_EXTERN_C String_t* _stringLiteral4EBC86E0EACFCA522AEB82874860D0E248D782A5;
 IL2CPP_EXTERN_C String_t* _stringLiteral542B678EE8E45EF49C8BF1EEDF69302ACFB87567;
 IL2CPP_EXTERN_C String_t* _stringLiteral58ADCD3094CAFBED0B0FF7F8648348496D14B93E;
 IL2CPP_EXTERN_C String_t* _stringLiteral5F510F12DA5A0B145167E6F7712DD5D4419511C2;
@@ -390,6 +389,7 @@ IL2CPP_EXTERN_C String_t* _stringLiteralE2C53BD2E96BD264DEDBE89CFC15A62B46E7E68E
 IL2CPP_EXTERN_C String_t* _stringLiteralE8BAD702C24BDA97C671CFF09E306CEAC39B0E5B;
 IL2CPP_EXTERN_C String_t* _stringLiteralEE67C84D76A5B237ACBA1ADCCC5BD7797CF0BE94;
 IL2CPP_EXTERN_C String_t* _stringLiteralF66E6A8E08EF9D1870D4FB53412CE1F43408AD94;
+IL2CPP_EXTERN_C String_t* _stringLiteralFD093BF647113E1F68097589713DF034331718B2;
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_Dispose_m0D874C0FB3259E2D7E3B0D575DAEAD845BCC66D8_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_Dispose_m437927601AF0136DC121804C87C2272F02CED19C_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_Dispose_m61F856C42A93BFA078EEDFF965363FEDEC51B910_RuntimeMethod_var;
@@ -405,7 +405,7 @@ IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_get_Current_m183D834DF472177579F
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_get_Current_m303B92F0A48F04E5434B0F2EA762553526790505_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_get_Current_mBBBCDD3325D12B626C5855086A255F855933B27D_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* Enumerator_get_Current_mD90728A8D7833B6395B54E9954D6E79F201143F2_RuntimeMethod_var;
-IL2CPP_EXTERN_C const RuntimeMethod* GCHandle_get_Target_m481F9508DA5E384D33CD1F4450060DC56BBD4CD5_RuntimeMethod_var;
+IL2CPP_EXTERN_C const RuntimeMethod* GCHandle_ThrowIfInvalid_m8BD7E31B383F657BB7B2512567A8296CFC16C931_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* IJobParallelForExtensions_Schedule_TisOpacityIdUpdateJob_t44287EF1EDECBC73C16DD75791575F362A19A110_m77AFA9A14FD2ACA01625D9E7B23D2A64EF963D35_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* IJobParallelForExtensions_Schedule_TisTessellationJob_t6752B373FBA1C29E9EFF3B0E46A67057B5684B76_m12F9D696213CC7E691042F5CF1AB25684716F990_RuntimeMethod_var;
 IL2CPP_EXTERN_C const RuntimeMethod* LinkedPoolItem_1__ctor_m49B1E922B449C430F3B9AEE16304413CD0745010_RuntimeMethod_var;
@@ -2203,7 +2203,7 @@ struct RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8  : public RuntimeObj
 	RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727* ___m_FirstCommand;
 	RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___m_RootRenderData;
 	TextureId_tFF4B4AAE53408AB10B0B89CCA5F7B50CF2535E58 ___quadTextureId;
-	RectInt_t1744D10E1063135DA9D574F95205B98DAC600CB8 ___quadRect;
+	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___quadRect;
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___quadUVRect;
 	GCHandlePool_t88A5284E139FDB4127234399D14AA91F62CAF0A0* ___m_GCHandlePool;
 	RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* ___parent;
@@ -2592,7 +2592,6 @@ struct RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2  : public RuntimeObj
 	RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727* ___lastTailCommand;
 	bool ___localFlipsWinding;
 	bool ___worldFlipsWinding;
-	bool ___worldTransformScaleZero;
 	int32_t ___clipMethod;
 	int32_t ___childrenStencilRef;
 	int32_t ___childrenMaskDepth;
@@ -4599,12 +4598,10 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTreeManager_get_drawIn
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool VisualElement_ShouldClip_m12585878F77BB029474BA67935AB704D81CE7FE0 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECECA494C2DE33283D489AC0596BB89858FB (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_owner, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* ___1_localRect, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* VisualElement_get_worldTransformRef_m25AB63C70B9C7965FEC38C1711316A47608D5276 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UIRUtility_ComputeMatrixRelativeToAncestor_mEB1A14BCB4654C3A0C9A3FE1EFEEA412FD96D9D6 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___1_ancestor, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___2_transform, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___1_transform, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___0_matrix, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* ___1_rect, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* VisualElement_get_worldTransformInverse_m3F6A138010EDD0ADB850092717003E8E38226980 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D RenderData_IntersectClipRects_m93E2B6A01C8816D2FF3B786570A8BD82F138EF67 (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_rect, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___1_parentRect, const RuntimeMethod* method) ;
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTree_get_isRootRenderTree_mB6433CBE5A68B70E9DD20B5D766A2951631AAD47_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t ComputedStyle_get_unityOverflowClipBox_m7AB0AE71E270B55E37AB90856EC2797F99780AF1 (ComputedStyle_t8B08CCCEE20525528B3FFDAC6D3F58F101AAF54C* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* RenderTreeManager_get_device_m35110EF1CEF0E13FABFEFD579CABDA81D5335310_inline (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) ;
@@ -4614,8 +4611,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_DepthFirstOnOpacityChanged_
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_OnColorChanged_m88F4A6672B5CFD02D1F200C0AEBC49CC97116482 (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___0_renderTreeManager, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___1_renderData, uint32_t ___2_dirtyID, ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* ___3_stats, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_DepthFirstOnTransformOrSizeChanged_mBA4726734BE62042607959D14BFF45E21AB73782 (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___0_renderTreeManager, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___1_renderData, uint32_t ___2_dirtyID, UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* ___3_device, bool ___4_isAncestorOfChangeSkinned, bool ___5_transformChanged, ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* ___6_stats, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_AllocatesID_mC45127AE3E5BA4D8817E5799C99B39D4B4E9144F (BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 ___0_alloc, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisualElement_MultiplyMatrix34_mBDEE644E6CEF9A47F7901CFE215B2682FCCAFDC9 (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___0_lhs, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___1_rhs, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___2_res, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___1_transform, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_mC53581E703768BA2512A7C65283657C331994353_inline (float ___0_d, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_a, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderTreeManager_CancelInsertion_m4D3A692DFE1AA50A523D0BD19A32CA3456C8E253 (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* RenderTreeManager_GetPooledRenderData_mC6C585D9FB9A82C4E4CB3F57C93E5486088619BA (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) ;
@@ -4676,7 +4671,6 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isIgnoringDyn
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_UpdateTextCoreSettings_mA19DBA0F459E42A0F65243E86AEFABF937320FEA (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___0_renderTreeManager, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___1_ve, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 RenderEvents_GetClipRectIDClipInfo_m05005B86016941A109E2E7D4A0F961020E593BF8 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UIRVEShaderInfoAllocator_SetClipRectValue_mB054EC9E7EB8B523E0022AADD215218542B6B7D3 (UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* __this, BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 ___0_alloc, Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___1_clipRect, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_UpdateZeroScaling_mEAD8A48B28258E1D5431CA836A74B34F7410CA45 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_InheritsID_m660DE50B92F5B019222925CC61164AA157604ACF (BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 ___0_alloc, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE758843C01D0FB07F061EEAB88D4A5159DB026C8 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___1_renderTreeManager, UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* ___2_device, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisualElement_EnsureWorldTransformAndClipUpToDate_mA58DAF07419D9E1245DE634CA38ACAE618CE3273 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
@@ -4705,7 +4699,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR BaseElementBuilder_t7AD7947872717E2F4C56F8A02
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* VisualElement_get_elementPanel_m4B4A37001D55527E4D015E6C6132607071F32B01_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool BaseVisualElementPanel_get_isFlat_m4B9D7849C0774D56CB90F34D433C2F2AE6ECFFA4_inline (BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Scale_get_value_m27CE2F2A3DD1A14DE72EE744A3817BFE3D3DDD96_inline (Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7* __this, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* Hierarchy_get_parent_m1CB3F7548632A5B5747041AF64B12BB0E0F402D4 (Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F (UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UIRVEShaderInfoAllocator_SetColorValue_m8246EA58FA06A05B865A19D650A39C49C06D2449 (UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* __this, BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 ___0_alloc, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_color, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, float ___0_r, float ___1_g, float ___2_b, float ___3_a, const RuntimeMethod* method) ;
@@ -4721,15 +4714,13 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_xMax_m97C28D468455A
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_yMax_mCF452040E0068A4B3CB15994C0B4B6AD4D78E04B_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR MeshGenerationNodeImpl_t059B9D42007B495B8C11038C0CFFB63DFB0DC81E* UnsafeMeshGenerationNode_GetManaged_m97AFC4F89078EA148F85F6D701ACA3B24DED82C1_inline (UnsafeMeshGenerationNode_t1FF7D38D9B39DC59A2F8E2DFC92BFAB2481E88A2* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MeshGenerationNodeImpl_DrawMesh_m698B059EABB7FAD16D56AA7569A2D9694BD81CBF (MeshGenerationNodeImpl_t059B9D42007B495B8C11038C0CFFB63DFB0DC81E* __this, NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 ___0_vertices, NativeSlice_1_t0D1A1AB7A9C4768B84EB7420D04A90920533C78A ___1_indices, Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700* ___2_texture, int32_t ___3_textureOptions, const RuntimeMethod* method) ;
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GCHandle_get_IsAllocated_m241908103D8D867E11CCAB73C918729825E86843_inline (GCHandle_tC44F6F72EE68BD4CFABA24309DA7A179D41127DC* __this, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void InvalidOperationException__ctor_mE4CB6F4712AB6D99A2358FBAE2E052B3EE976162 (InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB* __this, String_t* ___0_message, const RuntimeMethod* method) ;
+IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GCHandle_ThrowIfInvalid_m8BD7E31B383F657BB7B2512567A8296CFC16C931_inline (intptr_t ___0_handle, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GCHandle_CanDereferenceHandle_mAAAC42D1268CEF3FDD040A3D1574773D08140579_inline (intptr_t ___0_handle, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* GCHandle_GetRef_mAC7E58E62417209DC41C99F66BA70F0C3AA18DA8_inline (intptr_t ___0_handle, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* GCHandle_GetTarget_mE0AF851834410E2AEA6285B2497751570236C794 (intptr_t ___0_handle, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MeshGenerationNodeImpl_DrawGradients_mC07687F77CD91C7538685A3397C101B758111673 (MeshGenerationNodeImpl_t059B9D42007B495B8C11038C0CFFB63DFB0DC81E* __this, NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 ___0_vertices, NativeSlice_1_t0D1A1AB7A9C4768B84EB7420D04A90920533C78A ___1_indices, VectorImage_t7BD8CE948377FFE95FCA0C48014ACDFC13B8F8FC* ___2_gradientsOwner, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 VisualElement_get_layoutSize_m9BD5E3873E98B8D66582571A7F62F890FE970F70_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D VisualElement_CalculateConservativeRect_mA2F03F761381779D00E25C96C1DCE61A181A77EA (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___0_matrix, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___1_rect, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DepthOrderedDirtyTracking_RegisterDirty_mCA45A9CBEF677A5FDCF35E9BBB5A387408FF699B (DepthOrderedDirtyTracking_tBBB6D410F54E29280B46F49E7D941D4520F51D48* __this, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, int32_t ___1_dirtyTypes, int32_t ___2_dirtyTypeClass, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 Matrix4x4_Internal_Inverse_mD301299DCEF2139ADCA20FFE4222D065FAE582F1 (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___0_m, const RuntimeMethod* method) ;
 inline void List_1_AddWithResize_m79A9BF770BEF9C06BE40D5401E55E375F2726CC4 (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method)
@@ -4750,6 +4741,7 @@ inline void List_1_AddWithResize_m2E6F0EF4A4C9E947917DACE45957A7888BE26A19 (List
 	((  void (*) (List_1_t0325EC485D0C783FC73CF8D1F8C84A6628937599*, RepeatRectUV_tD14FA437CD80FC82B2ED78B34A201F3C91416A7C, const RuntimeMethod*))List_1_AddWithResize_m2E6F0EF4A4C9E947917DACE45957A7888BE26A19_gshared)(__this, ___0_item, method);
 }
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void InvalidOperationException__ctor_mE4CB6F4712AB6D99A2358FBAE2E052B3EE976162 (InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB* __this, String_t* ___0_message, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* VisualElement_get_layoutNode_mDEB89DEE452812FE70D90C54203C03DC216A66CB (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 LayoutNode_GetLayoutSize_m9DD2A25D8C470FF99CF5CD4072986F190E5DDFF6_inline (LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool LayoutNode_get_IsUndefined_m665915BF5E18265221ECD4DA8AFC287BBB217A42 (LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* __this, const RuntimeMethod* method) ;
@@ -19032,7 +19024,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_AllocatesID_mC45127AE3E5BA4D8
 	bool V_0 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:95>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:94>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_0 = ___0_alloc;
 		uint8_t L_1 = L_0.___ownedState;
 		if ((!(((uint32_t)L_1) == ((uint32_t)1))))
@@ -19061,7 +19053,7 @@ IL_0014:
 
 IL_0017:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:95>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:94>
 		bool L_3 = V_0;
 		return L_3;
 	}
@@ -19078,7 +19070,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_InheritsID_m660DE50B92F5B0192
 	bool V_0 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:96>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:95>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_0 = ___0_alloc;
 		uint8_t L_1 = L_0.___ownedState;
 		if (L_1)
@@ -19107,7 +19099,7 @@ IL_0013:
 
 IL_0016:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:96>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:95>
 		bool L_3 = V_0;
 		return L_3;
 	}
@@ -19124,139 +19116,137 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_Init_m58480630B2CE44C4D137BAC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:108>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:107>
 		__this->___owner = (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___owner), (void*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:109>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:108>
 		__this->___renderTree = (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___renderTree), (void*)(RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:110>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:109>
 		__this->___parent = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___parent), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:111>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:110>
 		__this->___nextSibling = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___nextSibling), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:112>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:111>
 		__this->___prevSibling = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___prevSibling), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:113>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:112>
 		__this->___firstChild = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstChild), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:114>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:113>
 		__this->___lastChild = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastChild), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:115>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:114>
 		__this->___groupTransformAncestor = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___groupTransformAncestor), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:116>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:115>
 		__this->___boneTransformAncestor = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___boneTransformAncestor), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:117>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:116>
 		__this->___prevDirty = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___prevDirty), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:118>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:117>
 		__this->___nextDirty = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___nextDirty), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:119>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:118>
 		__this->___flags = ((int32_t)64);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:120>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:119>
 		__this->___depthInRenderTree = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:121>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:120>
 		__this->___dirtiedValues = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:122>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:121>
 		__this->___dirtyID = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:123>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:122>
 		__this->___firstHeadCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstHeadCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:124>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:123>
 		__this->___lastHeadCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastHeadCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:125>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:124>
 		__this->___firstTailCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstTailCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:126>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:125>
 		__this->___lastTailCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastTailCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:127>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:126>
 		__this->___localFlipsWinding = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:128>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:127>
 		__this->___worldFlipsWinding = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:129>
-		__this->___worldTransformScaleZero = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:130>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:128>
 		__this->___clipMethod = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:131>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:129>
 		__this->___childrenStencilRef = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:132>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:130>
 		__this->___childrenMaskDepth = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:133>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:131>
 		__this->___headMesh = (MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___headMesh), (void*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:134>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:132>
 		__this->___tailMesh = (MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___tailMesh), (void*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:135>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:133>
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_0;
 		L_0 = Matrix4x4_get_identity_m6568A73831F3E2D587420D20FF423959D7D8AB56_inline(NULL);
 		__this->___verticesSpace = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:136>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:134>
 		il2cpp_codegen_runtime_class_init_inline(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var);
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_1 = ((UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_StaticFields*)il2cpp_codegen_static_fields_for(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var))->___identityTransform;
 		__this->___transformID = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:137>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:135>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_2 = ((UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_StaticFields*)il2cpp_codegen_static_fields_for(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var))->___infiniteClipRect;
 		__this->___clipRectID = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:138>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:136>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_3 = ((UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_StaticFields*)il2cpp_codegen_static_fields_for(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var))->___fullOpacity;
 		__this->___opacityID = L_3;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:139>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:137>
 		il2cpp_codegen_runtime_class_init_inline(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var);
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_4 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___colorID = L_4;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:140>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:138>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_5 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___backgroundColorID = L_5;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:141>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:139>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_6 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___borderLeftColorID = L_6;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:142>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:140>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_7 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___borderTopColorID = L_7;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:143>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:141>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_8 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___borderRightColorID = L_8;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:144>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:142>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_9 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___borderBottomColorID = L_9;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:145>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:143>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_10 = ((BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_StaticFields*)il2cpp_codegen_static_fields_for(BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30_il2cpp_TypeInfo_var))->___Invalid;
 		__this->___tintColorID = L_10;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:146>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:144>
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_11 = ((UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_StaticFields*)il2cpp_codegen_static_fields_for(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var))->___defaultTextCoreSettings;
 		__this->___textCoreSettingsID = L_11;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:147>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:145>
 		__this->___compositeOpacity = ((std::numeric_limits<float>::max)());
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:148>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:146>
 		__this->___backgroundAlpha = (0.0f);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:149>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:147>
 		__this->___graphicEntries = (BasicNode_1_t35824621448B5C86B405174E9DDB413FA8F4CEAE*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___graphicEntries), (void*)(BasicNode_1_t35824621448B5C86B405174E9DDB413FA8F4CEAE*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:150>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:148>
 		__this->___pendingRepaint = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:151>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:149>
 		__this->___pendingHierarchicalRepaint = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:152>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:150>
 		il2cpp_codegen_runtime_class_init_inline(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_12;
 		L_12 = Rect_get_zero_m5341D8B63DEF1F4C308A685EEC8CFEA12A396C8D_inline(NULL);
 		RenderData_set_clippingRect_m3232F0694FD2CF0E258FBAC93903B95984DD6868(__this, L_12, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:153>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:151>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_13;
 		L_13 = Rect_get_zero_m5341D8B63DEF1F4C308A685EEC8CFEA12A396C8D_inline(NULL);
 		RenderData_set_clippingRectMinusGroup_m88EA7A7EC3EB7B855A7B8DA1F5DEDE0DC04BDFB3(__this, L_13, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:154>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:152>
 		RenderData_set_clippingRectIsInfinite_mB4BB8451AA26EC1CBE234843295040E45301E092(__this, (bool)0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:155>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:153>
 		return;
 	}
 }
@@ -19264,61 +19254,61 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_Init_m58480630B2CE44C4D137BAC
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_Reset_mBE39E2A97927333E21DADA0168E3EF28CF50832E (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:159>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:157>
 		__this->___owner = (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___owner), (void*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:160>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:158>
 		__this->___renderTree = (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___renderTree), (void*)(RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:161>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:159>
 		__this->___parent = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___parent), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:162>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:160>
 		__this->___nextSibling = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___nextSibling), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:163>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:161>
 		__this->___prevSibling = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___prevSibling), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:164>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:162>
 		__this->___firstChild = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstChild), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:165>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:163>
 		__this->___lastChild = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastChild), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:166>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:164>
 		__this->___groupTransformAncestor = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___groupTransformAncestor), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:167>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:165>
 		__this->___boneTransformAncestor = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___boneTransformAncestor), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:168>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:166>
 		__this->___prevDirty = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___prevDirty), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:169>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:167>
 		__this->___nextDirty = (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___nextDirty), (void*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:170>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:168>
 		__this->___firstHeadCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstHeadCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:171>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:169>
 		__this->___lastHeadCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastHeadCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:172>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:170>
 		__this->___firstTailCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___firstTailCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:173>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:171>
 		__this->___lastTailCommand = (RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___lastTailCommand), (void*)(RenderChainCommand_t4F70E36AF4BC3645C8F9C822B7A3ACE9CB815727*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:174>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:172>
 		__this->___headMesh = (MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___headMesh), (void*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:175>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:173>
 		__this->___tailMesh = (MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___tailMesh), (void*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:176>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:174>
 		__this->___graphicEntries = (BasicNode_1_t35824621448B5C86B405174E9DDB413FA8F4CEAE*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___graphicEntries), (void*)(BasicNode_1_t35824621448B5C86B405174E9DDB413FA8F4CEAE*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:177>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:175>
 		return;
 	}
 }
@@ -19326,7 +19316,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_Reset_mBE39E2A97927333E21DADA
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:182>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:180>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&1))) == ((int32_t)1))? 1 : 0);
 	}
@@ -19335,7 +19325,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isGroupTransform_m6468EE9
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isIgnoringDynamicColorHint_mACBB6B12F76476595B9172793392D1E7201138C7 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:188>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:186>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&2))) == ((int32_t)2))? 1 : 0);
 	}
@@ -19344,7 +19334,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isIgnoringDynamicColorHin
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraData_m39015EEF02331F301EDB8BDD682EA5EF01D0D8A6 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:194>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:192>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&4))) == ((int32_t)4))? 1 : 0);
 	}
@@ -19353,7 +19343,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraData_m39015EEF023
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraMeshes_m5C633F6BAC7B522BB278D8C6BB0C0FEAC9B950BD (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:200>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:198>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&8))) == ((int32_t)8))? 1 : 0);
 	}
@@ -19362,7 +19352,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraMeshes_m5C633F6BA
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isSubTreeQuad_m19B0DEF4B5AB5D3BBADC3014B99942FEF8B5A27D (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:206>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:204>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)16)))) == ((int32_t)((int32_t)16)))? 1 : 0);
 	}
@@ -19371,7 +19361,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isSubTreeQuad_m19B0DEF4B5
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:214>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:212>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)32)))) == ((int32_t)((int32_t)32)))? 1 : 0);
 	}
@@ -19380,7 +19370,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isNestedRenderTreeRoot_m2
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_isClippingRectDirty_mD3A801F677E20BE06F6822B0384A481785A2DB4F (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:220>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:218>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)64)))) == ((int32_t)((int32_t)64)))? 1 : 0);
 	}
@@ -19392,7 +19382,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:231>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:229>
 		bool L_0;
 		L_0 = RenderData_get_isClippingRectDirty_mD3A801F677E20BE06F6822B0384A481785A2DB4F_inline(__this, NULL);
 		V_0 = L_0;
@@ -19403,16 +19393,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:233>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:231>
 		RenderData_UpdateClippingRect_mB3EFCEE0BFC09B21F8607949E2013D19B0E98BB4(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:234>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:232>
 		int32_t L_2 = __this->___flags;
 		__this->___flags = ((int32_t)((int32_t)L_2&((int32_t)-65)));
 	}
 
 IL_0023:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:236>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:234>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_3 = __this->___m_ClippingRect;
 		V_1 = L_3;
 		goto IL_002c;
@@ -19420,7 +19410,7 @@ IL_0023:
 
 IL_002c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:237>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:235>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_4 = V_1;
 		return L_4;
 	}
@@ -19429,10 +19419,10 @@ IL_002c:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_set_clippingRect_m3232F0694FD2CF0E258FBAC93903B95984DD6868 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:240>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:238>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_0 = ___0_value;
 		__this->___m_ClippingRect = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:241>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:239>
 		return;
 	}
 }
@@ -19443,7 +19433,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:253>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:251>
 		bool L_0;
 		L_0 = RenderData_get_isClippingRectDirty_mD3A801F677E20BE06F6822B0384A481785A2DB4F_inline(__this, NULL);
 		V_0 = L_0;
@@ -19454,16 +19444,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:255>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:253>
 		RenderData_UpdateClippingRect_mB3EFCEE0BFC09B21F8607949E2013D19B0E98BB4(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:256>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:254>
 		int32_t L_2 = __this->___flags;
 		__this->___flags = ((int32_t)((int32_t)L_2&((int32_t)-65)));
 	}
 
 IL_0023:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:258>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:256>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_3 = __this->___m_ClippingRectMinusGroup;
 		V_1 = L_3;
 		goto IL_002c;
@@ -19471,7 +19461,7 @@ IL_0023:
 
 IL_002c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:259>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:257>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_4 = V_1;
 		return L_4;
 	}
@@ -19480,10 +19470,10 @@ IL_002c:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_set_clippingRectMinusGroup_m88EA7A7EC3EB7B855A7B8DA1F5DEDE0DC04BDFB3 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:262>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:260>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_0 = ___0_value;
 		__this->___m_ClippingRectMinusGroup = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:263>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:261>
 		return;
 	}
 }
@@ -19493,7 +19483,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_clippingRectIsInfinite_m2
 	bool V_0 = false;
 	bool V_1 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:273>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:271>
 		bool L_0;
 		L_0 = RenderData_get_isClippingRectDirty_mD3A801F677E20BE06F6822B0384A481785A2DB4F_inline(__this, NULL);
 		V_0 = L_0;
@@ -19504,16 +19494,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderData_get_clippingRectIsInfinite_m2
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:275>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:273>
 		RenderData_UpdateClippingRect_mB3EFCEE0BFC09B21F8607949E2013D19B0E98BB4(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:276>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:274>
 		int32_t L_2 = __this->___flags;
 		__this->___flags = ((int32_t)((int32_t)L_2&((int32_t)-65)));
 	}
 
 IL_0023:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:278>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:276>
 		bool L_3 = __this->___m_ClippingRectIsInfinite;
 		V_1 = L_3;
 		goto IL_002c;
@@ -19521,7 +19511,7 @@ IL_0023:
 
 IL_002c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:279>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:277>
 		bool L_4 = V_1;
 		return L_4;
 	}
@@ -19530,10 +19520,10 @@ IL_002c:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_set_clippingRectIsInfinite_mB4BB8451AA26EC1CBE234843295040E45301E092 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:282>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:280>
 		bool L_0 = ___0_value;
 		__this->___m_ClippingRectIsInfinite = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:283>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:281>
 		return;
 	}
 }
@@ -19546,6 +19536,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_UpdateClippingRect_mB3EFCEE0B
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&IPanel_tAD0F3807B6DE2ECA557380E7DB5F3A179BE5A7A5_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
@@ -19562,14 +19553,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_UpdateClippingRect_mB3EFCEE0B
 	bool V_7 = false;
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_8;
 	memset((&V_8), 0, sizeof(V_8));
-	RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* V_9 = NULL;
-	RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* V_10 = NULL;
+	Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 V_9;
+	memset((&V_9), 0, sizeof(V_9));
+	bool V_10 = false;
 	bool V_11 = false;
-	bool V_12 = false;
+	Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 V_12;
+	memset((&V_12), 0, sizeof(V_12));
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_13;
 	memset((&V_13), 0, sizeof(V_13));
 	bool V_14 = false;
-	bool V_15 = false;
 	int32_t G_B3_0 = 0;
 	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* G_B10_0 = NULL;
 	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* G_B9_0 = NULL;
@@ -19582,7 +19574,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_UpdateClippingRect_mB3EFCEE0B
 	memset((&G_B28_0), 0, sizeof(G_B28_0));
 	RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* G_B28_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:292>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:290>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0 = __this->___parent;
 		if (!L_0)
 		{
@@ -19606,7 +19598,7 @@ IL_0016:
 IL_0017:
 	{
 		V_2 = (bool)G_B3_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:294>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:292>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = __this->___parent;
 		V_3 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_3) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_4 = V_3;
@@ -19616,13 +19608,13 @@ IL_0017:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:296>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:294>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_5 = __this->___parent;
 		NullCheck(L_5);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_6;
 		L_6 = RenderData_get_clippingRect_mA9C8E3A3BA56D19DE5BF1994C97BB465C92EF432(L_5, NULL);
 		V_0 = L_6;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:297>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:295>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_7 = __this->___parent;
 		NullCheck(L_7);
 		bool L_8;
@@ -19635,18 +19627,18 @@ IL_0017:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:299>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:297>
 		il2cpp_codegen_runtime_class_init_inline(DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_il2cpp_TypeInfo_var);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_10 = ((DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_StaticFields*)il2cpp_codegen_static_fields_for(DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_il2cpp_TypeInfo_var))->___k_UnlimitedRect;
 		V_1 = L_10;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:300>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:298>
 		V_2 = (bool)1;
 		goto IL_005b;
 	}
 
 IL_004f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:303>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:301>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_11 = __this->___parent;
 		NullCheck(L_11);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_12;
@@ -19661,7 +19653,7 @@ IL_005b:
 
 IL_005e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:307>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:305>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_13 = __this->___owner;
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_14 = L_13;
 		if (L_14)
@@ -19716,7 +19708,7 @@ IL_007a:
 IL_008f:
 	{
 		V_5 = G_B14_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:308>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:306>
 		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_21 = __this->___renderTree;
 		NullCheck(L_21);
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_22;
@@ -19732,7 +19724,7 @@ IL_008f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:309>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:307>
 		il2cpp_codegen_runtime_class_init_inline(DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_il2cpp_TypeInfo_var);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_25 = ((DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_StaticFields*)il2cpp_codegen_static_fields_for(DrawParams_t523864F415D78BD8BB14E8B7BD349594D6187443_il2cpp_TypeInfo_var))->___k_UnlimitedRect;
 		V_5 = L_25;
@@ -19740,17 +19732,17 @@ IL_008f:
 
 IL_00ae:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:310>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:308>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_26 = V_5;
 		V_1 = L_26;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:311>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:309>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_27 = V_5;
 		V_0 = L_27;
 	}
 
 IL_00b5:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:314>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:312>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_28 = __this->___owner;
 		NullCheck(L_28);
 		bool L_29;
@@ -19759,208 +19751,154 @@ IL_00b5:
 		bool L_30 = V_7;
 		if (!L_30)
 		{
-			goto IL_01d9;
+			goto IL_017b;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:316>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:314>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_31 = __this->___owner;
 		RenderData_GetLocalClippingRect_m7632ECECA494C2DE33283D489AC0596BB89858FB(L_31, (&V_8), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:319>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:317>
 		bool L_32;
 		L_32 = RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline(__this, NULL);
-		V_11 = L_32;
-		bool L_33 = V_11;
+		V_10 = L_32;
+		bool L_33 = V_10;
 		if (!L_33)
 		{
-			goto IL_00f4;
+			goto IL_00f1;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:323>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:321>
 		il2cpp_codegen_runtime_class_init_inline(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_34;
 		L_34 = Rect_get_zero_m5341D8B63DEF1F4C308A685EEC8CFEA12A396C8D_inline(NULL);
 		__this->___m_ClippingRectMinusGroup = L_34;
-		goto IL_0180;
+		goto IL_0157;
 	}
 
-IL_00f4:
+IL_00f1:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:326>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:324>
 		bool L_35;
 		L_35 = RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline(__this, NULL);
-		V_12 = L_35;
-		bool L_36 = V_12;
+		V_11 = L_35;
+		bool L_36 = V_11;
 		if (!L_36)
 		{
-			goto IL_010b;
+			goto IL_0108;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:327>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:325>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_37 = V_8;
 		__this->___m_ClippingRectMinusGroup = L_37;
-		goto IL_017f;
+		goto IL_0156;
 	}
 
-IL_010b:
+IL_0108:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:330>
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_38 = V_8;
-		V_13 = L_38;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:333>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_39 = __this->___owner;
-		NullCheck(L_39);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_40;
-		L_40 = VisualElement_get_worldTransformRef_m25AB63C70B9C7965FEC38C1711316A47608D5276(L_39, NULL);
-		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline(L_40, (&V_13), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:335>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_41 = __this->___groupTransformAncestor;
-		V_14 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_41) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
-		bool L_42 = V_14;
-		if (!L_42)
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_38 = __this->___groupTransformAncestor;
+		V_14 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_38) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
+		bool L_39 = V_14;
+		if (!L_39)
 		{
-			goto IL_014c;
+			goto IL_0129;
 		}
 	}
 	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:331>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_40 = __this->___groupTransformAncestor;
+		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
+		UIRUtility_ComputeMatrixRelativeToAncestor_mEB1A14BCB4654C3A0C9A3FE1EFEEA412FD96D9D6(__this, L_40, (&V_12), NULL);
+		goto IL_0132;
+	}
+
+IL_0129:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:333>
+		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
+		UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A(__this, (&V_12), NULL);
+	}
+
+IL_0132:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:335>
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_41 = V_8;
+		V_13 = L_41;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:336>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_43 = __this->___groupTransformAncestor;
-		NullCheck(L_43);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_44 = L_43->___owner;
-		NullCheck(L_44);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_45;
-		L_45 = VisualElement_get_worldTransformInverse_m3F6A138010EDD0ADB850092717003E8E38226980(L_44, NULL);
 		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline(L_45, (&V_13), NULL);
-		goto IL_0169;
-	}
-
-IL_014c:
-	{
+		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline((&V_12), (&V_13), NULL);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:338>
-		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_46 = __this->___renderTree;
-		NullCheck(L_46);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_47;
-		L_47 = RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline(L_46, NULL);
-		NullCheck(L_47);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_48 = L_47->___owner;
-		NullCheck(L_48);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_49;
-		L_49 = VisualElement_get_worldTransformInverse_m3F6A138010EDD0ADB850092717003E8E38226980(L_48, NULL);
-		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline(L_49, (&V_13), NULL);
-	}
-
-IL_0169:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:340>
-		bool L_50 = V_2;
-		if (L_50)
+		bool L_42 = V_2;
+		if (L_42)
 		{
 			G_B27_0 = __this;
-			goto IL_0177;
+			goto IL_014e;
 		}
 		G_B26_0 = __this;
 	}
 	{
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_51 = V_13;
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_52 = V_1;
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_53;
-		L_53 = RenderData_IntersectClipRects_m93E2B6A01C8816D2FF3B786570A8BD82F138EF67(L_51, L_52, NULL);
-		G_B28_0 = L_53;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_43 = V_13;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_44 = V_1;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_45;
+		L_45 = RenderData_IntersectClipRects_m93E2B6A01C8816D2FF3B786570A8BD82F138EF67(L_43, L_44, NULL);
+		G_B28_0 = L_45;
 		G_B28_1 = G_B26_0;
-		goto IL_0179;
+		goto IL_0150;
 	}
 
-IL_0177:
+IL_014e:
 	{
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_54 = V_13;
-		G_B28_0 = L_54;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_46 = V_13;
+		G_B28_0 = L_46;
 		G_B28_1 = G_B27_0;
 	}
 
-IL_0179:
+IL_0150:
 	{
 		NullCheck(G_B28_1);
 		G_B28_1->___m_ClippingRectMinusGroup = G_B28_0;
 	}
 
-IL_017f:
+IL_0156:
 	{
 	}
 
-IL_0180:
+IL_0157:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:345>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_55 = __this->___owner;
-		NullCheck(L_55);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_56;
-		L_56 = VisualElement_get_worldTransformRef_m25AB63C70B9C7965FEC38C1711316A47608D5276(L_55, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:343>
+		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
+		UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A(__this, (&V_9), NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:344>
 		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline(L_56, (&V_8), NULL);
+		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline((&V_9), (&V_8), NULL);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:347>
-		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_57 = __this->___renderTree;
-		V_9 = L_57;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:348>
-		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_58 = V_9;
-		NullCheck(L_58);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_59;
-		L_59 = RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline(L_58, NULL);
-		V_10 = L_59;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:349>
-		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_60 = V_9;
-		NullCheck(L_60);
-		bool L_61;
-		L_61 = RenderTree_get_isRootRenderTree_mB6433CBE5A68B70E9DD20B5D766A2951631AAD47_inline(L_60, NULL);
-		V_15 = (bool)((((int32_t)L_61) == ((int32_t)0))? 1 : 0);
-		bool L_62 = V_15;
-		if (!L_62)
-		{
-			goto IL_01c8;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:350>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_63 = V_10;
-		NullCheck(L_63);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_64 = L_63->___owner;
-		NullCheck(L_64);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_65;
-		L_65 = VisualElement_get_worldTransformInverse_m3F6A138010EDD0ADB850092717003E8E38226980(L_64, NULL);
-		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline(L_65, (&V_8), NULL);
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_47 = V_8;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_48 = V_0;
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_49;
+		L_49 = RenderData_IntersectClipRects_m93E2B6A01C8816D2FF3B786570A8BD82F138EF67(L_47, L_48, NULL);
+		__this->___m_ClippingRect = L_49;
+		goto IL_0192;
 	}
 
-IL_01c8:
+IL_017b:
 	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:351>
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_50 = V_0;
+		__this->___m_ClippingRect = L_50;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:352>
+		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_51 = V_1;
+		__this->___m_ClippingRectMinusGroup = L_51;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:353>
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_66 = V_8;
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_67 = V_0;
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_68;
-		L_68 = RenderData_IntersectClipRects_m93E2B6A01C8816D2FF3B786570A8BD82F138EF67(L_66, L_67, NULL);
-		__this->___m_ClippingRect = L_68;
-		goto IL_01f0;
+		bool L_52 = V_2;
+		__this->___m_ClippingRectIsInfinite = L_52;
 	}
 
-IL_01d9:
+IL_0192:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:357>
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_69 = V_0;
-		__this->___m_ClippingRect = L_69;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:358>
-		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_70 = V_1;
-		__this->___m_ClippingRectMinusGroup = L_70;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:359>
-		bool L_71 = V_2;
-		__this->___m_ClippingRectIsInfinite = L_71;
-	}
-
-IL_01f0:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:361>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:355>
 		return;
 	}
 }
@@ -19982,7 +19920,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_6;
 	memset((&V_6), 0, sizeof(V_6));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:365>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:359>
 		il2cpp_codegen_runtime_class_init_inline(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
 		float L_0;
 		L_0 = Rect_get_xMin_mE89C40702926D016A633399E20DB9501E251630D_inline((&___0_rect), NULL);
@@ -19991,7 +19929,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		float L_2;
 		L_2 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(L_0, L_1, NULL);
 		V_0 = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:366>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:360>
 		float L_3;
 		L_3 = Rect_get_xMax_m2339C7D2FCDA98A9B007F815F6E2059BA6BE425F_inline((&___0_rect), NULL);
 		float L_4;
@@ -19999,7 +19937,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		float L_5;
 		L_5 = Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline(L_3, L_4, NULL);
 		V_1 = L_5;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:367>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:361>
 		float L_6;
 		L_6 = Rect_get_yMin_mB19848FB25DE61EDF958F7A22CFDD86DE103062F_inline((&___0_rect), NULL);
 		float L_7;
@@ -20007,7 +19945,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		float L_8;
 		L_8 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(L_6, L_7, NULL);
 		V_2 = L_8;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:368>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:362>
 		float L_9;
 		L_9 = Rect_get_yMax_mBC37BEE1CD632AADD8B9EAF9FE3BA143F79CAF8E_inline((&___0_rect), NULL);
 		float L_10;
@@ -20015,19 +19953,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 		float L_11;
 		L_11 = Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline(L_9, L_10, NULL);
 		V_3 = L_11;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:369>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:363>
 		float L_12 = V_1;
 		float L_13 = V_0;
 		float L_14;
 		L_14 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(((float)il2cpp_codegen_subtract(L_12, L_13)), (0.0f), NULL);
 		V_4 = L_14;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:370>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:364>
 		float L_15 = V_3;
 		float L_16 = V_2;
 		float L_17;
 		L_17 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(((float)il2cpp_codegen_subtract(L_15, L_16)), (0.0f), NULL);
 		V_5 = L_17;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:371>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:365>
 		float L_18 = V_0;
 		float L_19 = V_2;
 		float L_20 = V_4;
@@ -20041,7 +19979,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0
 
 IL_007e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:372>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:366>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_23 = V_6;
 		return L_23;
 	}
@@ -20059,20 +19997,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 	RuntimeObject* V_0 = NULL;
 	bool V_1 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:376>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:370>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_owner;
 		NullCheck(L_0);
 		RuntimeObject* L_1;
 		L_1 = VisualElement_get_resolvedStyle_m3885B7534A94E0BCE024A9621465A0F273DA0AEB(L_0, NULL);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:378>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:372>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_2 = ___1_localRect;
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_3 = ___0_owner;
 		NullCheck(L_3);
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_4;
 		L_4 = VisualElement_get_rect_m07659FED0F69F3DDE74DBC5A2F694FA22139E087_inline(L_3, NULL);
 		*(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D*)L_2 = L_4;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:379>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:373>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_5 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_6 = L_5;
 		il2cpp_codegen_runtime_class_init_inline(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
@@ -20083,7 +20021,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_9;
 		L_9 = InterfaceFuncInvoker0< float >::Invoke(15, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_8);
 		Rect_set_x_mAB91AB71898A20762BC66FD0723C4C739C4C3406_inline(L_6, ((float)il2cpp_codegen_add(L_7, L_9)), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:380>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:374>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_10 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_11 = L_10;
 		float L_12;
@@ -20093,7 +20031,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_14;
 		L_14 = InterfaceFuncInvoker0< float >::Invoke(21, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_13);
 		Rect_set_y_mDE91F4B98A6E8623EFB1250FF6526D5DB5855629_inline(L_11, ((float)il2cpp_codegen_add(L_12, L_14)), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:381>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:375>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_15 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_16 = L_15;
 		float L_17;
@@ -20107,7 +20045,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_21;
 		L_21 = InterfaceFuncInvoker0< float >::Invoke(17, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_20);
 		Rect_set_width_m93B6217CF3EFF89F9B0C81F34D7345DE90B93E5A_inline(L_16, ((float)il2cpp_codegen_subtract(L_17, ((float)il2cpp_codegen_add(L_19, L_21)))), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:382>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:376>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_22 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_23 = L_22;
 		float L_24;
@@ -20121,7 +20059,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_28;
 		L_28 = InterfaceFuncInvoker0< float >::Invoke(13, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_27);
 		Rect_set_height_mD00038E6E06637137A5626CA8CD421924005BF03_inline(L_23, ((float)il2cpp_codegen_subtract(L_24, ((float)il2cpp_codegen_add(L_26, L_28)))), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:384>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:378>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_29 = ___0_owner;
 		NullCheck(L_29);
 		ComputedStyle_t8B08CCCEE20525528B3FFDAC6D3F58F101AAF54C* L_30;
@@ -20136,7 +20074,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:386>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:380>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_33 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_34 = L_33;
 		il2cpp_codegen_runtime_class_init_inline(Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_il2cpp_TypeInfo_var);
@@ -20147,7 +20085,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_37;
 		L_37 = InterfaceFuncInvoker0< float >::Invoke(46, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_36);
 		Rect_set_x_mAB91AB71898A20762BC66FD0723C4C739C4C3406_inline(L_34, ((float)il2cpp_codegen_add(L_35, L_37)), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:387>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:381>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_38 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_39 = L_38;
 		float L_40;
@@ -20157,7 +20095,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_42;
 		L_42 = InterfaceFuncInvoker0< float >::Invoke(48, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_41);
 		Rect_set_y_mDE91F4B98A6E8623EFB1250FF6526D5DB5855629_inline(L_39, ((float)il2cpp_codegen_add(L_40, L_42)), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:388>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:382>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_43 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_44 = L_43;
 		float L_45;
@@ -20171,7 +20109,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 		float L_49;
 		L_49 = InterfaceFuncInvoker0< float >::Invoke(47, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_48);
 		Rect_set_width_m93B6217CF3EFF89F9B0C81F34D7345DE90B93E5A_inline(L_44, ((float)il2cpp_codegen_subtract(L_45, ((float)il2cpp_codegen_add(L_47, L_49)))), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:389>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:383>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_50 = ___1_localRect;
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* L_51 = L_50;
 		float L_52;
@@ -20189,7 +20127,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderData_GetLocalClippingRect_m7632ECE
 
 IL_00e4:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:391>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:385>
 		return;
 	}
 }
@@ -20457,7 +20395,6 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 V_0;
@@ -20508,51 +20445,41 @@ IL_0017:
 		bool L_8 = V_2;
 		if (!L_8)
 		{
-			goto IL_004c;
+			goto IL_0038;
 		}
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:72>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_9 = V_1;
-		NullCheck(L_9);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_10 = L_9->___owner;
-		NullCheck(L_10);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_11;
-		L_11 = VisualElement_get_worldTransformInverse_m3F6A138010EDD0ADB850092717003E8E38226980(L_10, NULL);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_12 = ___0_renderData;
-		NullCheck(L_12);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_13 = L_12->___owner;
-		NullCheck(L_13);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* L_14;
-		L_14 = VisualElement_get_worldTransformRef_m25AB63C70B9C7965FEC38C1711316A47608D5276(L_13, NULL);
-		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
-		VisualElement_MultiplyMatrix34_mBDEE644E6CEF9A47F7901CFE215B2682FCCAFDC9(L_11, L_14, (&V_0), NULL);
-		goto IL_0055;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_9 = ___0_renderData;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_10 = V_1;
+		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
+		UIRUtility_ComputeMatrixRelativeToAncestor_mEB1A14BCB4654C3A0C9A3FE1EFEEA412FD96D9D6(L_9, L_10, (&V_0), NULL);
+		goto IL_0041;
 	}
 
-IL_004c:
+IL_0038:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:74>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_15 = ___0_renderData;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_11 = ___0_renderData;
 		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
-		UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A(L_15, (&V_0), NULL);
+		UIRUtility_ComputeMatrixRelativeToRenderTree_m5F3A2B67746A3195F04D5AE990F89187236DF82A(L_11, (&V_0), NULL);
 	}
 
-IL_0055:
+IL_0041:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:76>
 		(&V_0)->___m22 = (1.0f);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:77>
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_16 = V_0;
-		V_3 = L_16;
-		goto IL_0065;
+		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_12 = V_0;
+		V_3 = L_12;
+		goto IL_0051;
 	}
 
-IL_0065:
+IL_0051:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:78>
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_17 = V_3;
-		return L_17;
+		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_13 = V_3;
+		return L_13;
 	}
 }
 // Method Definition Index: 10855
@@ -24616,7 +24543,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_DepthFirstOnTransformOrSize
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:809>
-		goto IL_0217;
+		goto IL_0210;
 	}
 
 IL_0013:
@@ -24684,7 +24611,7 @@ IL_0076:
 		bool L_27 = V_3;
 		if (!L_27)
 		{
-			goto IL_00a1;
+			goto IL_009a;
 		}
 	}
 	{
@@ -24712,331 +24639,327 @@ IL_0076:
 
 IL_0099:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:830>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_34 = ___1_renderData;
-		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
-		RenderEvents_UpdateZeroScaling_mEAD8A48B28258E1D5431CA836A74B34F7410CA45(L_34, NULL);
 	}
 
-IL_00a1:
+IL_009a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:833>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:832>
 		V_0 = (bool)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:834>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_35 = ___1_renderData;
-		NullCheck(L_35);
-		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_36 = L_35->___transformID;
-		bool L_37;
-		L_37 = RenderData_AllocatesID_mC45127AE3E5BA4D8817E5799C99B39D4B4E9144F(L_36, NULL);
-		V_5 = L_37;
-		bool L_38 = V_5;
-		if (!L_38)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:833>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_34 = ___1_renderData;
+		NullCheck(L_34);
+		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_35 = L_34->___transformID;
+		bool L_36;
+		L_36 = RenderData_AllocatesID_mC45127AE3E5BA4D8817E5799C99B39D4B4E9144F(L_35, NULL);
+		V_5 = L_36;
+		bool L_37 = V_5;
+		if (!L_37)
 		{
-			goto IL_00f1;
+			goto IL_00ea;
 		}
 	}
 	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:835>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_38 = ___1_renderData;
+		NullCheck(L_38);
+		bool L_39;
+		L_39 = RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline(L_38, NULL);
+		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
+		Debug_Assert_m6E778CACD0F440E2DEA9ACDD9330A22DAF16E96D((bool)((((int32_t)L_39) == ((int32_t)0))? 1 : 0), NULL);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:836>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_39 = ___1_renderData;
-		NullCheck(L_39);
-		bool L_40;
-		L_40 = RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline(L_39, NULL);
-		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Assert_m6E778CACD0F440E2DEA9ACDD9330A22DAF16E96D((bool)((((int32_t)L_40) == ((int32_t)0))? 1 : 0), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:837>
-		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_41 = ___0_renderTreeManager;
-		NullCheck(L_41);
-		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_42 = L_41->___shaderInfoAllocator;
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_43 = ___1_renderData;
-		NullCheck(L_43);
-		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_44 = L_43->___transformID;
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_45 = ___1_renderData;
-		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
-		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_46;
-		L_46 = RenderEvents_GetTransformIDTransformInfo_m65859283ECF09E86A7249A7746AFC122DD3637E2(L_45, NULL);
+		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_40 = ___0_renderTreeManager;
+		NullCheck(L_40);
+		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_41 = L_40->___shaderInfoAllocator;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_42 = ___1_renderData;
 		NullCheck(L_42);
-		UIRVEShaderInfoAllocator_SetTransformValue_m7CEA33754EB6951EEDCCC2B2364B22B8B81A9F57(L_42, L_44, L_46, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:838>
+		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_43 = L_42->___transformID;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_44 = ___1_renderData;
+		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
+		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_45;
+		L_45 = RenderEvents_GetTransformIDTransformInfo_m65859283ECF09E86A7249A7746AFC122DD3637E2(L_44, NULL);
+		NullCheck(L_41);
+		UIRVEShaderInfoAllocator_SetTransformValue_m7CEA33754EB6951EEDCCC2B2364B22B8B81A9F57(L_41, L_43, L_45, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:837>
 		___4_isAncestorOfChangeSkinned = (bool)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:839>
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_47 = ___6_stats;
-		uint32_t* L_48 = (uint32_t*)(&L_47->___boneTransformed);
-		uint32_t* L_49 = L_48;
-		int32_t L_50 = *((uint32_t*)L_49);
-		*((int32_t*)L_49) = (int32_t)((int32_t)il2cpp_codegen_add(L_50, 1));
-		goto IL_01af;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:838>
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_46 = ___6_stats;
+		uint32_t* L_47 = (uint32_t*)(&L_46->___boneTransformed);
+		uint32_t* L_48 = L_47;
+		int32_t L_49 = *((uint32_t*)L_48);
+		*((int32_t*)L_48) = (int32_t)((int32_t)il2cpp_codegen_add(L_49, 1));
+		goto IL_01a8;
 	}
 
-IL_00f1:
+IL_00ea:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:841>
-		bool L_51 = ___5_transformChanged;
-		V_6 = (bool)((((int32_t)L_51) == ((int32_t)0))? 1 : 0);
-		bool L_52 = V_6;
-		if (!L_52)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:840>
+		bool L_50 = ___5_transformChanged;
+		V_6 = (bool)((((int32_t)L_50) == ((int32_t)0))? 1 : 0);
+		bool L_51 = V_6;
+		if (!L_51)
 		{
-			goto IL_0103;
+			goto IL_00fc;
 		}
 	}
 	{
-		goto IL_01af;
+		goto IL_01a8;
 	}
 
-IL_0103:
+IL_00fc:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:845>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_53 = ___1_renderData;
-		NullCheck(L_53);
-		bool L_54;
-		L_54 = RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline(L_53, NULL);
-		V_7 = L_54;
-		bool L_55 = V_7;
-		if (!L_55)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:844>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_52 = ___1_renderData;
+		NullCheck(L_52);
+		bool L_53;
+		L_53 = RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline(L_52, NULL);
+		V_7 = L_53;
+		bool L_54 = V_7;
+		if (!L_54)
 		{
-			goto IL_0122;
+			goto IL_011b;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:847>
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_56 = ___6_stats;
-		uint32_t* L_57 = (uint32_t*)(&L_56->___groupTransformElementsChanged);
-		uint32_t* L_58 = L_57;
-		int32_t L_59 = *((uint32_t*)L_58);
-		*((int32_t*)L_58) = (int32_t)((int32_t)il2cpp_codegen_add(L_59, 1));
-		goto IL_01af;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:846>
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_55 = ___6_stats;
+		uint32_t* L_56 = (uint32_t*)(&L_55->___groupTransformElementsChanged);
+		uint32_t* L_57 = L_56;
+		int32_t L_58 = *((uint32_t*)L_57);
+		*((int32_t*)L_57) = (int32_t)((int32_t)il2cpp_codegen_add(L_58, 1));
+		goto IL_01a8;
 	}
 
-IL_0122:
+IL_011b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:849>
-		bool L_60 = ___4_isAncestorOfChangeSkinned;
-		V_8 = L_60;
-		bool L_61 = V_8;
-		if (!L_61)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:848>
+		bool L_59 = ___4_isAncestorOfChangeSkinned;
+		V_8 = L_59;
+		bool L_60 = V_8;
+		if (!L_60)
 		{
-			goto IL_014d;
+			goto IL_0146;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:852>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_62 = ___1_renderData;
-		NullCheck(L_62);
-		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_63 = L_62->___transformID;
-		bool L_64;
-		L_64 = RenderData_InheritsID_m660DE50B92F5B019222925CC61164AA157604ACF(L_63, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:851>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_61 = ___1_renderData;
+		NullCheck(L_61);
+		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_62 = L_61->___transformID;
+		bool L_63;
+		L_63 = RenderData_InheritsID_m660DE50B92F5B019222925CC61164AA157604ACF(L_62, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Debug_t8394C7EEAECA3689C2C9B9DE9C7166D73596276F_il2cpp_TypeInfo_var);
-		Debug_Assert_m6E778CACD0F440E2DEA9ACDD9330A22DAF16E96D(L_64, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:853>
+		Debug_Assert_m6E778CACD0F440E2DEA9ACDD9330A22DAF16E96D(L_63, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:852>
 		V_0 = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:854>
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_65 = ___6_stats;
-		uint32_t* L_66 = (uint32_t*)(&L_65->___skipTransformed);
-		uint32_t* L_67 = L_66;
-		int32_t L_68 = *((uint32_t*)L_67);
-		*((int32_t*)L_67) = (int32_t)((int32_t)il2cpp_codegen_add(L_68, 1));
-		goto IL_01af;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:853>
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_64 = ___6_stats;
+		uint32_t* L_65 = (uint32_t*)(&L_64->___skipTransformed);
+		uint32_t* L_66 = L_65;
+		int32_t L_67 = *((uint32_t*)L_66);
+		*((int32_t*)L_66) = (int32_t)((int32_t)il2cpp_codegen_add(L_67, 1));
+		goto IL_01a8;
 	}
 
-IL_014d:
+IL_0146:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:856>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_69 = ___1_renderData;
-		NullCheck(L_69);
-		int32_t L_70 = L_69->___dirtiedValues;
-		if (((int32_t)((int32_t)L_70&((int32_t)48))))
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:855>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_68 = ___1_renderData;
+		NullCheck(L_68);
+		int32_t L_69 = L_68->___dirtiedValues;
+		if (((int32_t)((int32_t)L_69&((int32_t)48))))
 		{
-			goto IL_016e;
+			goto IL_0167;
 		}
 	}
 	{
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_71 = ___1_renderData;
-		NullCheck(L_71);
-		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_72 = L_71->___headMesh;
-		if (L_72)
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_70 = ___1_renderData;
+		NullCheck(L_70);
+		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_71 = L_70->___headMesh;
+		if (L_71)
 		{
-			goto IL_016b;
+			goto IL_0164;
 		}
 	}
 	{
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_73 = ___1_renderData;
-		NullCheck(L_73);
-		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_74 = L_73->___tailMesh;
-		G_B20_0 = ((!(((RuntimeObject*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)L_74) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
-		goto IL_016c;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_72 = ___1_renderData;
+		NullCheck(L_72);
+		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_73 = L_72->___tailMesh;
+		G_B20_0 = ((!(((RuntimeObject*)(MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E*)L_73) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
+		goto IL_0165;
 	}
 
-IL_016b:
+IL_0164:
 	{
 		G_B20_0 = 1;
 	}
 
-IL_016c:
+IL_0165:
 	{
 		G_B22_0 = G_B20_0;
-		goto IL_016f;
+		goto IL_0168;
 	}
 
-IL_016e:
+IL_0167:
 	{
 		G_B22_0 = 0;
 	}
 
-IL_016f:
+IL_0168:
 	{
 		V_9 = (bool)G_B22_0;
-		bool L_75 = V_9;
-		if (!L_75)
+		bool L_74 = V_9;
+		if (!L_74)
 		{
-			goto IL_01af;
+			goto IL_01a8;
+		}
+	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:859>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_75 = ___1_renderData;
+		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_76 = ___0_renderTreeManager;
+		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_77 = ___3_device;
+		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
+		bool L_78;
+		L_78 = RenderEvents_NudgeVerticesToNewSpace_mE758843C01D0FB07F061EEAB88D4A5159DB026C8(L_75, L_76, L_77, NULL);
+		V_10 = L_78;
+		bool L_79 = V_10;
+		if (!L_79)
+		{
+			goto IL_018b;
 		}
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:860>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_76 = ___1_renderData;
-		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_77 = ___0_renderTreeManager;
-		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_78 = ___3_device;
-		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
-		bool L_79;
-		L_79 = RenderEvents_NudgeVerticesToNewSpace_mE758843C01D0FB07F061EEAB88D4A5159DB026C8(L_76, L_77, L_78, NULL);
-		V_10 = L_79;
-		bool L_80 = V_10;
-		if (!L_80)
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_80 = ___6_stats;
+		uint32_t* L_81 = (uint32_t*)(&L_80->___nudgeTransformed);
+		uint32_t* L_82 = L_81;
+		int32_t L_83 = *((uint32_t*)L_82);
+		*((int32_t*)L_82) = (int32_t)((int32_t)il2cpp_codegen_add(L_83, 1));
+		goto IL_01a7;
+	}
+
+IL_018b:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:863>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_84 = ___1_renderData;
+		NullCheck(L_84);
+		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_85 = L_84->___renderTree;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_86 = ___1_renderData;
+		NullCheck(L_85);
+		RenderTree_OnRenderDataVisualsChanged_m37817178FDC3D43510120DFF5CEFC72EE085E813_inline(L_85, L_86, (bool)0, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:864>
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_87 = ___6_stats;
+		uint32_t* L_88 = (uint32_t*)(&L_87->___visualUpdateTransformed);
+		uint32_t* L_89 = L_88;
+		int32_t L_90 = *((uint32_t*)L_89);
+		*((int32_t*)L_89) = (int32_t)((int32_t)il2cpp_codegen_add(L_90, 1));
+	}
+
+IL_01a7:
+	{
+	}
+
+IL_01a8:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:868>
+		bool L_91 = V_0;
+		V_11 = L_91;
+		bool L_92 = V_11;
+		if (!L_92)
 		{
-			goto IL_0192;
+			goto IL_01b6;
 		}
 	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:861>
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_81 = ___6_stats;
-		uint32_t* L_82 = (uint32_t*)(&L_81->___nudgeTransformed);
-		uint32_t* L_83 = L_82;
-		int32_t L_84 = *((uint32_t*)L_83);
-		*((int32_t*)L_83) = (int32_t)((int32_t)il2cpp_codegen_add(L_84, 1));
-		goto IL_01ae;
-	}
-
-IL_0192:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:864>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_85 = ___1_renderData;
-		NullCheck(L_85);
-		RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* L_86 = L_85->___renderTree;
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_87 = ___1_renderData;
-		NullCheck(L_86);
-		RenderTree_OnRenderDataVisualsChanged_m37817178FDC3D43510120DFF5CEFC72EE085E813_inline(L_86, L_87, (bool)0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:865>
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_88 = ___6_stats;
-		uint32_t* L_89 = (uint32_t*)(&L_88->___visualUpdateTransformed);
-		uint32_t* L_90 = L_89;
-		int32_t L_91 = *((uint32_t*)L_90);
-		*((int32_t*)L_90) = (int32_t)((int32_t)il2cpp_codegen_add(L_91, 1));
-	}
-
-IL_01ae:
-	{
-	}
-
-IL_01af:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:869>
-		bool L_92 = V_0;
-		V_11 = L_92;
-		bool L_93 = V_11;
-		if (!L_93)
-		{
-			goto IL_01bd;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:870>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_94 = ___1_renderData;
-		uint32_t L_95 = ___2_dirtyID;
-		NullCheck(L_94);
-		L_94->___dirtyID = L_95;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_93 = ___1_renderData;
+		uint32_t L_94 = ___2_dirtyID;
+		NullCheck(L_93);
+		L_93->___dirtyID = L_94;
 	}
 
-IL_01bd:
+IL_01b6:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:872>
+		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_95 = ___0_renderTreeManager;
+		NullCheck(L_95);
+		bool L_96;
+		L_96 = RenderTreeManager_get_drawInCameras_m8EE1616BDFFA01DBDAB7E56EB2939001CDB15BF9_inline(L_95, NULL);
+		V_12 = L_96;
+		bool L_97 = V_12;
+		if (!L_97)
+		{
+			goto IL_01ce;
+		}
+	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:873>
-		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_96 = ___0_renderTreeManager;
-		NullCheck(L_96);
-		bool L_97;
-		L_97 = RenderTreeManager_get_drawInCameras_m8EE1616BDFFA01DBDAB7E56EB2939001CDB15BF9_inline(L_96, NULL);
-		V_12 = L_97;
-		bool L_98 = V_12;
-		if (!L_98)
-		{
-			goto IL_01d5;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:874>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_99 = ___1_renderData;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_98 = ___1_renderData;
+		NullCheck(L_98);
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_99 = L_98->___owner;
 		NullCheck(L_99);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_100 = L_99->___owner;
-		NullCheck(L_100);
-		VisualElement_EnsureWorldTransformAndClipUpToDate_mA58DAF07419D9E1245DE634CA38ACAE618CE3273(L_100, NULL);
+		VisualElement_EnsureWorldTransformAndClipUpToDate_mA58DAF07419D9E1245DE634CA38ACAE618CE3273(L_99, NULL);
 	}
 
-IL_01d5:
+IL_01ce:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:876>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_101 = ___1_renderData;
-		NullCheck(L_101);
-		bool L_102;
-		L_102 = RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline(L_101, NULL);
-		V_13 = (bool)((((int32_t)L_102) == ((int32_t)0))? 1 : 0);
-		bool L_103 = V_13;
-		if (!L_103)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:875>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_100 = ___1_renderData;
+		NullCheck(L_100);
+		bool L_101;
+		L_101 = RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline(L_100, NULL);
+		V_13 = (bool)((((int32_t)L_101) == ((int32_t)0))? 1 : 0);
+		bool L_102 = V_13;
+		if (!L_102)
 		{
-			goto IL_0217;
+			goto IL_0210;
 		}
 	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:878>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_103 = ___1_renderData;
+		NullCheck(L_103);
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_104 = L_103->___firstChild;
+		V_14 = L_104;
+		goto IL_0204;
+	}
+
+IL_01e8:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:881>
+		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_105 = ___0_renderTreeManager;
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_106 = V_14;
+		uint32_t L_107 = ___2_dirtyID;
+		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_108 = ___3_device;
+		bool L_109 = ___4_isAncestorOfChangeSkinned;
+		bool L_110 = ___5_transformChanged;
+		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_111 = ___6_stats;
+		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
+		RenderEvents_DepthFirstOnTransformOrSizeChanged_mBA4726734BE62042607959D14BFF45E21AB73782(L_105, L_106, L_107, L_108, L_109, L_110, L_111, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:882>
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_112 = V_14;
+		NullCheck(L_112);
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_113 = L_112->___nextSibling;
+		V_14 = L_113;
+	}
+
+IL_0204:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:879>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_104 = ___1_renderData;
-		NullCheck(L_104);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_105 = L_104->___firstChild;
-		V_14 = L_105;
-		goto IL_020b;
-	}
-
-IL_01ef:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:882>
-		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_106 = ___0_renderTreeManager;
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_107 = V_14;
-		uint32_t L_108 = ___2_dirtyID;
-		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_109 = ___3_device;
-		bool L_110 = ___4_isAncestorOfChangeSkinned;
-		bool L_111 = ___5_transformChanged;
-		ChainBuilderStats_t6E755490CE0B312AE16FEBC6734C7F2836A8067C* L_112 = ___6_stats;
-		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
-		RenderEvents_DepthFirstOnTransformOrSizeChanged_mBA4726734BE62042607959D14BFF45E21AB73782(L_106, L_107, L_108, L_109, L_110, L_111, L_112, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:883>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_113 = V_14;
-		NullCheck(L_113);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_114 = L_113->___nextSibling;
-		V_14 = L_114;
-	}
-
-IL_020b:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:880>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_115 = V_14;
-		V_15 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_115) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
-		bool L_116 = V_15;
-		if (L_116)
+		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_114 = V_14;
+		V_15 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_114) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
+		bool L_115 = V_15;
+		if (L_115)
 		{
-			goto IL_01ef;
+			goto IL_01e8;
 		}
 	}
 	{
 	}
 
-IL_0217:
+IL_0210:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:886>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:885>
 		return;
 	}
 }
@@ -25069,7 +24992,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_UpdateTextCoreSettings_mA19
 	RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* G_B6_0 = NULL;
 	int32_t G_B11_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:890>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:889>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___1_ve;
 		if (!L_0)
 		{
@@ -25099,14 +25022,14 @@ IL_0010:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:891>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:890>
 		V_5 = (bool)0;
 		goto IL_0129;
 	}
 
 IL_001e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:893>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:892>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_4 = ___1_ve;
 		NullCheck(L_4);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_5 = L_4->___nestedRenderData;
@@ -25128,25 +25051,25 @@ IL_001e:
 IL_002e:
 	{
 		V_0 = G_B7_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:895>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:894>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_9 = V_0;
 		NullCheck(L_9);
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_10 = L_9->___textCoreSettingsID;
 		bool L_11;
 		L_11 = RenderData_AllocatesID_mC45127AE3E5BA4D8817E5799C99B39D4B4E9144F(L_10, NULL);
 		V_1 = L_11;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:897>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:896>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_12 = ___1_ve;
 		TextCoreSettings_t3D724CD0811298B5AB1EA2041CE799CC25CDD115 L_13;
 		L_13 = TextUtilities_GetTextCoreSettingsForElement_m541E46117BCA12D12F6B2758624DFFB2C66E1EAA(L_12, (bool)0, NULL);
 		V_2 = L_13;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:901>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:900>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_14 = ___1_ve;
 		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
 		bool L_15;
 		L_15 = RenderEvents_NeedsColorID_mBE467BC1E1377BB3C9EFBC4DF360991F98578D1A(L_14, NULL);
 		V_3 = (bool)((((int32_t)L_15) == ((int32_t)0))? 1 : 0);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:903>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:902>
 		bool L_16 = V_3;
 		if (!L_16)
 		{
@@ -25184,20 +25107,20 @@ IL_005f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:906>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:905>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_21 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var);
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_22 = ((UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_StaticFields*)il2cpp_codegen_static_fields_for(UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF_il2cpp_TypeInfo_var))->___defaultTextCoreSettings;
 		NullCheck(L_21);
 		L_21->___textCoreSettingsID = L_22;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:907>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:906>
 		V_5 = (bool)1;
 		goto IL_0129;
 	}
 
 IL_0079:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:910>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:909>
 		bool L_23 = V_1;
 		V_7 = (bool)((((int32_t)L_23) == ((int32_t)0))? 1 : 0);
 		bool L_24 = V_7;
@@ -25207,7 +25130,7 @@ IL_0079:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:911>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:910>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_25 = V_0;
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_26 = ___0_renderTreeManager;
 		NullCheck(L_26);
@@ -25222,7 +25145,7 @@ IL_0079:
 
 IL_0095:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:913>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:912>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_30 = V_0;
 		NullCheck(L_30);
 		BMPAlloc_t29DA9D09157B8BAD2D5643711A53A5F11D216D30 L_31 = L_30->___textCoreSettingsID;
@@ -25236,7 +25159,7 @@ IL_0095:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:915>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:914>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_34 = ___1_ve;
 		NullCheck(L_34);
 		RuntimeObject* L_35;
@@ -25252,13 +25175,13 @@ IL_0095:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:917>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:916>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_38 = ___1_ve;
 		NullCheck(L_38);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_39;
 		L_39 = VisualElement_get_playModeTintColor_m2B313C47524EEFC081AD2C2BE13A65209344AEDE(L_38, NULL);
 		V_10 = L_39;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:918>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:917>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_40 = (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)(&(&V_2)->___faceColor);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_41 = L_40;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_42 = (*(Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)L_41);
@@ -25266,7 +25189,7 @@ IL_0095:
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_44;
 		L_44 = Color_op_Multiply_mD0296202733CB2D5342FB7C82B48AEDA63036758_inline(L_42, L_43, NULL);
 		*(Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)L_41 = L_44;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:919>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:918>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_45 = (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)(&(&V_2)->___outlineColor);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_46 = L_45;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_47 = (*(Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)L_46);
@@ -25274,7 +25197,7 @@ IL_0095:
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_49;
 		L_49 = Color_op_Multiply_mD0296202733CB2D5342FB7C82B48AEDA63036758_inline(L_47, L_48, NULL);
 		*(Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)L_46 = L_49;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:920>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:919>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_50 = (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)(&(&V_2)->___underlayColor);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_51 = L_50;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_52 = (*(Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)L_51);
@@ -25286,7 +25209,7 @@ IL_0095:
 
 IL_0110:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:923>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:922>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_55 = ___0_renderTreeManager;
 		NullCheck(L_55);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_56 = L_55->___shaderInfoAllocator;
@@ -25300,14 +25223,14 @@ IL_0110:
 
 IL_0124:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:926>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:925>
 		V_5 = (bool)1;
 		goto IL_0129;
 	}
 
 IL_0129:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:927>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:926>
 		bool L_60 = V_5;
 		return L_60;
 	}
@@ -25350,16 +25273,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 	int32_t G_B5_0 = 0;
 	NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022* G_B5_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:931>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:930>
 		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
 		ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD L_0 = ((RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_StaticFields*)il2cpp_codegen_static_fields_for(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var))->___k_NudgeVerticesMarker;
 		V_5 = L_0;
 		ProfilerMarker_Begin_mD07DB736ADA7D8BAF9D969CC7F3C55848A218C6E_inline((&V_5), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:934>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:933>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_1 = ___0_renderData;
 		il2cpp_codegen_runtime_class_init_inline(UIRUtility_tBBCA94052EAE57F0A59876553C582FFCF52E706C_il2cpp_TypeInfo_var);
 		UIRUtility_GetVerticesTransformInfo_m2832F7F7AA59C6AC1573E5E531E7AA05CD83C88D(L_1, (&V_0), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:935>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:934>
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_2 = V_0;
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = ___0_renderData;
 		NullCheck(L_3);
@@ -25369,7 +25292,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_6;
 		L_6 = Matrix4x4_op_Multiply_m75E91775655DCA8DFC8EDE0AB787285BB3935162_inline(L_2, L_5, NULL);
 		V_1 = L_6;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:942>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:941>
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_7 = V_1;
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_8 = ___0_renderData;
 		NullCheck(L_8);
@@ -25377,7 +25300,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_10;
 		L_10 = Matrix4x4_op_Multiply_m75E91775655DCA8DFC8EDE0AB787285BB3935162_inline(L_7, L_9, NULL);
 		V_2 = L_10;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:944>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:943>
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_11 = V_0;
 		float L_12 = L_11.___m00;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_13 = V_2;
@@ -25385,7 +25308,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_15;
 		L_15 = fabsf(((float)il2cpp_codegen_subtract(L_12, L_14)));
 		V_3 = L_15;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:945>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:944>
 		float L_16 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_17 = V_0;
 		float L_18 = L_17.___m01;
@@ -25394,7 +25317,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_21;
 		L_21 = fabsf(((float)il2cpp_codegen_subtract(L_18, L_20)));
 		V_3 = ((float)il2cpp_codegen_add(L_16, L_21));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:946>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:945>
 		float L_22 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_23 = V_0;
 		float L_24 = L_23.___m02;
@@ -25403,7 +25326,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_27;
 		L_27 = fabsf(((float)il2cpp_codegen_subtract(L_24, L_26)));
 		V_3 = ((float)il2cpp_codegen_add(L_22, L_27));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:947>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:946>
 		float L_28 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_29 = V_0;
 		float L_30 = L_29.___m03;
@@ -25412,7 +25335,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_33;
 		L_33 = fabsf(((float)il2cpp_codegen_subtract(L_30, L_32)));
 		V_3 = ((float)il2cpp_codegen_add(L_28, L_33));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:948>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:947>
 		float L_34 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_35 = V_0;
 		float L_36 = L_35.___m10;
@@ -25421,7 +25344,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_39;
 		L_39 = fabsf(((float)il2cpp_codegen_subtract(L_36, L_38)));
 		V_3 = ((float)il2cpp_codegen_add(L_34, L_39));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:949>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:948>
 		float L_40 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_41 = V_0;
 		float L_42 = L_41.___m11;
@@ -25430,7 +25353,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_45;
 		L_45 = fabsf(((float)il2cpp_codegen_subtract(L_42, L_44)));
 		V_3 = ((float)il2cpp_codegen_add(L_40, L_45));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:950>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:949>
 		float L_46 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_47 = V_0;
 		float L_48 = L_47.___m12;
@@ -25439,7 +25362,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_51;
 		L_51 = fabsf(((float)il2cpp_codegen_subtract(L_48, L_50)));
 		V_3 = ((float)il2cpp_codegen_add(L_46, L_51));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:951>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:950>
 		float L_52 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_53 = V_0;
 		float L_54 = L_53.___m13;
@@ -25448,7 +25371,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_57;
 		L_57 = fabsf(((float)il2cpp_codegen_subtract(L_54, L_56)));
 		V_3 = ((float)il2cpp_codegen_add(L_52, L_57));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:952>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:951>
 		float L_58 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_59 = V_0;
 		float L_60 = L_59.___m20;
@@ -25457,7 +25380,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_63;
 		L_63 = fabsf(((float)il2cpp_codegen_subtract(L_60, L_62)));
 		V_3 = ((float)il2cpp_codegen_add(L_58, L_63));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:953>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:952>
 		float L_64 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_65 = V_0;
 		float L_66 = L_65.___m21;
@@ -25466,7 +25389,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_69;
 		L_69 = fabsf(((float)il2cpp_codegen_subtract(L_66, L_68)));
 		V_3 = ((float)il2cpp_codegen_add(L_64, L_69));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:954>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:953>
 		float L_70 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_71 = V_0;
 		float L_72 = L_71.___m22;
@@ -25475,7 +25398,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_75;
 		L_75 = fabsf(((float)il2cpp_codegen_subtract(L_72, L_74)));
 		V_3 = ((float)il2cpp_codegen_add(L_70, L_75));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:955>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:954>
 		float L_76 = V_3;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_77 = V_0;
 		float L_78 = L_77.___m23;
@@ -25484,7 +25407,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		float L_81;
 		L_81 = fabsf(((float)il2cpp_codegen_subtract(L_78, L_80)));
 		V_3 = ((float)il2cpp_codegen_add(L_76, L_81));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:956>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:955>
 		float L_82 = V_3;
 		V_6 = (bool)((((float)L_82) > ((float)(9.99999975E-05f)))? 1 : 0);
 		bool L_83 = V_6;
@@ -25494,24 +25417,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NudgeVerticesToNewSpace_mE7
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:958>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:957>
 		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
 		ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD L_84 = ((RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_StaticFields*)il2cpp_codegen_static_fields_for(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var))->___k_NudgeVerticesMarker;
 		V_5 = L_84;
 		ProfilerMarker_End_m025AE3EF0F96F6DADC53489A53FC6EE65073DE60_inline((&V_5), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:959>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:958>
 		V_7 = (bool)0;
 		goto IL_028d;
 	}
 
 IL_0158:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:962>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:961>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_85 = ___0_renderData;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_86 = V_0;
 		NullCheck(L_85);
 		L_85->___verticesSpace = L_86;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:964>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:963>
 		il2cpp_codegen_initobj((&V_8), sizeof(NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022));
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_87 = V_1;
 		(&V_8)->___transform = L_87;
@@ -25543,7 +25466,7 @@ IL_017d:
 		G_B5_1->___keepZ = G_B5_0;
 		NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022 L_90 = V_8;
 		V_4 = L_90;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:970>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:969>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_91 = ___0_renderData;
 		NullCheck(L_91);
 		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_92 = L_91->___headMesh;
@@ -25555,7 +25478,7 @@ IL_017d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:971>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:970>
 		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_94 = ___2_device;
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_95 = ___0_renderData;
 		NullCheck(L_95);
@@ -25569,7 +25492,7 @@ IL_017d:
 
 IL_01b7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:973>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:972>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_100 = ___0_renderData;
 		NullCheck(L_100);
 		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_101 = L_100->___tailMesh;
@@ -25581,7 +25504,7 @@ IL_01b7:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:974>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:973>
 		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_103 = ___2_device;
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_104 = ___0_renderData;
 		NullCheck(L_104);
@@ -25595,14 +25518,14 @@ IL_01b7:
 
 IL_01e8:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:976>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:975>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_109 = ___1_renderTreeManager;
 		NullCheck(L_109);
 		JobManager_tC139532E48436E2DCB0FB9EB8C75E1EA244C6530* L_110;
 		L_110 = RenderTreeManager_get_jobManager_mCFD0DB0F9AD9E6F232B8A11087BEEFC9AD773ABD_inline(L_109, NULL);
 		NullCheck(L_110);
 		JobManager_Add_mF46A4ADE46145D766A0AAFC43FD4677BD20BAD92(L_110, (&V_4), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:978>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:977>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_111 = ___0_renderData;
 		NullCheck(L_111);
 		bool L_112;
@@ -25615,14 +25538,14 @@ IL_01e8:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:980>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:979>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_114 = ___1_renderTreeManager;
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_115 = ___0_renderData;
 		NullCheck(L_114);
 		ExtraRenderData_tC723833F3E6CF4ABB61951D5AECC135B113A56DD* L_116;
 		L_116 = RenderTreeManager_GetOrAddExtraData_mDA9CDFB07E6DCFC1A21750F243382D30ABE0AB1E(L_114, L_115, NULL);
 		V_12 = L_116;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:981>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:980>
 		ExtraRenderData_tC723833F3E6CF4ABB61951D5AECC135B113A56DD* L_117 = V_12;
 		NullCheck(L_117);
 		BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176* L_118 = L_117->___extraMesh;
@@ -25632,14 +25555,14 @@ IL_01e8:
 
 IL_0217:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:984>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:983>
 		il2cpp_codegen_initobj((&V_8), sizeof(NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022));
 		NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022 L_119 = V_4;
 		Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 L_120 = L_119.___transform;
 		(&V_8)->___transform = L_120;
 		NudgeJobData_tC303DCF7D6A8683AA414D05AA13CB6FAD4BB4022 L_121 = V_8;
 		V_14 = L_121;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:985>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:984>
 		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_122 = ___2_device;
 		BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176* L_123 = V_13;
 		NullCheck(L_123);
@@ -25649,14 +25572,14 @@ IL_0217:
 		int32_t* L_127 = (int32_t*)(&(&V_14)->___headCount);
 		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
 		RenderEvents_PrepareNudgeVertices_m320A5144A69C5ACBB325DD03AFBA1017D23F0A9E(L_122, L_124, L_125, L_126, L_127, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:986>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:985>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_128 = ___1_renderTreeManager;
 		NullCheck(L_128);
 		JobManager_tC139532E48436E2DCB0FB9EB8C75E1EA244C6530* L_129;
 		L_129 = RenderTreeManager_get_jobManager_mCFD0DB0F9AD9E6F232B8A11087BEEFC9AD773ABD_inline(L_128, NULL);
 		NullCheck(L_129);
 		JobManager_Add_mF46A4ADE46145D766A0AAFC43FD4677BD20BAD92(L_129, (&V_14), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:987>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:986>
 		BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176* L_130 = V_13;
 		NullCheck(L_130);
 		BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176* L_131 = L_130->___next;
@@ -25665,7 +25588,7 @@ IL_0217:
 
 IL_026d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:982>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:981>
 		BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176* L_132 = V_13;
 		V_15 = (bool)((!(((RuntimeObject*)(BasicNode_1_tD9BF2B97654531DF98520D39402CFB8867461176*)L_132) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_133 = V_15;
@@ -25679,19 +25602,19 @@ IL_026d:
 
 IL_0279:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:991>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:990>
 		il2cpp_codegen_runtime_class_init_inline(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var);
 		ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD L_134 = ((RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_StaticFields*)il2cpp_codegen_static_fields_for(RenderEvents_t05AE607F81A59EC3689391DCA90421F5BF2EE3E1_il2cpp_TypeInfo_var))->___k_NudgeVerticesMarker;
 		V_5 = L_134;
 		ProfilerMarker_End_m025AE3EF0F96F6DADC53489A53FC6EE65073DE60_inline((&V_5), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:992>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:991>
 		V_7 = (bool)1;
 		goto IL_028d;
 	}
 
 IL_028d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:993>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:992>
 		bool L_135 = V_7;
 		return L_135;
 	}
@@ -25712,13 +25635,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_PrepareNudgeVertices_m320A5
 	NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 V_2;
 	memset((&V_2), 0, sizeof(V_2));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:997>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:996>
 		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_0 = ___1_mesh;
 		NullCheck(L_0);
 		Alloc_t78312CFE58F38082281E80E297AE6176BD2BD8AE* L_1 = (Alloc_t78312CFE58F38082281E80E297AE6176BD2BD8AE*)(&L_0->___allocVerts);
 		uint32_t L_2 = L_1->___size;
 		V_0 = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:998>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:997>
 		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_3 = ___1_mesh;
 		NullCheck(L_3);
 		Page_tB4EA8095DF85BAF22AB8FCA71400121E721B57C9* L_4 = L_3->___allocPage;
@@ -25734,13 +25657,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_PrepareNudgeVertices_m320A5
 		NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 L_11;
 		L_11 = NativeSliceExtensions_Slice_TisVertex_t016AC68A2E6C62576E65412BEC71544AFC01AFC7_m0D7D6BAB64810308797BD6D6C898432E45D4AC4C(L_6, L_9, L_10, NativeSliceExtensions_Slice_TisVertex_t016AC68A2E6C62576E65412BEC71544AFC01AFC7_m0D7D6BAB64810308797BD6D6C898432E45D4AC4C_RuntimeMethod_var);
 		V_1 = L_11;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1000>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:999>
 		UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* L_12 = ___0_device;
 		MeshHandle_tC1E9A7ECCFDAEFDE064B8D58B35B9CEE5A70A22E* L_13 = ___1_mesh;
 		int32_t L_14 = V_0;
 		NullCheck(L_12);
 		UIRenderDevice_Update_m66ACAADBD144EF4A82044B18F27010E36445D983(L_12, L_13, L_14, (&V_2), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1002>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1001>
 		intptr_t* L_15 = ___2_src;
 		NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 L_16 = V_1;
 		void* L_17;
@@ -25748,7 +25671,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_PrepareNudgeVertices_m320A5
 		intptr_t L_18;
 		L_18 = IntPtr_op_Explicit_mE2CEC14C61FD5E2159A03EA2AD97F5CDC5BB9F4D(L_17, NULL);
 		*((intptr_t*)L_15) = (intptr_t)L_18;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1003>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1002>
 		intptr_t* L_19 = ___3_dst;
 		NativeSlice_1_t66375568C4FF313931F4D2F646D64FE6A406BAD2 L_20 = V_2;
 		void* L_21;
@@ -25756,11 +25679,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_PrepareNudgeVertices_m320A5
 		intptr_t L_22;
 		L_22 = IntPtr_op_Explicit_mE2CEC14C61FD5E2159A03EA2AD97F5CDC5BB9F4D(L_21, NULL);
 		*((intptr_t*)L_19) = (intptr_t)L_22;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1004>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1003>
 		int32_t* L_23 = ___4_count;
 		int32_t L_24 = V_0;
 		*((int32_t*)L_23) = (int32_t)L_24;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1005>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1004>
 		return;
 	}
 }
@@ -25781,7 +25704,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t RenderEvents_DetermineSelfClipMethod_
 	int32_t G_B9_0 = 0;
 	int32_t G_B12_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1009>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1008>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0 = ___1_renderData;
 		NullCheck(L_0);
 		bool L_1;
@@ -25794,14 +25717,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t RenderEvents_DetermineSelfClipMethod_
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1010>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1009>
 		V_5 = 1;
 		goto IL_00b3;
 	}
 
 IL_0015:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1012>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1011>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = ___1_renderData;
 		NullCheck(L_3);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_4 = L_3->___owner;
@@ -25816,14 +25739,14 @@ IL_0015:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1013>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1012>
 		V_5 = 1;
 		goto IL_00b3;
 	}
 
 IL_0031:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1015>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1014>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_7 = ___0_renderTreeManager;
 		NullCheck(L_7);
 		bool L_8;
@@ -25836,14 +25759,14 @@ IL_0031:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1016>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1015>
 		V_5 = 3;
 		goto IL_00b3;
 	}
 
 IL_0042:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1020>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1019>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_10 = ___1_renderData;
 		NullCheck(L_10);
 		bool L_11;
@@ -25872,7 +25795,7 @@ IL_005c:
 IL_005d:
 	{
 		V_0 = (bool)G_B9_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1021>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1020>
 		bool L_15 = V_0;
 		if (L_15)
 		{
@@ -25892,7 +25815,7 @@ IL_0064:
 IL_0065:
 	{
 		V_1 = G_B12_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1023>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1022>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_16 = ___0_renderTreeManager;
 		NullCheck(L_16);
 		BaseElementBuilder_t7AD7947872717E2F4C56F8A02A656F63A563DAFE* L_17;
@@ -25911,7 +25834,7 @@ IL_0065:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1024>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1023>
 		int32_t L_22 = V_1;
 		V_5 = L_22;
 		goto IL_00b3;
@@ -25919,14 +25842,14 @@ IL_0065:
 
 IL_0085:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1026>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1025>
 		V_2 = 0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1027>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1026>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_23 = ___1_renderData;
 		NullCheck(L_23);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_24 = L_23->___parent;
 		V_3 = L_24;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1028>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1027>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_25 = V_3;
 		V_9 = (bool)((!(((RuntimeObject*)(RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2*)L_25) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_26 = V_9;
@@ -25936,7 +25859,7 @@ IL_0085:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1029>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1028>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_27 = V_3;
 		NullCheck(L_27);
 		int32_t L_28 = L_27->___childrenMaskDepth;
@@ -25945,7 +25868,7 @@ IL_0085:
 
 IL_009f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1032>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1031>
 		int32_t L_29 = V_2;
 		V_10 = (bool)((((int32_t)L_29) == ((int32_t)7))? 1 : 0);
 		bool L_30 = V_10;
@@ -25955,7 +25878,7 @@ IL_009f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1033>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1032>
 		int32_t L_31 = V_1;
 		V_5 = L_31;
 		goto IL_00b3;
@@ -25963,14 +25886,14 @@ IL_009f:
 
 IL_00ae:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1036>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1035>
 		V_5 = 4;
 		goto IL_00b3;
 	}
 
 IL_00b3:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1037>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1036>
 		int32_t L_32 = V_5;
 		return L_32;
 	}
@@ -25998,7 +25921,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_UpdateLocalFlipsWinding_m58
 	bool V_8 = false;
 	bool V_9 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1042>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1041>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0 = ___0_renderData;
 		NullCheck(L_0);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1 = L_0->___owner;
@@ -26016,16 +25939,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_UpdateLocalFlipsWinding_m58
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1043>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1042>
 		V_3 = (bool)0;
 		goto IL_00a5;
 	}
 
 IL_001f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1045>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1044>
 		V_0 = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1046>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1045>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_5 = ___0_renderData;
 		NullCheck(L_5);
 		bool L_6;
@@ -26038,7 +25961,7 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1047>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_8 = ___0_renderData;
 		NullCheck(L_8);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_9 = L_8->___owner;
@@ -26052,13 +25975,13 @@ IL_001f:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_12;
 		L_12 = Scale_get_value_m27CE2F2A3DD1A14DE72EE744A3817BFE3D3DDD96_inline((&V_7), NULL);
 		V_5 = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1049>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1048>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13 = V_5;
 		float L_14 = L_13.___x;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_15 = V_5;
 		float L_16 = L_15.___y;
 		V_6 = ((float)il2cpp_codegen_multiply(L_14, L_16));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1050>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1049>
 		float L_17 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(Math_tEB65DE7CA8B083C412C969C92981C030865486CE_il2cpp_TypeInfo_var);
 		float L_18;
@@ -26071,26 +25994,26 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1052>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1051>
 		V_3 = (bool)0;
 		goto IL_00a5;
 	}
 
 IL_0076:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1055>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1054>
 		float L_20 = V_6;
 		V_0 = (bool)((((float)L_20) < ((float)(0.0f)))? 1 : 0);
 	}
 
 IL_0081:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1058>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1057>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_21 = ___0_renderData;
 		NullCheck(L_21);
 		bool L_22 = L_21->___localFlipsWinding;
 		V_1 = L_22;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1059>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1058>
 		bool L_23 = V_1;
 		bool L_24 = V_0;
 		V_9 = (bool)((((int32_t)((((int32_t)L_23) == ((int32_t)L_24))? 1 : 0)) == ((int32_t)0))? 1 : 0);
@@ -26101,155 +26024,37 @@ IL_0081:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1061>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1060>
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_26 = ___0_renderData;
 		bool L_27 = V_0;
 		NullCheck(L_26);
 		L_26->___localFlipsWinding = L_27;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1062>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1061>
 		V_3 = (bool)1;
 		goto IL_00a5;
 	}
 
 IL_00a1:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1065>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1064>
 		V_3 = (bool)0;
 		goto IL_00a5;
 	}
 
 IL_00a5:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1066>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1065>
 		bool L_28 = V_3;
 		return L_28;
 	}
 }
 // Method Definition Index: 10872
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_UpdateZeroScaling_mEAD8A48B28258E1D5431CA836A74B34F7410CA45 (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, const RuntimeMethod* method) 
-{
-	static bool s_Il2CppMethodInitialized;
-	if (!s_Il2CppMethodInitialized)
-	{
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Math_tEB65DE7CA8B083C412C969C92981C030865486CE_il2cpp_TypeInfo_var);
-		s_Il2CppMethodInitialized = true;
-	}
-	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* V_0 = NULL;
-	bool V_1 = false;
-	bool V_2 = false;
-	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* V_3 = NULL;
-	bool V_4 = false;
-	Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7 V_5;
-	memset((&V_5), 0, sizeof(V_5));
-	Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 V_6;
-	memset((&V_6), 0, sizeof(V_6));
-	bool V_7 = false;
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1070>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0 = ___0_renderData;
-		NullCheck(L_0);
-		bool L_1;
-		L_1 = RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline(L_0, NULL);
-		V_4 = L_1;
-		bool L_2 = V_4;
-		if (!L_2)
-		{
-			goto IL_000f;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1071>
-		goto IL_0087;
-	}
-
-IL_000f:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1073>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = ___0_renderData;
-		NullCheck(L_3);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_4 = L_3->___owner;
-		V_0 = L_4;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1074>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_5 = V_0;
-		NullCheck(L_5);
-		RuntimeObject* L_6;
-		L_6 = VisualElement_get_resolvedStyle_m3885B7534A94E0BCE024A9621465A0F273DA0AEB(L_5, NULL);
-		NullCheck(L_6);
-		Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7 L_7;
-		L_7 = InterfaceFuncInvoker0< Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7 >::Invoke(52, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_6);
-		V_5 = L_7;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
-		L_8 = Scale_get_value_m27CE2F2A3DD1A14DE72EE744A3817BFE3D3DDD96_inline((&V_5), NULL);
-		float L_9 = L_8.___x;
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_10 = V_0;
-		NullCheck(L_10);
-		RuntimeObject* L_11;
-		L_11 = VisualElement_get_resolvedStyle_m3885B7534A94E0BCE024A9621465A0F273DA0AEB(L_10, NULL);
-		NullCheck(L_11);
-		Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7 L_12;
-		L_12 = InterfaceFuncInvoker0< Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7 >::Invoke(52, IResolvedStyle_t6A3530BA6147B091C278593F21F86B09CD42BE89_il2cpp_TypeInfo_var, L_11);
-		V_5 = L_12;
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_13;
-		L_13 = Scale_get_value_m27CE2F2A3DD1A14DE72EE744A3817BFE3D3DDD96_inline((&V_5), NULL);
-		float L_14 = L_13.___y;
-		il2cpp_codegen_runtime_class_init_inline(Math_tEB65DE7CA8B083C412C969C92981C030865486CE_il2cpp_TypeInfo_var);
-		float L_15;
-		L_15 = fabsf(((float)il2cpp_codegen_multiply(L_9, L_14)));
-		V_1 = (bool)((((float)L_15) < ((float)(0.00100000005f)))? 1 : 0);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1076>
-		V_2 = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1077>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_16 = V_0;
-		NullCheck(L_16);
-		Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 L_17;
-		L_17 = VisualElement_get_hierarchy_m2E897DE4CFD349E65CFA38EFF6BAAFECE2F4E3E4_inline(L_16, NULL);
-		V_6 = L_17;
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_18;
-		L_18 = Hierarchy_get_parent_m1CB3F7548632A5B5747041AF64B12BB0E0F402D4((&V_6), NULL);
-		V_3 = L_18;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1078>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_19 = V_3;
-		V_7 = (bool)((!(((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_19) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
-		bool L_20 = V_7;
-		if (!L_20)
-		{
-			goto IL_007e;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1079>
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_21 = V_3;
-		NullCheck(L_21);
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_22 = L_21->___renderData;
-		NullCheck(L_22);
-		bool L_23 = L_22->___worldTransformScaleZero;
-		V_2 = L_23;
-	}
-
-IL_007e:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1081>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_24 = ___0_renderData;
-		bool L_25 = V_2;
-		bool L_26 = V_1;
-		NullCheck(L_24);
-		L_24->___worldTransformScaleZero = (bool)((int32_t)((int32_t)L_25|(int32_t)L_26));
-	}
-
-IL_0087:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1082>
-		return;
-	}
-}
-// Method Definition Index: 10873
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NeedsTransformID_mF33F7454EBC5B512CDDF05AE1B9BCC494DCDB0C9 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1086>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1069>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_ve;
 		NullCheck(L_0);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_1 = L_0->___renderData;
@@ -26283,17 +26088,17 @@ IL_001c:
 
 IL_001f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1087>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1070>
 		bool L_5 = V_0;
 		return L_5;
 	}
 }
-// Method Definition Index: 10874
+// Method Definition Index: 10873
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NeedsColorID_mBE467BC1E1377BB3C9EFBC4DF360991F98578D1A (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1104>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1087>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_ve;
 		NullCheck(L_0);
 		int32_t L_1;
@@ -26304,12 +26109,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NeedsColorID_mBE467BC1E1377
 
 IL_0011:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1105>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1088>
 		bool L_2 = V_0;
 		return L_2;
 	}
 }
-// Method Definition Index: 10875
+// Method Definition Index: 10874
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NeedsTextCoreSettings_mD6606BF1D8D24F91B318C120B322924852F63987 (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
 {
 	TextCoreSettings_t3D724CD0811298B5AB1EA2041CE799CC25CDD115 V_0;
@@ -26318,12 +26123,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_NeedsTextCoreSettings_mD660
 	bool V_2 = false;
 	int32_t G_B4_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1110>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1093>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_ve;
 		TextCoreSettings_t3D724CD0811298B5AB1EA2041CE799CC25CDD115 L_1;
 		L_1 = TextUtilities_GetTextCoreSettingsForElement_m541E46117BCA12D12F6B2758624DFFB2C66E1EAA(L_0, (bool)1, NULL);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1111>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1094>
 		TextCoreSettings_t3D724CD0811298B5AB1EA2041CE799CC25CDD115 L_2 = V_0;
 		float L_3 = L_2.___outlineWidth;
 		if ((!(((float)L_3) == ((float)(0.0f)))))
@@ -26365,26 +26170,26 @@ IL_003b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1112>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1095>
 		V_2 = (bool)1;
 		goto IL_0047;
 	}
 
 IL_0043:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1114>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1097>
 		V_2 = (bool)0;
 		goto IL_0047;
 	}
 
 IL_0047:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1115>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1098>
 		bool L_11 = V_2;
 		return L_11;
 	}
 }
-// Method Definition Index: 10876
+// Method Definition Index: 10875
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_InitColorIDs_m2AC4EE66F1EFF5795619BAD754EEBB830740325E (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___0_renderTreeManager, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___1_ve, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -26411,15 +26216,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RenderEvents_InitColorIDs_m2AC4EE66F1EFF
 	int32_t G_B20_0 = 0;
 	int32_t G_B25_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1119>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1102>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___1_ve;
 		NullCheck(L_0);
 		RuntimeObject* L_1;
 		L_1 = VisualElement_get_resolvedStyle_m3885B7534A94E0BCE024A9621465A0F273DA0AEB(L_0, NULL);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1120>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1103>
 		V_1 = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1121>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1104>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2 = ___1_ve;
 		NullCheck(L_2);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = L_2->___renderData;
@@ -26454,7 +26259,7 @@ IL_0028:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1123>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1106>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_8 = ___1_ve;
 		NullCheck(L_8);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_9 = L_8->___renderData;
@@ -26466,13 +26271,13 @@ IL_0028:
 		L_12 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_11, NULL);
 		NullCheck(L_9);
 		L_9->___colorID = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1124>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1107>
 		V_1 = (bool)1;
 	}
 
 IL_0046:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1126>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1109>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_13 = ___1_ve;
 		NullCheck(L_13);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_14 = L_13->___renderData;
@@ -26489,7 +26294,7 @@ IL_0046:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1128>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1111>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_18 = ___1_ve;
 		NullCheck(L_18);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_19 = L_18->___renderData;
@@ -26501,13 +26306,13 @@ IL_0046:
 		L_22 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_21, NULL);
 		NullCheck(L_19);
 		L_19->___backgroundColorID = L_22;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1129>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1112>
 		V_1 = (bool)1;
 	}
 
 IL_0077:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1131>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1114>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_23 = ___1_ve;
 		NullCheck(L_23);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_24 = L_23->___renderData;
@@ -26545,7 +26350,7 @@ IL_0099:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1133>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1116>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_30 = ___1_ve;
 		NullCheck(L_30);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_31 = L_30->___renderData;
@@ -26557,13 +26362,13 @@ IL_0099:
 		L_34 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_33, NULL);
 		NullCheck(L_31);
 		L_31->___borderLeftColorID = L_34;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1134>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1117>
 		V_1 = (bool)1;
 	}
 
 IL_00b9:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1136>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1119>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_35 = ___1_ve;
 		NullCheck(L_35);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_36 = L_35->___renderData;
@@ -26601,7 +26406,7 @@ IL_00db:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1138>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1121>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_42 = ___1_ve;
 		NullCheck(L_42);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_43 = L_42->___renderData;
@@ -26613,13 +26418,13 @@ IL_00db:
 		L_46 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_45, NULL);
 		NullCheck(L_43);
 		L_43->___borderTopColorID = L_46;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1139>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1122>
 		V_1 = (bool)1;
 	}
 
 IL_00fb:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1141>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1124>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_47 = ___1_ve;
 		NullCheck(L_47);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_48 = L_47->___renderData;
@@ -26657,7 +26462,7 @@ IL_011d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1143>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1126>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_54 = ___1_ve;
 		NullCheck(L_54);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_55 = L_54->___renderData;
@@ -26669,13 +26474,13 @@ IL_011d:
 		L_58 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_57, NULL);
 		NullCheck(L_55);
 		L_55->___borderRightColorID = L_58;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1144>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1127>
 		V_1 = (bool)1;
 	}
 
 IL_013d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1146>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1129>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_59 = ___1_ve;
 		NullCheck(L_59);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_60 = L_59->___renderData;
@@ -26713,7 +26518,7 @@ IL_015f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1148>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1131>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_66 = ___1_ve;
 		NullCheck(L_66);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_67 = L_66->___renderData;
@@ -26725,13 +26530,13 @@ IL_015f:
 		L_70 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_69, NULL);
 		NullCheck(L_67);
 		L_67->___borderBottomColorID = L_70;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1149>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1132>
 		V_1 = (bool)1;
 	}
 
 IL_017f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1151>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1134>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_71 = ___1_ve;
 		NullCheck(L_71);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_72 = L_71->___renderData;
@@ -26748,7 +26553,7 @@ IL_017f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1153>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1136>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_76 = ___1_ve;
 		NullCheck(L_76);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_77 = L_76->___renderData;
@@ -26760,13 +26565,13 @@ IL_017f:
 		L_80 = UIRVEShaderInfoAllocator_AllocColor_mF57B9588AAB845336D427B90C7F72E495800944F(L_79, NULL);
 		NullCheck(L_77);
 		L_77->___tintColorID = L_80;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1154>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1137>
 		V_1 = (bool)1;
 	}
 
 IL_01b2:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1156>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1139>
 		bool L_81 = V_1;
 		V_9 = L_81;
 		goto IL_01b7;
@@ -26774,12 +26579,12 @@ IL_01b2:
 
 IL_01b7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1157>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1140>
 		bool L_82 = V_9;
 		return L_82;
 	}
 }
-// Method Definition Index: 10877
+// Method Definition Index: 10876
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_SetColorValues_mFAC5B0753831C514E12061B4698A69DC159BCF93 (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* ___0_renderTreeManager, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___1_ve, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -26798,13 +26603,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_SetColorValues_mFAC5B075383
 	bool V_6 = false;
 	bool V_7 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1172>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1155>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___1_ve;
 		NullCheck(L_0);
 		RuntimeObject* L_1;
 		L_1 = VisualElement_get_resolvedStyle_m3885B7534A94E0BCE024A9621465A0F273DA0AEB(L_0, NULL);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1191>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1174>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2 = ___1_ve;
 		NullCheck(L_2);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3 = L_2->___renderData;
@@ -26821,7 +26626,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_SetColorValues_mFAC5B075383
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1192>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1175>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_7 = ___0_renderTreeManager;
 		NullCheck(L_7);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_8 = L_7->___shaderInfoAllocator;
@@ -26840,7 +26645,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents_SetColorValues_mFAC5B075383
 
 IL_0039:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1193>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1176>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_14 = ___1_ve;
 		NullCheck(L_14);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_15 = L_14->___renderData;
@@ -26857,7 +26662,7 @@ IL_0039:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1194>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1177>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_19 = ___0_renderTreeManager;
 		NullCheck(L_19);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_20 = L_19->___shaderInfoAllocator;
@@ -26876,7 +26681,7 @@ IL_0039:
 
 IL_006a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1195>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1178>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_26 = ___1_ve;
 		NullCheck(L_26);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_27 = L_26->___renderData;
@@ -26893,7 +26698,7 @@ IL_006a:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1196>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1179>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_31 = ___0_renderTreeManager;
 		NullCheck(L_31);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_32 = L_31->___shaderInfoAllocator;
@@ -26912,7 +26717,7 @@ IL_006a:
 
 IL_009b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1197>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1180>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_38 = ___1_ve;
 		NullCheck(L_38);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_39 = L_38->___renderData;
@@ -26929,7 +26734,7 @@ IL_009b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1198>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1181>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_43 = ___0_renderTreeManager;
 		NullCheck(L_43);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_44 = L_43->___shaderInfoAllocator;
@@ -26948,7 +26753,7 @@ IL_009b:
 
 IL_00ce:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1199>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1182>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_50 = ___1_ve;
 		NullCheck(L_50);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_51 = L_50->___renderData;
@@ -26965,7 +26770,7 @@ IL_00ce:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1200>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1183>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_55 = ___0_renderTreeManager;
 		NullCheck(L_55);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_56 = L_55->___shaderInfoAllocator;
@@ -26984,7 +26789,7 @@ IL_00ce:
 
 IL_0101:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1201>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1184>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_62 = ___1_ve;
 		NullCheck(L_62);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_63 = L_62->___renderData;
@@ -27001,7 +26806,7 @@ IL_0101:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1202>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1185>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_67 = ___0_renderTreeManager;
 		NullCheck(L_67);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_68 = L_67->___shaderInfoAllocator;
@@ -27020,7 +26825,7 @@ IL_0101:
 
 IL_0134:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1203>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1186>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_74 = ___1_ve;
 		NullCheck(L_74);
 		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_75 = L_74->___renderData;
@@ -27037,7 +26842,7 @@ IL_0134:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1204>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1187>
 		RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* L_79 = ___0_renderTreeManager;
 		NullCheck(L_79);
 		UIRVEShaderInfoAllocator_t7A9BCF1924EA027462B8DBBAC7B15BCBCB5CC3BF* L_80 = L_79->___shaderInfoAllocator;
@@ -27056,11 +26861,11 @@ IL_0134:
 
 IL_0167:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1206>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderEvents.cs:1189>
 		return;
 	}
 }
-// Method Definition Index: 10878
+// Method Definition Index: 10877
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RenderEvents__cctor_m3EB61A6FEFFDD0C51186C3904692A514EC73751C (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27181,7 +26986,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GradientSettingsAtlas_set_Mu
 		return;
 	}
 }
-// Method Definition Index: 35238
+// Method Definition Index: 35246
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_get_black_mB50217951591A045844C61E7FF31EEE3FEF16737_inline (const RuntimeMethod* method) 
 {
 	{
@@ -27192,7 +26997,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_0;
 	}
 }
-// Method Definition Index: 35250
+// Method Definition Index: 35258
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B Color32_op_Implicit_m79AF5E0BDE9CE041CAC4D89CBFA66E71C6DD1B70_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_c, const RuntimeMethod* method) 
 {
 	Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B V_0;
@@ -27232,7 +27037,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color32_t73C5004937BF5BB8AD55323D
 		return L_16;
 	}
 }
-// Method Definition Index: 33227
+// Method Definition Index: 33237
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ProfilerMarker_Begin_mD07DB736ADA7D8BAF9D969CC7F3C55848A218C6E_inline (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27243,7 +27048,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ProfilerMarker_Begin_mD07DB7
 		return;
 	}
 }
-// Method Definition Index: 35543
+// Method Definition Index: 35551
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_one_m9097EB8DC23C26118A591AF16702796C3EF51DFB_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27258,7 +27063,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35530
+// Method Definition Index: 35538
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Addition_m8136742CE6EE33BA4EB81C5F584678455917D2AE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -27280,7 +27085,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35537
+// Method Definition Index: 35545
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -27300,7 +27105,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_6;
 	}
 }
-// Method Definition Index: 34008
+// Method Definition Index: 34018
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_x_mA1E7EF6DEAD2E900D7D56B7A3957C05081EBA9CA_inline (RectInt_t1744D10E1063135DA9D574F95205B98DAC600CB8* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27309,7 +27114,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_x_mA1E7EF6DEA
 		return L_0;
 	}
 }
-// Method Definition Index: 34010
+// Method Definition Index: 34020
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_y_m440422264E6FCAA91E01F81486A78037AC29D878_inline (RectInt_t1744D10E1063135DA9D574F95205B98DAC600CB8* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27318,7 +27123,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_y_m440422264E
 		return L_0;
 	}
 }
-// Method Definition Index: 35554
+// Method Definition Index: 35562
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2Int__ctor_mC20D1312133EB8CB63EC11067088B043660F11CE_inline (Vector2Int_t69B2886EBAB732D9B880565E18E7568F3DE0CE6A* __this, int32_t ___0_x, int32_t ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -27332,7 +27137,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2Int__ctor_mC20D131213
 		return;
 	}
 }
-// Method Definition Index: 34012
+// Method Definition Index: 34022
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_width_m6B7B2FB764EAE83B7F63E7F77FA33973606761A7_inline (RectInt_t1744D10E1063135DA9D574F95205B98DAC600CB8* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27341,7 +27146,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_width_m6B7B2F
 		return L_0;
 	}
 }
-// Method Definition Index: 34014
+// Method Definition Index: 34024
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_height_mE25FB938714942D7A3BA0B3C21BC5CB913D5709C_inline (RectInt_t1744D10E1063135DA9D574F95205B98DAC600CB8* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27350,7 +27155,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t RectInt_get_height_mE25FB
 		return L_0;
 	}
 }
-// Method Definition Index: 35512
+// Method Definition Index: 35520
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -27364,7 +27169,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFF
 		return;
 	}
 }
-// Method Definition Index: 35550
+// Method Definition Index: 35558
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Vector2Int_get_x_mA2CACB1B6E6B5AD0CCC32B2CD2EDCE3ECEB50576_inline (Vector2Int_t69B2886EBAB732D9B880565E18E7568F3DE0CE6A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27373,7 +27178,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Vector2Int_get_x_mA2CACB1
 		return L_0;
 	}
 }
-// Method Definition Index: 35552
+// Method Definition Index: 35560
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Vector2Int_get_y_m48454163ECF0B463FB5A16A0C4FC4B14DB0768B3_inline (Vector2Int_t69B2886EBAB732D9B880565E18E7568F3DE0CE6A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27382,7 +27187,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Vector2Int_get_y_m4845416
 		return L_0;
 	}
 }
-// Method Definition Index: 33228
+// Method Definition Index: 33238
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ProfilerMarker_End_m025AE3EF0F96F6DADC53489A53FC6EE65073DE60_inline (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27402,7 +27207,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GradientSettingsAtlas_get_Mu
 		return L_0;
 	}
 }
-// Method Definition Index: 33225
+// Method Definition Index: 33235
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ProfilerMarker__ctor_mDD68B0A8B71E0301F592AF8891560150E55699C8_inline (ProfilerMarker_tA256E18DA86EDBC5528CE066FC91C96EE86501AD* __this, String_t* ___0_name, const RuntimeMethod* method) 
 {
 	{
@@ -27415,7 +27220,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ProfilerMarker__ctor_mDD68B0
 		return;
 	}
 }
-// Method Definition Index: 35249
+// Method Definition Index: 35257
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color32__ctor_mC9C6B443F0C7CA3F8B174158B2AF6F05E18EAC4E_inline (Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B* __this, uint8_t ___0_r, uint8_t ___1_g, uint8_t ___2_b, uint8_t ___3_a, const RuntimeMethod* method) 
 {
 	{
@@ -27510,7 +27315,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MeshGenerationDeferrer_set_d
 		return;
 	}
 }
-// Method Definition Index: 33966
+// Method Definition Index: 33976
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D Rect_get_zero_m5341D8B63DEF1F4C308A685EEC8CFEA12A396C8D_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27537,7 +27342,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MeshGenerator_set_textJobSys
 		return;
 	}
 }
-// Method Definition Index: 7962
+// Method Definition Index: 7961
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Length_get_value_m28A7FBD9908A795F0C73FED461EE32E5A3D6456F_inline (Length_t90BB06D47DD6DB461ED21BD3E3241FAB6C824256* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27546,7 +27351,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Length_get_value_m28A7FBD99
 		return L_0;
 	}
 }
-// Method Definition Index: 7964
+// Method Definition Index: 7963
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Length_get_unit_m35495152DF180B333572A9BB8C24452530BB338E_inline (Length_t90BB06D47DD6DB461ED21BD3E3241FAB6C824256* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27555,7 +27360,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Length_get_unit_m35495152
 		return (int32_t)(L_0);
 	}
 }
-// Method Definition Index: 35474
+// Method Definition Index: 35482
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -27594,7 +27399,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 35614
+// Method Definition Index: 35622
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 Vector4_get_zero_m3D61F5FA9483CD9C08977D9D8852FB448B4CE6D1_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27609,7 +27414,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector4_t58B63D32F48C0DBF50DE2C60
 		return L_0;
 	}
 }
-// Method Definition Index: 35490
+// Method Definition Index: 35498
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -27663,7 +27468,7 @@ IL_002d:
 		return L_5;
 	}
 }
-// Method Definition Index: 35486
+// Method Definition Index: 35494
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_RoundToInt_m60F8B66CF27F1FA75AA219342BD184B75771EB4B_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27690,7 +27495,7 @@ IL_000c:
 		return L_2;
 	}
 }
-// Method Definition Index: 35362
+// Method Definition Index: 35370
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m5F87930F9B0828E5652E2D9D01ED907C01122C86_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -27724,7 +27529,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Entry_t475ED76E31923970E7F7A6522E
 		return L_0;
 	}
 }
-// Method Definition Index: 33979
+// Method Definition Index: 33989
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D67551372073C9C32C4C4624C2A5713F7F9A9_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -27733,7 +27538,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D6755137
 		return L_0;
 	}
 }
-// Method Definition Index: 33981
+// Method Definition Index: 33991
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_height_mE1AA6C6C725CCD2D317BD2157396D3CF7D47C9D8_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -30528,7 +30333,7 @@ IL_1259:
 		return;
 	}
 }
-// Method Definition Index: 33963
+// Method Definition Index: 33973
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m18C3033D135097BEE424AAA68D91C706D2647F23_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_x, float ___1_y, float ___2_width, float ___3_height, const RuntimeMethod* method) 
 {
 	{
@@ -30548,7 +30353,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m18C3033D135097BE
 		return;
 	}
 }
-// Method Definition Index: 33980
+// Method Definition Index: 33990
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_width_m93B6217CF3EFF89F9B0C81F34D7345DE90B93E5A_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30558,7 +30363,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_width_m93B6217CF3EF
 		return;
 	}
 }
-// Method Definition Index: 33982
+// Method Definition Index: 33992
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_height_mD00038E6E06637137A5626CA8CD421924005BF03_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30568,7 +30373,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_height_mD00038E6E06
 		return;
 	}
 }
-// Method Definition Index: 33983
+// Method Definition Index: 33993
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Rect_get_size_mFB990FFC0FE0152179C8C74A59E4AC258CB44267_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -30584,7 +30389,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_2;
 	}
 }
-// Method Definition Index: 35510
+// Method Definition Index: 35518
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_Item_m18BC65BB0512B16A1F9C8BE4B83A3E7BBAD7064D_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, int32_t ___0_index, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -30649,7 +30454,7 @@ IL_002d:
 		return L_7;
 	}
 }
-// Method Definition Index: 33972
+// Method Definition Index: 33982
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Rect_get_position_m9B7E583E67443B6F4280A676E644BB0B9E7C4E38_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -30665,7 +30470,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_2;
 	}
 }
-// Method Definition Index: 35511
+// Method Definition Index: 35519
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2_set_Item_mEF309880B9B3B370B542AABEB32256EEC589DD03_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, int32_t ___0_index, float ___1_value, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -30730,7 +30535,7 @@ IL_002d:
 		return;
 	}
 }
-// Method Definition Index: 33973
+// Method Definition Index: 33983
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_position_m9CD8AA25A83A7A893429C0ED56C36641202C3F05_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30746,7 +30551,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_position_m9CD8AA25A
 		return;
 	}
 }
-// Method Definition Index: 33984
+// Method Definition Index: 33994
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_size_m346E4F7077E5A1C0F4E21966232CD726CB9E6BAA_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30762,7 +30567,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_size_m346E4F7077E5A
 		return;
 	}
 }
-// Method Definition Index: 33965
+// Method Definition Index: 33975
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m5665723DD0443E990EA203A54451B2BB324D8224_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_source, const RuntimeMethod* method) 
 {
 	{
@@ -30786,7 +30591,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m5665723DD0443E99
 		return;
 	}
 }
-// Method Definition Index: 33970
+// Method Definition Index: 33980
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_y_mC733E8D49F3CE21B2A3D40A1B72D687F22C97F49_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -30795,7 +30600,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_y_mC733E8D49F3CE21
 		return L_0;
 	}
 }
-// Method Definition Index: 33971
+// Method Definition Index: 33981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_y_mDE91F4B98A6E8623EFB1250FF6526D5DB5855629_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30805,7 +30610,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_y_mDE91F4B98A6E8623
 		return;
 	}
 }
-// Method Definition Index: 33991
+// Method Definition Index: 34001
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD632AADD8B9EAF9FE3BA143F79CAF8E_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -30815,7 +30620,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD63
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 33968
+// Method Definition Index: 33978
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_x_mB267B718E0D067F2BAE31BA477647FBF964916EB_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -30824,7 +30629,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_x_mB267B718E0D067F
 		return L_0;
 	}
 }
-// Method Definition Index: 33969
+// Method Definition Index: 33979
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_x_mAB91AB71898A20762BC66FD0723C4C739C4C3406_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -30834,7 +30639,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_x_mAB91AB71898A2076
 		return;
 	}
 }
-// Method Definition Index: 33989
+// Method Definition Index: 33999
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA98A9B007F815F6E2059BA6BE425F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -30844,7 +30649,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 35533
+// Method Definition Index: 35541
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Division_m707994C12D356E65E453CEE8F767E652B60911BF_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -30866,7 +30671,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35532
+// Method Definition Index: 35540
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_m6FFFFF6A9E069A4FBCA7E098D88AE39C2B80D442_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -30888,7 +30693,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35531
+// Method Definition Index: 35539
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Subtraction_m44475FCDAD2DA2F98D78A6625EC2DCDFE8803837_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -30910,7 +30715,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35539
+// Method Definition Index: 35547
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Inequality_mBEA93B5A0E954FEFB863DC61CB209119980EC713_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -30922,7 +30727,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Inequality_mBEA93
 		return (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 34000
+// Method Definition Index: 34010
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_op_Equality_mF2A038255CAF5F1E86079B9EE0FC96DE54307C1F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_lhs, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___1_rhs, const RuntimeMethod* method) 
 {
 	int32_t G_B5_0 = 0;
@@ -30976,7 +30781,7 @@ IL_003b:
 		return (bool)G_B5_0;
 	}
 }
-// Method Definition Index: 35541
+// Method Definition Index: 35549
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector2_op_Implicit_m6D9CABB2C791A192867D7A4559D132BE86DD3EB7_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_v, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -30995,7 +30800,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_4;
 	}
 }
-// Method Definition Index: 35397
+// Method Definition Index: 35405
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31022,7 +30827,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 35373
+// Method Definition Index: 35381
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_normalized_m736BBF65D5CDA7A18414370D15B4DFCC1E466F07_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31032,7 +30837,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 35364
+// Method Definition Index: 35372
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_Cross_mF93A280558BCE756D13B6CC5DCD7DE8A43148987_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_rhs, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31090,7 +30895,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MeshGenerator_set_disposed_m
 		return;
 	}
 }
-// Method Definition Index: 33985
+// Method Definition Index: 33995
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMin_mE89C40702926D016A633399E20DB9501E251630D_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31099,7 +30904,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMin_mE89C40702926
 		return L_0;
 	}
 }
-// Method Definition Index: 33987
+// Method Definition Index: 33997
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMin_mB19848FB25DE61EDF958F7A22CFDD86DE103062F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31108,7 +30913,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMin_mB19848FB25DE
 		return L_0;
 	}
 }
-// Method Definition Index: 33907
+// Method Definition Index: 33917
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Bounds_get_min_m465AC9BBE1DE5D8E8AD95AC19B9899068FEEBB13_inline (Bounds_t367E830C64BBF235ED8C3B2F8CF6254FDCAD39C3* __this, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31135,7 +30940,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 35540
+// Method Definition Index: 35548
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31153,7 +30958,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 33903
+// Method Definition Index: 33913
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Bounds_get_size_m0699A53A55A78B3201D7270D6F338DFA91B6FAD4_inline (Bounds_t367E830C64BBF235ED8C3B2F8CF6254FDCAD39C3* __this, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31174,7 +30979,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_6;
 	}
 }
-// Method Definition Index: 33975
+// Method Definition Index: 33985
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Rect_get_min_mD0D1BABF9C955D2D9CCA86E257B0783ACDEE69AC_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31190,7 +30995,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_2;
 	}
 }
-// Method Definition Index: 35529
+// Method Definition Index: 35537
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Max_m1E906743ECA6478A2EDCCFECD9D509898F66152B_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31216,7 +31021,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_10;
 	}
 }
-// Method Definition Index: 33976
+// Method Definition Index: 33986
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_min_m6557D7D73C6F115CA7C92E38C88EA9E95FC89253_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31239,7 +31044,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_min_m6557D7D73C6F11
 		return;
 	}
 }
-// Method Definition Index: 33977
+// Method Definition Index: 33987
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Rect_get_max_m60149158D9A01113214BB417AA48CEF774899167_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31264,7 +31069,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_2;
 	}
 }
-// Method Definition Index: 35528
+// Method Definition Index: 35536
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Min_m2D222BC18ACD4F965981EC93451DDD1D7ADFDDA0_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31290,7 +31095,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_10;
 	}
 }
-// Method Definition Index: 33978
+// Method Definition Index: 33988
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_max_mAD2D6D5DC1F5A6E69A0A0BD7E34C209F91C381F0_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31313,7 +31118,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_max_mAD2D6D5DC1F5A6
 		return;
 	}
 }
-// Method Definition Index: 35542
+// Method Definition Index: 35550
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31328,7 +31133,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 33964
+// Method Definition Index: 33974
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m503705FE0E4E413041E3CE7F09270489F401C675_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_position, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_size, const RuntimeMethod* method) 
 {
 	{
@@ -31352,7 +31157,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m503705FE0E4E4130
 		return;
 	}
 }
-// Method Definition Index: 35534
+// Method Definition Index: 35542
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_UnaryNegation_mBA9FC53A2194EE3CC067A12D11879F695B34D6F9_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31370,7 +31175,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 35247
+// Method Definition Index: 35255
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline (const RuntimeMethod* method) 
 {
 	{
@@ -31381,7 +31186,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_0;
 	}
 }
-// Method Definition Index: 35623
+// Method Definition Index: 35631
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector4_op_Inequality_mD6A1C6E862F3EFB1B222A2DDCB7A7237042DE142_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___0_lhs, Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -31393,7 +31198,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector4_op_Inequality_mD6A1C
 		return (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 33999
+// Method Definition Index: 34009
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_op_Inequality_mB5D7316EB50B1DDA9324F4BE6741DFF6A673137D_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_lhs, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___1_rhs, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31412,7 +31217,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_op_Inequality_mB5D7316E
 		return (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 35599
+// Method Definition Index: 35607
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector4__ctor_m96B2CD8B862B271F513AF0BDC2EABD58E4DBC813_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3* __this, float ___0_x, float ___1_y, float ___2_z, float ___3_w, const RuntimeMethod* method) 
 {
 	{
@@ -31432,7 +31237,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector4__ctor_m96B2CD8B862B2
 		return;
 	}
 }
-// Method Definition Index: 35622
+// Method Definition Index: 35630
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector4_op_Equality_mCEA0E5F229F4AE8C55152F7A8F84345F24F52DC6_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___0_lhs, Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___1_rhs, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -31489,7 +31294,7 @@ IL_0057:
 		return L_25;
 	}
 }
-// Method Definition Index: 15338
+// Method Definition Index: 15341
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Inequality_m90EFC9C4CAD9A33E309F2DDF98EE4E1DD253637B_inline (intptr_t ___0_value1, intptr_t ___1_value2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31516,50 +31321,37 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void UnsafeMeshGenerationNode_Dra
 		return;
 	}
 }
-// Method Definition Index: 18555
+// Method Definition Index: 18559
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* GCHandle_get_Target_m481F9508DA5E384D33CD1F4450060DC56BBD4CD5_inline (GCHandle_tC44F6F72EE68BD4CFABA24309DA7A179D41127DC* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	{
-		bool L_0;
-		L_0 = GCHandle_get_IsAllocated_m241908103D8D867E11CCAB73C918729825E86843_inline(__this, NULL);
-		if (L_0)
+		intptr_t L_0 = __this->___handle;
+		GCHandle_ThrowIfInvalid_m8BD7E31B383F657BB7B2512567A8296CFC16C931_inline(L_0, NULL);
+		intptr_t L_1 = __this->___handle;
+		bool L_2;
+		L_2 = GCHandle_CanDereferenceHandle_mAAAC42D1268CEF3FDD040A3D1574773D08140579_inline(L_1, NULL);
+		if (!L_2)
 		{
-			goto IL_0013;
+			goto IL_0024;
 		}
 	}
 	{
-		InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB* L_1 = (InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB*)il2cpp_codegen_object_new(((RuntimeClass*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB_il2cpp_TypeInfo_var)));
-		InvalidOperationException__ctor_mE4CB6F4712AB6D99A2358FBAE2E052B3EE976162(L_1, ((String_t*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&_stringLiteral4EBC86E0EACFCA522AEB82874860D0E248D782A5)), NULL);
-		IL2CPP_RAISE_MANAGED_EXCEPTION(L_1, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&GCHandle_get_Target_m481F9508DA5E384D33CD1F4450060DC56BBD4CD5_RuntimeMethod_var)));
+		intptr_t L_3 = __this->___handle;
+		RuntimeObject* L_4;
+		L_4 = GCHandle_GetRef_mAC7E58E62417209DC41C99F66BA70F0C3AA18DA8_inline(L_3, NULL);
+		return L_4;
 	}
 
-IL_0013:
+IL_0024:
 	{
-		intptr_t L_2 = __this->___handle;
-		bool L_3;
-		L_3 = GCHandle_CanDereferenceHandle_mAAAC42D1268CEF3FDD040A3D1574773D08140579_inline(L_2, NULL);
-		if (!L_3)
-		{
-			goto IL_002c;
-		}
-	}
-	{
-		intptr_t L_4 = __this->___handle;
-		RuntimeObject* L_5;
-		L_5 = GCHandle_GetRef_mAC7E58E62417209DC41C99F66BA70F0C3AA18DA8_inline(L_4, NULL);
-		return L_5;
-	}
-
-IL_002c:
-	{
-		intptr_t L_6 = __this->___handle;
-		RuntimeObject* L_7;
-		L_7 = GCHandle_GetTarget_mE0AF851834410E2AEA6285B2497751570236C794(L_6, NULL);
-		return L_7;
+		intptr_t L_5 = __this->___handle;
+		RuntimeObject* L_6;
+		L_6 = GCHandle_GetTarget_mE0AF851834410E2AEA6285B2497751570236C794(L_5, NULL);
+		return L_6;
 	}
 }
-// Method Definition Index: 15337
+// Method Definition Index: 15340
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Equality_m7D9CDCDE9DC2A0C2C614633F4921E90187FAB271_inline (intptr_t ___0_value1, intptr_t ___1_value2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31569,7 +31361,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Equality_m7D9CDCDE
 		return (bool)((((intptr_t)L_0) == ((intptr_t)L_1))? 1 : 0);
 	}
 }
-// Method Definition Index: 35361
+// Method Definition Index: 35369
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	{
@@ -31621,7 +31413,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void OpacityIdAccelerator_set_dis
 		return;
 	}
 }
-// Method Definition Index: 35341
+// Method Definition Index: 35349
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 Matrix4x4_get_identity_m6568A73831F3E2D587420D20FF423959D7D8AB56_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31640,7 +31432,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isClippingRectDirty_mD3A801F677E20BE06F6822B0384A481785A2DB4F_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:220>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:218>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)64)))) == ((int32_t)((int32_t)64)))? 1 : 0);
 	}
@@ -31649,12 +31441,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isClippingRec
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isGroupTransform_m6468EE90AFB0A8428B7303E799083782E8B42835_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:182>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:180>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&1))) == ((int32_t)1))? 1 : 0);
 	}
 }
-// Method Definition Index: 6700
+// Method Definition Index: 6698
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D VisualElement_get_rect_m07659FED0F69F3DDE74DBC5A2F694FA22139E087_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31662,11 +31454,11 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8
 	Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D V_1;
 	memset((&V_1), 0, sizeof(V_1));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1378>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1380>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_0;
 		L_0 = VisualElement_get_layoutSize_m9BD5E3873E98B8D66582571A7F62F890FE970F70_inline(__this, NULL);
 		V_0 = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1379>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1381>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_1 = V_0;
 		float L_2 = L_1.___x;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3 = V_0;
@@ -31680,12 +31472,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8
 
 IL_0026:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1380>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1382>
 		Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D L_6 = V_1;
 		return L_6;
 	}
 }
-// Method Definition Index: 10883
+// Method Definition Index: 10882
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* RenderTree_get_renderTreeManager_m8D9B0F2FFD8F60541A13FD783468EAEF1D2A14DB_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31694,7 +31486,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderTreeManager_tC48E33C23CCD40
 		return L_0;
 	}
 }
-// Method Definition Index: 11000
+// Method Definition Index: 11003
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTreeManager_get_drawInCameras_m8EE1616BDFFA01DBDAB7E56EB2939001CDB15BF9_inline (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31707,12 +31499,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTreeManager_get_drawIn
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:214>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:212>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)32)))) == ((int32_t)((int32_t)32)))? 1 : 0);
 	}
 }
-// Method Definition Index: 6903
+// Method Definition Index: 6902
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisualElement_TransformAlignedRect_m83F60A83A2F69136E513B24BFA697856AE4E3C6C_inline (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* ___0_matrix, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* ___1_rect, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31735,63 +31527,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisualElement_TransformAlign
 		return;
 	}
 }
-// Method Definition Index: 10884
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, const RuntimeMethod* method) 
-{
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderTree.cs:108>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0 = __this->___m_RootRenderData;
-		return L_0;
-	}
-}
-// Method Definition Index: 10887
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTree_get_isRootRenderTree_mB6433CBE5A68B70E9DD20B5D766A2951631AAD47_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, const RuntimeMethod* method) 
-{
-	bool V_0 = false;
-	int32_t G_B3_0 = 0;
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderTree.cs:123>
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_0;
-		L_0 = RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline(__this, NULL);
-		NullCheck(L_0);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1 = L_0->___owner;
-		NullCheck(L_1);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2;
-		L_2 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(L_1, NULL);
-		if (L_2)
-		{
-			goto IL_0023;
-		}
-	}
-	{
-		RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* L_3;
-		L_3 = RenderTree_get_rootRenderData_mFF5311C267223436AD60909F0E3B8E0D903639FA_inline(__this, NULL);
-		NullCheck(L_3);
-		bool L_4;
-		L_4 = RenderData_get_isNestedRenderTreeRoot_m23D23D38C3FA289C591678E5D8B5B7CAE59994FF_inline(L_3, NULL);
-		G_B3_0 = ((((int32_t)L_4) == ((int32_t)0))? 1 : 0);
-		goto IL_0024;
-	}
-
-IL_0023:
-	{
-		G_B3_0 = 0;
-	}
-
-IL_0024:
-	{
-		V_0 = (bool)G_B3_0;
-		goto IL_0027;
-	}
-
-IL_0027:
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderTree.cs:124>
-		bool L_5 = V_0;
-		return L_5;
-	}
-}
-// Method Definition Index: 35472
+// Method Definition Index: 35480
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -31830,7 +31566,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 10982
+// Method Definition Index: 10985
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR UIRenderDevice_t59628CBA89B4617E832C2B270E1C1A3931D01302* RenderTreeManager_get_device_m35110EF1CEF0E13FABFEFD579CABDA81D5335310_inline (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31839,7 +31575,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR UIRenderDevice_t59628CBA89B4617E8
 		return L_0;
 	}
 }
-// Method Definition Index: 35536
+// Method Definition Index: 35544
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_mC53581E703768BA2512A7C65283657C331994353_inline (float ___0_d, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_a, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31863,12 +31599,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isSubTreeQuad_m19B0DEF4B5AB5D3BBADC3014B99942FEF8B5A27D_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:206>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:204>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&((int32_t)16)))) == ((int32_t)((int32_t)16)))? 1 : 0);
 	}
 }
-// Method Definition Index: 6846
+// Method Definition Index: 6845
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 VisualElement_get_hierarchy_m2E897DE4CFD349E65CFA38EFF6BAAFECE2F4E3E4_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31881,12 +31617,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C50
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraData_m39015EEF02331F301EDB8BDD682EA5EF01D0D8A6_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:194>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:192>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&4))) == ((int32_t)4))? 1 : 0);
 	}
 }
-// Method Definition Index: 10895
+// Method Definition Index: 10893
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RenderTree_OnRenderDataVisualsChanged_m37817178FDC3D43510120DFF5CEFC72EE085E813_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, bool ___1_hierarchical, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31948,7 +31684,7 @@ IL_0024:
 		return;
 	}
 }
-// Method Definition Index: 10893
+// Method Definition Index: 10891
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RenderTree_OnRenderDataTransformOrSizeChanged_m3B23113530683F1277074D7133183CD881E8F524_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, bool ___1_transformChanged, bool ___2_clipRectSizeChanged, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -32019,7 +31755,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 10892
+// Method Definition Index: 10890
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RenderTree_OnRenderDataOpacityChanged_mEB3096486F8ADB3CD09E333533C15077BEA29765_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, bool ___1_hierarchical, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -32081,7 +31817,7 @@ IL_0029:
 		return;
 	}
 }
-// Method Definition Index: 10894
+// Method Definition Index: 10892
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RenderTree_OnRenderDataOpacityIdChanged_mDC9FB0A32A05B764FF7401567CAAC6955073205A_inline (RenderTree_t605515B72AF7767FA30297BEA8C5240A81E123F8* __this, RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* ___0_renderData, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -32107,12 +31843,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RenderTree_OnRenderDataOpaci
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_isIgnoringDynamicColorHint_mACBB6B12F76476595B9172793392D1E7201138C7_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:188>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:186>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&2))) == ((int32_t)2))? 1 : 0);
 	}
 }
-// Method Definition Index: 35226
+// Method Definition Index: 35234
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_op_Multiply_mD0296202733CB2D5342FB7C82B48AEDA63036758_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_a, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_b, const RuntimeMethod* method) 
 {
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
@@ -32144,7 +31880,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_16;
 	}
 }
-// Method Definition Index: 35309
+// Method Definition Index: 35317
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 Matrix4x4_get_inverse_m4F4A881CD789281EA90EB68CFD39F36C8A81E6BD_inline (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -32154,7 +31890,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59
 		return L_0;
 	}
 }
-// Method Definition Index: 35327
+// Method Definition Index: 35335
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 Matrix4x4_op_Multiply_m75E91775655DCA8DFC8EDE0AB787285BB3935162_inline (Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 ___0_lhs, Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 ___1_rhs, const RuntimeMethod* method) 
 {
 	Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 V_0;
@@ -32438,7 +32174,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59
 		return L_256;
 	}
 }
-// Method Definition Index: 11001
+// Method Definition Index: 11004
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTreeManager_get_isFlat_mBEF4B1D5E0BAC4606D60130DBC23EFC07A2515B5_inline (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -32447,7 +32183,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderTreeManager_get_isFlat
 		return L_0;
 	}
 }
-// Method Definition Index: 10996
+// Method Definition Index: 10999
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR JobManager_tC139532E48436E2DCB0FB9EB8C75E1EA244C6530* RenderTreeManager_get_jobManager_mCFD0DB0F9AD9E6F232B8A11087BEEFC9AD773ABD_inline (RenderTreeManager_tC48E33C23CCD40D5EFFF3CCA3D822893AD1C016E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -32460,12 +32196,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR JobManager_tC139532E48436E2DCB0FB
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool RenderData_get_hasExtraMeshes_m5C633F6BAC7B522BB278D8C6BB0C0FEAC9B950BD_inline (RenderData_t1ABE116B2B5E0409AC699E195922516606531DC2* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:200>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Renderer/UIRRenderData.cs:198>
 		int32_t L_0 = __this->___flags;
 		return (bool)((((int32_t)((int32_t)((int32_t)L_0&8))) == ((int32_t)8))? 1 : 0);
 	}
 }
-// Method Definition Index: 6854
+// Method Definition Index: 6853
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* VisualElement_get_elementPanel_m4B4A37001D55527E4D015E6C6132607071F32B01_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -32483,7 +32219,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool BaseVisualElementPanel_get_i
 		return L_0;
 	}
 }
-// Method Definition Index: 8068
+// Method Definition Index: 8067
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Scale_get_value_m27CE2F2A3DD1A14DE72EE744A3817BFE3D3DDD96_inline (Scale_t5594C69C1AC9398B57ABF6C4FA0D4E791B7A4DC7* __this, const RuntimeMethod* method) 
 {
 	{
@@ -32492,7 +32228,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 21091
+// Method Definition Index: 21095
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t1B1546AEB20D09E65A620651F8A4C68DD5998882 Enumerator_get_Current_m183D834DF472177579F599B1EE9EE341B0B8437B_gshared_inline (Enumerator_t3BE76F0412338F49CEA699BA1E4828A0D4C42077* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32501,7 +32237,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t1B1546AEB20D09E65A
 		return L_0;
 	}
 }
-// Method Definition Index: 21091
+// Method Definition Index: 21095
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t1108006793B0D86DFCF2E4481CD5E5E32AFF591B Enumerator_get_Current_mD90728A8D7833B6395B54E9954D6E79F201143F2_gshared_inline (Enumerator_t494BE5891CF52A8687B9709B12DFDF874B02FA11* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32510,7 +32246,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t1108006793B0D86DFC
 		return L_0;
 	}
 }
-// Method Definition Index: 21091
+// Method Definition Index: 21095
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t84638F9F5F454538786C27E8F639E0B602DB00D0 Enumerator_get_Current_m303B92F0A48F04E5434B0F2EA762553526790505_gshared_inline (Enumerator_t39BB773541BA4FCA4805CCAF51EED102C0120993* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32519,7 +32255,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR NativeSlice_1_t84638F9F5F45453878
 		return L_0;
 	}
 }
-// Method Definition Index: 21117
+// Method Definition Index: 21121
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m0C22CA69FAA76A44B8107DCD23A3DD3327E63C3C_gshared_inline (Queue_1_t75840AD230E9D2498F813412770B56A17D0281F1* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32528,7 +32264,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m0C22CA
 		return L_0;
 	}
 }
-// Method Definition Index: 21117
+// Method Definition Index: 21121
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m82A01ECF2E58E85CB036CC8A5003977C294922A9_gshared_inline (Queue_1_t9F41BF6CFC5D32AA799C92FDAE83FEBE7D98DAC9* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32537,7 +32273,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m82A01E
 		return L_0;
 	}
 }
-// Method Definition Index: 21042
+// Method Definition Index: 21046
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mEBCF994CC3814631017F46A387B1A192ED6C85C7_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32576,7 +32312,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21032
+// Method Definition Index: 21036
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C389F22B8CEC282C15D56516658746C383_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32585,7 +32321,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C
 		return L_0;
 	}
 }
-// Method Definition Index: 21042
+// Method Definition Index: 21046
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m2F86E252D086E288E02FA1C830B7E86C0A431E51_gshared_inline (List_1_t0D1C46FD8DDDE974D93CA4F3474EEC05AF950918* __this, float ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32624,7 +32360,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21050
+// Method Definition Index: 21054
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m16C1F2C61FED5955F10EB36BC1CB2DF34B128994_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32655,7 +32391,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21050
+// Method Definition Index: 21054
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m6CD2E5AAE6552A27AECCC57936767B4DCFC902B1_gshared_inline (List_1_t0D1C46FD8DDDE974D93CA4F3474EEC05AF950918* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32676,7 +32412,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21032
+// Method Definition Index: 21036
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mB4C8661C7E70F309ECC6D0581BD0EF188E39E69E_gshared_inline (List_1_t3511E79D0F3D52BB0D400A24E9972D864D8538D0* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32685,7 +32421,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mB4C8661
 		return L_0;
 	}
 }
-// Method Definition Index: 21042
+// Method Definition Index: 21046
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m51C9700CB21B12FCB606903C4833A212657432D1_gshared_inline (List_1_tC96558A2A77DD595C724D43BFE409C769AB0FA1E* __this, TessellationJobParameters_tA2407D5C15761590BDD217DDE4861964544E8CE2 ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32724,7 +32460,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21050
+// Method Definition Index: 21054
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m2CAFD6153821D90DC96BF829AE0049333833CC2B_gshared_inline (List_1_t0325EC485D0C783FC73CF8D1F8C84A6628937599* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32745,7 +32481,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21042
+// Method Definition Index: 21046
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m827AC524602A7884AD21944403F522E35F38F2C4_gshared_inline (List_1_t0325EC485D0C783FC73CF8D1F8C84A6628937599* __this, RepeatRectUV_tD14FA437CD80FC82B2ED78B34A201F3C91416A7C ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32784,7 +32520,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21032
+// Method Definition Index: 21036
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m94BC9F2C38CB5F118EBB447E37E6EF67FD3032D1_gshared_inline (List_1_t0325EC485D0C783FC73CF8D1F8C84A6628937599* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32793,7 +32529,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m94BC9F2
 		return L_0;
 	}
 }
-// Method Definition Index: 21091
+// Method Definition Index: 21095
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RepeatRectUV_tD14FA437CD80FC82B2ED78B34A201F3C91416A7C Enumerator_get_Current_mBBBCDD3325D12B626C5855086A255F855933B27D_gshared_inline (Enumerator_t19FD574FED1A42A647A84C93FD57BE2E72B5CC75* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32802,7 +32538,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RepeatRectUV_tD14FA437CD80FC82B2E
 		return L_0;
 	}
 }
-// Method Definition Index: 21032
+// Method Definition Index: 21036
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m2E1003C676B5AB0695322C1ECE5F339AA9D36747_gshared_inline (List_1_tC96558A2A77DD595C724D43BFE409C769AB0FA1E* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32811,7 +32547,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m2E1003C
 		return L_0;
 	}
 }
-// Method Definition Index: 21050
+// Method Definition Index: 21054
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m3F7B11E6A85BED162489F599ECC359D0FD050BD2_gshared_inline (List_1_tC96558A2A77DD595C724D43BFE409C769AB0FA1E* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32832,7 +32568,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 35218
+// Method Definition Index: 35226
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, float ___0_r, float ___1_g, float ___2_b, float ___3_a, const RuntimeMethod* method) 
 {
 	{
@@ -32852,7 +32588,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9C
 		return;
 	}
 }
-// Method Definition Index: 35538
+// Method Definition Index: 35546
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Equality_m6F2E069A50E787D131261E5CB25FC9E03F95B5E1_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -32887,7 +32623,7 @@ IL_002e:
 		return L_12;
 	}
 }
-// Method Definition Index: 35371
+// Method Definition Index: 35379
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_Normalize_m1DE89849FE2019B6AA0031306896F3B800849399_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -32954,7 +32690,7 @@ IL_0050:
 		return L_14;
 	}
 }
-// Method Definition Index: 33986
+// Method Definition Index: 33996
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_xMin_mA873FCFAF9EABA46A026B73CA045192DF1946F19_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -32981,7 +32717,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_xMin_mA873FCFAF9EAB
 		return;
 	}
 }
-// Method Definition Index: 33988
+// Method Definition Index: 33998
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_yMin_m9F780E509B9215A9E5826178CF664BD0E486D4EE_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -33008,7 +32744,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_yMin_m9F780E509B921
 		return;
 	}
 }
-// Method Definition Index: 33990
+// Method Definition Index: 34000
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_xMax_m97C28D468455A6D19325D0D862E80A093240D49D_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -33019,7 +32755,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_xMax_m97C28D468455A
 		return;
 	}
 }
-// Method Definition Index: 33992
+// Method Definition Index: 34002
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_yMax_mCF452040E0068A4B3CB15994C0B4B6AD4D78E04B_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -33047,18 +32783,31 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR MeshGenerationNodeImpl_t059B9D420
 		return ((MeshGenerationNodeImpl_t059B9D42007B495B8C11038C0CFFB63DFB0DC81E*)CastclassClass((RuntimeObject*)L_1, MeshGenerationNodeImpl_t059B9D42007B495B8C11038C0CFFB63DFB0DC81E_il2cpp_TypeInfo_var));
 	}
 }
-// Method Definition Index: 18551
-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GCHandle_get_IsAllocated_m241908103D8D867E11CCAB73C918729825E86843_inline (GCHandle_tC44F6F72EE68BD4CFABA24309DA7A179D41127DC* __this, const RuntimeMethod* method) 
+// Method Definition Index: 18558
+IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GCHandle_ThrowIfInvalid_m8BD7E31B383F657BB7B2512567A8296CFC16C931_inline (intptr_t ___0_handle, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	{
-		intptr_t L_0 = __this->___handle;
+		intptr_t L_0 = ___0_handle;
 		bool L_1;
-		L_1 = IntPtr_op_Inequality_m90EFC9C4CAD9A33E309F2DDF98EE4E1DD253637B_inline(L_0, 0, NULL);
-		return L_1;
+		L_1 = IntPtr_op_Equality_m7D9CDCDE9DC2A0C2C614633F4921E90187FAB271_inline(L_0, 0, NULL);
+		if (!L_1)
+		{
+			goto IL_0018;
+		}
+	}
+	{
+		InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB* L_2 = (InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB*)il2cpp_codegen_object_new(((RuntimeClass*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&InvalidOperationException_t5DDE4D49B7405FAAB1E4576F4715A42A3FAD4BAB_il2cpp_TypeInfo_var)));
+		InvalidOperationException__ctor_mE4CB6F4712AB6D99A2358FBAE2E052B3EE976162(L_2, ((String_t*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&_stringLiteralFD093BF647113E1F68097589713DF034331718B2)), NULL);
+		IL2CPP_RAISE_MANAGED_EXCEPTION(L_2, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&GCHandle_ThrowIfInvalid_m8BD7E31B383F657BB7B2512567A8296CFC16C931_RuntimeMethod_var)));
+	}
+
+IL_0018:
+	{
+		return;
 	}
 }
-// Method Definition Index: 18554
+// Method Definition Index: 18557
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GCHandle_CanDereferenceHandle_mAAAC42D1268CEF3FDD040A3D1574773D08140579_inline (intptr_t ___0_handle, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -33067,7 +32816,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool GCHandle_CanDereferenceHandl
 		return (bool)((((intptr_t)((intptr_t)(L_0&((intptr_t)1)))) == ((intptr_t)((intptr_t)0)))? 1 : 0);
 	}
 }
-// Method Definition Index: 18552
+// Method Definition Index: 18555
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* GCHandle_GetRef_mAC7E58E62417209DC41C99F66BA70F0C3AA18DA8_inline (intptr_t ___0_handle, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -33081,13 +32830,13 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* GCHandle_GetRef_mA
 		return L_3;
 	}
 }
-// Method Definition Index: 6701
+// Method Definition Index: 6699
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 VisualElement_get_layoutSize_m9BD5E3873E98B8D66582571A7F62F890FE970F70_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
 	memset((&V_0), 0, sizeof(V_0));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1393>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1395>
 		LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* L_0;
 		L_0 = VisualElement_get_layoutNode_mDEB89DEE452812FE70D90C54203C03DC216A66CB(__this, NULL);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_1;
@@ -33098,12 +32847,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 
 IL_000f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1394>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1396>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2 = V_0;
 		return L_2;
 	}
 }
-// Method Definition Index: 35381
+// Method Definition Index: 35389
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -33126,7 +32875,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6
 		return ((float)L_6);
 	}
 }
-// Method Definition Index: 11238
+// Method Definition Index: 11241
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 LayoutNode_GetLayoutSize_m9DD2A25D8C470FF99CF5CD4072986F190E5DDFF6_inline (LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* __this, const RuntimeMethod* method) 
 {
 	LayoutComputedData_t37CD62B9A6B59283679F1126AD9C4BB9FD15B9C1 V_0;

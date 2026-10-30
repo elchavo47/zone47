@@ -1,0 +1,2104 @@
+{
+ "items": [
+  {
+   "id": "M00",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.65,
+    0.63,
+    0.55,
+    1.0
+   ],
+   "smooth": 0.2,
+   "metal": 0.01,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M01",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.12,
+    0.22,
+    0.25,
+    1.0
+   ],
+   "smooth": 0.28,
+   "metal": 0.02,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M02",
+   "base": "damaged_plaster_diff_base",
+   "normal": "damaged_plaster_normal_normal",
+   "mask": "M02_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M03",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.45,
+    0.24,
+    0.1,
+    1.0
+   ],
+   "smooth": 0.28,
+   "metal": 0.02,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M04",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.065,
+    0.08,
+    0.08,
+    1.0
+   ],
+   "smooth": 0.58,
+   "metal": 0.18,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M05",
+   "base": "concrete_debris_diff_base",
+   "normal": "concrete_debris_normal_normal",
+   "mask": "M05_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M06",
+   "base": "concrete_floor_worn_02_diff_base",
+   "normal": "concrete_floor_worn_02_normal_normal",
+   "mask": "M06_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M07",
+   "base": "metal_plate_diff_base",
+   "normal": "metal_plate_normal_normal",
+   "mask": "M07_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M08",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.07,
+    0.075,
+    0.065,
+    1.0
+   ],
+   "smooth": 0.72,
+   "metal": 0.15,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M09",
+   "base": "asphalt_02_diff_base",
+   "normal": "asphalt_02_normal_normal",
+   "mask": "M09_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M10",
+   "base": "sandbag_canvas_diff_base",
+   "normal": "denim_fabric_normal_normal",
+   "mask": "M10_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M11",
+   "base": "020_Facade_cool_grey_diffuse_001_base",
+   "normal": "damaged_plaster_normal_normal",
+   "mask": "M11_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M12",
+   "base": "022_Facade_dust_brown_diffuse_001_base",
+   "normal": "damaged_plaster_normal_normal",
+   "mask": "M12_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M13",
+   "base": "024_Facade_faded_limestone_diffuse_001_base",
+   "normal": "damaged_plaster_normal_normal",
+   "mask": "M13_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M14",
+   "base": "faded_canvas_diff_base",
+   "normal": "denim_fabric_normal_normal",
+   "mask": "M14_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M15",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.55,
+    0.37,
+    0.08,
+    1.0
+   ],
+   "smooth": 0.3,
+   "metal": 0.15,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M16",
+   "base": "olive_military_metal_diff_base",
+   "normal": "rusty_painted_metal_normal_normal",
+   "mask": "M16_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M17",
+   "base": "rusty_painted_metal_diff_base",
+   "normal": "rusty_painted_metal_normal_normal",
+   "mask": "M17_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M18",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.43,
+    0.55,
+    0.61,
+    1.0
+   ],
+   "smooth": 0.45,
+   "metal": 0.05,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M19",
+   "base": "031_Image_1_base",
+   "normal": "Image_2_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M20",
+   "base": "115_Image_3_base",
+   "normal": "Image_4_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M21",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.034,
+    0.03,
+    0.025,
+    1.0
+   ],
+   "smooth": 0.05,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M22",
+   "base": "125_Image_5_base",
+   "normal": "Image_6_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.06,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M23",
+   "base": "125_Image_5_base",
+   "normal": "Image_6_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M24",
+   "base": "",
+   "normal": "Image_8_normal",
+   "mask": "",
+   "color": [
+    0.034,
+    0.03,
+    0.025,
+    1.0
+   ],
+   "smooth": 0.05,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M25",
+   "base": "044_Image_12_base",
+   "normal": "Image_13_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M26",
+   "base": "054_Image_14_base",
+   "normal": "Image_15_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M27",
+   "base": "064_Image_16_base",
+   "normal": "Image_17_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.14,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M28",
+   "base": "126_Image_5_001_base",
+   "normal": "Image_6_001_normal",
+   "mask": "M28_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M29",
+   "base": "127_Image_5_002_base",
+   "normal": "Image_6_001_normal",
+   "mask": "M29_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M30",
+   "base": "128_Image_5_003_base",
+   "normal": "Image_6_001_normal",
+   "mask": "M30_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M31",
+   "base": "129_Image_5_004_base",
+   "normal": "Image_6_001_normal",
+   "mask": "M31_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M32",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.7,
+    0.39,
+    0.23,
+    1.0
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.336,
+    0.187,
+    0.11,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M33",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    1.0,
+    0.72,
+    0.26,
+    1.0
+   ],
+   "smooth": 0.74,
+   "metal": 0.0,
+   "emission": [
+    1,
+    1,
+    0.832,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M34",
+   "base": "",
+   "normal": "Image_0_normal",
+   "mask": "",
+   "color": [
+    0.071,
+    0.079,
+    0.078,
+    1.0
+   ],
+   "smooth": 0.09,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M35",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.72,
+    0.73,
+    0.69,
+    1.0
+   ],
+   "smooth": 0.04,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M36",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.19,
+    0.175,
+    0.15,
+    1.0
+   ],
+   "smooth": 0.04,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M37",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.86,
+    0.9,
+    0.91,
+    1.0
+   ],
+   "smooth": 0.88,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": true
+  },
+  {
+   "id": "M38",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.93,
+    0.86,
+    0.73,
+    1.0
+   ],
+   "smooth": 0.87,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": true
+  },
+  {
+   "id": "M39",
+   "base": "136_Image_7_001_base",
+   "normal": "Image_8_001_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M40",
+   "base": "145_Image_9_001_base",
+   "normal": "Image_10_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M41",
+   "base": "137_Image_7_002_base",
+   "normal": "Image_8_001_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M42",
+   "base": "146_Image_9_002_base",
+   "normal": "Image_10_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M43",
+   "base": "138_Image_7_003_base",
+   "normal": "Image_8_001_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M44",
+   "base": "147_Image_9_003_base",
+   "normal": "Image_10_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M45",
+   "base": "139_Image_7_004_base",
+   "normal": "Image_8_001_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M46",
+   "base": "148_Image_9_004_base",
+   "normal": "Image_10_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M47",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.105,
+    0.125,
+    0.12,
+    1.0
+   ],
+   "smooth": 0.51,
+   "metal": 0.72,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M48",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.047,
+    0.052,
+    0.046,
+    1.0
+   ],
+   "smooth": 0.6,
+   "metal": 0.48,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M49",
+   "base": "",
+   "normal": "Image_7_normal",
+   "mask": "",
+   "color": [
+    0.43,
+    0.47,
+    0.475,
+    1.0
+   ],
+   "smooth": 0.41,
+   "metal": 0.76,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M50",
+   "base": "",
+   "normal": "Image_7_normal",
+   "mask": "",
+   "color": [
+    0.105,
+    0.125,
+    0.12,
+    1.0
+   ],
+   "smooth": 0.51,
+   "metal": 0.72,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M51",
+   "base": "",
+   "normal": "Image_8_normal",
+   "mask": "",
+   "color": [
+    0.43,
+    0.47,
+    0.475,
+    1.0
+   ],
+   "smooth": 0.41,
+   "metal": 0.76,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M52",
+   "base": "",
+   "normal": "Image_8_normal",
+   "mask": "",
+   "color": [
+    0.105,
+    0.125,
+    0.12,
+    1.0
+   ],
+   "smooth": 0.51,
+   "metal": 0.72,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M53",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.34,
+    0.325,
+    0.205,
+    1.0
+   ],
+   "smooth": 0.5,
+   "metal": 0.67,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M54",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.4,
+    0.3,
+    0.15,
+    1.0
+   ],
+   "smooth": 0.65,
+   "metal": 0.7,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M55",
+   "base": "",
+   "normal": "Image_1_normal",
+   "mask": "M55_mask",
+   "color": [
+    0.231,
+    0.25,
+    0.223,
+    1.0
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M56",
+   "base": "",
+   "normal": "Image_3_normal",
+   "mask": "M56_mask",
+   "color": [
+    0.231,
+    0.25,
+    0.223,
+    1.0
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M57",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.091,
+    0.107,
+    0.125,
+    1.0
+   ],
+   "smooth": 0.76,
+   "metal": 1.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M58",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.48,
+    0.505,
+    0.48,
+    1.0
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M59",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.3,
+    0.325,
+    0.31,
+    1.0
+   ],
+   "smooth": 0.22,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M60",
+   "base": "125_Image_5_base",
+   "normal": "Image_6_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M61",
+   "base": "",
+   "normal": "Image_8_normal",
+   "mask": "",
+   "color": [
+    0.48,
+    0.505,
+    0.48,
+    1.0
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M62",
+   "base": "044_Image_12_base",
+   "normal": "Image_13_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M63",
+   "base": "054_Image_14_base",
+   "normal": "Image_15_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M64",
+   "base": "054_Image_14_base",
+   "normal": "Image_15_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.22,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M65",
+   "base": "064_Image_16_base",
+   "normal": "Image_17_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.24,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M66",
+   "base": "040_Image_11_001_base",
+   "normal": "Image_12_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M67",
+   "base": "050_Image_13_001_base",
+   "normal": "Image_14_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M68",
+   "base": "060_Image_15_001_base",
+   "normal": "Image_16_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M69",
+   "base": "070_Image_17_001_base",
+   "normal": "Image_18_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M70",
+   "base": "078_Image_19_base",
+   "normal": "Image_20_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M71",
+   "base": "091_Image_21_base",
+   "normal": "Image_22_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M72",
+   "base": "099_Image_23_base",
+   "normal": "Image_24_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M73",
+   "base": "107_Image_25_base",
+   "normal": "Image_26_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M74",
+   "base": "041_Image_11_002_base",
+   "normal": "Image_12_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M75",
+   "base": "051_Image_13_002_base",
+   "normal": "Image_14_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M76",
+   "base": "061_Image_15_002_base",
+   "normal": "Image_16_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M77",
+   "base": "071_Image_17_002_base",
+   "normal": "Image_18_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M78",
+   "base": "079_Image_19_001_base",
+   "normal": "Image_20_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M79",
+   "base": "092_Image_21_001_base",
+   "normal": "Image_22_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M80",
+   "base": "100_Image_23_001_base",
+   "normal": "Image_24_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M81",
+   "base": "108_Image_25_001_base",
+   "normal": "Image_26_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M82",
+   "base": "042_Image_11_003_base",
+   "normal": "Image_12_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M83",
+   "base": "052_Image_13_003_base",
+   "normal": "Image_14_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M84",
+   "base": "062_Image_15_003_base",
+   "normal": "Image_16_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M85",
+   "base": "072_Image_17_003_base",
+   "normal": "Image_18_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M86",
+   "base": "080_Image_19_002_base",
+   "normal": "Image_20_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M87",
+   "base": "093_Image_21_002_base",
+   "normal": "Image_22_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M88",
+   "base": "101_Image_23_002_base",
+   "normal": "Image_24_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M89",
+   "base": "109_Image_25_002_base",
+   "normal": "Image_26_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M90",
+   "base": "043_Image_11_004_base",
+   "normal": "Image_12_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M91",
+   "base": "053_Image_13_004_base",
+   "normal": "Image_14_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M92",
+   "base": "063_Image_15_004_base",
+   "normal": "Image_16_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M93",
+   "base": "073_Image_17_004_base",
+   "normal": "Image_18_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M94",
+   "base": "081_Image_19_003_base",
+   "normal": "Image_20_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M95",
+   "base": "094_Image_21_003_base",
+   "normal": "Image_22_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M96",
+   "base": "102_Image_23_003_base",
+   "normal": "Image_24_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M97",
+   "base": "110_Image_25_003_base",
+   "normal": "Image_26_normal",
+   "mask": "",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.27,
+   "metal": 0.5,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M98",
+   "base": "",
+   "normal": "",
+   "mask": "",
+   "color": [
+    0.045,
+    0.048,
+    0.042,
+    1.0
+   ],
+   "smooth": 0.1,
+   "metal": 0.02,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  },
+  {
+   "id": "M99",
+   "base": "roofing_diff_base",
+   "normal": "concrete_floor_worn_02_normal_normal",
+   "mask": "M99_mask",
+   "color": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "smooth": 0.4,
+   "metal": 0.0,
+   "emission": [
+    0.0,
+    0.0,
+    0.0,
+    1
+   ],
+   "transparent": false
+  }
+ ]
+}

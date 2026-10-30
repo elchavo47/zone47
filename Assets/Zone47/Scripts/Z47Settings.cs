@@ -260,7 +260,14 @@ namespace Zone47
                     var k = UIK.Img(img.transform, "knob", new Color(1, 1, 1, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
                     k.sprite = Gfx.Circle; k.rectTransform.anchorMin = new Vector2(0.29f, 0.29f); k.rectTransform.anchorMax = new Vector2(0.71f, 0.71f);
                 }
-                UIK.Txt(img.transform, "t", L.S(it.label), 24, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                var ict = HUD.IconFor(it.id);
+                if (ict != null)
+                {
+                    var ic = UIK.Rect(img.transform, "icon", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+                    ic.anchorMin = new Vector2(0.2f, 0.2f); ic.anchorMax = new Vector2(0.8f, 0.8f);
+                    var ri = ic.gameObject.AddComponent<RawImage>(); ri.texture = ict; ri.color = Pal.Text; ri.raycastTarget = false;
+                }
+                else UIK.Txt(img.transform, "t", L.S(it.label), 24, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
                 var w = new W { it = it, img = img, ring = ring, rt = img.rectTransform };
                 ws.Add(w);
                 var tp = img.gameObject.AddComponent<TouchPad>();

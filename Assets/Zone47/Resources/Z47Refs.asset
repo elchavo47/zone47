@@ -137,6 +137,11 @@ MonoBehaviour:
   mapPrefab: {fileID: 6743131410289090053, guid: 333594f531904fd4fa1e60e336c4bbfd, type: 3}
   lobbyPrefab: {fileID: 8207347781303785254, guid: 30b0197c67de88b4788eef7fe07a46b7, type: 3}
   portPrefab: {fileID: 7107208720967827850, guid: fe8e152021e3c28429a3205269320f00, type: 3}
+  cityPrefab: {fileID: 6861940593190764780, guid: 0bf466dfd57300348aa0eebf3667e40a, type: 3}
+  mapThumbs:
+  - {fileID: 2800000, guid: 7594631fb20407d4f800aabc86aa1ff0, type: 3}
+  - {fileID: 2800000, guid: bf98bd60d0a03ae4f8b899c70b5bc4d0, type: 3}
+  - {fileID: 2800000, guid: df4e4ad80ab7f7e42934c824fa8480e5, type: 3}
   lobbySkyMat: {fileID: 2100000, guid: edd80e5047b5a534c8a01d1df8615c8d, type: 2}
   rainMat: {fileID: 2100000, guid: 9e56521ec01336f42a2829701aab639e, type: 2}
   skybox: {fileID: 2100000, guid: 0ec8709e5f6bf8143bc23a6f78a45624, type: 2}
@@ -154,6 +159,14 @@ MonoBehaviour:
   bodyFont: {fileID: 12800000, guid: bd0b04e8227664d43a0b4d130bedcf25, type: 3}
   logo: {fileID: 2800000, guid: 54d3def74527aa645b858dc466f17e06, type: 3}
   lobbyLogo: {fileID: 2800000, guid: 73a4e52021d89d0428c58c789d2998c5, type: 3}
+  icFire: {fileID: 2800000, guid: 7d0c4c788a5fbde49a0203db88d73827, type: 3}
+  icAim: {fileID: 2800000, guid: 9db02481fcc5cb14d85710d4fa2fcbe5, type: 3}
+  icReload: {fileID: 2800000, guid: 6f56840c3899de54698ce3e6bddce0d6, type: 3}
+  icGrenade: {fileID: 2800000, guid: 6420c7a99eda9f4438a7af29a2cdf1b3, type: 3}
+  icCrouch: {fileID: 2800000, guid: 677babc57a4a7864eaf7a1f3e609a026, type: 3}
+  icJump: {fileID: 2800000, guid: 693eea1faaf52e0418241574105a21a6, type: 3}
+  icHeadshot: {fileID: 2800000, guid: 79b28d18a9cfb9f48aed0da2b7b4f5c4, type: 3}
+  icPause: {fileID: 2800000, guid: 7caaad4ba2b4c0a42b72de6ee9ba00c2, type: 3}
   reload: {fileID: 8300000, guid: 1d763b7d005d79142bcc36c77f67ed93, type: 3}
   dryFire: {fileID: 8300000, guid: 5754fe791dcacfb44b7af13eba066285, type: 3}
   explosion: {fileID: 8300000, guid: 988ec540f5c7f744d94f58e6aec6d7ce, type: 3}

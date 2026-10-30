@@ -370,6 +370,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_Unity_Jobs_JobHandle_CombineDependenciesInternal2_Injected();
 		Register_Unity_Jobs_JobHandle_CombineDependenciesInternal2_Injected();
 
+		//System.Void Unity.Jobs.JobHandle::CombineDependenciesInternal3_Injected(Unity.Jobs.JobHandle&,Unity.Jobs.JobHandle&,Unity.Jobs.JobHandle&,Unity.Jobs.JobHandle&)
+		void Register_Unity_Jobs_JobHandle_CombineDependenciesInternal3_Injected();
+		Register_Unity_Jobs_JobHandle_CombineDependenciesInternal3_Injected();
+
 		//System.Void Unity.Jobs.JobHandle::CombineDependenciesInternalPtr_Injected(System.Void*,System.Int32,Unity.Jobs.JobHandle&)
 		void Register_Unity_Jobs_JobHandle_CombineDependenciesInternalPtr_Injected();
 		Register_Unity_Jobs_JobHandle_CombineDependenciesInternalPtr_Injected();
@@ -4134,9 +4138,9 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_ParticleSystem_EmitOld_Internal_Injected();
 		Register_UnityEngine_ParticleSystem_EmitOld_Internal_Injected();
 
-		//System.Void UnityEngine.ParticleSystem::Emit_Injected(System.IntPtr,UnityEngine.ParticleSystem/EmitParams&,System.Int32)
-		void Register_UnityEngine_ParticleSystem_Emit_Injected();
-		Register_UnityEngine_ParticleSystem_Emit_Injected();
+		//System.Void UnityEngine.ParticleSystem::EmitWithParams_Internal_Injected(System.IntPtr,UnityEngine.ParticleSystem/EmitParams&,System.Int32)
+		void Register_UnityEngine_ParticleSystem_EmitWithParams_Internal_Injected();
+		Register_UnityEngine_ParticleSystem_EmitWithParams_Internal_Injected();
 
 		//System.Void UnityEngine.ParticleSystem::Emit_Internal_Injected(System.IntPtr,System.Int32)
 		void Register_UnityEngine_ParticleSystem_Emit_Internal_Injected();

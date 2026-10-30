@@ -370,11 +370,34 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ touch controls
+        public static Texture2D IconFor(string id)
+        {
+            var R = Z47Refs.I;
+            switch (id)
+            {
+                case "fire": case "fire2": return R.icFire;
+                case "aim": return R.icAim;
+                case "reload": return R.icReload;
+                case "grenade": return R.icGrenade;
+                case "crouch": return R.icCrouch;
+                case "jump": return R.icJump;
+                default: return null;
+            }
+        }
+
         void BuildPauseButton()
         {
             var pb = UIK.Img(root, "pause", new Color(0.03f, 0.035f, 0.03f, 0.7f), new Vector2(1, 1), new Vector2(1, 1), new Vector2(-(24 + RadarR * 2 + 12), -24), new Vector2(64, 64), true);
-            UIK.Img(pb.transform, "a", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-8, 0), new Vector2(7, 24));
-            UIK.Img(pb.transform, "b", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(8, 0), new Vector2(7, 24));
+            if (Z47Refs.I.icPause != null)
+            {
+                var pi = UIK.Rect(pb.transform, "icon", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34)).gameObject.AddComponent<RawImage>();
+                pi.texture = Z47Refs.I.icPause; pi.color = Pal.Text; pi.raycastTarget = false;
+            }
+            else
+            {
+                UIK.Img(pb.transform, "a", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-8, 0), new Vector2(7, 24));
+                UIK.Img(pb.transform, "b", Pal.Text, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(8, 0), new Vector2(7, 24));
+            }
             UIK.Img(pb.transform, "line", Pal.Accent, new Vector2(0, 0), new Vector2(1, 0), Vector2.zero, new Vector2(0, 3));
             var b = pb.gameObject.AddComponent<Button>(); b.onClick.AddListener(() => { Sfx.UI(); TogglePause(); });
         }
@@ -437,11 +460,21 @@ namespace Zone47
         {
             string label = L.S(it.label); float size = it.size;
             Vector2 anchor = HudLayout.Anchor(it);
-            var img = UIK.Img(controls, it.id, fill ? new Color(c.r, c.g, c.b, 0.55f) : new Color(0, 0, 0, 0.35f), anchor, anchor, it.pos, new Vector2(size, size), true);
+            var img = UIK.Img(controls, it.id, fill ? new Color(c.r, c.g, c.b, 0.55f) : new Color(0, 0, 0, 0.45f), anchor, anchor, it.pos, new Vector2(size, size), true);
             img.rectTransform.pivot = new Vector2(0.5f, 0.5f); img.rectTransform.anchoredPosition = it.pos;
             img.sprite = Gfx.Circle;
             var ring = UIK.Img(img.transform, "ring", new Color(c.r, c.g, c.b, 0.85f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); ring.sprite = Gfx.Ring;
-            UIK.Txt(img.transform, "t", label, Mathf.RoundToInt(size * 0.2f), fill ? Color.white : Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            var icon = IconFor(it.id);
+            if (icon != null)
+            {
+                // icon instead of a word (like PUBG / CODM); slight drop shadow keeps it readable on bright sand
+                float isz = size * (it.id == "fire" || it.id == "fire2" ? 0.55f : 0.6f);
+                var sh = UIK.Rect(img.transform, "ish", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(2, -2), Vector2.one * isz).gameObject.AddComponent<RawImage>();
+                sh.texture = icon; sh.color = new Color(0, 0, 0, 0.45f); sh.raycastTarget = false;
+                var ic = UIK.Rect(img.transform, "icon", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.one * isz).gameObject.AddComponent<RawImage>();
+                ic.texture = icon; ic.color = fill ? Color.white : Pal.Text; ic.raycastTarget = false;
+            }
+            else UIK.Txt(img.transform, "t", label, Mathf.RoundToInt(size * 0.2f), fill ? Color.white : Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             var tp = img.gameObject.AddComponent<TouchPad>();
             if (fire)
             {
@@ -575,10 +608,16 @@ namespace Zone47
         public void KillFeed(Actor killer, Actor victim, bool headshot)
         {
             string kn = killer != null && killer != victim ? Colored(killer) : "";
-            string line = (kn != "" ? kn + "  <color=#B0A890>»</color>  " : "") + Colored(victim) + (headshot ? "  <color=#F29E1F>[" + L.S("headshot") + "]</color>" : "");
+            bool hsIcon = headshot && Z47Refs.I.icHeadshot != null;
+            string line = (kn != "" ? kn + "  <color=#B0A890>»</color>  " : "") + Colored(victim) + (headshot && !hsIcon ? "  <color=#F29E1F>[" + L.S("headshot") + "]</color>" : "");
             var bg = UIK.Img(feed, "k", new Color(0, 0, 0, 0.45f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(380, 30));
             var t = UIK.Txt(bg.transform, "t", line, 19, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(14, 0), new Vector2(-28, 0));
             t.supportRichText = true;
+            if (hsIcon)
+            {
+                var hi = UIK.Rect(bg.transform, "hs", new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-18, 0), new Vector2(24, 24)).gameObject.AddComponent<RawImage>();
+                hi.texture = Z47Refs.I.icHeadshot; hi.color = Pal.Accent; hi.raycastTarget = false;
+            }
             bg.transform.SetAsFirstSibling();
             feedItems.Add((t, Time.time));
             if (feedItems.Count > 5) { Destroy(feedItems[0].t.transform.parent.gameObject); feedItems.RemoveAt(0); }

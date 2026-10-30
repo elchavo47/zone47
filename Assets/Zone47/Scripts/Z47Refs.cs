@@ -49,7 +49,8 @@ namespace Zone47
         [Header("World")]
         public GameObject mapPrefab;
         public GameObject lobbyPrefab;
-        public GameObject portPrefab;
+        public GameObject portPrefab, cityPrefab;
+        public Texture2D[] mapThumbs;
         public Material lobbySkyMat, rainMat;
         public Material skybox;
         public Material crateMat, concreteMat, sandbagMat, barrelMat;
@@ -61,6 +62,7 @@ namespace Zone47
         public Font headFont;
         public Font bodyFont;
         public Texture2D logo, lobbyLogo;
+        public Texture2D icFire, icAim, icReload, icGrenade, icCrouch, icJump, icHeadshot, icPause;
 
         [Header("Audio")]
         public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt, breath, heartbeat, hurt, headshot, equip, bounce, rain;

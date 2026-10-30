@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <functional>
 #include "il2cpp-object-internals.h"
-#include "gc/Allocator.h"
 
 namespace il2cpp
 {

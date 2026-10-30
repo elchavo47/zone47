@@ -42,7 +42,7 @@ namespace Zone47
             var R = Z47Refs.I;
             worldRoot = new GameObject("World").transform;
             worldRoot.SetParent(transform);
-            var map = Instantiate(Settings.Map == 1 && R.portPrefab != null ? R.portPrefab : R.mapPrefab, worldRoot);
+            var map = Instantiate(Settings.Map == 1 && R.portPrefab != null ? R.portPrefab : Settings.Map == 2 && R.cityPrefab != null ? R.cityPrefab : R.mapPrefab, worldRoot);
             map.name = "Map";
             Physics.SyncTransforms();
             yield return null;

@@ -923,6 +923,53 @@ namespace Zone47.EditorTools
             return null;
         }
 
+        [System.Serializable] class CityMat { public string id, base_, normal, mask; public float[] color; public float smooth, metal; public float[] emission; public bool transparent; }
+        [System.Serializable] class CityMats { public CityMat[] items; }
+
+        /// Third map "Savaş Bölgesi": Blender-made city block. Materials come from materials_unity.json
+        /// (one per mesh group M00..M99), textures in Art/Map3/Tex.
+        static GameObject MakeCity()
+        {
+            string path = ROOT + "/Art/Map3/map3.fbx";
+            string jpath = ROOT + "/Art/Map3/materials_unity.json";
+            if (!File.Exists(path) || !File.Exists(jpath)) return null;
+            var mi = (ModelImporter)AssetImporter.GetAtPath(path);
+            mi.animationType = ModelImporterAnimationType.None; mi.importAnimation = false;
+            mi.materialImportMode = ModelImporterMaterialImportMode.None;
+            mi.addCollider = true; mi.isReadable = true;
+            mi.importCameras = false; mi.importLights = false;
+            mi.SaveAndReimport();
+            var data = JsonUtility.FromJson<CityMats>(File.ReadAllText(jpath).Replace("\"base\"", "\"base_\""));
+            var mats = new Dictionary<string, Material>();
+            foreach (var it in data.items)
+            {
+                var m = new Material(Lit);
+                m.SetFloat("_WorkflowMode", 1f);
+                Color c = it.color != null && it.color.Length >= 3 ? new Color(it.color[0], it.color[1], it.color[2], 1f) : Color.white;
+                if (!string.IsNullOrEmpty(it.base_)) { m.SetTexture("_BaseMap", Tex("Art/Map3/Tex/" + it.base_ + ".png")); c = Color.white; }
+                m.SetColor("_BaseColor", c);
+                if (!string.IsNullOrEmpty(it.normal)) { m.SetTexture("_BumpMap", Tex("Art/Map3/Tex/" + it.normal + ".png")); m.EnableKeyword("_NORMALMAP"); m.SetFloat("_BumpScale", 1f); }
+                if (!string.IsNullOrEmpty(it.mask)) { m.SetTexture("_MetallicGlossMap", Tex("Art/Map3/Tex/" + it.mask + ".png")); m.EnableKeyword("_METALLICSPECGLOSSMAP"); m.SetFloat("_Metallic", 1f); m.SetFloat("_Smoothness", 1f); }
+                else { m.SetFloat("_Metallic", it.metal); m.SetFloat("_Smoothness", Mathf.Clamp(it.smooth, 0f, 0.9f)); }
+                if (it.emission != null && it.emission.Length >= 3 && (it.emission[0] + it.emission[1] + it.emission[2]) > 0.01f)
+                { m.EnableKeyword("_EMISSION"); m.SetColor("_EmissionColor", new Color(it.emission[0], it.emission[1], it.emission[2]) * 2f); }
+                if (it.transparent) { m.SetColor("_BaseColor", new Color(0.08f, 0.1f, 0.12f)); m.SetFloat("_Smoothness", 0.9f); }   // broken glazing: dark glossy, opaque (cheap on mobile)
+                mats[it.id] = SaveMat(m, "City_" + it.id);
+            }
+            var map = (GameObject)Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path));
+            map.name = "City_Map";
+            foreach (var r in map.GetComponentsInChildren<MeshRenderer>())
+            {
+                string n = r.gameObject.name; string id = n.Substring(n.LastIndexOf('_') + 1);
+                if (!mats.TryGetValue(id, out var m)) { Debug.LogWarning("[Zone47] sehir: malzeme yok " + n); continue; }
+                r.sharedMaterials = Enumerable.Repeat(m, r.sharedMaterials.Length).ToArray();
+                r.shadowCastingMode = n.StartsWith("Ground") ? ShadowCastingMode.Off : ShadowCastingMode.On;
+                r.receiveShadows = true; r.gameObject.isStatic = true;
+            }
+            Debug.Log("[Zone47] Savas Bolgesi: " + mats.Count + " malzeme");
+            return Prefab(map, "City_Map");
+        }
+
         static GameObject MakeMap(Mats M)
         {
             string path = ROOT + "/Art/Map/TDM_Map.fbx";
@@ -963,6 +1010,8 @@ namespace Zone47.EditorTools
             R.rainMat = FXMat("FX_Rain", Tex("Art/FX/rain.png"), false, new Color(0.82f, 0.86f, 0.9f, 0.32f), true);
             R.rain = Load<AudioClip>("Art/Audio/rain.ogg");
             R.portPrefab = MakePort();
+            R.cityPrefab = MakeCity();
+            R.mapThumbs = new[] { Tex("Art/UI/Maps/map_desert.png"), Tex("Art/UI/Maps/map_port.png"), Tex("Art/UI/Maps/map_city.png") };
             R.skybox = M["sky"];
             R.crateMat = M["crate"]; R.concreteMat = M["concrete"]; R.sandbagMat = M["sandbag"]; R.barrelMat = M["barrel"];
             R.flashMat = M["fx_flash"]; R.smokeMat = M["fx_smoke"]; R.sparkMat = M["fx_spark"]; R.holeMat = M["fx_hole"]; R.tracerMat = M["fx_tracer"]; R.fireMat = M["fx_fire"];
@@ -970,6 +1019,9 @@ namespace Zone47.EditorTools
             R.bodyFont = Load<Font>("Art/UI/Rajdhani.ttf");
             R.logo = Tex("Art/UI/AppIcon.png");
             R.lobbyLogo = Tex("Art/UI/logo_lobby.png");
+            string IC = "Art/UI/Icons/";
+            R.icFire = Tex(IC + "ic_fire.png"); R.icAim = Tex(IC + "ic_aim.png"); R.icReload = Tex(IC + "ic_reload.png"); R.icGrenade = Tex(IC + "ic_grenade.png");
+            R.icCrouch = Tex(IC + "ic_crouch.png"); R.icJump = Tex(IC + "ic_jump.png"); R.icHeadshot = Tex(IC + "ic_headshot.png"); R.icPause = Tex(IC + "ic_pause.png");
             string A = "Art/Audio/";
             R.reload = Load<AudioClip>(A + "reload.wav"); R.dryFire = Load<AudioClip>(A + "dryfire.wav");
             R.explosion = Load<AudioClip>(A + "explosion.wav"); R.impact = Load<AudioClip>(A + "impact.wav");

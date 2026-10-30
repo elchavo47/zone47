@@ -618,7 +618,6 @@ static unsigned GetToolbarHeight()
     // If external keyboard does not exist, these values will be updated by keyboardWillShow
     editView.hidden = YES;
     viewToolbar.hidden = YES;
-    inputView.hidden = YES;
 
 #else // PLATFORM_TVOS
     [self setTextInputTraits: textField withParam: param];
@@ -666,6 +665,7 @@ static unsigned GetToolbarHeight()
 
     // we need to reload input views when switching the keyboard type for already active keyboard
     // otherwise the changed traits may not be immediately applied
+    editView.hidden = self.inputHidden;
     [inputView reloadInputViews];
 }
 
@@ -673,6 +673,13 @@ static unsigned GetToolbarHeight()
 {
     [NSObject cancelPreviousPerformRequestsWithTarget: self];
     [self performSelector: @selector(hideUIDelayed) withObject: nil afterDelay: 0.05]; // to avoid unnecessary hiding
+}
+
+- (BOOL)inputHidden
+{
+    if (self.hasExternalKeyboard)
+        return YES;
+    return _inputHidden;
 }
 
 - (void)hideUIDelayed
@@ -744,7 +751,7 @@ static unsigned GetToolbarHeight()
     UIView* unityView = UnityGetGLView();
     NSMutableArray<UIAccessibilityElement*>* elements = unityView.accessibilityElements ? [unityView.accessibilityElements mutableCopy] : [NSMutableArray array];
 
-    viewToolbar.hidden  = !_multiline || _inputHidden ? YES : NO;
+    viewToolbar.hidden  = !_multiline || self.inputHidden;
 
     [elements removeObject: (UIAccessibilityElement*)viewToolbar];
 
@@ -755,7 +762,7 @@ static unsigned GetToolbarHeight()
 
     [elements removeObject: (UIAccessibilityElement*)fieldToolbar];
 
-    editView.hidden     = _inputHidden ? YES : NO;
+    editView.hidden     = self.inputHidden;
 
     if (!_multiline && !editView.hidden)
     {
@@ -766,11 +773,10 @@ static unsigned GetToolbarHeight()
 
     #else
 
-    editView.hidden     = _inputHidden ? YES : NO;
+    editView.hidden     = self.inputHidden;
 
     #endif
 
-    inputView.hidden    = _inputHidden ? YES : NO;
     [self setTextInputTraits: textField withParam: cachedKeyboardParam];
 }
 
@@ -836,7 +842,7 @@ static unsigned GetToolbarHeight()
     {
         _keyboard->_rotating = NO;
 #if PLATFORM_IOS || PLATFORM_VISIONOS
-        _keyboard->editView.hidden = NO;
+        _keyboard->editView.hidden = _keyboard.inputHidden;
 #endif
     }
 }

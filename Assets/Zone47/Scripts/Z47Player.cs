@@ -267,9 +267,11 @@ namespace Zone47
             var g = UnityEngine.InputSystem.Gyroscope.current;
             if (g == null) return Vector2.zero;
             if (!g.enabled) { InputSystem.EnableDevice(g); g.samplingFrequency = 60f; return Vector2.zero; }
-            Vector3 w = g.angularVelocity.ReadValue();                     // rad/s, device axes
-            Vector2 r = new Vector2(-w.x, -w.y) * Mathf.Rad2Deg * Time.deltaTime;
-            if (Screen.orientation == ScreenOrientation.LandscapeRight) r = -r;
+            // The Input System reports the gyro in screen space (x = screen right, y = screen up, z = out of the screen),
+            // already compensated for landscape. Turning the phone left/right spins it about screen-up (y) -> yaw;
+            // tilting it toward/away from you spins it about screen-right (x) -> pitch.
+            Vector3 w = g.angularVelocity.ReadValue();                     // rad/s
+            Vector2 r = new Vector2(-w.y, w.x) * Mathf.Rad2Deg * Time.deltaTime;
             if (Settings.GyroInvert) r = -r;
             if (r.sqrMagnitude < 0.0004f) return Vector2.zero;               // ignore sensor noise when holding still
             return r * Settings.GyroSens;

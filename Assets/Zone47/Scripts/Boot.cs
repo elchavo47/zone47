@@ -176,37 +176,53 @@ namespace Zone47
             // ---- right: map + squads
             var col = UIK.Rect(root, "info", new Vector2(1, 1), new Vector2(1, 1), new Vector2(-70, -40), new Vector2(560, 980));
             UIK.Txt(col, "mh", L.S("map"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, 0), new Vector2(0, 30), true);
-            // two selectable map cards
-            var cards = new System.Collections.Generic.List<(Image bg, Image bar, Text sel, int id)>();
-            int nMaps = R.portPrefab != null ? 2 : 1;
-            if (Settings.Map >= nMaps) Settings.Map = 0;
-            for (int mi = 0; mi < nMaps; mi++)
+            // map picker: picture cards side by side, selected one framed in orange; its description underneath
+            var prefabs = new GameObject[] { R.mapPrefab, R.portPrefab, R.cityPrefab };
+            var ids = new System.Collections.Generic.List<int>();
+            for (int i = 0; i < prefabs.Length; i++) if (prefabs[i] != null) ids.Add(i);
+            if (!ids.Contains(Settings.Map)) Settings.Map = ids[0];
+            string[] nameKeys = { "mapname", "mapname2", "mapname3" }, infoKeys = { "mapinfo", "mapinfo2", "mapinfo3" };
+            float cw = (560f - (ids.Count - 1) * 10f) / ids.Count, ih = cw * 9f / 16f;
+            var frames = new System.Collections.Generic.List<(Image frame, Image shade, GameObject sel, int id)>();
+            var info = UIK.Txt(col, "minfo", "", 18, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -36 - ih - 62), new Vector2(0, 26), true);
+            System.Action refreshMaps = () =>
             {
-                int id = mi;
-                var card = UIK.Img(col, "card" + mi, new Color(0.05f, 0.055f, 0.05f, 0.82f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -36 - mi * 122), new Vector2(0, 110), true);
-                var bar = UIK.Img(card.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(6, 0)); bar.rectTransform.pivot = new Vector2(0, 0.5f);
-                UIK.Txt(card.transform, "t", L.S(mi == 0 ? "mapname" : "mapname2"), 30, Pal.Text, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(26, -14), new Vector2(-52, -28), true);
-                UIK.Txt(card.transform, "i", L.S(mi == 0 ? "mapinfo" : "mapinfo2"), 17, Pal.Dim, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(26, 14), new Vector2(-52, -28), true);
-                var sel = UIK.Txt(card.transform, "s", L.S("selected"), 16, Pal.Accent, TextAnchor.UpperRight, Vector2.zero, Vector2.one, new Vector2(-18, -14), new Vector2(-36, -28), true);
-                cards.Add((card, bar, sel, id));
-                card.gameObject.AddComponent<Button>().onClick.AddListener(() =>
-                {
-                    Sfx.UI(); Settings.Map = id; PlayerPrefs.Save();
-                    foreach (var c in cards) { bool on = c.id == Settings.Map; c.bar.enabled = on; c.sel.enabled = on; c.bg.color = new Color(0.05f, 0.055f, 0.05f, on ? 0.88f : 0.55f); }
-                });
+                foreach (var f in frames) { bool on = f.id == Settings.Map; f.frame.color = on ? Pal.Accent : new Color(1, 1, 1, 0.12f); f.shade.color = new Color(0, 0, 0, on ? 0f : 0.35f); f.sel.SetActive(on); }
+                info.text = L.S(infoKeys[Settings.Map]);
+            };
+            for (int k = 0; k < ids.Count; k++)
+            {
+                int id = ids[k];
+                float x = k * (cw + 10f);
+                var frame = UIK.Img(col, "map" + id, Pal.Accent, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x, -36), new Vector2(cw, ih + 52), true);
+                frame.rectTransform.pivot = new Vector2(0, 1); frame.rectTransform.anchoredPosition = new Vector2(x, -36);
+                var inner = UIK.Img(frame.transform, "in", new Color(0.05f, 0.055f, 0.05f, 0.95f), Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-6, -6));
+                var pic = UIK.Rect(inner.transform, "pic", new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, ih));
+                pic.pivot = new Vector2(0.5f, 1); pic.anchoredPosition = Vector2.zero;
+                var ri = pic.gameObject.AddComponent<RawImage>(); ri.raycastTarget = false;
+                if (R.mapThumbs != null && id < R.mapThumbs.Length && R.mapThumbs[id] != null) ri.texture = R.mapThumbs[id]; else ri.color = new Color(0.2f, 0.2f, 0.2f);
+                var shade = UIK.Img(pic, "shade", new Color(0, 0, 0, 0.35f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+                var nm = UIK.Txt(inner.transform, "n", L.S(nameKeys[id]), 17, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0), new Vector2(1, 0), new Vector2(10, 23), new Vector2(-20, 40), true);
+                nm.horizontalOverflow = HorizontalWrapMode.Wrap;
+                var selTag = UIK.Img(pic, "sel", Pal.Accent, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-6, -6), new Vector2(86, 24));
+                selTag.rectTransform.pivot = new Vector2(1, 1); selTag.rectTransform.anchoredPosition = new Vector2(-6, -6);
+                UIK.Txt(selTag.transform, "t", L.S("selected"), 14, new Color(0.08f, 0.06f, 0.03f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                frames.Add((frame, shade, selTag.gameObject, id));
+                frame.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); Settings.Map = id; PlayerPrefs.Save(); refreshMaps(); });
             }
-            foreach (var c in cards) { bool on = c.id == Settings.Map; c.bar.enabled = on; c.sel.enabled = on; c.bg.color = new Color(0.05f, 0.055f, 0.05f, on ? 0.88f : 0.55f); }
+            refreshMaps();
+            float sqY = -36 - ih - 100;
 
-            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -290), new Vector2(0, 30), true);
+            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, sqY), new Vector2(0, 30), true);
             for (int t = 0; t < 2; t++)
             {
                 var c = t == 0 ? Pal.Ally : Pal.Enemy;
                 float x0 = t == 0 ? 0 : 290;
-                UIK.Txt(col, "th" + t, L.S(t == 0 ? "allies" : "enemies"), 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, -330), new Vector2(270, 32), true);
+                UIK.Txt(col, "th" + t, L.S(t == 0 ? "allies" : "enemies"), 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 40), new Vector2(270, 32), true);
                 for (int i = 0; i < 5; i++)
                 {
                     string n = t == 0 ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[(i - 1) % MatchManager.AllyNames.Length]) : MatchManager.EnemyNames[i % MatchManager.EnemyNames.Length];
-                    var row = UIK.Img(col, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, -370 - i * 46), new Vector2(270, 40));
+                    var row = UIK.Img(col, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 80 - i * 46), new Vector2(270, 40));
                     UIK.Img(row.transform, "s", c, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
                     var tx = UIK.Txt(row.transform, "n", n, 22, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-24, 0), false);
                     tx.fontStyle = FontStyle.Bold;
@@ -397,11 +413,13 @@ namespace Zone47
             "\"Grenade\" by DJMaesen — CC BY 4.0 (skfb.ly/6AnKC)\n" +
             "\"fps arms\" by DJMaesen — CC BY 4.0 (skfb.ly/6R6yX)\n" +
             "\"Liman / Port\" map, textures & procedural audio: AYD Works Games\n" +
+            "\"Savas Bolgesi\" map: AYD Works Games · textures: Poly Haven (CC0)\n" +
             "\"Conteiner\" by pbk (Rafael_Oliveira) — CC BY 4.0 (sketchfab.com/3d-models/conteiner-8b5a55e3059d41699e4e3aa9c0c1baa4)\n" +
             "\"Forklift Truck\" by Kray Ewan — CC BY 4.0 (sketchfab.com/3d-models/forklift-truck-1567f5f71c1a40eebe487b1b8f570250)\n" +
             "\"Fort Worden Gun Battery Ash\" by peter54 — CC BY 4.0 (sketchfab.com/3d-models/fort-worden-gun-battery-ash-a0bc6bcaaa234e94855be78c20fb11c1)\n" +
             "\"fps animated carbine\" by DJMaesen — CC BY 4.0 (sketchfab.com/3d-models/fps-animated-carbine-62977bb4c53047a185b9f3a0cdf56b87)\n" +
             "\"Free - Holographic sight game ready\" by Karnaval — CC BY 4.0 (skfb.ly/oWDxG)\n" +
+            "Icons: game-icons.net — Lorc, Delapouite, sbed, Skoll, Guard13007 — CC BY 3.0\n" +
             "Characters & animations: Mixamo (Adobe)\n\n" +
             "Sounds (freesound.org): mnslugger20, 18hiltc, evanboyerman, synth2, gfl7, fastson,\n" +
             "rammbostein, fusionwolf3740, nicktermer, ogsoundfx, qubodup, designerschoice (Nicholas Judy), jaklocke, ceberation,\n" +

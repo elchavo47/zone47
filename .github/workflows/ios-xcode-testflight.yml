@@ -25,6 +25,12 @@ jobs:
           if [ -f libiPhone-lib.zip ]; then unzip -o libiPhone-lib.zip && rm libiPhone-lib.zip; fi
           ls -la libiPhone-lib.a
 
+      - name: Rejoin split build files (GitHub 100 MB per-file limit)
+        run: |
+          find ios -name '*.z47part00' | while read p; do
+            f="${p%.z47part00}"; cat "$f".z47part* > "$f"; rm -f "$f".z47part*; ls -la "$f"
+          done
+
       - name: Install certificate and profile
         env:
           P12: ${{ secrets.IOS_P12_BASE64 }}
