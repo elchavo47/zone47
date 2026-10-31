@@ -408,7 +408,7 @@ namespace Threading
     {
         il2cpp::os::Atomic::FullMemoryBarrier();
         *reinterpret_cast<Il2CppObject* volatile *>(address) = value;
-        il2cpp::gc::GarbageCollector::SetWriteBarrier((void**)&address);
+        il2cpp::gc::GarbageCollector::SetWriteBarrier((void**)address);
     }
 
     void Thread::VolatileWrite_Float(volatile void* address, float value)

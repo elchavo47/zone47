@@ -21,15 +21,16 @@ namespace Zone47
             new Preset(5, 10, 60, 600f, "5v10"),
             new Preset(10, 10, 80, 720f, "10v10"),
         };
-        public static Preset Cur => Presets[Mathf.Clamp(Settings.TeamPreset, 0, Presets.Length - 1)];
+        public static Preset Cur => Presets[Mathf.Clamp(Net.InMatch ? Net.MatchPreset : Settings.TeamPreset, 0, Presets.Length - 1)];
         public static int KillTarget => Cur.target;
         public static float MatchTime => Cur.time;
-        public static int AllySize => Cur.a;
-        public static int EnemySize => Cur.e;
-        public static int SizeOf(int team) => team == 0 ? AllySize : EnemySize;
-        /// Outnumbered player team: the bigger side shoots a bit worse / softer so 1v5 stays winnable.
-        public static float HandicapSpread(int team) { float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f + 0.14f * (r - 1f) : 1f; }
-        public static float HandicapDamage(int team) { float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f / (1f + 0.12f * (r - 1f)) : 1f; }
+        public static int AllySize => SizeOf(0);
+        public static int EnemySize => SizeOf(1);
+        /// Team size in local terms (online: my team is always 0, sizes come from the host's line-up).
+        public static int SizeOf(int team) => Net.InMatch ? Net.TeamSize[(team ^ Net.Flip) & 1] : team == 0 ? Cur.a : Cur.e;
+        /// Outnumbered player team: the bigger side shoots a bit worse / softer so 1v5 stays winnable. (Not online: humans on both sides.)
+        public static float HandicapSpread(int team) { if (Net.InMatch) return 1f; float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f + 0.14f * (r - 1f) : 1f; }
+        public static float HandicapDamage(int team) { if (Net.InMatch) return 1f; float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f / (1f + 0.12f * (r - 1f)) : 1f; }
 
         public int[] score = new int[2];
         public float timeLeft = 480f;      // set from the chosen preset in Begin() (PlayerPrefs can't be read in field initializers)
@@ -76,24 +77,32 @@ namespace Zone47
             "Static", "Volt", "Surge", "Spark", "Fuse", "Tank", "Bulldog", "Mastiff", "Rottweiler", "Doberman", "Husky",
         };
         public static string[] AllyNames = new string[0], EnemyNames = new string[0];
+        public static string[] AllyFlags = new string[0], EnemyFlags = new string[0];
         static bool namesUsed = true;
 
         /// Pick a new set of bot names (lobby shows them, the next match uses the same ones).
         public static void RollNames()
         {
             var taken = new System.Collections.Generic.HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { Settings.Callsign ?? "" };
-            string Pick(bool turkish)
-            {
-                var pool = (turkish ? Random.value < 0.8f : Random.value < 0.2f) ? NamesTR : NamesEN;
-                for (int tries = 0; tries < 50; tries++) { var n = pool[Random.Range(0, pool.Length)]; if (taken.Add(n)) return n; }
-                return pool[0] + Random.Range(10, 99);
-            }
+            string Pick(bool turkish) => PickName(taken, turkish);
             if (AllyNames.Length != AllySize - 1) AllyNames = new string[AllySize - 1];
             if (EnemyNames.Length != EnemySize) EnemyNames = new string[EnemySize];
             for (int i = 0; i < AllyNames.Length; i++) AllyNames[i] = Pick(true);
             for (int i = 0; i < EnemyNames.Length; i++) EnemyNames[i] = Pick(false);
+            AllyFlags = new string[AllyNames.Length]; EnemyFlags = new string[EnemyNames.Length];
+            for (int i = 0; i < AllyFlags.Length; i++) AllyFlags[i] = Countries.RandomBot(true);
+            for (int i = 0; i < EnemyFlags.Length; i++) EnemyFlags[i] = Countries.RandomBot(false);
             namesUsed = false;
         }
+        /// A callsign not in `taken` (added to it). Allies mostly Turkish, enemies mostly English.
+        public static string PickName(HashSet<string> taken, bool turkish)
+        {
+            var pool = (turkish ? Random.value < 0.8f : Random.value < 0.2f) ? NamesTR : NamesEN;
+            for (int tries = 0; tries < 50; tries++) { var n = pool[Random.Range(0, pool.Length)]; if (taken.Add(n)) return n; }
+            for (int k = 0; k < 200; k++) { var n = pool[Random.Range(0, pool.Length)] + Random.Range(10, 99); if (taken.Add(n)) return n; }
+            return "Bot" + Random.Range(100, 999);
+        }
+
         public static void EnsureNames() { if (namesUsed || AllyNames.Length != AllySize - 1 || EnemyNames.Length != EnemySize || (AllyNames.Length > 0 && AllyNames[0] == null) || (EnemyNames.Length > 0 && EnemyNames[0] == null)) RollNames(); namesUsed = true; }
 
         public void Begin()
@@ -129,14 +138,25 @@ namespace Zone47
             FixSpawns(); LoadingScreen.Progress(0.85f);
 
             // spawn teams
-            var player = PlayerController.Create(SpawnPoint(0, 0), SpawnRot(0));
-            player.transform.SetParent(transform);
-            for (int i = 1; i < AllySize; i++) SpawnBot(0, i, i % 4 == 3 ? "awp" : "m4", AllyNames[(i - 1) % AllyNames.Length]);
-            for (int i = 0; i < EnemySize; i++) SpawnBot(1, i, i % 5 == 2 ? "awp" : "ak", EnemyNames[i % EnemyNames.Length]);
+            if (Net.InMatch) SpawnOnline();
+            else
+            {
+                var player = PlayerController.Create(SpawnPoint(0, 0), SpawnRot(0));
+                player.transform.SetParent(transform);
+                for (int i = 1; i < AllySize; i++) SpawnBot(0, i, i % 4 == 3 ? "awp" : "m4", AllyNames[(i - 1) % AllyNames.Length], AllyFlags[(i - 1) % AllyFlags.Length]);
+                for (int i = 0; i < EnemySize; i++) SpawnBot(1, i, i % 5 == 2 ? "awp" : "ak", EnemyNames[i % EnemyNames.Length], EnemyFlags[i % EnemyFlags.Length]);
+            }
 
             HUD.Create(this);
             Sfx.Music(null, 0);
             Sfx.Ambience(R.ambience, 0.35f);
+            if (Net.InMatch)
+            {
+                // wait for every phone to finish loading (the host gives the go; it stops waiting after ~25 s)
+                Net.Ready(); LoadingScreen.Progress(0.95f);
+                while (Net.InMatch && !Net.Go) yield return null;
+                if (!Net.InMatch) yield break;
+            }
             LoadingScreen.Done();
             while (LoadingScreen.Visible) yield return null;        // countdown starts once the loading screen is gone
             foreach (var a in Actor.All) a.spawnTime = Time.time + countdown;
@@ -147,11 +167,37 @@ namespace Zone47
             AirStrikes.Begin(this);                       // always on
         }
 
-        void SpawnBot(int team, int idx, string weapon, string name)
+        BotController SpawnBot(int team, int idx, string weapon, string name, string flag)
         {
             var b = BotController.Create(team, SpawnPoint(team, idx), SpawnRot(team), weapon, name);
+            b.flag = flag;
             b.transform.SetParent(transform);
+            return b;
         }
+
+        /// Online line-up from the host: me as the player, everyone else as a bot (the host's AI) or a puppet (simulated elsewhere).
+        void SpawnOnline()
+        {
+            int[] idx = new int[2];
+            foreach (var s in Net.Specs)
+            {
+                int lt = (s.team ^ Net.Flip) & 1, i = idx[lt]++;
+                if (s.human && s.owner == Net.MyId)
+                {
+                    var p = PlayerController.Create(SpawnPoint(lt, i), SpawnRot(lt));
+                    p.transform.SetParent(transform);
+                    Net.Register(p, s.netId);
+                    continue;
+                }
+                var b = SpawnBot(lt, i, s.weapon, s.name, s.flag);
+                Net.Register(b, s.netId);
+                if (s.human) b.MakePuppet(true, s.owner);          // another phone's soldier
+                else if (!Net.IsHost) b.MakePuppet(false, 0);       // the host's bot
+            }
+        }
+
+        /// Where a team spawns. Online the two ends of the map are fixed by network team, so both phones agree.
+        public Vector3 SideCenter(int team) => spawnCenter[(team ^ Net.Flip) & 1];
 
         void MeasureMap(GameObject map)
         {
@@ -180,24 +226,25 @@ namespace Zone47
 
         public Vector3 SpawnPoint(int team, int idx)
         {
-            Vector3 side = Vector3.Cross((spawnCenter[1 - team] - spawnCenter[team]).normalized, Vector3.up);
+            Vector3 own = SideCenter(team), foe = SideCenter(1 - team);
+            Vector3 side = Vector3.Cross((foe - own).normalized, Vector3.up);
             for (int tries = 0; tries < 24; tries++)
             {
                 float spread = tries < 12 ? 1f : 2f;
-                Vector3 p = spawnCenter[team] + side * ((idx - (SizeOf(team) - 1) * 0.5f) * 2.2f + Random.Range(-1.5f, 1.5f)) * spread + Random.insideUnitSphere.Flat() * 2.5f * spread;
+                Vector3 p = own + side * ((idx - (SizeOf(team) - 1) * 0.5f) * 2.2f + Random.Range(-1.5f, 1.5f)) * spread + Random.insideUnitSphere.Flat() * 2.5f * spread;
                 if (!NavMesh.SamplePosition(p, out var h, 4f, NavMesh.AllAreas)) continue;
                 // must be on the ground (not a container roof) and free of any solid object
-                if (h.position.y > spawnCenter[team].y + 1f) continue;
+                if (h.position.y > own.y + 1f) continue;
                 Vector3 q = h.position;
                 if (Physics.CheckCapsule(q + Vector3.up * 0.65f, q + Vector3.up * 1.6f, 0.38f, ~0, QueryTriggerInteraction.Ignore)) continue;
                 return q;
             }
-            return spawnCenter[team] + Vector3.up * 0.1f;
+            return own + Vector3.up * 0.1f;
         }
 
         public Quaternion SpawnRot(int team)
         {
-            Vector3 d = (spawnCenter[1 - team] - spawnCenter[team]).Flat().normalized;
+            Vector3 d = (SideCenter(1 - team) - SideCenter(team)).Flat().normalized;
             return Quaternion.LookRotation(d == Vector3.zero ? Vector3.forward : d);
         }
 
@@ -326,7 +373,7 @@ namespace Zone47
         {
             if (!Running || Finished) return;
             timeLeft -= Time.deltaTime;
-            if (timeLeft <= 0f) { timeLeft = 0f; End(); }
+            if (timeLeft <= 0f) { timeLeft = 0f; if (!Net.IsClient) End(); }      // clients wait for the host's END
         }
 
         public void OnKill(Actor killer, Actor victim, bool headshot)
@@ -334,6 +381,7 @@ namespace Zone47
             if (killer == null && Actor.HazardName != null)
             {
                 HUD.I?.KillFeed(null, victim, false, Actor.HazardName, "drone");        // air strike: no team scores
+                Net.SendKill(victim, null, false, Actor.HazardName, "drone", score, RespawnDelay(victim));
                 StartCoroutine(RespawnLater(victim));
                 return;
             }
@@ -345,11 +393,38 @@ namespace Zone47
                 if (!victim.lastHitExplosive) killer.longestKill = Mathf.Max(killer.longestKill, Vector3.Distance(killer.ChestPos, victim.ChestPos));
             }
             string wid = victim.lastHitDrone ? "drone" : victim.lastHitExplosive ? "gren" : killer != null ? killer.WeaponId : null;
+            if (killer != null && killer != victim && wid != null) { killer.killsBy.TryGetValue(wid, out int kc); killer.killsBy[wid] = kc + 1; }
             HUD.I?.KillFeed(killer, victim, headshot, null, wid);
+            Net.SendKill(victim, killer, headshot, null, wid, score, RespawnDelay(victim));
             if (killer != null && killer != victim && killer.Alive) StartCoroutine(StreakReward(killer, killer.streak));
             StartCoroutine(RespawnLater(victim));
             if (score[scoringTeam] >= KillTarget) End();
         }
+
+        static float RespawnDelay(Actor a) => a.isPlayer || (a is BotController b && b.IsHuman) ? 4f : 5f;
+
+        /// Online (client): the host reports a death. Same bookkeeping and feed as OnKill, but no scoring decisions here.
+        public void NetKill(Actor victim, Actor killer, bool headshot, bool expl, bool drone, string hazard, string wid, float respawnDelay)
+        {
+            if (Finished || victim == null || !victim.Alive) return;
+            victim.lastHitHead = headshot; victim.lastHitExplosive = expl; victim.lastHitDrone = drone;
+            victim.respawnAt = Time.time + respawnDelay;
+            string prevHazard = Actor.HazardName; Actor.HazardName = hazard;
+            if (killer != null && killer != victim)
+            {
+                if (headshot) killer.headshotKills++;
+                if (!expl) killer.longestKill = Mathf.Max(killer.longestKill, Vector3.Distance(killer.ChestPos, victim.ChestPos));
+                if (wid != null) { killer.killsBy.TryGetValue(wid, out int kc); killer.killsBy[wid] = kc + 1; }
+            }
+            victim.NetDie(killer);                          // kills/streak counters, death animation / death screen
+            HUD.I?.KillFeed(killer, victim, headshot, hazard, wid);
+            if (killer != null && killer == PlayerController.Local) HUD.I?.HitMarker(true, headshot);
+            Actor.HazardName = prevHazard;
+            if (killer != null && killer != victim && killer.Alive) StartCoroutine(StreakReward(killer, killer.streak));
+        }
+
+        /// Online (client): the host ended the match.
+        public void NetEnd() => End();
 
         /// Kill streaks (bots too): 3 = radar for that side for 15 s, 5 = that side calls in a drone strike on the enemy.
         IEnumerator StreakReward(Actor a, int streak)
@@ -378,7 +453,7 @@ namespace Zone47
                     HUD.I?.ShowToastBig(tr ? "DÜŞMAN RADARI! YERİN BELLİ" : "ENEMY RADAR! YOU'RE SPOTTED", new Color(1f, 0.3f, 0.2f), 2.5f);
                 }
             }
-            else
+            else if (!Net.IsClient)                              // online: the host calls the drone and tells everyone
             {
                 if (AirStrikes.I == null) AirStrikes.Begin(this);
                 AirStrikes.I.Call(a);
@@ -387,7 +462,7 @@ namespace Zone47
 
         IEnumerator RespawnLater(Actor a)
         {
-            float delay = a.isPlayer ? 4f : 5f; a.respawnAt = Time.time + delay;
+            float delay = RespawnDelay(a); a.respawnAt = Time.time + delay;
             yield return new WaitForSeconds(delay);
             if (Finished || a == null) yield break;
             // pick the spawn slot furthest from enemies
@@ -401,12 +476,14 @@ namespace Zone47
             }
             a.Respawn(best, SpawnRot(a.team));
             a.spawnTime = Time.time;
+            Net.SendSpawn(a, best, SpawnRot(a.team));
         }
 
         void End()
         {
             if (Finished) return;
             Finished = true; Running = false;
+            Net.SendEnd(score);
             Sfx.Ambience(null, 0);
             HUD.I?.ShowEnd(score[0] > score[1] ? 1 : score[0] < score[1] ? -1 : 0);
         }

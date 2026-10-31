@@ -208,6 +208,18 @@ MonoBehaviour:
   heliPrefab: {fileID: 0}
   bombPrefab: {fileID: 919132149155446097, guid: 52e6b3a870cdb9a4cb5452af411be499, type: 3}
   bombTex: {fileID: 2800000, guid: f899ce5189a2979469446cb1d0c79fd0, type: 3}
+  flagAtlas: {fileID: 2800000, guid: f00ba0c47285c144c85fbdce956f17f1, type: 3}
+  avatarHex: {fileID: 2800000, guid: 8f985ee139307704697a6abad3ddb4b1, type: 3}
+  frames:
+  - {fileID: 2800000, guid: 07c50d3adaa55b84dab5f931ed9f8975, type: 3}
+  - {fileID: 2800000, guid: a35ff15d8f3a5104795b18b3fd49b261, type: 3}
+  - {fileID: 2800000, guid: 4b675b6d0233178489033af16a70779c, type: 3}
+  - {fileID: 2800000, guid: 20ef9d5272b16a84493c3c6c0cb0b8ed, type: 3}
+  - {fileID: 2800000, guid: 4679d75381ea27747a83cfce47541231, type: 3}
+  - {fileID: 2800000, guid: ca50b0440ab490f42b2204aed5030b63, type: 3}
+  - {fileID: 2800000, guid: d35b4281d9657e24fb6ca9311fbecdbf, type: 3}
+  - {fileID: 2800000, guid: e5d989b0045398f4a9d195fc60e85680, type: 3}
+  - {fileID: 2800000, guid: 5bac555d083c8e343ae29e169d5aa0b2, type: 3}
   killIcons:
   - {fileID: 2800000, guid: ccfd20e292aac7e4fad6add9c626c04b, type: 3}
   - {fileID: 2800000, guid: 46b3fb96f63b16f4e9dca7033250490b, type: 3}

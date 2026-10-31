@@ -28,9 +28,6 @@
 #include "utils/HashUtils.h"
 #include "gc/AppendOnlyGCHashMap.h"
 
-
-#include "gc/Allocator.h"
-
 template<typename T>
 struct ReflectionMapHash
 {

@@ -635,8 +635,12 @@ namespace Zone47
                 r.stripe = UIK.Img(r.bg.transform, "s", r.col, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)); r.stripe.rectTransform.pivot = new Vector2(0, 0.5f);
                 r.num = UIK.Txt(r.bg.transform, "no", (i + 1).ToString(), SquadFont, r.col, TextAnchor.MiddleCenter, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(18, 0), new Vector2(20, SquadRowH), true);
                 // one line: number · name · health bar · kills (nothing stacked, so nothing can overlap)
-                r.name = UIK.Txt(r.bg.transform, "n", a.callsign, SquadFont, a == me ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(34, 0), new Vector2(122, SquadRowH), true);
-                r.name.rectTransform.pivot = new Vector2(0, 0.5f); r.name.rectTransform.anchoredPosition = new Vector2(34, 0);
+                float fh = SquadRowH * 0.5f;
+                var rfl = Countries.Make(r.bg.transform, "fl", a.flag, new Vector2(0, 0.5f), Vector2.zero, fh);
+                rfl.rectTransform.pivot = new Vector2(0, 0.5f); rfl.rectTransform.anchoredPosition = new Vector2(32, 0);
+                float nx = 32 + fh * 4f / 3f + 6f;
+                r.name = UIK.Txt(r.bg.transform, "n", a.callsign, SquadFont, a == me ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(nx, 0), new Vector2(156 - nx, SquadRowH), true);
+                r.name.rectTransform.pivot = new Vector2(0, 0.5f); r.name.rectTransform.anchoredPosition = new Vector2(nx, 0);
                 r.name.horizontalOverflow = HorizontalWrapMode.Wrap; r.name.verticalOverflow = VerticalWrapMode.Truncate;
                 r.name.resizeTextForBestFit = true; r.name.resizeTextMinSize = 9; r.name.resizeTextMaxSize = SquadFont;
                 // health: dark track, slow pale "damage trail", then the live fill
@@ -773,8 +777,8 @@ namespace Zone47
             if (mm.Finished) return;
             Paused = !Paused;
             pausePanel.SetActive(Paused);
-            Time.timeScale = Paused ? 0f : 1f;
-            AudioListener.pause = Paused;
+            Time.timeScale = Paused && !Net.InMatch ? 0f : 1f;          // online: the match keeps running behind the menu
+            AudioListener.pause = Paused && !Net.InMatch;
             PInput.fireHeld = false;
         }
 
@@ -849,6 +853,7 @@ namespace Zone47
             int xKills = kills * 100, xHs = hsk * 50, xRes = result > 0 ? 500 : 150, xMvp = isMvp ? 300 : 0;
             int gained = xKills + xHs + xRes + xMvp;
             int before = Progress.XP; Progress.XP = before + gained;
+            var newAch = Profile.RecordMatch(me, result > 0, isMvp);
             UIK.Img(C, "sep", new Color(1, 1, 1, 0.12f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -290), new Vector2(-48, 2));
             string xl = L.S("xp_kills") + "  +" + xKills + "     " + L.S("xp_hs") + "  +" + xHs + "\n" + L.S(result > 0 ? "xp_win" : "xp_play") + "  +" + xRes + (isMvp ? "     " + L.S("xp_mvp") + "  +" + xMvp : "");
             UIK.Txt(C, "xpl", xl, 19, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, -330), new Vector2(-48, 60), false);
@@ -860,6 +865,12 @@ namespace Zone47
             fill.pivot = new Vector2(0, 0.5f); fill.anchoredPosition = Vector2.zero; fill.localScale = new Vector3(0, 1, 1);
             var up = UIK.Txt(C, "up", "", 30, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 30), new Vector2(0, 40), true);
             StartCoroutine(XpBar(before, before + gained, lvl, lvlNum, fill, up));
+            // achievements unlocked by this match
+            for (int i = 0; i < newAch.Count && i < 2; i++)
+            {
+                var ab = UIK.Img(P, "ach" + i, new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.92f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-560, 286 - i * 46), new Vector2(540, 40));
+                UIK.Txt(ab.transform, "t", (tr ? "BAŞARIM AÇILDI:  " : "ACHIEVEMENT:  ") + Profile.AName(newAch[i]).ToUpper(), 20, new Color(0.08f, 0.06f, 0.03f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            }
 
             // ---- right: both teams
             for (int t = 0; t < 2; t++)
@@ -875,11 +886,16 @@ namespace Zone47
                     var a = list[i];
                     var row = UIK.Img(P, "r", a.isPlayer ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.35f) : new Color(1, 1, 1, 0.06f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 160 - i * (rh + 4)), new Vector2(440, rh));
                     UIK.Img(row.transform, "s", t == 0 ? Pal.Ally : Pal.Enemy, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
-                    UIK.Txt(row.transform, "n", (a == mvp ? "★ " : "") + a.callsign, rh > 40 ? 24 : 19, a == mvp ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(18, 0), new Vector2(-36, 0), true);
+                    var efl = Countries.Make(row.transform, "fl", a.flag, new Vector2(0, 0.5f), Vector2.zero, rh * 0.42f);
+                    efl.rectTransform.pivot = new Vector2(0, 0.5f); efl.rectTransform.anchoredPosition = new Vector2(16, 0);
+                    float enx = 16 + rh * 0.42f * 4f / 3f + 10f;
+                    var ent = UIK.Txt(row.transform, "n", (a == mvp ? "MVP  " : "") + a.callsign, rh > 40 ? 24 : 19, a == mvp ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                    ent.rectTransform.offsetMin = new Vector2(enx, 0); ent.rectTransform.offsetMax = new Vector2(-18, 0);
                     UIK.Txt(row.transform, "k", a.kills + "        " + a.deaths, rh > 40 ? 24 : 19, Pal.Text, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-22, 0), new Vector2(-44, 0), true);
                 }
             }
-            UIK.Btn(P, L.S("again"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-280, 80), new Vector2(500, 96), () => Boot.I.StartMatch(), 42, true);
+            if (Net.Online) UIK.Btn(P, tr ? "LOBİYE DÖN" : "BACK TO LOBBY", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-280, 80), new Vector2(500, 96), () => Boot.I.BackToRoom(), 42, true);
+            else UIK.Btn(P, L.S("again"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-280, 80), new Vector2(500, 96), () => Boot.I.StartMatch(), 42, true);
             UIK.Btn(P, L.S("mainmenu"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(280, 80), new Vector2(500, 96), () => Boot.I.ToMenu(), 42);
         }
 
@@ -1146,7 +1162,7 @@ namespace Zone47
             }
             for (; n < tags.Length; n++) tags[n].enabled = false;
         }
-        void ShowToast(string s, float t) { toast.text = s; toastT = t; }
+        public void ShowToast(string s, float t = 2.5f) { toast.text = s; toastT = t; }
         public void Pickup(string s) { ShowToast(s, 1.4f); }
 
         // ------------------------------------------------------------ low health: blood, heavy breathing, heartbeat, colour drain

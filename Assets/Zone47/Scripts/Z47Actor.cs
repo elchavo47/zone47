@@ -14,7 +14,9 @@ namespace Zone47
         public float hp = 100f;
         public int kills, deaths, streak;
         // match stats (end screen)
-        public int shotsFired, shotsHit, headshotKills; public float longestKill, damageDealt;
+        public int shotsFired, shotsHit, headshotKills, bestStreak; public float longestKill, damageDealt;
+        public readonly Dictionary<string, int> killsBy = new Dictionary<string, int>();
+        public string flag = "tr";
         public bool Alive => hp > 0f;
         public bool isPlayer;
         public float lastDamageTime = -99f;
@@ -27,6 +29,9 @@ namespace Zone47
         public float spawnTime;
         public float respawnAt;       // when a dead actor comes back (squad card countdown)
         public bool Protected => Time.time - spawnTime < 2.5f;
+        // online: id shared by every phone; `remote` = simulated on another phone (we only show it)
+        public int netId = -1;
+        public bool remote;
 
         protected virtual void OnEnable() { if (!All.Contains(this)) All.Add(this); }
         protected virtual void OnDestroy() { All.Remove(this); }
@@ -41,26 +46,66 @@ namespace Zone47
             if (!Alive || MatchManager.I == null || !MatchManager.I.Running) return;
             if (from != null && from != this && from.team == team) return; // no friendly fire
             if (Protected) return;
+            if (Net.InMatch)
+            {
+                // the host owns all health. A client only reports what ITS soldier hit; everything else is decided by the host.
+                if (Net.IsClient)
+                {
+                    if (from != null && from == PlayerController.Local) Net.SendDamage(this, amount, from, fromPos, headshot, ExplosionDamage, DroneDamage);
+                    return;
+                }
+                if (from != null && from.remote && !Net.ApplyingRemote) return;   // that phone reports its own hits
+            }
             if (from != null && from != this) from.damageDealt += Mathf.Min(amount, hp);
             hp -= amount;
             lastDamageTime = Time.time;
             lastDamageFrom = fromPos; lastHitHead = headshot; lastHitAmount = amount; lastHitExplosive = ExplosionDamage; lastHitDrone = DroneDamage;
             OnHurt(from, fromPos);
-            if (Time.time - lastGrunt > 0.55f)
-            {
-                lastGrunt = Time.time;
-                if (isPlayer) Sfx.Play2D(Z47Refs.I.hurt, 0.55f, 0.1f);
-                else Sfx.Play3D(Z47Refs.I.hurt, ChestPos, 0.75f, 3f, 45f, 0.18f);
-            }
+            Grunt();
+            if (Net.InMatch) Net.SendHp(this, from, fromPos, headshot, amount, ExplosionDamage, DroneDamage);
             if (hp <= 0f)
             {
                 hp = 0f;
                 deaths++;
                 streak = 0;
-                if (from != null && from != this) { from.kills++; from.streak++; }
+                if (from != null && from != this) { from.kills++; from.streak++; if (from.streak > from.bestStreak) from.bestStreak = from.streak; }
                 MatchManager.I.OnKill(from, this, headshot);
                 OnDie(from);
             }
+        }
+
+        void Grunt()
+        {
+            if (Time.time - lastGrunt <= 0.55f) return;
+            lastGrunt = Time.time;
+            if (isPlayer) Sfx.Play2D(Z47Refs.I.hurt, 0.55f, 0.1f);
+            else Sfx.Play3D(Z47Refs.I.hurt, ChestPos, 0.75f, 3f, 45f, 0.18f);
+        }
+
+        /// Online (client): the host says this actor got hit.
+        public void NetHurt(float newHp, Actor from, Vector3 fromPos, bool head, float amount, bool expl, bool drone)
+        {
+            if (!Alive) return;
+            if (from != null && from == PlayerController.Local && from != this) from.damageDealt += Mathf.Min(amount, hp);
+            if (newHp > 0f) hp = newHp;                     // the kill message finishes it
+            lastDamageTime = Time.time; lastDamageFrom = fromPos; lastHitHead = head; lastHitAmount = amount; lastHitExplosive = expl; lastHitDrone = drone;
+            OnHurt(from, fromPos);
+            Grunt();
+        }
+
+        /// Online (client): the host says this actor died.
+        public void NetDie(Actor killer)
+        {
+            hp = 0f; deaths++; streak = 0;
+            if (killer != null && killer != this) { killer.kills++; killer.streak++; if (killer.streak > killer.bestStreak) killer.bestStreak = killer.streak; }
+            OnDie(killer);
+        }
+
+        /// Snapshot for the network (position at the feet, view yaw/pitch, stance flags, weapon index).
+        /// flags: 1 alive, 2 crouch, 4 prone, 8 aiming/alert, 16 reloading
+        public virtual void GetNetState(out Vector3 pos, out float yaw, out float pitch, out int flags, out int weapon)
+        {
+            pos = transform.position; yaw = transform.eulerAngles.y; pitch = 0f; flags = Alive ? 1 : 0; weapon = Net.WeaponIndex(WeaponId);
         }
 
         protected virtual void OnHurt(Actor from, Vector3 fromPos) { }
@@ -125,8 +170,16 @@ namespace Zone47
                 }
             }
             if (tracer) FX.Tracer(tracerFrom, end);
+            if (Net.InMatch && shooter != null && !shooter.remote) Net.SendShot(shooter, end, tracer, victim != null);
+            Flyby(shooter, origin, dir, end, victim);
+            if (shooter != null) shooter.lastShotTime = Time.time;
+            MatchManager.I?.Noise(origin, shooter);
+            return victim;
+        }
 
-            // bullet flyby for the local player
+        /// Bullet flyby for the local player.
+        public static void Flyby(Actor shooter, Vector3 origin, Vector3 dir, Vector3 end, Actor victim)
+        {
             var p = PlayerController.Local;
             if (p != null && shooter != p && p.Alive)
             {
@@ -138,9 +191,6 @@ namespace Zone47
                     if (miss < 2.2f && victim != p) Sfx.Play3D(Z47Refs.I.flyby, origin + dir * along, 0.8f, 1f, 10f, 0.2f);
                 }
             }
-            if (shooter != null) shooter.lastShotTime = Time.time;
-            MatchManager.I?.Noise(origin, shooter);
-            return victim;
         }
     }
 }

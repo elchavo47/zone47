@@ -224,12 +224,17 @@ class CapsuleCollider; template <> void RegisterUnityClass<CapsuleCollider>(cons
 class CharacterController; template <> void RegisterUnityClass<CharacterController>(const char*);
 namespace Unity { class CharacterJoint; } template <> void RegisterUnityClass<Unity::CharacterJoint>(const char*);
 class Collider; template <> void RegisterUnityClass<Collider>(const char*);
+namespace Unity { class FixedJoint; } template <> void RegisterUnityClass<Unity::FixedJoint>(const char*);
 namespace Unity { class Joint; } template <> void RegisterUnityClass<Unity::Joint>(const char*);
 class MeshCollider; template <> void RegisterUnityClass<MeshCollider>(const char*);
 class PhysicsManager; template <> void RegisterUnityClass<PhysicsManager>(const char*);
 class Rigidbody; template <> void RegisterUnityClass<Rigidbody>(const char*);
 class SphereCollider; template <> void RegisterUnityClass<SphereCollider>(const char*);
+class AnchoredJoint2D; template <> void RegisterUnityClass<AnchoredJoint2D>(const char*);
+class FixedJoint2D; template <> void RegisterUnityClass<FixedJoint2D>(const char*);
+class Joint2D; template <> void RegisterUnityClass<Joint2D>(const char*);
 class Physics2DSettings; template <> void RegisterUnityClass<Physics2DSettings>(const char*);
+class Rigidbody2D; template <> void RegisterUnityClass<Rigidbody2D>(const char*);
 class Terrain; template <> void RegisterUnityClass<Terrain>(const char*);
 class TerrainData; template <> void RegisterUnityClass<TerrainData>(const char*);
 namespace TextRendering { class Font; } template <> void RegisterUnityClass<TextRendering::Font>(const char*);
@@ -250,7 +255,7 @@ void RegisterAllClasses()
 {
 void RegisterBuiltinTypes();
 RegisterBuiltinTypes();
-	//Total: 109 non stripped classes
+	//Total: 114 non stripped classes
 	//0. NavMeshAgent
 	RegisterUnityClass<NavMeshAgent>("AI");
 	//1. NavMeshData
@@ -427,47 +432,57 @@ RegisterBuiltinTypes();
 	RegisterUnityClass<Unity::CharacterJoint>("Physics");
 	//87. Collider
 	RegisterUnityClass<Collider>("Physics");
-	//88. Joint
+	//88. FixedJoint
+	RegisterUnityClass<Unity::FixedJoint>("Physics");
+	//89. Joint
 	RegisterUnityClass<Unity::Joint>("Physics");
-	//89. MeshCollider
+	//90. MeshCollider
 	RegisterUnityClass<MeshCollider>("Physics");
-	//90. PhysicsManager
+	//91. PhysicsManager
 	RegisterUnityClass<PhysicsManager>("Physics");
-	//91. Rigidbody
+	//92. Rigidbody
 	RegisterUnityClass<Rigidbody>("Physics");
-	//92. SphereCollider
+	//93. SphereCollider
 	RegisterUnityClass<SphereCollider>("Physics");
-	//93. Physics2DSettings
+	//94. AnchoredJoint2D
+	RegisterUnityClass<AnchoredJoint2D>("Physics2D");
+	//95. FixedJoint2D
+	RegisterUnityClass<FixedJoint2D>("Physics2D");
+	//96. Joint2D
+	RegisterUnityClass<Joint2D>("Physics2D");
+	//97. Physics2DSettings
 	RegisterUnityClass<Physics2DSettings>("Physics2D");
-	//94. Terrain
+	//98. Rigidbody2D
+	RegisterUnityClass<Rigidbody2D>("Physics2D");
+	//99. Terrain
 	RegisterUnityClass<Terrain>("Terrain");
-	//95. TerrainData
+	//100. TerrainData
 	RegisterUnityClass<TerrainData>("Terrain");
-	//96. Font
+	//101. Font
 	RegisterUnityClass<TextRendering::Font>("TextRendering");
-	//97. Canvas
+	//102. Canvas
 	RegisterUnityClass<UI::Canvas>("UI");
-	//98. CanvasGroup
+	//103. CanvasGroup
 	RegisterUnityClass<UI::CanvasGroup>("UI");
-	//99. CanvasRenderer
+	//104. CanvasRenderer
 	RegisterUnityClass<UI::CanvasRenderer>("UI");
-	//100. UIRenderer
+	//105. UIRenderer
 	RegisterUnityClass<UIRenderer>("UIElements");
-	//101. UnityConnectSettings
+	//106. UnityConnectSettings
 	RegisterUnityClass<UnityConnectSettings>("UnityConnect");
-	//102. VFXManager
+	//107. VFXManager
 	RegisterUnityClass<VFXManager>("VFX");
-	//103. VFXRenderer
+	//108. VFXRenderer
 	RegisterUnityClass<VFXRenderer>("VFX");
-	//104. VisualEffect
+	//109. VisualEffect
 	RegisterUnityClass<VisualEffect>("VFX");
-	//105. VisualEffectAsset
+	//110. VisualEffectAsset
 	RegisterUnityClass<VisualEffectAsset>("VFX");
-	//106. VisualEffectObject
+	//111. VisualEffectObject
 	RegisterUnityClass<VisualEffectObject>("VFX");
-	//107. VideoClip
+	//112. VideoClip
 	RegisterUnityClass<VideoClip>("Video");
-	//108. VideoPlayer
+	//113. VideoPlayer
 	RegisterUnityClass<VideoPlayer>("Video");
 
 }

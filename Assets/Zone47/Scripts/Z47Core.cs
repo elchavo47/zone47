@@ -36,7 +36,7 @@ namespace Zone47
         public static bool AirStrikes { get => PlayerPrefs.GetInt("z_strikes", 1) == 1; set => PlayerPrefs.SetInt("z_strikes", value ? 1 : 0); }
         public static int TeamPreset { get => PlayerPrefs.GetInt("z_teams", 3); set => PlayerPrefs.SetInt("z_teams", value); }   // index into MatchManager.Presets (3 = 5v5)
         public static int Weather { get => PlayerPrefs.GetInt("z_wx", 0); set => PlayerPrefs.SetInt("z_wx", value); }   // 0 random, 1 noon, 2 fog, 3 sandstorm
-        public static int Map { get => PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
+        public static int Map { get => Net.MapOverride >= 0 ? Net.MapOverride : PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
         public static string PlayerName { get => PlayerPrefs.GetString("z_name", ""); set => PlayerPrefs.SetString("z_name", value); }
         public static string Callsign => string.IsNullOrWhiteSpace(PlayerName) ? L.S("you") : PlayerName.Trim();
 

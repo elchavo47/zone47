@@ -60,6 +60,7 @@ namespace Zone47
         public UnityEngine.Video.VideoClip lobbyVideo;      // looping lobby / loading background
         public GameObject dronePrefab, heliPrefab, bombPrefab;
         public Texture2D bombTex;
+        public Texture2D flagAtlas, avatarHex; public Texture2D[] frames;     // profile
         public Texture2D[] killIcons; public string[] killIconIds;     // kill feed weapon silhouettes
         public Texture2D KillIcon(string id)
         {

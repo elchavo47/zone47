@@ -1,5 +1,4 @@
 #include "il2cpp-config.h"
-#include "gc/Allocator.h"
 #include "gc/GarbageCollector.h"
 #include "gc/GCHandle.h"
 #include "os/Atomic.h"

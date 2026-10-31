@@ -575,6 +575,9 @@ PlayerSettings:
   - serializedVersion: 3
     m_BuildTarget: Android
     m_Formats: 03000000
+  - serializedVersion: 3
+    m_BuildTarget: iOS
+    m_Formats: 03000000
   playModeTestRunnerEnabled: 0
   runPlayModeTestAsEditModeTest: 0
   actionOnDotNetUnhandledException: 1
@@ -840,7 +843,10 @@ PlayerSettings:
   webGLCloseOnQuit: 0
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Android: Z47_NET;Z47_FRIENDS
+    Standalone: Z47_NET;Z47_FRIENDS
+    iPhone: Z47_NET;Z47_FRIENDS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -939,11 +945,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: f96b9802-34f3-46ae-b38c-2bc6fb21bef3
+  cloudProjectId: 146eb022-bb65-42d9-8c08-6e9a68a1e1bc
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Zone47
-  organizationId: omraydogdu47
+  projectName: Zone 47
+  organizationId: omraydogdu47_unity
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

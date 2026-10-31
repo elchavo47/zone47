@@ -1,0 +1,10 @@
+<linker>
+  <!-- online / friends: models are read by reflection and JSON, keep them out of IL2CPP stripping -->
+  <assembly fullname="Unity.Services.Friends" preserve="all" ignoreIfMissing="1"/>
+  <assembly fullname="Unity.Services.Relay" preserve="all" ignoreIfMissing="1"/>
+  <assembly fullname="Unity.Services.Multiplayer" preserve="all" ignoreIfMissing="1"/>
+  <assembly fullname="Assembly-CSharp">
+    <type fullname="Zone47.Z47Activity" preserve="all"/>
+    <type fullname="Zone47.Z47Invite" preserve="all"/>
+  </assembly>
+</linker>

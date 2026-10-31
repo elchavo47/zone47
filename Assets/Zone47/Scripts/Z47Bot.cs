@@ -34,12 +34,20 @@ namespace Zone47
         Ragdoll ragdoll;
         int nades = 2; float nextNade;
 
+        // online puppet: this soldier is simulated on another phone (a remote player, or the host's bots); we only show it
+        public bool puppet; public ulong owner; bool netHuman;
+        public bool IsHuman => netHuman;
+        Vector3 netPos, netVel, pupVel; float netYaw, netPitch, netT = -1f; int netFlags = 1; float lastRemoteFx = -9f;
+        bool prone;
+        Vector3 Vel => puppet ? pupVel : agent != null && agent.enabled ? agent.velocity : Vector3.zero;
+        bool Ready => puppet ? (netFlags & 8) != 0 || Time.time - lastShotTime < 2f : target != null || Time.time - lastKnownT < 12f;
+
         public override string WeaponId => weapon != null ? weapon.id : null;
         float Skill => Settings.Difficulty == 0 ? 0.55f : Settings.Difficulty == 1 ? 0.8f : 1f;
 
-        public override Vector3 EyePos => transform.position + Vector3.up * (crouch ? 1.05f : 1.6f);
-        public override Vector3 ChestPos => transform.position + Vector3.up * (crouch ? 0.85f : 1.25f);
-        public override float HeadHeight => transform.position.y + (crouch ? 0.95f : 1.5f);
+        public override Vector3 EyePos => transform.position + Vector3.up * (prone ? 0.4f : crouch ? 1.05f : 1.6f);
+        public override Vector3 ChestPos => transform.position + Vector3.up * (prone ? 0.3f : crouch ? 0.85f : 1.25f);
+        public override float HeadHeight => transform.position.y + (prone ? 0.32f : crouch ? 0.95f : 1.5f);
 
         public static BotController Create(int team, Vector3 pos, Quaternion rot, string weaponId, string name)
         {
@@ -47,7 +55,7 @@ namespace Zone47
             var go = Instantiate(team == 0 ? R.swatModel : R.gasModel, pos, rot);
             go.name = "Bot_" + name;
             var b = go.AddComponent<BotController>();
-            b.team = team; b.callsign = name;
+            b.team = team; b.callsign = name; b.flag = Countries.RandomBot(team == 0);
             b.Init(R.Weapon(weaponId));
             return b;
         }
@@ -77,7 +85,7 @@ namespace Zone47
             spine = anim.GetBoneTransform(HumanBodyBones.Chest) ?? anim.GetBoneTransform(HumanBodyBones.Spine);
             rShoulder = anim.GetBoneTransform(HumanBodyBones.RightUpperArm);
             SpawnGun();
-            ragdoll = gameObject.AddComponent<Ragdoll>(); ragdoll.Build(anim);
+            // ragdoll removed (bodies flopped around): deaths use the Dying animation again
             thinkT = Random.Range(0f, 0.3f);
         }
 
@@ -90,6 +98,7 @@ namespace Zone47
                 if (deadT > 3.2f) foreach (var r in rends) r.enabled = false;
                 return;
             }
+            if (puppet) { PuppetUpdate(); return; }
             if (!MatchManager.I.Running) { agent.isStopped = true; Animate(); return; }
 
             thinkT -= Time.deltaTime;
@@ -180,6 +189,7 @@ namespace Zone47
             var go = Instantiate(Z47Refs.I.grenadePrefab, from, Random.rotation);
             var gr = go.GetComponent<Grenade>(); if (gr != null) gr.owner = this;
             var rb = go.GetComponent<Rigidbody>(); if (rb != null) { rb.linearVelocity = v; rb.angularVelocity = Random.insideUnitSphere * 10f; }
+            Net.SendNade(this, from, v);
             if (Z47Refs.I.pin != null) Sfx.Play3D(Z47Refs.I.pin, transform.position + Vector3.up, 0.7f, 2f, 22f);
         }
 
@@ -370,7 +380,7 @@ namespace Zone47
                     if (holdT > 0f)
                     {
                         holdT -= Time.deltaTime; crouch = true;
-                        Face(mm.spawnCenter[1 - team]);
+                        Face(mm.SideCenter(1 - team));
                         aimDir = Vector3.Slerp(aimDir, transform.forward, Time.deltaTime * 3f);
                         if (holdT > 0f) goto Steps;
                         hasRoam = false;
@@ -378,7 +388,7 @@ namespace Zone47
                     if (!hasRoam || arrived || repathT < -15f)
                     {
                         // drift toward the enemy half, but spread out: skip spots a teammate is already near
-                        Vector3 enemySide = mm.spawnCenter[1 - team];
+                        Vector3 enemySide = mm.SideCenter(1 - team);
                         Vector3 best = mm.waypoints[Random.Range(0, mm.waypoints.Count)]; float bs = float.MaxValue;
                         for (int i = 0; i < 6; i++)
                         {
@@ -433,12 +443,12 @@ namespace Zone47
 
         void Animate()
         {
-            Vector3 lv = transform.InverseTransformDirection(agent != null ? agent.velocity : Vector3.zero);
+            Vector3 lv = transform.InverseTransformDirection(Vel);
             float runN = 4.5f;
             anim.SetFloat("MoveX", lv.x / runN, 0.12f, Time.deltaTime);
             anim.SetFloat("MoveZ", lv.z / runN, 0.12f, Time.deltaTime);
             anim.SetBool("Crouch", crouch);
-            anim.SetBool("Aim", target != null);
+            anim.SetBool("Aim", puppet ? Ready : target != null);
             anim.SetFloat("Speed", Mathf.Clamp01(lv.magnitude / 1.5f));
         }
 
@@ -459,14 +469,14 @@ namespace Zone47
             anim.SetIKHintPosition(AvatarIKHint.RightElbow, sh + transform.right * 0.25f + Vector3.down * 0.35f);
             anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0.6f);
             anim.SetIKHintPosition(AvatarIKHint.LeftElbow, sh - transform.right * 0.55f + Vector3.down * 0.4f + transform.forward * 0.15f);
-            anim.SetLookAtWeight(1f, target != null ? 0.45f : 0.2f, 0.8f, 0f, 0.5f);
+            anim.SetLookAtWeight(1f, (puppet ? Ready : target != null) ? 0.45f : 0.2f, 0.8f, 0f, 0.5f);
             anim.SetLookAtPosition(EyePos + aimDir * 10f);
         }
 
         void PlaceGun()
         {
             Vector3 fwd = aimDir.sqrMagnitude > 0.01f ? aimDir.normalized : transform.forward;
-            bool ready = target != null || Time.time - lastKnownT < 12f;
+            bool ready = Ready;
             if (!ready) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.3f);         // low ready while walking around
             if (reloading) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.45f);
             var rot = Quaternion.LookRotation(fwd, Vector3.up);
@@ -527,7 +537,7 @@ namespace Zone47
                 ragdoll.Activate(lastDamageFrom, strength, lastHitHead, lastHitExplosive, carry);
             }
             else { anim.SetTrigger("Die"); anim.SetBool("Dead", true); }
-            if (agent.isOnNavMesh) agent.isStopped = true;
+            if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
             agent.enabled = false;
             target = null;
             DropGun();
@@ -536,8 +546,8 @@ namespace Zone47
 
         public override void Respawn(Vector3 pos, Quaternion rot)
         {
-            agent.enabled = true;
-            agent.Warp(pos);
+            if (puppet) { transform.position = pos; netPos = pos; netVel = pupVel = Vector3.zero; netT = Time.time; netYaw = rot.eulerAngles.y; netFlags = 1; prone = crouch = false; }
+            else { agent.enabled = true; agent.Warp(pos); }
             transform.rotation = rot;
             col.enabled = true;
             hp = maxHp; mag = weapon.magSize; reloading = false; target = null; lastKnownT = -99f; hasRoam = false; nades = 2; fleeUntil = 0f;
@@ -546,6 +556,97 @@ namespace Zone47
             if (ragdoll != null) ragdoll.Deactivate();
             anim.SetBool("Dead", false);
             anim.Rebind();
+        }
+    
+        // ------------------------------------------------------------ online
+        public void MakePuppet(bool human, ulong ownerClient)
+        {
+            puppet = true; remote = true; netHuman = human; owner = ownerClient;
+            if (agent != null) agent.enabled = false;
+            netPos = transform.position; netYaw = transform.eulerAngles.y; netT = Time.time;
+        }
+
+        /// The player who controlled this soldier left: the host's AI takes over (other phones keep seeing a puppet).
+        public void TakeOverByBot()
+        {
+            if (!puppet) return;
+            puppet = false; remote = false; netHuman = false; prone = false;
+            target = null; hasRoam = false; lastKnownT = -99f;
+            if (Alive) { agent.enabled = true; if (NavMesh.SamplePosition(transform.position, out var h, 4f, NavMesh.AllAreas)) agent.Warp(h.position); }
+        }
+
+        public override void GetNetState(out Vector3 pos, out float yaw, out float pitch, out int flags, out int weaponIdx)
+        {
+            pos = transform.position; yaw = transform.eulerAngles.y;
+            Vector3 d = aimDir.sqrMagnitude > 0.01f ? aimDir.normalized : transform.forward;
+            pitch = -Mathf.Asin(Mathf.Clamp(d.y, -1f, 1f)) * Mathf.Rad2Deg;
+            flags = (Alive ? 1 : 0) | (crouch ? 2 : 0) | (prone ? 4 : 0) | (Ready ? 8 : 0) | (reloading ? 16 : 0);
+            weaponIdx = Net.WeaponIndex(weapon != null ? weapon.id : "m4");
+            if (puppet) { pos = netPos; yaw = netYaw; pitch = netPitch; flags = netFlags; }
+        }
+
+        public void SetNetState(Vector3 p, float yaw, float pitch, int flags, int weaponIdx)
+        {
+            float now = Time.time;
+            if (netT > 0f) { float dt = now - netT; if (dt > 0.02f) netVel = Vector3.ClampMagnitude((p - netPos) / dt, 9f); }
+            if ((p - transform.position).sqrMagnitude > 36f) { transform.position = p; netVel = Vector3.zero; }   // teleport (respawn / desync)
+            netPos = p; netT = now; netYaw = yaw; netPitch = pitch; netFlags = flags;
+            string wid = Net.Weapons[Mathf.Clamp(weaponIdx, 0, Net.Weapons.Length - 1)];
+            if (weapon == null || weapon.id != wid) SetWeapon(wid);
+        }
+
+        void SetWeapon(string id)
+        {
+            var w = Z47Refs.I.Weapon(id); if (w == null || w == weapon) return;
+            if (gun != null) { Destroy(gun.gameObject); gun = null; }
+            weapon = w; mag = w.magSize;
+            if (Alive) SpawnGun();
+        }
+
+        void PuppetUpdate()
+        {
+            float age = Mathf.Min(Time.time - netT, 0.25f);
+            Vector3 goal = netPos + netVel * age;
+            Vector3 before = transform.position;
+            transform.position = Vector3.Lerp(before, goal, 1f - Mathf.Exp(-Time.deltaTime * 14f));
+            Vector3 v = (transform.position - before) / Mathf.Max(Time.deltaTime, 0.0001f);
+            pupVel = Vector3.Lerp(pupVel, v.Flat(), 1f - Mathf.Exp(-Time.deltaTime * 10f));
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, netYaw, 0), 1f - Mathf.Exp(-Time.deltaTime * 16f));
+            prone = (netFlags & 4) != 0; crouch = (netFlags & 2) != 0 || prone;
+            reloading = (netFlags & 16) != 0;
+            aimDir = Quaternion.Euler(netPitch, netYaw, 0) * Vector3.forward;
+            // hit box follows the stance
+            float h = prone ? 0.6f : crouch ? 1.25f : 1.8f;
+            if (Mathf.Abs(col.height - h) > 0.01f) { col.height = h; col.center = new Vector3(0, h * 0.5f, 0); }
+            // footsteps
+            float sp = pupVel.magnitude;
+            if (sp > 0.6f && !crouch)
+            {
+                stepAcc += sp * Time.deltaTime;
+                if (stepAcc > 2.2f) { stepAcc = 0; Sfx.Play3D(Sfx.StepClip(transform.position, sp > 4f ? 1 : 0), transform.position, 0.7f, 2f, 24f, 0.08f); }
+            }
+            Animate();
+            // the host keeps remote players' health: same regeneration as the player's own
+            if (Net.IsHost && netHuman && hp < maxHp && Time.time - lastDamageTime > 5f) hp = Mathf.Min(maxHp, hp + 18f * Time.deltaTime);
+        }
+
+        /// Someone else's shot: sound, flash, tracer and impact here.
+        public void RemoteShot(Vector3 end, bool tracer, bool flesh)
+        {
+            if (!Alive || weapon == null) return;
+            Vector3 eye = EyePos, dir = (end - eye); float dist = dir.magnitude; if (dist < 0.01f) return; dir /= dist;
+            aimDir = dir; lastShotTime = Time.time;
+            Vector3 muzzle = gun != null ? gun.TransformPoint(weapon.muzzlePoint) : eye + dir * 0.6f;
+            if (Time.time - lastRemoteFx > 0.045f)
+            {
+                lastRemoteFx = Time.time;
+                Sfx.Play3D(weapon.shot, muzzle, 1f, 6f, 140f, 0.07f);
+                FX.MuzzleFlash(muzzle, gun != null ? gun.forward : dir, weapon.kind == WeaponKind.Sniper ? 0.45f : 0.32f);
+                if (anim != null) anim.SetTrigger("Fire");
+            }
+            if (tracer) FX.Tracer(muzzle, end);
+            FX.Impact(end, -dir, flesh);
+            Ballistics.Flyby(this, eye, dir, end, null);
         }
     }
 }

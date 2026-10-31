@@ -28,6 +28,7 @@ namespace Zone47
 
         IEnumerator Loop()
         {
+            if (Net.IsClient) yield break;                 // online: only the host decides when drones come
             yield return new WaitForSeconds(Random.Range(30f, 45f));
             while (MatchManager.I != null && !MatchManager.I.Finished)
             {
@@ -37,19 +38,20 @@ namespace Zone47
         }
 
         /// Test: start a strike right now (editor key B).
-        public void TriggerNow() { if (!striking && MatchManager.I != null && MatchManager.I.Running) StartCoroutine(Strike(null)); }
+        public void TriggerNow() { if (Net.IsClient) return; if (!striking && MatchManager.I != null && MatchManager.I.Running) StartCoroutine(Strike(null)); }
 
         /// Kill-streak reward: `caller`'s side calls a drone on the enemy. Their own team takes no damage, kills count for the caller.
         public void Call(Actor caller) { if (caller != null && MatchManager.I != null && MatchManager.I.Running) StartCoroutine(Strike(caller)); }
 
+        /// Everything random about one strike, decided up front (online the host sends it so every phone flies the same drone).
+        public struct Plan { public Vector3 target; public float inAng, orbitTime, dirSign; public int seed; }
+
         // ------------------------------------------------------------ one strike (~35 s)
         IEnumerator Strike(Actor caller)
         {
+            if (Net.IsClient) yield break;
             bool neutral = caller == null;
-            if (neutral) striking = true;
             int callTeam = neutral ? -1 : caller.team;
-            var pl0 = PlayerController.Local;
-            bool friendly = !neutral && pl0 != null && callTeam == pl0.team;
             // target a crowd (of the caller's enemies)
             Actor best = null; int bestN = -1;
             foreach (var a in Actor.All)
@@ -59,8 +61,29 @@ namespace Zone47
                 n += Random.Range(0, 3);
                 if (n > bestN) { bestN = n; best = a; }
             }
-            if (best == null) { if (neutral) striking = false; yield break; }
-            Vector3 target = best.transform.position;
+            if (best == null) yield break;
+            var plan = new Plan
+            {
+                target = best.transform.position, inAng = Random.Range(0f, 360f),
+                orbitTime = neutral ? Random.Range(9f, 13f) : Random.Range(4f, 6f),
+                dirSign = Random.value < 0.5f ? 1f : -1f, seed = Random.Range(1, int.MaxValue),
+            };
+            Net.SendStrike(caller, plan);
+            yield return Run(caller, plan);
+        }
+
+        /// Online (client): fly the strike the host planned.
+        public void RunPlan(Actor caller, Plan p) { StartCoroutine(Run(caller, p)); }
+
+        IEnumerator Run(Actor caller, Plan plan)
+        {
+            bool neutral = caller == null;
+            if (neutral) striking = true;
+            int callTeam = neutral ? -1 : caller.team;
+            var pl0 = PlayerController.Local;
+            bool friendly = !neutral && pl0 != null && callTeam == pl0.team;
+            Vector3 target = plan.target;
+            var rng = new System.Random(plan.seed);
 
             // 1) siren + warning, the drone is still far away (heard before it's seen)
             bool tr = Settings.Turkish;
@@ -71,7 +94,7 @@ namespace Zone47
                 if (Z47Refs.I.siren != null) Sfx.Play2D(Z47Refs.I.siren, 0.85f);
             }
 
-            float inAng = Random.Range(0f, 360f);
+            float inAng = plan.inAng;
             Vector3 inDir = Quaternion.Euler(0, inAng, 0) * Vector3.forward;
             Vector3 far = target - inDir * 520f + Vector3.up * Alt;
             Vector3 entry = target - inDir * OrbitR + Vector3.up * Alt;
@@ -98,7 +121,7 @@ namespace Zone47
             yield return Fly(drone, far, entry, () => TryGlance());
             // 3) circle the area once-ish, banking (the long scary part: it's right above you and you don't know where it'll hit)
             if (!friendly) HUD.I?.ShowToastBig(Settings.Turkish ? "İHA TEPEDE! SİPER AL" : "DRONE OVERHEAD! TAKE COVER", new Color(1f, 0.25f, 0.18f), 3f);
-            float orbitTime = neutral ? Random.Range(9f, 13f) : Random.Range(4f, 6f), t = 0f, a0 = Mathf.Atan2(entry.x - target.x, entry.z - target.z), dirSign = Random.value < 0.5f ? 1f : -1f;
+            float orbitTime = plan.orbitTime, t = 0f, a0 = Mathf.Atan2(entry.x - target.x, entry.z - target.z), dirSign = plan.dirSign;
             float w = Speed / OrbitR * dirSign;
             Vector3 last = drone.transform.position;
             while (t < orbitTime)
@@ -122,10 +145,11 @@ namespace Zone47
                 if (!dropped && Vector3.Distance(drone.transform.position.Flat(), target.Flat()) < 18f)
                 {
                     dropped = true;
-                    int n = Random.Range(3, 6);
+                    int n = rng.Next(3, 6);
                     for (int i = 0; i < n; i++)
                     {
-                        Vector3 p = target + Random.insideUnitSphere.Flat() * 24f;
+                        float ba = (float)rng.NextDouble() * Mathf.PI * 2f, br = Mathf.Sqrt((float)rng.NextDouble()) * 24f;
+                        Vector3 p = target + new Vector3(Mathf.Cos(ba), 0, Mathf.Sin(ba)) * br;
                         if (Physics.Raycast(p + Vector3.up * 80f, Vector3.down, out var g, 160f, ~0, QueryTriggerInteraction.Ignore)) p = g.point;
                         DropBomb(drone.transform.position + runDir * i * 5f - Vector3.up * 1.5f, p, 4.2f + i * 0.45f, caller);
                     }

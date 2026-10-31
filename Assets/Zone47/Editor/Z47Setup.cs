@@ -33,7 +33,7 @@ namespace Zone47.EditorTools
 
         /// Bump this whenever a package brings new art/sounds or changes the setup code:
         /// Unity then re-runs the setup by itself once per PC (no more clicking "Kurulumu Yap").
-        public const int SetupVersion = 21;
+        public const int SetupVersion = 22;
         static string VerKey => "z47_setupver_" + Application.dataPath.GetHashCode();
 
         static void AutoUpdate()
@@ -139,7 +139,7 @@ namespace Zone47.EditorTools
                 ti.mipmapEnabled = !ui;
                 ti.alphaIsTransparency = fx || ui;
                 ti.wrapMode = fx || ui ? TextureWrapMode.Clamp : TextureWrapMode.Repeat;
-                int max = ui ? 1024 : path.Contains("/Characters/") || path.Contains("/Lobby/") ? 2048 : path.Contains("/Map/") ? 2048 : path.Contains("/FX/") ? 256 : 1024;
+                int max = n == "flags_atlas" ? 2048 : ui ? 1024 : path.Contains("/Characters/") || path.Contains("/Lobby/") ? 2048 : path.Contains("/Map/") ? 2048 : path.Contains("/FX/") ? 256 : 1024;
                 ti.maxTextureSize = max;
                 ti.anisoLevel = path.Contains("/Lobby/") || path.Contains("/Port/") ? 8 : 1;   // grazing-angle floors shimmer without it
                 ti.textureCompression = TextureImporterCompression.Compressed;
@@ -1045,6 +1045,10 @@ namespace Zone47.EditorTools
             var kIds = new System.Collections.Generic.List<string>(); var kTex = new System.Collections.Generic.List<Texture2D>();
             foreach (var kid in new[] { "m4", "awp", "ak", "glock", "carbine", "shotgun", "gren", "drone" }) { var kt = Tex("Art/UI/KillIcons/kill_" + kid + ".png"); if (kt != null) { kIds.Add(kid); kTex.Add(kt); } }
             R.killIconIds = kIds.ToArray(); R.killIcons = kTex.ToArray();
+            R.flagAtlas = Tex("Art/UI/flags_atlas.png"); R.avatarHex = Tex("Art/UI/Frames/avatar_hex.png");
+            var frl = new System.Collections.Generic.List<Texture2D>();
+            for (int fi = 0; fi < 16; fi++) { var ft = Tex("Art/UI/Frames/frame_" + fi + ".png"); if (ft == null) break; frl.Add(ft); }
+            R.frames = frl.ToArray();
             R.bombPrefab = Load<GameObject>("Art/Bomb/bomb.fbx"); R.bombTex = Tex("Art/Bomb/bomb_albedo.png");      // "MK2 Grenade Drone Bomb" by yousef.hameed (CC BY)      // "MQ9 Ripper military drone" by Giperione (CC BY)
             R.portPrefab = MakePort();
             R.cityPrefab = MakeCity();

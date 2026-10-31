@@ -1,8 +1,8 @@
 #include "il2cpp-config.h"
 #include "icalls/mscorlib/System/AppDomain.h"
 
-#include "gc/Allocator.h"
 #include "gc/GarbageCollector.h"
+#include "gc/GCTrackedVector.h"
 #include "gc/WriteBarrier.h"
 #include "os/Mutex.h"
 #include "utils/StringUtils.h"
@@ -96,7 +96,7 @@ namespace System
     }
 
     baselib::ReentrantLock s_DomainDataMutex;
-    typedef std::vector<std::pair<UTF16String, Il2CppObject*>, il2cpp::gc::Allocator<std::pair<UTF16String, Il2CppObject*> > > DomainDataStorage;
+    typedef il2cpp::gc::GCTrackedVector<std::pair<UTF16String, Il2CppObject*> > DomainDataStorage;
     DomainDataStorage* s_DomainData;
 
     static inline void InitializeDomainData()

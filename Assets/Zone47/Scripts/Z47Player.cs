@@ -99,7 +99,7 @@ namespace Zone47
             Local = this;
             foreach (var c in casings) if (c != null) Destroy(c);
             casings.Clear();
-            isPlayer = true; team = 0; callsign = Settings.Callsign;
+            isPlayer = true; team = 0; callsign = Settings.Callsign; flag = Profile.Flag;
             cc = gameObject.AddComponent<CharacterController>();
             cc.height = 1.8f; cc.radius = 0.35f; cc.center = new Vector3(0, 0.9f, 0); cc.stepOffset = 0.45f; cc.slopeLimit = 50f;
             cc.skinWidth = 0.04f;
@@ -638,6 +638,14 @@ namespace Zone47
             var rb = g.GetComponent<Rigidbody>();
             rb.linearVelocity = cam.transform.forward * 16f + Vector3.up * 3.5f + cc.velocity * 0.5f;
             rb.angularVelocity = Random.insideUnitSphere * 10f;
+            Net.SendNade(this, g.transform.position, rb.linearVelocity);
+        }
+
+        public override void GetNetState(out Vector3 pos, out float y, out float p, out int flags, out int weapon)
+        {
+            pos = transform.position; y = yaw; p = pitch;
+            flags = (Alive ? 1 : 0) | (crouched ? 2 : 0) | (prone ? 4 : 0) | (Aiming || Firing || Time.time - lastShotAt < 1.5f ? 8 : 0) | (reloading ? 16 : 0);
+            weapon = Net.WeaponIndex(slots != null ? slots[cur].def.id : "m4");
         }
 
         // ------------------------------------------------------------ viewmodel

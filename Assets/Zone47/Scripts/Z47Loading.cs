@@ -118,9 +118,14 @@ namespace Zone47
                 for (int i = 0; i < count; i++)
                 {
                     string n = ally ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[i - 1]) : MatchManager.EnemyNames[i];
+                    string fc = ally ? (i == 0 ? Profile.Flag : MatchManager.AllyFlags[i - 1]) : MatchManager.EnemyFlags[i];
                     var row = UIK.Img(vs, "r", new Color(col.r, col.g, col.b, ally && i == 0 ? 0.28f : 0.12f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x, 82 - i * step), new Vector2(380, rh));
                     UIK.Img(row.transform, "s", col, new Vector2(ally ? 0 : 1, 0), new Vector2(ally ? 0 : 1, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(ally ? 0 : 1, 0.5f);
-                    var tx = UIK.Txt(row.transform, "n", n, big ? 19 : 22, ally && i == 0 ? Pal.Accent : Pal.Text, ally ? TextAnchor.MiddleLeft : TextAnchor.MiddleRight, Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-36, 0), true);
+                    float fh = rh * 0.5f, fw = fh * 4f / 3f;
+                    var rf = Countries.Make(row.transform, "fl", fc, new Vector2(ally ? 0 : 1, 0.5f), Vector2.zero, fh);
+                    rf.rectTransform.pivot = new Vector2(ally ? 0 : 1, 0.5f); rf.rectTransform.anchoredPosition = new Vector2(ally ? 16 : -16, 0);
+                    var tx = UIK.Txt(row.transform, "n", n, big ? 19 : 22, ally && i == 0 ? Pal.Accent : Pal.Text, ally ? TextAnchor.MiddleLeft : TextAnchor.MiddleRight, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                    tx.rectTransform.offsetMin = new Vector2(ally ? 26 + fw : 18, 0); tx.rectTransform.offsetMax = new Vector2(ally ? -18 : -26 - fw, 0);
                 }
             }
 

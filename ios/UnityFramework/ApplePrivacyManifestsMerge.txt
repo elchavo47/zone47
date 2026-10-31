@@ -27,3 +27,189 @@ Adding elements from Unity
 				1:
 					C617.1
 
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.authentication@6613d5ec6ae8/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyCollectedDataTypes:
+		0:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeEmailAddress
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		1:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeOtherUserContactInfo
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		2:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCoarseLocation
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		3:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCustomerSupport
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeOther
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		4:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeUserID
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		5:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeOtherUsageData
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+				1:
+					NSPrivacyCollectedDataTypePurposeAnalytics
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		6:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCrashData
+			NSPrivacyCollectedDataTypeLinked:
+				False
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+
+	NSPrivacyTracking:
+		False
+
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.wire@0986c357ead1/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyCollectedDataTypes:
+		0:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCoarseLocation
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+
+	NSPrivacyTracking:
+		False
+
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.friends@830abe5a687c/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyCollectedDataTypes:
+		0:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCoarseLocation
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		1:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeOtherUserContent
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+
+	NSPrivacyTracking:
+		False
+
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.multiplayer@cf2613f41536/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyCollectedDataTypes:
+		0:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCoarseLocation
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+		1:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeGameplayContent
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+
+	NSPrivacyTracking:
+		False
+
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.qos@49c69eeeb35e/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyCollectedDataTypes:
+		0:
+			NSPrivacyCollectedDataType:
+				NSPrivacyCollectedDataTypeCoarseLocation
+			NSPrivacyCollectedDataTypeLinked:
+				True
+			NSPrivacyCollectedDataTypePurposes:
+				0:
+					NSPrivacyCollectedDataTypePurposeAppFunctionality
+			NSPrivacyCollectedDataTypeTracking:
+				False
+
+	NSPrivacyTracking:
+		False
+
+--------------------------------------------------
+
+Adding elements from Library/PackageCache/com.unity.services.core@3464cb68d709/Runtime/PrivacyInfo.xcprivacy
+	NSPrivacyAccessedAPITypes:
+		0:
+			NSPrivacyAccessedAPIType:
+				NSPrivacyAccessedAPICategoryUserDefaults
+			NSPrivacyAccessedAPITypeReasons:
+				0:
+					CA92.1
+
+	NSPrivacyTracking:
+		False
+

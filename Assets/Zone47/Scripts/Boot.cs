@@ -8,7 +8,7 @@ using UnityEngine.Rendering.Universal;
 namespace Zone47
 {
     /// App entry: splash → menu → match. Lives in the only scene.
-    public class Boot : MonoBehaviour
+    public partial class Boot : MonoBehaviour
     {
         public static Boot I;
         GameObject menuRoot, matchRoot;
@@ -175,165 +175,7 @@ namespace Zone47
             var root = UIK.Full(menuCanvas.transform, "root");
             root.gameObject.AddComponent<SafeArea>();
 
-            // ---- left: logo, callsign, menu
-            var logoTex = R.lobbyLogo != null ? R.lobbyLogo : R.logo;
-            if (logoTex != null)
-            {
-                // transparent logo, no dark tile behind it: as wide as the menu column (560) and up to 270 tall
-                float aspect = logoTex.width / (float)logoTex.height;
-                Vector2 sz = aspect >= 560f / 270f ? new Vector2(560f, 560f / aspect) : new Vector2(270f * aspect, 270f);
-                var lg = UIK.Rect(root, "logo", new Vector2(0, 1), new Vector2(0, 1), new Vector2(80 + (560f - sz.x) * 0.5f, -12), sz);
-                var ri = lg.gameObject.AddComponent<RawImage>(); ri.texture = logoTex; ri.raycastTarget = false;
-            }
-            var chip = UIK.Img(root, "callsign", new Color(1, 1, 1, 0.07f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(80, -290), new Vector2(560, 92), true);
-            UIK.Img(chip.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(6, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
-            UIK.Txt(chip.transform, "lbl", L.S("callsign"), 18, Pal.Dim, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(24, -12), new Vector2(-48, -24), true);
-            nameTxt = UIK.Txt(chip.transform, "name", Settings.Callsign.ToUpper(), 38, Pal.Text, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(24, 10), new Vector2(-48, -20), true);
-            UIK.Txt(chip.transform, "edit", L.S("change"), 18, Pal.Accent, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-20, 0), new Vector2(-40, 0), true);
-            chip.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); ShowNameDialog(false); });
-            // level + XP progress on the callsign chip
-            Progress.Split(Progress.XP, out int plv, out int pin, out int pneed);
-            UIK.Txt(chip.transform, "lv", L.S("level") + " " + plv, 17, Pal.Accent, TextAnchor.UpperRight, Vector2.zero, Vector2.one, new Vector2(-20, -12), new Vector2(-40, -24), true);
-            var xpTrack = UIK.Img(chip.transform, "xpt", new Color(1, 1, 1, 0.1f), new Vector2(0, 0), new Vector2(1, 0), new Vector2(3, 2), new Vector2(-6, 4));
-            xpTrack.rectTransform.pivot = new Vector2(0.5f, 0);
-            var xpFill = UIK.Img(xpTrack.transform, "f", Pal.Accent, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).rectTransform;
-            xpFill.pivot = new Vector2(0, 0.5f); xpFill.anchoredPosition = Vector2.zero; xpFill.localScale = new Vector3(pin / (float)pneed, 1, 1);
-            var tdmTxt = UIK.Txt(root, "mode", L.S("tdm"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(84, -400), new Vector2(700, 36), true);
-
-            UIK.Btn(root, L.S("deploy"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -30), new Vector2(560, 110), StartMatch, 52, true);
-            var diffBtn = UIK.Btn(root, DiffLabel(), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -152), new Vector2(560, 80), null, 30);
-            diffBtn.onClick.AddListener(() => { Settings.Difficulty = (Settings.Difficulty + 1) % 3; diffBtn.GetComponentInChildren<Text>().text = DiffLabel(); });
-            UIK.Btn(root, L.S("settings"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -244), new Vector2(560, 80), () => ShowSettings(menuCanvas.transform, RebuildMenu), 30);
-
-            // ---- right: map + squads
-            var col = UIK.Rect(root, "info", new Vector2(1, 1), new Vector2(1, 1), new Vector2(-70, -40), new Vector2(560, 980));
-            UIK.Txt(col, "mh", L.S("map"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, 0), new Vector2(0, 30), true);
-            // map picker: picture cards side by side, selected one framed in orange; its description underneath
-            var prefabs = new GameObject[] { R.mapPrefab, R.portPrefab, R.cityPrefab };
-            var ids = new System.Collections.Generic.List<int>();
-            for (int i = 0; i < prefabs.Length; i++) if (prefabs[i] != null) ids.Add(i);
-            if (!ids.Contains(Settings.Map)) Settings.Map = ids[0];
-            string[] nameKeys = { "mapname", "mapname2", "mapname3" }, infoKeys = { "mapinfo", "mapinfo2", "mapinfo3" };
-            float cw = (560f - (ids.Count - 1) * 10f) / ids.Count, ih = cw * 9f / 16f;
-            var frames = new System.Collections.Generic.List<(Image frame, Image shade, GameObject sel, int id)>();
-            System.Action refreshWx = null;
-            var info = UIK.Txt(col, "minfo", "", 18, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -36 - ih - 62), new Vector2(0, 26), true);
-            System.Action refreshMaps = () =>
-            {
-                foreach (var f in frames) { bool on = f.id == Settings.Map; f.frame.color = on ? Pal.Accent : new Color(1, 1, 1, 0.12f); f.shade.color = new Color(0, 0, 0, on ? 0f : 0.35f); f.sel.SetActive(on); }
-                info.text = L.S(infoKeys[Settings.Map]);
-                refreshWx?.Invoke();
-            };
-            for (int k = 0; k < ids.Count; k++)
-            {
-                int id = ids[k];
-                float x = k * (cw + 10f);
-                var frame = UIK.Img(col, "map" + id, Pal.Accent, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x, -36), new Vector2(cw, ih + 52), true);
-                frame.rectTransform.pivot = new Vector2(0, 1); frame.rectTransform.anchoredPosition = new Vector2(x, -36);
-                var inner = UIK.Img(frame.transform, "in", new Color(0.05f, 0.055f, 0.05f, 0.95f), Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-6, -6));
-                var pic = UIK.Rect(inner.transform, "pic", new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, ih));
-                pic.pivot = new Vector2(0.5f, 1); pic.anchoredPosition = Vector2.zero;
-                var ri = pic.gameObject.AddComponent<RawImage>(); ri.raycastTarget = false;
-                if (R.mapThumbs != null && id < R.mapThumbs.Length && R.mapThumbs[id] != null) ri.texture = R.mapThumbs[id]; else ri.color = new Color(0.2f, 0.2f, 0.2f);
-                var shade = UIK.Img(pic, "shade", new Color(0, 0, 0, 0.35f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
-                var nm = UIK.Txt(inner.transform, "n", L.S(nameKeys[id]), 17, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0), new Vector2(1, 0), new Vector2(10, 23), new Vector2(-20, 40), true);
-                nm.horizontalOverflow = HorizontalWrapMode.Wrap;
-                var selTag = UIK.Img(pic, "sel", Pal.Accent, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-6, -6), new Vector2(86, 24));
-                selTag.rectTransform.pivot = new Vector2(1, 1); selTag.rectTransform.anchoredPosition = new Vector2(-6, -6);
-                UIK.Txt(selTag.transform, "t", L.S("selected"), 14, new Color(0.08f, 0.06f, 0.03f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-                frames.Add((frame, shade, selTag.gameObject, id));
-                frame.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); Settings.Map = id; PlayerPrefs.Save(); refreshMaps(); });
-            }
-            // weather picker: random / noon / foggy morning / sandstorm (desert only)
-            float wy = -36 - ih - 100;
-            UIK.Txt(col, "wh", L.S("weather"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, wy), new Vector2(0, 30), true);
-            var chips = new System.Collections.Generic.List<(Image bg, Text t, int w)>();
-            float chw = (560f - 3 * 8f) / 4f;
-            for (int w = 0; w < 4; w++)
-            {
-                int wi = w;
-                var bg = UIK.Img(col, "wx" + w, new Color(1, 1, 1, 0.06f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(w * (chw + 8f), wy - 34), new Vector2(chw, 40), true);
-                bg.rectTransform.pivot = new Vector2(0, 1); bg.rectTransform.anchoredPosition = new Vector2(w * (chw + 8f), wy - 34);
-                var t = UIK.Txt(bg.transform, "t", L.S("wx" + w), 15, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-                chips.Add((bg, t, w));
-                bg.gameObject.AddComponent<Button>().onClick.AddListener(() =>
-                {
-                    if (!Weather.Valid(wi, Settings.Map)) return;
-                    Sfx.UI(); Settings.Weather = wi; PlayerPrefs.Save(); refreshWx();
-                });
-            }
-            refreshWx = () =>
-            {
-                if (!Weather.Valid(Settings.Weather, Settings.Map)) { Settings.Weather = Weather.Random; PlayerPrefs.Save(); }
-                foreach (var c in chips)
-                {
-                    bool on = c.w == Settings.Weather, ok = Weather.Valid(c.w, Settings.Map);
-                    c.bg.color = on ? Pal.Accent : new Color(1, 1, 1, ok ? 0.08f : 0.03f);
-                    c.t.color = on ? new Color(0.08f, 0.06f, 0.03f) : ok ? Pal.Text : new Color(1, 1, 1, 0.25f);
-                }
-            };
-            refreshMaps();
-
-            // team size picker (1v1 ... 10v10); target and time come with it
-            float my = -36 - ih - 190;
-            UIK.Txt(col, "mh2", L.S("mode"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, my), new Vector2(0, 30), true);
-            var modeChips = new System.Collections.Generic.List<(Image bg, Text t)>();
-            int np = MatchManager.Presets.Length; float mw = (560f - (np - 1) * 6f) / np;
-            var modeInfo = UIK.Txt(col, "minfo2", "", 17, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, my - 82), new Vector2(0, 26), true);
-            RectTransform rosterRoot = null;
-            float sqY = -36 - ih - 310;
-            System.Action buildRoster = null;
-            System.Action refreshModes = () =>
-            {
-                for (int i = 0; i < modeChips.Count; i++)
-                {
-                    bool on = i == Settings.TeamPreset;
-                    modeChips[i].bg.color = on ? Pal.Accent : new Color(1, 1, 1, 0.08f);
-                    modeChips[i].t.color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
-                }
-                var cp = MatchManager.Cur; bool tr = Settings.Turkish;
-                tdmTxt.text = (tr ? "TAKIM ÖLÜM MAÇI · " : "TEAM DEATHMATCH · ") + cp.label;
-                modeInfo.text = (tr ? "HEDEF " : "TARGET ") + cp.target + "   ·   " + Mathf.RoundToInt(cp.time / 60f) + (tr ? " DK" : " MIN") + (cp.a < cp.e ? (tr ? "   ·   DÜŞMAN KALABALIK, BİRAZ DAHA AZ İSABETLİ" : "   ·   OUTNUMBERED: ENEMIES AIM A BIT WORSE") : "");
-            };
-            for (int i = 0; i < np; i++)
-            {
-                int pi = i;
-                var bg = UIK.Img(col, "mode" + i, new Color(1, 1, 1, 0.08f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(mw, 40), true);
-                bg.rectTransform.pivot = new Vector2(0, 1); bg.rectTransform.anchoredPosition = new Vector2(i * (mw + 6f), my - 34);
-                var t = UIK.Txt(bg.transform, "t", MatchManager.Presets[i].label, 17, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-                modeChips.Add((bg, t));
-                bg.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); Settings.TeamPreset = pi; PlayerPrefs.Save(); refreshModes(); buildRoster(); });
-            }
-
-            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, sqY), new Vector2(0, 30), true);
-            buildRoster = () =>
-            {
-                if (rosterRoot != null) Destroy(rosterRoot.gameObject);
-                rosterRoot = UIK.Rect(col, "roster", new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 0));
-                rosterRoot.pivot = new Vector2(0.5f, 1); rosterRoot.anchoredPosition = Vector2.zero;
-                MatchManager.RollNames();
-                bool big = MatchManager.EnemySize > 5 || MatchManager.AllySize > 5;
-                float rh = big ? 26f : 40f, step = big ? 30f : 46f; int fs = big ? 17 : 22;
-                for (int t = 0; t < 2; t++)
-                {
-                    var c = t == 0 ? Pal.Ally : Pal.Enemy;
-                    float x0 = t == 0 ? 0 : 290;
-                    int count = t == 0 ? MatchManager.AllySize : MatchManager.EnemySize;
-                    UIK.Txt(rosterRoot, "th" + t, L.S(t == 0 ? "allies" : "enemies") + "  " + count, 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 40), new Vector2(270, 32), true);
-                    for (int i = 0; i < count; i++)
-                    {
-                        string n = t == 0 ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[i - 1]) : MatchManager.EnemyNames[i];
-                        var row = UIK.Img(rosterRoot, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 80 - i * step), new Vector2(270, rh));
-                        UIK.Img(row.transform, "s", c, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
-                        var tx = UIK.Txt(row.transform, "n", n, fs, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-24, 0), false);
-                        tx.fontStyle = FontStyle.Bold;
-                        if (t == 0 && i == 0) rosterMe = tx;
-                    }
-                }
-            };
-            refreshModes();
-            buildRoster();
-            UIK.Txt(root, "foot", "AYD WORKS GAMES  ·  v0.9", 20, Pal.Dim, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 24), new Vector2(420, 30), true);
+            BuildLobbyUI(root);
 
             Sfx.Music(R.menuMusic, R.lobbyPrefab != null && R.rain != null ? 0.4f : 0.7f);
             if (string.IsNullOrWhiteSpace(Settings.PlayerName)) ShowNameDialog(true);
@@ -435,7 +277,9 @@ namespace Zone47
                 if (n.Length < 2) { ph.text = L.S("callsign_short"); input.text = ""; return; }
                 Settings.PlayerName = n; PlayerPrefs.Save();
                 if (nameTxt != null) nameTxt.text = n.ToUpper();
-                if (rosterMe != null) rosterMe.text = n;
+                if (rosterMe != null) rosterMe.text = n.Substring(0, 1).ToUpper();
+                if (Social.Ready) Social.Rename(); else if (Net.Available && Social.Available) Social.Init();
+                RefreshLobby();
                 Destroy(panel.gameObject);
             }, 36, true);
             if (!first) UIK.Btn(box.transform, L.S("cancel"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-150, 50), new Vector2(280, 86), () => Destroy(panel.gameObject), 32);
@@ -467,8 +311,8 @@ namespace Zone47
         public void StartMatch()
         {
             Time.timeScale = 1f; AudioListener.pause = false;
-            MatchManager.EnsureNames();
-            Weather.PrepareMatch();
+            if (!Net.InMatch) { MatchManager.EnsureNames(); Weather.PrepareMatch(); }      // online: line-up and weather come from the host
+            lobbyRoot = null; lobbyUI = null; stage = null; inviteBox = null;      // the lobby goes away with the menu
             LoadingScreen.Show();
             if (menuRoot != null) Destroy(menuRoot);
             menuRoot = null;
@@ -486,8 +330,12 @@ namespace Zone47
             mm.Begin();
         }
 
-        public void ToMenu()
+        public void ToMenu() => ToMenu(null);
+        /// Back to the lobby; leaves any online room. `reason` (e.g. "host left") is shown as a toast.
+        public void ToMenu(string reason)
         {
+            Net.Leave();
+            pendingToast = reason;
             Time.timeScale = 1f; AudioListener.pause = false;
             Sfx.Ambience(null, 0);
             if (matchRoot != null) Destroy(matchRoot);
@@ -495,7 +343,20 @@ namespace Zone47
             StartCoroutine(MenuNextFrame());
         }
 
-        IEnumerator MenuNextFrame() { yield return null; BuildMenu(); }
+        IEnumerator MenuNextFrame() { yield return null; BuildMenu(); if (!string.IsNullOrEmpty(pendingToast)) { Toast(pendingToast); pendingToast = null; } reopenRoom = false; }
+        string pendingToast; bool reopenRoom;
+
+        /// Online match over: back to the room screen, still connected.
+        public void BackToRoom()
+        {
+            Net.EndMatchLocal();
+            Time.timeScale = 1f; AudioListener.pause = false;
+            Sfx.Ambience(null, 0);
+            if (matchRoot != null) Destroy(matchRoot);
+            matchRoot = null;
+            reopenRoom = true;
+            StartCoroutine(MenuNextFrame());
+        }
 
         // ------------------------------------------------------------ settings
         public void ShowSettings(Transform parent, Action onClose, bool inMatch = false) => SettingsUI.Show(parent, onClose, inMatch);
@@ -538,6 +399,7 @@ namespace Zone47
             "Drone: \"MQ9 Ripper military drone\" by Giperione (CC BY 4.0, skfb.ly/oBAH8)\n" +
             "Bomb: \"MK2 Grenade Drone Bomb\" by yousef.hameed (CC BY 4.0, skfb.ly/oUNp7)\n" +
             "Shotgun: \"Shotgun\" by Pieter Ferreira (CC BY 4.0, skfb.ly/6WTnO)\n" +
+            "Flags: flag-icons by Panayiotis Lipiridis (MIT)\n" +
             "Music: \"Viking/Medieval Theme\" by Mark_Murray (freesound.org)\n\n" +
             "Fonts: Black Ops One, Rajdhani — SIL Open Font License\n" +
             "Licenses: creativecommons.org/licenses/by/4.0";

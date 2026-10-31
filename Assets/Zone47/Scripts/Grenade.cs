@@ -15,6 +15,15 @@ namespace Zone47
         void OnDisable() { Live.Remove(this); }
         bool done;
 
+        /// Online: someone else's grenade (it only hurts people on the phone that threw it; see Actor.Damage).
+        public static void Spawn(Actor owner, Vector3 pos, Vector3 vel)
+        {
+            if (Z47Refs.I.grenadePrefab == null) return;
+            var go = Instantiate(Z47Refs.I.grenadePrefab, pos, Random.rotation);
+            var g = go.GetComponent<Grenade>(); if (g != null) g.owner = owner;
+            var rb = go.GetComponent<Rigidbody>(); if (rb != null) { rb.linearVelocity = vel; rb.angularVelocity = Random.insideUnitSphere * 10f; }
+        }
+
         void Update()
         {
             t += Time.deltaTime;
