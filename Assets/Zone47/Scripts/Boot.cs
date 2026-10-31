@@ -457,7 +457,7 @@ namespace Zone47
         public Transform gun;
         public WeaponDef def;
         Animator a; float baseYaw; bool ok;
-        Transform hips, spine, neck, lUp, lLo, lHand, rUp, rLo, rHand;
+        Transform hips, spine, neck, lUp, lLo, lHand, rUp, rLo, rHand, lMid;
         Transform lThigh, lKnee, lFoot, rThigh, rKnee, rFoot, lToes, rToes;
 
         void Start()
@@ -469,6 +469,7 @@ namespace Zone47
             hips = B(HumanBodyBones.Hips); spine = B(HumanBodyBones.Spine); neck = B(HumanBodyBones.Neck);
             lUp = B(HumanBodyBones.LeftUpperArm); lLo = B(HumanBodyBones.LeftLowerArm); lHand = B(HumanBodyBones.LeftHand);
             rUp = B(HumanBodyBones.RightUpperArm); rLo = B(HumanBodyBones.RightLowerArm); rHand = B(HumanBodyBones.RightHand);
+            lMid = B(HumanBodyBones.LeftMiddleProximal);
             lThigh = B(HumanBodyBones.LeftUpperLeg); lKnee = B(HumanBodyBones.LeftLowerLeg); lFoot = B(HumanBodyBones.LeftFoot);
             rThigh = B(HumanBodyBones.RightUpperLeg); rKnee = B(HumanBodyBones.RightLowerLeg); rFoot = B(HumanBodyBones.RightFoot);
             lToes = B(HumanBodyBones.LeftToes); rToes = B(HumanBodyBones.RightToes);
@@ -509,21 +510,29 @@ namespace Zone47
             neck.rotation = Quaternion.AngleAxis(turn * 0.4f, Vector3.up) * neck.rotation;
             if (head != null) head.rotation = Quaternion.AngleAxis(turn * 0.6f, Vector3.up) * head.rotation;
 
-            // 5) rifle at port arms (PUBG lobby): grip by the right hip, muzzle up past the left shoulder, its side toward
-            //    the camera (not the top rail), magazine against the body
+            // 5) rifle at low ready: stock up by the right chest, muzzle diagonally down toward the ground in front-left,
+            //    sights on top, its side toward the camera
             Vector3 H = hips.position, N = neck.position;
             Vector3 up = (N - H).normalized;
             Vector3 right = Vector3.ProjectOnPlane(rUp.position - lUp.position, up).normalized;
             Vector3 fwd = Vector3.Cross(right, up);
-            Vector3 muzzle = (up * 0.78f - right * 0.58f + fwd * 0.12f).normalized;
-            Vector3 gunUp = Vector3.ProjectOnPlane(up * 0.58f + right * 0.78f + fwd * 0.35f, muzzle).normalized;
+            Vector3 muzzle = (-up * 0.55f - right * 0.55f + fwd * 0.62f).normalized;
+            Vector3 gunUp = Vector3.ProjectOnPlane(up + right * 0.35f, muzzle).normalized;
             Quaternion gr = Quaternion.LookRotation(muzzle, gunUp);
-            Vector3 grip = H + up * 0.17f + right * 0.15f + fwd * 0.2f;
+            Vector3 grip = H + up * 0.3f + right * 0.15f + fwd * 0.22f;
             gun.SetPositionAndRotation(grip, gr);
 
             // 6) hands back on it with the idle's own grip; elbows down, the right one by the side, the left one out
-            Arm(rUp, rLo, rHand, grip + gr * offR, gr * relR, -up * 0.8f + right * 0.6f - fwd * 0.3f);
-            Arm(lUp, lLo, lHand, grip + gr * offL, gr * relL, -up * 0.8f - right * 0.7f - fwd * 0.1f);
+            Arm(rUp, rLo, rHand, grip + gr * offR, gr * relR, -up * 0.5f + right * 0.9f - fwd * 0.25f);
+            // left hand: palm right under the handguard (the idle's hand angle, but placed exactly on the gun)
+            Vector3 fore = def != null ? gun.TransformPoint(def.forePoint) : grip + muzzle * 0.32f;
+            fore -= gunUp * 0.035f;
+            Vector3 palm = Vector3.zero;
+            for (int pass = 0; pass < 2; pass++)
+            {
+                Arm(lUp, lLo, lHand, fore - palm, gr * relL, -up * 0.7f - right * 0.6f - fwd * 0.1f);
+                palm = lMid != null ? (lMid.position - lHand.position) * 0.5f : Vector3.zero;   // the gun sits in the palm, not at the wrist
+            }
         }
 
         static void Arm(Transform up, Transform lo, Transform hand, Vector3 wrist, Quaternion handRot, Vector3 pole)
@@ -548,8 +557,10 @@ namespace Zone47
             Aim(rThigh, rFoot, new Vector3(rThigh.position.x, ankleY, rThigh.position.z) + side * 0.03f);
             // feet: keep the idle's flat foot, then turn each one to point forward (toes slightly out)
             lFoot.rotation = lf; rFoot.rotation = rf;
-            PointFoot(lFoot, lToes, Quaternion.Euler(0, -8f, 0) * transform.forward, turn);
-            PointFoot(rFoot, rToes, Quaternion.Euler(0, 8f, 0) * transform.forward, turn);
+            Vector3 body = Vector3.Cross((rUp.position - lUp.position).Flat(), Vector3.up).normalized;      // where the chest faces
+            if (body.sqrMagnitude < 0.5f) body = transform.forward;
+            PointFoot(lFoot, lToes, Quaternion.Euler(0, -5f, 0) * body, turn);
+            PointFoot(rFoot, rToes, Quaternion.Euler(0, 5f, 0) * body, turn);
         }
 
         static void PointFoot(Transform foot, Transform toes, Vector3 dir, float turn)

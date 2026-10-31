@@ -1062,6 +1062,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Animator_GetLayerWeight_Injected();
 		Register_UnityEngine_Animator_GetLayerWeight_Injected();
 
+		//System.Single UnityEngine.Animator::get_speed_Injected(System.IntPtr)
+		void Register_UnityEngine_Animator_get_speed_Injected();
+		Register_UnityEngine_Animator_get_speed_Injected();
+
 		//System.Void UnityEngine.Animator::CrossFade_Injected(System.IntPtr,System.Int32,System.Single,System.Int32,System.Single,System.Single)
 		void Register_UnityEngine_Animator_CrossFade_Injected();
 		Register_UnityEngine_Animator_CrossFade_Injected();
@@ -1157,6 +1161,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Animator::set_runtimeAnimatorController_Injected(System.IntPtr,System.IntPtr)
 		void Register_UnityEngine_Animator_set_runtimeAnimatorController_Injected();
 		Register_UnityEngine_Animator_set_runtimeAnimatorController_Injected();
+
+		//System.Void UnityEngine.Animator::set_speed_Injected(System.IntPtr,System.Single)
+		void Register_UnityEngine_Animator_set_speed_Injected();
+		Register_UnityEngine_Animator_set_speed_Injected();
 
 		//UnityEngine.AnimatorControllerParameter[] UnityEngine.Animator::get_parameters_Injected(System.IntPtr)
 		void Register_UnityEngine_Animator_get_parameters_Injected();

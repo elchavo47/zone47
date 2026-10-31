@@ -36,6 +36,14 @@ namespace Zone47
         static readonly float[] teamNadeAt = { -99f, -99f };        // last grenade per team: one side can't spam several at once
         int NadeCount => Settings.Difficulty >= 2 ? 2 : 1;
 
+        // feet: the walk/run clips are "in place" (no root motion), so the animation speed is matched to the real speed
+        // by watching the planted foot, and footsteps play the moment a foot touches the ground (from that foot)
+        Transform lFootB, rFootB;
+        Vector3 lPrevL, rPrevL; bool feetInit;
+        readonly float[] clipGround = { 1.4f, 2f, 4.2f };   // crouch / walk / run: how fast the planted foot slides back at animation speed 1 (m/s), learned live
+        float lMinY = 9f, rMinY = 9f; bool lDown = true, rDown = true; float lStepAt, rStepAt;
+        float lastYaw, turnRate;
+
         // online puppet: this soldier is simulated on another phone (a remote player, or the host's bots); we only show it
         public bool puppet; public ulong owner; bool netHuman;
         public bool IsHuman => netHuman;
@@ -86,6 +94,8 @@ namespace Zone47
             lHand = anim.GetBoneTransform(HumanBodyBones.LeftHand);
             spine = anim.GetBoneTransform(HumanBodyBones.Chest) ?? anim.GetBoneTransform(HumanBodyBones.Spine);
             rShoulder = anim.GetBoneTransform(HumanBodyBones.RightUpperArm);
+            lFootB = anim.GetBoneTransform(HumanBodyBones.LeftFoot); rFootB = anim.GetBoneTransform(HumanBodyBones.RightFoot);
+            lastYaw = transform.eulerAngles.y;
             SpawnGun();
             // ragdoll removed (bodies flopped around): deaths use the Dying animation again
             thinkT = Random.Range(0f, 0.3f);
@@ -284,7 +294,7 @@ namespace Zone47
             }
             Vector3 muzzle = gun.TransformPoint(weapon.muzzlePoint);
             Ballistics.Fire(this, EyePos, dir, weapon.range, weapon.damage * Mathf.Lerp(0.6f, 0.85f, Skill) * MatchManager.HandicapDamage(team), muzzle, true, out _);
-            Sfx.Play3D(weapon.shot, muzzle, 1f, 6f, 140f, 0.07f);
+            Sfx.Gunshot(weapon.shot, muzzle, 1f, false);
             FX.MuzzleFlash(muzzle, gun.forward, weapon.kind == WeaponKind.Sniper ? 0.45f : 0.32f);
             mag--;
             nextShot = Time.time + weapon.fireInterval * (weapon.kind == WeaponKind.Sniper ? 1.6f : 1.05f);
@@ -429,17 +439,7 @@ namespace Zone47
                 }
             }
 
-            Steps:
-            float sp = agent.velocity.magnitude;
-            if (sp > 0.5f)
-            {
-                stepAcc += sp * Time.deltaTime;
-                if (stepAcc > 2.2f)
-                {
-                    stepAcc = 0;
-                    Sfx.Play3D(Sfx.StepClip(transform.position, sp > 4f ? 1 : 0), transform.position, 0.7f, 2f, 24f, 0.08f);
-                }
-            }
+            Steps:;           // footsteps: played from the real foot plants (FeetSync)
         }
 
         /// A spot behind a nearby crate/barrier, on the far side from the enemy.
@@ -461,14 +461,24 @@ namespace Zone47
         {
             Vector3 d = (p - transform.position).Flat();
             if (d.sqrMagnitude < 0.01f) return;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(d), 420f * Time.deltaTime);
+            // on the move a quick turn is fine; standing still it turns at a human pace (the legs shuffle along, see Animate)
+            float sp = Vel.Flat().magnitude;
+            float rate = sp > 1.2f ? 420f : target != null ? 230f : 150f;
+            var want = Quaternion.LookRotation(d);
+            float ang = Quaternion.Angle(transform.rotation, want);
+            float k = Mathf.Clamp01(ang / 25f);                                  // ease out the last degrees instead of stopping dead
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, want, rate * Mathf.Lerp(0.35f, 1f, k) * Time.deltaTime);
         }
 
         void Animate()
         {
             Vector3 lv = transform.InverseTransformDirection(Vel);
             float runN = 4.5f;
-            anim.SetFloat("MoveX", lv.x / runN, 0.12f, Time.deltaTime);
+            float dt = Mathf.Max(Time.deltaTime, 0.0001f), yaw = transform.eulerAngles.y;
+            turnRate = Mathf.Lerp(turnRate, Mathf.DeltaAngle(lastYaw, yaw) / dt, 1f - Mathf.Exp(-dt * 10f)); lastYaw = yaw;
+            // turning on the spot: feed a little sideways step into the blend so the feet shuffle round instead of the body spinning on frozen legs
+            float shuffle = lv.Flat().magnitude < 0.5f && Mathf.Abs(turnRate) > 25f ? Mathf.Clamp(turnRate / 260f, -0.32f, 0.32f) : 0f;
+            anim.SetFloat("MoveX", lv.x / runN + shuffle, 0.12f, Time.deltaTime);
             anim.SetFloat("MoveZ", lv.z / runN, 0.12f, Time.deltaTime);
             anim.SetBool("Crouch", crouch);
             anim.SetBool("Aim", puppet ? Ready : target != null);
@@ -511,7 +521,8 @@ namespace Zone47
 
         void LateUpdate()
         {
-            if (!Alive) return;
+            if (!Alive) { if (anim != null && anim.speed != 1f) anim.speed = 1f; return; }
+            FeetSync();
             // fallback when the animator has no IK pass (old controller): still hold the gun along the aim line
             if (gun != null && ikFrame != Time.frameCount) PlaceGun();
             // the Mixamo rifle idle / walk hunch forward with the head down: stand them up straight.
@@ -603,6 +614,48 @@ namespace Zone47
             if (Alive) { agent.enabled = true; if (NavMesh.SamplePosition(transform.position, out var h, 4f, NavMesh.AllAreas)) agent.Warp(h.position); }
         }
 
+        /// Foot sliding fix + footsteps on real foot plants.
+        /// The planted foot moves backward relative to the body at the clip's own walking speed (times the animator speed):
+        /// from that we learn the clip's speed and set animator speed = real speed / clip speed, so the foot stays put on the ground.
+        void FeetSync()
+        {
+            if (anim == null || lFootB == null || rFootB == null) return;
+            float dt = Time.deltaTime; if (dt <= 0f) return;
+            Vector3 v = Vel.Flat(); float sp = v.magnitude;
+            Vector3 l = transform.InverseTransformPoint(lFootB.position), r = transform.InverseTransformPoint(rFootB.position);
+            // the lowest each foot gets (slowly forgets, so slopes / stance changes re-learn it)
+            lMinY = Mathf.Min(lMinY + dt * 0.05f, l.y); rMinY = Mathf.Min(rMinY + dt * 0.05f, r.y);
+            int band = crouch ? 0 : sp < 3f ? 1 : 2;
+            if (feetInit && sp > 0.6f && !reloading)
+            {
+                bool leftPlanted = l.y < r.y;
+                Vector3 d = ((leftPlanted ? l - lPrevL : r - rPrevL) / dt).Flat();
+                Vector3 moveDir = transform.InverseTransformDirection(v).Flat().normalized;
+                float back = -Vector3.Dot(d, moveDir) / Mathf.Max(anim.speed, 0.1f);       // the clip's ground speed
+                if (back > 0.4f && back < 9f) clipGround[band] = Mathf.Lerp(clipGround[band], back, 1f - Mathf.Exp(-dt * 2.5f));
+            }
+            float want = sp > 0.6f ? Mathf.Clamp(sp / Mathf.Max(0.3f, clipGround[band]), 0.7f, 1.45f) : 1f;
+            anim.speed = Mathf.Lerp(anim.speed, want, 1f - Mathf.Exp(-dt * 5f));
+
+            // footsteps: a foot coming down onto the ground
+            const float PlantH = 0.04f;
+            bool lNow = l.y < lMinY + PlantH, rNow = r.y < rMinY + PlantH;
+            if (feetInit && sp > 0.5f)
+            {
+                if (lNow && !lDown && Time.time - lStepAt > 0.18f) { lStepAt = Time.time; Step(lFootB.position, sp); }
+                if (rNow && !rDown && Time.time - rStepAt > 0.18f) { rStepAt = Time.time; Step(rFootB.position, sp); }
+            }
+            lDown = lNow; rDown = rNow; lPrevL = l; rPrevL = r; feetInit = true;
+        }
+
+        void Step(Vector3 at, float sp)
+        {
+            if (crouch && sp < 2f) return;                    // crouch-walking is quiet
+            var pl = PlayerController.Local;
+            bool enemy = pl == null || pl.team != team;
+            Sfx.Step(Sfx.StepClip(transform.position, sp > 4f ? 1 : 0), at, enemy, sp > 4f);
+        }
+
         public override void GetNetState(out Vector3 pos, out float yaw, out float pitch, out int flags, out int weaponIdx)
         {
             pos = transform.position; yaw = transform.eulerAngles.y;
@@ -646,13 +699,7 @@ namespace Zone47
             // hit box follows the stance
             float h = prone ? 0.6f : crouch ? 1.25f : 1.8f;
             if (Mathf.Abs(col.height - h) > 0.01f) { col.height = h; col.center = new Vector3(0, h * 0.5f, 0); }
-            // footsteps
-            float sp = pupVel.magnitude;
-            if (sp > 0.6f && !crouch)
-            {
-                stepAcc += sp * Time.deltaTime;
-                if (stepAcc > 2.2f) { stepAcc = 0; Sfx.Play3D(Sfx.StepClip(transform.position, sp > 4f ? 1 : 0), transform.position, 0.7f, 2f, 24f, 0.08f); }
-            }
+            // (footsteps: from the real foot plants, see FeetSync)
             Animate();
             // the host keeps remote players' health: same regeneration as the player's own
             if (Net.IsHost && netHuman && hp < maxHp && Time.time - lastDamageTime > 5f) hp = Mathf.Min(maxHp, hp + 18f * Time.deltaTime);
@@ -668,7 +715,7 @@ namespace Zone47
             if (Time.time - lastRemoteFx > 0.045f)
             {
                 lastRemoteFx = Time.time;
-                Sfx.Play3D(weapon.shot, muzzle, 1f, 6f, 140f, 0.07f);
+                Sfx.Gunshot(weapon.shot, muzzle, 1f, false);
                 FX.MuzzleFlash(muzzle, gun != null ? gun.forward : dir, weapon.kind == WeaponKind.Sniper ? 0.45f : 0.32f);
                 if (anim != null) anim.SetTrigger("Fire");
             }

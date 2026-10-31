@@ -19,9 +19,8 @@ namespace Zone47
         public static int lean;              // -1 left, 0 none, 1 right (toggled by the HUD buttons)
         public static int select = -1;
         public static bool nadeEquip, nadeNext;           // throwable slot tapped / ▲ next type
-        public static bool fireMode;                       // OTO / TEK tab tapped
         public static int nadeSelect = -1;               // picked from the throwable menu
-        public static void ResetEdges() { jump = crouchToggle = proneToggle = reload = grenade = next = nadeEquip = nadeNext = fireMode = false; select = -1; nadeSelect = -1; look = Vector2.zero; }
+        public static void ResetEdges() { jump = crouchToggle = proneToggle = reload = grenade = next = nadeEquip = nadeNext = false; select = -1; nadeSelect = -1; look = Vector2.zero; }
     }
 
     public class PlayerController : Actor
@@ -44,7 +43,7 @@ namespace Zone47
         float heat, fovKick, fovKickVel, wallT, breathT;
 
         // weapons
-        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; public Transform reticle; public bool semi; }
+        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; public Transform reticle; }
         int lastPrimary;                                   // the main weapon a gun from the ground replaces when the pistol is in hand
         Slot[] slots;
         int cur;
@@ -84,9 +83,6 @@ namespace Zone47
         public int CurSlot => cur;
         public int SlotMag(int i) => slots[i].mag;
         public int SlotReserve(int i) => slots[i].reserve;
-        /// Automatic weapons can be switched to single shots (OTO / TEK tab).
-        public bool FireAuto => slots[cur].def.automatic && !slots[cur].semi;
-        public bool CanSwitchFireMode => slots[cur].def.automatic;
         public int Mag => slots[cur].mag;
         public int Reserve => slots[cur].reserve;
         public bool Reloading => reloading;
@@ -515,7 +511,6 @@ namespace Zone47
             // throwables: pick / take in hand / put away
             if (Throwables()) return;
 
-            if (PInput.fireMode && s.def.automatic) { s.semi = !s.semi; Sfx.Play2D(Z47Refs.I.dryFire, 0.5f, 0.05f); HUD.I?.ShowToast(s.semi ? (Settings.Turkish ? "TEK ATIŞ" : "SINGLE") : (Settings.Turkish ? "OTOMATİK" : "AUTO")); }
             if (cur < 2) lastPrimary = cur;
 
             // switching
@@ -576,7 +571,7 @@ namespace Zone47
             if (!grounded) moveSpread += 3f;
             spreadNow = Mathf.Lerp(spreadNow, baseSpread + moveSpread, Time.deltaTime * 10f);
 
-            if (down && !reloading && Time.time >= nextFire && boltT <= 0 && ((d.automatic && !s.semi) || !triggerWasDown))
+            if (down && !reloading && Time.time >= nextFire && boltT <= 0 && (d.automatic || !triggerWasDown))
             {
                 if (s.mag > 0) Shoot(s);
                 else if (!triggerWasDown) Sfx.Play2D(Z47Refs.I.dryFire, 0.6f);
@@ -629,7 +624,7 @@ namespace Zone47
             }
             else Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !aimed && Random.value < 0.5f, out _, d.falloffStart, d.falloffEnd, d.falloffMin);
 
-            Sfx.Play2D(d.shot, d.kind == WeaponKind.Sniper ? 1f : 0.85f, 0.05f);
+            Sfx.Gunshot(d.shot, muzzleWorld, d.kind == WeaponKind.Sniper ? 1f : 0.85f, true);
             BotController.Noise(this, 60f);
             if (Random.value < 0.5f) StartCoroutine(Delayed(0.35f, () => Sfx.Play2D(Z47Refs.I.casing, 0.12f, 0.2f)));
             if (d.kind == WeaponKind.Sniper) StartCoroutine(Delayed(0.45f, () => Sfx.Play2D(Z47Refs.I.awpBolt, 0.6f)));

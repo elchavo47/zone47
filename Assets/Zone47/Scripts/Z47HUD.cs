@@ -416,12 +416,14 @@ namespace Zone47
         GameObject reloadBox; Text reloadTxt, reloadHint; RectTransform reloadFill; int cReload = -1;
         float deathAt;
         Image[] slotImgs = new Image[5];
-        const float CardW = 250f, CardH = 76f, CardGap = 10f, BarY = 20f, BarH = 18f;
+        const float CardW = 250f, CardH = 76f, CardGap = 10f, BarY = 20f, BarH = 18f, PistolW = 110f;
+        const float PanelW = CardW * 2f + PistolW + CardGap * 2f;          // two main cards + the pistol card
+        static float CardX(int i) => -PanelW * 0.5f + (i == 0 ? CardW * 0.5f : i == 1 ? CardW * 1.5f + CardGap : CardW * 2f + CardGap * 2f + PistolW * 0.5f);
         const float CardY = BarY + BarH + 8f + CardH * 0.5f;          // centre of the weapon cards
         readonly Outline[] cardOutline = new Outline[2];
         readonly Text[] cardAmmo = new Text[2];
         readonly int[] cCardMag = { -1, -1 }, cCardRes = { -1, -1 };
-        Image fireTab, takeBtn; Text fireTxt, takeTxt;
+        Image takeBtn; Text takeTxt, pistolAmmo; Outline pistolOutline; int cPistolMag = -1, cPistolRes = -1;
         WeaponPickup offered; float offeredAt = -9f;
 
         /// A gun on the ground is in reach: show the TAKE button for it this frame.
@@ -530,8 +532,7 @@ namespace Zone47
 
             // ---- weapon panel (PUBG style): two main-weapon cards, the pistol tab on their top right, the fire-mode tab
             //      above the one in hand, and a thick health bar across the bottom of the panel
-            float halfPanel = CardW + CardGap * 0.5f;
-            hpBack = UIK.Img(root, "hpBack", new Color(0f, 0f, 0f, 0.55f), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, BarY + BarH * 0.5f), new Vector2(halfPanel * 2f, BarH));
+            hpBack = UIK.Img(root, "hpBack", new Color(0f, 0f, 0f, 0.55f), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, BarY + BarH * 0.5f), new Vector2(PanelW, BarH));
             hpFill = UIK.Img(hpBack.transform, "fill", Pal.Text, new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, new Vector2(-4, -4));
             hpFill.rectTransform.pivot = new Vector2(0, 0.5f); hpFill.rectTransform.anchoredPosition = new Vector2(2, 0);
 
@@ -540,7 +541,7 @@ namespace Zone47
             for (int i = 0; i < 2; i++)
             {
                 int idx = i;
-                var b = UIK.Img(root, "card" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i == 0 ? -1f : 1f) * (CardW + CardGap) * 0.5f, CardY), new Vector2(CardW, CardH), true);
+                var b = UIK.Img(root, "card" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(CardX(i), CardY), new Vector2(CardW, CardH), true);
                 slotImgs[i] = b;
                 cardOutline[i] = b.gameObject.AddComponent<Outline>(); cardOutline[i].effectDistance = new Vector2(3, 3); cardOutline[i].effectColor = new Color(0, 0, 0, 0);
                 var ir = UIK.Rect(b.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(18, 8), new Vector2(150, 40));
@@ -549,17 +550,16 @@ namespace Zone47
                 cardAmmo[i].supportRichText = true;
                 b.gameObject.AddComponent<TouchPad>().down = e => PInput.select = idx;
             }
-            // pistol tab (Glock, always carried)
-            var pt = UIK.Img(root, "pistol", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(halfPanel - 52f, CardY + CardH * 0.5f + 4f + 18f), new Vector2(104, 36), true);
+            // pistol card (Glock, always carried): its own small card right of the two main ones
+            var pt = UIK.Img(root, "pistol", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(CardX(2), CardY), new Vector2(PistolW, CardH), true);
             slotImgs[2] = pt;
-            var pir = UIK.Rect(pt.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(46, 28));
+            pistolOutline = pt.gameObject.AddComponent<Outline>(); pistolOutline.effectDistance = new Vector2(3, 3); pistolOutline.effectColor = new Color(0, 0, 0, 0);
+            var pir = UIK.Rect(pt.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 8), new Vector2(60, 34));
             slotIcons[2] = pir.gameObject.AddComponent<RawImage>(); slotIcons[2].raycastTarget = false; slotIcons[2].color = Pal.Text;
-            var gico = Z47Refs.I.KillIcon("glock"); if (gico != null) { slotIcons[2].texture = gico; FitIcon(slotIcons[2], gico, 60f, 28f); }
+            var gico = Z47Refs.I.KillIcon("glock"); if (gico != null) { slotIcons[2].texture = gico; FitIcon(slotIcons[2], gico, 70f, 34f); }
+            pistolAmmo = UIK.Txt(pt.transform, "am", "", 18, Pal.Text, TextAnchor.LowerCenter, Vector2.zero, Vector2.one, new Vector2(0, 5), new Vector2(-8, -10), true);
+            pistolAmmo.supportRichText = true;
             pt.gameObject.AddComponent<TouchPad>().down = e => PInput.select = 2;
-            // fire mode tab (OTO / TEK), sits above the weapon in hand
-            fireTab = UIK.Img(root, "fmode", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), Vector2.zero, new Vector2(96, 34), true);
-            fireTxt = UIK.Txt(fireTab.transform, "t", "OTO", 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-            fireTab.gameObject.AddComponent<TouchPad>().down = e => PInput.fireMode = true;
             // TAKE button for a gun on the ground (shows while you stand over one)
             takeBtn = UIK.Img(root, "take", new Color(0.04f, 0.045f, 0.04f, 0.85f), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, CardY + CardH * 0.5f + 120f), new Vector2(300, 64), true);
             takeBtn.gameObject.AddComponent<Outline>().effectColor = Pal.Accent;
@@ -598,7 +598,7 @@ namespace Zone47
 
         void BuildThrowables()
         {
-            float x = CardW + CardGap * 0.5f + 12f + 46f;
+            float x = PanelW * 0.5f + 12f + 46f;
             nadeSlot = UIK.Img(root, "nade", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(x, CardY), new Vector2(92, CardH), true);
             var ir = UIK.Rect(nadeSlot.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-6, 6), new Vector2(46, 46));
             nadeIcon = ir.gameObject.AddComponent<RawImage>(); nadeIcon.raycastTarget = false; nadeIcon.color = Pal.Text;
@@ -1510,12 +1510,16 @@ namespace Zone47
                 string mc = m == 0 ? "#FF4A3D" : m <= Mathf.CeilToInt(ms * 0.3f) ? "#FFA028" : "#EDE8D9";
                 cardAmmo[i].text = "<color=" + mc + ">" + m + "</color><size=16><color=#9E998C> / " + r + "</color></size>";
             }
+            {
+                int m = p.SlotMag(2), r = p.SlotReserve(2);
+                if (m != cPistolMag || r != cPistolRes) { cPistolMag = m; cPistolRes = r; pistolAmmo.text = m + "<size=14><color=#9E998C> / " + r + "</color></size>"; }
+            }
             // TAKE button
             bool offer = offered != null && Time.time - offeredAt < 0.25f && p.Alive;
             if (takeBtn.gameObject.activeSelf != offer) takeBtn.gameObject.SetActive(offer);
             if (offer) { string nm = Z47Refs.I.Weapon(offered.weaponId).displayName; string tt = (Settings.Turkish ? "AL  ·  " : "TAKE  ·  ") + "<color=#F29E1F>" + nm + "</color>"; if (takeTxt.text != tt) takeTxt.text = tt; }
 
-            string key = p.CurSlot + "|" + p.NadeEquipped + "|" + p.SlotDef(0).id + "|" + p.SlotDef(1).id + "|" + p.FireAuto;
+            string key = p.CurSlot + "|" + p.NadeEquipped + "|" + p.SlotDef(0).id + "|" + p.SlotDef(1).id;
             if (key != cWep)
             {
                 cWep = key; weaponName.text = d.displayName;
@@ -1532,17 +1536,10 @@ namespace Zone47
                     }
                     else
                     {
-                        slotImgs[2].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.85f) : Pal.Panel;
-                        slotIcons[2].color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
+                        slotImgs[2].color = on ? new Color(0.13f, 0.12f, 0.09f, 0.85f) : Pal.Panel;
+                        pistolOutline.effectColor = on ? Pal.Accent : new Color(0, 0, 0, 0);
+                        slotIcons[2].color = on ? Color.white : new Color(0.75f, 0.73f, 0.68f, 0.75f);
                     }
-                }
-                // fire mode tab over the main weapon in hand (automatic weapons only)
-                bool showFire = p.CurSlot < 2 && !p.NadeEquipped && p.CanSwitchFireMode;
-                fireTab.gameObject.SetActive(showFire);
-                if (showFire)
-                {
-                    fireTab.rectTransform.anchoredPosition = new Vector2((p.CurSlot == 0 ? -1f : 1f) * (CardW + CardGap) * 0.5f - CardW * 0.5f + 48f, CardY + CardH * 0.5f + 4f + 17f);
-                    fireTxt.text = p.FireAuto ? (Settings.Turkish ? "OTO" : "AUTO") : (Settings.Turkish ? "TEK" : "SINGLE");
                 }
             }
             UpdateThrowables(p);

@@ -379,8 +379,66 @@ namespace Zone47
             s.clip = c; s.volume = vol * Settings.Sfx;
             // distant sounds lose their highs, like real gunfire across a town
             float dist = Vector3.Distance(pos, ListenerPos);
-            s.GetComponent<AudioLowPassFilter>().cutoffFrequency = Mathf.Lerp(22000f, 1800f, Mathf.InverseLerp(12f, 90f, dist));
-            s.pitch = 1f + UnityEngine.Random.Range(-pitchVar, pitchVar);
+            float far = Mathf.Pow(Mathf.InverseLerp(10f, 120f, dist), 0.6f);
+            s.GetComponent<AudioLowPassFilter>().cutoffFrequency = Mathf.Lerp(22000f, 750f, far);
+            s.pitch = (1f - far * 0.06f) * (1f + UnityEngine.Random.Range(-pitchVar, pitchVar));
+            s.Play();
+        }
+
+        // ---------------------------------------------------------------- gunfire: close = sharp, far = dull + rolling echo, indoors = room tail
+        static float lastTailAt;
+        static SfxRunner runner;
+        static void Later(float t, Action a)
+        {
+            if (root == null) Get();
+            if (runner == null) runner = root.GetComponent<SfxRunner>() ?? root.AddComponent<SfxRunner>();
+            runner.StartCoroutine(runner.After(t, a));
+        }
+
+        /// Under a roof (shooter or listener inside a building)?
+        static bool Indoors(Vector3 p) => Physics.Raycast(p + Vector3.up * 0.5f, Vector3.up, 12f, ~0, QueryTriggerInteraction.Ignore);
+
+        /// A gunshot. `own`: your own gun (2D, at the ears). Adds a delayed, filtered copy:
+        /// indoors a short dull room tail, far away a rolling echo off the buildings, close outdoors a faint slapback.
+        public static void Gunshot(AudioClip c, Vector3 pos, float vol, bool own)
+        {
+            if (c == null) return;
+            if (own) Play2D(c, vol, 0.05f); else Play3D(c, pos, vol, 6f, 170f, 0.07f);
+            if (!own && Time.time - lastTailAt < 0.07f) return;            // full-auto crowds: not a tail for every bullet
+            lastTailAt = Time.time;
+            float dist = own ? 0f : Vector3.Distance(pos, ListenerPos);
+            bool inside = Indoors(own ? ListenerPos : pos);
+            if (inside) Tail(c, pos, own, vol * 0.42f, 0.045f, 2400f, 0.9f);
+            else if (dist > 28f) Tail(c, pos, own, vol * Mathf.Lerp(0.35f, 0.6f, Mathf.InverseLerp(28f, 130f, dist)), 0.11f + dist / 1100f, 900f, 0.86f);
+            else Tail(c, pos, own, vol * 0.16f, 0.2f, 1500f, 0.93f);
+        }
+
+        static void Tail(AudioClip c, Vector3 pos, bool own, float vol, float delay, float cutoff, float pitch)
+        {
+            Later(delay, () =>
+            {
+                var s = Get();
+                s.transform.position = own ? ListenerPos : pos;
+                s.spatialBlend = own ? 0f : 1f; s.rolloffMode = AudioRolloffMode.Logarithmic; s.minDistance = 8f; s.maxDistance = 220f; s.dopplerLevel = 0f;
+                s.clip = c; s.volume = vol * Settings.Sfx;
+                s.GetComponent<AudioLowPassFilter>().cutoffFrequency = cutoff;
+                s.pitch = pitch * (1f + UnityEngine.Random.Range(-0.03f, 0.03f));
+                s.Play();
+            });
+        }
+
+        /// Footstep at a foot. Enemy steps are louder and carry further (you hear where they come from); your team's are soft.
+        public static void Step(AudioClip c, Vector3 pos, bool enemy, bool run)
+        {
+            if (c == null) return;
+            var s = Get();
+            s.transform.position = pos;
+            s.spatialBlend = 1f; s.rolloffMode = AudioRolloffMode.Logarithmic; s.dopplerLevel = 0f;
+            s.minDistance = 1.5f; s.maxDistance = enemy ? 34f : 18f;
+            s.clip = c; s.volume = (enemy ? (run ? 1f : 0.8f) : 0.32f) * Settings.Sfx;
+            float dist = Vector3.Distance(pos, ListenerPos);
+            s.GetComponent<AudioLowPassFilter>().cutoffFrequency = Mathf.Lerp(22000f, 5000f, Mathf.InverseLerp(4f, 30f, dist));
+            s.pitch = 1f + UnityEngine.Random.Range(-0.08f, 0.08f);
             s.Play();
         }
 
@@ -746,6 +804,12 @@ namespace Zone47
             var l = lg.AddComponent<Light>(); l.type = LightType.Point; l.color = new Color(1f, 0.62f, 0.3f); l.range = 45; l.intensity = 30;
             lg.AddComponent<LightFade>().life = 0.6f;
         }
+    }
+
+    /// Hosts delayed sounds (echo tails).
+    public class SfxRunner : MonoBehaviour
+    {
+        public System.Collections.IEnumerator After(float t, Action a) { yield return new WaitForSeconds(t); a?.Invoke(); }
     }
 
     public class FlashLife : MonoBehaviour
