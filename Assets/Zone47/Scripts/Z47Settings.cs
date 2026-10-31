@@ -18,6 +18,7 @@ namespace Zone47
         {
             var panel = UIK.Full(parent, "Settings");
             UIK.Img(panel, "bg", Bg, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            if (!inMatch && Boot.I != null) panel.gameObject.AddComponent<ScreenCover>().boot = Boot.I;     // lobby hidden behind the settings
             var safe = UIK.Full(panel, "safe");
             safe.gameObject.AddComponent<SafeArea>();
 

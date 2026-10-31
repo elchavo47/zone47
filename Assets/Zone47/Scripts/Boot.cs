@@ -296,7 +296,7 @@ namespace Zone47
             var a = g.GetComponent<Animator>();
             if (a != null) { a.runtimeAnimatorController = Z47Refs.I.bodyController; a.SetBool("Aim", false); }
             var gun = Instantiate(Z47Refs.I.Weapon(prefab == Z47Refs.I.swatModel ? "m4" : "ak").prefab, g.transform);
-            g.AddComponent<PoserGun>().gun = gun.transform;
+            var pg = g.AddComponent<PoserGun>(); pg.gun = gun.transform; pg.def = Z47Refs.I.Weapon(prefab == Z47Refs.I.swatModel ? "m4" : "ak");
         }
 
         void RebuildMenu() { if (menuRoot != null) Destroy(menuRoot); menuRoot = null; BuildMenu(); }
@@ -449,20 +449,156 @@ namespace Zone47
         }
     }
 
-    /// Keeps a rifle in a menu soldier's hands.
+    /// Lobby soldier pose (PUBG style): square to the camera, legs straight, standing tall, rifle held diagonally
+    /// across the chest (muzzle up to his left) with both hands on it. Built on top of the rifle idle every frame
+    /// (the idle keeps the breathing); every step measures the animated pose and sets an absolute result, so nothing builds up.
     public class PoserGun : MonoBehaviour
     {
         public Transform gun;
-        Transform r, l; Animator a;
-        void Start() { a = GetComponent<Animator>(); r = a.GetBoneTransform(HumanBodyBones.RightHand); l = a.GetBoneTransform(HumanBodyBones.LeftHand); }
+        public WeaponDef def;
+        Animator a; float baseYaw; bool ok;
+        Transform hips, spine, neck, lSh, rSh, lUp, lLo, lHand, rUp, rLo, rHand, lMid, rMid, lThumb, rThumb;
+        Transform lThigh, lKnee, lFoot, rThigh, rKnee, rFoot, lToes, rToes;
+
+        void Start()
+        {
+            a = GetComponent<Animator>();
+            baseYaw = transform.localEulerAngles.y;
+            if (a == null || !a.isHuman) return;
+            Transform B(HumanBodyBones b) => a.GetBoneTransform(b);
+            hips = B(HumanBodyBones.Hips); spine = B(HumanBodyBones.Spine); neck = B(HumanBodyBones.Neck);
+            lUp = B(HumanBodyBones.LeftUpperArm); lLo = B(HumanBodyBones.LeftLowerArm); lHand = B(HumanBodyBones.LeftHand);
+            rUp = B(HumanBodyBones.RightUpperArm); rLo = B(HumanBodyBones.RightLowerArm); rHand = B(HumanBodyBones.RightHand);
+            lMid = B(HumanBodyBones.LeftMiddleProximal); rMid = B(HumanBodyBones.RightMiddleProximal);
+            lThumb = B(HumanBodyBones.LeftThumbProximal); rThumb = B(HumanBodyBones.RightThumbProximal);
+            lThigh = B(HumanBodyBones.LeftUpperLeg); lKnee = B(HumanBodyBones.LeftLowerLeg); lFoot = B(HumanBodyBones.LeftFoot);
+            rThigh = B(HumanBodyBones.RightUpperLeg); rKnee = B(HumanBodyBones.RightLowerLeg); rFoot = B(HumanBodyBones.RightFoot);
+            lToes = B(HumanBodyBones.LeftToes); rToes = B(HumanBodyBones.RightToes);
+            ok = hips && spine && neck && lUp && lLo && lHand && rUp && rLo && rHand && lThigh && lKnee && lFoot && rThigh && rKnee && rFoot;
+        }
+
         void LateUpdate()
         {
-            if (r == null || l == null || gun == null) return;
-            Posture.Straighten(a, transform, 1f);        // stand tall in the lobby (the hands come along, the gun is placed in them below)
-            Vector3 f = l.position - r.position; if (f.sqrMagnitude < 1e-4f) return;
-            Vector3 up = Vector3.Cross(f, transform.right); if (Vector3.Dot(up, Vector3.up) < 0) up = -up;
-            gun.rotation = Quaternion.LookRotation(f.normalized, up);
-            gun.position = r.position + gun.rotation * new Vector3(0, 0.04f, 0.03f);
+            if (gun == null) return;
+            if (!ok) { OldPlace(); return; }
+
+            // 1) square up: the rifle idle stands bladed (body turned sideways). Turn the whole soldier so the chest faces the camera.
+            Vector3 sh = rUp.position - lUp.position, hp = rThigh.position - lThigh.position;
+            Vector3 facing = Vector3.Cross((sh.normalized * 0.7f + hp.normalized * 0.3f).Flat(), Vector3.up);
+            Vector3 fl = transform.InverseTransformDirection(facing);
+            if (fl.sqrMagnitude > 1e-4f) transform.localRotation = Quaternion.Euler(0f, baseYaw - Mathf.Atan2(fl.x, fl.z) * Mathf.Rad2Deg, 0f);
+
+            // 2) straight legs, feet under the hips (the idle has bent knees)
+            StraightLegs();
+
+            // 3) stand tall, chin up
+            Posture.Straighten(a, transform, 1f);
+
+            // 4) rifle across the chest, hands on it
+            Vector3 H = hips.position, N = neck.position;
+            Vector3 up = (N - H).normalized;
+            Vector3 right = Vector3.ProjectOnPlane(rUp.position - lUp.position, up).normalized;
+            Vector3 fwd = Vector3.Cross(right, up);
+            Vector3 chest = Vector3.Lerp(H, N, 0.55f);
+            Vector3 muzzle = (up * 0.62f - right * 0.6f + fwd * 0.22f).normalized;          // diagonal: up to his left
+            Vector3 gunUp = Vector3.ProjectOnPlane(fwd, muzzle).normalized;                    // sights face away from the chest
+            gun.SetPositionAndRotation(chest + fwd * 0.27f + right * 0.11f - up * 0.13f, Quaternion.LookRotation(muzzle, gunUp));
+            Vector3 gunRight = Vector3.Cross(gunUp, muzzle);
+            Vector3 grip = gun.position, fore = def != null ? gun.TransformPoint(def.forePoint) : gun.position + muzzle * 0.35f;
+
+            // right hand wraps the pistol grip, elbow down at the side; left hand under the handguard, elbow down and out
+            Hand(rUp, rLo, rHand, rMid, rThumb, grip, -up * 0.7f + right * 0.8f - fwd * 0.15f, (-gunUp * 0.75f + muzzle * 0.35f - gunRight * 0.3f).normalized, muzzle);
+            Hand(lUp, lLo, lHand, lMid, lThumb, fore, -up * 0.9f - right * 0.6f, (gunRight * 0.75f + gunUp * 0.25f + muzzle * 0.15f).normalized, muzzle);
+        }
+
+        void StraightLegs()
+        {
+            float ankleY = Mathf.Min(lFoot.position.y, rFoot.position.y);
+            Quaternion lf = lFoot.rotation, rf = rFoot.rotation;
+            // knees straight (a hair of bend so it doesn't look locked)
+            Straighten(lThigh, lKnee, lFoot); Straighten(rThigh, rKnee, rFoot);
+            float L = ((lKnee.position - lThigh.position).magnitude + (lFoot.position - lKnee.position).magnitude
+                     + (rKnee.position - rThigh.position).magnitude + (rFoot.position - rKnee.position).magnitude) * 0.5f;
+            // hips up so straight legs reach the ground
+            float hipJointY = (lThigh.position.y + rThigh.position.y) * 0.5f;
+            hips.position += Vector3.up * (ankleY + L * 0.985f - hipJointY);
+            Vector3 side = transform.right;
+            Aim(lThigh, lFoot, new Vector3(lThigh.position.x, ankleY, lThigh.position.z) - side * 0.03f);
+            Aim(rThigh, rFoot, new Vector3(rThigh.position.x, ankleY, rThigh.position.z) + side * 0.03f);
+            // feet: keep the idle's flat foot, then turn each one to point forward (toes slightly out)
+            lFoot.rotation = lf; rFoot.rotation = rf;
+            PointFoot(lFoot, lToes, Quaternion.Euler(0, -8f, 0) * transform.forward);
+            PointFoot(rFoot, rToes, Quaternion.Euler(0, 8f, 0) * transform.forward);
+        }
+
+        static void PointFoot(Transform foot, Transform toes, Vector3 dir)
+        {
+            if (toes == null) return;
+            Vector3 cur = (toes.position - foot.position).Flat();
+            if (cur.sqrMagnitude < 1e-6f) return;
+            float ang = Vector3.SignedAngle(cur, dir.Flat(), Vector3.up);
+            foot.rotation = Quaternion.AngleAxis(ang, Vector3.up) * foot.rotation;
+        }
+
+        static void Straighten(Transform thigh, Transform knee, Transform foot)
+        {
+            Vector3 upper = knee.position - thigh.position, lower = foot.position - knee.position;
+            Vector3 want = Vector3.Slerp(upper.normalized, lower.normalized, 0.04f);     // ~straight, keeps the knee's bend direction
+            knee.rotation = Quaternion.FromToRotation(lower, want) * knee.rotation;
+        }
+
+        static void Aim(Transform root, Transform end, Vector3 target)
+        {
+            Vector3 cur = end.position - root.position, want = target - root.position;
+            if (cur.sqrMagnitude > 1e-6f && want.sqrMagnitude > 1e-6f) root.rotation = Quaternion.FromToRotation(cur, want) * root.rotation;
+        }
+
+        /// Two-bone arm IK to put the palm on `target`, then turn the hand so the fingers wrap the gun.
+        static void Hand(Transform up, Transform lo, Transform hand, Transform mid, Transform thumb, Vector3 target, Vector3 pole, Vector3 fingerDir, Vector3 thumbDir)
+        {
+            Vector3 palm = Vector3.zero;
+            for (int pass = 0; pass < 2; pass++)
+            {
+                Solve(up, lo, hand, target - palm, pole);
+                OrientHand(hand, mid, thumb, fingerDir, thumbDir);
+                palm = mid != null ? (mid.position - hand.position) * 0.55f : Vector3.zero;   // grip sits in the palm, not at the wrist
+            }
+        }
+
+        static void Solve(Transform up, Transform lo, Transform hand, Vector3 target, Vector3 pole)
+        {
+            Vector3 a = up.position, b = lo.position, c = hand.position;
+            float lab = (b - a).magnitude, lbc = (c - b).magnitude;
+            Vector3 at = target - a;
+            float lat = Mathf.Clamp(at.magnitude, 0.01f, lab + lbc - 0.001f);
+            float d1 = (lab * lab - lbc * lbc + lat * lat) / (2f * lat);
+            float h = Mathf.Sqrt(Mathf.Max(lab * lab - d1 * d1, 0f));
+            Vector3 n = at.normalized, pd = Vector3.ProjectOnPlane(pole, n).normalized;
+            Vector3 e = a + n * d1 + pd * h;
+            up.rotation = Quaternion.FromToRotation(b - a, e - a) * up.rotation;
+            b = lo.position; c = hand.position;
+            lo.rotation = Quaternion.FromToRotation(c - b, a + n * lat - b) * lo.rotation;
+        }
+
+        static void OrientHand(Transform hand, Transform mid, Transform thumb, Vector3 fingerDir, Vector3 thumbDir)
+        {
+            if (mid == null) return;
+            Vector3 f = mid.position - hand.position;
+            if (f.sqrMagnitude < 1e-8f) return;
+            hand.rotation = Quaternion.FromToRotation(f, fingerDir) * hand.rotation;
+            if (thumb == null) return;
+            Vector3 t = Vector3.ProjectOnPlane(thumb.position - hand.position, fingerDir), w = Vector3.ProjectOnPlane(thumbDir, fingerDir);
+            if (t.sqrMagnitude > 1e-8f && w.sqrMagnitude > 1e-8f) hand.rotation = Quaternion.FromToRotation(t, w) * hand.rotation;
+        }
+
+        /// Fallback (non-humanoid model): gun between the hands, as before.
+        void OldPlace()
+        {
+            if (rHand == null || lHand == null) return;
+            Vector3 f = lHand.position - rHand.position; if (f.sqrMagnitude < 1e-4f) return;
+            Vector3 u = Vector3.Cross(f, transform.right); if (Vector3.Dot(u, Vector3.up) < 0) u = -u;
+            gun.rotation = Quaternion.LookRotation(f.normalized, u);
+            gun.position = rHand.position + gun.rotation * new Vector3(0, 0.04f, 0.03f);
         }
     }
 }

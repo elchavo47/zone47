@@ -51,10 +51,18 @@ namespace Zone47
         System.Collections.IEnumerator ToastFade() { toastTxt.color = Pal.Accent; yield return new WaitForSeconds(1.6f); float a = 1; while (a > 0 && toastTxt != null) { a -= Time.deltaTime * 2f; toastTxt.color = new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, a); yield return null; } }
 
         // ------------------------------------------------------------ shared screen chrome
+        int covers;
+        /// A full screen (profile, match settings, ...) opened or closed: the lobby only shows when none is open.
+        public void CoverChanged(int d)
+        {
+            covers = Mathf.Max(0, covers + d);
+            if (lobbyRoot != null) lobbyRoot.gameObject.SetActive(covers == 0);
+        }
         RectTransform MakeScreen(string name, string kicker, string title, Action onClose)
         {
             var p = UIK.Full(menuCanvas.transform, name);
-            UIK.Img(p, "bg", new Color(0.02f, 0.025f, 0.03f, 0.9f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            UIK.Img(p, "bg", new Color(0.02f, 0.025f, 0.03f, 0.97f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            p.gameObject.AddComponent<ScreenCover>().boot = this;          // hides the lobby (cards, friends, soldiers) behind it
             var root = UIK.Full(p, "root"); root.gameObject.AddComponent<SafeArea>();
             UIK.Txt(root, "k", kicker, 20, Pal.Accent, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, -46), new Vector2(900, 28), true).rectTransform.pivot = new Vector2(0, 1);
             UIK.Txt(root, "t", title, 50, Color.white, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, -74), new Vector2(1200, 64), true).rectTransform.pivot = new Vector2(0, 1);
@@ -174,14 +182,14 @@ namespace Zone47
             card.rectTransform.pivot = new Vector2(0, 1); card.rectTransform.anchoredPosition = new Vector2(70, -170);
             var C = card.transform;
             UIK.Img(C, "top", Pal.Accent, new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 4)).rectTransform.pivot = new Vector2(0.5f, 1);
-            Profile.Avatar(C, "av", new Vector2(0.5f, 1), new Vector2(0, -150), 210, Settings.Callsign, Profile.Flag, Profile.SafeFrame);
-            UIK.Txt(C, "n", Settings.Callsign.ToUpper(), 44, Color.white, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -300), new Vector2(520, 56), true);
-            UIK.Txt(C, "ti", Profile.CurrentTitle.ToUpper(), 22, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -344), new Vector2(520, 30), true);
-            var fl = Countries.Make(C, "fl", Profile.Flag, new Vector2(0.5f, 1), new Vector2(-120, -390), 30);
-            var cn = UIK.Txt(C, "cn", Countries.Name(Profile.Flag), 20, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(80, -390), new Vector2(360, 30), false);
+            Profile.Avatar(C, "av", new Vector2(0.5f, 1), new Vector2(0, -42), 180, Settings.Callsign, Profile.Flag, Profile.SafeFrame);      // spans -42..-222 (frame to ~-238)
+            UIK.Txt(C, "n", Settings.Callsign.ToUpper(), 44, Color.white, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -272), new Vector2(520, 56), true);
+            UIK.Txt(C, "ti", Profile.CurrentTitle.ToUpper(), 22, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -312), new Vector2(520, 30), true);
+            var fl = Countries.Make(C, "fl", Profile.Flag, new Vector2(0.5f, 1), new Vector2(-120, -356), 30);
+            var cn = UIK.Txt(C, "cn", Countries.Name(Profile.Flag), 20, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(80, -356), new Vector2(360, 30), false);
             float cnw = cn.preferredWidth; float tot = 40 + 12 + cnw;
-            ((RectTransform)fl.transform).anchoredPosition = new Vector2(-tot / 2f + 20, -390);
-            cn.rectTransform.pivot = new Vector2(0, 0.5f); cn.rectTransform.anchoredPosition = new Vector2(-tot / 2f + 52, -390);
+            ((RectTransform)fl.transform).anchoredPosition = new Vector2(-tot / 2f + 20, -356);
+            cn.rectTransform.pivot = new Vector2(0, 0.5f); cn.rectTransform.anchoredPosition = new Vector2(-tot / 2f + 52, -356);
 
             UIK.Txt(C, "lv", L.S("level") + " " + lv, 30, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(40, -462), new Vector2(-80, 40), true);
             UIK.Txt(C, "xp", into + " / " + need + " XP", 18, Pal.Dim, TextAnchor.MiddleRight, new Vector2(0, 1), new Vector2(1, 1), new Vector2(-40, -462), new Vector2(-80, 40), false);
@@ -299,7 +307,7 @@ namespace Zone47
                     int fi = i; bool ok = Profile.FrameUnlocked(i);
                     var c = UIK.Img(content, "fr" + i, new Color(1, 1, 1, 0.04f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(330, 340), true);
                     c.rectTransform.pivot = new Vector2(0, 1); c.rectTransform.anchoredPosition = new Vector2((i % 5) * 350, -(i / 5) * 360);
-                    var av = Profile.Avatar(c.transform, "av", new Vector2(0.5f, 1), new Vector2(0, -130), 170, Settings.Callsign, Profile.Flag, i);
+                    var av = Profile.Avatar(c.transform, "av", new Vector2(0.5f, 1), new Vector2(0, -26), 160, Settings.Callsign, Profile.Flag, i);           // top edge (pivot = top)
                     if (!ok) foreach (var g in av.GetComponentsInChildren<Graphic>()) g.color = new Color(g.color.r * 0.35f, g.color.g * 0.35f, g.color.b * 0.35f, g.color.a);
                     UIK.Txt(c.transform, "n", Profile.FrameName(i), 24, ok ? Color.white : Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 66), new Vector2(0, 30), true);
                     UIK.Txt(c.transform, "h", ok ? T("AÇIK", "UNLOCKED") : T("KİLİTLİ · ", "LOCKED · ") + Profile.FrameHow(i), 16, ok ? Pal.Accent : Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 30), new Vector2(-10, 26), false);
@@ -363,7 +371,7 @@ namespace Zone47
         void BuildLobbyUI(RectTransform root)
         {
             MatchManager.RollNames();
-            lobbyRoot = root;
+            lobbyRoot = root; covers = 0;
             SocialPump.Ensure();
             if (Net.Available && Social.Available && !string.IsNullOrWhiteSpace(Settings.PlayerName)) Social.Init();
             if (menuCam != null) menuCam.cullingMask &= ~(1 << PartyStage.Layer);
@@ -628,7 +636,7 @@ namespace Zone47
             Progress.Split(Progress.XP, out int lv, out int into, out int need);
             var pc = UIK.Img(U, "player", Glass, new Vector2(1, 1), new Vector2(1, 1), Vector2.zero, new Vector2(RightW, PlayerCardH), true);
             pc.rectTransform.pivot = new Vector2(1, 1); pc.rectTransform.anchoredPosition = new Vector2(-70, -20);
-            Profile.Avatar(pc.transform, "av", new Vector2(0, 0.5f), new Vector2(60, 4), 84, Settings.Callsign, Profile.Flag, Profile.SafeFrame);
+            Profile.Avatar(pc.transform, "av", new Vector2(0, 0.5f), new Vector2(18, 4), 84, Settings.Callsign, Profile.Flag, Profile.SafeFrame);        // left edge at 18 (pivot = left): spans 18..102, text starts at 124
             // three separate rows: name / rank · level / ID (numbers only)
             nameTxt = UIK.Txt(pc.transform, "n", Settings.Callsign.ToUpper(), 30, Color.white, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             Row(nameTxt.rectTransform, 124, 12, 36, 16);
@@ -927,12 +935,21 @@ namespace Zone47
         }
     }
 
+    /// Sits on a full-screen panel: while it exists the lobby underneath is hidden.
+    public class ScreenCover : MonoBehaviour
+    {
+        public Boot boot; bool on;
+        void OnEnable() { if (on || boot == null) return; on = true; boot.CoverChanged(1); }
+        void Start() { OnEnable(); }                       // `boot` is set right after AddComponent, after the first OnEnable
+        void OnDestroy() { if (on && boot != null) boot.CoverChanged(-1); }
+    }
+
     /// Rebuilds the lobby when the party / friends change; shows incoming invites.
     public class LobbyWatcher : MonoBehaviour
     {
         public Boot boot;
         bool dirty; float pullT;
-        void OnEnable() { Net.Changed += Mark; Net.Lost += OnLost; Social.Changed += Mark; Social.Invited += OnInvite; }
+        void OnEnable() { dirty = true; Net.Changed += Mark; Net.Lost += OnLost; Social.Changed += Mark; Social.Invited += OnInvite; }
         void OnDisable() { Net.Changed -= Mark; Net.Lost -= OnLost; Social.Changed -= Mark; Social.Invited -= OnInvite; }
         void Mark() { dirty = true; }
         void OnLost(string why) { dirty = true; lostMsg = why; }
@@ -1052,7 +1069,7 @@ namespace Zone47
             var prefab = m.team == myTeam ? R.swatModel : R.gasModel;
             var g = Instantiate(prefab, transform);
             g.transform.localPosition = SlotLocal(i);
-            float yaw = 180f + SlotLocal(i).x * 9f;                         // face the camera, turned a little toward the centre
+            float yaw = 180f + SlotLocal(i).x * 4f;                         // face the camera (side slots turned just a touch to the centre)
             g.transform.localRotation = Quaternion.Euler(0, yaw, 0);
             var a = g.GetComponent<Animator>();
             if (a != null)
@@ -1061,9 +1078,10 @@ namespace Zone47
                 a.cullingMode = AnimatorCullingMode.AlwaysAnimate;
                 a.Update(UnityEngine.Random.Range(0f, 2f));                 // not all in lockstep
             }
-            var gun = Instantiate(R.Weapon(m.team == myTeam ? "m4" : "ak").prefab, g.transform);
+            var wdef = R.Weapon(m.team == myTeam ? "m4" : "ak");
+            var gun = Instantiate(wdef.prefab, g.transform);
             foreach (var c in gun.GetComponentsInChildren<Collider>()) Destroy(c);
-            g.AddComponent<PoserGun>().gun = gun.transform;
+            var pg = g.AddComponent<PoserGun>(); pg.gun = gun.transform; pg.def = wdef;
             foreach (var t in g.GetComponentsInChildren<Transform>(true)) t.gameObject.layer = Layer;
             foreach (var r in g.GetComponentsInChildren<Renderer>(true)) { r.shadowCastingMode = ShadowCastingMode.Off; r.receiveShadows = false; }
             return g;

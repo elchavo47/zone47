@@ -25,6 +25,65 @@ namespace Zone47
         public static Sprite Ring => ring ??= Make(true);
         static Sprite arrow;
         public static Sprite Arrow => arrow ??= MakeArrow();
+        // ---- drawn icons for buttons that have no picture (PUBG-style lean / prone), white on transparent like the others
+        static Texture2D leanL, leanR, proneIc;
+        public static Texture2D LeanIcon(int dir) => dir < 0 ? (leanL ??= DrawIcon(LeanShape(-1))) : (leanR ??= DrawIcon(LeanShape(1)));
+        public static Texture2D ProneIcon => proneIc ??= DrawIcon(ProneShape);
+
+        static float Seg(Vector2 p, Vector2 a, Vector2 b)
+        {
+            Vector2 pa = p - a, ba = b - a;
+            float h = Mathf.Clamp01(Vector2.Dot(pa, ba) / Vector2.Dot(ba, ba));
+            return (pa - ba * h).magnitude;
+        }
+
+        /// Signed-distance drawing: shape(p) < 0 inside, p in -1..1 (y up). Soft 1-pixel edge.
+        static Texture2D DrawIcon(Func<Vector2, float> shape)
+        {
+            const int n = 128;
+            var t = new Texture2D(n, n, TextureFormat.RGBA32, false) { wrapMode = TextureWrapMode.Clamp };
+            var px = new Color32[n * n];
+            for (int y = 0; y < n; y++) for (int x = 0; x < n; x++)
+            {
+                var p = new Vector2((x + 0.5f) / n * 2f - 1f, (y + 0.5f) / n * 2f - 1f);
+                float a = Mathf.Clamp01(0.5f - shape(p) * n * 0.5f);
+                px[y * n + x] = new Color32(255, 255, 255, (byte)(a * 255));
+            }
+            t.SetPixels32(px); t.Apply();
+            return t;
+        }
+
+        /// Soldier leaning toward `dir` past a cover edge, arrow on the lean side.
+        static Func<Vector2, float> LeanShape(int dir) => p =>
+        {
+            float ang = 26f * Mathf.Deg2Rad, s = Mathf.Sin(ang), c = Mathf.Cos(ang);
+            var hip = new Vector2(-0.18f * dir, -0.12f);
+            var sh = hip + new Vector2(s * 0.5f * dir, c * 0.5f);
+            var head = hip + new Vector2(s * 0.83f * dir, c * 0.83f);
+            float d = Seg(p, hip, sh) - 0.13f;
+            d = Mathf.Min(d, (p - head).magnitude - 0.15f);
+            d = Mathf.Min(d, Seg(p, hip, new Vector2(hip.x - 0.17f * dir, -0.82f)) - 0.085f);
+            d = Mathf.Min(d, Seg(p, hip, new Vector2(hip.x + 0.13f * dir, -0.82f)) - 0.085f);
+            float wx = -0.62f * dir;
+            d = Mathf.Min(d, Seg(p, new Vector2(wx, -0.88f), new Vector2(wx, 0.62f)) - 0.05f);
+            var tip = new Vector2(0.86f * dir, 0.18f);
+            d = Mathf.Min(d, Seg(p, new Vector2(0.5f * dir, 0.18f), tip) - 0.045f);
+            d = Mathf.Min(d, Seg(p, tip, new Vector2(tip.x - 0.17f * dir, 0.34f)) - 0.045f);
+            d = Mathf.Min(d, Seg(p, tip, new Vector2(tip.x - 0.17f * dir, 0.02f)) - 0.045f);
+            return d;
+        };
+
+        /// Soldier lying flat with the rifle forward, on a ground line.
+        static float ProneShape(Vector2 p)
+        {
+            float d = Seg(p, new Vector2(-0.42f, -0.22f), new Vector2(0.52f, -0.26f)) - 0.12f;
+            d = Mathf.Min(d, (p - new Vector2(-0.66f, -0.12f)).magnitude - 0.15f);
+            d = Mathf.Min(d, Seg(p, new Vector2(0.52f, -0.26f), new Vector2(0.86f, -0.36f)) - 0.08f);
+            d = Mathf.Min(d, Seg(p, new Vector2(-0.48f, -0.12f), new Vector2(-0.9f, 0.06f)) - 0.05f);
+            d = Mathf.Min(d, Seg(p, new Vector2(-0.92f, -0.52f), new Vector2(0.92f, -0.52f)) - 0.035f);
+            return d;
+        }
+
         /// Circle split as a 9-slice: any rect drawn with it gets fully rounded ends (pill switches).
         static Sprite pill;
         public static Sprite Pill => pill ??= Sprite.Create(Circle.texture, new Rect(0, 0, 128, 128), new Vector2(0.5f, 0.5f), 100, 0, SpriteMeshType.FullRect, new Vector4(63, 63, 63, 63));
@@ -474,6 +533,9 @@ namespace Zone47
                 case "grenade": return R.icGrenade;
                 case "crouch": return R.icCrouch;
                 case "jump": return R.icJump;
+                case "leanl": return Gfx.LeanIcon(-1);
+                case "leanr": return Gfx.LeanIcon(1);
+                case "prone": return Gfx.ProneIcon;
                 default: return null;
             }
         }

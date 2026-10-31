@@ -1499,6 +1499,7 @@ struct Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7  : public MonoBehaviour_t5
 	bool ___reopenRoom;
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___toastTxt;
 	float ___toastUntil;
+	int32_t ___covers;
 	List_1_tDB72209F35D56F62A287633F9450978E90B90987* ___segRefreshers;
 	RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* ___lobbyRoot;
 	RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* ___lobbyUI;
@@ -1752,6 +1753,10 @@ struct PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465  : public Acto
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___swayPos;
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___swayRot;
 	float ___strafeTilt;
+	float ___sprintT;
+	float ___crouchT;
+	float ___proneT;
+	bool ___sprintLatch;
 	float ___adsT;
 	bool ___triggerWasDown;
 	bool ___keyFire;
@@ -2793,6 +2798,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildGrenadeWarn_m06923C3D4F20E76E158D509DA18491F58EDA916C (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_TouchUI_mB47898983D874755B1793EC60A96F204536B9F9A (const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (String_t* ___0_s, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* Gfx_LeanIcon_m12840B8FAC8A262F1ED8A52979A0FBAFDC95FB90 (int32_t ___0_dir, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* Gfx_get_ProneIcon_m2D9F6EB9D12FE33553F689884E909BA2F9087C2B (const RuntimeMethod* method) ;
 inline Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* GameObject_AddComponent_TisButton_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098_m60FA17F75591FF93A15D1D1FE5969B8CB9E5FAAC (GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* __this, const RuntimeMethod* method)
 {
 	return ((  Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* (*) (GameObject_t76FEDD663AB33C991A9C9A23129337651094216F*, const RuntimeMethod*))GameObject_AddComponent_TisRuntimeObject_m69B93700FACCF372F5753371C6E8FB780800B824_gshared)(__this, method);
@@ -3161,7 +3168,7 @@ inline void List_1_AddWithResize_m7328D6CEEA0060C4F62CFD400A0D20B8751E6F42 (List
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 89005
+// Method Definition Index: 89021
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_get_SquadRowH_m7CBFE180721D56F35515D9BCE736D48EAD5C7871 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3171,7 +3178,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_get_SquadRowH_m7CBFE180721D56F35515
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:320>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:379>
 		il2cpp_codegen_runtime_class_init_inline(MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358_il2cpp_TypeInfo_var);
 		int32_t L_0;
 		L_0 = MatchManager_get_AllySize_m28FDB7889FC1D556DFA3227CEF6E967AF4CD3EC4(NULL);
@@ -3189,7 +3196,7 @@ IL_000e:
 		return (21.0f);
 	}
 }
-// Method Definition Index: 89006
+// Method Definition Index: 89022
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t HUD_get_SquadFont_mEF7A8F88638A3621CCE1E50F58F12B5896F698A1 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3199,7 +3206,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t HUD_get_SquadFont_mEF7A8F88638A3621CC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:321>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:380>
 		il2cpp_codegen_runtime_class_init_inline(MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358_il2cpp_TypeInfo_var);
 		int32_t L_0;
 		L_0 = MatchManager_get_AllySize_m28FDB7889FC1D556DFA3227CEF6E967AF4CD3EC4(NULL);
@@ -3217,7 +3224,7 @@ IL_000b:
 		return ((int32_t)12);
 	}
 }
-// Method Definition Index: 89007
+// Method Definition Index: 89023
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_SquadHeight_mA9A09101FEABAC471A7F797C2683090E2B5C4EDA (int32_t ___0_n, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3227,7 +3234,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_SquadHeight_mA9A09101FEABAC471A7F79
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:322>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:381>
 		int32_t L_0 = ___0_n;
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		float L_1;
@@ -3235,7 +3242,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_SquadHeight_mA9A09101FEABAC471A7F79
 		return ((float)il2cpp_codegen_add((34.0f), ((float)il2cpp_codegen_multiply(((float)L_0), ((float)il2cpp_codegen_add(L_1, (3.0f)))))));
 	}
 }
-// Method Definition Index: 89008
+// Method Definition Index: 89024
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_JoystickActive_mC9708FC99996D7BDFBAC6EB9D6AAE4D7D5324D5E (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3245,7 +3252,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_JoystickActive_mC9708FC99996D7BD
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:333>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:392>
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_0 = __this->___joyPad;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -3267,45 +3274,45 @@ IL_001a:
 		return (bool)0;
 	}
 }
-// Method Definition Index: 89009
+// Method Definition Index: 89025
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_AimToggled_m0D498EE5BB8B1D0D937F98C9A129BAE2516E2E3C (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:334>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:393>
 		bool L_0 = __this->___U3CAimToggledU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 89010
+// Method Definition Index: 89026
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_set_AimToggled_m743736C4C968C0E6A684EC94D1CD7EE083A0F0F1 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:334>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:393>
 		bool L_0 = ___0_value;
 		__this->___U3CAimToggledU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 89011
+// Method Definition Index: 89027
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:335>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:394>
 		bool L_0 = __this->___U3CPausedU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 89012
+// Method Definition Index: 89028
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_set_Paused_mCC1EF25C5011D5F59E97EF2D0296ADDB3B0BB266 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:335>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:394>
 		bool L_0 = ___0_value;
 		__this->___U3CPausedU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 89013
+// Method Definition Index: 89029
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_TouchUI_mB47898983D874755B1793EC60A96F204536B9F9A (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3315,14 +3322,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_get_TouchUI_mB47898983D874755B1793EC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:336>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:395>
 		il2cpp_codegen_runtime_class_init_inline(Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
 		bool L_0;
 		L_0 = Application_get_isMobilePlatform_mE0BBFDE72BBFE5877581FA67DDBBFC397608AFCA(NULL);
 		return L_0;
 	}
 }
-// Method Definition Index: 89014
+// Method Definition Index: 89030
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Create_m680171ACBC614E80FB06E7487B56540D7E3793B1 (MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* ___0_m, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3335,10 +3342,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Create_m680171ACBC614E80FB06E7487B56
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:341>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:400>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = (GameObject_t76FEDD663AB33C991A9C9A23129337651094216F*)il2cpp_codegen_object_new(GameObject_t76FEDD663AB33C991A9C9A23129337651094216F_il2cpp_TypeInfo_var);
 		GameObject__ctor_m37D512B05D292F954792225E6C6EEE95293A9B88(L_0, _stringLiteral688EACA5B6C102DD0902F37B6172CDD16910A5F2, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:342>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:401>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_1 = L_0;
 		NullCheck(L_1);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_2;
@@ -3349,28 +3356,28 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Create_m680171ACBC614E80FB06E7487B56
 		L_4 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_3, NULL);
 		NullCheck(L_2);
 		Transform_SetParent_m6677538B60246D958DD91F931C50F969CCBB5250(L_2, L_4, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:343>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:402>
 		NullCheck(L_1);
 		HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* L_5;
 		L_5 = GameObject_AddComponent_TisHUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_m085068F2C67191F4323EB03906037F74D6D0F2D7(L_1, GameObject_AddComponent_TisHUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_m085068F2C67191F4323EB03906037F74D6D0F2D7_RuntimeMethod_var);
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I = L_5;
 		Il2CppCodeGenWriteBarrier((void**)(&((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I), (void*)L_5);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:344>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:403>
 		HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* L_6 = ((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I;
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_7 = ___0_m;
 		NullCheck(L_6);
 		L_6->___mm = L_7;
 		Il2CppCodeGenWriteBarrier((void**)(&L_6->___mm), (void*)L_7);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:345>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:404>
 		HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* L_8 = ((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I;
 		NullCheck(L_8);
 		HUD_Build_mD7C2B8EC9603CEA35357E543311A98217FD81D66(L_8, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:346>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:405>
 		return;
 	}
 }
-// Method Definition Index: 89015
+// Method Definition Index: 89031
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_OnDestroy_m6291CFC0974E359D682335FF1183BE44414A54F4 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3383,7 +3390,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_OnDestroy_m6291CFC0974E359D682335FF1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:350>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:409>
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* L_0 = ((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -3395,7 +3402,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_OnDestroy_m6291CFC0974E359D682335FF1
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:350>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:409>
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I = (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&((HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_StaticFields*)il2cpp_codegen_static_fields_for(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var))->___I), (void*)(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D*)NULL);
@@ -3403,9 +3410,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_OnDestroy_m6291CFC0974E359D682335FF1
 
 IL_0013:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:350>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:409>
 		Time_set_timeScale_mEF84EE4B2376A458387648079B426B267862D331((1.0f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:351>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:410>
 		il2cpp_codegen_runtime_class_init_inline(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var);
 		ColorAdjustments_t97EE64C6DB384E5F6BC48C3FA13C207E8FC87A86* L_2 = ((Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_StaticFields*)il2cpp_codegen_static_fields_for(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var))->___Exposure;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -3417,7 +3424,7 @@ IL_0013:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:351>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:410>
 		il2cpp_codegen_runtime_class_init_inline(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var);
 		ColorAdjustments_t97EE64C6DB384E5F6BC48C3FA13C207E8FC87A86* L_4 = ((Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_StaticFields*)il2cpp_codegen_static_fields_for(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var))->___Exposure;
 		NullCheck(L_4);
@@ -3428,11 +3435,11 @@ IL_0013:
 
 IL_003e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:352>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:411>
 		return;
 	}
 }
-// Method Definition Index: 89016
+// Method Definition Index: 89032
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A98217FD81D66 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -3562,12 +3569,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 	String_t* G_B19_0 = NULL;
 	Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* G_B24_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:356>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:415>
 		Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* L_0;
 		L_0 = UIK_Canvas_mEE924EBBBE330A453991C66D03BD39C657CE02D6(_stringLiteral3C17A9BA22C1FEDD52A8C5E9E996D666CCB94E55, ((int32_t)10), NULL);
 		__this->___canvas = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___canvas), (void*)L_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:357>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:416>
 		Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* L_1 = __this->___canvas;
 		NullCheck(L_1);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_2;
@@ -3576,7 +3583,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_3 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(__this, NULL);
 		NullCheck(L_2);
 		Transform_SetParent_m6677538B60246D958DD91F931C50F969CCBB5250(L_2, L_3, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:359>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:418>
 		Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* L_4 = __this->___canvas;
 		NullCheck(L_4);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_5;
@@ -3585,7 +3592,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_6 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_5, _stringLiteral5A0EE985B2AE2A4DB7161D511B311EDCD9C0B910, NULL);
 		__this->___full = L_6;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___full), (void*)L_6);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:360>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
 		Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* L_7 = __this->___canvas;
 		NullCheck(L_7);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_8;
@@ -3594,7 +3601,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_9 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_8, _stringLiteralA2E138AD319A0E08FFC4A185CE05933BF5C01D5C, NULL);
 		__this->___root = L_9;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___root), (void*)L_9);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:361>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:420>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_10 = __this->___root;
 		NullCheck(L_10);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_11;
@@ -3602,7 +3609,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		NullCheck(L_11);
 		SafeArea_t116B9D4C1AE7050248196F4EEBC3CDEB9CBCE24F* L_12;
 		L_12 = GameObject_AddComponent_TisSafeArea_t116B9D4C1AE7050248196F4EEBC3CDEB9CBCE24F_m6899BD9D0700984D18FA69CEB3F8BD17215BB58E(L_11, GameObject_AddComponent_TisSafeArea_t116B9D4C1AE7050248196F4EEBC3CDEB9CBCE24F_m6899BD9D0700984D18FA69CEB3F8BD17215BB58E_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:363>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:422>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_13 = __this->___full;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_14;
 		L_14 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_13, _stringLiteral95C9362CC4657438505E00D23889DADA8BD86669, NULL);
@@ -3614,30 +3621,30 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_16 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_15, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
 		__this->___vignette = L_16;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___vignette), (void*)L_16);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:364>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:423>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_17 = __this->___vignette;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_18;
 		L_18 = Gfx_Blood_m8FA7D04C9F5DA96D21E0E30F7A9B94C5A6A2A023(NULL);
 		NullCheck(L_17);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_17, L_18, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:364>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:423>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_19 = __this->___vignette;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_20;
 		memset((&L_20), 0, sizeof(L_20));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_20), (1.0f), (1.0f), (1.0f), (0.0f), NULL);
 		NullCheck(L_19);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_19, L_20);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:364>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:423>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_21 = __this->___vignette;
 		NullCheck(L_21);
 		VirtualActionInvoker1< bool >::Invoke(25, L_21, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:367>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:426>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_22 = __this->___full;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_23;
 		L_23 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_22, _stringLiteralDE79BE7B9F6D27C4598CBA75189C2CB53E71EDBB, NULL);
 		__this->___scopeGroup = L_23;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeGroup), (void*)L_23);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:369>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:428>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_24 = __this->___scopeGroup;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_25;
 		L_25 = Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline(NULL);
@@ -3656,13 +3663,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_30 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_24, _stringLiteral0633E9122B199FCA599E79A2B528B92FE8EBF206, L_25, L_26, L_27, L_28, L_29, (bool)0, NULL);
 		__this->___scopeLensMask = L_30;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeLensMask), (void*)L_30);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:370>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:429>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_31 = __this->___scopeLensMask;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_32;
 		L_32 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_31);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_31, L_32, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:370>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:429>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_33 = __this->___scopeLensMask;
 		NullCheck(L_33);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_34;
@@ -3672,7 +3679,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_35 = GameObject_AddComponent_TisMask_tE8E16C858EC6ECCE545C03802BD1399F7F406213_mAB9A7CE273F47DA107A278EEFEF3C1B61C08B303(L_34, GameObject_AddComponent_TisMask_tE8E16C858EC6ECCE545C03802BD1399F7F406213_mAB9A7CE273F47DA107A278EEFEF3C1B61C08B303_RuntimeMethod_var);
 		NullCheck(L_35);
 		Mask_set_showMaskGraphic_m9F288D22259CFD781D5A4D9B9747C2A2895E7D67(L_35, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:371>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:430>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_36 = __this->___scopeLensMask;
 		NullCheck(L_36);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_37;
@@ -3695,11 +3702,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_44 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_43, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
 		__this->___scopeLens = L_44;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeLens), (void*)L_44);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:372>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:431>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_45 = __this->___scopeLens;
 		NullCheck(L_45);
 		VirtualActionInvoker1< bool >::Invoke(25, L_45, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:373>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:432>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_46 = __this->___scopeGroup;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_47;
 		memset((&L_47), 0, sizeof(L_47));
@@ -3715,7 +3722,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_51;
 		L_51 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_46, _stringLiteral4D1BDBFCC51F4695254B3C53B7142111EC52EA17, L_47, L_48, L_49, L_50, NULL);
 		V_0 = L_51;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:374>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:433>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_52 = V_0;
 		NullCheck(L_52);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_53;
@@ -3725,17 +3732,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_54 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_53, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
 		__this->___scopeImg = L_54;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeImg), (void*)L_54);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:374>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:433>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_55 = __this->___scopeImg;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_56;
 		L_56 = Gfx_Scope_mBFA4680031437E885622F3AC896167CFFD6E5AE1(NULL);
 		NullCheck(L_55);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_55, L_56, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:374>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:433>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_57 = __this->___scopeImg;
 		NullCheck(L_57);
 		VirtualActionInvoker1< bool >::Invoke(25, L_57, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:375>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:434>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_58 = __this->___scopeGroup;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_59;
 		memset((&L_59), 0, sizeof(L_59));
@@ -3758,19 +3765,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_65 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_64, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
 		__this->___scopeHousing = L_65;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeHousing), (void*)L_65);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:376>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:435>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_66 = __this->___scopeHousing;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_67;
 		L_67 = Gfx_ScopeHousing_mB39D69F992D524B6E555FFD522B369F008D1A6AE(NULL);
 		NullCheck(L_66);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_66, L_67, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:376>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:435>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_68 = __this->___scopeHousing;
 		NullCheck(L_68);
 		VirtualActionInvoker1< bool >::Invoke(25, L_68, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:377>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:436>
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&V_1), (0.0f), (0.0f), (0.0f), (0.319999993f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:378>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:437>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_69 = __this->___scopeGroup;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_70 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_71;
@@ -3787,7 +3794,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_75 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_69, _stringLiteral639A8B94841B609670E52EFDEBDB2E6824D7A389, L_70, L_71, L_72, L_73, L_74, (bool)0, NULL);
 		__this->___scopeL = L_75;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeL), (void*)L_75);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:379>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:438>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_76 = __this->___scopeL;
 		NullCheck(L_76);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_77;
@@ -3797,7 +3804,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_78), (-400.0f), (-400.0f), NULL);
 		NullCheck(L_77);
 		RectTransform_set_offsetMin_m07F38B4105C7CA9CC9FBDC9ED0DB008602880AB9(L_77, L_78, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:379>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:438>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_79 = __this->___scopeL;
 		NullCheck(L_79);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_80;
@@ -3807,7 +3814,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_81), (-420.0f), (400.0f), NULL);
 		NullCheck(L_80);
 		RectTransform_set_offsetMax_m5514D09D86516F2C0E25FA6D11A3A4274D3D002D(L_80, L_81, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:380>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:439>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_82 = __this->___scopeGroup;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_83 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_84;
@@ -3824,7 +3831,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_88 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_82, _stringLiteralDDAB57B61D9AF3A59013817526E0B50BF5912134, L_83, L_84, L_85, L_86, L_87, (bool)0, NULL);
 		__this->___scopeR = L_88;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeR), (void*)L_88);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:381>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:440>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_89 = __this->___scopeR;
 		NullCheck(L_89);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_90;
@@ -3834,7 +3841,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_91), (420.0f), (-400.0f), NULL);
 		NullCheck(L_90);
 		RectTransform_set_offsetMin_m07F38B4105C7CA9CC9FBDC9ED0DB008602880AB9(L_90, L_91, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:381>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:440>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_92 = __this->___scopeR;
 		NullCheck(L_92);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_93;
@@ -3844,7 +3851,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_94), (400.0f), (400.0f), NULL);
 		NullCheck(L_93);
 		RectTransform_set_offsetMax_m5514D09D86516F2C0E25FA6D11A3A4274D3D002D(L_93, L_94, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:382>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:441>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_95 = __this->___scopeGroup;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_96 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_97;
@@ -3863,7 +3870,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_101 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_95, _stringLiteralAB54BB6CBBE08124260AF381021973102C91F414, L_96, L_97, L_98, L_99, L_100, (bool)0, NULL);
 		__this->___scopeT = L_101;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeT), (void*)L_101);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:383>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:442>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_102 = __this->___scopeGroup;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_103 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_104;
@@ -3882,7 +3889,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_108 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_102, _stringLiteral3FBC1DAC7DD644FC772B33CC5B6BE29B0120131B, L_103, L_104, L_105, L_106, L_107, (bool)0, NULL);
 		__this->___scopeB = L_108;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeB), (void*)L_108);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:384>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:443>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_109 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_110;
 		memset((&L_110), 0, sizeof(L_110));
@@ -3899,16 +3906,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Build_mD7C2B8EC9603CEA35357E543311A9
 		L_115 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_109, _stringLiteral2AF10F459E51945366EFDDFD0D2108598B13F7DD, L_110, L_111, L_112, L_113, L_114, (bool)0, NULL);
 		__this->___scopeBlink = L_115;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___scopeBlink), (void*)L_115);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:385>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:444>
 		HUD_SetScope_m21A276666685D33AF10B6CC531AC1EC0485858B2(__this, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:388>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:447>
 		V_5 = 0;
 		goto IL_054e;
 	}
 
 IL_048e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:390>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:449>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_116 = __this->___full;
 		String_t* L_117;
 		L_117 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_5), NULL);
@@ -3976,7 +3983,7 @@ IL_0506:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_126;
 		L_126 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(G_B4_6, G_B4_5, G_B4_4, G_B4_3, G_B4_2, G_B4_1, G_B4_0, (bool)0, NULL);
 		V_6 = L_126;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:391>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:450>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_127 = V_6;
 		NullCheck(L_127);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_128;
@@ -3989,7 +3996,7 @@ IL_0506:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_130), (0.0f), (0.0f), (0.0f), (0.5f), NULL);
 		NullCheck(L_129);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_129, L_130, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:392>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:451>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_131 = __this->___xh;
 		int32_t L_132 = V_5;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_133 = V_6;
@@ -3998,14 +4005,14 @@ IL_0506:
 		L_134 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_133, NULL);
 		NullCheck(L_131);
 		(L_131)->SetAt(static_cast<il2cpp_array_size_t>(L_132), (RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5*)L_134);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:388>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:447>
 		int32_t L_135 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_135, 1));
 	}
 
 IL_054e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:388>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:447>
 		int32_t L_136 = V_5;
 		if ((((int32_t)L_136) < ((int32_t)4)))
 		{
@@ -4013,7 +4020,7 @@ IL_054e:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:394>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:453>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_137 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_138;
 		memset((&L_138), 0, sizeof(L_138));
@@ -4033,7 +4040,7 @@ IL_054e:
 		L_143 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_137, _stringLiteral1E66BF584F52E51EAD89C18CDAFA6F2CE1041788, L_138, L_139, L_140, L_141, L_142, (bool)0, NULL);
 		__this->___centerDot = L_143;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___centerDot), (void*)L_143);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:395>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:454>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_144 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_145;
 		memset((&L_145), 0, sizeof(L_145));
@@ -4053,13 +4060,13 @@ IL_054e:
 		L_150 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_144, _stringLiteralADF87B2D4E0729B117B600A77B230762D915A26D, L_145, L_146, L_147, L_148, L_149, (bool)0, NULL);
 		__this->___redGlow = L_150;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___redGlow), (void*)L_150);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:395>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:454>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_151 = __this->___redGlow;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_152;
 		L_152 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_151);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_151, L_152, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:396>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:455>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_153 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_154;
 		memset((&L_154), 0, sizeof(L_154));
@@ -4079,13 +4086,13 @@ IL_054e:
 		L_159 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_153, _stringLiteral0FFBBF8FD5584F6A2656BCFADBBEFD813A7EEE7C, L_154, L_155, L_156, L_157, L_158, (bool)0, NULL);
 		__this->___redDot = L_159;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___redDot), (void*)L_159);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:396>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:455>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_160 = __this->___redDot;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_161;
 		L_161 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_160);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_160, L_161, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:397>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:456>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_162 = __this->___redDot;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_163 = __this->___redGlow;
 		int32_t L_164 = 0;
@@ -4095,7 +4102,7 @@ IL_054e:
 		bool L_165 = V_7;
 		NullCheck(L_162);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_162, L_165, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:398>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:457>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_166 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_167;
 		L_167 = Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline(NULL);
@@ -4114,21 +4121,21 @@ IL_054e:
 		L_172 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_166, _stringLiteral9CEB4D81FE1382FF120AEE05E403D6F7BCE690D2, L_167, L_168, L_169, L_170, L_171, (bool)0, NULL);
 		__this->___hitMark = L_172;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___hitMark), (void*)L_172);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:399>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:458>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_173 = __this->___hitMark;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_174;
 		memset((&L_174), 0, sizeof(L_174));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_174), (1.0f), (1.0f), (1.0f), (0.0f), NULL);
 		NullCheck(L_173);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_173, L_174);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:400>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:459>
 		V_8 = 0;
 		goto IL_07e8;
 	}
 
 IL_0732:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:402>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:461>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_175 = __this->___hitMark;
 		NullCheck(L_175);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_176;
@@ -4148,7 +4155,7 @@ IL_0732:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_181), (3.0f), (12.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_182;
 		L_182 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_176, _stringLiteralB9D3D73187778AF6D06AB846BD78D488ADBFB70E, L_177, L_178, L_179, L_180, L_181, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:403>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:462>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_183 = L_182;
 		NullCheck(L_183);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_184;
@@ -4158,7 +4165,7 @@ IL_0732:
 		L_186 = Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline((0.0f), (0.0f), ((float)((int32_t)il2cpp_codegen_add(((int32_t)45), ((int32_t)il2cpp_codegen_multiply(((int32_t)90), L_185))))), NULL);
 		NullCheck(L_184);
 		Transform_set_localRotation_mAB4A011D134BA58AB780BECC0025CA65F16185FA(L_184, L_186, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:404>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:463>
 		NullCheck(L_183);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_187;
 		L_187 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_183, NULL);
@@ -4176,14 +4183,14 @@ IL_0732:
 		L_193 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_192, NULL);
 		NullCheck(L_187);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_187, L_193, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:400>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:459>
 		int32_t L_194 = V_8;
 		V_8 = ((int32_t)il2cpp_codegen_add(L_194, 1));
 	}
 
 IL_07e8:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:400>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:459>
 		int32_t L_195 = V_8;
 		if ((((int32_t)L_195) < ((int32_t)4)))
 		{
@@ -4191,14 +4198,14 @@ IL_07e8:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:406>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:465>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_196 = __this->___hitMark;
 		NullCheck(L_196);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_197;
 		L_197 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_196, NULL);
 		NullCheck(L_197);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_197, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:409>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:468>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_198 = __this->___root;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_199;
 		memset((&L_199), 0, sizeof(L_199));
@@ -4215,21 +4222,21 @@ IL_07e8:
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_203;
 		L_203 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_198, _stringLiteralCFBAECE72C906B34CB11D957EB0C22230B80D241, L_199, L_200, L_201, L_202, NULL);
 		V_2 = L_203;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:410>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:469>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_204 = V_2;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** L_205 = (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)(&__this->___allyBar);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_206;
 		L_206 = HUD_ScoreBlock_m4CF75CDE176F1FEA169865E069BF2896487485A0(__this, L_204, (bool)1, L_205, NULL);
 		__this->___allyScore = L_206;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___allyScore), (void*)L_206);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:411>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:470>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_207 = V_2;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** L_208 = (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)(&__this->___enemyBar);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_209;
 		L_209 = HUD_ScoreBlock_m4CF75CDE176F1FEA169865E069BF2896487485A0(__this, L_207, (bool)0, L_208, NULL);
 		__this->___enemyScore = L_209;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___enemyScore), (void*)L_209);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:412>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:471>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_210 = V_2;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_211;
 		memset((&L_211), 0, sizeof(L_211));
@@ -4248,7 +4255,7 @@ IL_07e8:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_216;
 		L_216 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_210, _stringLiteral59854C85FEC9DAEF7BF224D99E0DCF1C5671C50A, L_211, L_212, L_213, L_214, L_215, (bool)0, NULL);
 		V_3 = L_216;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:413>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:472>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_217 = V_3;
 		NullCheck(L_217);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_218;
@@ -4268,7 +4275,7 @@ IL_07e8:
 		L_224 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_218, _stringLiteral51C6279E31F7483126B79E3000116001A915B690, _stringLiteral3F01DC4D2A4125BC554A259E6F3900ED85283A51, ((int32_t)34), L_219, 4, L_220, L_221, L_222, L_223, (bool)1, NULL);
 		__this->___timer = L_224;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___timer), (void*)L_224);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:414>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:473>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_225 = V_3;
 		NullCheck(L_225);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_226;
@@ -4324,7 +4331,7 @@ IL_092e:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_235), (118.0f), (18.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_236;
 		L_236 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B12_2, G_B12_1, L_230, ((int32_t)13), L_231, 4, L_232, L_233, L_234, L_235, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:417>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:476>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_237 = __this->___root;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_238;
 		memset((&L_238), 0, sizeof(L_238));
@@ -4347,7 +4354,7 @@ IL_092e:
 		L_244 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_237, _stringLiteral2B8E19EBECECBC918E301E45BEEE7CE08295EF89, L_238, L_239, L_242, L_243, NULL);
 		__this->___feed = L_244;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___feed), (void*)L_244);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:418>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:477>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_245 = __this->___feed;
 		NullCheck(L_245);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_246;
@@ -4355,26 +4362,26 @@ IL_092e:
 		NullCheck(L_246);
 		VerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8* L_247;
 		L_247 = GameObject_AddComponent_TisVerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8_m8FC80304C9EFC42F9CAE9588753536DC6F224521(L_246, GameObject_AddComponent_TisVerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8_m8FC80304C9EFC42F9CAE9588753536DC6F224521_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:478>
 		VerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8* L_248 = L_247;
 		NullCheck(L_248);
 		LayoutGroup_set_childAlignment_mA97DF1F2CF43C0CD1B83CFE7883626AA86ABB0AF(L_248, 0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:478>
 		VerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8* L_249 = L_248;
 		NullCheck(L_249);
 		HorizontalOrVerticalLayoutGroup_set_spacing_m90373F54D37DA8DFA90E102DC60EC33E542FD859(L_249, (6.0f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:478>
 		VerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8* L_250 = L_249;
 		NullCheck(L_250);
 		HorizontalOrVerticalLayoutGroup_set_childControlHeight_m8DD189C9B1F926641F4A2FD41F41F2097E4D7751(L_250, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:478>
 		VerticalLayoutGroup_t06B5E51FC8051BF2009E6494876FBB9F3E5320B8* L_251 = L_250;
 		NullCheck(L_251);
 		HorizontalOrVerticalLayoutGroup_set_childControlWidth_m0B9A78B8284E17C438645684984796AC0E2D1BD8(L_251, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:419>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:478>
 		NullCheck(L_251);
 		HorizontalOrVerticalLayoutGroup_set_childForceExpandHeight_mA144CF421614F41813DE346AA9D1C64621C6C2E5(L_251, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:422>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:481>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_252 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_253 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Panel;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_254;
@@ -4393,7 +4400,7 @@ IL_092e:
 		L_258 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_252, _stringLiteral03CB80F85B3F877FE254112B6C9F800FA4EA0FEB, L_253, L_254, L_255, L_256, L_257, (bool)0, NULL);
 		__this->___hpBack = L_258;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___hpBack), (void*)L_258);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:423>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:482>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_259 = __this->___hpBack;
 		NullCheck(L_259);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_260;
@@ -4414,7 +4421,7 @@ IL_092e:
 		L_266 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_260, _stringLiteral77245E58ABE221933150205A4FF5E6F21ACECC77, L_261, L_262, L_263, L_264, L_265, (bool)0, NULL);
 		__this->___hpFill = L_266;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___hpFill), (void*)L_266);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:424>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:483>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_267 = __this->___hpFill;
 		NullCheck(L_267);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_268;
@@ -4424,7 +4431,7 @@ IL_092e:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_269), (0.0f), (0.5f), NULL);
 		NullCheck(L_268);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_268, L_269, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:424>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:483>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_270 = __this->___hpFill;
 		NullCheck(L_270);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_271;
@@ -4434,11 +4441,11 @@ IL_092e:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_272), (2.0f), (0.0f), NULL);
 		NullCheck(L_271);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_271, L_272, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:427>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:486>
 		il2cpp_codegen_runtime_class_init_inline(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var);
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_273 = ((PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_StaticFields*)il2cpp_codegen_static_fields_for(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var))->___Local;
 		V_4 = L_273;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:428>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:487>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_274 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_275;
@@ -4474,7 +4481,7 @@ IL_0b37:
 	{
 		NullCheck(G_B15_1);
 		G_B15_1->___slotN = G_B15_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:429>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:488>
 		V_10 = 0;
 		goto IL_0d65;
 	}
@@ -4484,12 +4491,12 @@ IL_0b44:
 		U3CU3Ec__DisplayClass104_0_t222A753CE6BF30F1823552AACEADC88E256467A1* L_280 = (U3CU3Ec__DisplayClass104_0_t222A753CE6BF30F1823552AACEADC88E256467A1*)il2cpp_codegen_object_new(U3CU3Ec__DisplayClass104_0_t222A753CE6BF30F1823552AACEADC88E256467A1_il2cpp_TypeInfo_var);
 		U3CU3Ec__DisplayClass104_0__ctor_m508FF6CD42996BF193C97CB23591E562389DAEE1(L_280, NULL);
 		V_11 = L_280;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:431>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:490>
 		U3CU3Ec__DisplayClass104_0_t222A753CE6BF30F1823552AACEADC88E256467A1* L_281 = V_11;
 		int32_t L_282 = V_10;
 		NullCheck(L_281);
 		L_281->___idx = L_282;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:432>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:491>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_283 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_284;
@@ -4519,7 +4526,7 @@ IL_0b65:
 IL_0b73:
 	{
 		V_12 = G_B19_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:433>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:492>
 		String_t* L_289 = V_12;
 		bool L_290;
 		L_290 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_289, _stringLiteralAF823D8BB328F99E1A60D19A5C98ED456F94B158, NULL);
@@ -4529,13 +4536,13 @@ IL_0b73:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:433>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:492>
 		V_12 = _stringLiteralFDB98F1EA433B327EBD1077CB33CE726AB1ECC09;
 	}
 
 IL_0b8a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:434>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:493>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_291 = __this->___root;
 		String_t* L_292;
 		L_292 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_10), NULL);
@@ -4560,14 +4567,14 @@ IL_0b8a:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_301;
 		L_301 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_291, L_293, L_294, L_295, L_296, L_299, L_300, (bool)1, NULL);
 		V_13 = L_301;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:435>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:494>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_302 = __this->___slotImgs;
 		int32_t L_303 = V_10;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_304 = V_13;
 		NullCheck(L_302);
 		ArrayElementTypeCheck (L_302, L_304);
 		(L_302)->SetAt(static_cast<il2cpp_array_size_t>(L_303), (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E*)L_304);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:437>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:496>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_305 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_306;
@@ -4602,7 +4609,7 @@ IL_0c16:
 IL_0c2e:
 	{
 		V_14 = G_B24_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:438>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:497>
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_313 = V_14;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_314;
@@ -4613,9 +4620,9 @@ IL_0c2e:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:440>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:499>
 		V_15 = (28.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:440>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:499>
 		float L_315 = V_15;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_316 = V_14;
 		NullCheck(L_316);
@@ -4630,7 +4637,7 @@ IL_0c2e:
 		float L_321;
 		L_321 = Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline((108.0f), ((float)(((float)il2cpp_codegen_multiply(L_315, ((float)L_317)))/((float)L_320))), NULL);
 		V_16 = L_321;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:440>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:499>
 		float L_322 = V_16;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_323 = V_14;
 		NullCheck(L_323);
@@ -4641,7 +4648,7 @@ IL_0c2e:
 		int32_t L_326;
 		L_326 = VirtualFuncInvoker0< int32_t >::Invoke(5, L_325);
 		V_15 = ((float)(((float)il2cpp_codegen_multiply(L_322, ((float)L_324)))/((float)L_326)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:441>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:500>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_327 = V_13;
 		NullCheck(L_327);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_328;
@@ -4662,7 +4669,7 @@ IL_0c2e:
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_335;
 		L_335 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_328, _stringLiteral12023EAD43F0D90583D9655C169C8A322A13046E, L_329, L_330, L_331, L_334, NULL);
 		V_17 = L_335;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:442>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_336 = __this->___slotIcons;
 		int32_t L_337 = V_10;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_338 = V_17;
@@ -4675,7 +4682,7 @@ IL_0c2e:
 		NullCheck(L_336);
 		ArrayElementTypeCheck (L_336, L_340);
 		(L_336)->SetAt(static_cast<il2cpp_array_size_t>(L_337), (RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179*)L_340);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:442>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_341 = __this->___slotIcons;
 		int32_t L_342 = V_10;
 		NullCheck(L_341);
@@ -4684,7 +4691,7 @@ IL_0c2e:
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_345 = V_14;
 		NullCheck(L_344);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_344, L_345, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:442>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_346 = __this->___slotIcons;
 		int32_t L_347 = V_10;
 		NullCheck(L_346);
@@ -4692,7 +4699,7 @@ IL_0c2e:
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_349 = (L_346)->GetAt(static_cast<il2cpp_array_size_t>(L_348));
 		NullCheck(L_349);
 		VirtualActionInvoker1< bool >::Invoke(25, L_349, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:442>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_350 = __this->___slotIcons;
 		int32_t L_351 = V_10;
 		NullCheck(L_350);
@@ -4707,7 +4714,7 @@ IL_0c2e:
 
 IL_0d08:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:444>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:503>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_355 = __this->___slotTxt;
 		int32_t L_356 = V_10;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_357 = V_13;
@@ -4734,7 +4741,7 @@ IL_0d08:
 
 IL_0d41:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:445>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:504>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_366 = V_13;
 		NullCheck(L_366);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_367;
@@ -4742,21 +4749,21 @@ IL_0d41:
 		NullCheck(L_367);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_368;
 		L_368 = GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D(L_367, GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:445>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:504>
 		U3CU3Ec__DisplayClass104_0_t222A753CE6BF30F1823552AACEADC88E256467A1* L_369 = V_11;
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_370 = (Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41*)il2cpp_codegen_object_new(Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41_il2cpp_TypeInfo_var);
 		Action_1__ctor_m71EC084F51BD5BB5FDBB92E5FF42B04C90CDC5D6(L_370, L_369, (intptr_t)((void*)U3CU3Ec__DisplayClass104_0_U3CBuildU3Eb__0_m5E9F0C07DDFB524D0D63A726227D4A8730FE1D91_RuntimeMethod_var), NULL);
 		NullCheck(L_368);
 		L_368->___down = L_370;
 		Il2CppCodeGenWriteBarrier((void**)(&L_368->___down), (void*)L_370);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:429>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:488>
 		int32_t L_371 = V_10;
 		V_10 = ((int32_t)il2cpp_codegen_add(L_371, 1));
 	}
 
 IL_0d65:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:429>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:488>
 		int32_t L_372 = V_10;
 		int32_t L_373 = __this->___slotN;
 		if ((((int32_t)L_372) < ((int32_t)L_373)))
@@ -4765,7 +4772,7 @@ IL_0d65:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:448>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:507>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_374 = __this->___root;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_375 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Text;
@@ -4785,7 +4792,7 @@ IL_0d65:
 		L_380 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_374, _stringLiteralD42A0E82E7E27F56DFA6E09CFE0761E7C83A788E, _stringLiteral797069DAB9736CDB870B686EF158A6EDAAE76723, ((int32_t)44), L_375, 8, L_376, L_377, L_378, L_379, (bool)1, NULL);
 		__this->___ammo = L_380;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___ammo), (void*)L_380);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:449>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:508>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_381 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_382 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_383;
@@ -4804,7 +4811,7 @@ IL_0d65:
 		L_387 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_381, _stringLiteralE09BDEF8DF8CA482239563786485E1CE2638A7E0, _stringLiteralE4CB07D8454AF7388CF58FAAFEFE26DB745EA1F9, ((int32_t)18), L_382, 8, L_383, L_384, L_385, L_386, (bool)1, NULL);
 		__this->___weaponName = L_387;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___weaponName), (void*)L_387);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:450>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:509>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_388 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_389 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_390;
@@ -4823,13 +4830,13 @@ IL_0d65:
 		L_394 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_388, _stringLiteralA77B332C46D848F790D53EDB5E0641C50ED83741, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)24), L_389, 4, L_390, L_391, L_392, L_393, (bool)1, NULL);
 		__this->___toast = L_394;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___toast), (void*)L_394);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:452>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:511>
 		HUD_BuildRadar_mC4F66711347C712B59139A74B98DE42951507688(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:452>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:511>
 		HUD_BuildIndicators_m0426108762DCF78D37B32DE4A644C9CBA9D2002D(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:452>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:511>
 		HUD_BuildTags_m8662A5547CCEDD8DE604BE987C99876A5D19D342(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:453>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:512>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_395 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_396 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_397;
@@ -4848,7 +4855,7 @@ IL_0d65:
 		L_401 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_395, _stringLiteral20E7DAE11FA3F2D3169E7793DC583AD5A0697528, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)66), L_396, 4, L_397, L_398, L_399, L_400, (bool)1, NULL);
 		__this->___bigText = L_401;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___bigText), (void*)L_401);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:454>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:513>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_402 = __this->___bigText;
 		NullCheck(L_402);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_403;
@@ -4861,7 +4868,7 @@ IL_0d65:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_405), (0.0f), (0.0f), (0.0f), (0.600000024f), NULL);
 		NullCheck(L_404);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_404, L_405, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:455>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:514>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_406 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_407 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Text;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_408;
@@ -4880,7 +4887,7 @@ IL_0d65:
 		L_412 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_406, _stringLiteralC63474DAC1E4C6704BEA5DAE8BC38CEC22E69397, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)26), L_407, 4, L_408, L_409, L_410, L_411, (bool)1, NULL);
 		__this->___killText = L_412;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___killText), (void*)L_412);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:456>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:515>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_413 = __this->___killText;
 		NullCheck(L_413);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_414;
@@ -4893,19 +4900,19 @@ IL_0d65:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_416), (0.0f), (0.0f), (0.0f), (0.600000024f), NULL);
 		NullCheck(L_415);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_415, L_416, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:457>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:516>
 		HUD_BuildControls_mFA83CF8ADE22074BEA46560264B0AE87D87B4608(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:459>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:518>
 		HUD_BuildPauseButton_mED0793FEFB4A29EAFF2FFBD86B06B149BCF56EF6(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:461>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:520>
 		HUD_BuildDeath_m4D46F71ED82F59B7626E3F34C86BF8F5880AB0B7(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:461>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:520>
 		HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95FECB6860BDEF1EDC7(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:461>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:520>
 		HUD_BuildReload_mECFC850EE2B80758836FB830FA80E09803282B36(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:461>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:520>
 		HUD_BuildGrenadeWarn_m06923C3D4F20E76E158D509DA18491F58EDA916C(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:462>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:521>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_417 = __this->___controls;
 		NullCheck(L_417);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_418;
@@ -4915,11 +4922,11 @@ IL_0d65:
 		L_419 = HUD_get_TouchUI_mB47898983D874755B1793EC60A96F204536B9F9A(NULL);
 		NullCheck(L_418);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_418, L_419, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:463>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:522>
 		return;
 	}
 }
-// Method Definition Index: 89017
+// Method Definition Index: 89033
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* HUD_IconFor_mA830C940A1011DA7ED0AEE05538C63EAFFB95501 (String_t* ___0_id, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4931,13 +4938,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral63F8DDC5671DDD35F15613489AB21368AD0E1A10);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral6C23924C4F221C5F81332E79B4BD5A5AF61B9AF7);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral8A6809759794C6A9B9E187308CC71080CFDFF61A);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral92F7FD2F4C293A393AF6CCC8B56EA4A22A8E3F47);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral992A92B9AFBE31138854C46DEA1464572C14F440);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralD9865DBFDB5C8BCA72507C7D3DCA832647860188);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE18B612F2CEC49FD22137D4676C2F419D6CF46D5);
 		s_Il2CppMethodInitialized = true;
 	}
 	Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* V_0 = NULL;
 	uint32_t V_1 = 0;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:468>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:527>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_0;
 		L_0 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		V_0 = L_0;
@@ -4946,240 +4956,339 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11
 		L_2 = U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876(L_1, NULL);
 		V_1 = L_2;
 		uint32_t L_3 = V_1;
-		if ((!(((uint32_t)L_3) <= ((uint32_t)((int32_t)-2108353551)))))
+		if ((!(((uint32_t)L_3) <= ((uint32_t)((int32_t)2075039053)))))
 		{
-			goto IL_0035;
+			goto IL_005e;
 		}
 	}
 	{
 		uint32_t L_4 = V_1;
-		if ((((int32_t)L_4) == ((int32_t)((int32_t)942821878))))
+		if ((!(((uint32_t)L_4) <= ((uint32_t)((int32_t)1313842571)))))
 		{
-			goto IL_0088;
+			goto IL_0038;
 		}
 	}
 	{
 		uint32_t L_5 = V_1;
-		if ((((int32_t)L_5) == ((int32_t)((int32_t)1313842571))))
+		if ((((int32_t)L_5) == ((int32_t)((int32_t)942821878))))
 		{
-			goto IL_00b5;
+			goto IL_00c5;
 		}
 	}
 	{
 		uint32_t L_6 = V_1;
-		if ((((int32_t)L_6) == ((int32_t)((int32_t)-2108353551))))
+		if ((((int32_t)L_6) == ((int32_t)((int32_t)1313842571))))
 		{
-			goto IL_0079;
+			goto IL_00fb;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_0035:
+IL_0038:
 	{
 		uint32_t L_7 = V_1;
-		if ((!(((uint32_t)L_7) <= ((uint32_t)((int32_t)-1489019891)))))
+		if ((((int32_t)L_7) == ((int32_t)((int32_t)1571710483))))
 		{
-			goto IL_0052;
+			goto IL_0119;
 		}
 	}
 	{
 		uint32_t L_8 = V_1;
-		if ((((int32_t)L_8) == ((int32_t)((int32_t)-1901390119))))
+		if ((((int32_t)L_8) == ((int32_t)((int32_t)1842977317))))
 		{
-			goto IL_0067;
+			goto IL_0137;
 		}
 	}
 	{
 		uint32_t L_9 = V_1;
-		if ((((int32_t)L_9) == ((int32_t)((int32_t)-1489019891))))
+		if ((((int32_t)L_9) == ((int32_t)((int32_t)2075039053))))
 		{
-			goto IL_00c4;
+			goto IL_0128;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_0052:
+IL_005e:
 	{
 		uint32_t L_10 = V_1;
-		if ((((int32_t)L_10) == ((int32_t)((int32_t)-645342979))))
+		if ((!(((uint32_t)L_10) <= ((uint32_t)((int32_t)-1901390119)))))
 		{
-			goto IL_00a6;
+			goto IL_007b;
 		}
 	}
 	{
 		uint32_t L_11 = V_1;
-		if ((((int32_t)L_11) == ((int32_t)((int32_t)-310583924))))
+		if ((((int32_t)L_11) == ((int32_t)((int32_t)-2108353551))))
 		{
-			goto IL_0097;
+			goto IL_00b0;
 		}
 	}
 	{
-		goto IL_00fd;
-	}
-
-IL_0067:
-	{
-		String_t* L_12 = ___0_id;
-		bool L_13;
-		L_13 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_12, _stringLiteral491808D7EEB006360E8FF7C51AA2757B43D35E12, NULL);
-		if (L_13)
+		uint32_t L_12 = V_1;
+		if ((((int32_t)L_12) == ((int32_t)((int32_t)-1901390119))))
 		{
-			goto IL_00d3;
+			goto IL_009b;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_0079:
+IL_007b:
 	{
-		String_t* L_14 = ___0_id;
-		bool L_15;
-		L_15 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_14, _stringLiteral8A6809759794C6A9B9E187308CC71080CFDFF61A, NULL);
-		if (L_15)
+		uint32_t L_13 = V_1;
+		if ((((int32_t)L_13) == ((int32_t)((int32_t)-1489019891))))
 		{
-			goto IL_00d3;
+			goto IL_010a;
 		}
 	}
 	{
-		goto IL_00fd;
+		uint32_t L_14 = V_1;
+		if ((((int32_t)L_14) == ((int32_t)((int32_t)-645342979))))
+		{
+			goto IL_00e9;
+		}
+	}
+	{
+		uint32_t L_15 = V_1;
+		if ((((int32_t)L_15) == ((int32_t)((int32_t)-310583924))))
+		{
+			goto IL_00d7;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_0088:
+IL_009b:
 	{
 		String_t* L_16 = ___0_id;
 		bool L_17;
-		L_17 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_16, _stringLiteral2B92CCD4CA41F7D91F0F8D844F7E66990E91ADF3, NULL);
+		L_17 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_16, _stringLiteral491808D7EEB006360E8FF7C51AA2757B43D35E12, NULL);
 		if (L_17)
 		{
-			goto IL_00da;
+			goto IL_0146;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_0097:
+IL_00b0:
 	{
 		String_t* L_18 = ___0_id;
 		bool L_19;
-		L_19 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_18, _stringLiteralE18B612F2CEC49FD22137D4676C2F419D6CF46D5, NULL);
+		L_19 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_18, _stringLiteral8A6809759794C6A9B9E187308CC71080CFDFF61A, NULL);
 		if (L_19)
 		{
-			goto IL_00e1;
+			goto IL_0146;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_00a6:
+IL_00c5:
 	{
 		String_t* L_20 = ___0_id;
 		bool L_21;
-		L_21 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_20, _stringLiteral34EA1039F9A6CB3D1A170C182A178A34DCC1EA76, NULL);
+		L_21 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_20, _stringLiteral2B92CCD4CA41F7D91F0F8D844F7E66990E91ADF3, NULL);
 		if (L_21)
 		{
-			goto IL_00e8;
+			goto IL_014d;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_00b5:
+IL_00d7:
 	{
 		String_t* L_22 = ___0_id;
 		bool L_23;
-		L_23 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_22, _stringLiteral63F8DDC5671DDD35F15613489AB21368AD0E1A10, NULL);
+		L_23 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_22, _stringLiteralE18B612F2CEC49FD22137D4676C2F419D6CF46D5, NULL);
 		if (L_23)
 		{
-			goto IL_00ef;
+			goto IL_0154;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_00c4:
+IL_00e9:
 	{
 		String_t* L_24 = ___0_id;
 		bool L_25;
-		L_25 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_24, _stringLiteral6C23924C4F221C5F81332E79B4BD5A5AF61B9AF7, NULL);
+		L_25 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_24, _stringLiteral34EA1039F9A6CB3D1A170C182A178A34DCC1EA76, NULL);
 		if (L_25)
 		{
-			goto IL_00f6;
+			goto IL_015b;
 		}
 	}
 	{
-		goto IL_00fd;
+		goto IL_0184;
 	}
 
-IL_00d3:
+IL_00fb:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:471>
-		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_26 = V_0;
-		NullCheck(L_26);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_27 = L_26->___icFire;
-		return L_27;
+		String_t* L_26 = ___0_id;
+		bool L_27;
+		L_27 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_26, _stringLiteral63F8DDC5671DDD35F15613489AB21368AD0E1A10, NULL);
+		if (L_27)
+		{
+			goto IL_0162;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_00da:
+IL_010a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:472>
-		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_28 = V_0;
-		NullCheck(L_28);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_29 = L_28->___icAim;
-		return L_29;
+		String_t* L_28 = ___0_id;
+		bool L_29;
+		L_29 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_28, _stringLiteral6C23924C4F221C5F81332E79B4BD5A5AF61B9AF7, NULL);
+		if (L_29)
+		{
+			goto IL_0169;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_00e1:
+IL_0119:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:473>
-		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_30 = V_0;
-		NullCheck(L_30);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_31 = L_30->___icReload;
-		return L_31;
+		String_t* L_30 = ___0_id;
+		bool L_31;
+		L_31 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_30, _stringLiteral992A92B9AFBE31138854C46DEA1464572C14F440, NULL);
+		if (L_31)
+		{
+			goto IL_0170;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_00e8:
+IL_0128:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:474>
-		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_32 = V_0;
-		NullCheck(L_32);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_33 = L_32->___icGrenade;
-		return L_33;
+		String_t* L_32 = ___0_id;
+		bool L_33;
+		L_33 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_32, _stringLiteralD9865DBFDB5C8BCA72507C7D3DCA832647860188, NULL);
+		if (L_33)
+		{
+			goto IL_0177;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_00ef:
+IL_0137:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:475>
-		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_34 = V_0;
-		NullCheck(L_34);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_35 = L_34->___icCrouch;
-		return L_35;
+		String_t* L_34 = ___0_id;
+		bool L_35;
+		L_35 = String_op_Equality_m030E1B219352228970A076136E455C4E568C02C1(L_34, _stringLiteral92F7FD2F4C293A393AF6CCC8B56EA4A22A8E3F47, NULL);
+		if (L_35)
+		{
+			goto IL_017e;
+		}
+	}
+	{
+		goto IL_0184;
 	}
 
-IL_00f6:
+IL_0146:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:476>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:530>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_36 = V_0;
 		NullCheck(L_36);
-		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_37 = L_36->___icJump;
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_37 = L_36->___icFire;
 		return L_37;
 	}
 
-IL_00fd:
+IL_014d:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:477>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:531>
+		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_38 = V_0;
+		NullCheck(L_38);
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_39 = L_38->___icAim;
+		return L_39;
+	}
+
+IL_0154:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:532>
+		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_40 = V_0;
+		NullCheck(L_40);
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_41 = L_40->___icReload;
+		return L_41;
+	}
+
+IL_015b:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:533>
+		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_42 = V_0;
+		NullCheck(L_42);
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_43 = L_42->___icGrenade;
+		return L_43;
+	}
+
+IL_0162:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:534>
+		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_44 = V_0;
+		NullCheck(L_44);
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_45 = L_44->___icCrouch;
+		return L_45;
+	}
+
+IL_0169:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:535>
+		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_46 = V_0;
+		NullCheck(L_46);
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_47 = L_46->___icJump;
+		return L_47;
+	}
+
+IL_0170:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:536>
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_48;
+		L_48 = Gfx_LeanIcon_m12840B8FAC8A262F1ED8A52979A0FBAFDC95FB90((-1), NULL);
+		return L_48;
+	}
+
+IL_0177:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:537>
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_49;
+		L_49 = Gfx_LeanIcon_m12840B8FAC8A262F1ED8A52979A0FBAFDC95FB90(1, NULL);
+		return L_49;
+	}
+
+IL_017e:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:538>
+		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_50;
+		L_50 = Gfx_get_ProneIcon_m2D9F6EB9D12FE33553F689884E909BA2F9087C2B(NULL);
+		return L_50;
+	}
+
+IL_0184:
+	{
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:539>
 		return (Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4*)NULL;
 	}
 }
-// Method Definition Index: 89018
+// Method Definition Index: 89034
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF2FFBD86B06B149BCF56EF6 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5200,7 +5309,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 	}
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* V_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:483>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:545>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_1;
 		memset((&L_1), 0, sizeof(L_1));
@@ -5220,7 +5329,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_6;
 		L_6 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_0, _stringLiteral63A7BC5625BD73B4EFFB4EB777EA75B79C73E722, L_1, L_2, L_3, L_4, L_5, (bool)1, NULL);
 		V_0 = L_6;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:484>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:546>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_7;
 		L_7 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_7);
@@ -5234,7 +5343,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:486>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:548>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_10 = V_0;
 		NullCheck(L_10);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_11;
@@ -5258,7 +5367,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 		NullCheck(L_17);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_18;
 		L_18 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_17, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:487>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:549>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_19 = L_18;
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_20;
 		L_20 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
@@ -5266,13 +5375,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_21 = L_20->___icPause;
 		NullCheck(L_19);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_19, L_21, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:487>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:549>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_22 = L_19;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_23 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Text;
 		NullCheck(L_22);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_22, L_23);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:487>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:549>
 		NullCheck(L_22);
 		VirtualActionInvoker1< bool >::Invoke(25, L_22, (bool)0);
 		goto IL_0191;
@@ -5280,7 +5389,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPauseButton_mED0793FEFB4A29EAFF
 
 IL_00eb:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:491>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:553>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_24 = V_0;
 		NullCheck(L_24);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_25;
@@ -5301,7 +5410,7 @@ IL_00eb:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_30), (7.0f), (24.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_31;
 		L_31 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_25, _stringLiteral0A04B971B03DA607CE6C455184037B660CA89F78, L_26, L_27, L_28, L_29, L_30, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:492>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:554>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_32 = V_0;
 		NullCheck(L_32);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_33;
@@ -5325,7 +5434,7 @@ IL_00eb:
 
 IL_0191:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:494>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:556>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_40 = V_0;
 		NullCheck(L_40);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_41;
@@ -5345,7 +5454,7 @@ IL_0191:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_46), (0.0f), (3.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_47;
 		L_47 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_41, _stringLiteralA87D8447ADA4FCBB0C1453670109D4DDFF27315D, L_42, L_43, L_44, L_45, L_46, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:495>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:557>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_48 = V_0;
 		NullCheck(L_48);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_49;
@@ -5353,7 +5462,7 @@ IL_0191:
 		NullCheck(L_49);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_50;
 		L_50 = GameObject_AddComponent_TisButton_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098_m60FA17F75591FF93A15D1D1FE5969B8CB9E5FAAC(L_49, GameObject_AddComponent_TisButton_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098_m60FA17F75591FF93A15D1D1FE5969B8CB9E5FAAC_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:495>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:557>
 		NullCheck(L_50);
 		ButtonClickedEvent_t8EA72E90B3BD1392FB3B3EF167D5121C23569E4C* L_51;
 		L_51 = Button_get_onClick_m701712A7F7F000CC80D517C4510697E15722C35C_inline(L_50, NULL);
@@ -5361,11 +5470,11 @@ IL_0191:
 		UnityAction__ctor_mC53E20D6B66E0D5688CD81B88DBB34F5A58B7131(L_52, __this, (intptr_t)((void*)HUD_U3CBuildPauseButtonU3Eb__106_0_m40F72B5936AB7CB6028D3DC92CBA8D79CF3AC8EF_RuntimeMethod_var), NULL);
 		NullCheck(L_51);
 		UnityEvent_AddListener_m8AA4287C16628486B41DA41CA5E7A856A706D302(L_51, L_52, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:496>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:558>
 		return;
 	}
 }
-// Method Definition Index: 89019
+// Method Definition Index: 89035
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_RebuildControls_mC740429EB3252507D7CC4CA8CB493262B27D6A7E (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5383,7 +5492,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_RebuildControls_mC740429EB3252507D7C
 	int32_t G_B6_0 = 0;
 	GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* G_B6_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:563>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___controls;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -5394,7 +5503,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_RebuildControls_mC740429EB3252507D7C
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:501>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:563>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_2 = __this->___controls;
 		NullCheck(L_2);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3;
@@ -5405,20 +5514,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_RebuildControls_mC740429EB3252507D7C
 
 IL_001e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:502>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:564>
 		List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809* L_4 = __this->___fireButtons;
 		NullCheck(L_4);
 		List_1_Clear_m90370532921D9B7E743173CBF05C4BF5C2112283_inline(L_4, List_1_Clear_m90370532921D9B7E743173CBF05C4BF5C2112283_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:502>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:564>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___fireHeld = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:502>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:564>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_5;
 		L_5 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___move = L_5;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:503>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:565>
 		HUD_BuildControls_mFA83CF8ADE22074BEA46560264B0AE87D87B4608(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:504>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:566>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_6 = __this->___controls;
 		NullCheck(L_6);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_7;
@@ -5465,11 +5574,11 @@ IL_006d:
 	{
 		NullCheck(G_B6_1);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(G_B6_1, (bool)G_B6_0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:505>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:567>
 		return;
 	}
 }
-// Method Definition Index: 89020
+// Method Definition Index: 89036
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildControls_mFA83CF8ADE22074BEA46560264B0AE87D87B4608 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5621,21 +5730,21 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildControls_mFA83CF8ADE22074BEA465
 		NullCheck(L_1);
 		L_1->___U3CU3E4__this = __this;
 		Il2CppCodeGenWriteBarrier((void**)(&L_1->___U3CU3E4__this), (void*)__this);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:509>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:571>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_2 = __this->___root;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_3;
 		L_3 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_2, _stringLiteral52046D44ECF0108AC883B0E829D085D56925F787, NULL);
 		__this->___controls = L_3;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___controls), (void*)L_3);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:510>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:572>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_4 = __this->___controls;
 		NullCheck(L_4);
 		Transform_SetAsFirstSibling_mBE0D0E76099F829466DC2FBD71ACFCF3C8EC03BD(L_4, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:511>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:573>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_5;
 		L_5 = HudLayout_Load_mF9E5457A46A1F49664AA4896C585D54423ABBEA5(NULL);
 		V_1 = L_5;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:514>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:576>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_6 = __this->___controls;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_7;
 		memset((&L_7), 0, sizeof(L_7));
@@ -5652,14 +5761,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildControls_mFA83CF8ADE22074BEA465
 		L_11 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_12;
 		L_12 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_6, _stringLiteral58C403B2ADB7E09A23001D113CB718A73795DB62, L_7, L_8, L_9, L_10, L_11, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:515>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:577>
 		NullCheck(L_12);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_13;
 		L_13 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_12, NULL);
 		NullCheck(L_13);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_14;
 		L_14 = GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D(L_13, GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:516>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:578>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_il2cpp_TypeInfo_var);
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_15 = ((U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_il2cpp_TypeInfo_var))->___U3CU3E9__108_0;
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_16 = L_15;
@@ -5689,7 +5798,7 @@ IL_00af:
 		NullCheck(G_B2_1);
 		G_B2_1->___drag = G_B2_0;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B2_1->___drag), (void*)G_B2_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:519>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:581>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_20 = __this->___controls;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_21;
 		memset((&L_21), 0, sizeof(L_21));
@@ -5707,12 +5816,12 @@ IL_00af:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_26;
 		L_26 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_20, _stringLiteral70B0788478C88830C0C45B44F9AFEEC6708A9BCB, L_21, L_22, L_23, L_24, L_25, (bool)1, NULL);
 		V_2 = L_26;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:520>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:582>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_27 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_28;
 		L_28 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_27, _stringLiteralEECEAAC359EDB2E91D0F46F3CA9A65F47527BC5C, NULL);
 		V_3 = L_28;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:521>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:583>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_29 = __this->___controls;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_30;
 		memset((&L_30), 0, sizeof(L_30));
@@ -5740,21 +5849,21 @@ IL_00af:
 		L_40 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_39, NULL);
 		__this->___joyBase = L_40;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___joyBase), (void*)L_40);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:522>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:584>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_41 = __this->___joyBase;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_42;
 		memset((&L_42), 0, sizeof(L_42));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_42), (0.5f), (0.5f), NULL);
 		NullCheck(L_41);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_41, L_42, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:522>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:584>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_43 = __this->___joyBase;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_44 = V_3;
 		NullCheck(L_44);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_45 = L_44->___pos;
 		NullCheck(L_43);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_43, L_45, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:523>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:585>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_46 = __this->___joyBase;
 		NullCheck(L_46);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_47;
@@ -5767,12 +5876,12 @@ IL_00af:
 		float L_50 = L_49->___alpha;
 		NullCheck(L_48);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_48, L_50, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:524>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:586>
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_51 = V_3;
 		NullCheck(L_51);
 		float L_52 = L_51->___size;
 		__this->___joyScale = ((float)(L_52/(260.0f)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:525>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:587>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_53 = __this->___joyBase;
 		NullCheck(L_53);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_54;
@@ -5781,7 +5890,7 @@ IL_00af:
 		L_55 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_54);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_54, L_55, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:526>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:588>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_56 = __this->___joyBase;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_57;
 		memset((&L_57), 0, sizeof(L_57));
@@ -5796,12 +5905,12 @@ IL_00af:
 		L_61 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_62;
 		L_62 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_56, _stringLiteral6C3C0AE9A0AA4CADCC7912E36E5BAA7CB198BFD7, L_57, L_58, L_59, L_60, L_61, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:526>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:588>
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_63;
 		L_63 = Gfx_get_Ring_m3B9E445B58A91D7C4535A9A68BF8C6ACE2ABA831(NULL);
 		NullCheck(L_62);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_62, L_63, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:527>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:589>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_64 = __this->___joyBase;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_65;
 		memset((&L_65), 0, sizeof(L_65));
@@ -5827,7 +5936,7 @@ IL_00af:
 		L_73 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_72, NULL);
 		__this->___joyKnob = L_73;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___joyKnob), (void*)L_73);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:528>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:590>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_74 = __this->___joyKnob;
 		NullCheck(L_74);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_75;
@@ -5836,7 +5945,7 @@ IL_00af:
 		L_76 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_75);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_75, L_76, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:529>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:591>
 		U3CU3Ec__DisplayClass108_0_t3410F437CADCF995F99C0950EBA68B5936514A6B* L_77 = V_0;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_78 = __this->___joyBase;
 		NullCheck(L_78);
@@ -5844,7 +5953,7 @@ IL_00af:
 		L_79 = RectTransform_get_anchoredPosition_m38F25A4253B0905BB058BE73DBF43C7172CE0680(L_78, NULL);
 		NullCheck(L_77);
 		L_77->___home = L_79;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:530>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_80 = V_2;
 		NullCheck(L_80);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_81;
@@ -5854,12 +5963,12 @@ IL_00af:
 		L_82 = GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D(L_81, GameObject_AddComponent_TisTouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6_mC1C60658585D2A83C7F5176FF7FE63168B9FB47D_RuntimeMethod_var);
 		__this->___joyPad = L_82;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___joyPad), (void*)L_82);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:531>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:532>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:533>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:534>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:535>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:536>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:593>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:594>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:595>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:596>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:597>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:598>
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_83 = __this->___joyPad;
 		U3CU3Ec__DisplayClass108_0_t3410F437CADCF995F99C0950EBA68B5936514A6B* L_84 = V_0;
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_85 = (Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41*)il2cpp_codegen_object_new(Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41_il2cpp_TypeInfo_var);
@@ -5867,7 +5976,7 @@ IL_00af:
 		NullCheck(L_83);
 		L_83->___down = L_85;
 		Il2CppCodeGenWriteBarrier((void**)(&L_83->___down), (void*)L_85);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:537>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:599>
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_86 = __this->___joyPad;
 		U3CU3Ec__DisplayClass108_0_t3410F437CADCF995F99C0950EBA68B5936514A6B* L_87 = V_0;
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_88 = (Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41*)il2cpp_codegen_object_new(Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41_il2cpp_TypeInfo_var);
@@ -5875,7 +5984,7 @@ IL_00af:
 		NullCheck(L_86);
 		L_86->___drag = L_88;
 		Il2CppCodeGenWriteBarrier((void**)(&L_86->___drag), (void*)L_88);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:538>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:600>
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_89 = __this->___joyPad;
 		U3CU3Ec__DisplayClass108_0_t3410F437CADCF995F99C0950EBA68B5936514A6B* L_90 = V_0;
 		Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41* L_91 = (Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41*)il2cpp_codegen_object_new(Action_1_t5EFD410279BD84F1ADB35DF7BC8E54B56036EA41_il2cpp_TypeInfo_var);
@@ -5883,7 +5992,7 @@ IL_00af:
 		NullCheck(L_89);
 		L_89->___up = L_91;
 		Il2CppCodeGenWriteBarrier((void**)(&L_89->___up), (void*)L_91);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:541>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:603>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_92 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_93;
 		L_93 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_92, _stringLiteral491808D7EEB006360E8FF7C51AA2757B43D35E12, NULL);
@@ -5891,7 +6000,7 @@ IL_00af:
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_94 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_95;
 		L_95 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(__this, L_93, L_94, (bool)1, (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)NULL, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:542>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:604>
 		bool L_96;
 		L_96 = Settings_get_LeftFire_mEFC2903CBD6670C4BF8032FB60362C01681E5380(NULL);
 		if (!L_96)
@@ -5900,7 +6009,7 @@ IL_00af:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:542>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:604>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_97 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_98;
 		L_98 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_97, _stringLiteral8A6809759794C6A9B9E187308CC71080CFDFF61A, NULL);
@@ -5912,7 +6021,7 @@ IL_00af:
 
 IL_035a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:543>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:605>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_101 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_102;
 		L_102 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_101, _stringLiteral2B92CCD4CA41F7D91F0F8D844F7E66990E91ADF3, NULL);
@@ -5925,7 +6034,7 @@ IL_035a:
 		L_106 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(__this, L_102, L_103, (bool)0, L_105, (bool)0, NULL);
 		__this->___aimBtnImg = L_106;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___aimBtnImg), (void*)L_106);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:544>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:606>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_107 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_108;
 		L_108 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_107, _stringLiteral6C23924C4F221C5F81332E79B4BD5A5AF61B9AF7, NULL);
@@ -5969,7 +6078,7 @@ IL_03b5:
 		NullCheck(G_B6_4);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_115;
 		L_115 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(G_B6_4, G_B6_3, G_B6_2, (bool)G_B6_1, G_B6_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:545>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:607>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_116 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_117;
 		L_117 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_116, _stringLiteral63F8DDC5671DDD35F15613489AB21368AD0E1A10, NULL);
@@ -6013,7 +6122,7 @@ IL_03ed:
 		NullCheck(G_B8_4);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_124;
 		L_124 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(G_B8_4, G_B8_3, G_B8_2, (bool)G_B8_1, G_B8_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:546>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:608>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_125 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_126;
 		L_126 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_125, _stringLiteralE18B612F2CEC49FD22137D4676C2F419D6CF46D5, NULL);
@@ -6057,7 +6166,7 @@ IL_0425:
 		NullCheck(G_B10_4);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_133;
 		L_133 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(G_B10_4, G_B10_3, G_B10_2, (bool)G_B10_1, G_B10_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:547>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:609>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_134 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_135;
 		L_135 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_134, _stringLiteral92F7FD2F4C293A393AF6CCC8B56EA4A22A8E3F47, NULL);
@@ -6101,7 +6210,7 @@ IL_045d:
 		NullCheck(G_B12_4);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_142;
 		L_142 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(G_B12_4, G_B12_3, G_B12_2, (bool)G_B12_1, G_B12_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:548>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:610>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_143 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_144;
 		L_144 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_143, _stringLiteral992A92B9AFBE31138854C46DEA1464572C14F440, NULL);
@@ -6151,7 +6260,7 @@ IL_0496:
 		NullCheck(G_B14_5);
 		G_B14_5->___leanLImg = L_151;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B14_5->___leanLImg), (void*)L_151);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:549>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:611>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_152 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_153;
 		L_153 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_152, _stringLiteralD9865DBFDB5C8BCA72507C7D3DCA832647860188, NULL);
@@ -6201,7 +6310,7 @@ IL_04d3:
 		NullCheck(G_B16_5);
 		G_B16_5->___leanRImg = L_160;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B16_5->___leanRImg), (void*)L_160);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:550>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:612>
 		ItemU5BU5D_t454AA12D8F67C2D2988F042EC180D58995DB763C* L_161 = V_1;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_162;
 		L_162 = HudLayout_Get_mA1C5868EB3B506B88917A9B34238912992BA2CED(L_161, _stringLiteral34EA1039F9A6CB3D1A170C182A178A34DCC1EA76, NULL);
@@ -6246,7 +6355,7 @@ IL_050f:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_169;
 		L_169 = HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017(G_B18_4, G_B18_3, G_B18_2, (bool)G_B18_1, G_B18_0, (bool)0, NULL);
 		V_4 = L_169;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:551>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:613>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_170 = V_4;
 		NullCheck(L_170);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_171;
@@ -6267,13 +6376,13 @@ IL_050f:
 		L_177 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_171, _stringLiteral4C9ECEDF5B1FB9420A92A5B02A141FADFDF52ED6, _stringLiteral21ED4C7AF50D987589A9029FC0422151BE3A0FC2, ((int32_t)26), L_172, 2, L_173, L_174, L_175, L_176, (bool)1, NULL);
 		__this->___grenadeTxt = L_177;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___grenadeTxt), (void*)L_177);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:552>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:614>
 		__this->___cGren = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:553>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:615>
 		return;
 	}
 }
-// Method Definition Index: 89021
+// Method Definition Index: 89037
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* HUD_RoundButton_m2FA362938FC9FDD269E7802E7C286896D9D8F017 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* ___0_it, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_c, bool ___2_fill, Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___3_onDown, bool ___4_fire, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6365,7 +6474,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Image_tBC1D03F63BF71132E9A5E472B8742F172A011E
 		NullCheck(L_2);
 		L_2->___onDown = L_3;
 		Il2CppCodeGenWriteBarrier((void**)(&L_2->___onDown), (void*)L_3);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:558>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:620>
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_4 = ___0_it;
 		NullCheck(L_4);
 		String_t* L_5 = L_4->___label;
@@ -6373,17 +6482,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Image_tBC1D03F63BF71132E9A5E472B8742F172A011E
 		String_t* L_6;
 		L_6 = L_S_m348462463910C63CC88A4E53676D41A887568950(L_5, NULL);
 		V_1 = L_6;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:558>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:620>
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_7 = ___0_it;
 		NullCheck(L_7);
 		float L_8 = L_7->___size;
 		V_2 = L_8;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:559>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_9 = ___0_it;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_10;
 		L_10 = HudLayout_Anchor_mD4B6D15DF28CEE541C75AD3B5E615E25EFE49A67(L_9, NULL);
 		V_3 = L_10;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:560>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:622>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_11 = V_0;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_12 = __this->___controls;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_13 = ___0_it;
@@ -6446,7 +6555,7 @@ IL_0076:
 		NullCheck(G_B3_3);
 		G_B3_3->___img = L_31;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B3_3->___img), (void*)L_31);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:561>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:623>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_32 = V_0;
 		NullCheck(L_32);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_33 = L_32->___img;
@@ -6458,7 +6567,7 @@ IL_0076:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_35), (0.5f), (0.5f), NULL);
 		NullCheck(L_34);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_34, L_35, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:561>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:623>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_36 = V_0;
 		NullCheck(L_36);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_37 = L_36->___img;
@@ -6470,7 +6579,7 @@ IL_0076:
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_40 = L_39->___pos;
 		NullCheck(L_38);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_38, L_40, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:562>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:624>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_41 = V_0;
 		NullCheck(L_41);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_42 = L_41->___img;
@@ -6485,7 +6594,7 @@ IL_0076:
 		float L_46 = L_45->___alpha;
 		NullCheck(L_44);
 		CanvasGroup_set_alpha_m5C06839316D948BB4F75ED72C87FA1F1A20C333F(L_44, L_46, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:563>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:625>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_47 = V_0;
 		NullCheck(L_47);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_48 = L_47->___img;
@@ -6493,7 +6602,7 @@ IL_0076:
 		L_49 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_48);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_48, L_49, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:564>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:626>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_50 = V_0;
 		NullCheck(L_50);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_51 = L_50->___img;
@@ -6519,12 +6628,12 @@ IL_0076:
 		L_63 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_64;
 		L_64 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_52, _stringLiteral6C3C0AE9A0AA4CADCC7912E36E5BAA7CB198BFD7, L_59, L_60, L_61, L_62, L_63, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:564>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:626>
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_65;
 		L_65 = Gfx_get_Ring_m3B9E445B58A91D7C4535A9A68BF8C6ACE2ABA831(NULL);
 		NullCheck(L_64);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_64, L_65, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:565>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:627>
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_66 = ___0_it;
 		NullCheck(L_66);
 		String_t* L_67 = L_66->___id;
@@ -6532,7 +6641,7 @@ IL_0076:
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_68;
 		L_68 = HUD_IconFor_mA830C940A1011DA7ED0AEE05538C63EAFFB95501(L_67, NULL);
 		V_4 = L_68;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:566>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:628>
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_69 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_70;
@@ -6543,7 +6652,7 @@ IL_0076:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:569>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:631>
 		float L_71 = V_2;
 		Item_t490F6CFCD834528BF0ABD640179ABFFD7637279C* L_72 = ___0_it;
 		NullCheck(L_72);
@@ -6585,7 +6694,7 @@ IL_0186:
 IL_018b:
 	{
 		V_5 = ((float)il2cpp_codegen_multiply(G_B8_1, G_B8_0));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:570>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:632>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_78 = V_0;
 		NullCheck(L_78);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_79 = L_78->___img;
@@ -6614,22 +6723,22 @@ IL_018b:
 		NullCheck(L_88);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_89;
 		L_89 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_88, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:571>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:633>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_90 = L_89;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_91 = V_4;
 		NullCheck(L_90);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_90, L_91, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:571>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:633>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_92 = L_90;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_93;
 		memset((&L_93), 0, sizeof(L_93));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_93), (0.0f), (0.0f), (0.0f), (0.449999988f), NULL);
 		NullCheck(L_92);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_92, L_93);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:571>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:633>
 		NullCheck(L_92);
 		VirtualActionInvoker1< bool >::Invoke(25, L_92, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:572>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:634>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_94 = V_0;
 		NullCheck(L_94);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_95 = L_94->___img;
@@ -6657,12 +6766,12 @@ IL_018b:
 		NullCheck(L_104);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_105;
 		L_105 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_104, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:573>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:635>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_106 = L_105;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_107 = V_4;
 		NullCheck(L_106);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_106, L_107, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:573>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:635>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_108 = L_106;
 		bool L_109 = ___2_fill;
 		if (L_109)
@@ -6696,7 +6805,7 @@ IL_0279:
 	{
 		NullCheck(G_B11_1);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B11_1, G_B11_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:573>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:635>
 		NullCheck(G_B11_2);
 		VirtualActionInvoker1< bool >::Invoke(25, G_B11_2, (bool)0);
 		goto IL_02ce;
@@ -6704,7 +6813,7 @@ IL_0279:
 
 IL_0286:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:575>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:637>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_112 = V_0;
 		NullCheck(L_112);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_113 = L_112->___img;
@@ -6767,7 +6876,7 @@ IL_02b2:
 
 IL_02ce:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:576>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:638>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_126 = V_0;
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_127 = V_0;
 		NullCheck(L_127);
@@ -6781,7 +6890,7 @@ IL_02ce:
 		NullCheck(L_126);
 		L_126->___tp = L_130;
 		Il2CppCodeGenWriteBarrier((void**)(&L_126->___tp), (void*)L_130);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:577>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:639>
 		bool L_131 = ___4_fire;
 		if (!L_131)
 		{
@@ -6789,7 +6898,7 @@ IL_02ce:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:579>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:641>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_132 = V_0;
 		NullCheck(L_132);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_133 = L_132->___tp;
@@ -6799,7 +6908,7 @@ IL_02ce:
 		NullCheck(L_133);
 		L_133->___down = L_135;
 		Il2CppCodeGenWriteBarrier((void**)(&L_133->___down), (void*)L_135);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:580>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:642>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_136 = V_0;
 		NullCheck(L_136);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_137 = L_136->___tp;
@@ -6809,7 +6918,7 @@ IL_02ce:
 		NullCheck(L_137);
 		L_137->___up = L_139;
 		Il2CppCodeGenWriteBarrier((void**)(&L_137->___up), (void*)L_139);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:581>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:643>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_140 = V_0;
 		NullCheck(L_140);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_141 = L_140->___tp;
@@ -6842,7 +6951,7 @@ IL_033b:
 		NullCheck(G_B19_1);
 		G_B19_1->___drag = G_B19_0;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B19_1->___drag), (void*)G_B19_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:582>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:644>
 		List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809* L_147 = __this->___fireButtons;
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_148 = V_0;
 		NullCheck(L_148);
@@ -6854,7 +6963,7 @@ IL_033b:
 
 IL_0353:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:586>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:648>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_150 = V_0;
 		NullCheck(L_150);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_151 = L_150->___tp;
@@ -6864,7 +6973,7 @@ IL_0353:
 		NullCheck(L_151);
 		L_151->___down = L_153;
 		Il2CppCodeGenWriteBarrier((void**)(&L_151->___down), (void*)L_153);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:587>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:649>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_154 = V_0;
 		NullCheck(L_154);
 		TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_155 = L_154->___tp;
@@ -6878,14 +6987,14 @@ IL_0353:
 
 IL_0381:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:589>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:651>
 		U3CU3Ec__DisplayClass110_0_t1E4BFB1C029AF620BAF50FB6675A26235D237DE6* L_158 = V_0;
 		NullCheck(L_158);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_159 = L_158->___img;
 		return L_159;
 	}
 }
-// Method Definition Index: 89022
+// Method Definition Index: 89038
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_AnyFireHeld_mCB0E6013514B2E151794D1EA82115450536D8BDC (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* ___0_except, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6903,7 +7012,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool HUD_AnyFireHeld_mCB0E6013514B2E151794D1E
 	TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* V_1 = NULL;
 	bool V_2 = false;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 		List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809* L_0 = __this->___fireButtons;
 		NullCheck(L_0);
 		Enumerator_t730EE5E19034E64E1F542BDF424D42DD9323722C L_1;
@@ -6928,11 +7037,11 @@ FINALLY_0036:
 
 IL_000e_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 				TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_2;
 				L_2 = Enumerator_get_Current_m03EA330F12BF1A8A1EAB92D5BECD741F5FCB03FC_inline((&V_0), Enumerator_get_Current_m03EA330F12BF1A8A1EAB92D5BECD741F5FCB03FC_RuntimeMethod_var);
 				V_1 = L_2;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 				TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_3 = V_1;
 				TouchPad_t77E0A58E78569DE6BB7E03466D60481EC84B77E6* L_4 = ___0_except;
 				il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -6953,14 +7062,14 @@ IL_000e_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 				V_2 = (bool)1;
 				goto IL_0046;
 			}
 
 IL_002b_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 				bool L_8;
 				L_8 = Enumerator_MoveNext_m799F6F7D515A33B30948DA503C672AD9FF991139((&V_0), Enumerator_MoveNext_m799F6F7D515A33B30948DA503C672AD9FF991139_RuntimeMethod_var);
 				if (L_8)
@@ -6980,18 +7089,18 @@ IL_002b_1:
 
 IL_0044:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 		return (bool)0;
 	}
 
 IL_0046:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:592>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
 		bool L_9 = V_2;
 		return L_9;
 	}
 }
-// Method Definition Index: 89023
+// Method Definition Index: 89039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateJoy_m36864089054D88F921737D2AF3B8FDDF44A130A4 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_screenPos, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7011,24 +7120,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateJoy_m36864089054D88F921737D2AF
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 G_B3_1;
 	memset((&G_B3_1), 0, sizeof(G_B3_1));
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:596>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:658>
 		float L_0 = __this->___joyScale;
 		int32_t L_1;
 		L_1 = Screen_get_height_m01A3102DE71EE1FBEA51D09D6B0261CF864FE8F9(NULL);
 		V_0 = ((float)(((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply((110.0f), L_0)), ((float)L_1)))/(1080.0f)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:597>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:659>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2 = ___0_screenPos;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3 = __this->___joyOrigin;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_4;
 		L_4 = Vector2_op_Subtraction_m44475FCDAD2DA2F98D78A6625EC2DCDFE8803837_inline(L_2, L_3, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:598>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:660>
 		float L_5 = V_0;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_6;
 		L_6 = Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline(L_4, L_5, NULL);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_7;
 		L_7 = Vector2_ClampMagnitude_m9BF093877BD11282C41088022FE4AE70A3A0ECA9_inline(L_6, (1.25f), NULL);
 		V_1 = L_7;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:599>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:661>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_8 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_9;
 		L_9 = Vector2_ClampMagnitude_m9BF093877BD11282C41088022FE4AE70A3A0ECA9_inline(L_8, (1.0f), NULL);
@@ -7059,7 +7168,7 @@ IL_005c:
 		L_11 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(G_B3_1, G_B3_0, NULL);
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___move = L_11;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:600>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:662>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_12 = __this->___joyKnob;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_13 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_14;
@@ -7071,11 +7180,11 @@ IL_005c:
 		L_17 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_15, L_16, NULL);
 		NullCheck(L_12);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_12, L_17, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:601>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:663>
 		return;
 	}
 }
-// Method Definition Index: 89024
+// Method Definition Index: 89040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB830FA80E09803282B36 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7095,7 +7204,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 	}
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* V_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:607>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:669>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_1;
 		memset((&L_1), 0, sizeof(L_1));
@@ -7116,7 +7225,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		L_6 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_5, NULL);
 		__this->___reloadBox = L_6;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___reloadBox), (void*)L_6);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:608>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:670>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_7 = __this->___reloadBox;
 		NullCheck(L_7);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_8;
@@ -7139,7 +7248,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		L_14 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_8, _stringLiteral6B866DCFF4A3EC3D3C30879F029D88106601B1B2, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)22), L_9, 4, L_10, L_11, L_12, L_13, (bool)1, NULL);
 		__this->___reloadTxt = L_14;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___reloadTxt), (void*)L_14);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:609>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:671>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_15 = __this->___reloadTxt;
 		NullCheck(L_15);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_16;
@@ -7152,7 +7261,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_18), (0.0f), (0.0f), (0.0f), (0.600000024f), NULL);
 		NullCheck(L_17);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_17, L_18, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:610>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:672>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_19 = __this->___reloadBox;
 		NullCheck(L_19);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_20;
@@ -7174,7 +7283,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_25), (240.0f), (6.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_26;
 		L_26 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_20, _stringLiteral96681A2B198D42859DB500CC97021274BD2004F1, L_21, L_22, L_23, L_24, L_25, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:611>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:673>
 		NullCheck(L_26);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_27;
 		L_27 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_26, NULL);
@@ -7192,21 +7301,21 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_33;
 		L_33 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_27, _stringLiteral77245E58ABE221933150205A4FF5E6F21ACECC77, L_28, L_29, L_30, L_31, L_32, (bool)0, NULL);
 		V_0 = L_33;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:612>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:674>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_34 = V_0;
 		NullCheck(L_34);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_35;
 		L_35 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_34, NULL);
 		__this->___reloadFill = L_35;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___reloadFill), (void*)L_35);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:612>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:674>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_36 = __this->___reloadFill;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_37;
 		memset((&L_37), 0, sizeof(L_37));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_37), (0.0f), (0.5f), NULL);
 		NullCheck(L_36);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_36, L_37, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:613>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:675>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_38 = __this->___reloadBox;
 		NullCheck(L_38);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_39;
@@ -7233,15 +7342,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildReload_mECFC850EE2B80758836FB83
 		L_46 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_39, _stringLiteral0CD979583B209CE71603EFC4A398E6A9EFA8D872, L_40, ((int32_t)16), L_41, 4, L_42, L_43, L_44, L_45, (bool)1, NULL);
 		__this->___reloadHint = L_46;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___reloadHint), (void*)L_46);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:614>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:676>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_47 = __this->___reloadBox;
 		NullCheck(L_47);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_47, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:615>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:677>
 		return;
 	}
 }
-// Method Definition Index: 89025
+// Method Definition Index: 89041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildSquad_m76D55535A981E4A346CBD47952EAC9AA932002F3 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_me, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7327,16 +7436,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildSquad_m76D55535A981E4A346CBD479
 	Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* G_B18_4 = NULL;
 	SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* G_B18_5 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:619>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:681>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_0 = (List_1_t3844D5793B214116410D77DFB1F5F82183495216*)il2cpp_codegen_object_new(List_1_t3844D5793B214116410D77DFB1F5F82183495216_il2cpp_TypeInfo_var);
 		List_1__ctor_mE229A83A43392D2FBD80CC5ECA59DD461FC97963(L_0, List_1__ctor_mE229A83A43392D2FBD80CC5ECA59DD461FC97963_RuntimeMethod_var);
 		V_0 = L_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:620>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:682>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_1 = V_0;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_2 = ___0_me;
 		NullCheck(L_1);
 		List_1_Add_m71C6752B11D50301679007A003D0DF9406133916_inline(L_1, L_2, List_1_Add_m71C6752B11D50301679007A003D0DF9406133916_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
 		il2cpp_codegen_runtime_class_init_inline(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var);
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_3 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_StaticFields*)il2cpp_codegen_static_fields_for(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var))->___All;
 		NullCheck(L_3);
@@ -7362,11 +7471,11 @@ FINALLY_0059:
 
 IL_001a_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_5;
 				L_5 = Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_inline((&V_3), Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_RuntimeMethod_var);
 				V_4 = L_5;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_6 = V_4;
 				il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 				bool L_7;
@@ -7400,7 +7509,7 @@ IL_001a_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
 				List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_15 = V_0;
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_16 = V_4;
 				NullCheck(L_15);
@@ -7409,7 +7518,7 @@ IL_001a_1:
 
 IL_004e_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:621>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
 				bool L_17;
 				L_17 = Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16((&V_3), Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16_RuntimeMethod_var);
 				if (L_17)
@@ -7429,7 +7538,7 @@ IL_004e_1:
 
 IL_0067:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:622>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:684>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_18 = V_0;
 		NullCheck(L_18);
 		int32_t L_19;
@@ -7443,13 +7552,13 @@ IL_0067:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:622>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:684>
 		return;
 	}
 
 IL_0075:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:623>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:685>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_21 = V_0;
 		NullCheck(L_21);
 		int32_t L_22;
@@ -7458,7 +7567,7 @@ IL_0075:
 		float L_23;
 		L_23 = HUD_SquadHeight_mA9A09101FEABAC471A7F797C2683090E2B5C4EDA(L_22, NULL);
 		V_1 = L_23;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:624>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:686>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_24 = __this->___root;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_25;
 		memset((&L_25), 0, sizeof(L_25));
@@ -7477,7 +7586,7 @@ IL_0075:
 		L_30 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_24, _stringLiteralEED3FC819E7D2B18121C9A3217E4DD7D9A44CF9B, L_25, L_26, L_27, L_29, NULL);
 		__this->___squadRoot = L_30;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___squadRoot), (void*)L_30);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:625>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:687>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_31 = __this->___squadRoot;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_32;
 		memset((&L_32), 0, sizeof(L_32));
@@ -7493,7 +7602,7 @@ IL_0075:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_37;
 		L_37 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_31, _stringLiteral77B927D07B6D8323624FEAE29110E66C21EE4B71, L_32, L_33, L_34, L_35, L_36, (bool)0, NULL);
 		V_2 = L_37;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:626>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:688>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_38 = V_2;
 		NullCheck(L_38);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_39;
@@ -7521,7 +7630,7 @@ IL_0075:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_47), (0.5f), (1.0f), NULL);
 		NullCheck(L_46);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_46, L_47, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:627>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:689>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_48 = V_2;
 		NullCheck(L_48);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_49;
@@ -7544,7 +7653,7 @@ IL_0075:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_55), (160.0f), (24.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_56;
 		L_56 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_49, _stringLiteral0CD979583B209CE71603EFC4A398E6A9EFA8D872, L_50, ((int32_t)15), L_51, 3, L_52, L_53, L_54, L_55, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:628>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:690>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_57 = V_2;
 		NullCheck(L_57);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_58;
@@ -7566,21 +7675,21 @@ IL_0075:
 		L_64 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_58, _stringLiteral141A377D8AB0BC9959C88AA18203CAC121D15850, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)14), L_59, 5, L_60, L_61, L_62, L_63, (bool)1, NULL);
 		__this->___squadAlive = L_64;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___squadAlive), (void*)L_64);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:629>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:691>
 		V_5 = 0;
 		goto IL_0912;
 	}
 
 IL_0237:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:631>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:693>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_65 = V_0;
 		int32_t L_66 = V_5;
 		NullCheck(L_65);
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_67;
 		L_67 = List_1_get_Item_mDDC92FC1FA46E3F73FB6E680BEB30D9FD05DDF82(L_65, L_66, List_1_get_Item_mDDC92FC1FA46E3F73FB6E680BEB30D9FD05DDF82_RuntimeMethod_var);
 		V_6 = L_67;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:631>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:693>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_68 = (SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0*)il2cpp_codegen_object_new(SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0_il2cpp_TypeInfo_var);
 		SquadRow__ctor_mB3A61E9F945F72B449CE3CE6E91453E4D75E6D68(L_68, NULL);
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_69 = L_68;
@@ -7600,12 +7709,12 @@ IL_0237:
 		NullCheck(L_71);
 		L_71->___col = L_76;
 		V_7 = L_71;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:632>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:694>
 		int32_t L_77 = V_5;
 		float L_78;
 		L_78 = HUD_get_SquadRowH_m7CBFE180721D56F35515D9BCE736D48EAD5C7871(NULL);
 		V_8 = ((float)il2cpp_codegen_subtract((-31.0f), ((float)il2cpp_codegen_multiply(((float)L_77), ((float)il2cpp_codegen_add(L_78, (3.0f)))))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:633>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:695>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_79 = V_7;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_80 = V_2;
 		NullCheck(L_80);
@@ -7678,7 +7787,7 @@ IL_02e7:
 		NullCheck(G_B15_3);
 		G_B15_3->___bg = L_97;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B15_3->___bg), (void*)L_97);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:634>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:696>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_98 = V_7;
 		NullCheck(L_98);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_99 = L_98->___bg;
@@ -7690,7 +7799,7 @@ IL_02e7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_101), (0.5f), (1.0f), NULL);
 		NullCheck(L_100);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_100, L_101, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:634>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:696>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_102 = V_7;
 		NullCheck(L_102);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_103 = L_102->___bg;
@@ -7703,7 +7812,7 @@ IL_02e7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_106), (0.0f), L_105, NULL);
 		NullCheck(L_104);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_104, L_106, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:635>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:697>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_107 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_108 = V_7;
 		NullCheck(L_108);
@@ -7730,7 +7839,7 @@ IL_02e7:
 		NullCheck(L_107);
 		L_107->___stripe = L_117;
 		Il2CppCodeGenWriteBarrier((void**)(&L_107->___stripe), (void*)L_117);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:635>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:697>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_118 = V_7;
 		NullCheck(L_118);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_119 = L_118->___stripe;
@@ -7742,7 +7851,7 @@ IL_02e7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_121), (0.0f), (0.5f), NULL);
 		NullCheck(L_120);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_120, L_121, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:636>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:698>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_122 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_123 = V_7;
 		NullCheck(L_123);
@@ -7778,11 +7887,11 @@ IL_02e7:
 		NullCheck(L_122);
 		L_122->___num = L_136;
 		Il2CppCodeGenWriteBarrier((void**)(&L_122->___num), (void*)L_136);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:638>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:700>
 		float L_137;
 		L_137 = HUD_get_SquadRowH_m7CBFE180721D56F35515D9BCE736D48EAD5C7871(NULL);
 		V_9 = ((float)il2cpp_codegen_multiply(L_137, (0.5f)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:639>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:701>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_138 = V_7;
 		NullCheck(L_138);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_139 = L_138->___bg;
@@ -7801,7 +7910,7 @@ IL_02e7:
 		il2cpp_codegen_runtime_class_init_inline(Countries_t7279877CBCBEA5739E32DB76CEB88BA45D6C6144_il2cpp_TypeInfo_var);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_146;
 		L_146 = Countries_Make_mEF2D50A4765A54BFFFB317A167FA8C5A91CF44D6(L_140, _stringLiteral4852C2E3B7E3383EDB957D1E40090C538892A013, L_142, L_143, L_144, L_145, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:640>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:702>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_147 = L_146;
 		NullCheck(L_147);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_148;
@@ -7811,7 +7920,7 @@ IL_02e7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_149), (0.0f), (0.5f), NULL);
 		NullCheck(L_148);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_148, L_149, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:640>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:702>
 		NullCheck(L_147);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_150;
 		L_150 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_147, NULL);
@@ -7820,10 +7929,10 @@ IL_02e7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_151), (32.0f), (0.0f), NULL);
 		NullCheck(L_150);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_150, L_151, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:641>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:703>
 		float L_152 = V_9;
 		V_10 = ((float)il2cpp_codegen_add(((float)il2cpp_codegen_add((32.0f), ((float)(((float)il2cpp_codegen_multiply(L_152, (4.0f)))/(3.0f))))), (6.0f)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:642>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:704>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_153 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_154 = V_7;
 		NullCheck(L_154);
@@ -7904,7 +8013,7 @@ IL_0510:
 		NullCheck(G_B18_5);
 		G_B18_5->___name = L_172;
 		Il2CppCodeGenWriteBarrier((void**)(&G_B18_5->___name), (void*)L_172);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:643>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:705>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_173 = V_7;
 		NullCheck(L_173);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_174 = L_173->___name;
@@ -7916,7 +8025,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_176), (0.0f), (0.5f), NULL);
 		NullCheck(L_175);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_175, L_176, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:643>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:705>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_177 = V_7;
 		NullCheck(L_177);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_178 = L_177->___name;
@@ -7929,31 +8038,31 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_181), L_180, (0.0f), NULL);
 		NullCheck(L_179);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_179, L_181, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:644>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:706>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_182 = V_7;
 		NullCheck(L_182);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_183 = L_182->___name;
 		NullCheck(L_183);
 		Text_set_horizontalOverflow_m10AAFBA65FD7F4B1934B5D628B3E70D75D02FFD6(L_183, 0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:644>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:706>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_184 = V_7;
 		NullCheck(L_184);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_185 = L_184->___name;
 		NullCheck(L_185);
 		Text_set_verticalOverflow_m72A544DEAE0EBFCCBDE8174DF4C10C903DA8444F(L_185, 0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:645>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:707>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_186 = V_7;
 		NullCheck(L_186);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_187 = L_186->___name;
 		NullCheck(L_187);
 		Text_set_resizeTextForBestFit_m1376BB9FDBAC5571E0F24564E22391AC8EB89A35(L_187, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:645>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:707>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_188 = V_7;
 		NullCheck(L_188);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_189 = L_188->___name;
 		NullCheck(L_189);
 		Text_set_resizeTextMinSize_m1DC5160514ED872A8C572024A94D7EA9D6357655(L_189, ((int32_t)9), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:645>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:707>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_190 = V_7;
 		NullCheck(L_190);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_191 = L_190->___name;
@@ -7961,7 +8070,7 @@ IL_0510:
 		L_192 = HUD_get_SquadFont_mEF7A8F88638A3621CCE1E50F58F12B5896F698A1(NULL);
 		NullCheck(L_191);
 		Text_set_resizeTextMaxSize_m25EB2C9302AA9354237A2F56BB3E019192C6015B(L_191, L_192, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:647>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:709>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_193 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_194 = V_7;
 		NullCheck(L_194);
@@ -7992,27 +8101,27 @@ IL_0510:
 		NullCheck(L_193);
 		L_193->___bar = L_203;
 		Il2CppCodeGenWriteBarrier((void**)(&L_193->___bar), (void*)L_203);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:648>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:710>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_204 = V_7;
 		NullCheck(L_204);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_205 = L_204->___bar;
 		NullCheck(L_205);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_206;
 		L_206 = GameObject_get_transform_m0BC10ADFA1632166AE5544BDF9038A2650C2AE56(L_205, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:648>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:710>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_207 = ((RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5*)CastclassSealed((RuntimeObject*)L_206, RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5_il2cpp_TypeInfo_var));
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_208;
 		memset((&L_208), 0, sizeof(L_208));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_208), (0.0f), (0.5f), NULL);
 		NullCheck(L_207);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_207, L_208, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:648>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:710>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_209;
 		memset((&L_209), 0, sizeof(L_209));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_209), (162.0f), (0.0f), NULL);
 		NullCheck(L_207);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_207, L_209, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:649>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:711>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_210 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_211 = V_7;
 		NullCheck(L_211);
@@ -8036,7 +8145,7 @@ IL_0510:
 		NullCheck(L_210);
 		L_210->___trail = L_219;
 		Il2CppCodeGenWriteBarrier((void**)(&L_210->___trail), (void*)L_219);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:650>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:712>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_220 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_221 = V_7;
 		NullCheck(L_221);
@@ -8047,7 +8156,7 @@ IL_0510:
 		NullCheck(L_220);
 		L_220->___trailRt = L_223;
 		Il2CppCodeGenWriteBarrier((void**)(&L_220->___trailRt), (void*)L_223);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:650>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:712>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_224 = V_7;
 		NullCheck(L_224);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_225 = L_224->___trailRt;
@@ -8056,7 +8165,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_226), (0.0f), (0.5f), NULL);
 		NullCheck(L_225);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_225, L_226, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:650>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:712>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_227 = V_7;
 		NullCheck(L_227);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_228 = L_227->___trailRt;
@@ -8064,7 +8173,7 @@ IL_0510:
 		L_229 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_228);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_228, L_229, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:651>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:713>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_230 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_231 = V_7;
 		NullCheck(L_231);
@@ -8087,7 +8196,7 @@ IL_0510:
 		NullCheck(L_230);
 		L_230->___fill = L_239;
 		Il2CppCodeGenWriteBarrier((void**)(&L_230->___fill), (void*)L_239);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:652>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:714>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_240 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_241 = V_7;
 		NullCheck(L_241);
@@ -8098,7 +8207,7 @@ IL_0510:
 		NullCheck(L_240);
 		L_240->___fillRt = L_243;
 		Il2CppCodeGenWriteBarrier((void**)(&L_240->___fillRt), (void*)L_243);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:652>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:714>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_244 = V_7;
 		NullCheck(L_244);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_245 = L_244->___fillRt;
@@ -8107,7 +8216,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_246), (0.0f), (0.5f), NULL);
 		NullCheck(L_245);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_245, L_246, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:652>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:714>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_247 = V_7;
 		NullCheck(L_247);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_248 = L_247->___fillRt;
@@ -8115,7 +8224,7 @@ IL_0510:
 		L_249 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_248);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_248, L_249, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:653>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:715>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_250 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_251 = V_7;
 		NullCheck(L_251);
@@ -8146,7 +8255,7 @@ IL_0510:
 		NullCheck(L_250);
 		L_250->___kills = L_261;
 		Il2CppCodeGenWriteBarrier((void**)(&L_250->___kills), (void*)L_261);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:716>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_262 = V_7;
 		NullCheck(L_262);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_263 = L_262->___kills;
@@ -8158,7 +8267,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_265), (1.0f), (0.5f), NULL);
 		NullCheck(L_264);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_264, L_265, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:654>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:716>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_266 = V_7;
 		NullCheck(L_266);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_267 = L_266->___kills;
@@ -8170,7 +8279,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_269), (-8.0f), (0.0f), NULL);
 		NullCheck(L_268);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_268, L_269, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:655>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:717>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_270 = V_7;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_271 = V_7;
 		NullCheck(L_271);
@@ -8200,7 +8309,7 @@ IL_0510:
 		NullCheck(L_270);
 		L_270->___dead = L_280;
 		Il2CppCodeGenWriteBarrier((void**)(&L_270->___dead), (void*)L_280);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:656>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:718>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_281 = V_7;
 		NullCheck(L_281);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_282 = L_281->___dead;
@@ -8212,7 +8321,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_284), (0.0f), (0.5f), NULL);
 		NullCheck(L_283);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_283, L_284, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:656>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:718>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_285 = V_7;
 		NullCheck(L_285);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_286 = L_285->___dead;
@@ -8224,7 +8333,7 @@ IL_0510:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_288), (162.0f), (0.0f), NULL);
 		NullCheck(L_287);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_287, L_288, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:657>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:719>
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_289 = V_7;
 		NullCheck(L_289);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_290 = L_289->___dead;
@@ -8233,19 +8342,19 @@ IL_0510:
 		L_291 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_290, NULL);
 		NullCheck(L_291);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_291, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:658>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:720>
 		List_1_t0BF27BC30A5AC6B54D5CCCD6924F0ED01D79D809* L_292 = __this->___squad;
 		SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_293 = V_7;
 		NullCheck(L_292);
 		List_1_Add_mD3429005BB2578EAAF5C39792A51ECBB9F9D476A_inline(L_292, L_293, List_1_Add_mD3429005BB2578EAAF5C39792A51ECBB9F9D476A_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:629>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:691>
 		int32_t L_294 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_294, 1));
 	}
 
 IL_0912:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:629>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:691>
 		int32_t L_295 = V_5;
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_296 = V_0;
 		NullCheck(L_296);
@@ -8257,7 +8366,7 @@ IL_0912:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:661>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:723>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_298 = __this->___feed;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_299;
@@ -8268,7 +8377,7 @@ IL_0912:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:661>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:723>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_300 = __this->___feed;
 		float L_301 = V_1;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_302;
@@ -8280,11 +8389,11 @@ IL_0912:
 
 IL_094f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:662>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:724>
 		return;
 	}
 }
-// Method Definition Index: 89026
+// Method Definition Index: 89042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateSquad_mA8C54C1A9BE395E6C70AAEA19AD812E1FBD50ECC (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8353,9 +8462,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateSquad_mA8C54C1A9BE395E6C70AAEA
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F G_B35_0;
 	memset((&G_B35_0), 0, sizeof(G_B35_0));
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:666>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:728>
 		V_0 = 0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:667>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
 		List_1_t0BF27BC30A5AC6B54D5CCCD6924F0ED01D79D809* L_0 = __this->___squad;
 		NullCheck(L_0);
 		Enumerator_t28D600002D42ACB019E215BBC21DDA88AE509DA6 L_1;
@@ -8380,11 +8489,11 @@ FINALLY_02d8:
 
 IL_0013_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:667>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_2;
 				L_2 = Enumerator_get_Current_mF1144FD89594D578B45991B927781C2FB188A1FB_inline((&V_1), Enumerator_get_Current_mF1144FD89594D578B45991B927781C2FB188A1FB_RuntimeMethod_var);
 				V_2 = L_2;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:669>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:731>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_3 = V_2;
 				NullCheck(L_3);
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_4 = L_3->___a;
@@ -8397,7 +8506,7 @@ IL_0013_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:670>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:732>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_6 = V_2;
 				NullCheck(L_6);
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_7 = L_6->___a;
@@ -8405,7 +8514,7 @@ IL_0013_1:
 				bool L_8;
 				L_8 = Actor_get_Alive_mE91B2EEF1D2FB5551B5E8E4452DB00E0830807DE(L_7, NULL);
 				V_3 = L_8;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:670>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:732>
 				bool L_9 = V_3;
 				if (!L_9)
 				{
@@ -8413,14 +8522,14 @@ IL_0013_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:670>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:732>
 				int32_t L_10 = V_0;
 				V_0 = ((int32_t)il2cpp_codegen_add(L_10, 1));
 			}
 
 IL_003f_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:671>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:733>
 				bool L_11 = V_3;
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_12 = V_2;
 				NullCheck(L_12);
@@ -8431,12 +8540,12 @@ IL_003f_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:673>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:735>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_14 = V_2;
 				bool L_15 = V_3;
 				NullCheck(L_14);
 				L_14->___wasAlive = L_15;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:674>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:736>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_16 = V_2;
 				NullCheck(L_16);
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_17 = L_16->___dead;
@@ -8446,14 +8555,14 @@ IL_003f_1:
 				bool L_19 = V_3;
 				NullCheck(L_18);
 				GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_18, (bool)((((int32_t)L_19) == ((int32_t)0))? 1 : 0), NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:674>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:736>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_20 = V_2;
 				NullCheck(L_20);
 				GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_21 = L_20->___bar;
 				bool L_22 = V_3;
 				NullCheck(L_21);
 				GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_21, L_22, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:675>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:737>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_23 = V_2;
 				NullCheck(L_23);
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_24 = L_23->___name;
@@ -8507,7 +8616,7 @@ IL_009b_1:
 			{
 				NullCheck(G_B11_1);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B11_1, G_B11_0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:676>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:738>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_32 = V_2;
 				NullCheck(L_32);
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_33 = L_32->___stripe;
@@ -8541,7 +8650,7 @@ IL_00c5_1:
 			{
 				NullCheck(G_B14_1);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B14_1, G_B14_0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:677>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:739>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_38 = V_2;
 				NullCheck(L_38);
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_39 = L_38->___num;
@@ -8553,7 +8662,7 @@ IL_00c5_1:
 				L_42 = VirtualFuncInvoker0< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(22, L_41);
 				NullCheck(L_39);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_39, L_42);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:678>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:740>
 				bool L_43 = V_3;
 				if (!L_43)
 				{
@@ -8561,11 +8670,11 @@ IL_00c5_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:678>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:740>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_44 = V_2;
 				NullCheck(L_44);
 				L_44->___shown = (1.0f);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:678>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:740>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_45 = V_2;
 				NullCheck(L_45);
 				L_45->___cDead = (-1);
@@ -8573,7 +8682,7 @@ IL_00c5_1:
 
 IL_00f5_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:680>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:742>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_46 = V_2;
 				NullCheck(L_46);
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_47 = L_46->___a;
@@ -8588,7 +8697,7 @@ IL_00f5_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:680>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:742>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_51 = V_2;
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_52 = V_2;
 				NullCheck(L_52);
@@ -8597,7 +8706,7 @@ IL_00f5_1:
 				int32_t L_54 = L_53->___kills;
 				NullCheck(L_51);
 				L_51->___cK = L_54;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:680>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:742>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_55 = V_2;
 				NullCheck(L_55);
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_56 = L_55->___kills;
@@ -8614,7 +8723,7 @@ IL_00f5_1:
 
 IL_0139_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:681>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:743>
 				bool L_61 = V_3;
 				if (L_61)
 				{
@@ -8622,7 +8731,7 @@ IL_0139_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:683>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:745>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_62 = V_2;
 				NullCheck(L_62);
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_63 = L_62->___a;
@@ -8633,7 +8742,7 @@ IL_0139_1:
 				int32_t L_66;
 				L_66 = Mathf_CeilToInt_mF2BF9F4261B3431DC20E10A46CFEEED103C48963_inline(((float)il2cpp_codegen_subtract(L_64, L_65)), NULL);
 				V_6 = L_66;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:684>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:746>
 				int32_t L_67 = V_6;
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_68 = V_2;
 				NullCheck(L_68);
@@ -8644,12 +8753,12 @@ IL_0139_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:684>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:746>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_70 = V_2;
 				int32_t L_71 = V_6;
 				NullCheck(L_70);
 				L_70->___cDead = L_71;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:684>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:746>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_72 = V_2;
 				NullCheck(L_72);
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_73 = L_72->___dead;
@@ -8687,13 +8796,13 @@ IL_019b_1:
 			{
 				NullCheck(G_B23_1);
 				VirtualActionInvoker1< String_t* >::Invoke(75, G_B23_1, G_B23_0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:685>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:747>
 				goto IL_02ca_1;
 			}
 
 IL_01a5_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:687>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:749>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_79 = V_2;
 				NullCheck(L_79);
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_80 = L_79->___a;
@@ -8707,7 +8816,7 @@ IL_01a5_1:
 				float L_85;
 				L_85 = Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline(((float)(L_81/L_84)), NULL);
 				V_4 = L_85;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:688>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:750>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_86 = V_2;
 				float L_87 = V_4;
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_88 = V_2;
@@ -8785,7 +8894,7 @@ IL_0209_1:
 			{
 				NullCheck(G_B30_1);
 				G_B30_1->___shown = G_B30_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:689>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:751>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_100 = V_2;
 				NullCheck(L_100);
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_101 = L_100->___fillRt;
@@ -8795,7 +8904,7 @@ IL_0209_1:
 				Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline((&L_103), L_102, (1.0f), (1.0f), NULL);
 				NullCheck(L_101);
 				Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_101, L_103, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:690>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:752>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_104 = V_2;
 				NullCheck(L_104);
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_105 = L_104->___trailRt;
@@ -8807,8 +8916,8 @@ IL_0209_1:
 				Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline((&L_108), L_107, (1.0f), (1.0f), NULL);
 				NullCheck(L_105);
 				Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_105, L_108, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:691>
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:692>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:753>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:754>
 				float L_109 = V_4;
 				if ((((float)L_109) < ((float)(0.300000012f))))
 				{
@@ -8858,7 +8967,7 @@ IL_0279_1:
 IL_02bb_1:
 			{
 				V_5 = G_B35_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:693>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:755>
 				SquadRow_t3EEB3C747249BA4531F9CFECBE4A31EF63B23CB0* L_118 = V_2;
 				NullCheck(L_118);
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_119 = L_118->___fill;
@@ -8869,7 +8978,7 @@ IL_02bb_1:
 
 IL_02ca_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:667>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
 				bool L_121;
 				L_121 = Enumerator_MoveNext_m7061DDCDA220AC5C430EE26CB995FA8B83402330((&V_1), Enumerator_MoveNext_m7061DDCDA220AC5C430EE26CB995FA8B83402330_RuntimeMethod_var);
 				if (L_121)
@@ -8889,7 +8998,7 @@ IL_02ca_1:
 
 IL_02e6:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:695>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:757>
 		int32_t L_122 = V_0;
 		int32_t L_123 = __this->___cAlive;
 		if ((((int32_t)L_122) == ((int32_t)L_123)))
@@ -8898,10 +9007,10 @@ IL_02e6:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:695>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:757>
 		int32_t L_124 = V_0;
 		__this->___cAlive = L_124;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:695>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:757>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_125 = __this->___squadAlive;
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_126 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)5);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_127 = L_126;
@@ -8939,11 +9048,11 @@ IL_02e6:
 
 IL_034a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:696>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:758>
 		return;
 	}
 }
-// Method Definition Index: 89027
+// Method Definition Index: 89043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildGrenadeWarn_m06923C3D4F20E76E158D509DA18491F58EDA916C (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8968,14 +9077,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildGrenadeWarn_m06923C3D4F20E76E15
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* V_3 = NULL;
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* V_4 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:705>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:767>
 		V_0 = 0;
 		goto IL_023c;
 	}
 
 IL_0007:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:707>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:769>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___full;
 		String_t* L_1;
 		L_1 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_0), NULL);
@@ -8995,7 +9104,7 @@ IL_0007:
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_7;
 		L_7 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_0, L_2, L_3, L_4, L_5, L_6, NULL);
 		V_1 = L_7;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:708>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_8 = V_1;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_9;
 		memset((&L_9), 0, sizeof(L_9));
@@ -9014,13 +9123,13 @@ IL_0007:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_14;
 		L_14 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_8, _stringLiteral80BC6B7A6CECCE5459FCC4FC252283C0DD1AC6A8, L_9, L_10, L_11, L_12, L_13, (bool)0, NULL);
 		V_2 = L_14;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:709>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:771>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_15 = V_2;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_16;
 		L_16 = Gfx_get_Arrow_mFFBA18E0B4B596709E67B9B1D011CE9CB5FD353C(NULL);
 		NullCheck(L_15);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_15, L_16, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:710>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:772>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_17 = V_1;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_18;
 		memset((&L_18), 0, sizeof(L_18));
@@ -9039,13 +9148,13 @@ IL_0007:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_23;
 		L_23 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_17, _stringLiteral96681A2B198D42859DB500CC97021274BD2004F1, L_18, L_19, L_20, L_21, L_22, (bool)0, NULL);
 		V_3 = L_23;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:711>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:773>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_24 = V_3;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_25;
 		L_25 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_24);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_24, L_25, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:712>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:774>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_26;
 		L_26 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_26);
@@ -9059,7 +9168,7 @@ IL_0007:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:714>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:776>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_29 = V_3;
 		NullCheck(L_29);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_30;
@@ -9083,7 +9192,7 @@ IL_0007:
 		NullCheck(L_36);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_37;
 		L_37 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_36, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:715>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:777>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_38 = L_37;
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_39;
 		L_39 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
@@ -9091,14 +9200,14 @@ IL_0007:
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_40 = L_39->___icGrenade;
 		NullCheck(L_38);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_38, L_40, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:715>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:777>
 		NullCheck(L_38);
 		VirtualActionInvoker1< bool >::Invoke(25, L_38, (bool)0);
 	}
 
 IL_0190:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:717>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:779>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_41 = V_1;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_42;
 		L_42 = Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline(NULL);
@@ -9117,7 +9226,7 @@ IL_0190:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_47;
 		L_47 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_41, _stringLiteralA02431CF7C501A5B368C91E41283419D8FA9FB03, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)17), L_42, 4, L_43, L_44, L_45, L_46, (bool)1, NULL);
 		V_4 = L_47;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:718>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:780>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_48 = V_4;
 		NullCheck(L_48);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_49;
@@ -9130,14 +9239,14 @@ IL_0190:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_51), (0.0f), (0.0f), (0.0f), (0.850000024f), NULL);
 		NullCheck(L_50);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_50, L_51, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:719>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:781>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_52 = V_1;
 		NullCheck(L_52);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_53;
 		L_53 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_52, NULL);
 		NullCheck(L_53);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_53, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:720>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:782>
 		List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_54 = __this->___gWarn;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_55 = V_1;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_56 = V_2;
@@ -9152,14 +9261,14 @@ IL_0190:
 		ValueTuple_5__ctor_mB43EC243CFCB29DC982A2AA87C24160D2F07532A((&L_61), L_55, L_57, L_58, L_59, L_60, ValueTuple_5__ctor_mB43EC243CFCB29DC982A2AA87C24160D2F07532A_RuntimeMethod_var);
 		NullCheck(L_54);
 		List_1_Add_m266F6F3AA8DC93B360B499B5942DC144F4D378E1_inline(L_54, L_61, List_1_Add_m266F6F3AA8DC93B360B499B5942DC144F4D378E1_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:705>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:767>
 		int32_t L_62 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_62, 1));
 	}
 
 IL_023c:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:705>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:767>
 		int32_t L_63 = V_0;
 		if ((((int32_t)L_63) < ((int32_t)4)))
 		{
@@ -9167,11 +9276,11 @@ IL_023c:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:722>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:784>
 		return;
 	}
 }
-// Method Definition Index: 89028
+// Method Definition Index: 89044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateGrenadeWarn_mE5F6D54F989651E9247486F47C6D24ACD9536D31 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_p, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9220,9 +9329,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateGrenadeWarn_mE5F6D54F989651E92
 	ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 G_B13_1;
 	memset((&G_B13_1), 0, sizeof(G_B13_1));
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:726>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:788>
 		V_0 = 0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:727>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:789>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_0 = ___0_p;
 		NullCheck(L_0);
 		bool L_1;
@@ -9245,7 +9354,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateGrenadeWarn_mE5F6D54F989651E92
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:791>
 		il2cpp_codegen_runtime_class_init_inline(Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96_il2cpp_TypeInfo_var);
 		List_1_t0C079C552D40DE471BDD3307FB8AD36C971EC099* L_5 = ((Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96_StaticFields*)il2cpp_codegen_static_fields_for(Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96_il2cpp_TypeInfo_var))->___Live;
 		NullCheck(L_5);
@@ -9271,11 +9380,11 @@ FINALLY_023a:
 
 IL_002e_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:791>
 				Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96* L_7;
 				L_7 = Enumerator_get_Current_m13830F88EE80BCEE448D896FA2FDBC2D31C5A8DB_inline((&V_1), Enumerator_get_Current_m13830F88EE80BCEE448D896FA2FDBC2D31C5A8DB_RuntimeMethod_var);
 				V_2 = L_7;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:731>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:793>
 				Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96* L_8 = V_2;
 				il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 				bool L_9;
@@ -9297,7 +9406,7 @@ IL_002e_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:732>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:794>
 				Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96* L_13 = V_2;
 				NullCheck(L_13);
 				Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_14;
@@ -9315,11 +9424,11 @@ IL_002e_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_19;
 				L_19 = Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline(L_15, L_18, NULL);
 				V_3 = L_19;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:733>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:795>
 				float L_20;
 				L_20 = Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline((&V_3), NULL);
 				V_4 = L_20;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:734>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
 				float L_21 = V_4;
 				if ((((float)L_21) > ((float)(12.0f))))
 				{
@@ -9327,7 +9436,7 @@ IL_002e_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:735>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:797>
 				List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_22 = __this->___gWarn;
 				int32_t L_23 = V_0;
 				int32_t L_24 = L_23;
@@ -9335,7 +9444,7 @@ IL_002e_1:
 				NullCheck(L_22);
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_25;
 				L_25 = List_1_get_Item_m0CB0A63A19AA706F1A3B5287E7C048E2A71ABF2B(L_22, L_24, List_1_get_Item_m0CB0A63A19AA706F1A3B5287E7C048E2A71ABF2B_RuntimeMethod_var);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:736>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:798>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_26 = L_25;
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_27 = L_26.___Item1;
 				NullCheck(L_27);
@@ -9343,7 +9452,7 @@ IL_002e_1:
 				L_28 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_27, NULL);
 				NullCheck(L_28);
 				GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_28, (bool)1, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:738>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:800>
 				PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_29 = ___0_p;
 				NullCheck(L_29);
 				Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_30 = L_29->___cam;
@@ -9355,9 +9464,9 @@ IL_002e_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_33;
 				L_33 = Transform_InverseTransformDirection_m69C077B881A98B08C7F231EFC49429C906FBC575(L_31, L_32, NULL);
 				V_5 = L_33;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:738>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:800>
 				(&V_5)->___y = (0.0f);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:739>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:801>
 				float L_34;
 				L_34 = Vector3_get_sqrMagnitude_m43C27DEC47C4811FB30AB474FF2131A963B66FC8_inline((&V_5), NULL);
 				if ((((float)L_34) > ((float)(9.99999975E-05f))))
@@ -9388,7 +9497,7 @@ IL_00d9_1:
 IL_00ec_1:
 			{
 				V_6 = G_B10_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:740>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:802>
 				float L_40 = V_6;
 				float L_41;
 				L_41 = sinf(L_40);
@@ -9396,7 +9505,7 @@ IL_00ec_1:
 				float L_43;
 				L_43 = cosf(L_42);
 				Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&V_7), L_41, L_43, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:741>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:803>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_44 = G_B10_1;
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_45 = L_44.___Item1;
 				Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_46 = V_7;
@@ -9404,7 +9513,7 @@ IL_00ec_1:
 				L_47 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_46, (175.0f), NULL);
 				NullCheck(L_45);
 				RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_45, L_47, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:742>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:804>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_48 = L_44;
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_49 = L_48.___Item2;
 				Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_50 = V_7;
@@ -9412,7 +9521,7 @@ IL_00ec_1:
 				L_51 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_50, (40.0f), NULL);
 				NullCheck(L_49);
 				RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_49, L_51, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:743>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:805>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_52 = L_48;
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_53 = L_52.___Item2;
 				float L_54 = V_6;
@@ -9420,9 +9529,9 @@ IL_00ec_1:
 				L_55 = Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline((0.0f), (0.0f), ((float)il2cpp_codegen_multiply(((-L_54)), (57.2957802f))), NULL);
 				NullCheck(L_53);
 				Transform_set_localRotation_mAB4A011D134BA58AB780BECC0025CA65F16185FA(L_53, L_55, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:744>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:806>
 				float L_56 = V_4;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:745>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:807>
 				if (((((float)L_56) < ((float)(7.5f)))? 1 : 0))
 				{
 					G_B12_0 = L_52;
@@ -9451,19 +9560,19 @@ IL_017a_1:
 IL_0193_1:
 			{
 				V_8 = G_B13_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:746>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:808>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_59 = G_B13_1;
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_60 = L_59.___Item3;
 				Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_61 = V_8;
 				NullCheck(L_60);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_60, L_61);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:746>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:808>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_62 = L_59;
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_63 = L_62.___Item4;
 				Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_64 = V_8;
 				NullCheck(L_63);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_63, L_64);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:747>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:809>
 				Grenade_tAE74DF2A4DA5C790F7BC3BEB9C4F470649CDBB96* L_65 = V_2;
 				NullCheck(L_65);
 				float L_66;
@@ -9471,7 +9580,7 @@ IL_0193_1:
 				float L_67;
 				L_67 = Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline(((float)il2cpp_codegen_subtract((1.0f), ((float)(L_66/(2.5999999f))))), NULL);
 				V_9 = L_67;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:748>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:810>
 				ValueTuple_5_t7C4C6CD40B39D4BEA3F354AA383EBF8CA6EB4145 L_68 = L_62;
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_69 = L_68.___Item1;
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_70;
@@ -9485,7 +9594,7 @@ IL_0193_1:
 				L_74 = Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline(L_70, ((float)il2cpp_codegen_add((1.0f), ((float)il2cpp_codegen_multiply((0.119999997f), L_73)))), NULL);
 				NullCheck(L_69);
 				Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_69, L_74, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:749>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:811>
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_75 = L_68.___Item5;
 				float L_76 = V_4;
 				int32_t L_77;
@@ -9503,7 +9612,7 @@ IL_0193_1:
 
 IL_022c_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:729>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:791>
 				bool L_81;
 				L_81 = Enumerator_MoveNext_mC1E87CB1C429CB6950DCD8DFE4CC9EE914C68C86((&V_1), Enumerator_MoveNext_mC1E87CB1C429CB6950DCD8DFE4CC9EE914C68C86_RuntimeMethod_var);
 				if (L_81)
@@ -9523,7 +9632,7 @@ IL_022c_1:
 
 IL_0248:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:752>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:814>
 		List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_82 = __this->___gWarn;
 		int32_t L_83 = V_0;
 		NullCheck(L_82);
@@ -9542,7 +9651,7 @@ IL_0248:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:752>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:814>
 		List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_88 = __this->___gWarn;
 		int32_t L_89 = V_0;
 		NullCheck(L_88);
@@ -9558,14 +9667,14 @@ IL_0248:
 
 IL_0281:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:752>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:814>
 		int32_t L_93 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_93, 1));
 	}
 
 IL_0285:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:752>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:814>
 		int32_t L_94 = V_0;
 		List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_95 = __this->___gWarn;
 		NullCheck(L_95);
@@ -9577,11 +9686,11 @@ IL_0285:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:753>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:815>
 		return;
 	}
 }
-// Method Definition Index: 89029
+// Method Definition Index: 89045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34C86BF8F5880AB0B7 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9596,7 +9705,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:757>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:819>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_1;
 		L_1 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_0, _stringLiteral4D051A1C6B5D7B20CF5BE518E0307D11548295E8, NULL);
@@ -9605,7 +9714,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34
 		L_2 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_1, NULL);
 		__this->___deathPanel = L_2;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___deathPanel), (void*)L_2);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:758>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:820>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3 = __this->___deathPanel;
 		NullCheck(L_3);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_4;
@@ -9623,7 +9732,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34
 		L_9 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_10;
 		L_10 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_4, _stringLiteral96681A2B198D42859DB500CC97021274BD2004F1, L_5, L_6, L_7, L_8, L_9, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:759>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:821>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_11 = __this->___deathPanel;
 		NullCheck(L_11);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_12;
@@ -9646,7 +9755,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34
 		L_18 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_12, _stringLiteral6B866DCFF4A3EC3D3C30879F029D88106601B1B2, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)38), L_13, 4, L_14, L_15, L_16, L_17, (bool)1, NULL);
 		__this->___deathTxt = L_18;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___deathTxt), (void*)L_18);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:760>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_19 = __this->___deathPanel;
 		NullCheck(L_19);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_20;
@@ -9668,15 +9777,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildDeath_m4D46F71ED82F59B7626E3F34
 		L_26 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_20, _stringLiteral5B9FE05484B470B354696B4F06C3B12F71B5BB4A, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)26), L_21, 4, L_22, L_23, L_24, L_25, (bool)1, NULL);
 		__this->___deathTimer = L_26;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___deathTimer), (void*)L_26);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:761>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:823>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_27 = __this->___deathPanel;
 		NullCheck(L_27);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_27, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:762>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:824>
 		return;
 	}
 }
-// Method Definition Index: 89030
+// Method Definition Index: 89046
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95FECB6860BDEF1EDC7 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9721,7 +9830,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 	String_t* G_B1_5 = NULL;
 	Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* G_B1_6 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:766>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:828>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_1;
 		L_1 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_0, _stringLiteral63A7BC5625BD73B4EFFB4EB777EA75B79C73E722, NULL);
@@ -9730,7 +9839,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 		L_2 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_1, NULL);
 		__this->___pausePanel = L_2;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___pausePanel), (void*)L_2);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:767>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:829>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3 = __this->___pausePanel;
 		NullCheck(L_3);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_4;
@@ -9748,7 +9857,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 		L_9 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_10;
 		L_10 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_4, _stringLiteral96681A2B198D42859DB500CC97021274BD2004F1, L_5, L_6, L_7, L_8, L_9, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:768>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:830>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_11 = __this->___pausePanel;
 		NullCheck(L_11);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_12;
@@ -9772,7 +9881,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_18), (1000.0f), (120.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_19;
 		L_19 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_12, _stringLiteral6B866DCFF4A3EC3D3C30879F029D88106601B1B2, L_13, ((int32_t)80), L_14, 4, L_15, L_16, L_17, L_18, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:769>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:831>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_20 = __this->___pausePanel;
 		NullCheck(L_20);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_21;
@@ -9795,7 +9904,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_27, __this, (intptr_t)((void*)HUD_TogglePause_mAB127BC3B02D493E2CAA82C0D508793E70163F85_RuntimeMethod_var), NULL);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_28;
 		L_28 = UIK_Btn_m5A0620E9EF0517CD9E2B311A29B61A33D6C152EB(L_21, L_22, L_23, L_24, L_25, L_26, L_27, ((int32_t)44), (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_29 = __this->___pausePanel;
 		NullCheck(L_29);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_30;
@@ -9818,7 +9927,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildPause_m0E61F6D1ADA46BD8A0F9F95F
 		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_36, __this, (intptr_t)((void*)HUD_U3CBuildPauseU3Eb__122_0_m61E9DABC4D50E1760AC4F3F017C9A80AB5A5F9B4_RuntimeMethod_var), NULL);
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_37;
 		L_37 = UIK_Btn_m5A0620E9EF0517CD9E2B311A29B61A33D6C152EB(L_30, L_31, L_32, L_33, L_34, L_35, L_36, ((int32_t)44), (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:771>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:833>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_38 = __this->___pausePanel;
 		NullCheck(L_38);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_39;
@@ -9880,15 +9989,15 @@ IL_0200:
 	{
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_50;
 		L_50 = UIK_Btn_m5A0620E9EF0517CD9E2B311A29B61A33D6C152EB(G_B2_6, G_B2_5, G_B2_4, G_B2_3, G_B2_2, G_B2_1, G_B2_0, ((int32_t)44), (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:772>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:834>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_51 = __this->___pausePanel;
 		NullCheck(L_51);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_51, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:773>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:835>
 		return;
 	}
 }
-// Method Definition Index: 89031
+// Method Definition Index: 89047
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TogglePause_mAB127BC3B02D493E2CAA82C0D508793E70163F85 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9901,7 +10010,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TogglePause_mAB127BC3B02D493E2CAA82C
 	float G_B6_0 = 0.0f;
 	int32_t G_B9_0 = 0;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:777>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:839>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_0 = __this->___mm;
 		NullCheck(L_0);
 		bool L_1;
@@ -9912,23 +10021,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TogglePause_mAB127BC3B02D493E2CAA82C
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:777>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:839>
 		return;
 	}
 
 IL_000e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:778>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:840>
 		bool L_2;
 		L_2 = HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline(__this, NULL);
 		HUD_set_Paused_mCC1EF25C5011D5F59E97EF2D0296ADDB3B0BB266_inline(__this, (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:779>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:841>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_3 = __this->___pausePanel;
 		bool L_4;
 		L_4 = HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline(__this, NULL);
 		NullCheck(L_3);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_3, L_4, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:780>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:842>
 		bool L_5;
 		L_5 = HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline(__this, NULL);
 		if (!L_5)
@@ -9960,7 +10069,7 @@ IL_0044:
 IL_0049:
 	{
 		Time_set_timeScale_mEF84EE4B2376A458387648079B426B267862D331(G_B6_0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:781>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:843>
 		bool L_7;
 		L_7 = HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline(__this, NULL);
 		if (!L_7)
@@ -9984,14 +10093,14 @@ IL_0060:
 IL_0061:
 	{
 		AudioListener_set_pause_m4D52C9FFC6B10B0F281329FA0FB3CE2C64894F33((bool)G_B9_0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:782>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:844>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___fireHeld = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:783>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:845>
 		return;
 	}
 }
-// Method Definition Index: 89032
+// Method Definition Index: 89048
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowDeath_mB78EC5B773F3ACF9C892626C44F16FA3A611E1CC (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* ___0_killer, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10012,15 +10121,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowDeath_mB78EC5B773F3ACF9C892626C4
 	String_t* G_B5_0 = NULL;
 	String_t* G_B3_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:787>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:849>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___deathPanel;
 		NullCheck(L_0);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_0, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:788>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:850>
 		float L_1;
 		L_1 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		__this->___deathAt = L_1;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:789>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:851>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_2 = ___0_killer;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_3;
@@ -10071,7 +10180,7 @@ IL_003d:
 IL_0043:
 	{
 		V_0 = G_B5_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:790>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:852>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_11 = __this->___deathTxt;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_12;
@@ -10084,25 +10193,25 @@ IL_0043:
 		L_15 = String_Concat_m093934F71A9B351911EE46311674ED463B180006(L_12, _stringLiteral5C0F825B45948213E53634014D402EB0EDD46F3A, L_14, _stringLiteralCBE844AF922BC0AC1AB4CA94466DC7FD7038D0E2, NULL);
 		NullCheck(L_11);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_11, L_15);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:791>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:853>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_16 = __this->___controls;
 		NullCheck(L_16);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_17;
 		L_17 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_16, NULL);
 		NullCheck(L_17);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_17, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:792>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:854>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___fireHeld = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:792>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:854>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_18;
 		L_18 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___move = L_18;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:793>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:855>
 		return;
 	}
 }
-// Method Definition Index: 89033
+// Method Definition Index: 89049
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ResetAim_m35561EE092BB71966B8F4486DA08C32A7DC8B42C (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10112,25 +10221,25 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ResetAim_m35561EE092BB71966B8F4486DA
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
 		HUD_set_AimToggled_m743736C4C968C0E6A684EC94D1CD7EE083A0F0F1_inline(__this, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___aim = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
 		HUD_SetScope_m21A276666685D33AF10B6CC531AC1EC0485858B2(__this, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_0 = __this->___scopeBlink;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_1;
 		memset((&L_1), 0, sizeof(L_1));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_1), (0.0f), (0.0f), (0.0f), (0.0f), NULL);
 		NullCheck(L_0);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_0, L_1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:796>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
 		return;
 	}
 }
-// Method Definition Index: 89034
+// Method Definition Index: 89050
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_HideDeath_m2F59F4E327257EC7F530ABF70C1BF67D5B19C3B0 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10141,11 +10250,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_HideDeath_m2F59F4E327257EC7F530ABF70
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:800>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:862>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___deathPanel;
 		NullCheck(L_0);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:801>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:863>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_1 = __this->___controls;
 		NullCheck(L_1);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_2;
@@ -10155,16 +10264,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_HideDeath_m2F59F4E327257EC7F530ABF70
 		L_3 = HUD_get_TouchUI_mB47898983D874755B1793EC60A96F204536B9F9A(NULL);
 		NullCheck(L_2);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_2, L_3, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:802>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:864>
 		HUD_set_AimToggled_m743736C4C968C0E6A684EC94D1CD7EE083A0F0F1_inline(__this, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:802>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:864>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___aim = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:803>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:865>
 		return;
 	}
 }
-// Method Definition Index: 89035
+// Method Definition Index: 89051
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowEnd_m7652B8B293915A1EB222CD20C3802E10D10E5F74 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, int32_t ___0_result, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10605,11 +10714,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowEnd_m7652B8B293915A1EB222CD20C38
 	String_t* G_B127_5 = NULL;
 	Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* G_B127_6 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:807>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
 		Time_set_timeScale_mEF84EE4B2376A458387648079B426B267862D331((1.0f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:807>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
 		HUD_set_Paused_mCC1EF25C5011D5F59E97EF2D0296ADDB3B0BB266_inline(__this, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:807>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___pausePanel;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -10620,7 +10729,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowEnd_m7652B8B293915A1EB222CD20C38
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:807>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_2 = __this->___pausePanel;
 		NullCheck(L_2);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_2, (bool)0, NULL);
@@ -10628,33 +10737,33 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowEnd_m7652B8B293915A1EB222CD20C38
 
 IL_002a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:808>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:870>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_3 = __this->___controls;
 		NullCheck(L_3);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_4;
 		L_4 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_3, NULL);
 		NullCheck(L_4);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_4, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:809>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:871>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_5 = __this->___deathPanel;
 		NullCheck(L_5);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_5, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:810>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:872>
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___fireHeld = (bool)0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:810>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:872>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_6;
 		L_6 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___move = L_6;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:811>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:873>
 		bool L_7;
 		L_7 = Settings_get_Turkish_m7CE82C90345078D1558503FEA1B8AEFAE460B511(NULL);
 		V_0 = L_7;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:812>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:874>
 		il2cpp_codegen_runtime_class_init_inline(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var);
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_8 = ((PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_StaticFields*)il2cpp_codegen_static_fields_for(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var))->___Local;
 		V_1 = L_8;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:813>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:875>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_9 = __this->___root;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_10;
 		L_10 = UIK_Full_m7D8239CAD47253BDB6132D88826B2B94178222E6(L_9, _stringLiteralA2F4AC9DD8E1FAC5257E5F7BA5EE1C7C7E5F7AB1, NULL);
@@ -10663,13 +10772,13 @@ IL_002a:
 		L_11 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_10, NULL);
 		__this->___endPanel = L_11;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___endPanel), (void*)L_11);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:814>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:876>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_12 = __this->___endPanel;
 		NullCheck(L_12);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_13;
 		L_13 = GameObject_get_transform_m0BC10ADFA1632166AE5544BDF9038A2650C2AE56(L_12, NULL);
 		V_2 = L_13;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:815>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:877>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_14 = V_2;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_15;
 		memset((&L_15), 0, sizeof(L_15));
@@ -10684,7 +10793,7 @@ IL_002a:
 		L_19 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_20;
 		L_20 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_14, _stringLiteral96681A2B198D42859DB500CC97021274BD2004F1, L_15, L_16, L_17, L_18, L_19, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:816>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:878>
 		int32_t L_21 = ___0_result;
 		if ((((int32_t)L_21) > ((int32_t)0)))
 		{
@@ -10726,7 +10835,7 @@ IL_00e4:
 IL_00ee:
 	{
 		V_3 = G_B7_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:817>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_26 = V_2;
 		String_t* L_27 = V_3;
 		int32_t L_28 = ___0_result;
@@ -10808,7 +10917,7 @@ IL_0113:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_36), (1400.0f), (120.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_37;
 		L_37 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B12_4, G_B12_3, G_B12_2, G_B12_1, G_B12_0, 4, L_33, L_34, L_35, L_36, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:818>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:880>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_38 = V_2;
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_39 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)5);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_40 = L_39;
@@ -10858,11 +10967,11 @@ IL_0113:
 		L_57 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_38, _stringLiteralC0E2DE04AE40B3B0493F0F846F34B279C6D44FE9, L_51, ((int32_t)52), L_52, 4, L_53, L_54, L_55, L_56, (bool)1, NULL);
 		NullCheck(L_57);
 		Text_set_supportRichText_mB4DB141150AEBCCADEFFF4EC7A799F85FD075265(L_57, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:821>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:883>
 		V_4 = (Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017*)NULL;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:821>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:883>
 		V_5 = (-(std::numeric_limits<float>::max)());
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 		il2cpp_codegen_runtime_class_init_inline(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var);
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_58 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_StaticFields*)il2cpp_codegen_static_fields_for(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var))->___All;
 		NullCheck(L_58);
@@ -10888,11 +10997,11 @@ FINALLY_025e:
 
 IL_021a_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_60;
 				L_60 = Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_inline((&V_25), Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_RuntimeMethod_var);
 				V_26 = L_60;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_61 = V_26;
 				NullCheck(L_61);
 				int32_t L_62 = L_61->___kills;
@@ -10903,7 +11012,7 @@ IL_021a_1:
 				NullCheck(L_65);
 				int32_t L_66 = L_65->___headshotKills;
 				V_27 = ((float)il2cpp_codegen_add(((float)il2cpp_codegen_subtract(((float)il2cpp_codegen_multiply(((float)L_62), (3.0f))), ((float)L_64))), ((float)L_66)));
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				float L_67 = V_27;
 				float L_68 = V_5;
 				if ((!(((float)L_67) > ((float)L_68))))
@@ -10912,17 +11021,17 @@ IL_021a_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				float L_69 = V_27;
 				V_5 = L_69;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_70 = V_26;
 				V_4 = L_70;
 			}
 
 IL_0253_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:822>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
 				bool L_71;
 				L_71 = Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16((&V_25), Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16_RuntimeMethod_var);
 				if (L_71)
@@ -10942,7 +11051,7 @@ IL_0253_1:
 
 IL_026c:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:823>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:885>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_72 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_73;
@@ -10953,7 +11062,7 @@ IL_026c:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:825>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:887>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_74 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		float L_75 = (&((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent)->___r;
@@ -10976,7 +11085,7 @@ IL_026c:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_82), (520.0f), (40.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_83;
 		L_83 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_74, _stringLiteral102122EDD528360A5EA077C2043BB93876F910E1, L_78, L_79, L_80, L_81, L_82, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:826>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:888>
 		NullCheck(L_83);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_84;
 		L_84 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_83, NULL);
@@ -11064,7 +11173,7 @@ IL_0338:
 
 IL_0370:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:830>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:892>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_105 = V_2;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_106;
 		memset((&L_106), 0, sizeof(L_106));
@@ -11083,12 +11192,12 @@ IL_0370:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_110), (620.0f), (560.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_111;
 		L_111 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_105, _stringLiteral55F6FB523009E03A840F104D9F4FCBD108E276CB, L_106, L_107, L_108, L_109, L_110, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:831>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:893>
 		NullCheck(L_111);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_112;
 		L_112 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_111, NULL);
 		V_6 = L_112;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:894>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_113 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_114 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
@@ -11113,7 +11222,7 @@ IL_0370:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_121), (0.5f), (1.0f), NULL);
 		NullCheck(L_120);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_120, L_121, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:833>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:895>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_122 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_123;
@@ -11133,7 +11242,7 @@ IL_0370:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_128), (-48.0f), (34.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_129;
 		L_129 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_122, _stringLiteral0CD979583B209CE71603EFC4A398E6A9EFA8D872, L_123, ((int32_t)24), L_124, 3, L_125, L_126, L_127, L_128, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:834>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:896>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_130 = V_1;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_131;
@@ -11159,7 +11268,7 @@ IL_049d:
 IL_04a3:
 	{
 		V_7 = G_B27_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:834>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:896>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_134 = V_1;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_135;
@@ -11185,7 +11294,7 @@ IL_04b1:
 IL_04b7:
 	{
 		V_8 = G_B30_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:834>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:896>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_138 = V_1;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_139;
@@ -11211,7 +11320,7 @@ IL_04c5:
 IL_04cb:
 	{
 		V_9 = G_B33_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:835>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:897>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_142 = V_1;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_143;
@@ -11251,14 +11360,14 @@ IL_04e6:
 IL_04f5:
 	{
 		V_10 = G_B37_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:836>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:837>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:838>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:839>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:840>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:841>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:842>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:843>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:898>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:899>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:900>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:901>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:902>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:903>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:904>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:905>
 		il2cpp_array_size_t L_151[] = { (il2cpp_array_size_t)5, (il2cpp_array_size_t)2 };
 		StringU5BU2CU5D_tF2843FC5B60496ACCA54AD6538897DBA3E19A7EF* L_150 = (StringU5BU2CU5D_tF2843FC5B60496ACCA54AD6538897DBA3E19A7EF*)GenArrayNew(StringU5BU2CU5D_tF2843FC5B60496ACCA54AD6538897DBA3E19A7EF_il2cpp_TypeInfo_var, L_151);
 		StringU5BU2CU5D_tF2843FC5B60496ACCA54AD6538897DBA3E19A7EF* L_152 = L_150;
@@ -11485,17 +11594,17 @@ IL_0656:
 		NullCheck(G_B46_3);
 		(G_B46_3)->SetAt(G_B46_2, G_B46_1, G_B46_0);
 		V_11 = G_B46_4;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:844>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:906>
 		V_30 = 0;
 		goto IL_0745;
 	}
 
 IL_0665:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:846>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:908>
 		int32_t L_200 = V_30;
 		V_31 = ((float)((int32_t)il2cpp_codegen_subtract(((int32_t)-78), ((int32_t)il2cpp_codegen_multiply(L_200, ((int32_t)40))))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:847>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:909>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_201 = V_6;
 		String_t* L_202;
 		L_202 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_30), NULL);
@@ -11523,7 +11632,7 @@ IL_0665:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_212), (-48.0f), (34.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_213;
 		L_213 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_201, L_203, L_206, ((int32_t)22), L_207, 3, L_208, L_209, L_211, L_212, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:848>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:910>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_214 = V_6;
 		String_t* L_215;
 		L_215 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_30), NULL);
@@ -11552,14 +11661,14 @@ IL_0665:
 		L_226 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_214, L_216, L_219, ((int32_t)24), L_220, 5, L_221, L_222, L_224, L_225, (bool)1, NULL);
 		NullCheck(L_226);
 		Text_set_supportRichText_mB4DB141150AEBCCADEFFF4EC7A799F85FD075265(L_226, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:844>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:906>
 		int32_t L_227 = V_30;
 		V_30 = ((int32_t)il2cpp_codegen_add(L_227, 1));
 	}
 
 IL_0745:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:844>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:906>
 		int32_t L_228 = V_30;
 		StringU5BU2CU5D_tF2843FC5B60496ACCA54AD6538897DBA3E19A7EF* L_229 = V_11;
 		NullCheck((RuntimeArray*)L_229);
@@ -11571,7 +11680,7 @@ IL_0745:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:852>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:914>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_231 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_232;
@@ -11599,13 +11708,13 @@ IL_0768:
 IL_0769:
 	{
 		V_12 = (bool)G_B52_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:853>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:915>
 		int32_t L_236 = V_7;
 		V_13 = ((int32_t)il2cpp_codegen_multiply(L_236, ((int32_t)100)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:853>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:915>
 		int32_t L_237 = V_9;
 		V_14 = ((int32_t)il2cpp_codegen_multiply(L_237, ((int32_t)50)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:853>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:915>
 		int32_t L_238 = ___0_result;
 		if ((((int32_t)L_238) > ((int32_t)0)))
 		{
@@ -11625,7 +11734,7 @@ IL_0784:
 IL_0789:
 	{
 		V_15 = G_B55_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:853>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:915>
 		bool L_239 = V_12;
 		if (L_239)
 		{
@@ -11645,21 +11754,21 @@ IL_0792:
 IL_0797:
 	{
 		V_16 = G_B58_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:854>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:916>
 		int32_t L_240 = V_13;
 		int32_t L_241 = V_14;
 		int32_t L_242 = V_15;
 		int32_t L_243 = V_16;
 		V_17 = ((int32_t)il2cpp_codegen_add(((int32_t)il2cpp_codegen_add(((int32_t)il2cpp_codegen_add(L_240, L_241)), L_242)), L_243));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:855>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:917>
 		int32_t L_244;
 		L_244 = Progress_get_XP_m1233EF3C1199AB33CF6145B661AD67EB3A2F4679(NULL);
 		V_18 = L_244;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:855>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:917>
 		int32_t L_245 = V_18;
 		int32_t L_246 = V_17;
 		Progress_set_XP_mCC31FAD4BB8702766B58445C0D3D25722C2592B0(((int32_t)il2cpp_codegen_add(L_245, L_246)), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:856>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:918>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_247 = V_1;
 		int32_t L_248 = ___0_result;
 		bool L_249 = V_12;
@@ -11667,7 +11776,7 @@ IL_0797:
 		List_1_tEC91E54084D7786A19657343513A6A6E2EFF564A* L_250;
 		L_250 = Profile_RecordMatch_mAB07C3B1C336D06AE13317DC3F1332BB46B672C7(L_247, (bool)((((int32_t)L_248) > ((int32_t)0))? 1 : 0), L_249, NULL);
 		V_19 = L_250;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:857>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:919>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_251 = V_6;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_252;
 		memset((&L_252), 0, sizeof(L_252));
@@ -11686,7 +11795,7 @@ IL_0797:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_256), (-48.0f), (2.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_257;
 		L_257 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_251, _stringLiteral07CDBBCAA90CDAE8F1E2C6DCAE010EDC5C4A244F, L_252, L_253, L_254, L_255, L_256, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:858>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:920>
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_258 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)((int32_t)12));
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_259 = L_258;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
@@ -11808,7 +11917,7 @@ IL_08d7:
 		String_t* L_282;
 		L_282 = String_Concat_m647EBF831F54B6DF7D5AFA5FD012CF4EE7571B6A(G_B64_3, NULL);
 		V_20 = L_282;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:859>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:921>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_283 = V_6;
 		String_t* L_284 = V_20;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
@@ -11827,7 +11936,7 @@ IL_08d7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_289), (-48.0f), (60.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_290;
 		L_290 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_283, _stringLiteral6A27065E558A52DEDB639EBEEC3F2DC4BAB2325F, L_284, ((int32_t)19), L_285, 0, L_286, L_287, L_288, L_289, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:860>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:922>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_291 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_292;
@@ -11853,7 +11962,7 @@ IL_08d7:
 		L_300 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_291, _stringLiteral60407FA867A72B802544BF09AF0C7474B32BC5F1, L_294, ((int32_t)26), L_295, 3, L_296, L_297, L_298, L_299, (bool)1, NULL);
 		NullCheck(L_300);
 		Text_set_supportRichText_mB4DB141150AEBCCADEFFF4EC7A799F85FD075265(L_300, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:861>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:923>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_301 = V_6;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_302 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_303;
@@ -11871,7 +11980,7 @@ IL_08d7:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_307;
 		L_307 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_301, _stringLiteral5D52F5774B3A4F2D746121366BB3C1351E903792, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)22), L_302, 3, L_303, L_304, L_305, L_306, (bool)1, NULL);
 		V_21 = L_307;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:862>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:924>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_308 = V_6;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_309 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Dim;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_310;
@@ -11889,7 +11998,7 @@ IL_08d7:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_314;
 		L_314 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_308, _stringLiteral923591A11DEFD5B1732405012EFEA35E5023024C, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)18), L_309, 5, L_310, L_311, L_312, L_313, (bool)0, NULL);
 		V_22 = L_314;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:863>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:925>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_315 = V_6;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_316;
 		memset((&L_316), 0, sizeof(L_316));
@@ -11908,7 +12017,7 @@ IL_08d7:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_320), (-48.0f), (12.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_321;
 		L_321 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_315, _stringLiteral09FD22DA3CEFEACE96CB263E19361486F432DB29, L_316, L_317, L_318, L_319, L_320, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:864>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:926>
 		NullCheck(L_321);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_322;
 		L_322 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_321, NULL);
@@ -11927,27 +12036,27 @@ IL_08d7:
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_329;
 		L_329 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_328, NULL);
 		V_23 = L_329;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:865>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:927>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_330 = V_23;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_331;
 		memset((&L_331), 0, sizeof(L_331));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_331), (0.0f), (0.5f), NULL);
 		NullCheck(L_330);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_330, L_331, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:865>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:927>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_332 = V_23;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_333;
 		L_333 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_332);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_332, L_333, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:865>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:927>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_334 = V_23;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_335;
 		memset((&L_335), 0, sizeof(L_335));
 		Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline((&L_335), (0.0f), (1.0f), (1.0f), NULL);
 		NullCheck(L_334);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_334, L_335, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:866>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:928>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_336 = V_6;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_337 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_338;
@@ -11965,7 +12074,7 @@ IL_08d7:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_342;
 		L_342 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_336, _stringLiteral1B22F82E513C1BB368DFDBFDFB5FB8C1178CA305, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, ((int32_t)30), L_337, 4, L_338, L_339, L_340, L_341, (bool)1, NULL);
 		V_24 = L_342;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:867>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:929>
 		int32_t L_343 = V_18;
 		int32_t L_344 = V_18;
 		int32_t L_345 = V_17;
@@ -11977,14 +12086,14 @@ IL_08d7:
 		L_350 = HUD_XpBar_m1F723C9703BA1D63EDE6B794EC2B8098C2093162(__this, L_343, ((int32_t)il2cpp_codegen_add(L_344, L_345)), L_346, L_347, L_348, L_349, NULL);
 		Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* L_351;
 		L_351 = MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812(__this, L_350, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:931>
 		V_32 = 0;
 		goto IL_0c91;
 	}
 
 IL_0ba5:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:871>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:933>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_352 = V_2;
 		String_t* L_353;
 		L_353 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_32), NULL);
@@ -12012,7 +12121,7 @@ IL_0ba5:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_363), (540.0f), (40.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_364;
 		L_364 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_352, L_354, L_358, L_359, L_360, L_362, L_363, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:872>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:934>
 		NullCheck(L_364);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_365;
 		L_365 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_364, NULL);
@@ -12068,14 +12177,14 @@ IL_0c41:
 		L_377 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_378;
 		L_378 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B68_2, G_B68_1, L_372, ((int32_t)20), L_373, 4, L_374, L_375, L_376, L_377, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:931>
 		int32_t L_379 = V_32;
 		V_32 = ((int32_t)il2cpp_codegen_add(L_379, 1));
 	}
 
 IL_0c91:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:869>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:931>
 		int32_t L_380 = V_32;
 		List_1_tEC91E54084D7786A19657343513A6A6E2EFF564A* L_381 = V_19;
 		NullCheck(L_381);
@@ -12096,18 +12205,18 @@ IL_0c91:
 
 IL_0ca4:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:876>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:938>
 		V_33 = 0;
 		goto IL_1102;
 	}
 
 IL_0cac:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:878>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:940>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_384 = (List_1_t3844D5793B214116410D77DFB1F5F82183495216*)il2cpp_codegen_object_new(List_1_t3844D5793B214116410D77DFB1F5F82183495216_il2cpp_TypeInfo_var);
 		List_1__ctor_mE229A83A43392D2FBD80CC5ECA59DD461FC97963(L_384, List_1__ctor_mE229A83A43392D2FBD80CC5ECA59DD461FC97963_RuntimeMethod_var);
 		V_34 = L_384;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
 		il2cpp_codegen_runtime_class_init_inline(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var);
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_385 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_StaticFields*)il2cpp_codegen_static_fields_for(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var))->___All;
 		NullCheck(L_385);
@@ -12133,11 +12242,11 @@ FINALLY_0ce9:
 
 IL_0cc1_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_387;
 				L_387 = Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_inline((&V_25), Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_RuntimeMethod_var);
 				V_37 = L_387;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_388 = V_37;
 				NullCheck(L_388);
 				int32_t L_389 = L_388->___team;
@@ -12148,7 +12257,7 @@ IL_0cc1_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
 				List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_391 = V_34;
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_392 = V_37;
 				NullCheck(L_391);
@@ -12157,7 +12266,7 @@ IL_0cc1_1:
 
 IL_0cde_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:879>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
 				bool L_393;
 				L_393 = Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16((&V_25), Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16_RuntimeMethod_var);
 				if (L_393)
@@ -12177,7 +12286,7 @@ IL_0cde_1:
 
 IL_0cf7:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:880>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:942>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_394 = V_34;
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_il2cpp_TypeInfo_var);
 		Comparison_1_t931C1E5853229931CCF9E2225A7CE2AAAE3F43B2* L_395 = ((U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tC0DA67F420E7B1EAB4331E6FE034221B2C90DD67_il2cpp_TypeInfo_var))->___U3CU3E9__127_3;
@@ -12207,7 +12316,7 @@ IL_0d18:
 	{
 		NullCheck(G_B81_1);
 		List_1_Sort_m95E0BE203C74116361539A47D7F4E9DBA0B094AA(G_B81_1, G_B81_0, List_1_Sort_m95E0BE203C74116361539A47D7F4E9DBA0B094AA_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:881>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:943>
 		int32_t L_400 = V_33;
 		if (!L_400)
 		{
@@ -12227,7 +12336,7 @@ IL_0d28:
 IL_0d2a:
 	{
 		V_35 = ((float)G_B84_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:881>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:943>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_401 = V_34;
 		NullCheck(L_401);
 		int32_t L_402;
@@ -12250,7 +12359,7 @@ IL_0d3e:
 IL_0d43:
 	{
 		V_36 = G_B87_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:882>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:944>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_403 = V_2;
 		String_t* L_404;
 		L_404 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_33), NULL);
@@ -12338,7 +12447,7 @@ IL_0d7e:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_415), (440.0f), (36.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_416;
 		L_416 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B93_4, G_B93_3, G_B93_2, G_B93_1, G_B93_0, 3, L_411, L_412, L_414, L_415, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:883>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:945>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_417 = V_2;
 		String_t* L_418;
 		L_418 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_33), NULL);
@@ -12368,21 +12477,21 @@ IL_0d7e:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_428), (440.0f), (36.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_429;
 		L_429 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_417, L_419, L_422, ((int32_t)20), L_423, 5, L_424, L_425, L_427, L_428, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:946>
 		V_38 = 0;
 		goto IL_10ee;
 	}
 
 IL_0e3f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:886>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:948>
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_430 = V_34;
 		int32_t L_431 = V_38;
 		NullCheck(L_430);
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_432;
 		L_432 = List_1_get_Item_mDDC92FC1FA46E3F73FB6E680BEB30D9FD05DDF82(L_430, L_431, List_1_get_Item_mDDC92FC1FA46E3F73FB6E680BEB30D9FD05DDF82_RuntimeMethod_var);
 		V_39 = L_432;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:887>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:949>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_433 = V_2;
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_434 = V_39;
 		NullCheck(L_434);
@@ -12440,7 +12549,7 @@ IL_0e9c:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_448), (440.0f), L_447, NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_449;
 		L_449 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(G_B97_2, G_B97_1, G_B97_0, L_441, L_442, L_446, L_448, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:888>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:950>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_450 = L_449;
 		NullCheck(L_450);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_451;
@@ -12500,7 +12609,7 @@ IL_0f00:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_461), (0.0f), (0.5f), NULL);
 		NullCheck(L_460);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_460, L_461, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:889>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:951>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_462 = G_B100_3;
 		NullCheck(L_462);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_463;
@@ -12517,7 +12626,7 @@ IL_0f00:
 		il2cpp_codegen_runtime_class_init_inline(Countries_t7279877CBCBEA5739E32DB76CEB88BA45D6C6144_il2cpp_TypeInfo_var);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_469;
 		L_469 = Countries_Make_mEF2D50A4765A54BFFFB317A167FA8C5A91CF44D6(L_463, _stringLiteral4852C2E3B7E3383EDB957D1E40090C538892A013, L_465, L_466, L_467, ((float)il2cpp_codegen_multiply(L_468, (0.419999987f))), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:890>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:952>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_470 = L_469;
 		NullCheck(L_470);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_471;
@@ -12527,7 +12636,7 @@ IL_0f00:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_472), (0.0f), (0.5f), NULL);
 		NullCheck(L_471);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_471, L_472, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:890>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:952>
 		NullCheck(L_470);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_473;
 		L_473 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_470, NULL);
@@ -12536,10 +12645,10 @@ IL_0f00:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_474), (16.0f), (0.0f), NULL);
 		NullCheck(L_473);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_473, L_474, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:891>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:953>
 		float L_475 = V_36;
 		V_40 = ((float)il2cpp_codegen_add(((float)il2cpp_codegen_add((16.0f), ((float)(((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_475, (0.419999987f))), (4.0f)))/(3.0f))))), (10.0f)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:892>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:954>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_476 = L_462;
 		NullCheck(L_476);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_477;
@@ -12673,7 +12782,7 @@ IL_102d:
 		L_493 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_494;
 		L_494 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B109_4, G_B109_3, G_B109_2, G_B109_1, G_B109_0, 3, L_490, L_491, L_492, L_493, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:893>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:955>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_495 = L_494;
 		NullCheck(L_495);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_496;
@@ -12684,7 +12793,7 @@ IL_102d:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_498), L_497, (0.0f), NULL);
 		NullCheck(L_496);
 		RectTransform_set_offsetMin_m07F38B4105C7CA9CC9FBDC9ED0DB008602880AB9(L_496, L_498, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:893>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:955>
 		NullCheck(L_495);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_499;
 		L_499 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_495, NULL);
@@ -12693,7 +12802,7 @@ IL_102d:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_500), (-18.0f), (0.0f), NULL);
 		NullCheck(L_499);
 		RectTransform_set_offsetMax_m5514D09D86516F2C0E25FA6D11A3A4274D3D002D(L_499, L_500, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:894>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:956>
 		NullCheck(G_B109_5);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_501;
 		L_501 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(G_B109_5, NULL);
@@ -12753,14 +12862,14 @@ IL_10b3:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_514), (-44.0f), (0.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_515;
 		L_515 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B112_3, G_B112_2, G_B112_1, G_B112_0, L_510, 5, L_511, L_512, L_513, L_514, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:946>
 		int32_t L_516 = V_38;
 		V_38 = ((int32_t)il2cpp_codegen_add(L_516, 1));
 	}
 
 IL_10ee:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:884>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:946>
 		int32_t L_517 = V_38;
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_518 = V_34;
 		NullCheck(L_518);
@@ -12772,14 +12881,14 @@ IL_10ee:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:876>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:938>
 		int32_t L_520 = V_33;
 		V_33 = ((int32_t)il2cpp_codegen_add(L_520, 1));
 	}
 
 IL_1102:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:876>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:938>
 		int32_t L_521 = V_33;
 		if ((((int32_t)L_521) < ((int32_t)2)))
 		{
@@ -12787,7 +12896,7 @@ IL_1102:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:897>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:959>
 		il2cpp_codegen_runtime_class_init_inline(Net_t0F46FFEA9F5ACAB38FDD873A7C3FA14A5A89AED6_il2cpp_TypeInfo_var);
 		bool L_522;
 		L_522 = Net_get_Online_mBE11E55E41211ACE862F5E83FB66247E43A3BF66_inline(NULL);
@@ -12797,7 +12906,7 @@ IL_1102:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:897>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:959>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_523 = V_2;
 		bool L_524 = V_0;
 		if (L_524)
@@ -12881,7 +12990,7 @@ IL_117c:
 
 IL_1187:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:898>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:960>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_535 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_536;
@@ -12945,7 +13054,7 @@ IL_11ed:
 
 IL_11f6:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:899>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:961>
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_547 = V_2;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_548;
@@ -13005,11 +13114,11 @@ IL_125c:
 	{
 		Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* L_558;
 		L_558 = UIK_Btn_m5A0620E9EF0517CD9E2B311A29B61A33D6C152EB(G_B128_6, G_B128_5, G_B128_4, G_B128_3, G_B128_2, G_B128_1, G_B128_0, ((int32_t)42), (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:900>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:962>
 		return;
 	}
 }
-// Method Definition Index: 89036
+// Method Definition Index: 89052
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* HUD_XpBar_m1F723C9703BA1D63EDE6B794EC2B8098C2093162 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, int32_t ___0_from, int32_t ___1_to, Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___2_lvl, Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___3_num, RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* ___4_fill, Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* ___5_up, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13053,7 +13162,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* HUD_XpBar_m1F723C9703BA1D63EDE
 		return L_11;
 	}
 }
-// Method Definition Index: 89037
+// Method Definition Index: 89053
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_HitMarker_m194C7456CDB3034347234CD06E22A477398443A9 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_kill, bool ___1_head, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13067,7 +13176,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_HitMarker_m194C7456CDB3034347234CD06
 	float G_B3_0 = 0.0f;
 	HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* G_B3_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:927>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:989>
 		bool L_0 = ___0_kill;
 		if (L_0)
 		{
@@ -13092,18 +13201,18 @@ IL_0010:
 	{
 		NullCheck(G_B3_1);
 		G_B3_1->___hitT = G_B3_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:927>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:989>
 		bool L_1 = ___0_kill;
 		bool L_2 = ___1_head;
 		__this->___hitKill = (bool)((int32_t)((int32_t)L_1|(int32_t)L_2));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:928>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:990>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_3 = __this->___hitMark;
 		NullCheck(L_3);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_4;
 		L_4 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_3, NULL);
 		NullCheck(L_4);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_4, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:929>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:991>
 		bool L_5 = ___1_head;
 		if (!L_5)
 		{
@@ -13111,7 +13220,7 @@ IL_0010:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:929>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:991>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_6;
 		L_6 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_6);
@@ -13123,7 +13232,7 @@ IL_0010:
 
 IL_004c:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:930>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:992>
 		bool L_8 = ___0_kill;
 		if (!L_8)
 		{
@@ -13131,7 +13240,7 @@ IL_004c:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:930>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:992>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_9;
 		L_9 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_9);
@@ -13143,18 +13252,18 @@ IL_004c:
 
 IL_0069:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:931>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:993>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_11;
 		L_11 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_11);
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_12 = L_11->___impact;
 		il2cpp_codegen_runtime_class_init_inline(Sfx_t16802BE99E3D9CEA5A9CB046D6F8D642F6BFE28F_il2cpp_TypeInfo_var);
 		Sfx_Play2D_m6A96EC3B28AA32165BFED97E6E101C4C029CF633(L_12, (0.140000001f), (0.100000001f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:932>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:994>
 		return;
 	}
 }
-// Method Definition Index: 89038
+// Method Definition Index: 89054
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Damaged_m400A1FAF6E0CAC656762EF7E3CFBD7BBCFCB4B22 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_from, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13172,13 +13281,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Damaged_m400A1FAF6E0CAC656762EF7E3CF
 	int32_t V_4 = 0;
 	Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* V_5 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:936>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:998>
 		__this->___dmgT = (1.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:937>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:999>
 		il2cpp_codegen_runtime_class_init_inline(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var);
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_0 = ((PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_StaticFields*)il2cpp_codegen_static_fields_for(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var))->___Local;
 		V_0 = L_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:937>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:999>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_1 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_2;
@@ -13189,13 +13298,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Damaged_m400A1FAF6E0CAC656762EF7E3CF
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:937>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:999>
 		return;
 	}
 
 IL_001b:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:939>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1001>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_3 = ___0_from;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_4 = V_0;
 		NullCheck(L_4);
@@ -13209,9 +13318,9 @@ IL_001b:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_8;
 		L_8 = VecExt_Flat_mA706635287093E74241DE4D7525D8A3E096321A3(L_7, NULL);
 		V_1 = L_8;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:940>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1002>
 		V_2 = (Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327*)NULL;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_9 = __this->___indicators;
 		V_3 = L_9;
 		V_4 = 0;
@@ -13220,14 +13329,14 @@ IL_001b:
 
 IL_0040:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_10 = V_3;
 		int32_t L_11 = V_4;
 		NullCheck(L_10);
 		int32_t L_12 = L_11;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_13 = (L_10)->GetAt(static_cast<il2cpp_array_size_t>(L_12));
 		V_5 = L_13;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_14 = V_5;
 		NullCheck(L_14);
 		float L_15 = L_14->___t;
@@ -13260,10 +13369,10 @@ IL_0040:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_25 = V_5;
 		V_2 = L_25;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		goto IL_008f;
 	}
 
@@ -13275,7 +13384,7 @@ IL_0082:
 
 IL_0088:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:941>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1003>
 		int32_t L_27 = V_4;
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_28 = V_3;
 		NullCheck(L_28);
@@ -13287,7 +13396,7 @@ IL_0088:
 
 IL_008f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:942>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1004>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_29 = V_2;
 		if (L_29)
 		{
@@ -13295,19 +13404,19 @@ IL_008f:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:942>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1004>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_30 = __this->___indicators;
 		int32_t L_31 = __this->___indIdx;
 		NullCheck(L_30);
 		int32_t L_32 = L_31;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_33 = (L_30)->GetAt(static_cast<il2cpp_array_size_t>(L_32));
 		V_2 = L_33;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:942>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1004>
 		int32_t L_34 = __this->___indIdx;
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_35 = __this->___indicators;
 		NullCheck(L_35);
 		__this->___indIdx = ((int32_t)(((int32_t)il2cpp_codegen_add(L_34, 1))%((int32_t)(((RuntimeArray*)L_35)->max_length))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:942>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1004>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_36 = V_2;
 		NullCheck(L_36);
 		L_36->___pop = (1.0f);
@@ -13315,28 +13424,28 @@ IL_008f:
 
 IL_00c2:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:943>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1005>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_37 = V_2;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_38 = ___0_from;
 		NullCheck(L_37);
 		L_37->___from = L_38;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:943>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1005>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_39 = V_2;
 		NullCheck(L_39);
 		L_39->___t = (1.60000002f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:944>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1006>
 		return;
 	}
 }
-// Method Definition Index: 89039
+// Method Definition Index: 89055
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Fired_mC34B6D3630C62DFEE8DE7AC312577967FBB26A14 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:946>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1008>
 		return;
 	}
 }
-// Method Definition Index: 89040
+// Method Definition Index: 89056
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_KillFeed_mFAE7ECEBC46340415B8AC5B18552504F44A57448 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* ___0_killer, Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* ___1_victim, bool ___2_headshot, String_t* ___3_hazard, String_t* ___4_weaponId, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13437,7 +13546,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_KillFeed_mFAE7ECEBC46340415B8AC5B185
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* G_B37_4 = NULL;
 	String_t* G_B54_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:951>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1013>
 		String_t* L_0 = ___3_hazard;
 		if (L_0)
 		{
@@ -13492,7 +13601,7 @@ IL_0026:
 IL_0037:
 	{
 		V_1 = G_B6_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:952>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1014>
 		bool L_10 = ___2_headshot;
 		if (!L_10)
 		{
@@ -13519,7 +13628,7 @@ IL_004d:
 IL_004e:
 	{
 		V_2 = (bool)G_B9_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:953>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1015>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_14;
 		L_14 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		String_t* L_15 = ___4_weaponId;
@@ -13527,7 +13636,7 @@ IL_004e:
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_16;
 		L_16 = Z47Refs_KillIcon_mE92580931B16ECB25A49C239247484509028944D(L_14, L_15, NULL);
 		V_3 = L_16;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:954>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1016>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_17 = __this->___feed;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_18;
 		memset((&L_18), 0, sizeof(L_18));
@@ -13547,11 +13656,11 @@ IL_004e:
 		L_23 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_17, _stringLiteral37A50091974FE11FAC57C870272F76245820AA18, L_18, L_19, L_20, L_21, L_22, (bool)0, NULL);
 		(&V_0)->___bg = L_23;
 		Il2CppCodeGenWriteBarrier((void**)(&(&V_0)->___bg), (void*)L_23);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:955>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1017>
 		(&V_0)->___x = (12.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:965>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1027>
 		V_4 = (Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62*)NULL;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:966>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1028>
 		String_t* L_24 = V_1;
 		bool L_25;
 		L_25 = String_op_Inequality_m8C940F3CFC42866709D7CA931B3D77B4BE94BCB6(L_24, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, NULL);
@@ -13561,7 +13670,7 @@ IL_004e:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:966>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1028>
 		String_t* L_26 = V_1;
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_27;
@@ -13571,7 +13680,7 @@ IL_004e:
 
 IL_00e5:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:967>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1029>
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_28 = V_3;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_29;
@@ -13582,9 +13691,9 @@ IL_00e5:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:969>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1031>
 		V_6 = (20.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:969>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1031>
 		float L_30 = V_6;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_31 = V_3;
 		NullCheck(L_31);
@@ -13597,7 +13706,7 @@ IL_00e5:
 		int32_t L_35;
 		L_35 = Mathf_Max_m7FA442918DE37E3A00106D1F2E789D65829792B8_inline(1, L_34, NULL);
 		V_7 = ((float)(((float)il2cpp_codegen_multiply(L_30, ((float)L_32)))/((float)L_35)));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:970>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1032>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_36 = V_0;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_37 = L_36.___bg;
 		NullCheck(L_37);
@@ -13618,14 +13727,14 @@ IL_00e5:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_44), L_42, L_43, NULL);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_45;
 		L_45 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_38, _stringLiteralAEAE695721470A925F8F9D0E589B6D2018587626, L_39, L_40, L_41, L_44, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:971>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_46 = L_45;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_47;
 		memset((&L_47), 0, sizeof(L_47));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_47), (0.0f), (0.5f), NULL);
 		NullCheck(L_46);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_46, L_47, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:971>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_48 = L_46;
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_49 = V_0;
 		float L_50 = L_49.___x;
@@ -13634,29 +13743,29 @@ IL_00e5:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_51), L_50, (0.0f), NULL);
 		NullCheck(L_48);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_48, L_51, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:972>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
 		NullCheck(L_48);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_52;
 		L_52 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_48, NULL);
 		NullCheck(L_52);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_53;
 		L_53 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_52, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:972>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_54 = L_53;
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_55 = V_3;
 		NullCheck(L_54);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_54, L_55, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:972>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_56 = L_54;
 		NullCheck(L_56);
 		VirtualActionInvoker1< bool >::Invoke(25, L_56, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:972>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_57;
 		memset((&L_57), 0, sizeof(L_57));
 		Color__ctor_mCD6889CDE39F18704CD6EA8E2EFBFA48BA3E13B0_inline((&L_57), (0.920000017f), (0.899999976f), (0.839999974f), NULL);
 		NullCheck(L_56);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_56, L_57);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:973>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1035>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_58 = V_0;
 		float L_59 = L_58.___x;
 		float L_60 = V_7;
@@ -13666,7 +13775,7 @@ IL_00e5:
 
 IL_01c7:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:975>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1037>
 		String_t* L_61 = V_1;
 		bool L_62;
 		L_62 = String_op_Inequality_m8C940F3CFC42866709D7CA931B3D77B4BE94BCB6(L_61, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, NULL);
@@ -13676,7 +13785,7 @@ IL_01c7:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:975>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1037>
 		il2cpp_codegen_runtime_class_init_inline(HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D_il2cpp_TypeInfo_var);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_63;
 		L_63 = HUD_U3CKillFeedU3Eg__PartU7C132_0_mA4A33ADFF429CD12DE9F798568E15009BA5D232E(_stringLiteralAE75504E13427349F01E840F8094EB1E73B2EB28, (&V_0), NULL);
@@ -13684,7 +13793,7 @@ IL_01c7:
 
 IL_01e1:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:976>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1038>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_64 = ___1_victim;
 		String_t* L_65;
 		L_65 = HUD_Colored_mD6F729D13B0DBBF948767987770644262C3F460A(__this, L_64, NULL);
@@ -13732,7 +13841,7 @@ IL_020e:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_71;
 		L_71 = HUD_U3CKillFeedU3Eg__PartU7C132_0_mA4A33ADFF429CD12DE9F798568E15009BA5D232E(L_70, (&V_0), NULL);
 		V_5 = L_71;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:977>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1039>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_72 = V_4;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_73;
@@ -13743,14 +13852,14 @@ IL_020e:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:977>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1039>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_74 = V_5;
 		V_4 = L_74;
 	}
 
 IL_022a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:978>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1040>
 		bool L_75 = V_2;
 		if (!L_75)
 		{
@@ -13758,7 +13867,7 @@ IL_022a:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:980>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1042>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_76 = V_0;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_77 = L_76.___bg;
 		NullCheck(L_77);
@@ -13777,14 +13886,14 @@ IL_022a:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_82), (22.0f), (22.0f), NULL);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_83;
 		L_83 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_78, _stringLiteralC36BFBECC43E4487848E9F8BF2C6C72BE9CAD64B, L_79, L_80, L_81, L_82, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:981>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1043>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_84 = L_83;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_85;
 		memset((&L_85), 0, sizeof(L_85));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_85), (0.0f), (0.5f), NULL);
 		NullCheck(L_84);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_84, L_85, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:981>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1043>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_86 = L_84;
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_87 = V_0;
 		float L_88 = L_87.___x;
@@ -13793,14 +13902,14 @@ IL_022a:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_89), ((float)il2cpp_codegen_subtract(L_88, (2.0f))), (0.0f), NULL);
 		NullCheck(L_86);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_86, L_89, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:982>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1044>
 		NullCheck(L_86);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_90;
 		L_90 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_86, NULL);
 		NullCheck(L_90);
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_91;
 		L_91 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_90, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:982>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1044>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_92 = L_91;
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_93;
 		L_93 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
@@ -13808,16 +13917,16 @@ IL_022a:
 		Texture2D_tE6505BC111DD8A424A9DBE8E05D7D09E11FFFCF4* L_94 = L_93->___icHeadshot;
 		NullCheck(L_92);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_92, L_94, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:982>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1044>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_95 = L_92;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_96 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		NullCheck(L_95);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_95, L_96);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:982>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1044>
 		NullCheck(L_95);
 		VirtualActionInvoker1< bool >::Invoke(25, L_95, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:983>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1045>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_97 = V_0;
 		float L_98 = L_97.___x;
 		(&V_0)->___x = ((float)il2cpp_codegen_add(L_98, (26.0f)));
@@ -13825,7 +13934,7 @@ IL_022a:
 
 IL_02e6:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:985>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1047>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_99 = V_0;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_100 = L_99.___bg;
 		NullCheck(L_100);
@@ -13840,7 +13949,7 @@ IL_02e6:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_105), L_104, (30.0f), NULL);
 		NullCheck(L_101);
 		RectTransform_set_sizeDelta_mC9A980EA6036E6725EF24CEDF3EE80A9B2B50EE5(L_101, L_105, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:986>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1048>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042 L_106 = V_0;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_107 = L_106.___bg;
 		NullCheck(L_107);
@@ -13848,7 +13957,7 @@ IL_02e6:
 		L_108 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_107, NULL);
 		NullCheck(L_108);
 		Transform_SetAsFirstSibling_mBE0D0E76099F829466DC2FBD71ACFCF3C8EC03BD(L_108, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:987>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1049>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_109 = __this->___feedItems;
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_110 = V_4;
 		float L_111;
@@ -13858,7 +13967,7 @@ IL_02e6:
 		ValueTuple_2__ctor_mBB61E1214E45966A3CA33488C602FD80B09AC0BB((&L_112), L_110, L_111, ValueTuple_2__ctor_mBB61E1214E45966A3CA33488C602FD80B09AC0BB_RuntimeMethod_var);
 		NullCheck(L_109);
 		List_1_Add_mE48B9005E76648F924F99B951302E26ABD26CA0D_inline(L_109, L_112, List_1_Add_mE48B9005E76648F924F99B951302E26ABD26CA0D_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:988>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1050>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_113 = __this->___feedItems;
 		NullCheck(L_113);
 		int32_t L_114;
@@ -13869,7 +13978,7 @@ IL_02e6:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:988>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1050>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_115 = __this->___feedItems;
 		NullCheck(L_115);
 		ValueTuple_2_tB8B25C09B1AE13ACBF5A55C93A4F6D23C91E95F4 L_116;
@@ -13886,7 +13995,7 @@ IL_02e6:
 		L_120 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_119, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		Object_Destroy_mE97D0A766419A81296E8D4E5C23D01D3FE91ACBB(L_120, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:988>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1050>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_121 = __this->___feedItems;
 		NullCheck(L_121);
 		List_1_RemoveAt_mD32DF6F59A4A64D31A494A32AEF9C73DFC876421(L_121, 0, List_1_RemoveAt_mD32DF6F59A4A64D31A494A32AEF9C73DFC876421_RuntimeMethod_var);
@@ -13894,7 +14003,7 @@ IL_02e6:
 
 IL_037c:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:989>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1051>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_122 = ___0_killer;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_123;
@@ -13925,11 +14034,11 @@ IL_037c:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:991>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1053>
 		bool L_129;
 		L_129 = Settings_get_Turkish_m7CE82C90345078D1558503FEA1B8AEFAE460B511(NULL);
 		V_8 = L_129;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:992>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1054>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_130 = __this->___killText;
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_131 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)6);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_132 = L_131;
@@ -14067,9 +14176,9 @@ IL_040b:
 		L_146 = String_Concat_m647EBF831F54B6DF7D5AFA5FD012CF4EE7571B6A(L_145, NULL);
 		NullCheck(G_B37_4);
 		VirtualActionInvoker1< String_t* >::Invoke(75, G_B37_4, L_146);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:993>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1055>
 		__this->___killT = (2.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:993>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1055>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_147 = __this->___killText;
 		NullCheck(L_147);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_148;
@@ -14080,7 +14189,7 @@ IL_040b:
 		L_150 = Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline(L_149, (1.25f), NULL);
 		NullCheck(L_148);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_148, L_150, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:994>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1056>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_151 = ___0_killer;
 		NullCheck(L_151);
 		int32_t L_152 = L_151->___streak;
@@ -14199,7 +14308,7 @@ IL_04b9:
 IL_04be:
 	{
 		V_9 = G_B54_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:995>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1057>
 		String_t* L_163 = V_9;
 		if (!L_163)
 		{
@@ -14207,18 +14316,18 @@ IL_04be:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:995>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1057>
 		String_t* L_164 = V_9;
 		HUD_ShowToastBig_mEC271B818041651D57769C4255A1DA4E3F8C95BE(__this, L_164, NULL);
 	}
 
 IL_04cc:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:997>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1059>
 		return;
 	}
 }
-// Method Definition Index: 89041
+// Method Definition Index: 89057
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* HUD_Colored_mD6F729D13B0DBBF948767987770644262C3F460A (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* ___0_a, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14236,7 +14345,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* HUD_Colored_mD6F729D13B0DBBF9487679
 	String_t* V_0 = NULL;
 	String_t* G_B5_0 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1001>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1063>
 		Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_0 = ___0_a;
 		NullCheck(L_0);
 		bool L_1 = L_0->___isPlayer;
@@ -14273,7 +14382,7 @@ IL_001e:
 IL_0023:
 	{
 		V_0 = G_B5_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1002>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1064>
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_4 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)5);
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_5 = L_4;
 		NullCheck(L_5);
@@ -14299,7 +14408,7 @@ IL_0023:
 		return L_13;
 	}
 }
-// Method Definition Index: 89042
+// Method Definition Index: 89058
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* HUD_ScoreBlock_m4CF75CDE176F1FEA169865E069BF2896487485A0 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* ___0_parent, bool ___1_ally, Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** ___2_bar, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14500,7 +14609,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 	int32_t G_B33_0 = 0;
 	RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* G_B33_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1007>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1069>
 		bool L_0 = ___1_ally;
 		if (L_0)
 		{
@@ -14524,7 +14633,7 @@ IL_000a:
 IL_000f:
 	{
 		V_0 = G_B3_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1008>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1070>
 		bool L_3 = ___1_ally;
 		if (L_3)
 		{
@@ -14544,7 +14653,7 @@ IL_001a:
 IL_001f:
 	{
 		V_1 = ((float)G_B6_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1009>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1071>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_4 = ___0_parent;
 		bool L_5 = ___1_ally;
 		if (L_5)
@@ -14586,7 +14695,7 @@ IL_0031:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_11), (230.0f), (70.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_12;
 		L_12 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(G_B9_1, G_B9_0, L_6, L_7, L_8, L_10, L_11, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1010>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1072>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_13 = L_12;
 		NullCheck(L_13);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_14;
@@ -14677,8 +14786,8 @@ IL_00ad:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_21), (5.0f), (0.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_22;
 		L_22 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(G_B15_4, G_B15_3, G_B15_2, G_B15_1, L_19, L_20, L_21, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1011>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1012>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1073>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1074>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_23 = G_B15_5;
 		NullCheck(L_23);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_24;
@@ -14833,8 +14942,8 @@ IL_012a:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_39), (-32.0f), (-18.0f), NULL);
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_40;
 		L_40 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B24_8, G_B24_7, G_B24_6, G_B24_5, G_B24_4, G_B24_3, G_B24_2, G_B24_1, L_38, L_39, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1013>
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1014>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1075>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1076>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_41 = G_B24_9;
 		NullCheck(L_41);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_42;
@@ -14950,7 +15059,7 @@ IL_017c:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_50;
 		L_50 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(G_B30_8, G_B30_7, G_B30_6, G_B30_5, G_B30_4, G_B30_3, G_B30_2, G_B30_1, L_48, L_49, (bool)1, NULL);
 		V_2 = L_50;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1015>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1077>
 		NullCheck(G_B30_9);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_51;
 		L_51 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(G_B30_9, NULL);
@@ -14972,7 +15081,7 @@ IL_017c:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_57;
 		L_57 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_51, _stringLiteral09FD22DA3CEFEACE96CB263E19361486F432DB29, L_52, L_53, L_54, L_55, L_56, (bool)0, NULL);
 		V_3 = L_57;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1016>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1078>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** L_58 = ___2_bar;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_59 = V_3;
 		NullCheck(L_59);
@@ -14991,7 +15100,7 @@ IL_017c:
 		L_66 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_60, _stringLiteral77245E58ABE221933150205A4FF5E6F21ACECC77, L_61, L_62, L_63, L_64, L_65, (bool)0, NULL);
 		*((Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)L_58) = (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E*)L_66;
 		Il2CppCodeGenWriteBarrier((void**)(Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)L_58, (void*)(Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E*)L_66);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1017>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1079>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** L_67 = ___2_bar;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_68 = *((Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)L_67);
 		NullCheck(L_68);
@@ -15024,7 +15133,7 @@ IL_0239:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_71), ((float)G_B33_0), (0.5f), NULL);
 		NullCheck(G_B33_1);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(G_B33_1, L_71, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1018>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1080>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E** L_72 = ___2_bar;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_73 = *((Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E**)L_72);
 		NullCheck(L_73);
@@ -15035,12 +15144,12 @@ IL_0239:
 		Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline((&L_75), (0.0f), (1.0f), (1.0f), NULL);
 		NullCheck(L_74);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_74, L_75, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1019>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1081>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_76 = V_2;
 		return L_76;
 	}
 }
-// Method Definition Index: 89043
+// Method Definition Index: 89059
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToastBig_mEC271B818041651D57769C4255A1DA4E3F8C95BE (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, String_t* ___0_s, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15050,7 +15159,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToastBig_mEC271B818041651D57769C
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1024>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1086>
 		String_t* L_0 = ___0_s;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_1 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
@@ -15058,7 +15167,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToastBig_mEC271B818041651D57769C
 		return;
 	}
 }
-// Method Definition Index: 89044
+// Method Definition Index: 89060
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Flash_m7CAE86780E8DF25303FA976428FC246232050F5C (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, float ___0_amount, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15070,7 +15179,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Flash_m7CAE86780E8DF25303FA976428FC2
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1029>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1091>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_0 = __this->___flashImg;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -15081,7 +15190,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Flash_m7CAE86780E8DF25303FA976428FC2
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1029>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1091>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_2 = __this->___full;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_3;
 		memset((&L_3), 0, sizeof(L_3));
@@ -15098,7 +15207,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Flash_m7CAE86780E8DF25303FA976428FC2
 		L_8 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_2, _stringLiteralF384C9DBDDE6A686F8989C4F4D134390385A46DB, L_3, L_4, L_5, L_6, L_7, (bool)0, NULL);
 		__this->___flashImg = L_8;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___flashImg), (void*)L_8);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1029>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1091>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_9 = __this->___flashImg;
 		NullCheck(L_9);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_10;
@@ -15113,7 +15222,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Flash_m7CAE86780E8DF25303FA976428FC2
 
 IL_0068:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1030>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1092>
 		float L_12 = __this->___flashA;
 		float L_13 = ___0_amount;
 		float L_14;
@@ -15121,18 +15230,18 @@ IL_0068:
 		float L_15;
 		L_15 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline(L_12, ((float)il2cpp_codegen_multiply(L_14, (0.850000024f))), NULL);
 		__this->___flashA = L_15;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1031>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1093>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_16 = __this->___flashImg;
 		NullCheck(L_16);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_17;
 		L_17 = Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371(L_16, NULL);
 		NullCheck(L_17);
 		Transform_SetAsLastSibling_m848AF1A0B4C7912FE88D8CBCF92B83D57B2B917E(L_17, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1032>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1094>
 		return;
 	}
 }
-// Method Definition Index: 89045
+// Method Definition Index: 89061
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TickFlash_m742DA5CD028BEF8B5CE0731D2AF4C0FC368508EE (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15142,7 +15251,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TickFlash_m742DA5CD028BEF8B5CE0731D2
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1095>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_0 = __this->___flashImg;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -15153,20 +15262,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_TickFlash_m742DA5CD028BEF8B5CE0731D2
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1095>
 		return;
 	}
 
 IL_000f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1095>
 		float L_2 = __this->___flashA;
 		float L_3;
 		L_3 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		float L_4;
 		L_4 = Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline(L_2, (0.0f), ((float)il2cpp_codegen_multiply(L_3, (1.39999998f))), NULL);
 		__this->___flashA = L_4;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1095>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_5 = __this->___flashImg;
 		float L_6 = __this->___flashA;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_7;
@@ -15174,26 +15283,26 @@ IL_000f:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_7), (1.0f), (0.970000029f), (0.899999976f), L_6, NULL);
 		NullCheck(L_5);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_5, L_7);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1033>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1095>
 		return;
 	}
 }
-// Method Definition Index: 89046
+// Method Definition Index: 89062
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToastBig_mCF58FA2429DBEFB435E269863FDC63B5011FF6A4 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, String_t* ___0_s, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_c, float ___2_dur, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1096>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_0 = __this->___bigText;
 		String_t* L_1 = ___0_s;
 		NullCheck(L_0);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_0, L_1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1096>
 		float L_2 = ___2_dur;
 		__this->___bigT = L_2;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1096>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_3 = ___1_c;
 		__this->___bigCol = L_3;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1096>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_4 = __this->___bigText;
 		NullCheck(L_4);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_5;
@@ -15204,19 +15313,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToastBig_mCF58FA2429DBEFB435E269
 		L_7 = Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline(L_6, (1.39999998f), NULL);
 		NullCheck(L_5);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_5, L_7, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1034>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1096>
 		return;
 	}
 }
-// Method Definition Index: 89047
+// Method Definition Index: 89063
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float HUD_get_Px_m285AE835DD8C7547A33DD03E110AC68C959BA332 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1041>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1103>
 		return (2.33333325f);
 	}
 }
-// Method Definition Index: 89048
+// Method Definition Index: 89064
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74B98DE42951507688 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15241,7 +15350,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* V_0 = NULL;
 	int32_t V_1 = 0;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1044>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1106>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_1;
 		memset((&L_1), 0, sizeof(L_1));
@@ -15261,14 +15370,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_6;
 		L_6 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_0, _stringLiteralD4E46656524F7CDD0F205FE8339944ABA103C642, L_1, L_2, L_3, L_4, L_5, (bool)0, NULL);
 		V_0 = L_6;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1045>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1107>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_7 = V_0;
 		NullCheck(L_7);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_8;
 		L_8 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_7, NULL);
 		__this->___radar = L_8;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___radar), (void*)L_8);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1046>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1108>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_9 = V_0;
 		NullCheck(L_9);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_10;
@@ -15276,7 +15385,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 		NullCheck(L_10);
 		RectMask2D_tACF92BE999C791A665BD1ADEABF5BCEB82846670* L_11;
 		L_11 = GameObject_AddComponent_TisRectMask2D_tACF92BE999C791A665BD1ADEABF5BCEB82846670_m13A9D8AFFFA3B7A823E98A8E1A39F51DF1B8ED4F(L_10, GameObject_AddComponent_TisRectMask2D_tACF92BE999C791A665BD1ADEABF5BCEB82846670_m13A9D8AFFFA3B7A823E98A8E1A39F51DF1B8ED4F_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1047>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1109>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_12 = __this->___radar;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_13;
 		memset((&L_13), 0, sizeof(L_13));
@@ -15292,14 +15401,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 		L_17 = UIK_Rect_mF5CC096AFCA3EE26414FF5D7AFEB625478DB2318(L_12, _stringLiteral46F263F0CF6446F563A587505D483CA2DAF3B89A, L_13, L_14, L_15, L_16, NULL);
 		__this->___radarRot = L_17;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___radarRot), (void*)L_17);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1048>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1110>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_18 = __this->___radarRot;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_19;
 		memset((&L_19), 0, sizeof(L_19));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_19), (0.5f), (0.5f), NULL);
 		NullCheck(L_18);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_18, L_19, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1049>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1111>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_20 = __this->___radarRot;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_21;
 		memset((&L_21), 0, sizeof(L_21));
@@ -15321,7 +15430,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 		L_27 = GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43(L_26, GameObject_AddComponent_TisRawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179_mF832D1CFB763BE172F50826618A3D458EE451B43_RuntimeMethod_var);
 		__this->___mapImg = L_27;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___mapImg), (void*)L_27);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1050>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1112>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_28 = __this->___mapImg;
 		NullCheck(L_28);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_29;
@@ -15331,25 +15440,25 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildRadar_mC4F66711347C712B59139A74
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_30), (0.5f), (0.5f), NULL);
 		NullCheck(L_29);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_29, L_30, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1051>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1113>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_31 = __this->___mapImg;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_32;
 		memset((&L_32), 0, sizeof(L_32));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_32), (0.920000017f), (0.899999976f), (0.860000014f), (0.949999988f), NULL);
 		NullCheck(L_31);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_31, L_32);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1051>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1113>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_33 = __this->___mapImg;
 		NullCheck(L_33);
 		VirtualActionInvoker1< bool >::Invoke(25, L_33, (bool)0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		V_1 = 0;
 		goto IL_01fc;
 	}
 
 IL_0175:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_34 = __this->___dots;
 		int32_t L_35 = V_1;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_36 = __this->___radarRot;
@@ -15371,7 +15480,7 @@ IL_0175:
 		NullCheck(L_34);
 		ArrayElementTypeCheck (L_34, L_42);
 		(L_34)->SetAt(static_cast<il2cpp_array_size_t>(L_35), (Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E*)L_42);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_43 = __this->___dots;
 		int32_t L_44 = V_1;
 		NullCheck(L_43);
@@ -15381,7 +15490,7 @@ IL_0175:
 		L_47 = Gfx_get_Circle_m21EC3B8C18631B2E0AE34B08944D47A07AB26BEF(NULL);
 		NullCheck(L_46);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_46, L_47, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_48 = __this->___dots;
 		int32_t L_49 = V_1;
 		NullCheck(L_48);
@@ -15395,14 +15504,14 @@ IL_0175:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_53), (0.5f), (0.5f), NULL);
 		NullCheck(L_52);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_52, L_53, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		int32_t L_54 = V_1;
 		V_1 = ((int32_t)il2cpp_codegen_add(L_54, 1));
 	}
 
 IL_01fc:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1052>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
 		int32_t L_55 = V_1;
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_56 = __this->___dots;
 		NullCheck(L_56);
@@ -15412,7 +15521,7 @@ IL_01fc:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1053>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1115>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_57 = __this->___radar;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_58;
 		memset((&L_58), 0, sizeof(L_58));
@@ -15427,20 +15536,20 @@ IL_01fc:
 		L_62 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_63;
 		L_63 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_57, _stringLiteralD1AB6616BF9578984C009BCD6A188E983662EB37, L_58, L_59, L_60, L_61, L_62, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1054>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1116>
 		NullCheck(L_63);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_64;
 		L_64 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_63, NULL);
 		NullCheck(L_64);
 		Outline_t9CF146E077DC65F441EDEC463AA6710374108084* L_65;
 		L_65 = GameObject_AddComponent_TisOutline_t9CF146E077DC65F441EDEC463AA6710374108084_m8F6D80A0E755F0ADB855EB195B2DC0A5C82457E4(L_64, GameObject_AddComponent_TisOutline_t9CF146E077DC65F441EDEC463AA6710374108084_m8F6D80A0E755F0ADB855EB195B2DC0A5C82457E4_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1054>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1116>
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_66;
 		memset((&L_66), 0, sizeof(L_66));
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_66), (1.0f), (1.0f), (1.0f), (0.25f), NULL);
 		NullCheck(L_65);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_65, L_66, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1056>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1118>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_67 = __this->___radar;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_68;
 		memset((&L_68), 0, sizeof(L_68));
@@ -15458,7 +15567,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_72), (0.0f), (2.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_73;
 		L_73 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_67, _stringLiteralC84D0C8E7AEF586F233453AAC3F4DC1C3596F65F, L_68, L_69, L_70, L_71, L_72, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1057>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1119>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_74 = __this->___radar;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_75;
 		memset((&L_75), 0, sizeof(L_75));
@@ -15476,7 +15585,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_79), (0.0f), (2.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_80;
 		L_80 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_74, _stringLiteral9F1948EB8BB2F6B8E9FB863DEF0C1B4178B4C8EC, L_75, L_76, L_77, L_78, L_79, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1058>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1120>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_81 = __this->___radar;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_82;
 		memset((&L_82), 0, sizeof(L_82));
@@ -15494,7 +15603,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_86), (2.0f), (0.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_87;
 		L_87 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_81, _stringLiteralF5105E79F1BE893F2F34A4B0DFF6A854D056344A, L_82, L_83, L_84, L_85, L_86, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1059>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1121>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_88 = __this->___radar;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_89;
 		memset((&L_89), 0, sizeof(L_89));
@@ -15512,7 +15621,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_93), (2.0f), (0.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_94;
 		L_94 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_88, _stringLiteral4979435BC414A38C6A847CE4F6602518D9E784DC, L_89, L_90, L_91, L_92, L_93, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1060>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1122>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_95 = __this->___radar;
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_96 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
@@ -15529,7 +15638,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_100), (18.0f), (18.0f), NULL);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_101;
 		L_101 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_95, _stringLiteral5D0B7A1BC952F7F3CBB1B00E89E84090A2286942, L_96, L_97, L_98, L_99, L_100, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1061>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1123>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_102 = L_101;
 		NullCheck(L_102);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_103;
@@ -15539,7 +15648,7 @@ IL_01fc:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_104), (0.5f), (0.5f), NULL);
 		NullCheck(L_103);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_103, L_104, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1061>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1123>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_105 = L_102;
 		NullCheck(L_105);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_106;
@@ -15548,13 +15657,13 @@ IL_01fc:
 		L_107 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_106);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_106, L_107, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1062>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1124>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_108 = L_105;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_109;
 		L_109 = Gfx_get_Arrow_mFFBA18E0B4B596709E67B9B1D011CE9CB5FD353C(NULL);
 		NullCheck(L_108);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_108, L_109, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1063>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1125>
 		NullCheck(L_108);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_110;
 		L_110 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_108, NULL);
@@ -15566,11 +15675,11 @@ IL_01fc:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_112), (0.0f), (0.0f), (0.0f), (0.600000024f), NULL);
 		NullCheck(L_111);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_111, L_112, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1064>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1126>
 		return;
 	}
 }
-// Method Definition Index: 89049
+// Method Definition Index: 89065
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateRadar_m106D35C56D1EF504CF9FA787FF71FB94DBD5FB26 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_p, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15621,7 +15730,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateRadar_m106D35C56D1EF504CF9FA78
 	memset((&G_B21_1), 0, sizeof(G_B21_1));
 	RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* G_B21_2 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1068>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1130>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_0 = __this->___mapImg;
 		NullCheck(L_0);
 		Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700* L_1;
@@ -15647,14 +15756,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateRadar_m106D35C56D1EF504CF9FA78
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1070>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1132>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_6 = __this->___mapImg;
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_7 = __this->___mm;
 		NullCheck(L_7);
 		RenderTexture_tBA90C4C3AD9EECCFDDCC632D97C29FAB80D60D27* L_8 = L_7->___mapTex;
 		NullCheck(L_6);
 		RawImage_set_texture_mC016318C95CC17A826D57DD219DBCB6DFD295C02(L_6, L_8, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1071>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1133>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_9 = __this->___mapImg;
 		NullCheck(L_9);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_10;
@@ -15678,7 +15787,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateRadar_m106D35C56D1EF504CF9FA78
 
 IL_0076:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1073>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1135>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_18 = ___0_p;
 		NullCheck(L_18);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_19 = L_18->___cam;
@@ -15690,14 +15799,14 @@ IL_0076:
 		L_21 = Transform_get_eulerAngles_mCAAF48EFCF628F1ED91C2FFE75A4FD19C039DD6A(L_20, NULL);
 		float L_22 = L_21.___y;
 		V_0 = L_22;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1074>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1136>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_23 = __this->___radarRot;
 		float L_24 = V_0;
 		Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 L_25;
 		L_25 = Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline((0.0f), (0.0f), L_24, NULL);
 		NullCheck(L_23);
 		Transform_set_localRotation_mAB4A011D134BA58AB780BECC0025CA65F16185FA(L_23, L_25, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1075>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1137>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_26 = ___0_p;
 		NullCheck(L_26);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_27;
@@ -15706,7 +15815,7 @@ IL_0076:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_28;
 		L_28 = Transform_get_position_m69CD5FA214FDAE7BB701552943674846C220FDE1(L_27, NULL);
 		V_1 = L_28;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1076>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1138>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_29 = __this->___mapImg;
 		NullCheck(L_29);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_30;
@@ -15732,9 +15841,9 @@ IL_0076:
 		L_43 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_41, L_42, NULL);
 		NullCheck(L_30);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_30, L_43, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1077>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1139>
 		V_2 = 0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1078>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1140>
 		il2cpp_codegen_runtime_class_init_inline(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var);
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_44 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_StaticFields*)il2cpp_codegen_static_fields_for(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var))->___All;
 		NullCheck(L_44);
@@ -15760,11 +15869,11 @@ FINALLY_028c:
 
 IL_0113_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1078>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1140>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_46;
 				L_46 = Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_inline((&V_3), Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_RuntimeMethod_var);
 				V_4 = L_46;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1080>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1142>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_47 = V_4;
 				PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_48 = ___0_p;
 				il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -15795,7 +15904,7 @@ IL_0113_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1081>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1143>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_54 = V_4;
 				NullCheck(L_54);
 				int32_t L_55 = L_54->___team;
@@ -15803,12 +15912,12 @@ IL_0113_1:
 				NullCheck(L_56);
 				int32_t L_57 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017*)L_56)->___team;
 				V_5 = (bool)((((int32_t)L_55) == ((int32_t)L_57))? 1 : 0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1082>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1144>
 				float L_58;
 				L_58 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 				float L_59 = __this->___RadarUntil;
 				V_6 = (bool)((((float)L_58) < ((float)L_59))? 1 : 0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1083>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1145>
 				bool L_60 = V_5;
 				if (L_60)
 				{
@@ -15836,7 +15945,7 @@ IL_0113_1:
 
 IL_0182_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1084>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1146>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_65 = V_4;
 				NullCheck(L_65);
 				Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_66;
@@ -15848,7 +15957,7 @@ IL_0182_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_69;
 				L_69 = Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline(L_67, L_68, NULL);
 				V_7 = L_69;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1085>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1147>
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_70 = V_7;
 				float L_71 = L_70.___x;
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_72 = V_7;
@@ -15865,7 +15974,7 @@ IL_0182_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1086>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1148>
 				ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_76 = __this->___dots;
 				int32_t L_77 = V_2;
 				int32_t L_78 = L_77;
@@ -15873,11 +15982,11 @@ IL_0182_1:
 				NullCheck(L_76);
 				int32_t L_79 = L_78;
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_80 = (L_76)->GetAt(static_cast<il2cpp_array_size_t>(L_79));
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1087>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1149>
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_81 = L_80;
 				NullCheck(L_81);
 				Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_81, (bool)1, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1088>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1150>
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_82 = L_81;
 				NullCheck(L_82);
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_83;
@@ -15895,7 +16004,7 @@ IL_0182_1:
 				L_90 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_88, L_89, NULL);
 				NullCheck(L_83);
 				RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_83, L_90, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1089>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1151>
 				bool L_91 = V_5;
 				bool L_92 = V_6;
 				if (((int32_t)((int32_t)L_91|(int32_t)L_92)))
@@ -15927,7 +16036,7 @@ IL_021f_1:
 IL_0224_1:
 			{
 				V_8 = G_B15_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1090>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1152>
 				bool L_97 = V_5;
 				if (L_97)
 				{
@@ -15955,7 +16064,7 @@ IL_0231_1:
 IL_0236_1:
 			{
 				V_9 = G_B18_0;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1090>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1152>
 				Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_100 = G_B18_1;
 				Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_101 = V_9;
 				float L_102 = L_101.___r;
@@ -15969,7 +16078,7 @@ IL_0236_1:
 				Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_108), L_102, L_104, L_106, L_107, NULL);
 				NullCheck(L_100);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_100, L_108);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1091>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1153>
 				NullCheck(L_100);
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_109;
 				L_109 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_100, NULL);
@@ -16009,7 +16118,7 @@ IL_0274_1:
 
 IL_027e_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1078>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1140>
 				bool L_113;
 				L_113 = Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16((&V_3), Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16_RuntimeMethod_var);
 				if (L_113)
@@ -16029,7 +16138,7 @@ IL_027e_1:
 
 IL_029a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1093>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1155>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_114 = __this->___dots;
 		int32_t L_115 = V_2;
 		NullCheck(L_114);
@@ -16037,14 +16146,14 @@ IL_029a:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_117 = (L_114)->GetAt(static_cast<il2cpp_array_size_t>(L_116));
 		NullCheck(L_117);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_117, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1093>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1155>
 		int32_t L_118 = V_2;
 		V_2 = ((int32_t)il2cpp_codegen_add(L_118, 1));
 	}
 
 IL_02ac:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1093>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1155>
 		int32_t L_119 = V_2;
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_120 = __this->___dots;
 		NullCheck(L_120);
@@ -16054,11 +16163,11 @@ IL_02ac:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1094>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1156>
 		return;
 	}
 }
-// Method Definition Index: 89050
+// Method Definition Index: 89066
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildIndicators_m0426108762DCF78D37B32DE4A644C9CBA9D2002D (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16071,14 +16180,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildIndicators_m0426108762DCF78D37B
 	int32_t V_0 = 0;
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* V_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1101>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
 		V_0 = 0;
 		goto IL_00ac;
 	}
 
 IL_0007:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1103>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1165>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_0 = __this->___root;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_1;
 		memset((&L_1), 0, sizeof(L_1));
@@ -16097,13 +16206,13 @@ IL_0007:
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_6;
 		L_6 = UIK_Img_mD3EA1C793EC434176313525DA2B362D2A017519E(L_0, _stringLiteral70FDC71A8E186EC34EE3AC5E44591F5856781B38, L_1, L_2, L_3, L_4, L_5, (bool)0, NULL);
 		V_1 = L_6;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1104>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1166>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_7 = V_1;
 		Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99* L_8;
 		L_8 = Gfx_get_DmgTri_m202A5EF1185E7A490F75125489205E71C7E629F0(NULL);
 		NullCheck(L_7);
 		Image_set_sprite_mC0C248340BA27AAEE56855A3FAFA0D8CA12956DE(L_7, L_8, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1104>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1166>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_9 = V_1;
 		NullCheck(L_9);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_10;
@@ -16113,7 +16222,7 @@ IL_0007:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_11), (0.5f), (0.5f), NULL);
 		NullCheck(L_10);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_10, L_11, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1105>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1167>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_12 = __this->___indicators;
 		int32_t L_13 = V_0;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_14 = (Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327*)il2cpp_codegen_object_new(Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327_il2cpp_TypeInfo_var);
@@ -16129,14 +16238,14 @@ IL_0007:
 		NullCheck(L_12);
 		ArrayElementTypeCheck (L_12, L_17);
 		(L_12)->SetAt(static_cast<il2cpp_array_size_t>(L_13), (Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327*)L_17);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1101>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
 		int32_t L_18 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_18, 1));
 	}
 
 IL_00ac:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1101>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
 		int32_t L_19 = V_0;
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_20 = __this->___indicators;
 		NullCheck(L_20);
@@ -16146,11 +16255,11 @@ IL_00ac:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1107>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1169>
 		return;
 	}
 }
-// Method Definition Index: 89051
+// Method Definition Index: 89067
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateIndicators_m16D16CDDC2934188D3F80B64450ADED27A30240D (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_p, const RuntimeMethod* method) 
 {
 	IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* V_0 = NULL;
@@ -16161,7 +16270,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateIndicators_m16D16CDDC2934188D3
 	float V_4 = 0.0f;
 	float V_5 = 0.0f;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1110>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1172>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_0 = __this->___indicators;
 		V_0 = L_0;
 		V_1 = 0;
@@ -16170,14 +16279,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateIndicators_m16D16CDDC2934188D3
 
 IL_000e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1110>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1172>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_1 = V_0;
 		int32_t L_2 = V_1;
 		NullCheck(L_1);
 		int32_t L_3 = L_2;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_4 = (L_1)->GetAt(static_cast<il2cpp_array_size_t>(L_3));
 		V_2 = L_4;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1112>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1174>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_5 = V_2;
 		NullCheck(L_5);
 		float L_6 = L_5->___t;
@@ -16187,19 +16296,19 @@ IL_000e:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1112>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1174>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_7 = V_2;
 		NullCheck(L_7);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_8 = L_7->___img;
 		NullCheck(L_8);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_8, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1112>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1174>
 		goto IL_017b;
 	}
 
 IL_0030:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1113>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1175>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_9 = V_2;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_10 = L_9;
 		NullCheck(L_10);
@@ -16208,13 +16317,13 @@ IL_0030:
 		L_12 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		NullCheck(L_10);
 		L_10->___t = ((float)il2cpp_codegen_subtract(L_11, L_12));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1114>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1176>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_13 = V_2;
 		NullCheck(L_13);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_14 = L_13->___img;
 		NullCheck(L_14);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_14, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1115>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1177>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_15 = V_2;
 		NullCheck(L_15);
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_16 = L_15->___from;
@@ -16230,7 +16339,7 @@ IL_0030:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_21;
 		L_21 = VecExt_Flat_mA706635287093E74241DE4D7525D8A3E096321A3(L_20, NULL);
 		V_3 = L_21;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1116>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1178>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_22 = ___0_p;
 		NullCheck(L_22);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_23 = L_22->___cam;
@@ -16242,14 +16351,14 @@ IL_0030:
 		L_25 = Transform_get_forward_mFCFACF7165FDAB21E80E384C494DF278386CEE2F(L_24, NULL);
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_26;
 		L_26 = VecExt_Flat_mA706635287093E74241DE4D7525D8A3E096321A3(L_25, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1117>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1179>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_27 = V_3;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_28;
 		L_28 = Vector3_get_up_m128AF3FDC820BF59D5DE86D973E7DE3F20C3AEBA_inline(NULL);
 		float L_29;
 		L_29 = Vector3_SignedAngle_m76C77F9D7BAF5969FA5B7500ED2D5FF9F9FA4153_inline(L_26, L_27, L_28, NULL);
 		V_4 = L_29;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1118>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1180>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_30 = V_2;
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_31 = V_2;
 		NullCheck(L_31);
@@ -16260,12 +16369,12 @@ IL_0030:
 		L_34 = Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline(L_32, (0.0f), ((float)il2cpp_codegen_multiply(L_33, (5.0f))), NULL);
 		NullCheck(L_30);
 		L_30->___pop = L_34;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1119>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1181>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_35 = V_2;
 		NullCheck(L_35);
 		float L_36 = L_35->___pop;
 		V_5 = ((float)il2cpp_codegen_add((165.0f), ((float)il2cpp_codegen_multiply(L_36, (18.0f)))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1120>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1182>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_37 = V_2;
 		NullCheck(L_37);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_38 = L_37->___img;
@@ -16286,7 +16395,7 @@ IL_0030:
 		L_46 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_44, L_45, NULL);
 		NullCheck(L_39);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_39, L_46, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1121>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1183>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_47 = V_2;
 		NullCheck(L_47);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_48 = L_47->___img;
@@ -16298,7 +16407,7 @@ IL_0030:
 		L_51 = Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline((0.0f), (0.0f), ((-L_50)), NULL);
 		NullCheck(L_49);
 		Transform_set_localRotation_mAB4A011D134BA58AB780BECC0025CA65F16185FA(L_49, L_51, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1122>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1184>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_52 = V_2;
 		NullCheck(L_52);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_53 = L_52->___img;
@@ -16314,7 +16423,7 @@ IL_0030:
 		L_58 = Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline(L_55, ((float)il2cpp_codegen_add((1.0f), ((float)il2cpp_codegen_multiply(L_57, (0.349999994f))))), NULL);
 		NullCheck(L_54);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_54, L_58, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1123>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1185>
 		Ind_t59CF2005040230AB5BF71CB2F9DC89791827F327* L_59 = V_2;
 		NullCheck(L_59);
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_60 = L_59->___img;
@@ -16338,7 +16447,7 @@ IL_017b:
 
 IL_017f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1110>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1172>
 		int32_t L_66 = V_1;
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_67 = V_0;
 		NullCheck(L_67);
@@ -16348,11 +16457,11 @@ IL_017f:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1125>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1187>
 		return;
 	}
 }
-// Method Definition Index: 89052
+// Method Definition Index: 89068
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildTags_m8662A5547CCEDD8DE604BE987C99876A5D19D342 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16366,14 +16475,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_BuildTags_m8662A5547CCEDD8DE604BE987
 	}
 	int32_t V_0 = 0;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1131>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1193>
 		V_0 = 0;
 		goto IL_0093;
 	}
 
 IL_0007:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1133>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1195>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_0 = __this->___tags;
 		int32_t L_1 = V_0;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_2 = __this->___full;
@@ -16395,7 +16504,7 @@ IL_0007:
 		NullCheck(L_0);
 		ArrayElementTypeCheck (L_0, L_8);
 		(L_0)->SetAt(static_cast<il2cpp_array_size_t>(L_1), (Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62*)L_8);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1134>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1196>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_9 = __this->___tags;
 		int32_t L_10 = V_0;
 		NullCheck(L_9);
@@ -16412,14 +16521,14 @@ IL_0007:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_15), (0.0f), (0.0f), (0.0f), (0.699999988f), NULL);
 		NullCheck(L_14);
 		Shadow_set_effectColor_mCCC5DB6B7D09C5DEE0C677DEB3B9B0C578F05AF1(L_14, L_15, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1131>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1193>
 		int32_t L_16 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_16, 1));
 	}
 
 IL_0093:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1131>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1193>
 		int32_t L_17 = V_0;
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_18 = __this->___tags;
 		NullCheck(L_18);
@@ -16429,11 +16538,11 @@ IL_0093:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1136>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
 		return;
 	}
 }
-// Method Definition Index: 89053
+// Method Definition Index: 89069
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateTags_m39704AA7B98388706B22B54FCCE82EDD742F37E7 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_p, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16479,14 +16588,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_UpdateTags_m39704AA7B98388706B22B54F
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* G_B18_1 = NULL;
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* G_B18_2 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1139>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1201>
 		V_0 = 0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1140>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1202>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_0 = ___0_p;
 		NullCheck(L_0);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_1 = L_0->___cam;
 		V_1 = L_1;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1141>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1203>
 		il2cpp_codegen_runtime_class_init_inline(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var);
 		List_1_t3844D5793B214116410D77DFB1F5F82183495216* L_2 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_StaticFields*)il2cpp_codegen_static_fields_for(Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017_il2cpp_TypeInfo_var))->___All;
 		NullCheck(L_2);
@@ -16512,11 +16621,11 @@ FINALLY_020f:
 
 IL_0019_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1141>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1203>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_4;
 				L_4 = Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_inline((&V_2), Enumerator_get_Current_m471B242A4CFFD04C94B2C678720ABCB702BF9CC6_RuntimeMethod_var);
 				V_3 = L_4;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1143>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1205>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_5 = V_3;
 				PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_6 = ___0_p;
 				il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -16557,7 +16666,7 @@ IL_0019_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1144>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1206>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_14 = V_3;
 				NullCheck(L_14);
 				Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_15;
@@ -16572,7 +16681,7 @@ IL_0019_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_19;
 				L_19 = Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline(L_16, L_18, NULL);
 				V_4 = L_19;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1145>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_20 = V_4;
 				Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_21 = V_1;
 				NullCheck(L_21);
@@ -16584,11 +16693,11 @@ IL_0019_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_24;
 				L_24 = Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline(L_20, L_23, NULL);
 				V_5 = L_24;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1146>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1208>
 				float L_25;
 				L_25 = Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline((&V_5), NULL);
 				V_6 = L_25;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1147>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1209>
 				float L_26 = V_6;
 				if ((((float)L_26) > ((float)(70.0f))))
 				{
@@ -16612,7 +16721,7 @@ IL_0019_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1148>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1210>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_32 = V_3;
 				NullCheck(L_32);
 				int32_t L_33 = L_32->___team;
@@ -16620,7 +16729,7 @@ IL_0019_1:
 				NullCheck(L_34);
 				int32_t L_35 = ((Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017*)L_34)->___team;
 				V_7 = (bool)((((int32_t)L_33) == ((int32_t)L_35))? 1 : 0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1149>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1211>
 				bool L_36 = V_7;
 				if (L_36)
 				{
@@ -16658,7 +16767,7 @@ IL_0019_1:
 
 IL_00fb_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1150>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1212>
 				bool L_47 = V_7;
 				if (L_47)
 				{
@@ -16678,7 +16787,7 @@ IL_00fb_1:
 
 IL_0111_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1152>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1214>
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_50 = V_3;
 				NullCheck(L_50);
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_51;
@@ -16699,7 +16808,7 @@ IL_0111_1:
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_58;
 				L_58 = Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline(L_54, L_57, NULL);
 				V_8 = L_58;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1153>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1215>
 				Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_59 = V_1;
 				NullCheck(L_59);
 				Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_60;
@@ -16738,14 +16847,14 @@ IL_0111_1:
 
 IL_017d_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1154>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1216>
 				Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_70 = V_1;
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_71 = V_4;
 				NullCheck(L_70);
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_72;
 				L_72 = Camera_WorldToScreenPoint_m26B4C8945C3B5731F1CC5944CFD96BF17126BAA3(L_70, L_71, NULL);
 				V_10 = L_72;
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1155>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1217>
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_73 = __this->___full;
 				Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_74 = V_10;
 				Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_75;
@@ -16759,7 +16868,7 @@ IL_017d_1:
 				}
 			}
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1156>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1218>
 				TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_77 = __this->___tags;
 				int32_t L_78 = V_0;
 				int32_t L_79 = L_78;
@@ -16767,18 +16876,18 @@ IL_017d_1:
 				NullCheck(L_77);
 				int32_t L_80 = L_79;
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_81 = (L_77)->GetAt(static_cast<il2cpp_array_size_t>(L_80));
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1157>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1219>
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_82 = L_81;
 				NullCheck(L_82);
 				Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_82, (bool)1, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1158>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1220>
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_83 = L_82;
 				Actor_t904FFB3CA4F238B87537B8F27F2CB82B2D42C017* L_84 = V_3;
 				NullCheck(L_84);
 				String_t* L_85 = L_84->___callsign;
 				NullCheck(L_83);
 				VirtualActionInvoker1< String_t* >::Invoke(75, L_83, L_85);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1159>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1221>
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_86 = L_83;
 				bool L_87 = V_7;
 				if (L_87)
@@ -16812,7 +16921,7 @@ IL_01ce_1:
 			{
 				NullCheck(G_B18_1);
 				VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B18_1, G_B18_0);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1160>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1222>
 				Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_90 = G_B18_2;
 				float L_91 = V_6;
 				float L_92;
@@ -16821,7 +16930,7 @@ IL_01ce_1:
 				L_93 = Mathf_RoundToInt_m60F8B66CF27F1FA75AA219342BD184B75771EB4B_inline(L_92, NULL);
 				NullCheck(L_90);
 				Text_set_fontSize_m426338B0A2CDA58609028FFD471EF5F2C9F364D4(L_90, L_93, NULL);
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1161>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1223>
 				NullCheck(L_90);
 				RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_94;
 				L_94 = Graphic_get_rectTransform_mF4752E8934267D630810E84CE02CDFB81EB1FD6D(L_90, NULL);
@@ -16832,7 +16941,7 @@ IL_01ce_1:
 
 IL_0201_1:
 			{
-				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1141>
+				//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1203>
 				bool L_96;
 				L_96 = Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16((&V_2), Enumerator_MoveNext_mB81AB306B994C900B595EFC3B9BE3650E5215A16_RuntimeMethod_var);
 				if (L_96)
@@ -16852,7 +16961,7 @@ IL_0201_1:
 
 IL_021d:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1225>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_97 = __this->___tags;
 		int32_t L_98 = V_0;
 		NullCheck(L_97);
@@ -16860,14 +16969,14 @@ IL_021d:
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_100 = (L_97)->GetAt(static_cast<il2cpp_array_size_t>(L_99));
 		NullCheck(L_100);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_100, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1225>
 		int32_t L_101 = V_0;
 		V_0 = ((int32_t)il2cpp_codegen_add(L_101, 1));
 	}
 
 IL_022f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1163>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1225>
 		int32_t L_102 = V_0;
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_103 = __this->___tags;
 		NullCheck(L_103);
@@ -16877,38 +16986,38 @@ IL_022f:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1164>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1226>
 		return;
 	}
 }
-// Method Definition Index: 89054
+// Method Definition Index: 89070
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_ShowToast_mF3FDB1C2D4D7EADC483DCCFE3BC959BC1CD3789F (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, String_t* ___0_s, float ___1_t, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1165>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1227>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_0 = __this->___toast;
 		String_t* L_1 = ___0_s;
 		NullCheck(L_0);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_0, L_1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1165>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1227>
 		float L_2 = ___1_t;
 		__this->___toastT = L_2;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1165>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1227>
 		return;
 	}
 }
-// Method Definition Index: 89055
+// Method Definition Index: 89071
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Pickup_m859C43FED9249EB86FD8E015A273CCFBC3098E6F (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, String_t* ___0_s, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1166>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1228>
 		String_t* L_0 = ___0_s;
 		HUD_ShowToast_mF3FDB1C2D4D7EADC483DCCFE3BC959BC1CD3789F(__this, L_0, (1.39999998f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1166>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1228>
 		return;
 	}
 }
-// Method Definition Index: 89056
+// Method Definition Index: 89072
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_LowHealth_m595E33A095F829B7483D5E0A8EE86244D281888B (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* ___0_p, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16947,7 +17056,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_LowHealth_m595E33A095F829B7483D5E0A8
 	float G_B10_3 = 0.0f;
 	HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* G_B10_4 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1171>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1233>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_0 = __this->___breathSrc;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -16958,7 +17067,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_LowHealth_m595E33A095F829B7483D5E0A8
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1173>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1235>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_2;
 		L_2 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_2);
@@ -16967,7 +17076,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_LowHealth_m595E33A095F829B7483D5E0A8
 		L_4 = HUD_MakeLoop_m73F320BC9DB05F68A1A9C40B30C22ABC4331D18F(__this, L_3, NULL);
 		__this->___breathSrc = L_4;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___breathSrc), (void*)L_4);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1173>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1235>
 		Z47Refs_tB75AD61484FAAB78C85CCF127EBCF77DDBA8D8B5* L_5;
 		L_5 = Z47Refs_get_I_m6844E8DAB473B0CE0E09A6FA5D261E50B487F8FE(NULL);
 		NullCheck(L_5);
@@ -16980,7 +17089,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_LowHealth_m595E33A095F829B7483D5E0A8
 
 IL_003a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1176>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1238>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_8 = ___0_p;
 		NullCheck(L_8);
 		bool L_9;
@@ -17008,7 +17117,7 @@ IL_0049:
 IL_0060:
 	{
 		V_0 = G_B5_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1177>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1239>
 		float L_13 = __this->___lowHpT;
 		float L_14 = V_0;
 		float L_15;
@@ -17080,12 +17189,12 @@ IL_0092:
 		L_20 = Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline(G_B10_3, G_B10_2, ((float)il2cpp_codegen_multiply(G_B10_1, G_B10_0)), NULL);
 		NullCheck(G_B10_4);
 		G_B10_4->___lowHpT = L_20;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1178>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1240>
 		float L_21;
 		L_21 = Settings_get_Sfx_m7369DE1B0D3E32434416730CDB9A8088B1D47117(NULL);
 		float L_22 = __this->___lowHpT;
 		V_1 = ((float)il2cpp_codegen_multiply(L_21, L_22));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1179>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1241>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_23 = __this->___breathSrc;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_24;
@@ -17096,12 +17205,12 @@ IL_0092:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1179>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1241>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_25 = __this->___breathSrc;
 		float L_26 = V_1;
 		NullCheck(L_25);
 		AudioSource_set_volume_mD902BBDBBDE0E3C148609BF3C05096148E90F2C0(L_25, ((float)il2cpp_codegen_multiply(L_26, (0.899999976f))), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1179>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1241>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_27 = __this->___breathSrc;
 		float L_28 = __this->___lowHpT;
 		NullCheck(L_27);
@@ -17110,7 +17219,7 @@ IL_0092:
 
 IL_00e7:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1180>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1242>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_29 = __this->___heartSrc;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_30;
@@ -17121,13 +17230,13 @@ IL_00e7:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1180>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1242>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_31 = __this->___heartSrc;
 		float L_32 = V_1;
 		float L_33 = V_1;
 		NullCheck(L_31);
 		AudioSource_set_volume_mD902BBDBBDE0E3C148609BF3C05096148E90F2C0(L_31, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_32, L_33)), (0.800000012f))), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1180>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1242>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_34 = __this->___heartSrc;
 		float L_35 = __this->___lowHpT;
 		NullCheck(L_34);
@@ -17136,14 +17245,14 @@ IL_00e7:
 
 IL_0126:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1182>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1244>
 		float L_36 = __this->___dmgT;
 		float L_37;
 		L_37 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		float L_38;
 		L_38 = Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline(L_36, (0.0f), ((float)il2cpp_codegen_multiply(L_37, (1.79999995f))), NULL);
 		__this->___dmgT = L_38;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1183>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1245>
 		float L_39;
 		L_39 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		float L_40 = __this->___lowHpT;
@@ -17152,11 +17261,11 @@ IL_0126:
 		float L_42;
 		L_42 = powf(((float)il2cpp_codegen_add((0.5f), ((float)il2cpp_codegen_multiply((0.5f), L_41)))), (6.0f));
 		V_2 = L_42;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1184>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1246>
 		float L_43 = __this->___lowHpT;
 		float L_44 = V_2;
 		V_3 = ((float)il2cpp_codegen_multiply(L_43, ((float)il2cpp_codegen_add((0.550000012f), ((float)il2cpp_codegen_multiply((0.25f), L_44))))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1185>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1247>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_45 = __this->___vignette;
 		float L_46 = __this->___dmgT;
 		float L_47 = V_3;
@@ -17169,7 +17278,7 @@ IL_0126:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_50), (1.0f), (1.0f), (1.0f), L_49, NULL);
 		NullCheck(L_45);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_45, L_50);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1187>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1249>
 		il2cpp_codegen_runtime_class_init_inline(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var);
 		ColorAdjustments_t97EE64C6DB384E5F6BC48C3FA13C207E8FC87A86* L_51 = ((Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_StaticFields*)il2cpp_codegen_static_fields_for(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var))->___Exposure;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -17181,12 +17290,12 @@ IL_0126:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1189>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1251>
 		float L_53 = __this->___lowHpT;
 		float L_54;
 		L_54 = Mathf_Lerp_m47EF2FFB7647BD0A1FDC26DC03E28B19812139B5_inline((-8.0f), (-62.0f), L_53, NULL);
 		V_4 = L_54;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1190>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1252>
 		float L_55 = V_4;
 		float L_56 = __this->___lastSat;
 		float L_57;
@@ -17197,10 +17306,10 @@ IL_0126:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1190>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1252>
 		float L_58 = V_4;
 		__this->___lastSat = L_58;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1190>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1252>
 		il2cpp_codegen_runtime_class_init_inline(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var);
 		ColorAdjustments_t97EE64C6DB384E5F6BC48C3FA13C207E8FC87A86* L_59 = ((Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_StaticFields*)il2cpp_codegen_static_fields_for(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var))->___Exposure;
 		NullCheck(L_59);
@@ -17212,11 +17321,11 @@ IL_0126:
 
 IL_022a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1192>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1254>
 		return;
 	}
 }
-// Method Definition Index: 89057
+// Method Definition Index: 89073
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* HUD_MakeLoop_m73F320BC9DB05F68A1A9C40B30C22ABC4331D18F (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* ___0_c, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17227,7 +17336,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR AudioSource_t871AC2272F896738252F04EE949AEF5B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1196>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1258>
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_0 = ___0_c;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_1;
@@ -17238,48 +17347,48 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR AudioSource_t871AC2272F896738252F04EE949AEF5B
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1196>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1258>
 		return (AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299*)NULL;
 	}
 
 IL_000b:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1197>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1259>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_2;
 		L_2 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(__this, NULL);
 		NullCheck(L_2);
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_3;
 		L_3 = GameObject_AddComponent_TisAudioSource_t871AC2272F896738252F04EE949AEF5B241D3299_m0E8EFDB9B3D8DF1ADE10C56D3168A9C1BA19BF14(L_2, GameObject_AddComponent_TisAudioSource_t871AC2272F896738252F04EE949AEF5B241D3299_m0E8EFDB9B3D8DF1ADE10C56D3168A9C1BA19BF14_RuntimeMethod_var);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_4 = L_3;
 		AudioClip_t5D272C4EB4F2D3ED49F1C346DEA373CF6D585F20* L_5 = ___0_c;
 		NullCheck(L_4);
 		AudioSource_set_clip_mFF441895E274286C88D9C75ED5CA1B1B39528D70(L_4, L_5, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_6 = L_4;
 		NullCheck(L_6);
 		AudioSource_set_loop_m834A590939D8456008C0F897FD80B0ECFFB7FE56(L_6, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_7 = L_6;
 		NullCheck(L_7);
 		AudioSource_set_spatialBlend_mCEE7A3E87A8C146E048B2CA3413FDC7BDB7BE001(L_7, (0.0f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_8 = L_7;
 		NullCheck(L_8);
 		AudioSource_set_volume_mD902BBDBBDE0E3C148609BF3C05096148E90F2C0(L_8, (0.0f), NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_9 = L_8;
 		NullCheck(L_9);
 		AudioSource_set_playOnAwake_m7EACC6ECEF12D7BA86A4E5A53603F1C8F9E11949(L_9, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1198>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
 		AudioSource_t871AC2272F896738252F04EE949AEF5B241D3299* L_10 = L_9;
 		NullCheck(L_10);
 		AudioSource_Play_m95DF07111C61D0E0F00257A00384D31531D590C3(L_10, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1199>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1261>
 		return L_10;
 	}
 }
-// Method Definition Index: 89058
+// Method Definition Index: 89074
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_SetScope_m21A276666685D33AF10B6CC531AC1EC0485858B2 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_on, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17295,17 +17404,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_SetScope_m21A276666685D33AF10B6CC531
 	RenderTexture_tBA90C4C3AD9EECCFDDCC632D97C29FAB80D60D27* G_B4_0 = NULL;
 	RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* G_B4_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1204>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1266>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_0 = __this->___scopeLensMask;
 		bool L_1 = ___0_on;
 		NullCheck(L_0);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_0, L_1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1204>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1266>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_2 = __this->___scopeLens;
 		bool L_3 = ___0_on;
 		NullCheck(L_2);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_2, L_3, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1205>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1267>
 		bool L_4 = ___0_on;
 		if (!L_4)
 		{
@@ -17313,11 +17422,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_SetScope_m21A276666685D33AF10B6CC531
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1205>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1267>
 		il2cpp_codegen_runtime_class_init_inline(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var);
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_5 = ((PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_StaticFields*)il2cpp_codegen_static_fields_for(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var))->___Local;
 		V_0 = L_5;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1205>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1267>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_6 = __this->___scopeLens;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_7 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -17354,41 +17463,41 @@ IL_0039:
 
 IL_003e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1206>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1268>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_11 = __this->___scopeHousing;
 		bool L_12 = ___0_on;
 		NullCheck(L_11);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_11, L_12, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
 		RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* L_13 = __this->___scopeImg;
 		bool L_14 = ___0_on;
 		NullCheck(L_13);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_13, L_14, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_15 = __this->___scopeL;
 		bool L_16 = ___0_on;
 		NullCheck(L_15);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_15, L_16, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_17 = __this->___scopeR;
 		bool L_18 = ___0_on;
 		NullCheck(L_17);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_17, L_18, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_19 = __this->___scopeT;
 		bool L_20 = ___0_on;
 		NullCheck(L_19);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_19, L_20, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1207>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_21 = __this->___scopeB;
 		bool L_22 = ___0_on;
 		NullCheck(L_21);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_21, L_22, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1208>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1270>
 		return;
 	}
 }
-// Method Definition Index: 89059
+// Method Definition Index: 89075
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Update_m2946A91CBDF5588C29446128364CBC8705BA70E8 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17508,11 +17617,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Update_m2946A91CBDF5588C29446128364C
 	memset((&G_B99_0), 0, sizeof(G_B99_0));
 	Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* G_B99_1 = NULL;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1213>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1275>
 		il2cpp_codegen_runtime_class_init_inline(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var);
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_0 = ((PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_StaticFields*)il2cpp_codegen_static_fields_for(PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465_il2cpp_TypeInfo_var))->___Local;
 		V_0 = L_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1214>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1276>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_1 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_2;
@@ -17523,13 +17632,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_Update_m2946A91CBDF5588C29446128364C
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1214>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1276>
 		return;
 	}
 
 IL_0010:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1217>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1279>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_3 = __this->___mm;
 		NullCheck(L_3);
 		Int32U5BU5D_t19C97395396A72ECAF310612F0760F165060314C* L_4 = L_3->___score;
@@ -17543,7 +17652,7 @@ IL_0010:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1217>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1279>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_8 = __this->___mm;
 		NullCheck(L_8);
 		Int32U5BU5D_t19C97395396A72ECAF310612F0760F165060314C* L_9 = L_8->___score;
@@ -17551,14 +17660,14 @@ IL_0010:
 		int32_t L_10 = 0;
 		int32_t L_11 = (L_9)->GetAt(static_cast<il2cpp_array_size_t>(L_10));
 		__this->___cS0 = L_11;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1217>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1279>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_12 = __this->___allyScore;
 		int32_t* L_13 = (int32_t*)(&__this->___cS0);
 		String_t* L_14;
 		L_14 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5(L_13, NULL);
 		NullCheck(L_12);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_12, L_14);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1217>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1279>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_15 = __this->___allyBar;
 		NullCheck(L_15);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_16;
@@ -17578,7 +17687,7 @@ IL_0010:
 
 IL_0080:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1218>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1280>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_21 = __this->___mm;
 		NullCheck(L_21);
 		Int32U5BU5D_t19C97395396A72ECAF310612F0760F165060314C* L_22 = L_21->___score;
@@ -17592,7 +17701,7 @@ IL_0080:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1218>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1280>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_26 = __this->___mm;
 		NullCheck(L_26);
 		Int32U5BU5D_t19C97395396A72ECAF310612F0760F165060314C* L_27 = L_26->___score;
@@ -17600,14 +17709,14 @@ IL_0080:
 		int32_t L_28 = 1;
 		int32_t L_29 = (L_27)->GetAt(static_cast<il2cpp_array_size_t>(L_28));
 		__this->___cS1 = L_29;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1218>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1280>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_30 = __this->___enemyScore;
 		int32_t* L_31 = (int32_t*)(&__this->___cS1);
 		String_t* L_32;
 		L_32 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5(L_31, NULL);
 		NullCheck(L_30);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_30, L_32);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1218>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1280>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_33 = __this->___enemyBar;
 		NullCheck(L_33);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_34;
@@ -17627,7 +17736,7 @@ IL_0080:
 
 IL_00f0:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1219>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1281>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_39 = __this->___squadRoot;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_40;
@@ -17638,7 +17747,7 @@ IL_00f0:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1219>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1281>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_41 = V_0;
 		HUD_BuildSquad_m76D55535A981E4A346CBD47952EAC9AA932002F3(__this, L_41, NULL);
 		goto IL_010d;
@@ -17646,16 +17755,16 @@ IL_00f0:
 
 IL_0107:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1219>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1281>
 		HUD_UpdateSquad_mA8C54C1A9BE395E6C70AAEA19AD812E1FBD50ECC(__this, NULL);
 	}
 
 IL_010d:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1220>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1282>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_42 = V_0;
 		HUD_UpdateGrenadeWarn_mE5F6D54F989651E9247486F47C6D24ACD9536D31(__this, L_42, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1221>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1283>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_43 = V_0;
 		NullCheck(L_43);
 		bool L_44;
@@ -17682,7 +17791,7 @@ IL_0124:
 IL_0125:
 	{
 		V_1 = (bool)G_B12_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1222>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1284>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_47 = __this->___reloadBox;
 		NullCheck(L_47);
 		bool L_48;
@@ -17694,18 +17803,18 @@ IL_0125:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1222>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1284>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_50 = __this->___reloadBox;
 		bool L_51 = V_1;
 		NullCheck(L_50);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_50, L_51, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1222>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1284>
 		__this->___cReload = (-1);
 	}
 
 IL_0147:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1223>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1285>
 		bool L_52 = V_1;
 		if (!L_52)
 		{
@@ -17713,7 +17822,7 @@ IL_0147:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1225>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1287>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_53 = V_0;
 		NullCheck(L_53);
 		float L_54;
@@ -17721,7 +17830,7 @@ IL_0147:
 		int32_t L_55;
 		L_55 = Mathf_CeilToInt_mF2BF9F4261B3431DC20E10A46CFEEED103C48963_inline(((float)il2cpp_codegen_multiply(L_54, (10.0f))), NULL);
 		V_9 = L_55;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1226>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1288>
 		int32_t L_56 = V_9;
 		int32_t L_57 = __this->___cReload;
 		if ((((int32_t)L_56) == ((int32_t)L_57)))
@@ -17730,10 +17839,10 @@ IL_0147:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1226>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1288>
 		int32_t L_58 = V_9;
 		__this->___cReload = L_58;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1226>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1288>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_59 = __this->___reloadTxt;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_60;
@@ -17750,7 +17859,7 @@ IL_0147:
 
 IL_01a8:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1227>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1289>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_64 = __this->___reloadFill;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_65 = V_0;
 		NullCheck(L_65);
@@ -17761,7 +17870,7 @@ IL_01a8:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_67), ((float)il2cpp_codegen_multiply((240.0f), L_66)), (0.0f), NULL);
 		NullCheck(L_64);
 		RectTransform_set_sizeDelta_mC9A980EA6036E6725EF24CEDF3EE80A9B2B50EE5(L_64, L_67, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1228>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1290>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_68 = __this->___reloadHint;
 		NullCheck(L_68);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_69;
@@ -17779,7 +17888,7 @@ IL_01a8:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1228>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1290>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_73 = __this->___reloadHint;
 		NullCheck(L_73);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_74;
@@ -17794,14 +17903,14 @@ IL_01a8:
 
 IL_01f7:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1231>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1293>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_77 = __this->___mm;
 		NullCheck(L_77);
 		float L_78 = L_77->___timeLeft;
 		int32_t L_79;
 		L_79 = Mathf_CeilToInt_mF2BF9F4261B3431DC20E10A46CFEEED103C48963_inline(L_78, NULL);
 		V_2 = L_79;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1232>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1294>
 		int32_t L_80 = V_2;
 		int32_t L_81 = __this->___cTime;
 		if ((((int32_t)L_80) == ((int32_t)L_81)))
@@ -17810,10 +17919,10 @@ IL_01f7:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1232>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1294>
 		int32_t L_82 = V_2;
 		__this->___cTime = L_82;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1232>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1294>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_83 = __this->___timer;
 		int32_t L_84 = V_2;
 		V_11 = ((int32_t)(L_84/((int32_t)60)));
@@ -17831,7 +17940,7 @@ IL_01f7:
 
 IL_024c:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1234>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1296>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_89 = __this->___hpFill;
 		NullCheck(L_89);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_90;
@@ -17849,7 +17958,7 @@ IL_024c:
 		Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline((&L_96), L_95, (1.0f), (1.0f), NULL);
 		NullCheck(L_90);
 		Transform_set_localScale_mBA79E811BAF6C47B80FF76414C12B47B3CD03633(L_90, L_96, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1235>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1297>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_97 = __this->___hpFill;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_98 = V_0;
 		NullCheck(L_98);
@@ -17881,13 +17990,13 @@ IL_029c:
 	{
 		NullCheck(G_B24_1);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B24_1, G_B24_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1237>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1299>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_102 = V_0;
 		NullCheck(L_102);
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_103;
 		L_103 = PlayerController_get_Cur_mFE8E39EEF4B9A6A2BFC0E3726E1534ADB1A511FD(L_102, NULL);
 		V_3 = L_103;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1238>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1300>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_104 = V_0;
 		NullCheck(L_104);
 		int32_t L_105;
@@ -17927,19 +18036,19 @@ IL_029c:
 
 IL_02df:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1240>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_115 = V_0;
 		NullCheck(L_115);
 		int32_t L_116;
 		L_116 = PlayerController_get_Mag_mFBB8BFE7B060A8DFF7EDD2BAACEA7A1DFF6C3FA7(L_115, NULL);
 		__this->___cMag = L_116;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1240>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_117 = V_0;
 		NullCheck(L_117);
 		int32_t L_118;
 		L_118 = PlayerController_get_Reserve_mE4816895708D6953F94E251B11C19CEA702E13A7(L_117, NULL);
 		__this->___cRes = L_118;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1240>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_119 = V_0;
 		NullCheck(L_119);
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_120;
@@ -17948,11 +18057,11 @@ IL_02df:
 		String_t* L_121 = L_120->___id;
 		__this->___cAmmoWep = L_121;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___cAmmoWep), (void*)L_121);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1240>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_122 = __this->___ammo;
 		NullCheck(L_122);
 		Text_set_supportRichText_mB4DB141150AEBCCADEFFF4EC7A799F85FD075265(L_122, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1241>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1303>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_123 = V_0;
 		NullCheck(L_123);
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_124;
@@ -17962,7 +18071,7 @@ IL_02df:
 		int32_t L_126;
 		L_126 = Mathf_Max_m7FA442918DE37E3A00106D1F2E789D65829792B8_inline(1, L_125, NULL);
 		V_12 = L_126;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1243>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1305>
 		int32_t L_127 = __this->___cMag;
 		if (!L_127)
 		{
@@ -17998,7 +18107,7 @@ IL_0353:
 IL_0358:
 	{
 		V_13 = G_B32_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1244>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1306>
 		int32_t L_131 = __this->___cRes;
 		if (!L_131)
 		{
@@ -18032,7 +18141,7 @@ IL_037a:
 IL_037f:
 	{
 		V_14 = G_B37_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1245>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1307>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_134 = __this->___ammo;
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_135 = (StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248*)SZArrayNew(StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248_il2cpp_TypeInfo_var, (uint32_t)((int32_t)9));
 		StringU5BU5D_t7674CD946EC0CE7B3AE0BE70E6EE85F2ECD9F248* L_136 = L_135;
@@ -18078,7 +18187,7 @@ IL_037f:
 
 IL_03e6:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1247>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1309>
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_152 = V_3;
 		NullCheck(L_152);
 		String_t* L_153 = L_152->___id;
@@ -18091,34 +18200,34 @@ IL_03e6:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1249>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1311>
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_156 = V_3;
 		NullCheck(L_156);
 		String_t* L_157 = L_156->___id;
 		__this->___cWep = L_157;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___cWep), (void*)L_157);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1249>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1311>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_158 = __this->___weaponName;
 		WeaponDef_t8E2BDBCA2A102DB338393D5F8B07DD886857D449* L_159 = V_3;
 		NullCheck(L_159);
 		String_t* L_160 = L_159->___displayName;
 		NullCheck(L_158);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_158, L_160);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1250>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
 		V_15 = 0;
 		goto IL_04b2;
 	}
 
 IL_0421:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1252>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1314>
 		int32_t L_161 = V_15;
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_162 = V_0;
 		NullCheck(L_162);
 		int32_t L_163;
 		L_163 = PlayerController_get_CurSlot_m992EA73D9855B1A45769C5DF1F2D527AFF1B73CA_inline(L_162, NULL);
 		V_16 = (bool)((((int32_t)L_161) == ((int32_t)L_163))? 1 : 0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1253>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1315>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_164 = __this->___slotImgs;
 		int32_t L_165 = V_15;
 		NullCheck(L_164);
@@ -18157,7 +18266,7 @@ IL_0469:
 	{
 		NullCheck(G_B43_1);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, G_B43_1, G_B43_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1254>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1316>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_174 = __this->___slotIcons;
 		int32_t L_175 = V_15;
 		NullCheck(L_174);
@@ -18172,7 +18281,7 @@ IL_0469:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1254>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1316>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_179 = __this->___slotIcons;
 		int32_t L_180 = V_15;
 		NullCheck(L_179);
@@ -18211,14 +18320,14 @@ IL_04a7:
 
 IL_04ac:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1250>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
 		int32_t L_186 = V_15;
 		V_15 = ((int32_t)il2cpp_codegen_add(L_186, 1));
 	}
 
 IL_04b2:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1250>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
 		int32_t L_187 = V_15;
 		int32_t L_188 = __this->___slotN;
 		if ((((int32_t)L_187) < ((int32_t)L_188)))
@@ -18229,7 +18338,7 @@ IL_04b2:
 
 IL_04bf:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1257>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_189 = V_0;
 		NullCheck(L_189);
 		int32_t L_190 = L_189->___grenades;
@@ -18240,12 +18349,12 @@ IL_04bf:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1257>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_192 = V_0;
 		NullCheck(L_192);
 		int32_t L_193 = L_192->___grenades;
 		__this->___cGren = L_193;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1257>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_194 = __this->___grenadeTxt;
 		int32_t* L_195 = (int32_t*)(&__this->___cGren);
 		String_t* L_196;
@@ -18256,7 +18365,7 @@ IL_04bf:
 
 IL_04ef:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1258>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1320>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_197 = __this->___aimBtnImg;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_198;
@@ -18267,7 +18376,7 @@ IL_04ef:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1258>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1320>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_199 = __this->___aimBtnImg;
 		bool L_200;
 		L_200 = HUD_get_AimToggled_m0D498EE5BB8B1D0D937F98C9A129BAE2516E2E3C_inline(__this, NULL);
@@ -18304,7 +18413,7 @@ IL_053f:
 
 IL_0544:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1259>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1321>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_203 = __this->___leanLImg;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_204;
@@ -18315,7 +18424,7 @@ IL_0544:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1259>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1321>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_205 = __this->___leanLImg;
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		int32_t L_206 = ((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___lean;
@@ -18352,7 +18461,7 @@ IL_0594:
 
 IL_0599:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1322>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_209 = __this->___leanRImg;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_210;
@@ -18363,7 +18472,7 @@ IL_0599:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1260>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1322>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_211 = __this->___leanRImg;
 		il2cpp_codegen_runtime_class_init_inline(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var);
 		int32_t L_212 = ((PInput_t143560363285B0EA7ED50AD16AC2B48596241043_StaticFields*)il2cpp_codegen_static_fields_for(PInput_t143560363285B0EA7ED50AD16AC2B48596241043_il2cpp_TypeInfo_var))->___lean;
@@ -18400,16 +18509,16 @@ IL_05e9:
 
 IL_05ee:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1263>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1325>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_215 = V_0;
 		NullCheck(L_215);
 		bool L_216;
 		L_216 = PlayerController_get_Scoped_m5FCF27F662B16AFA27B67AC33947416F4E190EE0(L_215, NULL);
 		V_4 = L_216;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1264>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1326>
 		bool L_217 = V_4;
 		HUD_SetScope_m21A276666685D33AF10B6CC531AC1EC0485858B2(__this, L_217, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1265>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1327>
 		bool L_218 = V_4;
 		bool L_219 = __this->___wasScoped;
 		if ((((int32_t)L_218) == ((int32_t)L_219)))
@@ -18418,7 +18527,7 @@ IL_05ee:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1265>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1327>
 		bool L_220 = V_4;
 		if (L_220)
 		{
@@ -18443,21 +18552,21 @@ IL_0619:
 	{
 		NullCheck(G_B71_1);
 		G_B71_1->___blinkT = G_B71_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1265>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1327>
 		bool L_221 = V_4;
 		__this->___wasScoped = L_221;
 	}
 
 IL_0626:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1266>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1328>
 		float L_222 = __this->___blinkT;
 		float L_223;
 		L_223 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		float L_224;
 		L_224 = Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline(L_222, (0.0f), ((float)il2cpp_codegen_multiply(L_223, (6.0f))), NULL);
 		__this->___blinkT = L_224;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1267>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1329>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_225 = __this->___scopeBlink;
 		float L_226 = __this->___blinkT;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_227;
@@ -18465,7 +18574,7 @@ IL_0626:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_227), (0.0f), (0.0f), (0.0f), ((float)il2cpp_codegen_multiply(L_226, (0.899999976f))), NULL);
 		NullCheck(L_225);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_225, L_227);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1269>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1331>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_228 = V_0;
 		NullCheck(L_228);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_229 = L_228->___cam;
@@ -18476,7 +18585,7 @@ IL_0626:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_231;
 		L_231 = Transform_get_forward_mFCFACF7165FDAB21E80E384C494DF278386CEE2F(L_230, NULL);
 		V_5 = L_231;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1270>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1332>
 		bool L_232 = V_4;
 		if (!L_232)
 		{
@@ -18492,7 +18601,7 @@ IL_0626:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1272>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1334>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_234 = V_0;
 		NullCheck(L_234);
 		Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* L_235 = L_234->___cam;
@@ -18504,7 +18613,7 @@ IL_0626:
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_238;
 		L_238 = Transform_InverseTransformDirection_m69C077B881A98B08C7F231EFC49429C906FBC575(L_236, L_237, NULL);
 		V_17 = L_238;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1273>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1335>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_239 = V_17;
 		float L_240 = L_239.___x;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_241 = V_17;
@@ -18516,13 +18625,13 @@ IL_0626:
 		L_244 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_245;
 		L_245 = Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline(L_243, L_244, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1274>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1336>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_246 = V_0;
 		NullCheck(L_246);
 		float L_247;
 		L_247 = PlayerController_get_MoveSpeed_mE820C72AC63A711E5BF338FFFBBE7576722CD315(L_246, NULL);
 		V_18 = L_247;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1275>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1337>
 		float L_248;
 		L_248 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		float L_249;
@@ -18544,7 +18653,7 @@ IL_0626:
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_257;
 		L_257 = Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline(L_256, (26.0f), NULL);
 		V_19 = L_257;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1276>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1338>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_258;
 		L_258 = Vector2_op_UnaryNegation_mBA9FC53A2194EE3CC067A12D11879F695B34D6F9_inline(L_245, NULL);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_259;
@@ -18555,7 +18664,7 @@ IL_0626:
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_262;
 		L_262 = Vector2_op_Addition_m8136742CE6EE33BA4EB81C5F584678455917D2AE_inline(L_260, L_261, NULL);
 		V_20 = L_262;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1277>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1339>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_263 = __this->___scopeDrift;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_264 = V_20;
 		float L_265;
@@ -18568,7 +18677,7 @@ IL_0626:
 
 IL_0769:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1279>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1341>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_267;
 		L_267 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		__this->___scopeDrift = L_267;
@@ -18576,20 +18685,20 @@ IL_0769:
 
 IL_0774:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1280>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1342>
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_268 = __this->___scopeGroup;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_269 = __this->___scopeDrift;
 		NullCheck(L_268);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_268, L_269, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1281>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1343>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_270 = V_5;
 		__this->___lastFwd = L_270;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1282>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1344>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_271 = V_0;
 		NullCheck(L_271);
 		float L_272 = L_271->___spreadNow;
 		V_6 = ((float)il2cpp_codegen_add((8.0f), ((float)il2cpp_codegen_multiply(L_272, (9.0f)))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1283>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1345>
 		bool L_273 = V_4;
 		if (L_273)
 		{
@@ -18613,7 +18722,7 @@ IL_07b0:
 IL_07b1:
 	{
 		V_7 = (bool)G_B79_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1284>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1346>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_276 = __this->___xh;
 		NullCheck(L_276);
 		int32_t L_277 = 0;
@@ -18624,7 +18733,7 @@ IL_07b1:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_280), (0.0f), ((float)il2cpp_codegen_add(L_279, (8.0f))), NULL);
 		NullCheck(L_278);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_278, L_280, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1284>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1346>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_281 = __this->___xh;
 		NullCheck(L_281);
 		int32_t L_282 = 1;
@@ -18635,7 +18744,7 @@ IL_07b1:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_285), (0.0f), ((float)il2cpp_codegen_subtract(((-L_284)), (8.0f))), NULL);
 		NullCheck(L_283);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_283, L_285, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1285>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1347>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_286 = __this->___xh;
 		NullCheck(L_286);
 		int32_t L_287 = 2;
@@ -18646,7 +18755,7 @@ IL_07b1:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_290), ((float)il2cpp_codegen_add(L_289, (8.0f))), (0.0f), NULL);
 		NullCheck(L_288);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_288, L_290, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1285>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1347>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_291 = __this->___xh;
 		NullCheck(L_291);
 		int32_t L_292 = 3;
@@ -18657,7 +18766,7 @@ IL_07b1:
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_295), ((float)il2cpp_codegen_subtract(((-L_294)), (8.0f))), (0.0f), NULL);
 		NullCheck(L_293);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_293, L_295, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1286>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1348>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_296 = __this->___xh;
 		V_21 = L_296;
 		V_11 = 0;
@@ -18666,13 +18775,13 @@ IL_07b1:
 
 IL_083e:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1286>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1348>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_297 = V_21;
 		int32_t L_298 = V_11;
 		NullCheck(L_297);
 		int32_t L_299 = L_298;
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_300 = (L_297)->GetAt(static_cast<il2cpp_array_size_t>(L_299));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1286>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1348>
 		NullCheck(L_300);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_301;
 		L_301 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_300, NULL);
@@ -18710,7 +18819,7 @@ IL_0855:
 
 IL_0860:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1286>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1348>
 		int32_t L_306 = V_11;
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_307 = V_21;
 		NullCheck(L_307);
@@ -18720,7 +18829,7 @@ IL_0860:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1287>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1349>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_308 = __this->___centerDot;
 		bool L_309 = V_7;
 		if (!L_309)
@@ -18750,7 +18859,7 @@ IL_087b:
 	{
 		NullCheck(G_B88_1);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(G_B88_1, (bool)G_B88_0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1289>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1351>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_312 = V_0;
 		NullCheck(L_312);
 		bool L_313;
@@ -18801,7 +18910,7 @@ IL_08b6:
 IL_08b7:
 	{
 		V_8 = (bool)G_B93_0;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1290>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1352>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_322 = __this->___redDot;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_323 = __this->___redGlow;
 		bool L_324 = V_8;
@@ -18812,7 +18921,7 @@ IL_08b7:
 		bool L_326 = V_22;
 		NullCheck(L_322);
 		Behaviour_set_enabled_mF1DCFE60EB09E0529FE9476CA804A3AA2D72B16A(L_322, L_326, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1292>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1354>
 		float L_327 = __this->___hitT;
 		if ((!(((float)L_327) > ((float)(0.0f)))))
 		{
@@ -18820,12 +18929,12 @@ IL_08b7:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1294>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1356>
 		float L_328 = __this->___hitT;
 		float L_329;
 		L_329 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___hitT = ((float)il2cpp_codegen_subtract(L_328, L_329));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1295>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1357>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_330 = __this->___hitMark;
 		NullCheck(L_330);
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_331;
@@ -18837,14 +18946,14 @@ IL_08b7:
 
 IL_090a:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1295>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1357>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_332 = V_23;
 		int32_t L_333 = V_11;
 		NullCheck(L_332);
 		int32_t L_334 = L_333;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_335 = (L_332)->GetAt(static_cast<il2cpp_array_size_t>(L_334));
 		V_24 = L_335;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1295>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1357>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_336 = V_24;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_337 = __this->___hitMark;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
@@ -18856,7 +18965,7 @@ IL_090a:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1295>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1357>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_339 = V_24;
 		bool L_340 = __this->___hitKill;
 		if (L_340)
@@ -18900,7 +19009,7 @@ IL_0971:
 
 IL_0977:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1295>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1357>
 		int32_t L_346 = V_11;
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_347 = V_23;
 		NullCheck(L_347);
@@ -18910,7 +19019,7 @@ IL_0977:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1296>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1358>
 		float L_348 = __this->___hitT;
 		if ((!(((float)L_348) <= ((float)(0.0f)))))
 		{
@@ -18918,7 +19027,7 @@ IL_0977:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1296>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1358>
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_349 = __this->___hitMark;
 		NullCheck(L_349);
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_350;
@@ -18929,10 +19038,10 @@ IL_0977:
 
 IL_099d:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1299>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1361>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_351 = V_0;
 		HUD_LowHealth_m595E33A095F829B7483D5E0A8EE86244D281888B(__this, L_351, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1301>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1363>
 		float L_352 = __this->___toastT;
 		if ((!(((float)L_352) > ((float)(0.0f)))))
 		{
@@ -18940,12 +19049,12 @@ IL_099d:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1301>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1363>
 		float L_353 = __this->___toastT;
 		float L_354;
 		L_354 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___toastT = ((float)il2cpp_codegen_subtract(L_353, L_354));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1301>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1363>
 		float L_355 = __this->___toastT;
 		if ((!(((float)L_355) <= ((float)(0.0f)))))
 		{
@@ -18953,7 +19062,7 @@ IL_099d:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1301>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1363>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_356 = __this->___toast;
 		NullCheck(L_356);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_356, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709);
@@ -18962,7 +19071,7 @@ IL_099d:
 
 IL_09e2:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1364>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_357 = V_0;
 		NullCheck(L_357);
 		int32_t L_358;
@@ -18983,7 +19092,7 @@ IL_09e2:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1302>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1364>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_361 = __this->___toast;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_362;
@@ -18995,7 +19104,7 @@ IL_09e2:
 
 IL_0a09:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1303>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1365>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_363 = __this->___toast;
 		NullCheck(L_363);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_363, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709);
@@ -19003,7 +19112,7 @@ IL_0a09:
 
 IL_0a19:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1305>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1367>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_364 = __this->___deathPanel;
 		NullCheck(L_364);
 		bool L_365;
@@ -19014,14 +19123,14 @@ IL_0a19:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1307>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1369>
 		float L_366;
 		L_366 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		float L_367 = __this->___deathAt;
 		float L_368;
 		L_368 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline((0.0f), ((float)il2cpp_codegen_subtract((4.0f), ((float)il2cpp_codegen_subtract(L_366, L_367)))), NULL);
 		V_25 = L_368;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1308>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1370>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_369 = __this->___deathTimer;
 		il2cpp_codegen_runtime_class_init_inline(L_tA65CCF101DBD066C6BC54CB387CDB4B04699065C_il2cpp_TypeInfo_var);
 		String_t* L_370;
@@ -19036,16 +19145,16 @@ IL_0a19:
 
 IL_0a6f:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1311>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1373>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_373 = V_0;
 		HUD_UpdateRadar_m106D35C56D1EF504CF9FA787FF71FB94DBD5FB26(__this, L_373, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1311>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1373>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_374 = V_0;
 		HUD_UpdateIndicators_m16D16CDDC2934188D3F80B64450ADED27A30240D(__this, L_374, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1311>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1373>
 		PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* L_375 = V_0;
 		HUD_UpdateTags_m39704AA7B98388706B22B54FCCE82EDD742F37E7(__this, L_375, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1374>
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_376 = __this->___mm;
 		NullCheck(L_376);
 		bool L_377;
@@ -19075,7 +19184,7 @@ IL_0a6f:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1374>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_382 = __this->___bigText;
 		MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* L_383 = __this->___mm;
 		NullCheck(L_383);
@@ -19087,13 +19196,13 @@ IL_0a6f:
 		L_386 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_11), NULL);
 		NullCheck(L_382);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_382, L_386);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1374>
 		__this->___bigT = (0.300000012f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1374>
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_387 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		__this->___bigCol = L_387;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1312>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1374>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_388 = __this->___bigText;
 		NullCheck(L_388);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_389;
@@ -19111,7 +19220,7 @@ IL_0a6f:
 
 IL_0b27:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1313>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1375>
 		float L_394 = __this->___bigT;
 		if ((!(((float)L_394) > ((float)(0.0f)))))
 		{
@@ -19119,12 +19228,12 @@ IL_0b27:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1313>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1375>
 		float L_395 = __this->___bigT;
 		float L_396;
 		L_396 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___bigT = ((float)il2cpp_codegen_subtract(L_395, L_396));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1313>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1375>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_397 = __this->___bigText;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* L_398 = (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F*)(&__this->___bigCol);
 		float L_399 = L_398->___r;
@@ -19140,7 +19249,7 @@ IL_0b27:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_406), L_399, L_401, L_403, L_405, NULL);
 		NullCheck(L_397);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_397, L_406);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1313>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1375>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_407 = __this->___bigText;
 		NullCheck(L_407);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_408;
@@ -19165,7 +19274,7 @@ IL_0b27:
 
 IL_0bc2:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1314>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1376>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_415 = __this->___bigText;
 		NullCheck(L_415);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_415, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709);
@@ -19173,7 +19282,7 @@ IL_0bc2:
 
 IL_0bd2:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1315>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1377>
 		float L_416 = __this->___killT;
 		if ((!(((float)L_416) > ((float)(0.0f)))))
 		{
@@ -19181,12 +19290,12 @@ IL_0bd2:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1315>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1377>
 		float L_417 = __this->___killT;
 		float L_418;
 		L_418 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
 		__this->___killT = ((float)il2cpp_codegen_subtract(L_417, L_418));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1315>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1377>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_419 = __this->___killText;
 		float L_420 = __this->___killT;
 		float L_421;
@@ -19196,7 +19305,7 @@ IL_0bd2:
 		Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline((&L_422), (1.0f), (1.0f), (1.0f), L_421, NULL);
 		NullCheck(L_419);
 		VirtualActionInvoker1< Color_tD001788D726C3A7F1379BEED0260B9591F440C1F >::Invoke(23, L_419, L_422);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1315>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1377>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_423 = __this->___killText;
 		NullCheck(L_423);
 		Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* L_424;
@@ -19221,7 +19330,7 @@ IL_0bd2:
 
 IL_0c58:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1316>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1378>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_431 = __this->___killText;
 		NullCheck(L_431);
 		VirtualActionInvoker1< String_t* >::Invoke(75, L_431, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709);
@@ -19229,7 +19338,7 @@ IL_0c58:
 
 IL_0c68:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1381>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_432 = __this->___feedItems;
 		NullCheck(L_432);
 		int32_t L_433;
@@ -19240,7 +19349,7 @@ IL_0c68:
 
 IL_0c79:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1321>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1383>
 		float L_434;
 		L_434 = Time_get_time_m3A271BB1B20041144AC5B7863B71AB1F0150374B(NULL);
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_435 = __this->___feedItems;
@@ -19255,7 +19364,7 @@ IL_0c79:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1321>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1383>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_439 = __this->___feedItems;
 		int32_t L_440 = V_26;
 		NullCheck(L_439);
@@ -19273,7 +19382,7 @@ IL_0c79:
 		L_445 = Component_get_gameObject_m57AEFBB14DB39EC476F740BA000E170355DE691B(L_444, NULL);
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		Object_Destroy_mE97D0A766419A81296E8D4E5C23D01D3FE91ACBB(L_445, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1321>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1383>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_446 = __this->___feedItems;
 		int32_t L_447 = V_26;
 		NullCheck(L_446);
@@ -19282,14 +19391,14 @@ IL_0c79:
 
 IL_0ccb:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1381>
 		int32_t L_448 = V_26;
 		V_26 = ((int32_t)il2cpp_codegen_subtract(L_448, 1));
 	}
 
 IL_0cd1:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1319>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1381>
 		int32_t L_449 = V_26;
 		if ((((int32_t)L_449) >= ((int32_t)0)))
 		{
@@ -19297,11 +19406,11 @@ IL_0cd1:
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1323>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1385>
 		return;
 	}
 }
-// Method Definition Index: 89060
+// Method Definition Index: 89076
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__ctor_m5CCCEC605B33F5DB04DCE97A91B2892E40A3023E (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19324,77 +19433,77 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__ctor_m5CCCEC605B33F5DB04DCE97A91B28
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:301>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:360>
 		RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D* L_0 = (RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D*)(RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D*)SZArrayNew(RectTransformU5BU5D_tD8879AA94435492C205ABBE1E530FFD24CE0393D_il2cpp_TypeInfo_var, (uint32_t)4);
 		__this->___xh = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___xh), (void*)L_0);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:307>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:366>
 		__this->___lastSat = (-999.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cMag = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cRes = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cS0 = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cS1 = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cTime = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:309>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:368>
 		__this->___cGren = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:311>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:370>
 		List_1_tB2453D50530FE706F025BB841FFB23D550218F12* L_1 = (List_1_tB2453D50530FE706F025BB841FFB23D550218F12*)il2cpp_codegen_object_new(List_1_tB2453D50530FE706F025BB841FFB23D550218F12_il2cpp_TypeInfo_var);
 		List_1__ctor_m63FF0BABB6AEEAB588FA1CB1789090BA5AFBE8F7(L_1, List_1__ctor_m63FF0BABB6AEEAB588FA1CB1789090BA5AFBE8F7_RuntimeMethod_var);
 		__this->___feedItems = L_1;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___feedItems), (void*)L_1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:316>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:375>
 		List_1_t0BF27BC30A5AC6B54D5CCCD6924F0ED01D79D809* L_2 = (List_1_t0BF27BC30A5AC6B54D5CCCD6924F0ED01D79D809*)il2cpp_codegen_object_new(List_1_t0BF27BC30A5AC6B54D5CCCD6924F0ED01D79D809_il2cpp_TypeInfo_var);
 		List_1__ctor_m2FFAF8B0F482CC3BDE99FBAD83FE7A7FA7CAFEC3(L_2, List_1__ctor_m2FFAF8B0F482CC3BDE99FBAD83FE7A7FA7CAFEC3_RuntimeMethod_var);
 		__this->___squad = L_2;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___squad), (void*)L_2);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:317>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:376>
 		__this->___cAlive = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:323>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:382>
 		__this->___cReload = (-1);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:325>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:384>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_3 = (ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78*)(ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78*)SZArrayNew(ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78_il2cpp_TypeInfo_var, (uint32_t)5);
 		__this->___slotImgs = L_3;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___slotImgs), (void*)L_3);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:326>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:385>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_4 = (TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353*)(TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353*)SZArrayNew(TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353_il2cpp_TypeInfo_var, (uint32_t)5);
 		__this->___slotTxt = L_4;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___slotTxt), (void*)L_4);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:327>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:386>
 		RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997* L_5 = (RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997*)(RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997*)SZArrayNew(RawImageU5BU5D_tCF8D2C9175896CDEA0650874FCEA19472CBD6997_il2cpp_TypeInfo_var, (uint32_t)5);
 		__this->___slotIcons = L_5;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___slotIcons), (void*)L_5);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:328>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:387>
 		__this->___slotN = 3;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:554>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:616>
 		__this->___joyScale = (1.0f);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:591>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:653>
 		List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809* L_6 = (List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809*)il2cpp_codegen_object_new(List_1_t09C45BABFB857EFD906EC4A8A62D39793282C809_il2cpp_TypeInfo_var);
 		List_1__ctor_m47344E24B8FB0AE689E8149936FFA850F48D0183(L_6, List_1__ctor_m47344E24B8FB0AE689E8149936FFA850F48D0183_RuntimeMethod_var);
 		__this->___fireButtons = L_6;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___fireButtons), (void*)L_6);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:700>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:762>
 		List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955* L_7 = (List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955*)il2cpp_codegen_object_new(List_1_tBCC369055EC2B22D06DE0B40B7FEC1AC436A0955_il2cpp_TypeInfo_var);
 		List_1__ctor_mDDC9BDB5A1023A586D954D7B609C54FE2F153AEF(L_7, List_1__ctor_mDDC9BDB5A1023A586D954D7B609C54FE2F153AEF_RuntimeMethod_var);
 		__this->___gWarn = L_7;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___gWarn), (void*)L_7);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1023>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1085>
 		il2cpp_codegen_runtime_class_init_inline(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var);
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_8 = ((Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_StaticFields*)il2cpp_codegen_static_fields_for(Pal_t137CD1595B6FE8036D0321FCFF84B9BEC049055A_il2cpp_TypeInfo_var))->___Accent;
 		__this->___bigCol = L_8;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1039>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1101>
 		ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78* L_9 = (ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78*)(ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78*)SZArrayNew(ImageU5BU5D_t8869694C217655DA7B1315DC02C80F1308B78B78_il2cpp_TypeInfo_var, (uint32_t)((int32_t)24));
 		__this->___dots = L_9;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___dots), (void*)L_9);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1098>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1160>
 		IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084* L_10 = (IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084*)(IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084*)SZArrayNew(IndU5BU5D_tAE51E7EDEF257DDD1FFB1F59972CB8BFED396084_il2cpp_TypeInfo_var, (uint32_t)6);
 		__this->___indicators = L_10;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___indicators), (void*)L_10);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1128>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1190>
 		TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353* L_11 = (TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353*)(TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353*)SZArrayNew(TextU5BU5D_t1D476A037C4542F053D17ADAFA2723F311F9A353_il2cpp_TypeInfo_var, (uint32_t)((int32_t)20));
 		__this->___tags = L_11;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___tags), (void*)L_11);
@@ -19402,7 +19511,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__ctor_m5CCCEC605B33F5DB04DCE97A91B28
 		return;
 	}
 }
-// Method Definition Index: 89061
+// Method Definition Index: 89077
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__cctor_mA18C42823837D030CEF5A4EB109AA432899D959B (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19413,7 +19522,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__cctor_mA18C42823837D030CEF5A4EB109A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:318>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:377>
 		ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_0 = (ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389*)(ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389*)SZArrayNew(ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389_il2cpp_TypeInfo_var, (uint32_t)6);
 		ColorU5BU5D_t612261CF293F6FFC3D80AB52259FF0DC2B2CC389* L_1 = L_0;
 		Color_tD001788D726C3A7F1379BEED0260B9591F440C1F L_2;
@@ -19456,7 +19565,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD__cctor_mA18C42823837D030CEF5A4EB109A
 		return;
 	}
 }
-// Method Definition Index: 89062
+// Method Definition Index: 89078
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseButtonU3Eb__106_0_m40F72B5936AB7CB6028D3DC92CBA8D79CF3AC8EF (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19466,16 +19575,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseButtonU3Eb__106_0_m40F7
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:495>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:557>
 		il2cpp_codegen_runtime_class_init_inline(Sfx_t16802BE99E3D9CEA5A9CB046D6F8D642F6BFE28F_il2cpp_TypeInfo_var);
 		Sfx_UI_mEF5EB691D7988E9A8C0D698145F0B70BB62D150E(NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:495>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:557>
 		HUD_TogglePause_mAB127BC3B02D493E2CAA82C0D508793E70163F85(__this, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:495>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:557>
 		return;
 	}
 }
-// Method Definition Index: 89063
+// Method Definition Index: 89079
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_0_m61E9DABC4D50E1760AC4F3F017C9A80AB5A5F9B4 (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19487,11 +19596,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_0_m61E9DABC4D
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_0 = __this->___pausePanel;
 		NullCheck(L_0);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_0, (bool)0, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		il2cpp_codegen_runtime_class_init_inline(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var);
 		Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7* L_1 = ((Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_StaticFields*)il2cpp_codegen_static_fields_for(Boot_tC03BE82877A1608E9C55533CD2506DC5CED4DCF7_il2cpp_TypeInfo_var))->___I;
 		Canvas_t2DB4CEFDFF732884866C83F11ABF75F5AE8FFB26* L_2 = __this->___canvas;
@@ -19502,15 +19611,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_0_m61E9DABC4D
 		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_4, __this, (intptr_t)((void*)HUD_U3CBuildPauseU3Eb__122_2_m1AAD9640DCFF8D19A80EB2D6CABFAF393143B32B_RuntimeMethod_var), NULL);
 		NullCheck(L_1);
 		Boot_ShowSettings_mE19751FA45311DD7E6B73A534A414639E6930323(L_1, L_3, L_4, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		return;
 	}
 }
-// Method Definition Index: 89064
+// Method Definition Index: 89080
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_2_m1AAD9640DCFF8D19A80EB2D6CABFAF393143B32B (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		bool L_0;
 		L_0 = HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline(__this, NULL);
 		if (!L_0)
@@ -19519,7 +19628,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_2_m1AAD9640DC
 		}
 	}
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		GameObject_t76FEDD663AB33C991A9C9A23129337651094216F* L_1 = __this->___pausePanel;
 		NullCheck(L_1);
 		GameObject_SetActive_m638E92E1E75E519E5B24CF150B08CA8E0CDFAB92(L_1, (bool)1, NULL);
@@ -19527,11 +19636,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void HUD_U3CBuildPauseU3Eb__122_2_m1AAD9640DC
 
 IL_0014:
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:770>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:832>
 		return;
 	}
 }
-// Method Definition Index: 89065
+// Method Definition Index: 89081
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* HUD_U3CKillFeedU3Eg__PartU7C132_0_mA4A33ADFF429CD12DE9F798568E15009BA5D232E (String_t* ___0_s, U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042* ___1_p, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19544,7 +19653,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 	Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* V_0 = NULL;
 	float V_1 = 0.0f;
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:958>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1020>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042* L_0 = ___1_p;
 		Image_tBC1D03F63BF71132E9A5E472B8742F172A011E7E* L_1 = L_0->___bg;
 		NullCheck(L_1);
@@ -19567,11 +19676,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_9;
 		L_9 = UIK_Txt_m2DE72FE940817E89487F072C2C3A3C8F896035DC(L_2, _stringLiteral6B866DCFF4A3EC3D3C30879F029D88106601B1B2, L_3, ((int32_t)19), L_4, 3, L_5, L_6, L_7, L_8, (bool)0, NULL);
 		V_0 = L_9;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:959>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1021>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_10 = V_0;
 		NullCheck(L_10);
 		Text_set_supportRichText_mB4DB141150AEBCCADEFFF4EC7A799F85FD075265(L_10, (bool)1, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:960>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1022>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_11 = V_0;
 		NullCheck(L_11);
 		float L_12;
@@ -19579,7 +19688,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 		float L_13;
 		L_13 = Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline((8.0f), L_12, NULL);
 		V_1 = L_13;
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:961>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1023>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_14 = V_0;
 		NullCheck(L_14);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_15;
@@ -19589,7 +19698,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_16), (0.0f), (0.5f), NULL);
 		NullCheck(L_15);
 		RectTransform_set_pivot_m79D0177D383D432A93C2615F1932B739B1C6E146(L_15, L_16, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:961>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1023>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_17 = V_0;
 		NullCheck(L_17);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_18;
@@ -19600,7 +19709,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_20), L_19, (30.0f), NULL);
 		NullCheck(L_18);
 		RectTransform_set_sizeDelta_mC9A980EA6036E6725EF24CEDF3EE80A9B2B50EE5(L_18, L_20, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:961>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1023>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_21 = V_0;
 		NullCheck(L_21);
 		RectTransform_t6C5DA5E41A89E0F488B001E45E58963480E543A5* L_22;
@@ -19612,13 +19721,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E6
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_25), L_24, (0.0f), NULL);
 		NullCheck(L_22);
 		RectTransform_set_anchoredPosition_mF903ACE04F6959B1CD67E2B94FABC0263068F965(L_22, L_25, NULL);
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:962>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1024>
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042* L_26 = ___1_p;
 		U3CU3Ec__DisplayClass132_0_t7C176D72A53421EDEF0173A0F2F6168C22CF4042* L_27 = ___1_p;
 		float L_28 = L_27->___x;
 		float L_29 = V_1;
 		L_26->___x = ((float)il2cpp_codegen_add(L_28, ((float)il2cpp_codegen_add(L_29, (8.0f)))));
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:963>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:1025>
 		Text_tD60B2346DAA6666BF0D822FF607F0B220C2B9E62* L_30 = V_0;
 		return L_30;
 	}
@@ -19657,7 +19766,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_0;
 	}
 }
-// Method Definition Index: 50964
+// Method Definition Index: 50967
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -19671,7 +19780,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFF
 		return;
 	}
 }
-// Method Definition Index: 50995
+// Method Definition Index: 50998
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19686,7 +19795,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 50996
+// Method Definition Index: 50999
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_one_m9097EB8DC23C26118A591AF16702796C3EF51DFB_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19701,7 +19810,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 50879
+// Method Definition Index: 50882
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline (float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -19720,7 +19829,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Quaternion_tDA59F214EF07D7700B26E
 		return L_3;
 	}
 }
-// Method Definition Index: 50994
+// Method Definition Index: 50997
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector2_op_Implicit_m6D9CABB2C791A192867D7A4559D132BE86DD3EB7_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_v, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -19739,7 +19848,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_4;
 	}
 }
-// Method Definition Index: 50993
+// Method Definition Index: 50996
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -19757,7 +19866,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 50920
+// Method Definition Index: 50923
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_Min_m888083F74FF5655778F0403BB5E9608BEFDEA8CB_inline (int32_t ___0_a, int32_t ___1_b, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -19796,7 +19905,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 50923
+// Method Definition Index: 50926
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_Max_m7FA442918DE37E3A00106D1F2E789D65829792B8_inline (int32_t ___0_a, int32_t ___1_b, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -19835,7 +19944,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 50919
+// Method Definition Index: 50922
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -19874,7 +19983,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 94234
+// Method Definition Index: 94254
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ButtonClickedEvent_t8EA72E90B3BD1392FB3B3EF167D5121C23569E4C* Button_get_onClick_m701712A7F7F000CC80D517C4510697E15722C35C_inline (Button_t6786514A57F7AFDEE5431112FEA0CAB24F5AE098* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19883,7 +19992,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ButtonClickedEvent_t8EA72E90B3BD1
 		return L_0;
 	}
 }
-// Method Definition Index: 50988
+// Method Definition Index: 50991
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -19903,7 +20012,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_6;
 	}
 }
-// Method Definition Index: 50934
+// Method Definition Index: 50937
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_RoundToInt_m60F8B66CF27F1FA75AA219342BD184B75771EB4B_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19930,7 +20039,7 @@ IL_000c:
 		return L_2;
 	}
 }
-// Method Definition Index: 50984
+// Method Definition Index: 50987
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Subtraction_m44475FCDAD2DA2F98D78A6625EC2DCDFE8803837_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -19952,7 +20061,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 50990
+// Method Definition Index: 50993
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -19972,7 +20081,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_6;
 	}
 }
-// Method Definition Index: 50980
+// Method Definition Index: 50983
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_ClampMagnitude_m9BF093877BD11282C41088022FE4AE70A3A0ECA9_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_vector, float ___1_maxLength, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20052,7 +20161,7 @@ IL_0050:
 		return L_19;
 	}
 }
-// Method Definition Index: 50978
+// Method Definition Index: 50981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_magnitude_m5C59B4056420AEFDB291AD0914A3F675330A75CE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20092,7 +20201,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_mCD6889CDE39F187
 		return;
 	}
 }
-// Method Definition Index: 50932
+// Method Definition Index: 50935
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_CeilToInt_mF2BF9F4261B3431DC20E10A46CFEEED103C48963_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20119,7 +20228,7 @@ IL_000c:
 		return L_2;
 	}
 }
-// Method Definition Index: 50938
+// Method Definition Index: 50941
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -20173,7 +20282,7 @@ IL_002d:
 		return L_5;
 	}
 }
-// Method Definition Index: 50942
+// Method Definition Index: 50945
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_MoveTowards_m69751B5EC50D8E7127D4BB2C8D908E38808AF45D_inline (float ___0_current, float ___1_target, float ___2_maxDelta, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -20219,7 +20328,7 @@ IL_0026:
 		return L_11;
 	}
 }
-// Method Definition Index: 50795
+// Method Definition Index: 50797
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	{
@@ -20236,7 +20345,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999E
 		return;
 	}
 }
-// Method Definition Index: 50948
+// Method Definition Index: 50951
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_PingPong_mB1D6A10F386CE1EEA99DB69486DDA6DA531D799D_inline (float ___0_t, float ___1_length, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -20323,7 +20432,7 @@ IL_0089:
 		return L_31;
 	}
 }
-// Method Definition Index: 50832
+// Method Definition Index: 50834
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -20350,7 +20459,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 50816
+// Method Definition Index: 50818
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20373,7 +20482,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6
 		return ((float)L_6);
 	}
 }
-// Method Definition Index: 50818
+// Method Definition Index: 50820
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_sqrMagnitude_m43C27DEC47C4811FB30AB474FF2131A963B66FC8_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20387,7 +20496,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_sqrMagnitude_m4
 		return ((float)il2cpp_codegen_add(((float)il2cpp_codegen_add(((float)il2cpp_codegen_multiply(L_0, L_1)), ((float)il2cpp_codegen_multiply(L_2, L_3)))), ((float)il2cpp_codegen_multiply(L_4, L_5))));
 	}
 }
-// Method Definition Index: 50824
+// Method Definition Index: 50826
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_one_mC9B289F1E15C42C597180C9FE6FB492495B51D02_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20402,7 +20511,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 50834
+// Method Definition Index: 50836
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -20426,7 +20535,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_9;
 	}
 }
-// Method Definition Index: 89145
+// Method Definition Index: 89165
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MatchManager_get_Finished_m6884261B2BE0E1ADB0FE15845A9A4C119F942DEA_inline (MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20435,26 +20544,26 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MatchManager_get_Finished_m6
 		return L_0;
 	}
 }
-// Method Definition Index: 89011
+// Method Definition Index: 89027
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool HUD_get_Paused_m7BB110D3DD061A666AF29415ABB80812D010459F_inline (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:335>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:394>
 		bool L_0 = __this->___U3CPausedU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 89012
+// Method Definition Index: 89028
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void HUD_set_Paused_mCC1EF25C5011D5F59E97EF2D0296ADDB3B0BB266_inline (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:335>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:394>
 		bool L_0 = ___0_value;
 		__this->___U3CPausedU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 89239
+// Method Definition Index: 89259
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Net_get_InMatch_mFF18F94CC217E5FAF76604DAF9E1B01D645C4B4D_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20470,17 +20579,17 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Net_get_InMatch_mFF18F94CC21
 		return L_0;
 	}
 }
-// Method Definition Index: 89010
+// Method Definition Index: 89026
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void HUD_set_AimToggled_m743736C4C968C0E6A684EC94D1CD7EE083A0F0F1_inline (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:334>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:393>
 		bool L_0 = ___0_value;
 		__this->___U3CAimToggledU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 89225
+// Method Definition Index: 89245
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Net_get_Online_mBE11E55E41211ACE862F5E83FB66247E43A3BF66_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20496,7 +20605,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Net_get_Online_mBE11E55E4121
 		return L_0;
 	}
 }
-// Method Definition Index: 50811
+// Method Definition Index: 50813
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Angle_mB16906B482814C140FE5BA9D041D2DC11E42A68D_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_from, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_to, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20559,7 +20668,7 @@ IL_0058:
 		return L_10;
 	}
 }
-// Method Definition Index: 50921
+// Method Definition Index: 50924
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -20598,7 +20707,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 95118
+// Method Definition Index: 95138
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700* RawImage_get_texture_m84CCFDF78F6886F73EBE5A7C78D6E9C3CA903813_inline (RawImage_tFF12F7DB574FBDC1863CF607C7A12A5D9F8D6179* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20607,7 +20716,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Texture_t791CBB51219779964E0E8A2E
 		return L_0;
 	}
 }
-// Method Definition Index: 50827
+// Method Definition Index: 50829
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_up_m128AF3FDC820BF59D5DE86D973E7DE3F20C3AEBA_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -20622,7 +20731,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 50813
+// Method Definition Index: 50815
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_SignedAngle_m76C77F9D7BAF5969FA5B7500ED2D5FF9F9FA4153_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_from, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_to, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___2_axis, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -20693,7 +20802,7 @@ IL_0088:
 		return L_37;
 	}
 }
-// Method Definition Index: 50831
+// Method Definition Index: 50833
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -20720,7 +20829,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 50808
+// Method Definition Index: 50810
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Dot_mBB86BB940AA0A32FA7D3C02AC42E5BC7095A5D52_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -20740,7 +20849,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Dot_mBB86BB940AA0A3
 		return ((float)il2cpp_codegen_add(((float)il2cpp_codegen_add(((float)il2cpp_codegen_multiply(L_1, L_3)), ((float)il2cpp_codegen_multiply(L_5, L_7)))), ((float)il2cpp_codegen_multiply(L_9, L_11))));
 	}
 }
-// Method Definition Index: 50807
+// Method Definition Index: 50809
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_normalized_m736BBF65D5CDA7A18414370D15B4DFCC1E466F07_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20750,7 +20859,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 50939
+// Method Definition Index: 50942
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Lerp_m47EF2FFB7647BD0A1FDC26DC03E28B19812139B5_inline (float ___0_a, float ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -20773,43 +20882,43 @@ IL_0010:
 		return L_5;
 	}
 }
-// Method Definition Index: 89438
+// Method Definition Index: 89458
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderTexture_tBA90C4C3AD9EECCFDDCC632D97C29FAB80D60D27* PlayerController_get_ScopeRT_mF03E6DDA611DCB0037905F2B8B49E89548125819_inline (PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:299>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:301>
 		RenderTexture_tBA90C4C3AD9EECCFDDCC632D97C29FAB80D60D27* L_0 = __this->___scopeRT;
 		return L_0;
 	}
 }
-// Method Definition Index: 89421
+// Method Definition Index: 89441
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool PlayerController_get_Reloading_mD449C94DF3B0E946BDF557CBD13807BD999F0DF7_inline (PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:76>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:78>
 		bool L_0 = __this->___reloading;
 		return L_0;
 	}
 }
-// Method Definition Index: 89418
+// Method Definition Index: 89438
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t PlayerController_get_CurSlot_m992EA73D9855B1A45769C5DF1F2D527AFF1B73CA_inline (PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:73>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:75>
 		int32_t L_0 = __this->___cur;
 		return L_0;
 	}
 }
-// Method Definition Index: 89009
+// Method Definition Index: 89025
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool HUD_get_AimToggled_m0D498EE5BB8B1D0D937F98C9A129BAE2516E2E3C_inline (HUD_tE4F30900C3A25B2C30E32B91C197D3B88819D67D* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:334>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47HUD.cs:393>
 		bool L_0 = __this->___U3CAimToggledU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 50987
+// Method Definition Index: 50990
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_UnaryNegation_mBA9FC53A2194EE3CC067A12D11879F695B34D6F9_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -20827,7 +20936,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 50983
+// Method Definition Index: 50986
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Addition_m8136742CE6EE33BA4EB81C5F584678455917D2AE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -20849,7 +20958,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 50965
+// Method Definition Index: 50968
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Lerp_m1A36103F7967F653A929556E26E6D052C298C00C_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -20893,16 +21002,16 @@ IL_0047:
 		return L_17;
 	}
 }
-// Method Definition Index: 89426
+// Method Definition Index: 89446
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float PlayerController_get_AdsT_mEF1A5DE7E6910C69EDC10E32B8B82917A9463B7F_inline (PlayerController_tB1C33E0C65326BDF4A2CAD2B225BC91B8D33B465* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:81>
+		//<source_info:C:/Zone47/Assets/Zone47/Scripts/Z47Player.cs:83>
 		float L_0 = __this->___adsT;
 		return L_0;
 	}
 }
-// Method Definition Index: 89143
+// Method Definition Index: 89163
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MatchManager_get_Running_m04AD0A422FBA174A0FC50241357B564A108BD465_inline (MatchManager_t9447F1A01A98E7AFCC13FE198B162D7266166358* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20911,7 +21020,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MatchManager_get_Running_m04
 		return L_0;
 	}
 }
-// Method Definition Index: 50789
+// Method Definition Index: 50791
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_Lerp_m3A906D0530A94FAABB94F0F905E84D99BE85C3F8_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -21148,7 +21257,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m16398DB
 		return L_0;
 	}
 }
-// Method Definition Index: 50979
+// Method Definition Index: 50982
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA16336720C14EEF8BA9B55AE33B98C9EE2082BDC_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, const RuntimeMethod* method) 
 {
 	{
@@ -21160,7 +21269,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA
 		return ((float)il2cpp_codegen_add(((float)il2cpp_codegen_multiply(L_0, L_1)), ((float)il2cpp_codegen_multiply(L_2, L_3))));
 	}
 }
-// Method Definition Index: 50935
+// Method Definition Index: 50938
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Sign_m42EE1F0BC041AF14F89DED7F762BE996E2C50D8A_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -21196,7 +21305,7 @@ IL_0018:
 		return L_1;
 	}
 }
-// Method Definition Index: 50947
+// Method Definition Index: 50950
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Repeat_m6F1560A163481BB311D685294E1B463C3E4EB3BA_inline (float ___0_t, float ___1_length, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -21222,7 +21331,7 @@ IL_001b:
 		return L_7;
 	}
 }
-// Method Definition Index: 50809
+// Method Definition Index: 50811
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Dot_m9B5EBE36643126708DB3F444C59C11FA30803DBB_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -21242,7 +21351,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Dot_m9B5EBE36643126
 		return ((float)il2cpp_codegen_add(((float)il2cpp_codegen_add(((float)il2cpp_codegen_multiply(L_1, L_3)), ((float)il2cpp_codegen_multiply(L_5, L_7)))), ((float)il2cpp_codegen_multiply(L_9, L_11))));
 	}
 }
-// Method Definition Index: 50936
+// Method Definition Index: 50939
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp_mEB9AEA827D27D20FCC787F7375156AF46BB12BBF_inline (float ___0_value, float ___1_min, float ___2_max, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -21299,7 +21408,7 @@ IL_001d:
 		return L_9;
 	}
 }
-// Method Definition Index: 50812
+// Method Definition Index: 50814
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_Angle_m77FA4FE195D5A09AFA28304707DD4EA837874F34_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___0_from, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_to, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -21366,7 +21475,7 @@ IL_0054:
 		return L_14;
 	}
 }
-// Method Definition Index: 50805
+// Method Definition Index: 50807
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_Normalize_m1DE89849FE2019B6AA0031306896F3B800849399_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;

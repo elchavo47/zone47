@@ -2030,6 +2030,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Collider_get_enabled_Injected();
 		Register_UnityEngine_Collider_get_enabled_Injected();
 
+		//System.IntPtr UnityEngine.Collider::get_attachedRigidbody_Injected(System.IntPtr)
+		void Register_UnityEngine_Collider_get_attachedRigidbody_Injected();
+		Register_UnityEngine_Collider_get_attachedRigidbody_Injected();
+
 		//System.Void UnityEngine.Collider::ClosestPoint_Injected(System.IntPtr,UnityEngine.Vector3&,UnityEngine.Vector3&)
 		void Register_UnityEngine_Collider_ClosestPoint_Injected();
 		Register_UnityEngine_Collider_ClosestPoint_Injected();
@@ -8993,6 +8997,10 @@ void RegisterAllStrippedInternalCalls()
 	//End Registrations for type : UnityEngine.UnityLogWriter
 
 	//Start Registrations for type : UnityEngine.Vector3
+
+		//System.Void UnityEngine.Vector3::Internal_RotateTowards_Injected(UnityEngine.Vector3&,UnityEngine.Vector3&,System.Single,System.Single,UnityEngine.Vector3&)
+		void Register_UnityEngine_Vector3_Internal_RotateTowards_Injected();
+		Register_UnityEngine_Vector3_Internal_RotateTowards_Injected();
 
 		//System.Void UnityEngine.Vector3::Internal_SlerpUnclamped_Injected(UnityEngine.Vector3&,UnityEngine.Vector3&,System.Single,UnityEngine.Vector3&)
 		void Register_UnityEngine_Vector3_Internal_SlerpUnclamped_Injected();

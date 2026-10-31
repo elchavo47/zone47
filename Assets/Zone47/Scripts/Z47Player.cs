@@ -55,6 +55,8 @@ namespace Zone47
         static void Spring(ref float x, ref float v, float k, float c, float dt) { v += (-k * x - c * v) * dt; x += v * dt; }
         int shotIdx; float lastShotAt = -9f;
         Vector3 swayPos; Vector3 swayRot; float strafeTilt;
+        float sprintT, crouchT, proneT;      // 0..1 blends: the weapon eases into the run / crouch / prone pose instead of snapping
+        bool sprintLatch;                    // sprint starts at a full push and only stops when the stick clearly comes back
         float adsT;
         bool triggerWasDown;
         bool keyFire;
@@ -373,7 +375,9 @@ namespace Zone47
             Vector2 mv = Vector2.ClampMagnitude(PInput.move, 1f);
             // sprint anywhere in the forward 60deg cone (diagonal forward no longer drops to walk speed)
             float mag = mv.magnitude;
-            bool sprint = mag > 0.88f && mv.y / Mathf.Max(mag, 0.001f) > 0.5f && !Aiming && !Firing && !reloading && !prone;
+            float fwdRatio = mv.y / Mathf.Max(mag, 0.001f);
+            sprintLatch = sprintLatch ? (mag > 0.72f && fwdRatio > 0.35f) : (mag > 0.9f && fwdRatio > 0.5f);   // hysteresis: no flicker at the edge
+            bool sprint = sprintLatch && !Aiming && !Firing && !reloading && !prone;
             if (sprint && crouched) { if (CanStand(1.8f)) crouched = false; else sprint = false; }
             if (sprint) PInput.lean = 0;
             float speed = prone ? 1.1f : crouched ? 2.2f : Aiming ? 2.7f : sprint ? 6.4f : 4.3f;
@@ -402,7 +406,7 @@ namespace Zone47
             landDip = Mathf.Lerp(landDip, 0, Time.deltaTime * 8f);
 
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
-            float bob = grounded ? Mathf.Sin(Time.time * (sprint ? 13f : 9f)) * Mathf.Clamp01(hs / 6f) * 0.03f * (1f - adsT * 0.8f) : 0f;
+            float bob = grounded ? Mathf.Sin(Time.time * Mathf.Lerp(9f, 13f, sprintT)) * Mathf.Clamp01(hs / 6f) * 0.03f * (1f - adsT * 0.8f) : 0f;
             // lean: peek around corners, stopped early by walls so the camera never clips through
             int lean = (prone || sprint || !Alive) ? 0 : PInput.lean;
             if (lean != 0)
@@ -671,11 +675,17 @@ namespace Zone47
             if (!grounded) pos += new Vector3(0, -Mathf.Clamp(velocity.y, -6f, 6f) * 0.004f, 0) * aimK;
             pos += new Vector3(0, -landDip * 0.25f, 0);
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
-            float bt = Time.time * (sprinting ? 13f : 9f);
+            float bt = Time.time * Mathf.Lerp(9f, 13f, sprintT);
             pos += new Vector3(Mathf.Cos(bt * 0.5f) * 0.012f, Mathf.Abs(Mathf.Sin(bt * 0.5f)) * 0.01f, 0) * Mathf.Clamp01(hs / 5f) * (1f - adsT * 0.9f);
-            if (sprinting) { pos += new Vector3(-0.04f, -0.04f, -0.03f); rot *= Quaternion.Euler(10f, -28f, 12f); }
-            if (crouched) pos += new Vector3(-0.01f, 0.005f, 0) * (1f - adsT);
-            if (prone && !Aiming) { pos += new Vector3(0.02f, -0.03f, 0); rot *= Quaternion.Euler(0, 0, -8f); }
+            // stance poses blend in/out over ~0.25 s (they used to switch in a single frame)
+            float sm = 1f - Mathf.Exp(-Time.deltaTime * 9f);
+            sprintT = Mathf.Lerp(sprintT, sprinting ? 1f : 0f, sm);
+            crouchT = Mathf.Lerp(crouchT, crouched ? 1f : 0f, sm);
+            proneT = Mathf.Lerp(proneT, prone && !Aiming ? 1f : 0f, sm);
+            float st = sprintT * sprintT * (3f - 2f * sprintT);       // smoothstep: soft start and landing
+            pos += new Vector3(-0.04f, -0.04f, -0.03f) * st; rot *= Quaternion.Euler(10f * st, -28f * st, 12f * st);
+            pos += new Vector3(-0.01f, 0.005f, 0) * crouchT * (1f - adsT);
+            pos += new Vector3(0.02f, -0.03f, 0) * proneT; rot *= Quaternion.Euler(0, 0, -8f * proneT);
 
             // breathing: slow figure-eight drift, calmer when aiming, stronger when out of breath (sprinting)
             breathT += Time.deltaTime * (sprinting ? 2.2f : 1f);

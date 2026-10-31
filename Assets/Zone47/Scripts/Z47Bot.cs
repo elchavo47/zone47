@@ -32,7 +32,9 @@ namespace Zone47
         float stuckT, holdT;
         float strafeSide = 1f;
         Ragdoll ragdoll;
-        int nades = 2; float nextNade;
+        int nades = 1; float nextNade;
+        static readonly float[] teamNadeAt = { -99f, -99f };        // last grenade per team: one side can't spam several at once
+        int NadeCount => Settings.Difficulty >= 2 ? 2 : 1;
 
         // online puppet: this soldier is simulated on another phone (a remote player, or the host's bots); we only show it
         public bool puppet; public ulong owner; bool netHuman;
@@ -87,6 +89,7 @@ namespace Zone47
             SpawnGun();
             // ragdoll removed (bodies flopped around): deaths use the Dying animation again
             thinkT = Random.Range(0f, 0.3f);
+            nades = NadeCount; nextNade = Time.time + Random.Range(20f, 35f);     // no grenade in the first moments of a life
         }
 
         void Update()
@@ -158,19 +161,20 @@ namespace Zone47
                     Flee(g.transform.position, Grenade.BlastR + 1.5f, Mathf.Max(0.5f, g.TimeLeft));
 
             if (nades <= 0 || Time.time < nextNade || reloading || Z47Refs.I.grenadePrefab == null || Time.time < fleeUntil) return;
+            if (Time.time - teamNadeAt[team & 1] < 12f) return;           // a teammate just threw one
             Vector3 at; bool want;
             if (target != null)
             {
                 // someone camping behind cover at medium range
                 float d = Vector3.Distance(target.transform.position, transform.position);
-                want = d > 9f && d < 26f && Random.value < (atCover ? 0.06f : 0.035f) * Skill;
+                want = d > 9f && d < 26f && Random.value < (atCover ? 0.012f : 0.006f) * Skill;     // checked 5x a second
                 at = target.transform.position;
             }
             else
             {
                 // just lost sight of them: flush them out of where they hid
                 float since = Time.time - lastKnownT, d = Vector3.Distance(lastKnown, transform.position);
-                want = since > 0.6f && since < 4f && d > 8f && d < 24f && Random.value < 0.12f * Skill;
+                want = since > 0.6f && since < 4f && d > 8f && d < 24f && Random.value < 0.03f * Skill;
                 at = lastKnown;
             }
             if (!want) return;
@@ -180,7 +184,7 @@ namespace Zone47
 
         void ThrowNade(Vector3 at)
         {
-            nades--; nextNade = Time.time + Random.Range(14f, 22f);
+            nades--; nextNade = Time.time + Random.Range(35f, 55f); teamNadeAt[team & 1] = Time.time;
             Face(at);
             Vector3 from = EyePos + transform.forward * 0.55f + Vector3.up * 0.1f;
             at += Random.insideUnitSphere.Flat() * Mathf.Lerp(3f, 1f, Skill);
@@ -555,7 +559,7 @@ namespace Zone47
             else { agent.enabled = true; agent.Warp(pos); }
             transform.rotation = rot;
             col.enabled = true;
-            hp = maxHp; mag = weapon.magSize; reloading = false; target = null; lastKnownT = -99f; hasRoam = false; nades = 2; fleeUntil = 0f;
+            hp = maxHp; mag = weapon.magSize; reloading = false; target = null; lastKnownT = -99f; hasRoam = false; nades = NadeCount; nextNade = Time.time + Random.Range(20f, 35f); fleeUntil = 0f;
             foreach (var r in rends) r.enabled = true;
             if (gun == null) SpawnGun();
             if (ragdoll != null) ragdoll.Deactivate();
