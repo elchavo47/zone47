@@ -516,17 +516,20 @@ namespace Zone47
             Vector3 up = (N - H).normalized;
             Vector3 right = Vector3.ProjectOnPlane(rUp.position - lUp.position, up).normalized;
             Vector3 fwd = Vector3.Cross(right, up);
-            Vector3 muzzle = (-up * 0.55f - right * 0.55f + fwd * 0.62f).normalized;
-            Vector3 gunUp = Vector3.ProjectOnPlane(up + right * 0.35f, muzzle).normalized;
+            // lies across the chest (barely toward the camera): pointing it at the camera hid the side and put the handguard
+            // 41 cm in front of the hips, out of the left arm's reach (55 cm arm vs 57 cm) - the hand hung in the air
+            Vector3 muzzle = (-up * 0.6f - right * 0.78f + fwd * 0.16f).normalized;
+            // "up" of the gun at right angles to both the barrel and the camera direction: its side faces the camera exactly
+            Vector3 gunUp = Vector3.Cross(muzzle, fwd).normalized; if (Vector3.Dot(gunUp, up) < 0f) gunUp = -gunUp;
             Quaternion gr = Quaternion.LookRotation(muzzle, gunUp);
-            Vector3 grip = H + up * 0.3f + right * 0.15f + fwd * 0.22f;
+            Vector3 grip = H + up * 0.32f + right * 0.14f + fwd * 0.2f;
             gun.SetPositionAndRotation(grip, gr);
 
             // 6) hands back on it with the idle's own grip; elbows down, the right one by the side, the left one out
             Arm(rUp, rLo, rHand, grip + gr * offR, gr * relR, -up * 0.5f + right * 0.9f - fwd * 0.25f);
             // left hand: palm right under the handguard (the idle's hand angle, but placed exactly on the gun)
             Vector3 fore = def != null ? gun.TransformPoint(def.forePoint) : grip + muzzle * 0.32f;
-            fore -= gunUp * 0.035f;
+            fore -= gunUp * 0.04f;                                              // under the handguard
             Vector3 palm = Vector3.zero;
             for (int pass = 0; pass < 2; pass++)
             {
