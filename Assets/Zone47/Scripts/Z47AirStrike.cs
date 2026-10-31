@@ -11,7 +11,17 @@ namespace Zone47
         public static AirStrikes I;
         static Material droneMat, bombMat;
         const float BlastR = 11f;
-        const float Alt = 85f, Speed = 24f, OrbitR = 70f;
+        const float Speed = 24f;
+        // fog / sandstorm: fly much lower and tighter so the drone is still seen through the haze (at 85 m it was ~110 m away = invisible)
+        static bool Thick => Weather.Current == Weather.Fog || Weather.Current == Weather.Sandstorm;
+        static float Alt => Thick ? 42f : 85f;
+        static float OrbitR => Thick ? 32f : 70f;
+
+        /// Live aim of one strike. The host keeps moving it onto where the people are (and tells the other phones),
+        /// then fixes the final target and the exact bomb spots right before the bombing run.
+        class Aim { public Vector3 target; public bool final; public Vector3[] drops; }
+        readonly Dictionary<int, Aim> aims = new Dictionary<int, Aim>();
+        static bool Decides => !Net.IsClient;            // offline or host
 
         class Bomb { public Vector3 at, from; public float hitT, dropT; public Transform body; public Actor caller; }
         readonly List<Bomb> bombs = new List<Bomb>();
@@ -52,19 +62,11 @@ namespace Zone47
             if (Net.IsClient) yield break;
             bool neutral = caller == null;
             int callTeam = neutral ? -1 : caller.team;
-            // target a crowd (of the caller's enemies)
-            Actor best = null; int bestN = -1;
-            foreach (var a in Actor.All)
-            {
-                if (!a.Alive || (!neutral && a.team == callTeam)) continue;
-                int n = 0; foreach (var o in Actor.All) if (o != a && o.Alive && (o.ChestPos - a.ChestPos).sqrMagnitude < 25f * 25f) n++;
-                n += Random.Range(0, 3);
-                if (n > bestN) { bestN = n; best = a; }
-            }
-            if (best == null) yield break;
+            // start over the biggest group of soldiers (the caller's enemies); the aim keeps following them afterwards
+            if (!Crowd(callTeam, null, out var start)) yield break;
             var plan = new Plan
             {
-                target = best.transform.position, inAng = Random.Range(0f, 360f),
+                target = start, inAng = Random.Range(0f, 360f),
                 orbitTime = neutral ? Random.Range(9f, 13f) : Random.Range(4f, 6f),
                 dirSign = Random.value < 0.5f ? 1f : -1f, seed = Random.Range(1, int.MaxValue),
             };
@@ -83,7 +85,18 @@ namespace Zone47
             var pl0 = PlayerController.Local;
             bool friendly = !neutral && pl0 != null && callTeam == pl0.team;
             Vector3 target = plan.target;
-            var rng = new System.Random(plan.seed);
+            var aim = new Aim { target = plan.target };
+            aims[plan.seed] = aim;
+            float retargetT = 0f;
+            // host / offline: every second, move the aim onto the biggest group right now (and tell the other phones)
+            void Retarget(bool force)
+            {
+                if (!Decides) return;
+                retargetT -= Time.deltaTime;
+                if (retargetT > 0f && !force) return;
+                retargetT = 1f;
+                if (Crowd(callTeam, aim.target, out var c)) { aim.target = c; Net.SendTrack(plan.seed, c); }
+            }
 
             // 1) siren + warning, the drone is still far away (heard before it's seen)
             bool tr = Settings.Turkish;
@@ -118,24 +131,39 @@ namespace Zone47
             }
 
             // 2) slow approach
-            yield return Fly(drone, far, entry, () => TryGlance());
+            yield return Fly(drone, far, entry, () => { TryGlance(); Retarget(false); });
             // 3) circle the area once-ish, banking (the long scary part: it's right above you and you don't know where it'll hit)
             if (!friendly) HUD.I?.ShowToastBig(Settings.Turkish ? "İHA TEPEDE! SİPER AL" : "DRONE OVERHEAD! TAKE COVER", new Color(1f, 0.25f, 0.18f), 3f);
             float orbitTime = plan.orbitTime, t = 0f, a0 = Mathf.Atan2(entry.x - target.x, entry.z - target.z), dirSign = plan.dirSign;
             float w = Speed / OrbitR * dirSign;
             Vector3 last = drone.transform.position;
-            while (t < orbitTime)
+            Vector3 center = target;
+            float extra = 0f;
+            // keep circling until the orbit time is up AND (online client) the host has sent the final target
+            while (t < orbitTime || (!Decides && !aim.final && extra < 8f))
             {
-                t += Time.deltaTime;
+                t += Time.deltaTime; if (t >= orbitTime) extra += Time.deltaTime;
+                Retarget(false);
+                center = Vector3.MoveTowards(center, aim.target, 10f * Time.deltaTime);     // the circle drifts over to where the people are
                 float ang = a0 + w * t;
-                Vector3 p = target + new Vector3(Mathf.Sin(ang), 0, Mathf.Cos(ang)) * OrbitR + Vector3.up * Alt;
+                Vector3 p = center + new Vector3(Mathf.Sin(ang), 0, Mathf.Cos(ang)) * OrbitR + Vector3.up * Alt;
                 Vector3 v = p - last; last = p;
                 drone.transform.position = p;
                 if (v.sqrMagnitude > 0.0001f) drone.transform.rotation = Quaternion.LookRotation(v) * Quaternion.Euler(0, 0, -dirSign * 18f);
                 TryGlance();
                 yield return null;
             }
-            // 4) bombing run straight across the area, bombs released over it (impact spots unmarked)
+            // 4) final aim: where the soldiers are NOW. The host picks the exact bomb spots (on the people there) and sends them,
+            //    so every phone drops the same bombs in the same places.
+            if (Decides)
+            {
+                Retarget(true);
+                aim.drops = PickDrops(aim.target, callTeam);
+                aim.final = true;
+                Net.SendDrop(plan.seed, aim.target, aim.drops);
+            }
+            if (!aim.final) { aims.Remove(plan.seed); drones.Remove(drone); Destroy(drone); if (neutral) striking = false; yield break; }   // lost the host's data
+            target = aim.target;
             Vector3 runDir = (target - drone.transform.position).Flat().normalized;
             Vector3 runStart = drone.transform.position, runEnd = target + runDir * 520f + Vector3.up * Alt;
             bool dropped = false;
@@ -145,19 +173,56 @@ namespace Zone47
                 if (!dropped && Vector3.Distance(drone.transform.position.Flat(), target.Flat()) < 18f)
                 {
                     dropped = true;
-                    int n = rng.Next(3, 6);
-                    for (int i = 0; i < n; i++)
-                    {
-                        float ba = (float)rng.NextDouble() * Mathf.PI * 2f, br = Mathf.Sqrt((float)rng.NextDouble()) * 24f;
-                        Vector3 p = target + new Vector3(Mathf.Cos(ba), 0, Mathf.Sin(ba)) * br;
-                        if (Physics.Raycast(p + Vector3.up * 80f, Vector3.down, out var g, 160f, ~0, QueryTriggerInteraction.Ignore)) p = g.point;
-                        DropBomb(drone.transform.position + runDir * i * 5f - Vector3.up * 1.5f, p, 4.2f + i * 0.45f, caller);
-                    }
+                    var pts = aim.drops ?? new Vector3[0];
+                    for (int i = 0; i < pts.Length; i++)
+                        DropBomb(drone.transform.position + runDir * i * 5f - Vector3.up * 1.5f, pts[i], (Thick ? 3.2f : 4.2f) + i * 0.45f, caller);
                 }
             });
+            aims.Remove(plan.seed);
             drones.Remove(drone); Destroy(drone);
             if (neutral) striking = false;
         }
+
+        static bool Target(Actor a, int callTeam) => a != null && a.Alive && (callTeam < 0 || a.team != callTeam);
+
+        /// Centre of the biggest group of targets (feet level). `near`: prefer groups close to the current aim so the drone doesn't zig-zag.
+        static bool Crowd(int callTeam, Vector3? near, out Vector3 center)
+        {
+            center = Vector3.zero; float best = float.MinValue; bool found = false;
+            foreach (var a in Actor.All)
+            {
+                if (!Target(a, callTeam)) continue;
+                int n = 0; Vector3 sum = Vector3.zero;
+                foreach (var o in Actor.All)
+                    if (Target(o, callTeam) && (o.transform.position - a.transform.position).Flat().sqrMagnitude < 20f * 20f) { n++; sum += o.transform.position; }
+                float score = n * 10f + Random.Range(0f, 4f) - (near.HasValue ? (a.transform.position - near.Value).Flat().magnitude * 0.06f : 0f);
+                if (score > best) { best = score; center = sum / Mathf.Max(1, n); found = true; }
+            }
+            return found;
+        }
+
+        /// 3-5 bomb spots: on the soldiers standing around the target (a couple of metres off), the rest close around it.
+        static Vector3[] PickDrops(Vector3 target, int callTeam)
+        {
+            var near = new List<Actor>();
+            foreach (var a in Actor.All) if (Target(a, callTeam) && (a.transform.position - target).Flat().sqrMagnitude < 22f * 22f) near.Add(a);
+            near.Sort((x, y) => (x.transform.position - target).sqrMagnitude.CompareTo((y.transform.position - target).sqrMagnitude));
+            int n = Random.Range(3, 6);
+            var pts = new Vector3[n];
+            for (int i = 0; i < n; i++)
+            {
+                Vector3 p = i < near.Count ? near[i].transform.position + Random.insideUnitSphere.Flat() * 2.5f
+                                           : target + Random.insideUnitSphere.Flat() * 9f;
+                if (Physics.Raycast(p + Vector3.up * 80f, Vector3.down, out var g, 160f, ~0, QueryTriggerInteraction.Ignore)) p = g.point;
+                pts[i] = p;
+            }
+            return pts;
+        }
+
+        /// Online (client): the host moved a strike's aim.
+        public void NetTrack(int id, Vector3 p) { if (aims.TryGetValue(id, out var a) && !a.final) a.target = p; }
+        /// Online (client): final target and bomb spots of a strike.
+        public void NetDrop(int id, Vector3 target, Vector3[] pts) { if (aims.TryGetValue(id, out var a)) { a.target = target; a.drops = pts; a.final = true; } }
 
         IEnumerator Fly(GameObject drone, Vector3 a, Vector3 b, System.Action tick)
         {
@@ -332,6 +397,7 @@ namespace Zone47
                     droneMat.SetFloat("_Smoothness", 0.35f);
                 }
                 foreach (var r in rends) { if (droneMat != null) { var mats = r.sharedMaterials; for (int i = 0; i < mats.Length; i++) mats[i] = droneMat; r.sharedMaterials = mats; } r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; }
+                DroneBeacon.Add(wrap);
                 return wrap;
             }
             var root = new GameObject("Drone");
@@ -347,9 +413,44 @@ namespace Zone47
             Part(new Vector3(0, 0.15f, 0.3f), new Vector3(12f, 0.12f, 1.1f), PrimitiveType.Cube); // wings
             Part(new Vector3(0, 0.6f, -3.6f), new Vector3(0.1f, 1.2f, 0.9f), PrimitiveType.Cube); // tail fin
             Part(new Vector3(0, 0.1f, -3.8f), new Vector3(3.2f, 0.1f, 0.7f), PrimitiveType.Cube); // tail plane
+            DroneBeacon.Add(root);
             return root;
         }
 
-        void OnDestroy() { if (I == this) I = null; foreach (var b in bombs) if (b.body) Destroy(b.body.gameObject); foreach (var d in drones) if (d) Destroy(d); drones.Clear(); }
+        void OnDestroy() { aims.Clear(); if (I == this) I = null; foreach (var b in bombs) if (b.body) Destroy(b.body.gameObject); foreach (var d in drones) if (d) Destroy(d); drones.Clear(); }
+    }
+
+    /// Red anti-collision light under the drone, blinking. Drawn with the unlit FX shader, which ignores fog,
+    /// so it shows through a sandstorm / fog even when the body is lost in the haze.
+    public class DroneBeacon : MonoBehaviour
+    {
+        static Material mat;
+        Transform q; Renderer r; float phase;
+
+        public static void Add(GameObject drone)
+        {
+            var src = Z47Refs.I.sparkMat != null ? Z47Refs.I.sparkMat : Z47Refs.I.flashMat;
+            if (src == null) return;
+            if (mat == null) { mat = new Material(src) { name = "DroneBeacon" }; mat.SetFloat("_VC", 0f); mat.SetColor("_BaseColor", new Color(1f, 0.12f, 0.08f, 1f)); }
+            var b = drone.AddComponent<DroneBeacon>();
+            var g = GameObject.CreatePrimitive(PrimitiveType.Quad); Destroy(g.GetComponent<Collider>());
+            g.name = "Beacon"; g.transform.SetParent(drone.transform, false);
+            b.r = g.GetComponent<Renderer>(); b.r.sharedMaterial = mat; b.r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; b.r.receiveShadows = false;
+            b.q = g.transform; b.phase = Random.value;
+        }
+
+        void LateUpdate()
+        {
+            if (q == null) return;
+            var cam = Camera.main; if (cam == null) return;
+            q.position = transform.position - Vector3.up * 0.8f;
+            q.rotation = Quaternion.LookRotation(q.position - cam.transform.position);
+            float d = Vector3.Distance(cam.transform.position, q.position);
+            float t = Mathf.Repeat(Time.time * 1.1f + phase, 1f);
+            bool flash = t < 0.12f || (t > 0.24f && t < 0.33f);                 // double blink, like a real strobe
+            float size = (0.9f + d * 0.035f) * (flash ? 1.6f : 0.75f);           // keeps a readable size on screen at any distance
+            q.localScale = Vector3.one * size / Mathf.Max(0.0001f, transform.lossyScale.x);
+            r.enabled = flash || t > 0.5f;
+        }
     }
 }

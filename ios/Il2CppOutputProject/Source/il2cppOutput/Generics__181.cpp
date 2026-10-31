@@ -6323,7 +6323,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Task_1_tDF1FF540D7D2248A08580387A39717B7FB7A9
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 98900
+// Method Definition Index: 98928
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WebSocketServiceHost_1__ctor_m1951675A6504FA93098753842F8F2B82A560DFCE_gshared (WebSocketServiceHost_1_tB86332D04981FE797DCF8BBA330F181147860845* __this, String_t* ___0_path, Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* ___1_initializer, Logger_t94DF353D0E36883ABCD46D14A9158723B2C9D7FF* ___2_log, const RuntimeMethod* method) 
 {
 	{
@@ -6341,7 +6341,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WebSocketServiceHost_1__ctor_m1951675A65
 		return;
 	}
 }
-// Method Definition Index: 98901
+// Method Definition Index: 98929
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Type_t* WebSocketServiceHost_1_get_BehaviorType_mFB5F7D6324574071AE98FF1ECF62F3B76BAC5E3C_gshared (WebSocketServiceHost_1_tB86332D04981FE797DCF8BBA330F181147860845* __this, const RuntimeMethod* method) 
 {
 	{
@@ -6353,7 +6353,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Type_t* WebSocketServiceHost_1_get_BehaviorTy
 		return L_1;
 	}
 }
-// Method Definition Index: 98902
+// Method Definition Index: 98930
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Func_1_tD5C081AE11746B200C711DD48DBEB00E3A9276D4* WebSocketServiceHost_1_createSessionCreator_m110E20D6760FE2D8303EA6FD89BB5D274B1B3A91_gshared (Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* ___0_initializer, const RuntimeMethod* method) 
 {
 	U3CU3Ec__DisplayClass4_0_tF50DB4632CE9239E02B1E92072C26600E23A9162* V_0 = NULL;
@@ -6420,7 +6420,7 @@ IL_0035:
 		return L_11;
 	}
 }
-// Method Definition Index: 98903
+// Method Definition Index: 98931
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WebSocketBehavior_t1AAFC576CBE781D23E42BF7D23E795E8457750EC* WebSocketServiceHost_1_CreateSession_mFF26EA784FA34F88E9A8C62CB11DB58D7D322C5E_gshared (WebSocketServiceHost_1_tB86332D04981FE797DCF8BBA330F181147860845* __this, const RuntimeMethod* method) 
 {
 	{

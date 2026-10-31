@@ -303,7 +303,7 @@ namespace Zone47
             var chip = new Color(1, 1, 1, 0.08f); var dark = new Color(0.08f, 0.06f, 0.03f);
             tb(L.S("size") + "  −", 170, chip, Pal.Text, () => { if (sel != null) { sel.it.size = Mathf.Max(sel.it.defSize * 0.6f, sel.it.size - sel.it.defSize * 0.1f); refresh(); } });
             var st = tb("", 110, Color.clear, Pal.Accent, null); sizeTxt = st.GetComponentInChildren<Text>();
-            tb(L.S("size") + "  +", 170, chip, Pal.Text, () => { if (sel != null) { sel.it.size = Mathf.Min(sel.it.defSize * 1.6f, sel.it.size + sel.it.defSize * 0.1f); refresh(); } });
+            tb(L.S("size") + "  +", 170, chip, Pal.Text, () => { if (sel != null) { sel.it.size = Mathf.Min(sel.it.defSize * 3f, sel.it.size + sel.it.defSize * 0.1f); refresh(); } });
             tb(L.S("reset"), 200, chip, Pal.Text, () => { foreach (var w in ws) { w.it.pos = w.it.defPos; w.it.size = w.it.defSize; w.it.alpha = 1f; } refresh(); });
             tb(L.S("cancel"), 200, chip, Pal.Text, () => { UnityEngine.Object.Destroy(panel.gameObject); onDone?.Invoke(); });
             tb(L.S("save"), 210, Pal.Accent, dark, () =>
@@ -326,8 +326,10 @@ namespace Zone47
             };
             Action<float> stepAlpha = d =>
             {
-                if (sel != null) sel.it.alpha = Mathf.Clamp(sel.it.alpha + d, 0.2f, 1f);
-                else foreach (var w in ws) w.it.alpha = Mathf.Clamp(w.it.alpha + d, 0.2f, 1f);
+                // 10% steps, finer 5% steps at the very transparent end (down to 5%)
+                Func<float, float> step = a => Mathf.Clamp(Mathf.Round((a + (a < 0.2f || (a <= 0.2001f && d < 0f) ? d * 0.5f : d)) * 100f) / 100f, 0.05f, 1f);
+                if (sel != null) sel.it.alpha = step(sel.it.alpha);
+                else foreach (var w in ws) w.it.alpha = step(w.it.alpha);
                 refresh();
             };
             tb2(L.S("opacity") + "  −", 250, chip, Pal.Text, () => stepAlpha(-0.1f));

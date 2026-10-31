@@ -453,11 +453,12 @@ namespace Zone47
     public class PoserGun : MonoBehaviour
     {
         public Transform gun;
-        Transform r, l;
-        void Start() { var a = GetComponent<Animator>(); r = a.GetBoneTransform(HumanBodyBones.RightHand); l = a.GetBoneTransform(HumanBodyBones.LeftHand); }
+        Transform r, l; Animator a;
+        void Start() { a = GetComponent<Animator>(); r = a.GetBoneTransform(HumanBodyBones.RightHand); l = a.GetBoneTransform(HumanBodyBones.LeftHand); }
         void LateUpdate()
         {
             if (r == null || l == null || gun == null) return;
+            Posture.Straighten(a, transform, 1f);        // stand tall in the lobby (the hands come along, the gun is placed in them below)
             Vector3 f = l.position - r.position; if (f.sqrMagnitude < 1e-4f) return;
             Vector3 up = Vector3.Cross(f, transform.right); if (Vector3.Dot(up, Vector3.up) < 0) up = -up;
             gun.rotation = Quaternion.LookRotation(f.normalized, up);

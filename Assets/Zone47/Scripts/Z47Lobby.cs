@@ -15,12 +15,12 @@ namespace Zone47
         static readonly Color Glass = new Color(0.04f, 0.045f, 0.045f, 0.72f);
         static string T(string tr, string en) => Settings.Turkish ? tr : en;
 
-        void Chip(RectTransform root, ref float x, float y, string text, Action onTap)
+        void Chip(RectTransform root, ref float x, float y, string text, Action onTap, bool accent = false)
         {
-            var c = UIK.Img(root, "chip", Glass, new Vector2(0, 0), new Vector2(0, 0), Vector2.zero, new Vector2(10, 46), onTap != null);
+            var c = UIK.Img(root, "chip", accent ? Pal.Accent : Glass, new Vector2(0, 0), new Vector2(0, 0), Vector2.zero, new Vector2(10, 46), onTap != null);
             c.rectTransform.pivot = new Vector2(0, 0); c.rectTransform.anchoredPosition = new Vector2(x, y);
-            var ol = c.gameObject.AddComponent<Outline>(); ol.effectColor = new Color(1, 1, 1, 0.2f); ol.effectDistance = new Vector2(2, 2);
-            var t = UIK.Txt(c.transform, "t", text, 22, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, false);
+            var ol = c.gameObject.AddComponent<Outline>(); ol.effectColor = accent ? new Color(0, 0, 0, 0.35f) : new Color(1, 1, 1, 0.2f); ol.effectDistance = new Vector2(2, 2);
+            var t = UIK.Txt(c.transform, "t", text, 22, accent ? Ink : Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, false);
             t.supportRichText = true; t.fontStyle = FontStyle.Bold;
             float w = t.preferredWidth + 40f; c.rectTransform.sizeDelta = new Vector2(w, 46);
             x += w + 12f;
@@ -418,11 +418,12 @@ namespace Zone47
             for (int i = 0; i < nav.Length; i++)
             {
                 bool on = i == 0;
-                var item = UIK.Img(U, "nav" + i, on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.2f) : new Color(0, 0, 0, 0.01f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(360, 64), true);
-                item.rectTransform.pivot = new Vector2(0, 1); item.rectTransform.anchoredPosition = new Vector2(70, -180 - i * 70);
+                var item = UIK.Img(U, "nav" + i, on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.2f) : new Color(0, 0, 0, 0.01f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(360, 76), true);
+                item.rectTransform.pivot = new Vector2(0, 1); item.rectTransform.anchoredPosition = new Vector2(70, -170 - i * 84);
                 if (on) UIK.Img(item.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(5, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
-                UIK.Txt(item.transform, "t", nav[i].t, 26, on ? Color.white : new Color(0.62f, 0.6f, 0.55f), TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(22, -6), new Vector2(-34, -8), true);
-                UIK.Txt(item.transform, "s", nav[i].s, 15, on ? Pal.Accent : nav[i].soon ? Pal.Ally : new Color(0.45f, 0.43f, 0.4f), TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(22, 7), new Vector2(-34, -12), true);
+                // two fixed rows (title on top, subtitle under it) so they never run into each other
+                Row(UIK.Txt(item.transform, "t", nav[i].t, 26, on ? Color.white : new Color(0.62f, 0.6f, 0.55f), TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true).rectTransform, 22, 8, 34);
+                Row(UIK.Txt(item.transform, "s", nav[i].s, 14, on ? Pal.Accent : nav[i].soon ? Pal.Ally : new Color(0.45f, 0.43f, 0.4f), TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true).rectTransform, 22, 44, 22);
                 var act = nav[i].a;
                 if (act != null) item.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); act(); });
             }
@@ -478,28 +479,31 @@ namespace Zone47
                     plus.rectTransform.anchoredPosition = P(mid) + new Vector2(0, 20);
                     var po = plus.gameObject.AddComponent<Outline>(); po.effectColor = Pal.Accent; po.effectDistance = new Vector2(3, 3);
                     UIK.Txt(plus.transform, "p", "+", 76, Pal.Accent, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, new Vector2(0, 4), Vector2.zero, true);
-                    UIK.Txt(plus.transform, "l", online ? T("DAVET ET", "INVITE") : T("PARTİ KUR", "PARTY UP"), 20, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, -26), new Vector2(240, 30), true);
+                    UIK.Txt(plus.transform, "l", T("ARKADAŞ ÇAĞIR", "INVITE"), 20, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, -26), new Vector2(240, 30), true);
                     plus.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); PlusTapped(); });
                 }
             }
 
             // ---- party header (top, over the stage)
-            var ph = UIK.Rect(U, "party", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(cx, -36), new Vector2(900, 64));
+            var ph = UIK.Rect(U, "party", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(cx, -36), new Vector2(960, 64));
             UIK.Txt(ph, "k", T("PARTİ", "PARTY"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 0), new Vector2(0, 1), new Vector2(0, 0), new Vector2(140, 0), true).rectTransform.pivot = new Vector2(0, 0.5f);
             var cnt = UIK.Txt(ph, "n", (online ? Net.Room.Count : 1) + "<size=34><color=#9E998C> / " + Net.MaxPlayers + "</color></size>", 56, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 0), new Vector2(0, 1), new Vector2(118, 0), new Vector2(200, 0), true);
             cnt.supportRichText = true; cnt.rectTransform.pivot = new Vector2(0, 0.5f);
             if (online)
             {
-                var cb = UIK.Img(ph, "code", new Color(0.04f, 0.045f, 0.045f, 0.8f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(400, 56), true);
-                cb.rectTransform.pivot = new Vector2(0, 0.5f); cb.rectTransform.anchoredPosition = new Vector2(300, 0);
-                UIK.Txt(cb.transform, "k", T("ODA KODU", "CODE"), 17, Pal.Dim, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-32, 0), true);
-                UIK.Txt(cb.transform, "c", Net.Code, 30, Color.white, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(118, 0), new Vector2(-236, 0), true);
-                var cp = UIK.Img(cb.transform, "cp", Pal.Accent, new Vector2(1, 0.5f), new Vector2(1, 0.5f), Vector2.zero, new Vector2(110, 38));
-                cp.rectTransform.pivot = new Vector2(1, 0.5f); cp.rectTransform.anchoredPosition = new Vector2(-9, 0);
+                // [ ODA KODU | ABC123 | KOPYALA ]  — three separate columns, the code gets its own wide middle slot
+                var cb = UIK.Img(ph, "code", new Color(0.04f, 0.045f, 0.045f, 0.85f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(500, 56), true);
+                cb.rectTransform.pivot = new Vector2(0, 0.5f); cb.rectTransform.anchoredPosition = new Vector2(280, 0);
+                var ck = UIK.Txt(cb.transform, "k", T("ODA KODU", "ROOM CODE"), 16, Pal.Dim, TextAnchor.MiddleLeft, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, Vector2.zero, true).rectTransform;
+                ck.pivot = new Vector2(0, 0.5f); ck.anchoredPosition = new Vector2(16, 0); ck.sizeDelta = new Vector2(120, 0);
+                var cc = UIK.Txt(cb.transform, "c", Net.Code, 32, Color.white, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero, true).rectTransform;
+                cc.offsetMin = new Vector2(140, 0); cc.offsetMax = new Vector2(-130, 0);
+                var cp = UIK.Img(cb.transform, "cp", Pal.Accent, new Vector2(1, 0.5f), new Vector2(1, 0.5f), Vector2.zero, new Vector2(116, 42));
+                cp.rectTransform.pivot = new Vector2(1, 0.5f); cp.rectTransform.anchoredPosition = new Vector2(-7, 0);
                 UIK.Txt(cp.transform, "t", T("KOPYALA", "COPY"), 16, Ink, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-                cb.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); GUIUtility.systemCopyBuffer = Net.Code; Toast(T("KOD KOPYALANDI", "CODE COPIED")); });
+                cb.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); GUIUtility.systemCopyBuffer = Net.Code; Toast(T("ODA KODU KOPYALANDI · ARKADAŞINA GÖNDER", "CODE COPIED · SEND IT TO A FRIEND")); });
                 var lv = UIK.Btn(ph, T("ÇIK", "LEAVE"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(110, 56), () => { Net.Leave(); }, 22);
-                var lr = (RectTransform)lv.transform; lr.pivot = new Vector2(0, 0.5f); lr.anchoredPosition = new Vector2(712, 0);
+                var lr = (RectTransform)lv.transform; lr.pivot = new Vector2(0, 0.5f); lr.anchoredPosition = new Vector2(794, 0);
             }
             else
             {
@@ -516,9 +520,17 @@ namespace Zone47
             UIK.Txt(U, "kick", kicker, 20, online && me != null && me.team == 1 ? Pal.Enemy : Pal.Accent, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(0, 0), new Vector2(72, 196), new Vector2(700, 28), true).rectTransform.pivot = new Vector2(0, 0);
             var ht = UIK.Txt(U, "hero", T("TAKIM ÖLÜM MAÇI", "TEAM DEATHMATCH"), 54, Color.white, TextAnchor.LowerLeft, new Vector2(0, 0), new Vector2(0, 0), new Vector2(70, 124), new Vector2(900, 70), true);
             ht.rectTransform.pivot = new Vector2(0, 0); ht.gameObject.AddComponent<Shadow>().effectColor = new Color(0, 0, 0, 0.6f);
+            bool canEdit = !online || Net.IsHost;
+            Action openSettings = () =>
+            {
+                if (!online) ShowMatchSettings(RefreshLobby);
+                else if (Net.IsHost) ShowMatchSettings(() => { Net.PullHostSettings(); RefreshLobby(); });
+                else Toast(T("MODU VE HARİTAYI KURUCU SEÇER", "THE HOST PICKS MODE AND MAP"));
+            };
             float x = 72;
-            Chip(U, ref x, 60, "<color=#F29E1F>" + pr.label + "</color>  ·  " + T("HEDEF ", "TARGET ") + pr.target, null);
-            Chip(U, ref x, 60, Mathf.RoundToInt(pr.time / 60f) + T(" DK", " MIN"), null);
+            // the mode chip itself opens the match settings, and a bright CHANGE MODE chip sits right next to it
+            Chip(U, ref x, 60, "<color=#F29E1F>" + pr.label + "</color>  ·  " + T("HEDEF ", "TARGET ") + pr.target + "  ·  " + Mathf.RoundToInt(pr.time / 60f) + T(" DK", " MIN"), openSettings);
+            if (canEdit) Chip(U, ref x, 60, T("MOD DEĞİŞTİR  »", "CHANGE MODE  »"), openSettings, true);
             if (online)
             {
                 int bots = Mathf.Max(0, pr.a - Net.TeamCount(0)) + Mathf.Max(0, pr.e - Net.TeamCount(1));
@@ -528,30 +540,53 @@ namespace Zone47
             else Chip(U, ref x, 60, T("ZORLUK: ", "DIFFICULTY: ") + "<color=#F29E1F>" + L.S(Settings.Difficulty == 0 ? "easy" : Settings.Difficulty == 1 ? "normal" : "hard") + "</color>",
                 () => { Settings.Difficulty = (Settings.Difficulty + 1) % 3; PlayerPrefs.Save(); RefreshLobby(); });
 
-            // ---- right column: player card, friends, settings chips, PLAY
+            // ---- right column (top to bottom): player card, friends, match card, PLAY
             BuildPlayerCard(U);
             BuildFriends(U);
-            string[] mk = { "mapname", "mapname2", "mapname3" };
-            int map = online ? Net.RoomMap : Settings.Map, wxi = online ? Net.RoomWeather : Settings.Weather;
-            Action openSettings = () =>
-            {
-                if (!online) ShowMatchSettings(RefreshLobby);
-                else if (Net.IsHost) ShowMatchSettings(() => { Net.PullHostSettings(); RefreshLobby(); });
-                else Toast(T("AYARLARI KURUCU SEÇER", "THE HOST PICKS THE SETTINGS"));
-            };
-            string third = online ? "<color=#F29E1F>" + CountReady() + " / " + Net.Room.Count + "</color> " + T("HAZIR", "READY") : T("DEĞİŞTİR  »", "CHANGE  »");
-            string[] notes = { T("HARİTA: ", "MAP: ") + "<color=#F29E1F>" + L.S(mk[Mathf.Clamp(map, 0, 2)]) + "</color>", T("HAVA: ", "WEATHER: ") + "<color=#F29E1F>" + L.S("wx" + wxi) + "</color>", third };
-            float nw3 = (RightW - 16f) / 3f;
-            for (int i = 0; i < 3; i++)
-            {
-                var n = UIK.Img(U, "note" + i, new Color(0.04f, 0.045f, 0.045f, 0.75f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(nw3, 48), true);
-                n.rectTransform.pivot = new Vector2(1, 0); n.rectTransform.anchoredPosition = new Vector2(-70 - (2 - i) * (nw3 + 8), 190);
-                var o = n.gameObject.AddComponent<Outline>(); o.effectColor = new Color(1, 1, 1, 0.14f); o.effectDistance = new Vector2(2, 2);
-                var tx = UIK.Txt(n.transform, "t", notes[i], 17, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-10, 0), true); tx.supportRichText = true;
-                tx.resizeTextForBestFit = true; tx.resizeTextMinSize = 11; tx.resizeTextMaxSize = 17;
-                n.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); openSettings(); });
-            }
+            BuildMatchCard(U, pr, online, canEdit, openSettings);
             BuildPlayButton(U);
+        }
+
+        const float PlayY = 40f, PlayH = 120f, CardH = 92f, CardGap = 12f, PlayerCardH = 124f;
+        static readonly string[] MapShortTR = { "ÇÖL KASABASI", "LİMAN", "ŞEHİR" }, MapShortEN = { "DESERT TOWN", "PORT", "CITY BLOCK" };
+
+        /// Place a text/rect as a fixed-height row measured from the top of its parent.
+        static RectTransform Row(RectTransform r, float left, float top, float h, float right = 12f)
+        {
+            r.anchorMin = new Vector2(0, 1); r.anchorMax = new Vector2(1, 1); r.pivot = new Vector2(0, 1);
+            r.offsetMin = new Vector2(left, -top - h); r.offsetMax = new Vector2(-right, -top);
+            return r;
+        }
+
+        /// One clear card above PLAY: mode · map · weather, with a big CHANGE button (the host / offline only).
+        void BuildMatchCard(RectTransform U, MatchManager.Preset pr, bool online, bool canEdit, Action openSettings)
+        {
+            int map = Mathf.Clamp(online ? Net.RoomMap : Settings.Map, 0, 2), wxi = online ? Net.RoomWeather : Settings.Weather;
+            var c = UIK.Img(U, "matchcard", new Color(0.03f, 0.04f, 0.04f, 0.9f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(RightW, CardH), true);
+            c.rectTransform.pivot = new Vector2(1, 0); c.rectTransform.anchoredPosition = new Vector2(-70, PlayY + PlayH + CardGap);
+            var o = c.gameObject.AddComponent<Outline>(); o.effectColor = new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.5f); o.effectDistance = new Vector2(2, 2);
+            UIK.Img(c.transform, "bar", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(5, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
+            float btnW = canEdit ? 170f : 0f;
+            var l1 = UIK.Txt(c.transform, "l1", "<color=#F29E1F>" + pr.label + "</color>  ·  " + (Settings.Turkish ? MapShortTR : MapShortEN)[map], 26, Color.white, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            l1.supportRichText = true; l1.horizontalOverflow = HorizontalWrapMode.Wrap; l1.resizeTextForBestFit = true; l1.resizeTextMinSize = 16; l1.resizeTextMaxSize = 26;
+            Row(l1.rectTransform, 22, 12, 36, btnW + 20);
+            string ready = online ? "  ·  " + CountReady() + "/" + Net.Room.Count + T(" HAZIR", " READY") : "";
+            var l2 = UIK.Txt(c.transform, "l2", T("HAVA: ", "WEATHER: ") + L.S("wx" + wxi) + "  ·  " + T("HEDEF ", "TARGET ") + pr.target + ready, 16, Pal.Dim, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            l2.horizontalOverflow = HorizontalWrapMode.Wrap; l2.resizeTextForBestFit = true; l2.resizeTextMinSize = 11; l2.resizeTextMaxSize = 16;
+            Row(l2.rectTransform, 22, 52, 26, btnW + 20);
+            if (canEdit)
+            {
+                var b = UIK.Img(c.transform, "chg", Pal.Accent, new Vector2(1, 0.5f), new Vector2(1, 0.5f), Vector2.zero, new Vector2(btnW, CardH - 22), true);
+                b.rectTransform.pivot = new Vector2(1, 0.5f); b.rectTransform.anchoredPosition = new Vector2(-11, 0);
+                var bt = UIK.Txt(b.transform, "t", T("MOD\nDEĞİŞTİR", "CHANGE\nMODE"), 20, Ink, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                bt.lineSpacing = 0.9f;
+            }
+            else
+            {
+                var h = UIK.Txt(c.transform, "h", T("KURUCU SEÇER", "HOST PICKS"), 15, Pal.Dim, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                Row(h.rectTransform, 22, 12, 36, 18);
+            }
+            c.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); openSettings(); });
         }
 
         public void ShowToastMsg(string s) => Toast(s);
@@ -579,8 +614,8 @@ namespace Zone47
                 lit = !r;
                 act = () => Net.ToggleReady();
             }
-            var b = UIK.Img(U, "play", lit ? Pal.Accent : new Color(0.16f, 0.17f, 0.16f, 0.95f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(RightW, 120), true);
-            b.rectTransform.pivot = new Vector2(1, 0); b.rectTransform.anchoredPosition = new Vector2(-70, 56);
+            var b = UIK.Img(U, "play", lit ? Pal.Accent : new Color(0.16f, 0.17f, 0.16f, 0.95f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(RightW, PlayH), true);
+            b.rectTransform.pivot = new Vector2(1, 0); b.rectTransform.anchoredPosition = new Vector2(-70, PlayY);
             if (!lit) { var o = b.gameObject.AddComponent<Outline>(); o.effectColor = online && !host && Net.MyReady ? Green : Pal.Accent; o.effectDistance = new Vector2(3, 3); }
             Color tc = lit ? Ink : online && !host && Net.MyReady ? Green : Pal.Accent;
             UIK.Txt(b.transform, "t", big, 56, tc, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, new Vector2(0, 14), new Vector2(0, -30), true);
@@ -591,21 +626,27 @@ namespace Zone47
         void BuildPlayerCard(RectTransform U)
         {
             Progress.Split(Progress.XP, out int lv, out int into, out int need);
-            var pc = UIK.Img(U, "player", Glass, new Vector2(1, 1), new Vector2(1, 1), Vector2.zero, new Vector2(RightW, 112), true);
-            pc.rectTransform.pivot = new Vector2(1, 1); pc.rectTransform.anchoredPosition = new Vector2(-70, -24);
-            Profile.Avatar(pc.transform, "av", new Vector2(0, 0.5f), new Vector2(58, 0), 84, Settings.Callsign, Profile.Flag, Profile.SafeFrame);
-            nameTxt = UIK.Txt(pc.transform, "n", Settings.Callsign.ToUpper(), 30, Color.white, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(120, -10), new Vector2(-140, -16), true);
-            UIK.Txt(pc.transform, "t", Profile.CurrentTitle.ToUpper() + "  ·  " + L.S("level") + " " + lv, 16, Pal.Accent, TextAnchor.UpperLeft, Vector2.zero, Vector2.one, new Vector2(120, -48), new Vector2(-140, -54), true);
-            string tag = Social.Ready && Social.MyTag.Length > 0 ? T("ETİKETİN: ", "YOUR TAG: ") + Social.MyTag : "";
-            if (tag.Length > 0) UIK.Txt(pc.transform, "tag", tag, 16, Pal.Ally, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(120, 12), new Vector2(-140, -20), true);
-            var trk = UIK.Img(pc.transform, "xp", new Color(1, 1, 1, 0.12f), new Vector2(0, 0), new Vector2(1, 0), new Vector2(60, 4), new Vector2(-150, 4));
-            trk.rectTransform.pivot = new Vector2(0.5f, 0);
+            var pc = UIK.Img(U, "player", Glass, new Vector2(1, 1), new Vector2(1, 1), Vector2.zero, new Vector2(RightW, PlayerCardH), true);
+            pc.rectTransform.pivot = new Vector2(1, 1); pc.rectTransform.anchoredPosition = new Vector2(-70, -20);
+            Profile.Avatar(pc.transform, "av", new Vector2(0, 0.5f), new Vector2(60, 4), 84, Settings.Callsign, Profile.Flag, Profile.SafeFrame);
+            // three separate rows: name / rank · level / ID (numbers only)
+            nameTxt = UIK.Txt(pc.transform, "n", Settings.Callsign.ToUpper(), 30, Color.white, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            Row(nameTxt.rectTransform, 124, 12, 36, 16);
+            Row(UIK.Txt(pc.transform, "t", Profile.CurrentTitle.ToUpper() + "  ·  " + L.S("level") + " " + lv, 16, Pal.Accent, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true).rectTransform, 124, 50, 22, 16);
+            string num = Social.MyNumber;
+            if (num.Length > 0)
+            {
+                var idT = UIK.Txt(pc.transform, "id", "ID  <color=#FFFFFF>" + num + "</color>   <size=13><color=#7F7B70>" + T("DOKUN = KOPYALA", "TAP = COPY") + "</color></size>", 18, Pal.Ally, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                idT.supportRichText = true; Row(idT.rectTransform, 124, 76, 26, 16);
+            }
+            var trk = UIK.Img(pc.transform, "xp", new Color(1, 1, 1, 0.12f), new Vector2(0, 0), new Vector2(1, 0), Vector2.zero, Vector2.zero);
+            trk.rectTransform.pivot = new Vector2(0, 0); trk.rectTransform.offsetMin = new Vector2(124, 8); trk.rectTransform.offsetMax = new Vector2(-16, 12);
             var fill = UIK.Img(trk.transform, "f", Pal.Accent, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).rectTransform;
             fill.pivot = new Vector2(0, 0.5f); fill.anchoredPosition = Vector2.zero; fill.localScale = new Vector3(into / (float)need, 1, 1);
             pc.gameObject.AddComponent<Button>().onClick.AddListener(() =>
             {
                 Sfx.UI();
-                if (Social.Ready && Social.MyTag.Length > 0) { GUIUtility.systemCopyBuffer = Social.MyTag; Toast(T("ETİKET KOPYALANDI · PROFİL İÇİN AVATARA DOKUN", "TAG COPIED · TAP THE AVATAR FOR PROFILE")); }
+                if (Social.MyNumber.Length > 0) { GUIUtility.systemCopyBuffer = Social.MyNumber; Toast(T("ID KOPYALANDI · ARKADAŞINA GÖNDER", "ID COPIED · SEND IT TO A FRIEND")); }
                 else ShowProfile();
             });
             var avBtn = pc.transform.Find("av");
@@ -616,10 +657,14 @@ namespace Zone47
         int friendTab;
         void BuildFriends(RectTransform U)
         {
-            float top = -150f, h = 1080f - 150f - 260f;          // down to just above the settings chips
-            var p = UIK.Img(U, "friends", new Color(0.03f, 0.04f, 0.04f, 0.8f), new Vector2(1, 1), new Vector2(1, 1), Vector2.zero, new Vector2(RightW, h), true);
-            p.rectTransform.pivot = new Vector2(1, 1); p.rectTransform.anchoredPosition = new Vector2(-70, top);
+            // stretches between the player card and the match card: follows the real (safe-area) screen height,
+            // so the bottom buttons can never slide under the cards below on shorter phones
+            float topY = 20f + PlayerCardH + 12f, bottomY = PlayY + PlayH + CardGap + CardH + 12f;
+            var p = UIK.Img(U, "friends", new Color(0.03f, 0.04f, 0.04f, 0.8f), new Vector2(1, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero, true);
+            p.rectTransform.pivot = new Vector2(1, 1);
+            p.rectTransform.offsetMin = new Vector2(-70 - RightW, bottomY); p.rectTransform.offsetMax = new Vector2(-70, -topY);
             var P = (RectTransform)p.transform;
+            float h = Mathf.Max(260f, (lobbyRoot.rect.height > 100f ? lobbyRoot.rect.height : 1080f) - topY - bottomY);
             UIK.Img(P, "top", Pal.Accent, new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 4)).rectTransform.pivot = new Vector2(0.5f, 1);
             UIK.Txt(P, "h", T("ARKADAŞLAR", "FRIENDS"), 26, Color.white, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(18, -30), new Vector2(-36, 36), true);
             if (Social.Ready) UIK.Txt(P, "on", "<color=#6BE36B>●</color> " + Social.OnlineCount + T(" ÇEVRİMİÇİ", " ONLINE"), 17, Green, TextAnchor.MiddleRight, new Vector2(0, 1), new Vector2(1, 1), new Vector2(-18, -30), new Vector2(-36, 36), true).supportRichText = true;
@@ -644,19 +689,23 @@ namespace Zone47
                 for (int i = 0; i < tabs.Length; i++)
                 {
                     int ti = i;
-                    var tb = UIK.Txt(P, "tab" + i, tabs[i], 18, friendTab == i ? Color.white : Pal.Dim, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(18 + i * 130, -70), new Vector2(150, 30), true);
+                    var tb = UIK.Txt(P, "tab" + i, tabs[i], 18, friendTab == i ? Color.white : Pal.Dim, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(18 + i * 130, -78), new Vector2(150, 30), true);
                     tb.supportRichText = true; tb.rectTransform.pivot = new Vector2(0, 0.5f); tb.raycastTarget = true;
                     if (friendTab == i) { var ul = UIK.Img(tb.transform, "u", Pal.Accent, new Vector2(0, 0), new Vector2(0, 0), Vector2.zero, new Vector2(tb.preferredWidth, 3)); ul.rectTransform.pivot = new Vector2(0, 1); }
                     tb.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); friendTab = ti; RefreshLobby(); });
                 }
-                UIK.Img(P, "sep", new Color(1, 1, 1, 0.1f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -90), new Vector2(0, 1));
-                var content = ScrollArea(P, new Vector2(0, -92), new Vector2(RightW, h - 92 - bottomH - 8), out var setH);
+                UIK.Img(P, "sep", new Color(1, 1, 1, 0.1f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -98), new Vector2(0, 1));
+                var content = ScrollArea(P, new Vector2(0, -100), new Vector2(RightW, h - 100 - bottomH - 8), out var setH);
+                // the list stretches with the panel (ends just above the ADD FRIEND / JOIN buttons whatever the screen height)
+                var vpr = (RectTransform)content.parent;
+                vpr.anchorMin = new Vector2(0, 0); vpr.anchorMax = new Vector2(1, 1); vpr.pivot = new Vector2(0.5f, 1);
+                vpr.offsetMin = new Vector2(0, bottomH + 8); vpr.offsetMax = new Vector2(0, -100);
                 float y = 0f; const float rh = 62f;
                 if (friendTab == 0)
                 {
                     if (Social.Friends.Count == 0)
                     {
-                        UIK.Txt(content, "e", T("Henüz arkadaşın yok.\nAşağıdan etiketle ekle (İsim#1234).", "No friends yet.\nAdd one by tag below (Name#1234)."), 19, Pal.Dim, TextAnchor.UpperCenter, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -60), new Vector2(-40, 80), false);
+                        UIK.Txt(content, "e", T("Henüz arkadaşın yok.\nAşağıdaki ARKADAŞ EKLE'ye bas, ID'sini yaz.", "No friends yet.\nTap ADD FRIEND below and type their ID."), 19, Pal.Dim, TextAnchor.UpperCenter, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -60), new Vector2(-40, 80), false);
                         y = 140f;
                     }
                     foreach (var f in Social.Friends) { FriendRow(content, f, y, rh); y += rh; }
@@ -673,18 +722,17 @@ namespace Zone47
 
             // bottom buttons: add friend / join by code
             float bw = (RightW - 36f - 10f) / 2f;
-            var add = UIK.Img(P, "add", new Color(0, 0, 0, 0.01f), new Vector2(0, 0), new Vector2(0, 0), Vector2.zero, new Vector2(bw, 50), true);
+            var add = UIK.Img(P, "add", Pal.Accent, new Vector2(0, 0), new Vector2(0, 0), Vector2.zero, new Vector2(bw, 50), true);
             add.rectTransform.pivot = new Vector2(0, 0); add.rectTransform.anchoredPosition = new Vector2(18, 12);
-            var ao = add.gameObject.AddComponent<Outline>(); ao.effectColor = Pal.Accent; ao.effectDistance = new Vector2(2, 2);
-            UIK.Txt(add.transform, "t", "+  " + T("ARKADAŞ EKLE", "ADD FRIEND"), 19, Pal.Accent, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            UIK.Txt(add.transform, "t", "+  " + T("ARKADAŞ EKLE", "ADD FRIEND"), 19, Ink, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             add.gameObject.AddComponent<Button>().onClick.AddListener(() =>
             {
                 Sfx.UI();
                 if (!Social.Ready) { Toast(T("ARKADAŞ SİSTEMİ HAZIR DEĞİL", "FRIENDS NOT READY")); return; }
-                InputDialog(T("ARKADAŞ EKLE", "ADD FRIEND"), T("Arkadaşının etiketini yaz (profil kartında yazar)", "Type your friend's tag (shown on their player card)"), "Isim#1234", 30, false,
-                    (v, done) => Social.AddByName(v, err => { done(err); if (err == null) { Toast(T("İSTEK GÖNDERİLDİ", "REQUEST SENT")); friendTab = 1; RefreshLobby(); } }));
+                InputDialog(T("ARKADAŞ EKLE", "ADD FRIEND"), T("Arkadaşının ID'sini yaz (kartında yazan sayı)", "Type your friend's ID (the number on their card)"), "374821", 10, false,
+                    (v, done) => Social.AddByName(v, err => { done(err); if (err == null) { Toast(T("İSTEK GÖNDERİLDİ", "REQUEST SENT")); friendTab = 1; RefreshLobby(); } }), true);
             });
-            var jc = UIK.Img(P, "join", new Color(0, 0, 0, 0.01f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(bw, 50), true);
+            var jc = UIK.Img(P, "join", new Color(1, 1, 1, 0.1f), new Vector2(1, 0), new Vector2(1, 0), Vector2.zero, new Vector2(bw, 50), true);
             jc.rectTransform.pivot = new Vector2(1, 0); jc.rectTransform.anchoredPosition = new Vector2(-18, 12);
             var jo = jc.gameObject.AddComponent<Outline>(); jo.effectColor = new Color(1, 1, 1, 0.3f); jo.effectDistance = new Vector2(2, 2);
             UIK.Txt(jc.transform, "t", T("KODLA KATIL", "JOIN BY CODE"), 19, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
@@ -773,8 +821,8 @@ namespace Zone47
             if (!Net.Online)
             {
                 if (Net.Busy) return;
-                Toast(T("PARTİ KURULUYOR...", "CREATING PARTY..."));
-                Net.HostRoom(err => { if (err != null) Toast(err); else { Toast(T("PARTİ KURULDU · ARKADAŞLARINI DAVET ET", "PARTY READY · INVITE FRIENDS")); Social.UpdatePresence(); } RefreshLobby(); });
+                Toast(T("ODA AÇILIYOR...", "OPENING A ROOM..."));
+                Net.HostRoom(err => { if (err != null) Toast(err); else { Toast(T("ODA HAZIR · KODU KOPYALA YA DA SAĞDAN DAVET ET", "ROOM READY · COPY THE CODE OR INVITE FROM THE RIGHT")); Social.UpdatePresence(); } RefreshLobby(); });
                 return;
             }
             Toast(Social.Ready ? T("SAĞDAKİ LİSTEDEN DAVET ET ya da KODU PAYLAŞ", "INVITE FROM THE LIST or SHARE THE CODE") : T("ODA KODUNU ARKADAŞINLA PAYLAŞ", "SHARE THE ROOM CODE"));
@@ -819,7 +867,7 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ dialogs
-        void InputDialog(string title, string hint, string placeholder, int limit, bool upper, Action<string, Action<string>> submit)
+        void InputDialog(string title, string hint, string placeholder, int limit, bool upper, Action<string, Action<string>> submit, bool digits = false)
         {
             var panel = UIK.Full(menuCanvas.transform, "Dialog");
             UIK.Img(panel, "bg", new Color(0, 0, 0, 0.8f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
@@ -833,6 +881,7 @@ namespace Zone47
             var ph = UIK.Txt(fieldBg.transform, "ph", placeholder, 34, new Color(1, 1, 1, 0.22f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, new Vector2(-30, 0), true);
             var input = fieldBg.gameObject.AddComponent<InputField>();
             input.textComponent = txt; input.placeholder = ph; input.characterLimit = limit; input.lineType = InputField.LineType.SingleLine;
+            if (digits) { input.characterValidation = InputField.CharacterValidation.Integer; input.keyboardType = TouchScreenKeyboardType.NumberPad; }
             if (upper) { input.characterValidation = InputField.CharacterValidation.Alphanumeric; input.onValueChanged.AddListener(v => { string u = v.ToUpperInvariant(); if (u != v) input.text = u; }); }
             bool busy = false;
             UIK.Btn(box.transform, L.S("ok"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(150, 50), new Vector2(280, 84), () =>

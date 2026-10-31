@@ -15362,7 +15362,7 @@ IL_002a:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97157
+// Method Definition Index: 97185
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_get_IsCreated_m270A88D7AC1409DA488A6468923F491B42F4F747_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, const RuntimeMethod* method) 
 {
 	{
@@ -15382,7 +15382,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_get_IsCreated_m270A88D7AC1409DA488A6468
 	_returnValue = NativeMultiQueue_1_get_IsCreated_m270A88D7AC1409DA488A6468923F491B42F4F747(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 97158
+// Method Definition Index: 97186
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1__ctor_mAD507371D76EF93A21A88B7ECE0C53E1C8D82FAA_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, int32_t ___0_initialMessageCapacity, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15428,7 +15428,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1__ctor_mAD507371D76EF93A21A88B7ECE0C53E1
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9*>(__this + _offset);
 	NativeMultiQueue_1__ctor_mAD507371D76EF93A21A88B7ECE0C53E1C8D82FAA(_thisAdjusted, ___0_initialMessageCapacity, method);
 }
-// Method Definition Index: 97159
+// Method Definition Index: 97187
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Dispose_m0CB571B34758D53D4C4DDE4819DD7B60FD345886_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15459,7 +15459,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1_Dispose_m0CB571B34758D53D4C4DDE4819DD7B
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9*>(__this + _offset);
 	NativeMultiQueue_1_Dispose_m0CB571B34758D53D4C4DDE4819DD7B60FD345886(_thisAdjusted, method);
 }
-// Method Definition Index: 97160
+// Method Definition Index: 97188
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Enqueue_mAD62CF8C5B1EC496B46F4A9DC284A48BF4B62AEE_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, int32_t ___0_bucket, Il2CppFullySharedGenericStruct ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15694,7 +15694,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1_Enqueue_mAD62CF8C5B1EC496B46F4A9DC284A4
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9*>(__this + _offset);
 	NativeMultiQueue_1_Enqueue_mAD62CF8C5B1EC496B46F4A9DC284A48BF4B62AEE(_thisAdjusted, ___0_bucket, ___1_value, method);
 }
-// Method Definition Index: 97161
+// Method Definition Index: 97189
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_Dequeue_mA2BDFFC1B631F8926C32CB91F43FC27E330526E2_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, int32_t ___0_bucket, Il2CppFullySharedGenericStruct* ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15836,7 +15836,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_Dequeue_mA2BDFFC1B631F8926C32CB91F43FC2
 	_returnValue = NativeMultiQueue_1_Dequeue_mA2BDFFC1B631F8926C32CB91F43FC27E330526E2(_thisAdjusted, ___0_bucket, ___1_value, method);
 	return _returnValue;
 }
-// Method Definition Index: 97162
+// Method Definition Index: 97190
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_Peek_mF86EDB725AD74A0AA3AB48BD299A9446CD2FF3A6_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, int32_t ___0_bucket, Il2CppFullySharedGenericStruct* ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15930,7 +15930,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_Peek_mF86EDB725AD74A0AA3AB48BD299A9446C
 	_returnValue = NativeMultiQueue_1_Peek_mF86EDB725AD74A0AA3AB48BD299A9446CD2FF3A6(_thisAdjusted, ___0_bucket, ___1_value, method);
 	return _returnValue;
 }
-// Method Definition Index: 97163
+// Method Definition Index: 97191
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Clear_m1865E3341241979823A32B6FEF9B0DD29D356751_gshared (NativeMultiQueue_1_t5E7AEBA77871D34FB86A6628018E48707D6244D9* __this, int32_t ___0_bucket, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15994,7 +15994,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1_Clear_m1865E3341241979823A32B6FEF9B0DD2
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97157
+// Method Definition Index: 97185
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_get_IsCreated_m736C470906A78B68385CD37AD287DFF1F654B102_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16014,7 +16014,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_get_IsCreated_m736C470906A78B68385CD37A
 	_returnValue = NativeMultiQueue_1_get_IsCreated_m736C470906A78B68385CD37AD287DFF1F654B102(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 97158
+// Method Definition Index: 97186
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1__ctor_mD94AD9D9604C378FDB9434F2DB12606224A74636_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, int32_t ___0_initialMessageCapacity, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16060,7 +16060,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1__ctor_mD94AD9D9604C378FDB9434F2DB126062
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43*>(__this + _offset);
 	NativeMultiQueue_1__ctor_mD94AD9D9604C378FDB9434F2DB12606224A74636(_thisAdjusted, ___0_initialMessageCapacity, method);
 }
-// Method Definition Index: 97159
+// Method Definition Index: 97187
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Dispose_m2E2DC28B55148585494679B0563B1C6BF1DCE480_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16091,7 +16091,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1_Dispose_m2E2DC28B55148585494679B0563B1C
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43*>(__this + _offset);
 	NativeMultiQueue_1_Dispose_m2E2DC28B55148585494679B0563B1C6BF1DCE480(_thisAdjusted, method);
 }
-// Method Definition Index: 97160
+// Method Definition Index: 97188
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Enqueue_m8C1B14DA9AD732E65F3C1ADEE5DBA941FFA8A7D3_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, int32_t ___0_bucket, IPCData_t46E9604572E2A38CBBA8A418C6E25E6BAE2757CC ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16324,7 +16324,7 @@ IL2CPP_EXTERN_C  void NativeMultiQueue_1_Enqueue_m8C1B14DA9AD732E65F3C1ADEE5DBA9
 	_thisAdjusted = reinterpret_cast<NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43*>(__this + _offset);
 	NativeMultiQueue_1_Enqueue_m8C1B14DA9AD732E65F3C1ADEE5DBA941FFA8A7D3(_thisAdjusted, ___0_bucket, ___1_value, method);
 }
-// Method Definition Index: 97161
+// Method Definition Index: 97189
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_Dequeue_m006D166BE177F47345444F8425B15D4860C8F705_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, int32_t ___0_bucket, IPCData_t46E9604572E2A38CBBA8A418C6E25E6BAE2757CC* ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16464,7 +16464,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_Dequeue_m006D166BE177F47345444F8425B15D
 	_returnValue = NativeMultiQueue_1_Dequeue_m006D166BE177F47345444F8425B15D4860C8F705(_thisAdjusted, ___0_bucket, ___1_value, method);
 	return _returnValue;
 }
-// Method Definition Index: 97162
+// Method Definition Index: 97190
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool NativeMultiQueue_1_Peek_mD3ED10037AAB6D1B9C9A7FE73230591554A19506_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, int32_t ___0_bucket, IPCData_t46E9604572E2A38CBBA8A418C6E25E6BAE2757CC* ___1_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16556,7 +16556,7 @@ IL2CPP_EXTERN_C  bool NativeMultiQueue_1_Peek_mD3ED10037AAB6D1B9C9A7FE7323059155
 	_returnValue = NativeMultiQueue_1_Peek_mD3ED10037AAB6D1B9C9A7FE73230591554A19506(_thisAdjusted, ___0_bucket, ___1_value, method);
 	return _returnValue;
 }
-// Method Definition Index: 97163
+// Method Definition Index: 97191
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeMultiQueue_1_Clear_m75D7F89783717CD3B52E6FBCBF458AC61999A488_gshared (NativeMultiQueue_1_t12A9E5CD5796DE19B776A6E1F505AD94D5A89B43* __this, int32_t ___0_bucket, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;

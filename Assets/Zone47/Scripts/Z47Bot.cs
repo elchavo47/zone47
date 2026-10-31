@@ -488,9 +488,14 @@ namespace Zone47
 
         void LateUpdate()
         {
+            if (!Alive) return;
             // fallback when the animator has no IK pass (old controller): still hold the gun along the aim line
-            if (!Alive || gun == null || ikFrame == Time.frameCount) return;
-            PlaceGun();
+            if (gun != null && ikFrame != Time.frameCount) PlaceGun();
+            // the Mixamo rifle idle / walk hunch forward with the head down: stand them up straight.
+            // The gun turns with the chest, so the hands stay on it. Not while aiming (that pose is already upright and
+            // tilting it would move the muzzle off target), crouched, prone or reloading.
+            if (!Ready && !crouch && !prone && !reloading) Posture.Straighten(anim, transform, 0.9f, gun);
+            else if (!prone) Posture.LevelHead(anim, transform, 0.6f);
         }
 
         void SpawnGun()
@@ -647,6 +652,52 @@ namespace Zone47
             if (tracer) FX.Tracer(muzzle, end);
             FX.Impact(end, -dir, flesh);
             Ballistics.Flyby(this, eye, dir, end, null);
+        }
+    }
+
+    /// Fixes the slouch of the Mixamo rifle clips after the animator has run (LateUpdate).
+    /// It measures the pose every frame and corrects it to a target, so it never builds up even when the animator skips frames.
+    public static class Posture
+    {
+        const float UprightLean = 4f;        // a soldier standing "straight" still leans a few degrees forward
+
+        /// Turn the spine/chest back so the torso stands up straight, then level the head.
+        /// `carry` (the rifle) is turned with the chest so it stays in the hands.
+        public static void Straighten(Animator a, Transform root, float amount, Transform carry = null)
+        {
+            if (a == null || !a.isHuman) return;
+            Transform hips = a.GetBoneTransform(HumanBodyBones.Hips), spine = a.GetBoneTransform(HumanBodyBones.Spine),
+                      chest = a.GetBoneTransform(HumanBodyBones.Chest), neck = a.GetBoneTransform(HumanBodyBones.Neck);
+            if (hips == null || spine == null || neck == null) return;
+            Vector3 fwd = root.forward, right = root.right;
+            Vector3 torso = neck.position - hips.position;
+            float lean = Mathf.Atan2(Vector3.Dot(torso, fwd), Vector3.Dot(torso, Vector3.up)) * Mathf.Rad2Deg;     // + = bent forward
+            float fix = -Mathf.Clamp(lean - UprightLean, -10f, 40f) * amount;
+            if (Mathf.Abs(fix) > 0.2f)
+            {
+                // split over the spine bones (a straight back, not a broken one)
+                var bones = chest != null ? new[] { spine, chest } : new[] { spine };
+                var q = Quaternion.AngleAxis(fix / bones.Length, right);
+                foreach (var b in bones)
+                {
+                    Vector3 pivot = b.position;
+                    b.rotation = q * b.rotation;
+                    if (carry != null) { carry.position = pivot + q * (carry.position - pivot); carry.rotation = q * carry.rotation; }
+                }
+            }
+            LevelHead(a, root, amount);
+        }
+
+        /// Chin up: the idle clips look at the floor.
+        public static void LevelHead(Animator a, Transform root, float amount)
+        {
+            if (a == null || !a.isHuman) return;
+            Transform neck = a.GetBoneTransform(HumanBodyBones.Neck), head = a.GetBoneTransform(HumanBodyBones.Head);
+            if (neck == null || head == null) return;
+            Vector3 n = head.position - neck.position;
+            float tilt = Mathf.Atan2(Vector3.Dot(n, root.forward), Vector3.Dot(n, Vector3.up)) * Mathf.Rad2Deg;   // + = head forward/down
+            float fix = -Mathf.Clamp(tilt - 6f, -10f, 45f) * amount * 0.8f;
+            if (Mathf.Abs(fix) > 0.2f) neck.rotation = Quaternion.AngleAxis(fix, root.right) * neck.rotation;
         }
     }
 }

@@ -268,7 +268,7 @@ namespace Zone47
                 it.defPos = it.pos; it.defSize = it.size;
                 var s = PlayerPrefs.GetString("z_L_" + it.id, "");
                 var p = s.Split(';');
-                if (p.Length >= 4 && float.TryParse(p[3], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var al)) it.alpha = Mathf.Clamp(al, 0.2f, 1f);
+                if (p.Length >= 4 && float.TryParse(p[3], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var al)) it.alpha = Mathf.Clamp(al, 0.05f, 1f);
                 if (p.Length >= 3 && float.TryParse(p[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var x)
                     && float.TryParse(p[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var y)
                     && float.TryParse(p[2], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var z))

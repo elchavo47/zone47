@@ -62,7 +62,7 @@ namespace Zone47
     /// every phone simulates its own soldier and sends where it is. No NetworkObjects: everything goes through one named message.
     public static class Net
     {
-        public const int Version = 2;
+        public const int Version = 3;                          // 3: drone strikes follow players (TRACK / DROP)
         public const int MaxPlayers = 10;
         public static readonly string[] Weapons = { "m4", "ak", "awp", "glock", "carbine", "shotgun" };
         public static int WeaponIndex(string id) { int i = Array.IndexOf(Weapons, id); return i < 0 ? 0 : i; }
@@ -112,7 +112,7 @@ namespace Zone47
 
         // message types
         const byte HELLO = 1, ROOM = 2, TEAM = 3, START = 4, BYE = 5, READY = 6, GO = 7, RDY = 8,
-                   STATE = 10, WORLD = 11, SHOT = 12, NADE = 13, DMG = 14, HP = 15, KILL = 16, SPAWN = 17, STRIKE = 18, END = 19, LEAVE = 20;
+                   STATE = 10, WORLD = 11, SHOT = 12, NADE = 13, DMG = 14, HP = 15, KILL = 16, SPAWN = 17, STRIKE = 18, END = 19, LEAVE = 20, TRACK = 21, DROP = 22;
 
         static string T(string tr, string en) => Settings.Turkish ? tr : en;
         static Action<string> joinDone;
@@ -508,6 +508,22 @@ namespace Zone47
             SendAll(new NetW().U8(STRIKE).I16(IdOf(caller)).V3(p.target).F(p.inAng).F(p.orbitTime).F(p.dirSign).I32(p.seed), true);
         }
 
+        /// Host: a drone strike's aim moved onto a group of soldiers.
+        public static void SendTrack(int strikeId, Vector3 p)
+        {
+            if (!IsHost || !InMatch) return;
+            SendAll(new NetW().U8(TRACK).I32(strikeId).V3(p), false);
+        }
+
+        /// Host: final target and the exact bomb spots of a strike.
+        public static void SendDrop(int strikeId, Vector3 target, Vector3[] pts)
+        {
+            if (!IsHost || !InMatch || pts == null) return;
+            var w = new NetW().U8(DROP).I32(strikeId).V3(target).U8(Mathf.Min(pts.Length, 16));
+            for (int i = 0; i < pts.Length && i < 16; i++) w.V3(pts[i]);
+            SendAll(w, true);
+        }
+
         public static void SendEnd(int[] localScore)
         {
             if (!IsHost || !InMatch) return;
@@ -734,6 +750,23 @@ namespace Zone47
                     AirStrikes.I.RunPlan(ById(cid), p);
                     return;
                 }
+                case TRACK:
+                {
+                    if (IsHost) return;
+                    int sid = r.I32(); var p = r.V3();
+                    if (!r.Ok) return;
+                    AirStrikes.I?.NetTrack(sid, p);
+                    return;
+                }
+                case DROP:
+                {
+                    if (IsHost) return;
+                    int sid = r.I32(); var tgt = r.V3(); int n = r.U8(); var pts = new Vector3[n];
+                    for (int i = 0; i < n; i++) pts[i] = r.V3();
+                    if (!r.Ok) return;
+                    AirStrikes.I?.NetDrop(sid, tgt, pts);
+                    return;
+                }
                 case END:
                 {
                     if (IsHost) return;
@@ -774,6 +807,7 @@ namespace Zone47
     public class Z47Activity
     {
         public string s = "lobby";      // lobby / party / match
+        public string nm = "";          // callsign shown to friends
         public string code = "";        // party room code (friends can join)
         public string flag = "tr";
         public int lv = 1;
@@ -815,6 +849,51 @@ namespace Zone47
         public static bool Ready { get; private set; }
         public static bool Starting { get; private set; }
         public static string MyTag = "";
+        /// Numeric IDs without our own server: every player's hidden Unity name is "Z47_NN" (NN = 10..99, fixed per account),
+        /// Unity adds "#dddd". The ID people see and type is NN followed by those digits: Z47_37#4821 -> 374821.
+        /// (100 groups x 10,000 suffixes, instead of 10,000 if everyone had the same name.)
+        public const string IdPrefix = "Z47_";
+        public static string IdOf(string tag)
+        {
+            if (string.IsNullOrEmpty(tag) || !tag.StartsWith(IdPrefix, StringComparison.OrdinalIgnoreCase)) return "";
+            int h = tag.IndexOf('#'); if (h < 0) return "";
+            string g = tag.Substring(IdPrefix.Length, h - IdPrefix.Length), n = tag.Substring(h + 1);
+            if (g.Length != 2 || n.Length == 0) return "";
+            foreach (char c in g + n) if (!char.IsDigit(c)) return "";
+            return g + n;
+        }
+        public static string MyNumber => IdOf(MyTag);
+
+        /// The hidden Unity name for this account (stable: derived from the Unity player id, survives reinstalls).
+        static string HiddenName(string playerId)
+        {
+            uint h = 2166136261;
+            foreach (char c in playerId ?? "") { h ^= c; h *= 16777619; }
+            return IdPrefix + (10 + h % 90);
+        }
+
+        /// What people type -> the full Unity tag. "374821", "37 4821", "ID 374821", "#374821" all work.
+        public static string NormalizeTag(string s)
+        {
+            var d = new System.Text.StringBuilder();
+            foreach (char c in s ?? "") if (char.IsDigit(c)) d.Append(c);
+            string n = d.ToString();
+            if (n.Length < 5 || n.Length > 10) return "";
+            return IdPrefix + n.Substring(0, 2) + "#" + n.Substring(2);
+        }
+
+        /// Friend names: from their presence (callsign), remembered on this phone so offline friends keep their name.
+        static string NameFor(string id, string tag, string fromPresence)
+        {
+            string key = "z_fn_" + id;
+            if (!string.IsNullOrEmpty(fromPresence)) { if (PlayerPrefs.GetString(key, "") != fromPresence) PlayerPrefs.SetString(key, fromPresence); return fromPresence; }
+            string saved = string.IsNullOrEmpty(id) ? "" : PlayerPrefs.GetString(key, "");
+            if (saved.Length > 0) return saved;
+            string num = IdOf(tag);
+            if (num.Length > 0) return "ID " + num;
+            int h = (tag ?? "").LastIndexOf('#');
+            return h > 0 ? tag.Substring(0, h) : (string.IsNullOrEmpty(tag) ? "?" : tag);      // old-style names (before the update)
+        }
         public static string Error = "";
         public static int OnlineCount { get { int n = 0; foreach (var f in Friends) if (f.status > 0) n++; return n; } }
 
@@ -865,12 +944,11 @@ namespace Zone47
             var member = Get(rel, "Member");
             var f = new Friend { id = Get(member, "Id") as string ?? "" };
             string full = Get(Get(member, "Profile"), "Name") as string ?? "";
-            int hash = full.LastIndexOf('#');
-            f.name = hash > 0 ? full.Substring(0, hash) : (full.Length > 0 ? full : "?");
             f.tag = full;
             var pres = Get(member, "Presence");
             string av = Get(pres, "Availability")?.ToString() ?? "";
             var act = Activity<Z47Activity>(pres);
+            f.name = NameFor(f.id, full, act != null ? act.nm : null);
             if (Get(pres, "LastSeen") is DateTime ls) f.lastSeen = ls;
             bool online = av == "Online" || av == "Busy" || av == "Away";
             f.status = !online ? 0 : act != null && act.s == "match" ? 3 : act != null && act.s == "party" ? 2 : 1;
@@ -890,7 +968,7 @@ namespace Zone47
             {
                 await Net.SignIn();
                 var auth = AuthenticationService.Instance;
-                string want = CleanName(Settings.Callsign);
+                string want = HiddenName(auth.PlayerId);
                 string cur = auth.PlayerName;
                 if (string.IsNullOrEmpty(cur)) { try { cur = await auth.GetPlayerNameAsync(); } catch { cur = null; } }
                 if (string.IsNullOrEmpty(cur) || !cur.StartsWith(want + "#", StringComparison.OrdinalIgnoreCase)) cur = await auth.UpdatePlayerNameAsync(want);
@@ -915,10 +993,10 @@ namespace Zone47
         }
 
         /// Callsign changed: new player name (keeps a fresh #tag).
-        public static async void Rename()
+        public static void Rename()
         {
             if (!Ready) return;
-            try { MyTag = await AuthenticationService.Instance.UpdatePlayerNameAsync(CleanName(Settings.Callsign)) ?? MyTag; } catch (Exception e) { Debug.LogWarning("[Social] rename: " + e.Message); }
+            UpdatePresence();          // the ID never changes; friends see the new callsign through presence
             Fire();
         }
 
@@ -947,12 +1025,12 @@ namespace Zone47
 
         public static async void AddByName(string tag, Action<string> done)
         {
-            tag = (tag ?? "").Trim();
             if (!Ready) { done?.Invoke(T("Arkadaş sistemi hazır değil", "Friends not ready")); return; }
-            if (!tag.Contains("#")) { done?.Invoke(T("Etiketi tam yaz: İsim#1234", "Type the full tag: Name#1234")); return; }
-            if (string.Equals(tag, MyTag, StringComparison.OrdinalIgnoreCase)) { done?.Invoke(T("Bu senin etiketin :)", "That's your own tag :)")); return; }
+            tag = NormalizeTag(tag);
+            if (tag.Length == 0) { done?.Invoke(T("ID'yi yaz (kartında yazan 6 haneli sayı)", "Type the ID (the 6-digit number on their card)")); return; }
+            if (string.Equals(tag, MyTag, StringComparison.OrdinalIgnoreCase)) { done?.Invoke(T("Bu senin ID'n :)", "That's your own ID :)")); return; }
             try { await Svc.AddFriendByNameAsync(tag); Pull(); done?.Invoke(null); }
-            catch (Exception e) { Debug.LogWarning("[Social] add: " + e.Message); done?.Invoke(T("Oyuncu bulunamadı", "Player not found")); }
+            catch (Exception e) { Debug.LogWarning("[Social] add: " + e.Message); done?.Invoke(T("Bu ID'de oyuncu yok · kontrol et", "No player with that ID · check it")); }
         }
 
         public static async void Accept(string id) { try { await Svc.AddFriendAsync(id); } catch (Exception e) { Debug.LogWarning(e.Message); } Pull(); }
@@ -1002,7 +1080,7 @@ namespace Zone47
             {
                 s = Net.InMatch ? "match" : Net.Online ? "party" : "lobby",
                 code = Net.Online && !Net.InMatch ? Net.Code : "",
-                flag = Profile.Flag, lv = Progress.Level, n = Math.Max(1, Net.Room.Count),
+                flag = Profile.Flag, lv = Progress.Level, n = Math.Max(1, Net.Room.Count), nm = Settings.Callsign,
             };
             try
             {
