@@ -356,6 +356,7 @@ IL2CPP_EXTERN_C RuntimeClass* Action_2_t5F23CC3B7A8A73A4EA03ECC4C0C36453937843DB
 IL2CPP_EXTERN_C RuntimeClass* Action_2_t723CF5545926725AE4B055BB8E304D27E617A846_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Action_3_tD4FEFC6A317A295868086BEB12578A006464E2D5_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var;
+IL2CPP_EXTERN_C RuntimeClass* Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* ArgumentException_tAD90411542A20A9C72D5CDA3A84181D8B947A263_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* CollectionPool_2_t472BB60F9652525CF0B6D1758D2E6DB80C432B41_il2cpp_TypeInfo_var;
@@ -431,7 +432,6 @@ IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_t60527410F3A92983A4813BC22952F179C47944F5_
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_tA52264FB34D2C14C45A86994CABA0D3D89B614A6_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_tB31473FE33CB23DE1098AC8F9020D024C97DE002_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* U3CU3Ec_tF03D85AF8783AE9E0EA5858D8BF46EC212660A17_il2cpp_TypeInfo_var;
-IL2CPP_EXTERN_C RuntimeClass* UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* UQueryExtensions_t1271382882DF1B8FEEDE5EFA510405ABA7BD3426_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA_il2cpp_TypeInfo_var;
 IL2CPP_EXTERN_C RuntimeClass* VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var;
@@ -1513,6 +1513,10 @@ struct RenderHints_t4032FC4AB3FD946FD2A484865B8861730D9035E7
 	int32_t ___value__;
 };
 struct Repeat_tC0330B75B12D24B063BA5151AF3BB73B85D8B840 
+{
+	int32_t ___value__;
+};
+struct RuntimePlatform_t9A8AAF204603076FCAAECCCC05DA386AEE7BF66E 
 {
 	int32_t ___value__;
 };
@@ -4311,7 +4315,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool SortColumnDescriptions_Remove_m2E23AFC24
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortColumnDescription_set_direction_m28A37600DCBA0259EDCDE484E4F27F7CA11E1804 (SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* __this, int32_t ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortColumnDescription__ctor_m4CDF60FC2C353A3A2BD1BED94AA8DCAE6B451E0E (SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* __this, String_t* ___0_columnName, int32_t ___1_direction, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortColumnDescription__ctor_m59FD47F4249C40134E7165C6A76B65E356A0A148 (SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* __this, int32_t ___0_columnIndex, int32_t ___1_direction, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool UIElementsUtility_get_isCommandActionKeyPlatform_m85BDE38B7F4C7AB3917E645E74A6FE5F78C1C3F3 (const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138 (const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortColumnDescriptions_Clear_mE75FE492DFD24BC03275E58C6B66C8C067C75D1F (SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool SortColumnDescriptions_Contains_m1B25CED15299CDDE7D32669A3262AC90F9286BD9 (SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* __this, SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* ___0_item, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortColumnDescriptions_Add_m7BA0FEA9AD5FE5C528AA3B0E59FFB67A8EAA0531 (SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* __this, SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* ___0_item, const RuntimeMethod* method) ;
@@ -4564,7 +4568,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR LayoutComputedData_t37CD62B9A6B59283679F1126A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11792
+// Method Definition Index: 11789
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m9DCC22D7BDE18F5DEE570F890B92E3E97D6F3750 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4582,7 +4586,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m9DCC22D7BDE18F5DEE570F89
 		return;
 	}
 }
-// Method Definition Index: 11793
+// Method Definition Index: 11790
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_mF75E078CA53C3A4E283B026C734D6526AD9A75D8 (U3CU3Ec_t345757B82EB8853CF2BC4D251CFBC9033C5C5718* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -4591,7 +4595,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_mF75E078CA53C3A4E283B026C7
 		return;
 	}
 }
-// Method Definition Index: 11794
+// Method Definition Index: 11791
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOverLinkTagEvent_t9E0D384AF14F3D06FB6539B994B620AD4E0BC3F5* U3CU3Ec_U3C_cctorU3Eb__0_0_m805F53AEC36A01AA3233D5D8821A33FF66195BEB (U3CU3Ec_t345757B82EB8853CF2BC4D251CFBC9033C5C5718* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4615,7 +4619,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOverLinkTagEvent_t9E0D384AF14F3D06FB65
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11795
+// Method Definition Index: 11792
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent__cctor_m71794FED94153CA967E50DD9B7B83BA16750177C (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4640,7 +4644,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent__cctor_m71794FED
 		return;
 	}
 }
-// Method Definition Index: 11796
+// Method Definition Index: 11793
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkID_mBD3292D6A020311A61134C01709E471ED20B8D2F (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -4651,7 +4655,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkID_mBD32
 		return;
 	}
 }
-// Method Definition Index: 11797
+// Method Definition Index: 11794
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkText_m12488371182B00CF808A451B82B845A76B943E56 (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -4662,7 +4666,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkText_m12
 		return;
 	}
 }
-// Method Definition Index: 11798
+// Method Definition Index: 11795
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_Init_mC3D22C694A6B4CAA4C8220EA3C0B9CF08B27A2E0 (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4680,7 +4684,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_Init_mC3D22C694A
 		return;
 	}
 }
-// Method Definition Index: 11799
+// Method Definition Index: 11796
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_LocalInit_m9CFC4170443A253802B94A164AE2880001F8A874 (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -4690,7 +4694,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_LocalInit_m9CFC4
 		return;
 	}
 }
-// Method Definition Index: 11800
+// Method Definition Index: 11797
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* PointerMoveLinkTagEvent_GetPooled_m71751E122152506AFCD404F647E8E34DA7906EF0 (RuntimeObject* ___0_evt, String_t* ___1_linkID, String_t* ___2_linkText, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4730,7 +4734,7 @@ IL_001c:
 		return L_7;
 	}
 }
-// Method Definition Index: 11801
+// Method Definition Index: 11798
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent__ctor_mC7634CF57C088B9E928E0EEADC7BEFDDFDCD830D (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4748,7 +4752,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent__ctor_mC7634CF57
 		return;
 	}
 }
-// Method Definition Index: 11802
+// Method Definition Index: 11799
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_Dispatch_m5310E107E84A658A714C9A1EB7E4A13F3864F808 (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
@@ -4767,7 +4771,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_Dispatch_m5310E1
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11803
+// Method Definition Index: 11800
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m1A316157F939C2B1D062846AC4D7D6029938EEAD (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4785,7 +4789,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m1A316157F939C2B1D062846A
 		return;
 	}
 }
-// Method Definition Index: 11804
+// Method Definition Index: 11801
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m1671795A479502B331B468CBA4C0F8E431E84BE6 (U3CU3Ec_tA52264FB34D2C14C45A86994CABA0D3D89B614A6* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -4794,7 +4798,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m1671795A479502B331B468CBA
 		return;
 	}
 }
-// Method Definition Index: 11805
+// Method Definition Index: 11802
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* U3CU3Ec_U3C_cctorU3Eb__0_0_mCFA7EB21D56A274D0CCAB48D34C65C9DADCF845D (U3CU3Ec_tA52264FB34D2C14C45A86994CABA0D3D89B614A6* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4818,7 +4822,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerMoveLinkTagEvent_tD3F89E105A009EFE560A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11806
+// Method Definition Index: 11803
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent__cctor_m284C438FC52AF2FEF2FE0AC3AA218FE4A275A22A (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4843,7 +4847,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent__cctor_m284C438FC
 		return;
 	}
 }
-// Method Definition Index: 11807
+// Method Definition Index: 11804
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_Init_m0C71C4DBA3CFCDF77CFCBAF43E199D0B142B2050 (PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4861,7 +4865,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_Init_m0C71C4DBA3C
 		return;
 	}
 }
-// Method Definition Index: 11808
+// Method Definition Index: 11805
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_LocalInit_m8B337050B1C76FA1263F390EAA02B9FA71BAA641 (PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* __this, const RuntimeMethod* method) 
 {
 	{
@@ -4871,7 +4875,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_LocalInit_m8B3370
 		return;
 	}
 }
-// Method Definition Index: 11809
+// Method Definition Index: 11806
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* PointerOutLinkTagEvent_GetPooled_mD240495C02265417AF92A2D71B7434BF3B285DF1 (RuntimeObject* ___0_evt, String_t* ___1_linkID, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4901,7 +4905,7 @@ IL_000c:
 		return L_3;
 	}
 }
-// Method Definition Index: 11810
+// Method Definition Index: 11807
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent__ctor_mEC382CF277BF14B6CCB49960B64CE345604C31E7 (PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4919,7 +4923,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent__ctor_mEC382CF277
 		return;
 	}
 }
-// Method Definition Index: 11811
+// Method Definition Index: 11808
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_Dispatch_m0AFFD3EEEEE3EC10C7F93190DF25B0EB0787EC08 (PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
@@ -4938,7 +4942,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutLinkTagEvent_Dispatch_m0AFFD3E
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11812
+// Method Definition Index: 11809
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m918DA4E234C2A345608026C6EB6961590651CD1D (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4956,7 +4960,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m918DA4E234C2A345608026C6
 		return;
 	}
 }
-// Method Definition Index: 11813
+// Method Definition Index: 11810
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m99F3CD38ECD836248034DA4544AB8408D8545CC5 (U3CU3Ec_t60527410F3A92983A4813BC22952F179C47944F5* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -4965,7 +4969,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m99F3CD38ECD836248034DA454
 		return;
 	}
 }
-// Method Definition Index: 11814
+// Method Definition Index: 11811
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3F0E3EC3E962BB85A511* U3CU3Ec_U3C_cctorU3Eb__0_0_m443E2870A2A4B21D76E75835775CB0C8AC2DD285 (U3CU3Ec_t60527410F3A92983A4813BC22952F179C47944F5* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -4989,7 +4993,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOutLinkTagEvent_t944EACB43BAF6A88A01E3
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11815
+// Method Definition Index: 11812
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent__cctor_mF44442B8436C7EEF3274A44EE36D8842255A3C00 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5014,7 +5018,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent__cctor_mF44442B8
 		return;
 	}
 }
-// Method Definition Index: 11816
+// Method Definition Index: 11813
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkID_mDED112D0BD419BE700A1C88B1282FFC81F7EAE48 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5025,7 +5029,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkID_mDED1
 		return;
 	}
 }
-// Method Definition Index: 11817
+// Method Definition Index: 11814
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkText_mB9D85E3FB495C277014BF8247422103C70A8EE30 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5036,7 +5040,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkText_mB9
 		return;
 	}
 }
-// Method Definition Index: 11818
+// Method Definition Index: 11815
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_Init_m362417512B782B18DB5A86D7AB9844C11722C340 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5054,7 +5058,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_Init_m362417512B
 		return;
 	}
 }
-// Method Definition Index: 11819
+// Method Definition Index: 11816
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_LocalInit_mBB5281EBF59CC80B256587C8FD79F5364AE37497 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, const RuntimeMethod* method) 
 {
 	{
@@ -5064,7 +5068,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_LocalInit_mBB528
 		return;
 	}
 }
-// Method Definition Index: 11820
+// Method Definition Index: 11817
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* PointerDownLinkTagEvent_GetPooled_m7C062F93B521A33B2564CB0342861809CE3DC27A (RuntimeObject* ___0_evt, String_t* ___1_linkID, String_t* ___2_linkText, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5104,7 +5108,7 @@ IL_001c:
 		return L_7;
 	}
 }
-// Method Definition Index: 11821
+// Method Definition Index: 11818
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent__ctor_m0C91836C89733231AEA61E1EAF2765E028702B56 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5122,7 +5126,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent__ctor_m0C91836C8
 		return;
 	}
 }
-// Method Definition Index: 11822
+// Method Definition Index: 11819
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_Dispatch_m6CD948B89445ABB6458A9F4151EA81322DB07569 (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
@@ -5141,7 +5145,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_Dispatch_m6CD948
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11823
+// Method Definition Index: 11820
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_mB2F1D7BB3D748FB11F991EE2C51929EFD8CB95A9 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5159,7 +5163,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_mB2F1D7BB3D748FB11F991EE2
 		return;
 	}
 }
-// Method Definition Index: 11824
+// Method Definition Index: 11821
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m7A5A9C275875ECE1F9C14F93CEF0EFEE935527B9 (U3CU3Ec_tF03D85AF8783AE9E0EA5858D8BF46EC212660A17* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -5168,7 +5172,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m7A5A9C275875ECE1F9C14F93C
 		return;
 	}
 }
-// Method Definition Index: 11825
+// Method Definition Index: 11822
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* U3CU3Ec_U3C_cctorU3Eb__0_0_mE8206A649F8E5D676DFAE4EC5D838B46371DCA14 (U3CU3Ec_tF03D85AF8783AE9E0EA5858D8BF46EC212660A17* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5192,7 +5196,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11826
+// Method Definition Index: 11823
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent__cctor_mDBC13D7B2149C237FBB2DD783C8F1ABB81035E98 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5217,7 +5221,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent__cctor_mDBC13D7B21
 		return;
 	}
 }
-// Method Definition Index: 11827
+// Method Definition Index: 11824
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkID_m48D26A14B24B304CA63844309A9F8E626E71D55D (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5228,7 +5232,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkID_m48D26A
 		return;
 	}
 }
-// Method Definition Index: 11828
+// Method Definition Index: 11825
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkText_m935D07221EABC4F77E036231330039E6A6411C30 (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5239,7 +5243,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkText_m935D
 		return;
 	}
 }
-// Method Definition Index: 11829
+// Method Definition Index: 11826
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_Init_m39422DEAB3DCD0387AE67E407B519D8B16F1B909 (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5257,7 +5261,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_Init_m39422DEAB3DC
 		return;
 	}
 }
-// Method Definition Index: 11830
+// Method Definition Index: 11827
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_LocalInit_mD3939645A7552DA21C8FF1916352CCB35B747A69 (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, const RuntimeMethod* method) 
 {
 	{
@@ -5267,7 +5271,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_LocalInit_mD393964
 		return;
 	}
 }
-// Method Definition Index: 11831
+// Method Definition Index: 11828
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* PointerUpLinkTagEvent_GetPooled_m9DFEFBB79F1ED5CC2BB4E40496EC8BDB6B26F55D (RuntimeObject* ___0_evt, String_t* ___1_linkID, String_t* ___2_linkText, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5307,7 +5311,7 @@ IL_001c:
 		return L_7;
 	}
 }
-// Method Definition Index: 11832
+// Method Definition Index: 11829
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent__ctor_m9C730F7713A2EA053FD0CD0796BD70D10E9DA592 (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5325,7 +5329,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent__ctor_m9C730F7713A
 		return;
 	}
 }
-// Method Definition Index: 11833
+// Method Definition Index: 11830
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_Dispatch_m19B686F076E5308E4B45E51AD387323DD0FFC0EB (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
@@ -5344,7 +5348,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_Dispatch_m19B686F0
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11834
+// Method Definition Index: 11831
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m573B4D7FACE3C8884E9EC825C38BE91C8719C7CC (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5362,7 +5366,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__cctor_m573B4D7FACE3C8884E9EC825
 		return;
 	}
 }
-// Method Definition Index: 11835
+// Method Definition Index: 11832
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m1C756E3634692BF5BE28EC20238FBD77CDBE8F48 (U3CU3Ec_tB31473FE33CB23DE1098AC8F9020D024C97DE002* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -5371,7 +5375,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_m1C756E3634692BF5BE28EC202
 		return;
 	}
 }
-// Method Definition Index: 11836
+// Method Definition Index: 11833
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* U3CU3Ec_U3C_cctorU3Eb__0_0_mC905B57EFB9E880C0A82B37411B9BB27CC167B68 (U3CU3Ec_tB31473FE33CB23DE1098AC8F9020D024C97DE002* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -5449,7 +5453,7 @@ IL2CPP_EXTERN_C void StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A_marsh
 IL2CPP_EXTERN_C void StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A_marshal_com_cleanup(StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A_marshaled_com& marshaled)
 {
 }
-// Method Definition Index: 11837
+// Method Definition Index: 11834
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_top_m48E6217782E620393440CCCD81930520B1E1030D (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5467,7 +5471,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_top_m48E6217782E620393440CCCD81930520B1E10
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_top_m48E6217782E620393440CCCD81930520B1E1030D(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11838
+// Method Definition Index: 11835
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_left_mFAD27A84F960F6DF78853A2129A8204B4F8CD806 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5485,7 +5489,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_left_mFAD27A84F960F6DF78853A2129A8204B4F8C
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_left_mFAD27A84F960F6DF78853A2129A8204B4F8CD806(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11839
+// Method Definition Index: 11836
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_width_m9624D54682E20BF8F737C4B720F37E8E8F9525FA (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5503,7 +5507,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_width_m9624D54682E20BF8F737C4B720F37E8E8F9
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_width_m9624D54682E20BF8F737C4B720F37E8E8F9525FA(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11840
+// Method Definition Index: 11837
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_height_m4ACA993F82BB0E9960844357040147BB15B45678 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5521,7 +5525,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_height_m4ACA993F82BB0E9960844357040147BB15
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_height_m4ACA993F82BB0E9960844357040147BB15B45678(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11841
+// Method Definition Index: 11838
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_right_mA41389187E587D958E1ADC82616B9FC0A6D59010 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5539,7 +5543,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_right_mA41389187E587D958E1ADC82616B9FC0A6D
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_right_mA41389187E587D958E1ADC82616B9FC0A6D59010(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11842
+// Method Definition Index: 11839
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_bottom_mF0585EEE945A1F798A2F3A39FB44918DF7577999 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5557,7 +5561,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_bottom_mF0585EEE945A1F798A2F3A39FB44918DF7
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_bottom_mF0585EEE945A1F798A2F3A39FB44918DF7577999(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11843
+// Method Definition Index: 11840
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_color_m0DE08D9E8470C008EF7977ABACB801B50C403604 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5575,7 +5579,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_color_m0DE08D9E8470C008EF7977ABACB801B50C4
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_color_m0DE08D9E8470C008EF7977ABACB801B50C403604(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11844
+// Method Definition Index: 11841
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_backgroundColor_m2A9BC3A6EE3327E4AD37B833093F2B1045F42657 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5593,7 +5597,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_backgroundColor_m2A9BC3A6EE3327E4AD37B8330
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_backgroundColor_m2A9BC3A6EE3327E4AD37B833093F2B1045F42657(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11845
+// Method Definition Index: 11842
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_unityBackgroundImageTintColor_m9518C2F0EEF84A7514FB08D412ECA223481E26EB (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5611,7 +5615,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_unityBackgroundImageTintColor_m9518C2F0EEF
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_unityBackgroundImageTintColor_m9518C2F0EEF84A7514FB08D412ECA223481E26EB(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11846
+// Method Definition Index: 11843
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderColor_m51C6B51A6F5CF146DD5BC299D1F6996D8468BD19 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5629,7 +5633,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderColor_m51C6B51A6F5CF146DD5BC299D1F69
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderColor_m51C6B51A6F5CF146DD5BC299D1F6996D8468BD19(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11847
+// Method Definition Index: 11844
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_marginLeft_m9B22FA1BD816F1A51F225928DF2F3D906E6DF88B (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5647,7 +5651,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_marginLeft_m9B22FA1BD816F1A51F225928DF2F3D
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_marginLeft_m9B22FA1BD816F1A51F225928DF2F3D906E6DF88B(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11848
+// Method Definition Index: 11845
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_marginTop_mF863F6D466BC531C6AF621C89ECDBD39463BD93E (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5665,7 +5669,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_marginTop_mF863F6D466BC531C6AF621C89ECDBD3
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_marginTop_mF863F6D466BC531C6AF621C89ECDBD39463BD93E(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11849
+// Method Definition Index: 11846
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_marginRight_m7CE017508A3B1D833C58994CC49D26526A2201B1 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5683,7 +5687,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_marginRight_m7CE017508A3B1D833C58994CC49D2
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_marginRight_m7CE017508A3B1D833C58994CC49D26526A2201B1(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11850
+// Method Definition Index: 11847
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_marginBottom_mC6168EF9E4CF2B5C10E4F2C0C10173F47ECC5228 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5701,7 +5705,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_marginBottom_mC6168EF9E4CF2B5C10E4F2C0C101
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_marginBottom_mC6168EF9E4CF2B5C10E4F2C0C10173F47ECC5228(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11851
+// Method Definition Index: 11848
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_paddingLeft_m5F86CBEAB6FBE559BCF2879CB8B29A818E1EE842 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5719,7 +5723,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_paddingLeft_m5F86CBEAB6FBE559BCF2879CB8B29
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_paddingLeft_m5F86CBEAB6FBE559BCF2879CB8B29A818E1EE842(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11852
+// Method Definition Index: 11849
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float StyleValues_get_paddingTop_m4163613C0D8C0232FFF6E9FEEA365E8EE4C22F29 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, const RuntimeMethod* method) 
 {
 	StyleFloat_t4A100BCCDC275C2302517C5858C9BE9EC43D4841 V_0;
@@ -5755,7 +5759,7 @@ IL2CPP_EXTERN_C  float StyleValues_get_paddingTop_m4163613C0D8C0232FFF6E9FEEA365
 	_returnValue = StyleValues_get_paddingTop_m4163613C0D8C0232FFF6E9FEEA365E8EE4C22F29(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 11853
+// Method Definition Index: 11850
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_paddingTop_m7ECA854BDED29E7EB321AAB864E31496AE9296C4 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5773,7 +5777,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_paddingTop_m7ECA854BDED29E7EB321AAB864E314
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_paddingTop_m7ECA854BDED29E7EB321AAB864E31496AE9296C4(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11854
+// Method Definition Index: 11851
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_paddingRight_mBF11DC662A123347AC9EE1E27E8E305CD8185DE6 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5791,7 +5795,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_paddingRight_mBF11DC662A123347AC9EE1E27E8E
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_paddingRight_mBF11DC662A123347AC9EE1E27E8E305CD8185DE6(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11855
+// Method Definition Index: 11852
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_paddingBottom_m3BFC2973535E0E6D039E20B772A8820FC8077E7B (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5809,7 +5813,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_paddingBottom_m3BFC2973535E0E6D039E20B772A
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_paddingBottom_m3BFC2973535E0E6D039E20B772A8820FC8077E7B(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11856
+// Method Definition Index: 11853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderLeftWidth_mBF143DCEA54204778667BF44C8E73B7975D4AAA9 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5827,7 +5831,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderLeftWidth_mBF143DCEA54204778667BF44C
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderLeftWidth_mBF143DCEA54204778667BF44C8E73B7975D4AAA9(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11857
+// Method Definition Index: 11854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderRightWidth_mEE38F80EEFACA8EA46E2FBFB999C66BF149237E7 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5845,7 +5849,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderRightWidth_mEE38F80EEFACA8EA46E2FBFB
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderRightWidth_mEE38F80EEFACA8EA46E2FBFB999C66BF149237E7(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11858
+// Method Definition Index: 11855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderTopWidth_m1E5392A33528F1925D3069320B8FFF00560EFDA0 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5863,7 +5867,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderTopWidth_m1E5392A33528F1925D3069320B
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderTopWidth_m1E5392A33528F1925D3069320B8FFF00560EFDA0(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11859
+// Method Definition Index: 11856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderBottomWidth_m71302DEB066E5E6E573474C55257B322F7419365 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5881,7 +5885,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderBottomWidth_m71302DEB066E5E6E573474C
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderBottomWidth_m71302DEB066E5E6E573474C55257B322F7419365(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11860
+// Method Definition Index: 11857
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderTopLeftRadius_m73F97178B2C0D14C27D10343CA5531F89D43B111 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5899,7 +5903,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderTopLeftRadius_m73F97178B2C0D14C27D10
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderTopLeftRadius_m73F97178B2C0D14C27D10343CA5531F89D43B111(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11861
+// Method Definition Index: 11858
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderTopRightRadius_m88DD2EFAABD5E9561C785307ABAB01EF5B27622E (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5917,7 +5921,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderTopRightRadius_m88DD2EFAABD5E9561C78
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderTopRightRadius_m88DD2EFAABD5E9561C785307ABAB01EF5B27622E(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11862
+// Method Definition Index: 11859
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderBottomLeftRadius_m760918D8378859D7856071CE870EB65F959D4C76 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5935,7 +5939,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderBottomLeftRadius_m760918D8378859D785
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderBottomLeftRadius_m760918D8378859D7856071CE870EB65F959D4C76(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11863
+// Method Definition Index: 11860
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_borderBottomRightRadius_m333C6B1380996D18764DDB00C2840FB2BEAE41B8 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5953,7 +5957,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_borderBottomRightRadius_m333C6B1380996D187
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_borderBottomRightRadius_m333C6B1380996D18764DDB00C2840FB2BEAE41B8(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11864
+// Method Definition Index: 11861
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_opacity_m922BA4C7684E0A662DFE1E85283CFDC35C1CE81F (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5971,7 +5975,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_opacity_m922BA4C7684E0A662DFE1E85283CFDC35
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_opacity_m922BA4C7684E0A662DFE1E85283CFDC35C1CE81F(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11865
+// Method Definition Index: 11862
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_flexGrow_mA7EA5E8B7DEA6569366E164F00CA8160540FEF48 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -5989,7 +5993,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_flexGrow_mA7EA5E8B7DEA6569366E164F00CA8160
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_flexGrow_mA7EA5E8B7DEA6569366E164F00CA8160540FEF48(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11866
+// Method Definition Index: 11863
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_set_flexShrink_m4838D70B1233E2CA71A38AC32ECB4C96F8CDA67E (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -6007,7 +6011,7 @@ IL2CPP_EXTERN_C  void StyleValues_set_flexShrink_m4838D70B1233E2CA71A38AC32ECB4C
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_set_flexShrink_m4838D70B1233E2CA71A38AC32ECB4C96F8CDA67E(_thisAdjusted, ___0_value, method);
 }
-// Method Definition Index: 11867
+// Method Definition Index: 11864
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_SetValue_m0A2171A1F7DA8AC12ADF95B63B0EF7E446A6D6BA (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, int32_t ___0_id, float ___1_value, const RuntimeMethod* method) 
 {
 	StyleValue_t56307594EC04E04EFBCC3220595B4AAD66FF93C5 V_0;
@@ -6038,7 +6042,7 @@ IL2CPP_EXTERN_C  void StyleValues_SetValue_m0A2171A1F7DA8AC12ADF95B63B0EF7E446A6
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_SetValue_m0A2171A1F7DA8AC12ADF95B63B0EF7E446A6D6BA(_thisAdjusted, ___0_id, ___1_value, method);
 }
-// Method Definition Index: 11868
+// Method Definition Index: 11865
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void StyleValues_SetValue_mBAC6E9C25500E6660F25A0D6F87E2C1594D64A7D (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, int32_t ___0_id, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_value, const RuntimeMethod* method) 
 {
 	StyleValue_t56307594EC04E04EFBCC3220595B4AAD66FF93C5 V_0;
@@ -6069,7 +6073,7 @@ IL2CPP_EXTERN_C  void StyleValues_SetValue_mBAC6E9C25500E6660F25A0D6F87E2C1594D6
 	_thisAdjusted = reinterpret_cast<StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A*>(__this + _offset);
 	StyleValues_SetValue_mBAC6E9C25500E6660F25A0D6F87E2C1594D64A7D(_thisAdjusted, ___0_id, ___1_value, method);
 }
-// Method Definition Index: 11869
+// Method Definition Index: 11866
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR StyleValueCollection_t5ADC08D23E648FBE78F2C161494786E6C83E1377* StyleValues_Values_m88F2CD5ABCE813109E3AEC2EC7E188F3335124F4 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6130,7 +6134,7 @@ IL2CPP_EXTERN_C  StyleValueCollection_t5ADC08D23E648FBE78F2C161494786E6C83E1377*
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11871
+// Method Definition Index: 11868
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Lerp_Interpolate_m6600A3C40476BFAFF0B91EBDD50B8DA0695DEB44 (float ___0_start, float ___1_end, float ___2_ratio, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -6152,7 +6156,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 11872
+// Method Definition Index: 11869
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Lerp_Interpolate_m3670F7FFEB36D2A5485DB0A46111608451725E7D (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_start, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_end, float ___2_ratio, const RuntimeMethod* method) 
 {
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
@@ -6175,7 +6179,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 11873
+// Method Definition Index: 11870
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A Lerp_Interpolate_mB8C742AFAB0D735F42E1D3271520B0F4870C13F3 (StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A ___0_start, StyleValues_t4AED947A53B84B62EF2B589A40B74911CA77D11A ___1_end, float ___2_ratio, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6809,7 +6813,7 @@ IL_02e7:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11915
+// Method Definition Index: 11912
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AutoCompletePathVisitor_get_maxDepth_m186F0E249DA7088275B85F6E5F87BF65B843851C (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, const RuntimeMethod* method) 
 {
 	{
@@ -6818,7 +6822,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AutoCompletePathVisitor_get_maxDepth_
 		return L_0;
 	}
 }
-// Method Definition Index: 11916
+// Method Definition Index: 11913
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool AutoCompletePathVisitor_HasReachedEnd_mEACD20D3E93C66F53CDD2970D12E1C538956BB8E (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, Type_t* ___0_containerType, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6864,7 +6868,7 @@ IL_0027:
 		return (bool)G_B3_0;
 	}
 }
-// Method Definition Index: 11917
+// Method Definition Index: 11914
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AutoCompletePathVisitor_Reset_m177367D691A8FA3AC7B5EFD7E82783169CA8725A (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6901,7 +6905,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AutoCompletePathVisitor_Reset_m177367D69
 		return;
 	}
 }
-// Method Definition Index: 11922
+// Method Definition Index: 11919
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AutoCompletePathVisitor_VisitPropertyType_m93CA1A7ADF8BB5E1A1FD73FF0D2F153C21834583 (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, Type_t* ___0_type, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7209,7 +7213,7 @@ IL_0117:
 		return;
 	}
 }
-// Method Definition Index: 11923
+// Method Definition Index: 11920
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AutoCompletePathVisitor__ctor_m20927C6045A6F91632CBEC121CECD505F8A9705A (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7236,7 +7240,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AutoCompletePathVisitor__ctor_m20927C604
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11924
+// Method Definition Index: 11921
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086465* VisitContext_get_propertyPathInfos_mFEFFA4214B8DE54183835DFB3850D48373666FE3 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7245,7 +7249,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086
 		return L_0;
 	}
 }
-// Method Definition Index: 11925
+// Method Definition Index: 11922
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_propertyPathInfos_mFCA652B80C3C586B0F42F0648A86CDFD9B1B37FD (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086465* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7256,7 +7260,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_propertyPathInfos_mFCA6
 		return;
 	}
 }
-// Method Definition Index: 11926
+// Method Definition Index: 11923
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR HashSet_1_tAE2F12E55878645F5BE7C4D5603228A6FAB429C7* VisitContext_get_types_m061A3E9948C49F1492D8FB10EDF80692F007BD60 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7265,7 +7269,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR HashSet_1_tAE2F12E55878645F5BE7C4D5603228A6FA
 		return L_0;
 	}
 }
-// Method Definition Index: 11927
+// Method Definition Index: 11924
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 VisitContext_get_current_m7C4197B91ADAA11C45F37709EBBB076461C19C10 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7274,7 +7278,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B
 		return L_0;
 	}
 }
-// Method Definition Index: 11928
+// Method Definition Index: 11925
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_current_mDDA3330D2D49DFA4C01D19FA3123E22586FC9310 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7309,7 +7313,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_current_mDDA3330D2D49DF
 		return;
 	}
 }
-// Method Definition Index: 11929
+// Method Definition Index: 11926
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t VisitContext_get_currentDepth_m71D6554E66F041CBFAECAD0EAED46A65D83C7387 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7318,7 +7322,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t VisitContext_get_currentDepth_m71D655
 		return L_0;
 	}
 }
-// Method Definition Index: 11930
+// Method Definition Index: 11927
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_currentDepth_m52788AC7E4B2FF784EF7C6F395BDE0000E0DE008 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7328,7 +7332,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext_set_currentDepth_m52788AC7E
 		return;
 	}
 }
-// Method Definition Index: 11931
+// Method Definition Index: 11928
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitContext__ctor_mA88DF1A7B67C0F673C8FB563357100AD340F6592 (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7410,7 +7414,7 @@ IL2CPP_EXTERN_C void VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43C
 IL2CPP_EXTERN_C void VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE_marshal_com_cleanup(VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE_marshaled_com& marshaled)
 {
 }
-// Method Definition Index: 11934
+// Method Definition Index: 11931
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitedPropertyScope__ctor_m5BA295E7B5ECD4EAD4B51A54A9933667BDD6549A (VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE* __this, VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* ___0_context, RuntimeObject* ___1_property, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7505,7 +7509,7 @@ IL2CPP_EXTERN_C  void VisitedPropertyScope__ctor_m5BA295E7B5ECD4EAD4B51A54A99336
 	_thisAdjusted = reinterpret_cast<VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE*>(__this + _offset);
 	VisitedPropertyScope__ctor_m5BA295E7B5ECD4EAD4B51A54A9933667BDD6549A(_thisAdjusted, ___0_context, ___1_property, method);
 }
-// Method Definition Index: 11935
+// Method Definition Index: 11932
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitedPropertyScope__ctor_m1CA03A55E3FE37E78ABBE0AC9BF9AF5C014BC480 (VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE* __this, VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* ___0_context, int32_t ___1_index, Type_t* ___2_type, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7596,7 +7600,7 @@ IL2CPP_EXTERN_C  void VisitedPropertyScope__ctor_m1CA03A55E3FE37E78ABBE0AC9BF9AF
 	_thisAdjusted = reinterpret_cast<VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE*>(__this + _offset);
 	VisitedPropertyScope__ctor_m1CA03A55E3FE37E78ABBE0AC9BF9AF5C014BC480(_thisAdjusted, ___0_context, ___1_index, ___2_type, method);
 }
-// Method Definition Index: 11936
+// Method Definition Index: 11933
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void VisitedPropertyScope_Dispose_m49D22C9237E70EBD320BC1B5122940EE68276760 (VisitedPropertyScope_tE05035FCF84C4F135E88B893FC40CF5F3B43CFFE* __this, const RuntimeMethod* method) 
 {
 	PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 V_0;
@@ -7643,7 +7647,7 @@ IL2CPP_EXTERN_C  void VisitedPropertyScope_Dispose_m49D22C9237E70EBD320BC1B51229
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11937
+// Method Definition Index: 11934
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 TypePathVisitor_get_Path_m6BC0A732F2057444371812A4B9B952A9FEF74378 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7652,7 +7656,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B
 		return L_0;
 	}
 }
-// Method Definition Index: 11938
+// Method Definition Index: 11935
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_Path_m50275DBEAAB0C5D03D316EFD56C1C52C7FCA71A0 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7687,7 +7691,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_Path_m50275DBEAAB0C5
 		return;
 	}
 }
-// Method Definition Index: 11939
+// Method Definition Index: 11936
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_resolvedType_m484445A58C07D18393F38BAD75C180FD57E3F8FE (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, Type_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7698,7 +7702,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_resolvedType_m484445
 		return;
 	}
 }
-// Method Definition Index: 11940
+// Method Definition Index: 11937
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t TypePathVisitor_get_ReturnCode_m7A088F27D0126D165F2C83538853810302CAA574 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -7707,7 +7711,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t TypePathVisitor_get_ReturnCode_m7A088
 		return L_0;
 	}
 }
-// Method Definition Index: 11941
+// Method Definition Index: 11938
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_ReturnCode_m4BD0A1BF508D661CE97F4E2646A1D5DA8AEEDBA9 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -7717,7 +7721,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_set_ReturnCode_m4BD0A1BF
 		return;
 	}
 }
-// Method Definition Index: 11942
+// Method Definition Index: 11939
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_Reset_mA7D3710BC44A3B9F9145EEF08E26BB22D4E7BFAB (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 V_0;
@@ -7740,7 +7744,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor_Reset_mA7D3710BC44A3B9F9
 		return;
 	}
 }
-// Method Definition Index: 11946
+// Method Definition Index: 11943
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool TypePathVisitor_IsLastPartReached_m2C04A966F490D2B80E49E4AB37B2248C83C21BE8 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -7805,7 +7809,7 @@ IL_004b:
 		return L_8;
 	}
 }
-// Method Definition Index: 11947
+// Method Definition Index: 11944
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Type_t* TypePathVisitor_GetElementType_mDA16AD8485546D4EC31BB92ABB5B7C2762935853 (Type_t* ___0_type, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -7965,7 +7969,7 @@ IL_0073:
 		return L_25;
 	}
 }
-// Method Definition Index: 11948
+// Method Definition Index: 11945
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor__ctor_m759C6E94F877CBDF5E9508414E08F8F092AC2F57 (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -7982,7 +7986,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TypePathVisitor__ctor_m759C6E94F877CBDF5
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11949
+// Method Definition Index: 11946
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMovePreview__ctor_m22DB2105E7AB6FF55ECF0612351AE91F251F93AF (MultiColumnHeaderColumnMovePreview_t04FF3D282BAB99F5EDF8FBB1ECE4AA24598CCDA1* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8006,7 +8010,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMovePreview__ctor
 		return;
 	}
 }
-// Method Definition Index: 11950
+// Method Definition Index: 11947
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMovePreview__cctor_mE51A854058EB4BBEA96EED7F1B438072BF022A38 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8036,7 +8040,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMovePreview__ccto
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11951
+// Method Definition Index: 11948
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMoveLocationPreview__ctor_m91736DA84FB129DC68537E7BCBBB81EAF8A1776C (MultiColumnHeaderColumnMoveLocationPreview_tA46A9C48704DECDEA2D3D32312F6A3C71F655FA7* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8077,7 +8081,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMoveLocationPrevi
 		return;
 	}
 }
-// Method Definition Index: 11952
+// Method Definition Index: 11949
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMoveLocationPreview__cctor_m22714E462EBF72EE0BCD2BF2B661D07863D7A629 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8114,7 +8118,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnMoveLocationPrevi
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11953
+// Method Definition Index: 11950
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ColumnMover_get_columnLayout_mE9AC5B30D6257335EA3071AE948417B4786A75C0 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -8123,7 +8127,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBA
 		return L_0;
 	}
 }
-// Method Definition Index: 11954
+// Method Definition Index: 11951
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_set_columnLayout_m40A95913088B40305880B995E0C08BC31B9A2896 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -8134,7 +8138,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_set_columnLayout_m40A9591308
 		return;
 	}
 }
-// Method Definition Index: 11955
+// Method Definition Index: 11952
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnMover_get_active_m53690CF499CEBA1D3F1DB6298248548C85184291 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -8143,7 +8147,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnMover_get_active_m53690CF499CEBA1D
 		return L_0;
 	}
 }
-// Method Definition Index: 11956
+// Method Definition Index: 11953
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_set_active_mAAA3970E167BEB08AC0A151B8CFDFAA73651EEFE (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -8196,7 +8200,7 @@ IL_002a:
 		return;
 	}
 }
-// Method Definition Index: 11957
+// Method Definition Index: 11954
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnMover_get_moving_mBFBDD99BD148F773EC1E1E952CF8BA83BE428AA2 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -8205,7 +8209,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnMover_get_moving_mBFBDD99BD148F773
 		return L_0;
 	}
 }
-// Method Definition Index: 11958
+// Method Definition Index: 11955
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_set_moving_mAE09F29E2878B2C630B51C1DA589A78FC310E4B0 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -8258,7 +8262,7 @@ IL_002a:
 		return;
 	}
 }
-// Method Definition Index: 11959
+// Method Definition Index: 11956
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_add_activeChanged_m3CBCFFAFF157D42C027FAE1DA85082C118FB762F (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8302,7 +8306,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 11960
+// Method Definition Index: 11957
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_remove_activeChanged_m0C5EC329AA257EA0810CDB0DC58A25740AAFE81A (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8346,7 +8350,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 11961
+// Method Definition Index: 11958
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_add_movingChanged_m7E3915D46E38740AF4726D81C41DD3AE7A42781D (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8390,7 +8394,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 11962
+// Method Definition Index: 11959
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_remove_movingChanged_m53FBDA385044B02FF11F45A8DA065445C2B93EE8 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8434,7 +8438,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 11963
+// Method Definition Index: 11960
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover__ctor_mFAC20DF94884ECE096559E3BCEC540FC98D4A5C8 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8460,7 +8464,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover__ctor_mFAC20DF94884ECE096559
 		return;
 	}
 }
-// Method Definition Index: 11964
+// Method Definition Index: 11961
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_RegisterCallbacksOnTarget_m9C25BE44D94F5C32D1084504909CFFB836594906 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8533,7 +8537,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_RegisterCallbacksOnTarget_m9
 		return;
 	}
 }
-// Method Definition Index: 11965
+// Method Definition Index: 11962
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_UnregisterCallbacksFromTarget_mDAFA598A7A488B5B569E80274CE853667AA38151 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8606,7 +8610,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_UnregisterCallbacksFromTarge
 		return;
 	}
 }
-// Method Definition Index: 11966
+// Method Definition Index: 11963
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnPointerDown_m08A10436D8C885E33E79F9242563AB97082230CC (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8657,7 +8661,7 @@ IL_002a:
 		return;
 	}
 }
-// Method Definition Index: 11967
+// Method Definition Index: 11964
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnPointerMove_m339DD7D114969F64C678BE16535F5CA428208D15 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8702,7 +8706,7 @@ IL_0023:
 		return;
 	}
 }
-// Method Definition Index: 11968
+// Method Definition Index: 11965
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnPointerUp_m4FAC6FF0C458B4D08C2A46ECE3763F9179272A05 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8773,7 +8777,7 @@ IL_0035:
 		return;
 	}
 }
-// Method Definition Index: 11969
+// Method Definition Index: 11966
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnPointerCancel_m0C369DAE52C7B5912059269675C1AE77F66ABBE7 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, PointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8837,7 +8841,7 @@ IL_002a:
 		return;
 	}
 }
-// Method Definition Index: 11970
+// Method Definition Index: 11967
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnPointerCaptureOut_m5A28A9A49039B20FA29BE5C687E3B416337FB7D6 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, PointerCaptureOutEvent_t3D53CEE79BD37EC74F40289B4D5501C4449905E5* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8880,7 +8884,7 @@ IL_001e:
 		return;
 	}
 }
-// Method Definition Index: 11971
+// Method Definition Index: 11968
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_ProcessCancelEvent_m28B1FBE96706B475D78BEBB27DA00BBBF922A0DB (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_evt, int32_t ___1_pointerId, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -8946,7 +8950,7 @@ IL_004a:
 		return;
 	}
 }
-// Method Definition Index: 11972
+// Method Definition Index: 11969
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_OnKeyDown_mA765C17F3C424CB728430F707046A12C59BD2B8E (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9000,7 +9004,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 11973
+// Method Definition Index: 11970
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_ProcessDownEvent_mBFE5FD1DAC2F0B59B78023B77847F13CD6076CE2 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_evt, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_localPosition, int32_t ___2_pointerId, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9138,7 +9142,7 @@ IL_00bb:
 		return;
 	}
 }
-// Method Definition Index: 11974
+// Method Definition Index: 11971
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_ProcessMoveEvent_mC6F1471400CEBAE916A2E84B7BCD284D655EE91B (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_e, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_localPosition, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9255,7 +9259,7 @@ IL_0080:
 		return;
 	}
 }
-// Method Definition Index: 11975
+// Method Definition Index: 11972
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_ProcessUpEvent_m77373BD50FE9451242C8A353D0B78A1DB62122AB (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_evt, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_localPosition, int32_t ___2_pointerId, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9353,7 +9357,7 @@ IL_0067:
 		return;
 	}
 }
-// Method Definition Index: 11976
+// Method Definition Index: 11973
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_BeginDragMove_m14D4B5BAEF18B8B684E9AE778575733992722749 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, float ___0_pos, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9606,7 +9610,7 @@ IL_00d5:
 		return;
 	}
 }
-// Method Definition Index: 11977
+// Method Definition Index: 11974
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_DragMove_m8FD041DC356081BEA01D26697D35ED46A85438DB (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, float ___0_pos, const RuntimeMethod* method) 
 {
 	{
@@ -9619,7 +9623,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_DragMove_m8FD041DC356081BEA0
 		return;
 	}
 }
-// Method Definition Index: 11978
+// Method Definition Index: 11975
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_UpdatePreviewPosition_mCFD060688DE9919343AFB6295D06EACB0008D828 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9724,7 +9728,7 @@ IL_009e:
 		return;
 	}
 }
-// Method Definition Index: 11979
+// Method Definition Index: 11976
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_UpdateMoveLocation_m2D5D876F30D727BF4A4E6E5260F3C55C6F1E09B9 (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -9878,7 +9882,7 @@ IL_0096:
 		return;
 	}
 }
-// Method Definition Index: 11980
+// Method Definition Index: 11977
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnMover_EndDragMove_m68B0DFA13CA2772C96BB7630C79C59A012DA420F (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, bool ___0_cancelled, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -10091,7 +10095,7 @@ IL_00d8:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11981
+// Method Definition Index: 11978
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizePreview__ctor_mA5FF7A37545830D31855A82875CB2B6E82407443 (MultiColumnHeaderColumnResizePreview_t458501BAD22A312D1D88DC8B407C3C86C170688F* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10131,7 +10135,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizePreview__ct
 		return;
 	}
 }
-// Method Definition Index: 11982
+// Method Definition Index: 11979
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizePreview__cctor_m9EC362AE98C6796AB5C6F9DEA011E91A04265FB4 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10168,7 +10172,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizePreview__cc
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11983
+// Method Definition Index: 11980
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ColumnResizer_get_columnLayout_m717D464317CDC3E4F17387192A7E600398B9B00D (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -10177,7 +10181,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBA
 		return L_0;
 	}
 }
-// Method Definition Index: 11984
+// Method Definition Index: 11981
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_set_columnLayout_m5916AA50ECF0D28DBA5362D27F6EFC2BAF3ACCEF (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -10188,7 +10192,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_set_columnLayout_m5916AA50
 		return;
 	}
 }
-// Method Definition Index: 11985
+// Method Definition Index: 11982
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnResizer_get_preview_m12D3B74AD10459BB36874E8ADA4E576EAEC21295 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -10197,7 +10201,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ColumnResizer_get_preview_m12D3B74AD1045
 		return L_0;
 	}
 }
-// Method Definition Index: 11986
+// Method Definition Index: 11983
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_set_preview_mB6836147C91FA68A6A937ABD7BFD243233D36C62 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -10207,7 +10211,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_set_preview_mB6836147C91FA
 		return;
 	}
 }
-// Method Definition Index: 11987
+// Method Definition Index: 11984
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer__ctor_m07C499CC666CB96A1D1A469AD0BB79D9F2C1F615 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10239,7 +10243,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer__ctor_m07C499CC666CB96A1D1
 		return;
 	}
 }
-// Method Definition Index: 11988
+// Method Definition Index: 11985
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_RegisterCallbacksOnTarget_m11057C2306290DC082D48C26D5441D5265F19630 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10292,7 +10296,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_RegisterCallbacksOnTarget_
 		return;
 	}
 }
-// Method Definition Index: 11989
+// Method Definition Index: 11986
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_UnregisterCallbacksFromTarget_m801080A9376A64618861567D3483FA3AC312C78A (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10345,7 +10349,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_UnregisterCallbacksFromTar
 		return;
 	}
 }
-// Method Definition Index: 11990
+// Method Definition Index: 11987
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_OnKeyDown_mB0C1A41405EA536B450D2E14FBD19980DE7B9446 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10406,7 +10410,7 @@ IL_002d:
 		return;
 	}
 }
-// Method Definition Index: 11991
+// Method Definition Index: 11988
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_OnPointerDown_mC3AC83CA422D78FB32C810AFB57F8BBACF22798F (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10616,7 +10620,7 @@ IL_0117:
 		return;
 	}
 }
-// Method Definition Index: 11992
+// Method Definition Index: 11989
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_OnPointerMove_mAB5A4859815EEB928CF0F5A652F5F97622B0D1F5 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10708,7 +10712,7 @@ IL_005e:
 		return;
 	}
 }
-// Method Definition Index: 11993
+// Method Definition Index: 11990
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_OnPointerUp_m3FA970CF075ADB96DE8F139F7330D8C1D983B9B1 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10819,7 +10823,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 11994
+// Method Definition Index: 11991
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_BeginDragResize_m8209735AA2238E82C25AA891EA63D3AE6B24D820 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, float ___0_pos, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -10877,7 +10881,7 @@ IL_0044:
 		return;
 	}
 }
-// Method Definition Index: 11995
+// Method Definition Index: 11992
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_DragResize_m000FE95E901FA40AFB592F421239B1834EDC1F7B (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, float ___0_pos, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -10947,7 +10951,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 11996
+// Method Definition Index: 11993
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_UpdatePreviewPosition_mFCC200B134C9099C429F6C6F1BF3792F58F2A84B (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -10982,7 +10986,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_UpdatePreviewPosition_mFCC
 		return;
 	}
 }
-// Method Definition Index: 11997
+// Method Definition Index: 11994
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnResizer_EndDragResize_mD17EA39598B0DE59C3327A8795A57647A9340780 (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, float ___0_pos, bool ___1_cancelled, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -11091,7 +11095,7 @@ IL_0055:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 11998
+// Method Definition Index: 11995
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_get_isApplyingViewState_mBC74AD0189B485B572640C881D0524F5AD9ABC4D (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11100,7 +11104,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_get_isApplyi
 		return L_0;
 	}
 }
-// Method Definition Index: 11999
+// Method Definition Index: 11996
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11109,7 +11113,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8A
 		return L_0;
 	}
 }
-// Method Definition Index: 12000
+// Method Definition Index: 11997
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* MultiColumnCollectionHeader_get_columnLayout_m372E9CE3879D912E501701023DFDAAFD8C2E1CEE (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11118,7 +11122,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBA
 		return L_0;
 	}
 }
-// Method Definition Index: 12001
+// Method Definition Index: 11998
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnCollectionHeader_get_columnContainer_m33E41CBB68DF0781F002B266F332F8B8CF4BF179 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11127,7 +11131,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		return L_0;
 	}
 }
-// Method Definition Index: 12002
+// Method Definition Index: 11999
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnCollectionHeader_get_resizeHandleContainer_m9FA878F056A534B74CC914B2AE17E8FBBF6A58EE (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11136,7 +11140,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		return L_0;
 	}
 }
-// Method Definition Index: 12003
+// Method Definition Index: 12000
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MultiColumnCollectionHeader_get_sortedColumns_mC33C8CC43BB2674570116BDA529E2E27865907CB (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11145,7 +11149,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MultiColumnCollectionHeader_ge
 		return L_0;
 	}
 }
-// Method Definition Index: 12004
+// Method Definition Index: 12001
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MultiColumnCollectionHeader_get_sortedColumnReadonly_m2029C7FA8EC490D3DB67282FD8568C628EC93638 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11154,7 +11158,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* MultiColumnCollectionHeader_ge
 		return L_0;
 	}
 }
-// Method Definition Index: 12005
+// Method Definition Index: 12002
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11163,7 +11167,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SortColumnDescriptions_tDC3FDF948D96F26E0BCB2
 		return L_0;
 	}
 }
-// Method Definition Index: 12006
+// Method Definition Index: 12003
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_set_sortDescriptions_mAE5354A00522C90A89FD257EE41187BBAE4C088B (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11190,7 +11194,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_set_sortDesc
 		return;
 	}
 }
-// Method Definition Index: 12007
+// Method Definition Index: 12004
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Columns_t487EAF3B634F6D919D58F1927099A8883964831B* MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11199,7 +11203,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Columns_t487EAF3B634F6D919D58F1927099A8883964
 		return L_0;
 	}
 }
-// Method Definition Index: 12008
+// Method Definition Index: 12005
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_get_sortingEnabled_m7CEDC3823FD83A515F3B5E7B7CAEF9A9A172E4AE (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11208,7 +11212,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_get_sortingE
 		return L_0;
 	}
 }
-// Method Definition Index: 12009
+// Method Definition Index: 12006
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_set_sortingEnabled_m645D08AED802A4528905A1E1EBE1C5E05570CC54 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -11245,7 +11249,7 @@ IL_0025:
 		return;
 	}
 }
-// Method Definition Index: 12010
+// Method Definition Index: 12007
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_add_columnResized_m3F1F30C04195CBC0CDB782C289A538A144577E5E (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11289,7 +11293,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12011
+// Method Definition Index: 12008
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_remove_columnResized_mB1FF9EF20F8E3DF0759FAE65AD85166FBB5048F3 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11333,7 +11337,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12012
+// Method Definition Index: 12009
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_add_columnSortingChanged_m43BAF67355CFCB66D6465229043049559E7EA896 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11377,7 +11381,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12013
+// Method Definition Index: 12010
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_remove_columnSortingChanged_mE0DA66039E88D4A120CC4031F62CA11FA18C04BF (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11421,7 +11425,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12014
+// Method Definition Index: 12011
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_add_contextMenuPopulateEvent_m15718C59580FF0A5FF191609DD3789680BDFFA3A (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_2_t723CF5545926725AE4B055BB8E304D27E617A846* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11465,7 +11469,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12015
+// Method Definition Index: 12012
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_remove_contextMenuPopulateEvent_mD059D7EB536AA4045CB251AE9B0D55AB43B1D89F (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_2_t723CF5545926725AE4B055BB8E304D27E617A846* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11509,7 +11513,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12016
+// Method Definition Index: 12013
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_add_viewDataRestored_m6879F3873E4BD5D506CB37B66BD3538B8B640629 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11553,7 +11557,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12017
+// Method Definition Index: 12014
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_remove_viewDataRestored_m74B9D74E48AF1D920B2144D3462A8A18D49C7DA5 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11597,7 +11601,7 @@ IL_0007:
 		return;
 	}
 }
-// Method Definition Index: 12018
+// Method Definition Index: 12015
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader__ctor_mD017937163B4DF35F2B8F029F85A166CE2BBDBBA (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Columns_t487EAF3B634F6D919D58F1927099A8883964831B* ___0_columns, SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* ___1_sortDescriptions, List_1_t75E66FBE18EAE33E2DBD8F2C48C54549332A997F* ___2_sortedColumns, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11844,7 +11848,7 @@ IL_0107:
 		return;
 	}
 }
-// Method Definition Index: 12019
+// Method Definition Index: 12016
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ScheduleDoLayout_m04F5F02D1AE9EF87904687BA7E7C5868BBC454BF (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -11891,7 +11895,7 @@ IL_002c:
 		return;
 	}
 }
-// Method Definition Index: 12020
+// Method Definition Index: 12017
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ResizeToFit_mCD9B95ECBFF45AD2ED06E67BDE423D7B6CFF3637 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11907,7 +11911,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ResizeToFit_
 		return;
 	}
 }
-// Method Definition Index: 12021
+// Method Definition Index: 12018
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortedColumns_m581A15DAF47FFF1D1680AD46897300BFCF4DE046 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -12302,7 +12306,7 @@ IL_0188:
 		return;
 	}
 }
-// Method Definition Index: 12022
+// Method Definition Index: 12019
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateColumnControls_m9519B6ECD0B234E4394C2A68D9A448A7334EEF4D (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -12626,7 +12630,7 @@ IL_014d:
 		return;
 	}
 }
-// Method Definition Index: 12023
+// Method Definition Index: 12020
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnAdded_mB1BB392EF1E1838217220A1BB169641F6F8987C9 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	{
@@ -12636,7 +12640,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnAdde
 		return;
 	}
 }
-// Method Definition Index: 12024
+// Method Definition Index: 12021
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnAdded_mEC27A5AC73278BC1BF20B51DC87F75FE3EDA500D (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -12790,7 +12794,7 @@ IL_00de:
 		return;
 	}
 }
-// Method Definition Index: 12025
+// Method Definition Index: 12022
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnRemoved_m1DC4EFA8E9FBC1C544B82E341808EAF21BB89439 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -12846,7 +12850,7 @@ IL_003b:
 		return;
 	}
 }
-// Method Definition Index: 12026
+// Method Definition Index: 12023
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnChanged_mED9D790F6A55B1CC86CD231B3C57BFD3CBB01689 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, int32_t ___1_type, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -12919,7 +12923,7 @@ IL_0044:
 		return;
 	}
 }
-// Method Definition Index: 12027
+// Method Definition Index: 12024
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnReordered_mB4FD0793F40BC526778AA61AB6B540FC7C305EB6 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, int32_t ___1_from, int32_t ___2_to, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13089,7 +13093,7 @@ IL_00ad:
 		return;
 	}
 }
-// Method Definition Index: 12028
+// Method Definition Index: 12025
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnResized_m3E124C40E782CCCA8EC621CFE647D9EEE7A8E12E (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, const RuntimeMethod* method) 
 {
 	{
@@ -13099,7 +13103,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnResi
 		return;
 	}
 }
-// Method Definition Index: 12029
+// Method Definition Index: 12026
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnContextualMenuManipulator_mCC86399DC89F7071ACBABBB399AC0465F9EEAE9D (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13579,7 +13583,7 @@ IL_01c5:
 		return;
 	}
 }
-// Method Definition Index: 12030
+// Method Definition Index: 12027
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnMoveManipulatorActivated_mD3EDFCE376CF7075E14D2E7942ED0D767721C9FF (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* ___0_mover, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13633,7 +13637,7 @@ IL_0018:
 		return;
 	}
 }
-// Method Definition Index: 12031
+// Method Definition Index: 12028
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnGeometryChanged_m13BD8EB727CBF1D4DF0597201196F809A0441FBA (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, GeometryChangedEvent_tB4A621001850F337A676F8CC27F172B8ADB22A9A* ___0_e, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13735,7 +13739,7 @@ IL_005f:
 		return;
 	}
 }
-// Method Definition Index: 12032
+// Method Definition Index: 12029
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_DoLayout_m00D8901B53C04C55ABF8431AB8173B9A875A109E (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -13753,7 +13757,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_DoLayout_m00
 		return;
 	}
 }
-// Method Definition Index: 12033
+// Method Definition Index: 12030
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnControlGeometryChanged_mD044FAD74B77796F1FB7151D3ADAB87A1873D52C (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, GeometryChangedEvent_tB4A621001850F337A676F8CC27F172B8ADB22A9A* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13876,7 +13880,7 @@ IL_0099:
 		return;
 	}
 }
-// Method Definition Index: 12034
+// Method Definition Index: 12031
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnColumnClicked_m03EB74AEA07CF9A9E137F55C91A0BBB4FA84C500 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_evt, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14055,18 +14059,18 @@ IL_009f:
 		return;
 	}
 }
-// Method Definition Index: 12035
+// Method Definition Index: 12032
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortColumnDescriptionsOnClick_m340554ECCFAC22119105748E574B9931D259304D (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, int32_t ___1_modifiers, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Enumerable_FirstOrDefault_TisSortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37_mE0FF5ED4ED299DF742420C237774AF87A493D707_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Func_2_t3D82AF007EA8EE4E79564452A7BD617D0D26C06E_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec__DisplayClass73_0_U3CUpdateSortColumnDescriptionsOnClickU3Eb__0_m346E137C98A963E1FD05687399EA2E0B0F8B04BB_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&U3CU3Ec__DisplayClass73_0_t3AE14AE11B775DBC738BA02BA0DC1EAD1CC12010_il2cpp_TypeInfo_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	U3CU3Ec__DisplayClass73_0_t3AE14AE11B775DBC738BA02BA0DC1EAD1CC12010* V_0 = NULL;
@@ -14075,7 +14079,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortCo
 	bool V_3 = false;
 	bool V_4 = false;
 	bool V_5 = false;
-	bool V_6 = false;
+	int32_t V_6 = 0;
+	bool V_7 = false;
+	bool V_8 = false;
 	SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* G_B5_0 = NULL;
 	SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* G_B4_0 = NULL;
 	int32_t G_B6_0 = 0;
@@ -14128,7 +14134,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortCo
 		bool L_13;
 		L_13 = SortColumnDescriptions_Remove_m2E23AFC243EF615AA95FB66457C035ADB709B6A7(L_11, L_12, NULL);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:702>
-		goto IL_00e6;
+		goto IL_00ff;
 	}
 
 IL_004c:
@@ -14215,77 +14221,95 @@ IL_0099:
 IL_009b:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:715>
-		il2cpp_codegen_runtime_class_init_inline(UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var);
-		bool L_29;
-		L_29 = UIElementsUtility_get_isCommandActionKeyPlatform_m85BDE38B7F4C7AB3917E645E74A6FE5F78C1C3F3(NULL);
-		if (L_29)
+		V_2 = 2;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:717>
+		il2cpp_codegen_runtime_class_init_inline(Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
+		int32_t L_29;
+		L_29 = Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138(NULL);
+		V_6 = L_29;
+		int32_t L_30 = V_6;
+		if (!L_30)
 		{
-			goto IL_00a5;
+			goto IL_00b2;
 		}
 	}
 	{
-		G_B14_0 = 2;
-		goto IL_00a6;
+		int32_t L_31 = V_6;
+		G_B14_0 = ((((int32_t)((((int32_t)L_31) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		goto IL_00b3;
 	}
 
-IL_00a5:
+IL_00b2:
 	{
-		G_B14_0 = 8;
+		G_B14_0 = 0;
 	}
 
-IL_00a6:
+IL_00b3:
 	{
-		V_2 = G_B14_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:717>
-		int32_t L_30 = ___1_modifiers;
-		int32_t L_31 = V_2;
-		V_5 = (bool)((((int32_t)((((int32_t)L_30) == ((int32_t)L_31))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		V_5 = (bool)((((int32_t)G_B14_0) == ((int32_t)0))? 1 : 0);
 		bool L_32 = V_5;
 		if (!L_32)
 		{
-			goto IL_00c2;
+			goto IL_00c0;
 		}
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:719>
-		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_33;
-		L_33 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
-		NullCheck(L_33);
-		SortColumnDescriptions_Clear_mE75FE492DFD24BC03275E58C6B66C8C067C75D1F(L_33, NULL);
+		V_2 = 8;
 	}
 
-IL_00c2:
+IL_00c0:
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:722>
-		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_34;
-		L_34 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
-		SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_35 = V_1;
-		NullCheck(L_34);
-		bool L_36;
-		L_36 = SortColumnDescriptions_Contains_m1B25CED15299CDDE7D32669A3262AC90F9286BD9(L_34, L_35, NULL);
-		V_6 = (bool)((((int32_t)L_36) == ((int32_t)0))? 1 : 0);
-		bool L_37 = V_6;
-		if (!L_37)
+		int32_t L_33 = ___1_modifiers;
+		int32_t L_34 = V_2;
+		V_7 = (bool)((((int32_t)((((int32_t)L_33) == ((int32_t)L_34))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		bool L_35 = V_7;
+		if (!L_35)
 		{
-			goto IL_00e6;
+			goto IL_00db;
 		}
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:724>
-		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_38;
-		L_38 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
-		SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_39 = V_1;
-		NullCheck(L_38);
-		SortColumnDescriptions_Add_m7BA0FEA9AD5FE5C528AA3B0E59FFB67A8EAA0531(L_38, L_39, NULL);
+		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_36;
+		L_36 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
+		NullCheck(L_36);
+		SortColumnDescriptions_Clear_mE75FE492DFD24BC03275E58C6B66C8C067C75D1F(L_36, NULL);
 	}
 
-IL_00e6:
+IL_00db:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:726>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:727>
+		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_37;
+		L_37 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
+		SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_38 = V_1;
+		NullCheck(L_37);
+		bool L_39;
+		L_39 = SortColumnDescriptions_Contains_m1B25CED15299CDDE7D32669A3262AC90F9286BD9(L_37, L_38, NULL);
+		V_8 = (bool)((((int32_t)L_39) == ((int32_t)0))? 1 : 0);
+		bool L_40 = V_8;
+		if (!L_40)
+		{
+			goto IL_00ff;
+		}
+	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:729>
+		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_41;
+		L_41 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
+		SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_42 = V_1;
+		NullCheck(L_41);
+		SortColumnDescriptions_Add_m7BA0FEA9AD5FE5C528AA3B0E59FFB67A8EAA0531(L_41, L_42, NULL);
+	}
+
+IL_00ff:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:731>
 		return;
 	}
 }
-// Method Definition Index: 12036
+// Method Definition Index: 12033
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ScrollHorizontally_mF437DF1A10D576CC1037A06AB9D17EBFA9274C75 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, float ___0_horizontalOffset, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14296,7 +14320,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ScrollHorizo
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:730>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:735>
 		RuntimeObject* L_0;
 		L_0 = VisualElement_get_style_mDCFF8D835BE0AFE412905E108F48B32A83734224(__this, NULL);
 		float L_1 = ___0_horizontalOffset;
@@ -14319,11 +14343,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ScrollHorizo
 		L_9 = StyleTranslate_op_Implicit_m4D41C2283DA73397E358544187286A04BE0544E5(L_8, NULL);
 		NullCheck(L_0);
 		InterfaceActionInvoker1< StyleTranslate_tF9528CA4B45EE4EB2C4D294336A83D88DB6AF089 >::Invoke(127, IStyle_t4FD66C97CA5F46BFE328FED0C65277A37E0A89F7_il2cpp_TypeInfo_var, L_0, L_9);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:731>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:736>
 		return;
 	}
 }
-// Method Definition Index: 12037
+// Method Definition Index: 12034
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_RaiseColumnResized_mE261E54FB14D2F9CD56857494329A72D79DFCE91 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, int32_t ___0_columnIndex, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14335,7 +14359,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_RaiseColumnR
 	Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* G_B2_0 = NULL;
 	Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* G_B1_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:735>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:740>
 		Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* L_0 = __this->___columnResized;
 		Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* L_1 = L_0;
 		if (L_1)
@@ -14370,20 +14394,20 @@ IL_000d:
 
 IL_002a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:736>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:741>
 		return;
 	}
 }
-// Method Definition Index: 12038
+// Method Definition Index: 12035
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_RaiseColumnSortingChanged_mE7EABCE7805D9EB40CCC8BFBBA8052C4F171E0E7 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
 	Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* G_B3_0 = NULL;
 	Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* G_B2_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:740>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:745>
 		MultiColumnCollectionHeader_ApplyColumnSorting_m8B4F413051B277004F15158CC54B15D92E76248F(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:741>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:746>
 		bool L_0 = __this->___m_ApplyingViewState;
 		V_0 = (bool)((((int32_t)L_0) == ((int32_t)0))? 1 : 0);
 		bool L_1 = V_0;
@@ -14393,7 +14417,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_RaiseColumnS
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:742>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:747>
 		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_2 = __this->___columnSortingChanged;
 		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_3 = L_2;
 		if (L_3)
@@ -14415,11 +14439,11 @@ IL_0021:
 
 IL_0027:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:743>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:748>
 		return;
 	}
 }
-// Method Definition Index: 12039
+// Method Definition Index: 12036
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ApplyColumnSorting_m8B4F413051B277004F15158CC54B15D92E76248F (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14456,7 +14480,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_ApplyColumnS
 	int32_t V_12 = 0;
 	bool V_13 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:747>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:752>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_0;
 		L_0 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		NullCheck(L_0);
@@ -14500,13 +14524,13 @@ IL_007f:
 
 IL_0015_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:747>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:752>
 				RuntimeObject* L_5 = V_1;
 				NullCheck(L_5);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_6;
 				L_6 = InterfaceFuncInvoker0< Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* >::Invoke(0, IEnumerator_1_t6C561189597D7102947B2C2D0FCE829F1CFCE163_il2cpp_TypeInfo_var, L_5);
 				V_2 = L_6;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:749>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:754>
 				Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_7;
 				L_7 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_8 = V_2;
@@ -14521,20 +14545,20 @@ IL_0015_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:751>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:756>
 				goto IL_006b_1;
 			}
 
 IL_0037_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:754>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:759>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_11 = V_3;
 				NullCheck(L_11);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_12;
 				L_12 = ColumnData_get_control_m2104649E1052F0506708BD93DC9DDAE2CA34B700_inline(L_11, NULL);
 				NullCheck(L_12);
 				MultiColumnHeaderColumn_set_sortOrderLabel_m216F43AF4B529B01B7601B1DC01F10F50E221613(L_12, _stringLiteralDA39A3EE5E6B4B0D3255BFEF95601890AFD80709, NULL);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:755>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:760>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_13 = V_3;
 				NullCheck(L_13);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_14;
@@ -14543,7 +14567,7 @@ IL_0037_1:
 				String_t* L_15 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___sortedAscendingUssClassName;
 				NullCheck(L_14);
 				VisualElement_RemoveFromClassList_mA7A2EC202004DFCBF38C12B70C6218BF40D21220(L_14, L_15, NULL);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:756>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:761>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_16 = V_3;
 				NullCheck(L_16);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_17;
@@ -14555,7 +14579,7 @@ IL_0037_1:
 
 IL_006b_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:747>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:752>
 				RuntimeObject* L_19 = V_1;
 				NullCheck(L_19);
 				bool L_20;
@@ -14577,11 +14601,11 @@ IL_006b_1:
 
 IL_0080:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:759>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:764>
 		List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E* L_21 = (List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E*)il2cpp_codegen_object_new(List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E_il2cpp_TypeInfo_var);
 		List_1__ctor_m3C7562B7F26422C44413CDDD1B9C5A5D0E38740D(L_21, List_1__ctor_m3C7562B7F26422C44413CDDD1B9C5A5D0E38740D_RuntimeMethod_var);
 		V_0 = L_21;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:761>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:766>
 		RuntimeObject* L_22;
 		L_22 = MultiColumnCollectionHeader_get_sortedColumns_mC33C8CC43BB2674570116BDA529E2E27865907CB_inline(__this, NULL);
 		NullCheck(L_22);
@@ -14622,13 +14646,13 @@ IL_0113:
 
 IL_0096_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:761>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:766>
 				RuntimeObject* L_26 = V_5;
 				NullCheck(L_26);
 				SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_27;
 				L_27 = InterfaceFuncInvoker0< SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* >::Invoke(0, IEnumerator_1_t0BE1512A4B1C9BE1B3332B1F70F118A003849D87_il2cpp_TypeInfo_var, L_26);
 				V_6 = L_27;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:763>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:768>
 				Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_28;
 				L_28 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 				SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_29 = V_6;
@@ -14646,12 +14670,12 @@ IL_0096_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:765>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:770>
 				List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E* L_33 = V_0;
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_34 = V_7;
 				NullCheck(L_33);
 				List_1_Add_m3FD1E69C926288408B3D6B73F63114F4F0AC9BD7_inline(L_33, L_34, List_1_Add_m3FD1E69C926288408B3D6B73F63114F4F0AC9BD7_RuntimeMethod_var);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:766>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:771>
 				SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* L_35 = V_6;
 				NullCheck(L_35);
 				int32_t L_36;
@@ -14664,7 +14688,7 @@ IL_0096_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:767>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:772>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_38 = V_7;
 				NullCheck(L_38);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_39;
@@ -14678,7 +14702,7 @@ IL_0096_1:
 
 IL_00e8_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:769>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:774>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_41 = V_7;
 				NullCheck(L_41);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_42;
@@ -14699,7 +14723,7 @@ IL_00fb_1:
 
 IL_00fc_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:761>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:766>
 				RuntimeObject* L_44 = V_5;
 				NullCheck(L_44);
 				bool L_45;
@@ -14721,7 +14745,7 @@ IL_00fc_1:
 
 IL_0114:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:773>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:778>
 		List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E* L_46 = V_0;
 		NullCheck(L_46);
 		int32_t L_47;
@@ -14734,14 +14758,14 @@ IL_0114:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:775>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:780>
 		V_11 = 0;
 		goto IL_0151;
 	}
 
 IL_0129:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:777>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:782>
 		List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E* L_49 = V_0;
 		int32_t L_50 = V_11;
 		NullCheck(L_49);
@@ -14756,14 +14780,14 @@ IL_0129:
 		L_54 = Int32_ToString_m030E01C24E294D6762FB0B6F37CB541581F55CA5((&V_12), NULL);
 		NullCheck(L_52);
 		MultiColumnHeaderColumn_set_sortOrderLabel_m216F43AF4B529B01B7601B1DC01F10F50E221613(L_52, L_54, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:775>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:780>
 		int32_t L_55 = V_11;
 		V_11 = ((int32_t)il2cpp_codegen_add(L_55, 1));
 	}
 
 IL_0151:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:775>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:780>
 		int32_t L_56 = V_11;
 		List_1_tBF01B28C0C80C2B11CD3F6D870CA503A27D53B7E* L_57 = V_0;
 		NullCheck(L_57);
@@ -14781,11 +14805,11 @@ IL_0151:
 
 IL_0162:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:780>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:785>
 		return;
 	}
 }
-// Method Definition Index: 12040
+// Method Definition Index: 12037
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortingStatus_m3FD39F142C0582FAC15DEA2B510E4467E4143934 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -14812,9 +14836,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_UpdateSortin
 	bool V_10 = false;
 	int32_t G_B7_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:784>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:789>
 		V_0 = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:786>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:791>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_0;
 		L_0 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		NullCheck(L_0);
@@ -14858,13 +14882,13 @@ IL_0067:
 
 IL_0017_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:786>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:791>
 				RuntimeObject* L_5 = V_1;
 				NullCheck(L_5);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_6;
 				L_6 = InterfaceFuncInvoker0< Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* >::Invoke(0, IEnumerator_1_t6C561189597D7102947B2C2D0FCE829F1CFCE163_il2cpp_TypeInfo_var, L_5);
 				V_2 = L_6;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:788>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:793>
 				Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_7;
 				L_7 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_8 = V_2;
@@ -14879,13 +14903,13 @@ IL_0017_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:790>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:795>
 				goto IL_0053_1;
 			}
 
 IL_0039_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:793>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:798>
 				bool L_11;
 				L_11 = MultiColumnCollectionHeader_get_sortingEnabled_m7CEDC3823FD83A515F3B5E7B7CAEF9A9A172E4AE_inline(__this, NULL);
 				if (!L_11)
@@ -14917,7 +14941,7 @@ IL_004a_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:794>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:799>
 				V_0 = (bool)1;
 			}
 
@@ -14927,7 +14951,7 @@ IL_0052_1:
 
 IL_0053_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:786>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:791>
 				RuntimeObject* L_15 = V_1;
 				NullCheck(L_15);
 				bool L_16;
@@ -14949,7 +14973,7 @@ IL_0053_1:
 
 IL_0068:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:797>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:802>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_17;
 		L_17 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		NullCheck(L_17);
@@ -14993,13 +15017,13 @@ IL_00eb:
 
 IL_007d_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:797>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:802>
 				RuntimeObject* L_22 = V_6;
 				NullCheck(L_22);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_23;
 				L_23 = InterfaceFuncInvoker0< Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* >::Invoke(0, IEnumerator_1_t6C561189597D7102947B2C2D0FCE829F1CFCE163_il2cpp_TypeInfo_var, L_22);
 				V_7 = L_23;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:799>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:804>
 				Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_24;
 				L_24 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 				Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_25 = V_7;
@@ -15014,13 +15038,13 @@ IL_007d_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:801>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:806>
 				goto IL_00d4_1;
 			}
 
 IL_00a2_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:804>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:809>
 				bool L_28 = V_0;
 				V_10 = L_28;
 				bool L_29 = V_10;
@@ -15030,7 +15054,7 @@ IL_00a2_1:
 				}
 			}
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:806>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:811>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_30 = V_8;
 				NullCheck(L_30);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_31;
@@ -15044,7 +15068,7 @@ IL_00a2_1:
 
 IL_00bf_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:810>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:815>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_33 = V_8;
 				NullCheck(L_33);
 				MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_34;
@@ -15061,7 +15085,7 @@ IL_00d3_1:
 
 IL_00d4_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:797>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:802>
 				RuntimeObject* L_36 = V_6;
 				NullCheck(L_36);
 				bool L_37;
@@ -15083,11 +15107,11 @@ IL_00d4_1:
 
 IL_00ec:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:813>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:818>
 		return;
 	}
 }
-// Method Definition Index: 12041
+// Method Definition Index: 12038
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnViewDataReady_m8B4943E04D7E3EA8210F17F7BF712CC41B083710 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15107,7 +15131,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_OnViewDataRe
 
 FINALLY_004c:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:832>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:837>
 				__this->___m_ApplyingViewState = (bool)0;
 				return;
 			}
@@ -15115,26 +15139,26 @@ FINALLY_004c:
 		try
 		{
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:819>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:824>
 				__this->___m_ApplyingViewState = (bool)1;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:821>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:826>
 				VisualElement_OnViewDataReady_mC163AC6CDC322CCB2941C1DEFC6EF3900C332C79(__this, NULL);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:823>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:828>
 				String_t* L_0;
 				L_0 = VisualElement_GetFullHierarchicalViewDataKey_m36E019EF47770CE6BC054BB606CD224517028A8F(__this, NULL);
 				V_0 = L_0;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:825>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:830>
 				ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* L_1 = __this->___m_ViewState;
 				String_t* L_2 = V_0;
 				ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* L_3;
 				L_3 = VisualElement_GetOrCreateViewData_TisViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0_m8CDDFB41F8A608977A00A561CD427DA6AE41E939(__this, L_1, L_2, VisualElement_GetOrCreateViewData_TisViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0_m8CDDFB41F8A608977A00A561CD427DA6AE41E939_RuntimeMethod_var);
 				__this->___m_ViewState = L_3;
 				Il2CppCodeGenWriteBarrier((void**)(&__this->___m_ViewState), (void*)L_3);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:826>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:831>
 				ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* L_4 = __this->___m_ViewState;
 				NullCheck(L_4);
 				ViewState_Apply_mA0B5DDD016CF5E95F619B37CEBD7F63E01253AB8(L_4, __this, NULL);
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:828>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:833>
 				Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_5 = __this->___viewDataRestored;
 				Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_6 = L_5;
 				if (L_6)
@@ -15167,18 +15191,18 @@ IL_0049_1:
 
 IL_0056:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:834>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:839>
 		return;
 	}
 }
-// Method Definition Index: 12042
+// Method Definition Index: 12039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_SaveViewState_m79F4AEFAA208DA670DC6D0CA348924F749EEF34F (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
 	ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* G_B4_0 = NULL;
 	ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* G_B3_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:838>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:843>
 		bool L_0 = __this->___m_ApplyingViewState;
 		V_0 = L_0;
 		bool L_1 = V_0;
@@ -15188,13 +15212,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_SaveViewStat
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:839>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:844>
 		goto IL_0027;
 	}
 
 IL_000d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:841>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:846>
 		ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* L_2 = __this->___m_ViewState;
 		ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* L_3 = L_2;
 		if (L_3)
@@ -15216,17 +15240,17 @@ IL_0019:
 
 IL_0020:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:842>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:847>
 		VisualElement_SaveViewData_m6F18758E27148CBC3B9E4FCB1F33798AAB427CD6(__this, NULL);
 	}
 
 IL_0027:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:843>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:848>
 		return;
 	}
 }
-// Method Definition Index: 12043
+// Method Definition Index: 12040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_CleanupColumnData_mF2A277E10AC25B7F6FC4B3C35BE26C237FFA845F (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* ___0_data, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15242,7 +15266,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_CleanupColum
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:847>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:852>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_0 = ___0_data;
 		NullCheck(L_0);
 		MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_1;
@@ -15251,7 +15275,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_CleanupColum
 		EventCallback_1__ctor_mF06BFBEB6C98B9A486C131579BD98388B38997F5(L_2, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnControlGeometryChanged_mD044FAD74B77796F1FB7151D3ADAB87A1873D52C_RuntimeMethod_var), NULL);
 		NullCheck(L_1);
 		CallbackEventHandler_UnregisterCallback_TisGeometryChangedEvent_tB4A621001850F337A676F8CC27F172B8ADB22A9A_m7E6F5C986914E13F679AC4D1E8F0131F9C2A06E2(L_1, L_2, 0, CallbackEventHandler_UnregisterCallback_TisGeometryChangedEvent_tB4A621001850F337A676F8CC27F172B8ADB22A9A_m7E6F5C986914E13F679AC4D1E8F0131F9C2A06E2_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:848>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:853>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_3 = ___0_data;
 		NullCheck(L_3);
 		MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_4;
@@ -15263,7 +15287,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_CleanupColum
 		Action_1__ctor_m1A92C58D7FD083E3BE392CF3C0116F93B8E59FBB(L_6, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnClicked_m03EB74AEA07CF9A9E137F55C91A0BBB4FA84C500_RuntimeMethod_var), NULL);
 		NullCheck(L_5);
 		Clickable_remove_clickedWithEventInfo_mBDE8823F49EC90FD45DFC65D2F832003F6D8DD33(L_5, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:849>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:854>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_7 = ___0_data;
 		NullCheck(L_7);
 		MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_8;
@@ -15275,32 +15299,32 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_CleanupColum
 		Action_1__ctor_mF1C3475FABF0EFC0AB3AF74E3412B1A314EDBD1C(L_10, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnMoveManipulatorActivated_mD3EDFCE376CF7075E14D2E7942ED0D767721C9FF_RuntimeMethod_var), NULL);
 		NullCheck(L_9);
 		ColumnMover_remove_activeChanged_m0C5EC329AA257EA0810CDB0DC58A25740AAFE81A(L_9, L_10, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:850>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:855>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_11 = ___0_data;
 		NullCheck(L_11);
 		MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_12;
 		L_12 = ColumnData_get_control_m2104649E1052F0506708BD93DC9DDAE2CA34B700_inline(L_11, NULL);
 		NullCheck(L_12);
 		VisualElement_RemoveFromHierarchy_m5F43EA9B8CBA47EA2AEC2D75180713395AEECF64(L_12, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:851>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:856>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_13 = ___0_data;
 		NullCheck(L_13);
 		MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* L_14;
 		L_14 = ColumnData_get_control_m2104649E1052F0506708BD93DC9DDAE2CA34B700_inline(L_13, NULL);
 		NullCheck(L_14);
 		MultiColumnHeaderColumn_Dispose_mE3C0DA70E9155AB22AAAB014EA1554719F6ACB02(L_14, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:852>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:857>
 		ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_15 = ___0_data;
 		NullCheck(L_15);
 		MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* L_16;
 		L_16 = ColumnData_get_resizeHandle_m3635E5A74654B97F64519A2C71655E27E70F2DEB_inline(L_15, NULL);
 		NullCheck(L_16);
 		VisualElement_RemoveFromHierarchy_m5F43EA9B8CBA47EA2AEC2D75180713395AEECF64(L_16, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:853>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:858>
 		return;
 	}
 }
-// Method Definition Index: 12044
+// Method Definition Index: 12041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_Dispose_m3AFE08A6A2AA666A8E3FB394667AA37A0C4E41D0 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15330,56 +15354,56 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_Dispose_m3AF
 	memset((&V_0), 0, sizeof(V_0));
 	ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:857>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:862>
 		SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* L_0;
 		L_0 = MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline(__this, NULL);
 		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_1 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
 		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_1, __this, (intptr_t)((void*)MultiColumnCollectionHeader_UpdateSortedColumns_m581A15DAF47FFF1D1680AD46897300BFCF4DE046_RuntimeMethod_var), NULL);
 		NullCheck(L_0);
 		SortColumnDescriptions_remove_changed_m4A6F751CA6E4A4514B86A2E6C78100251208ECD9(L_0, L_1, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:858>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:863>
 		ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* L_2;
 		L_2 = MultiColumnCollectionHeader_get_columnLayout_m372E9CE3879D912E501701023DFDAAFD8C2E1CEE_inline(__this, NULL);
 		Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* L_3 = (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07*)il2cpp_codegen_object_new(Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07_il2cpp_TypeInfo_var);
 		Action__ctor_mBDC7B0B4A3F583B64C2896F01BDED360772F67DC(L_3, __this, (intptr_t)((void*)MultiColumnCollectionHeader_ScheduleDoLayout_m04F5F02D1AE9EF87904687BA7E7C5868BBC454BF_RuntimeMethod_var), NULL);
 		NullCheck(L_2);
 		ColumnLayout_remove_layoutRequested_mAF20B108F79E8DB0EFA351CCD4C2F8F2BE8E153D(L_2, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:859>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:864>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_4;
 		L_4 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		Action_2_t5F23CC3B7A8A73A4EA03ECC4C0C36453937843DB* L_5 = (Action_2_t5F23CC3B7A8A73A4EA03ECC4C0C36453937843DB*)il2cpp_codegen_object_new(Action_2_t5F23CC3B7A8A73A4EA03ECC4C0C36453937843DB_il2cpp_TypeInfo_var);
 		Action_2__ctor_m002A8DD0BA5DA5D2680EC9AF53323C9EE95D12C5(L_5, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnAdded_mB1BB392EF1E1838217220A1BB169641F6F8987C9_RuntimeMethod_var), NULL);
 		NullCheck(L_4);
 		Columns_remove_columnAdded_mC05217F3C8C8DB4EB8B87C8D4F841B7E6751E2D4(L_4, L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:860>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:865>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_6;
 		L_6 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8* L_7 = (Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8*)il2cpp_codegen_object_new(Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8_il2cpp_TypeInfo_var);
 		Action_1__ctor_mABC0A74E2D09A84EE658DC70DB5EF1DAB87D8CC6(L_7, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnRemoved_m1DC4EFA8E9FBC1C544B82E341808EAF21BB89439_RuntimeMethod_var), NULL);
 		NullCheck(L_6);
 		Columns_remove_columnRemoved_m5F64EB1B584BE4290BA4D9F86B4479C95AAE3E2C(L_6, L_7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:861>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:866>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_8;
 		L_8 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346* L_9 = (Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346*)il2cpp_codegen_object_new(Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346_il2cpp_TypeInfo_var);
 		Action_2__ctor_m76F3C2B34919F8C03E2EA99DFA9ADC2B87C3EE74(L_9, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnChanged_mED9D790F6A55B1CC86CD231B3C57BFD3CBB01689_RuntimeMethod_var), NULL);
 		NullCheck(L_8);
 		Columns_remove_columnChanged_mAE162F03BF201C04990963A963844DC1E6243AD8(L_8, L_9, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:862>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:867>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_10;
 		L_10 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		Action_3_tD4FEFC6A317A295868086BEB12578A006464E2D5* L_11 = (Action_3_tD4FEFC6A317A295868086BEB12578A006464E2D5*)il2cpp_codegen_object_new(Action_3_tD4FEFC6A317A295868086BEB12578A006464E2D5_il2cpp_TypeInfo_var);
 		Action_3__ctor_m5E79A50729A327E48B8F30E0005D3F50A47EB43B(L_11, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnReordered_mB4FD0793F40BC526778AA61AB6B540FC7C305EB6_RuntimeMethod_var), NULL);
 		NullCheck(L_10);
 		Columns_remove_columnReordered_m49D026E037DF08832118CA4D792B94D2A39426CB(L_10, L_11, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:863>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:868>
 		Columns_t487EAF3B634F6D919D58F1927099A8883964831B* L_12;
 		L_12 = MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline(__this, NULL);
 		Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8* L_13 = (Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8*)il2cpp_codegen_object_new(Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8_il2cpp_TypeInfo_var);
 		Action_1__ctor_mABC0A74E2D09A84EE658DC70DB5EF1DAB87D8CC6(L_13, __this, (intptr_t)((void*)MultiColumnCollectionHeader_OnColumnResized_m3E124C40E782CCCA8EC621CFE647D9EEE7A8E12E_RuntimeMethod_var), NULL);
 		NullCheck(L_12);
 		Columns_remove_columnResized_m27AA742AA94413F603B4CB2820C4553E21C9A3CA(L_12, L_13, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:865>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:870>
 		Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_14;
 		L_14 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 		NullCheck(L_14);
@@ -15408,18 +15432,18 @@ FINALLY_00da:
 
 IL_00bd_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:865>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:870>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_17;
 				L_17 = Enumerator_get_Current_m9A0751D8148E6E6D219979DAAFCBCD494CA8E86C_inline((&V_0), Enumerator_get_Current_m9A0751D8148E6E6D219979DAAFCBCD494CA8E86C_RuntimeMethod_var);
 				V_1 = L_17;
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:867>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:872>
 				ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* L_18 = V_1;
 				MultiColumnCollectionHeader_CleanupColumnData_mF2A277E10AC25B7F6FC4B3C35BE26C237FFA845F(__this, L_18, NULL);
 			}
 
 IL_00cf_1:
 			{
-				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:865>
+				//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:870>
 				bool L_19;
 				L_19 = Enumerator_MoveNext_m961B00A800ABACBC591BC454786F3DC17E2F7641((&V_0), Enumerator_MoveNext_m961B00A800ABACBC591BC454786F3DC17E2F7641_RuntimeMethod_var);
 				if (L_19)
@@ -15439,16 +15463,16 @@ IL_00cf_1:
 
 IL_00e9:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:870>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:875>
 		Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* L_20;
 		L_20 = MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline(__this, NULL);
 		NullCheck(L_20);
 		Dictionary_2_Clear_mE1E7DB0EA8AFC3C5B5DCE71C30F23DFD8BCAE6D3(L_20, Dictionary_2_Clear_mE1E7DB0EA8AFC3C5B5DCE71C30F23DFD8BCAE6D3_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:871>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnCollectionHeader.cs:876>
 		return;
 	}
 }
-// Method Definition Index: 12045
+// Method Definition Index: 12042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader__cctor_m83C969995722AC5E22EE4B3D7827087B1A11E929 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15486,7 +15510,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader__cctor_m83C9
 		return;
 	}
 }
-// Method Definition Index: 12046
+// Method Definition Index: 12043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_U3COnContextualMenuManipulatorU3Eb__67_0_m9645847C3B065FE872796D34DB73B5A825A689E0 (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, DropdownMenuAction_t9E1F246511E77E34FB7E3CA05FD7354E16268835* ___0_a, const RuntimeMethod* method) 
 {
 	{
@@ -15503,7 +15527,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnCollectionHeader_U3COnContext
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12047
+// Method Definition Index: 12044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ViewState_Save_m4EA2EA660548A20E3CE1C86EA1196DBE06A557ED (ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* __this, MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* ___0_header, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -15736,7 +15760,7 @@ IL_00e0:
 		return;
 	}
 }
-// Method Definition Index: 12048
+// Method Definition Index: 12045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ViewState_Apply_mA0B5DDD016CF5E95F619B37CEBD7F63E01253AB8 (ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* __this, MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* ___0_header, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16094,7 +16118,7 @@ IL_01a6:
 		return;
 	}
 }
-// Method Definition Index: 12049
+// Method Definition Index: 12046
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ViewState__ctor_mB03095327D194F99640247A0F7F76B475089976D (ViewState_t5BBB8D6381ABFF63C3178453D4ACE18E7D54D4C0* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16199,7 +16223,7 @@ IL2CPP_EXTERN_C void ColumnState_tC563C18EC36392C792E3E0645B1CE344DCC75957_marsh
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12050
+// Method Definition Index: 12047
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* ColumnData_get_control_m2104649E1052F0506708BD93DC9DDAE2CA34B700 (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16208,7 +16232,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MultiColumnHeaderColumn_t6F44266EE1B6EEB83465
 		return L_0;
 	}
 }
-// Method Definition Index: 12051
+// Method Definition Index: 12048
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnData_set_control_m4E96B6B3BE312C9DF0C8D0558A644F15603936EA (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16219,7 +16243,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnData_set_control_m4E96B6B3BE312C9D
 		return;
 	}
 }
-// Method Definition Index: 12052
+// Method Definition Index: 12049
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* ColumnData_get_resizeHandle_m3635E5A74654B97F64519A2C71655E27E70F2DEB (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16228,7 +16252,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MultiColumnHeaderColumnResizeHandle_t2512E81E
 		return L_0;
 	}
 }
-// Method Definition Index: 12053
+// Method Definition Index: 12050
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnData_set_resizeHandle_m208608154A3E812A3DF69D11B7C90EE311BA3E3A (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16239,7 +16263,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnData_set_resizeHandle_m208608154A3
 		return;
 	}
 }
-// Method Definition Index: 12054
+// Method Definition Index: 12051
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ColumnData__ctor_mED0C10F0B698DCD07135057BD1543A8EB7819EE3 (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -16310,7 +16334,7 @@ IL2CPP_EXTERN_C void SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA
 IL2CPP_EXTERN_C void SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA_marshal_com_cleanup(SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA_marshaled_com& marshaled)
 {
 }
-// Method Definition Index: 12055
+// Method Definition Index: 12052
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void SortedColumnState__ctor_mBEFBA6B11E09B0FE2E463DB1B7DA5343020C4625 (SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA* __this, SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* ___0_desc, int32_t ___1_dir, const RuntimeMethod* method) 
 {
 	{
@@ -16340,7 +16364,7 @@ IL2CPP_EXTERN_C  void SortedColumnState__ctor_mBEFBA6B11E09B0FE2E463DB1B7DA53430
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12056
+// Method Definition Index: 12053
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass67_0__ctor_m065DAD1EC397D50BB9125113A191FF856945DEFA (U3CU3Ec__DisplayClass67_0_t49136E59B387F716807B2171EF9ECBCD1E5C0CE7* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -16349,7 +16373,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass67_0__ctor_m065DAD1
 		return;
 	}
 }
-// Method Definition Index: 12057
+// Method Definition Index: 12054
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass67_0_U3COnContextualMenuManipulatorU3Eb__1_m006BD828835E919610DF91711FBCA084DB697F3B (U3CU3Ec__DisplayClass67_0_t49136E59B387F716807B2171EF9ECBCD1E5C0CE7* __this, DropdownMenuAction_t9E1F246511E77E34FB7E3CA05FD7354E16268835* ___0_a, const RuntimeMethod* method) 
 {
 	{
@@ -16365,7 +16389,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass67_0_U3COnContextua
 		return;
 	}
 }
-// Method Definition Index: 12058
+// Method Definition Index: 12055
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t U3CU3Ec__DisplayClass67_0_U3COnContextualMenuManipulatorU3Eb__2_mEED2FF470BE4BA264545ECAFBF1A3397AAD5B05D (U3CU3Ec__DisplayClass67_0_t49136E59B387F716807B2171EF9ECBCD1E5C0CE7* __this, DropdownMenuAction_t9E1F246511E77E34FB7E3CA05FD7354E16268835* ___0_a, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -16486,7 +16510,7 @@ IL_006b:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12059
+// Method Definition Index: 12056
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass73_0__ctor_m9EFE19A9456808EF179C5C278A289996DEB9F245 (U3CU3Ec__DisplayClass73_0_t3AE14AE11B775DBC738BA02BA0DC1EAD1CC12010* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -16495,7 +16519,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass73_0__ctor_m9EFE19A
 		return;
 	}
 }
-// Method Definition Index: 12060
+// Method Definition Index: 12057
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CU3Ec__DisplayClass73_0_U3CUpdateSortColumnDescriptionsOnClickU3Eb__0_m346E137C98A963E1FD05687399EA2E0B0F8B04BB (U3CU3Ec__DisplayClass73_0_t3AE14AE11B775DBC738BA02BA0DC1EAD1CC12010* __this, SortColumnDescription_t278A693B84340D73A6FADCFB1521E313A80F9C37* ___0_d, const RuntimeMethod* method) 
 {
 	int32_t G_B5_0 = 0;
@@ -16572,7 +16596,7 @@ IL_004e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12061
+// Method Definition Index: 12058
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator_set_sortOrderLabel_mE6A11351A46594F38435996836C534EEBBBB5493 (MultiColumnHeaderColumnSortIndicator_tBC4661121B0BC69A811617BFB87C1D388A68EAF3* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16584,7 +16608,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator_set
 		return;
 	}
 }
-// Method Definition Index: 12062
+// Method Definition Index: 12059
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator__ctor_mB2B676892287C099CB028651FC8BFFC24F50B78C (MultiColumnHeaderColumnSortIndicator_tBC4661121B0BC69A811617BFB87C1D388A68EAF3* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16641,7 +16665,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator__ct
 		return;
 	}
 }
-// Method Definition Index: 12063
+// Method Definition Index: 12060
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator__cctor_mB4F2FED8F782FBE023F35462C3A9F49C25617F0C (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16685,7 +16709,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnSortIndicator__cc
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12064
+// Method Definition Index: 12061
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnHeaderColumnIcon_get_isImageInline_mA8A194A1D7A36E9A709A35D18485843CC4EA7E40 (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16694,7 +16718,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnHeaderColumnIcon_get_isImageI
 		return L_0;
 	}
 }
-// Method Definition Index: 12065
+// Method Definition Index: 12062
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_set_isImageInline_mD97ED05765110CCC0F80709BF736BD21820EDB00 (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16704,7 +16728,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_set_isImageI
 		return;
 	}
 }
-// Method Definition Index: 12066
+// Method Definition Index: 12063
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon__ctor_m3EF894DF24F8FF407A9EFF82A82C007FB9485A8B (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16733,7 +16757,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon__ctor_m3EF89
 		return;
 	}
 }
-// Method Definition Index: 12067
+// Method Definition Index: 12064
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_UpdateClassList_mCBF8869345849E933CDA82841AD5D272A1D0D4BA (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16815,7 +16839,7 @@ IL_0054:
 		return;
 	}
 }
-// Method Definition Index: 12068
+// Method Definition Index: 12065
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon__cctor_mC68CB5C4468A491515539076ED5ECCCD825A3ACB (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -16837,7 +16861,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon__cctor_mC68C
 		return;
 	}
 }
-// Method Definition Index: 12069
+// Method Definition Index: 12066
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_U3C_ctorU3Eb__5_0_m586986A4D4E92E9B05E805C49C81162378526056 (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, CustomStyleResolvedEvent_t54D095D62773F628A6A05A4531DEE990166062E6* ___0_evt, const RuntimeMethod* method) 
 {
 	{
@@ -16854,7 +16878,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_U3C_ctorU3Eb
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12070
+// Method Definition Index: 12067
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* MultiColumnHeaderColumn_get_clickable_m666BF00DCDD3C93AF24313728660EACEEAB6EB60 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16863,7 +16887,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17
 		return L_0;
 	}
 }
-// Method Definition Index: 12071
+// Method Definition Index: 12068
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_clickable_m4D07B882D6BE89436D23BEB6FFF429E67806B025 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16874,7 +16898,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_clickable_m4
 		return;
 	}
 }
-// Method Definition Index: 12072
+// Method Definition Index: 12069
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* MultiColumnHeaderColumn_get_mover_mFEADE86CF38D4094072FB2CE5264EB2EB7EA8958 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16883,7 +16907,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99
 		return L_0;
 	}
 }
-// Method Definition Index: 12073
+// Method Definition Index: 12070
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_mover_m9DFA7B4077E2BB24F4BE04FA75B5ADF7088E4E3D (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16894,7 +16918,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_mover_m9DFA7
 		return;
 	}
 }
-// Method Definition Index: 12074
+// Method Definition Index: 12071
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_sortOrderLabel_m216F43AF4B529B01B7601B1DC01F10F50E221613 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16906,7 +16930,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_sortOrderLab
 		return;
 	}
 }
-// Method Definition Index: 12075
+// Method Definition Index: 12072
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16915,7 +16939,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Column_tD686764EBBB4AFE8473E2464D0039885E3A2E
 		return L_0;
 	}
 }
-// Method Definition Index: 12076
+// Method Definition Index: 12073
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_column_mBC6A73A2FDFE84735C41B17D8902F35DC78610F9 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -16926,7 +16950,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_column_mBC6A
 		return;
 	}
 }
-// Method Definition Index: 12077
+// Method Definition Index: 12074
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16935,7 +16959,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		return L_0;
 	}
 }
-// Method Definition Index: 12078
+// Method Definition Index: 12075
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_content_m54DEBB34A4297BA982CE6EC6C8D507B5084282E7 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17022,7 +17046,7 @@ IL_007c:
 		return;
 	}
 }
-// Method Definition Index: 12079
+// Method Definition Index: 12076
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool MultiColumnHeaderColumn_get_isContentBound_m336B8D5F3A7747A733D8715F3760247F9ADAB818 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17063,7 +17087,7 @@ IL_0025:
 		return (bool)G_B3_0;
 	}
 }
-// Method Definition Index: 12080
+// Method Definition Index: 12077
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_isContentBound_m21DAA554D4A36AEEF99B7FBCFEF6D09B8B68AB17 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17107,7 +17131,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 12081
+// Method Definition Index: 12078
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn__ctor_m8B18D6D52DA92B8DBC81C863D58E0AC739CA2915 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_column, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17255,7 +17279,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn__ctor_m8B18D6D52
 		return;
 	}
 }
-// Method Definition Index: 12082
+// Method Definition Index: 12079
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnColumnChanged_mE6030E3156096F084E93828887C127A9F3AAC093 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_c, int32_t ___1_role, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17347,7 +17371,7 @@ IL_0058:
 		return;
 	}
 }
-// Method Definition Index: 12083
+// Method Definition Index: 12080
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnColumnResized_m93F88ED5892A2C90D99902765FBB691579223E49 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_c, const RuntimeMethod* method) 
 {
 	{
@@ -17357,18 +17381,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnColumnResized_
 		return;
 	}
 }
-// Method Definition Index: 12084
+// Method Definition Index: 12081
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_InitManipulators_mE98CD5BD8CBAC8D2C0692BA54B4758EF619B37E7 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
 	if (!s_Il2CppMethodInitialized)
 	{
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_RuntimeMethod_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&MultiColumnHeaderColumn_OnMoverChanged_m685AC6D6745C2EE3EF6835F32BB0DF1DA7334055_RuntimeMethod_var);
-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var);
 		s_Il2CppMethodInitialized = true;
 	}
 	int32_t V_0 = 0;
@@ -17376,6 +17400,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_InitManipulators
 	Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* V_2 = NULL;
 	ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81 V_3;
 	memset((&V_3), 0, sizeof(V_3));
+	bool V_4 = false;
+	int32_t V_5 = 0;
 	int32_t G_B3_0 = 0;
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:216>
@@ -17414,45 +17440,63 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_InitManipulators
 		NullCheck(L_9);
 		List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_inline(L_9, L_10, List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_RuntimeMethod_var);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:221>
-		il2cpp_codegen_runtime_class_init_inline(UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var);
-		bool L_11;
-		L_11 = UIElementsUtility_get_isCommandActionKeyPlatform_m85BDE38B7F4C7AB3917E645E74A6FE5F78C1C3F3(NULL);
-		if (L_11)
+		V_0 = 2;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:223>
+		il2cpp_codegen_runtime_class_init_inline(Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
+		int32_t L_11;
+		L_11 = Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138(NULL);
+		V_5 = L_11;
+		int32_t L_12 = V_5;
+		if (!L_12)
 		{
-			goto IL_007c;
+			goto IL_0089;
 		}
 	}
 	{
-		G_B3_0 = 2;
-		goto IL_007d;
+		int32_t L_13 = V_5;
+		G_B3_0 = ((((int32_t)((((int32_t)L_13) == ((int32_t)1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		goto IL_008a;
 	}
 
-IL_007c:
+IL_0089:
 	{
-		G_B3_0 = 8;
+		G_B3_0 = 0;
 	}
 
-IL_007d:
+IL_008a:
 	{
-		V_0 = G_B3_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:222>
-		Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* L_12;
-		L_12 = MultiColumnHeaderColumn_get_clickable_m666BF00DCDD3C93AF24313728660EACEEAB6EB60_inline(__this, NULL);
-		NullCheck(L_12);
-		List_1_t569CB45C96475FFA9C716A7CC2ADE24112D38121* L_13;
-		L_13 = MouseManipulator_get_activators_mAB6DB832B06575DF49E23F84AE0B79EACE0509C9_inline(L_12, NULL);
+		V_4 = (bool)((((int32_t)G_B3_0) == ((int32_t)0))? 1 : 0);
+		bool L_14 = V_4;
+		if (!L_14)
+		{
+			goto IL_0097;
+		}
+	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:225>
+		V_0 = 8;
+	}
+
+IL_0097:
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:227>
+		Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* L_15;
+		L_15 = MultiColumnHeaderColumn_get_clickable_m666BF00DCDD3C93AF24313728660EACEEAB6EB60_inline(__this, NULL);
+		NullCheck(L_15);
+		List_1_t569CB45C96475FFA9C716A7CC2ADE24112D38121* L_16;
+		L_16 = MouseManipulator_get_activators_mAB6DB832B06575DF49E23F84AE0B79EACE0509C9_inline(L_15, NULL);
 		il2cpp_codegen_initobj((&V_3), sizeof(ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81));
 		ManipulatorActivationFilter_set_button_m7D270A0FB7BF8D63EE26483770D72A0676374769_inline((&V_3), 0, NULL);
-		int32_t L_14 = V_0;
-		ManipulatorActivationFilter_set_modifiers_m192D9065F5CD6F592753C0439A2B1F60A6DBC969_inline((&V_3), L_14, NULL);
-		ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81 L_15 = V_3;
-		NullCheck(L_13);
-		List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_inline(L_13, L_15, List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:223>
+		int32_t L_17 = V_0;
+		ManipulatorActivationFilter_set_modifiers_m192D9065F5CD6F592753C0439A2B1F60A6DBC969_inline((&V_3), L_17, NULL);
+		ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81 L_18 = V_3;
+		NullCheck(L_16);
+		List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_inline(L_16, L_18, List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_RuntimeMethod_var);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:228>
 		return;
 	}
 }
-// Method Definition Index: 12085
+// Method Definition Index: 12082
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnMoverChanged_m685AC6D6745C2EE3EF6835F32BB0DF1DA7334055 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* ___0_mv, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17463,7 +17507,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnMoverChanged_m
 	}
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:227>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:232>
 		ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* L_0;
 		L_0 = MultiColumnHeaderColumn_get_mover_mFEADE86CF38D4094072FB2CE5264EB2EB7EA8958_inline(__this, NULL);
 		NullCheck(L_0);
@@ -17477,7 +17521,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnMoverChanged_m
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:228>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:233>
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
 		String_t* L_3 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___movingUssClassName;
 		VisualElement_AddToClassList_mAF0DD8D8CFD5130229A0471DD260E01ED82117F1(__this, L_3, NULL);
@@ -17486,7 +17530,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_OnMoverChanged_m
 
 IL_001e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:230>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:235>
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
 		String_t* L_4 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___movingUssClassName;
 		VisualElement_RemoveFromClassList_mA7A2EC202004DFCBF38C12B70C6218BF40D21220(__this, L_4, NULL);
@@ -17494,16 +17538,16 @@ IL_001e:
 
 IL_002a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:231>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:236>
 		return;
 	}
 }
-// Method Definition Index: 12086
+// Method Definition Index: 12083
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateDataFromColumn_mAC4CC9AB39A9322B6BD18872E420F59A78DCAEEE (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:235>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:240>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_0;
 		L_0 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		V_0 = (bool)((((RuntimeObject*)(Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A*)L_0) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
@@ -17514,32 +17558,32 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateDataFromCo
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:236>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:241>
 		goto IL_0030;
 	}
 
 IL_0010:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:238>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:243>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_2;
 		L_2 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_2);
 		String_t* L_3;
 		L_3 = Column_get_name_mE905E1F11D923A1364A7B6B93FC0145139DC86AE_inline(L_2, NULL);
 		VisualElement_set_name_m5ABC7B8D2586B1839DD436E1AAF25D81395759BC(__this, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:239>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:244>
 		MultiColumnHeaderColumn_UnbindHeaderContent_mC0B1E1AC05405EF53761C24AE57A7F105F4CA542(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:240>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:245>
 		MultiColumnHeaderColumn_BindHeaderContent_mCE24B0B824AA2636B4BD62D6418B1138345C6D5F(__this, NULL);
 	}
 
 IL_0030:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:241>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:246>
 		return;
 	}
 }
-// Method Definition Index: 12087
+// Method Definition Index: 12084
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_BindHeaderContent_mCE24B0B824AA2636B4BD62D6418B1138345C6D5F (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17552,7 +17596,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_BindHeaderConten
 	bool V_0 = false;
 	Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:245>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:250>
 		bool L_0;
 		L_0 = MultiColumnHeaderColumn_get_isContentBound_m336B8D5F3A7747A733D8715F3760247F9ADAB818(__this, NULL);
 		V_0 = (bool)((((int32_t)L_0) == ((int32_t)0))? 1 : 0);
@@ -17563,7 +17607,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_BindHeaderConten
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:247>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:252>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2;
 		L_2 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
@@ -17574,7 +17618,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_BindHeaderConten
 		RuntimeObject* L_5;
 		L_5 = VisualElement_GetProperty_m55B38972BE5AC52737BE671560381BDC2C8EAAD2(L_2, L_4, NULL);
 		V_1 = ((Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)IsInst((RuntimeObject*)L_5, Action_1_t66B514BE877E216616DEDD40416127189FE16FA3_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:249>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:254>
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_6 = V_1;
 		if (L_6)
 		{
@@ -17596,17 +17640,17 @@ IL_002f:
 
 IL_003c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:250>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:255>
 		MultiColumnHeaderColumn_set_isContentBound_m21DAA554D4A36AEEF99B7FBCFEF6D09B8B68AB17(__this, (bool)1, NULL);
 	}
 
 IL_0045:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:252>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:257>
 		return;
 	}
 }
-// Method Definition Index: 12088
+// Method Definition Index: 12085
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UnbindHeaderContent_mC0B1E1AC05405EF53761C24AE57A7F105F4CA542 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17619,7 +17663,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UnbindHeaderCont
 	bool V_0 = false;
 	Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:256>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:261>
 		bool L_0;
 		L_0 = MultiColumnHeaderColumn_get_isContentBound_m336B8D5F3A7747A733D8715F3760247F9ADAB818(__this, NULL);
 		V_0 = L_0;
@@ -17630,7 +17674,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UnbindHeaderCont
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:258>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:263>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2;
 		L_2 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
@@ -17641,7 +17685,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UnbindHeaderCont
 		RuntimeObject* L_5;
 		L_5 = VisualElement_GetProperty_m55B38972BE5AC52737BE671560381BDC2C8EAAD2(L_2, L_4, NULL);
 		V_1 = ((Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)IsInst((RuntimeObject*)L_5, Action_1_t66B514BE877E216616DEDD40416127189FE16FA3_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:260>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:265>
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_6 = V_1;
 		if (L_6)
 		{
@@ -17663,17 +17707,17 @@ IL_002c:
 
 IL_0039:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:261>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:266>
 		MultiColumnHeaderColumn_set_isContentBound_m21DAA554D4A36AEEF99B7FBCFEF6D09B8B68AB17(__this, (bool)0, NULL);
 	}
 
 IL_0042:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:263>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:268>
 		return;
 	}
 }
-// Method Definition Index: 12089
+// Method Definition Index: 12086
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderContent_mE694659FEC154B5ECD032B42063C508BCBFED9F2 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17685,9 +17729,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 	}
 	Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:268>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:273>
 		MultiColumnHeaderColumn_UnbindHeaderContent_mC0B1E1AC05405EF53761C24AE57A7F105F4CA542(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:269>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:274>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0;
 		L_0 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
@@ -17698,7 +17742,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 		RuntimeObject* L_3;
 		L_3 = VisualElement_GetProperty_m55B38972BE5AC52737BE671560381BDC2C8EAAD2(L_0, L_2, NULL);
 		V_0 = ((Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)IsInst((RuntimeObject*)L_3, Action_1_t66B514BE877E216616DEDD40416127189FE16FA3_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:271>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:276>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_4;
 		L_4 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_5 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_BindingCallbackVEPropertyName;
@@ -17707,7 +17751,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 		NullCheck(L_4);
 		bool L_7;
 		L_7 = VisualElement_ClearProperty_m8A6F90C019D0FCA88FB1A548FF406A0406BB080C(L_4, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:272>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:277>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_8;
 		L_8 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_9 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_UnbindingCallbackVEPropertyName;
@@ -17716,7 +17760,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 		NullCheck(L_8);
 		bool L_11;
 		L_11 = VisualElement_ClearProperty_m8A6F90C019D0FCA88FB1A548FF406A0406BB080C(L_8, L_10, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:273>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:278>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_12;
 		L_12 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_13 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_DestroyCallbackVEPropertyName;
@@ -17725,7 +17769,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 		NullCheck(L_12);
 		bool L_15;
 		L_15 = VisualElement_ClearProperty_m8A6F90C019D0FCA88FB1A548FF406A0406BB080C(L_12, L_14, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:274>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:279>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_16;
 		L_16 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_17 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_BoundVEPropertyName;
@@ -17734,7 +17778,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DestroyHeaderCon
 		NullCheck(L_16);
 		bool L_19;
 		L_19 = VisualElement_ClearProperty_m8A6F90C019D0FCA88FB1A548FF406A0406BB080C(L_16, L_18, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:275>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:280>
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_20 = V_0;
 		if (L_20)
 		{
@@ -17756,11 +17800,11 @@ IL_0080:
 
 IL_008d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:276>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:281>
 		return;
 	}
 }
-// Method Definition Index: 12090
+// Method Definition Index: 12087
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnHeaderColumn_CreateDefaultHeaderContent_m32DC5901715F20EA5162D5F7410FAA48539D3986 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17777,20 +17821,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 	Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* V_2 = NULL;
 	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* V_3 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:280>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:285>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)il2cpp_codegen_object_new(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
 		VisualElement__ctor_m4C59A7BA0CE74223A61F07C39A60071DD0207E2D(L_0, NULL);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1 = L_0;
 		NullCheck(L_1);
 		VisualElement_set_pickingMode_m4B12358A0C59640E752A2BB5B3E6F5C76CB9ACD0(L_1, 1, NULL);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:282>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:287>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
 		String_t* L_3 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___defaultContentUssClassName;
 		NullCheck(L_2);
 		VisualElement_AddToClassList_mAF0DD8D8CFD5130229A0471DD260E01ED82117F1(L_2, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:284>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:289>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_4 = (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88*)il2cpp_codegen_object_new(MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88_il2cpp_TypeInfo_var);
 		MultiColumnHeaderColumnIcon__ctor_m3EF894DF24F8FF407A9EFF82A82C007FB9485A8B(L_4, NULL);
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_5 = L_4;
@@ -17801,7 +17845,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		NullCheck(L_7);
 		VisualElement_set_pickingMode_m4B12358A0C59640E752A2BB5B3E6F5C76CB9ACD0(L_7, 1, NULL);
 		V_1 = L_7;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:286>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:291>
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_8 = (Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70*)il2cpp_codegen_object_new(Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70_il2cpp_TypeInfo_var);
 		Label__ctor_mEC3F9EF41CBD508BAA966A8C6C75EABBED3CB365(L_8, NULL);
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_9 = L_8;
@@ -17812,22 +17856,22 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		NullCheck(L_11);
 		VisualElement_set_pickingMode_m4B12358A0C59640E752A2BB5B3E6F5C76CB9ACD0(L_11, 1, NULL);
 		V_2 = L_11;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:287>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:292>
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_12 = V_2;
 		String_t* L_13 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___titleUssClassName;
 		NullCheck(L_12);
 		VisualElement_AddToClassList_mAF0DD8D8CFD5130229A0471DD260E01ED82117F1(L_12, L_13, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:289>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:294>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_14 = V_0;
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_15 = V_1;
 		NullCheck(L_14);
 		VisualElement_Add_mE2571CCB23C09103F8732EEC73833683F7236A7F(L_14, L_15, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:290>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:295>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_16 = V_0;
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_17 = V_2;
 		NullCheck(L_16);
 		VisualElement_Add_mE2571CCB23C09103F8732EEC73833683F7236A7F(L_16, L_17, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:292>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:297>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_18 = V_0;
 		V_3 = L_18;
 		goto IL_006f;
@@ -17835,12 +17879,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 
 IL_006f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:293>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:298>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_19 = V_3;
 		return L_19;
 	}
 }
-// Method Definition Index: 12091
+// Method Definition Index: 12088
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DefaultBindHeaderContent_m0822363EA281BCB1C4A02BB33DE98273B733BCEB (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -17864,7 +17908,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DefaultBindHeade
 	bool V_7 = false;
 	int32_t G_B9_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:297>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:302>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_ve;
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
 		String_t* L_1 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___titleElementName;
@@ -17872,17 +17916,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DefaultBindHeade
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_2;
 		L_2 = UQueryExtensions_Q_TisLabel_tC160668F9119CE0F5567021FB208E64A5B1C5B70_m8F4BED0AE8A46A7D6F84F222B4154231ED2DAC9F(L_0, L_1, (String_t*)NULL, UQueryExtensions_Q_TisLabel_tC160668F9119CE0F5567021FB208E64A5B1C5B70_m8F4BED0AE8A46A7D6F84F222B4154231ED2DAC9F_RuntimeMethod_var);
 		V_0 = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:298>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:303>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_3 = ___0_ve;
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_4;
 		L_4 = UQueryExtensions_Q_TisMultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88_mD26CD9BBB37243A6D2389863EE20E41044A2504A(L_3, (String_t*)NULL, (String_t*)NULL, UQueryExtensions_Q_TisMultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88_mD26CD9BBB37243A6D2389863EE20E41044A2504A_RuntimeMethod_var);
 		V_1 = L_4;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:300>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:305>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_5 = ___0_ve;
 		String_t* L_6 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___hasTitleUssClassName;
 		NullCheck(L_5);
 		VisualElement_RemoveFromClassList_mA7A2EC202004DFCBF38C12B70C6218BF40D21220(L_5, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:302>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:307>
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_7 = V_0;
 		V_2 = (bool)((!(((RuntimeObject*)(Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70*)L_7) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_8 = V_2;
@@ -17892,7 +17936,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DefaultBindHeade
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:303>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:308>
 		Label_tC160668F9119CE0F5567021FB208E64A5B1C5B70* L_9 = V_0;
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_10;
 		L_10 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
@@ -17905,7 +17949,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_DefaultBindHeade
 
 IL_003d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:305>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:310>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_12;
 		L_12 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_12);
@@ -17921,7 +17965,7 @@ IL_003d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:306>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:311>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_16 = ___0_ve;
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
 		String_t* L_17 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___hasTitleUssClassName;
@@ -17931,7 +17975,7 @@ IL_003d:
 
 IL_0060:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:308>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:313>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_18 = V_1;
 		V_4 = (bool)((!(((RuntimeObject*)(MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88*)L_18) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_19 = V_4;
@@ -17941,7 +17985,7 @@ IL_0060:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:310>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:315>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_20;
 		L_20 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_20);
@@ -18006,11 +18050,11 @@ IL_00c3:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:312>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:317>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_33 = V_1;
 		NullCheck(L_33);
 		MultiColumnHeaderColumnIcon_set_isImageInline_mD97ED05765110CCC0F80709BF736BD21820EDB00_inline(L_33, (bool)1, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:313>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:318>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_34 = V_1;
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_35;
 		L_35 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
@@ -18022,7 +18066,7 @@ IL_00c3:
 		L_37 = Background_get_texture_mB5F42EF624BBBF324E912C2C0AD9439DAD9C2491((&V_6), NULL);
 		NullCheck(L_34);
 		Image_set_image_mF6FBE8FC8B449E1BB7780C7FE7BDD2F047743171(L_34, L_37, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:314>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:319>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_38 = V_1;
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_39;
 		L_39 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
@@ -18034,7 +18078,7 @@ IL_00c3:
 		L_41 = Background_get_sprite_m256B207C4821A236775103B4099FFCEF259ABDC4((&V_6), NULL);
 		NullCheck(L_38);
 		Image_set_sprite_m450EFE431288F6E5A8A23DE2A7CBDA70822975EC(L_38, L_41, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:315>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:320>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_42 = V_1;
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_43;
 		L_43 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
@@ -18051,7 +18095,7 @@ IL_00c3:
 
 IL_0126:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:319>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:324>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_46 = V_1;
 		NullCheck(L_46);
 		bool L_47;
@@ -18064,15 +18108,15 @@ IL_0126:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:321>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:326>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_49 = V_1;
 		NullCheck(L_49);
 		Image_set_image_mF6FBE8FC8B449E1BB7780C7FE7BDD2F047743171(L_49, (Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:322>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:327>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_50 = V_1;
 		NullCheck(L_50);
 		Image_set_sprite_m450EFE431288F6E5A8A23DE2A7CBDA70822975EC(L_50, (Sprite_tAFF74BC83CD68037494CB0B4F28CBDF8971CAB99*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:323>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:328>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_51 = V_1;
 		NullCheck(L_51);
 		Image_set_vectorImage_m7FADE33531324158839378914B13EF127C51D1A0(L_51, (VectorImage_t7BD8CE948377FFE95FCA0C48014ACDFC13B8F8FC*)NULL, NULL);
@@ -18084,7 +18128,7 @@ IL_014d:
 
 IL_014e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:326>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:331>
 		MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* L_52 = V_1;
 		NullCheck(L_52);
 		MultiColumnHeaderColumnIcon_UpdateClassList_mCBF8869345849E933CDA82841AD5D272A1D0D4BA(L_52, NULL);
@@ -18092,11 +18136,11 @@ IL_014e:
 
 IL_0156:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:328>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:333>
 		return;
 	}
 }
-// Method Definition Index: 12092
+// Method Definition Index: 12089
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateHeaderTemplate_mF1FDCA9979BD4ADB38F369EBF485501C1FE6546D (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18116,7 +18160,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateHeaderTemp
 	bool V_4 = false;
 	bool V_5 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:332>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:337>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_0;
 		L_0 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		V_4 = (bool)((((RuntimeObject*)(Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A*)L_0) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
@@ -18127,41 +18171,41 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateHeaderTemp
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:333>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:338>
 		goto IL_00d7;
 	}
 
 IL_0015:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:335>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:340>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_2;
 		L_2 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_2);
 		Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2* L_3;
 		L_3 = Column_get_makeHeader_m6035BCA86A4259DB69F8F2F3B757498424744900_inline(L_2, NULL);
 		V_0 = L_3;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:336>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:341>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_4;
 		L_4 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_4);
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_5;
 		L_5 = Column_get_bindHeader_m6849178DCA72A5EBDE14D04ADB9866974B55625B_inline(L_4, NULL);
 		V_1 = L_5;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:337>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:342>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_6;
 		L_6 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_6);
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_7;
 		L_7 = Column_get_unbindHeader_mB9D11DBF6A2BDB970C27DD890DB37BCD2A5D77A7_inline(L_6, NULL);
 		V_2 = L_7;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:338>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:343>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_8;
 		L_8 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_8);
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_9;
 		L_9 = Column_get_destroyHeader_mAAA3B50E1A4BBC2E0C62C21A9E2A89387873215D_inline(L_8, NULL);
 		V_3 = L_9;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:340>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:345>
 		Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2* L_10 = V_0;
 		V_5 = (bool)((((RuntimeObject*)(Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2*)L_10) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_11 = V_5;
@@ -18171,29 +18215,29 @@ IL_0015:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:342>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:347>
 		Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2* L_12 = (Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2*)il2cpp_codegen_object_new(Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2_il2cpp_TypeInfo_var);
 		Func_1__ctor_mF6EF1F2D908EA8D26E877D4C5365D5777FBA75EB(L_12, __this, (intptr_t)((void*)MultiColumnHeaderColumn_CreateDefaultHeaderContent_m32DC5901715F20EA5162D5F7410FAA48539D3986_RuntimeMethod_var), NULL);
 		V_0 = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:343>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:348>
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_13 = (Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)il2cpp_codegen_object_new(Action_1_t66B514BE877E216616DEDD40416127189FE16FA3_il2cpp_TypeInfo_var);
 		Action_1__ctor_m94ECFE5106934350E611D7DEB700E42A7D7456FB(L_13, __this, (intptr_t)((void*)MultiColumnHeaderColumn_DefaultBindHeaderContent_m0822363EA281BCB1C4A02BB33DE98273B733BCEB_RuntimeMethod_var), NULL);
 		V_1 = L_13;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:344>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:349>
 		V_2 = (Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)NULL;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:345>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:350>
 		V_3 = (Action_1_t66B514BE877E216616DEDD40416127189FE16FA3*)NULL;
 	}
 
 IL_006f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:348>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:353>
 		Func_1_tEA19435E526C20D577E34BADB14CA06F066636C2* L_14 = V_0;
 		NullCheck(L_14);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_15;
 		L_15 = Func_1_Invoke_m073521535E43A005444DC0A7BA0082D630D54BCC_inline(L_14, NULL);
 		MultiColumnHeaderColumn_set_content_m54DEBB34A4297BA982CE6EC6C8D507B5084282E7(__this, L_15, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:349>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:354>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_16;
 		L_16 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		il2cpp_codegen_runtime_class_init_inline(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var);
@@ -18203,7 +18247,7 @@ IL_006f:
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_19 = V_1;
 		NullCheck(L_16);
 		VisualElement_SetProperty_m2EB182A4E57AD33CACC3DC0209DCDB5D8773F7E6(L_16, L_18, L_19, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:350>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:355>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_20;
 		L_20 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_21 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_UnbindingCallbackVEPropertyName;
@@ -18212,7 +18256,7 @@ IL_006f:
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_23 = V_2;
 		NullCheck(L_20);
 		VisualElement_SetProperty_m2EB182A4E57AD33CACC3DC0209DCDB5D8773F7E6(L_20, L_22, L_23, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:351>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:356>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_24;
 		L_24 = MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline(__this, NULL);
 		String_t* L_25 = ((MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_StaticFields*)il2cpp_codegen_static_fields_for(MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4_il2cpp_TypeInfo_var))->___s_DestroyCallbackVEPropertyName;
@@ -18221,22 +18265,22 @@ IL_006f:
 		Action_1_t66B514BE877E216616DEDD40416127189FE16FA3* L_27 = V_3;
 		NullCheck(L_24);
 		VisualElement_SetProperty_m2EB182A4E57AD33CACC3DC0209DCDB5D8773F7E6(L_24, L_26, L_27, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:352>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:357>
 		MultiColumnHeaderColumn_set_isContentBound_m21DAA554D4A36AEEF99B7FBCFEF6D09B8B68AB17(__this, (bool)0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:353>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:358>
 		__this->___m_ScheduledHeaderTemplateUpdate = (RuntimeObject*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_ScheduledHeaderTemplateUpdate), (void*)(RuntimeObject*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:354>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:359>
 		MultiColumnHeaderColumn_UpdateDataFromColumn_mAC4CC9AB39A9322B6BD18872E420F59A78DCAEEE(__this, NULL);
 	}
 
 IL_00d7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:355>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:360>
 		return;
 	}
 }
-// Method Definition Index: 12093
+// Method Definition Index: 12090
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateGeometryFromColumn_m17E1BEF13BD673914E238E41B87E7DA5136EAFC7 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18247,7 +18291,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateGeometryFr
 	}
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:359>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:364>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_0;
 		L_0 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		NullCheck(L_0);
@@ -18263,13 +18307,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_UpdateGeometryFr
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:360>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:365>
 		goto IL_0033;
 	}
 
 IL_0017:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:361>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:366>
 		RuntimeObject* L_4;
 		L_4 = VisualElement_get_style_mDCFF8D835BE0AFE412905E108F48B32A83734224(__this, NULL);
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_5;
@@ -18285,11 +18329,11 @@ IL_0017:
 
 IL_0033:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:362>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:367>
 		return;
 	}
 }
-// Method Definition Index: 12094
+// Method Definition Index: 12091
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_Dispose_mE3C0DA70E9155AB22AAAB014EA1554719F6ACB02 (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18304,46 +18348,46 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_Dispose_mE3C0DA7
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:366>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:371>
 		ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* L_0;
 		L_0 = MultiColumnHeaderColumn_get_mover_mFEADE86CF38D4094072FB2CE5264EB2EB7EA8958_inline(__this, NULL);
 		Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9* L_1 = (Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9*)il2cpp_codegen_object_new(Action_1_t9695AED713CA91CBC7D63B1EED2BDF6D6C9C33F9_il2cpp_TypeInfo_var);
 		Action_1__ctor_mF1C3475FABF0EFC0AB3AF74E3412B1A314EDBD1C(L_1, __this, (intptr_t)((void*)MultiColumnHeaderColumn_OnMoverChanged_m685AC6D6745C2EE3EF6835F32BB0DF1DA7334055_RuntimeMethod_var), NULL);
 		NullCheck(L_0);
 		ColumnMover_remove_movingChanged_m53FBDA385044B02FF11F45A8DA065445C2B93EE8(L_0, L_1, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:367>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:372>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_2;
 		L_2 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346* L_3 = (Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346*)il2cpp_codegen_object_new(Action_2_t240BAEB1DC7A6558995FFCB7E0186F2ABB2CE346_il2cpp_TypeInfo_var);
 		Action_2__ctor_m76F3C2B34919F8C03E2EA99DFA9ADC2B87C3EE74(L_3, __this, (intptr_t)((void*)MultiColumnHeaderColumn_OnColumnChanged_mE6030E3156096F084E93828887C127A9F3AAC093_RuntimeMethod_var), NULL);
 		NullCheck(L_2);
 		Column_remove_changed_m0982BCFB3E2A9CAE47AB88F8BB23458155F515CE(L_2, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:368>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:373>
 		Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* L_4;
 		L_4 = MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline(__this, NULL);
 		Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8* L_5 = (Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8*)il2cpp_codegen_object_new(Action_1_t1EA00726877CBFFB94EE52CCD9672A96472984B8_il2cpp_TypeInfo_var);
 		Action_1__ctor_mABC0A74E2D09A84EE658DC70DB5EF1DAB87D8CC6(L_5, __this, (intptr_t)((void*)MultiColumnHeaderColumn_OnColumnResized_m93F88ED5892A2C90D99902765FBB691579223E49_RuntimeMethod_var), NULL);
 		NullCheck(L_4);
 		Column_remove_resized_mDFE6F4F052077CCB1CFE04CB3046C9F5E7FBBB97(L_4, L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:369>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:374>
 		ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* L_6;
 		L_6 = MultiColumnHeaderColumn_get_mover_mFEADE86CF38D4094072FB2CE5264EB2EB7EA8958_inline(__this, NULL);
 		VisualElementExtensions_RemoveManipulator_m7FF368767CDA311BA47F56729AA68B173F1BED35(__this, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:370>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:375>
 		Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* L_7;
 		L_7 = MultiColumnHeaderColumn_get_clickable_m666BF00DCDD3C93AF24313728660EACEEAB6EB60_inline(__this, NULL);
 		VisualElementExtensions_RemoveManipulator_m7FF368767CDA311BA47F56729AA68B173F1BED35(__this, L_7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:371>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:376>
 		MultiColumnHeaderColumn_set_mover_m9DFA7B4077E2BB24F4BE04FA75B5ADF7088E4E3D_inline(__this, (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:372>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:377>
 		MultiColumnHeaderColumn_set_column_mBC6A73A2FDFE84735C41B17D8902F35DC78610F9_inline(__this, (Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:373>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:378>
 		MultiColumnHeaderColumn_set_content_m54DEBB34A4297BA982CE6EC6C8D507B5084282E7(__this, (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:374>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/MultiColumn/MultiColumnHeaderColumn.cs:379>
 		return;
 	}
 }
-// Method Definition Index: 12095
+// Method Definition Index: 12092
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn__cctor_mC33D49C05FBCCAB006142858F69E0FBE34380820 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18467,7 +18511,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn__cctor_mC33D49C0
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 12096
+// Method Definition Index: 12093
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnHeaderColumnResizeHandle_get_dragArea_mAD2E4005E97F7BAB1D51123C330608E8B6CB25F5 (MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18476,7 +18520,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F22
 		return L_0;
 	}
 }
-// Method Definition Index: 12097
+// Method Definition Index: 12094
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizeHandle__ctor_mEF78D5252757F1DC4EE4D31187C0666D150580B7 (MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18519,7 +18563,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizeHandle__cto
 		return;
 	}
 }
-// Method Definition Index: 12098
+// Method Definition Index: 12095
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnResizeHandle__cctor_m117030BB9B29B074E5D47BDBCB05744E6D4D5446 (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -18593,7 +18637,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void EventBase_set_propagation_m1
 		return;
 	}
 }
-// Method Definition Index: 11796
+// Method Definition Index: 11793
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkID_mBD3292D6A020311A61134C01709E471ED20B8D2F_inline (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18604,7 +18648,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_
 		return;
 	}
 }
-// Method Definition Index: 11797
+// Method Definition Index: 11794
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_linkText_m12488371182B00CF808A451B82B845A76B943E56_inline (PointerMoveLinkTagEvent_tD3F89E105A009EFE560A1055A34C919ECD2BC18D* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18615,7 +18659,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveLinkTagEvent_set_
 		return;
 	}
 }
-// Method Definition Index: 11816
+// Method Definition Index: 11813
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkID_mDED112D0BD419BE700A1C88B1282FFC81F7EAE48_inline (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18626,7 +18670,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_
 		return;
 	}
 }
-// Method Definition Index: 11817
+// Method Definition Index: 11814
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_linkText_mB9D85E3FB495C277014BF8247422103C70A8EE30_inline (PointerDownLinkTagEvent_tCBAACF66D0661AB64EDA7C18DD9E845D47481C46* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18637,7 +18681,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerDownLinkTagEvent_set_
 		return;
 	}
 }
-// Method Definition Index: 11827
+// Method Definition Index: 11824
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkID_m48D26A14B24B304CA63844309A9F8E626E71D55D_inline (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18648,7 +18692,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_li
 		return;
 	}
 }
-// Method Definition Index: 11828
+// Method Definition Index: 11825
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_linkText_m935D07221EABC4F77E036231330039E6A6411C30_inline (PointerUpLinkTagEvent_t16A0CA9A9DA4BB87D6531675CE40FABDF91732A5* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18659,7 +18703,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerUpLinkTagEvent_set_li
 		return;
 	}
 }
-// Method Definition Index: 35500
+// Method Definition Index: 35497
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_LerpUnclamped_mF35042F9D25A221BDD4B3FD6251224610AFC1F35_inline (float ___0_a, float ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -18680,7 +18724,7 @@ IL_000b:
 		return L_4;
 	}
 }
-// Method Definition Index: 35239
+// Method Definition Index: 35236
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_LerpUnclamped_m91027D026E64424B71959149B942F706FC16B1A2_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_a, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
@@ -18724,7 +18768,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_28;
 	}
 }
-// Method Definition Index: 11929
+// Method Definition Index: 11926
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t VisitContext_get_currentDepth_m71D6554E66F041CBFAECAD0EAED46A65D83C7387_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18733,7 +18777,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t VisitContext_get_currentD
 		return L_0;
 	}
 }
-// Method Definition Index: 11915
+// Method Definition Index: 11912
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t AutoCompletePathVisitor_get_maxDepth_m186F0E249DA7088275B85F6E5F87BF65B843851C_inline (AutoCompletePathVisitor_tF0F2FA82B3F3666F724C75CF0B95E4A420243B15* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18742,7 +18786,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t AutoCompletePathVisitor_g
 		return L_0;
 	}
 }
-// Method Definition Index: 11926
+// Method Definition Index: 11923
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR HashSet_1_tAE2F12E55878645F5BE7C4D5603228A6FAB429C7* VisitContext_get_types_m061A3E9948C49F1492D8FB10EDF80692F007BD60_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18751,7 +18795,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR HashSet_1_tAE2F12E55878645F5BE7C4
 		return L_0;
 	}
 }
-// Method Definition Index: 11928
+// Method Definition Index: 11925
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_current_mDDA3330D2D49DFA4C01D19FA3123E22586FC9310_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18786,7 +18830,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_current_mDD
 		return;
 	}
 }
-// Method Definition Index: 11925
+// Method Definition Index: 11922
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_propertyPathInfos_mFCA652B80C3C586B0F42F0648A86CDFD9B1B37FD_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086465* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18797,7 +18841,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_propertyPat
 		return;
 	}
 }
-// Method Definition Index: 11930
+// Method Definition Index: 11927
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_currentDepth_m52788AC7E4B2FF784EF7C6F395BDE0000E0DE008_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18807,7 +18851,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisitContext_set_currentDept
 		return;
 	}
 }
-// Method Definition Index: 11927
+// Method Definition Index: 11924
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 VisitContext_get_current_m7C4197B91ADAA11C45F37709EBBB076461C19C10_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18816,7 +18860,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6
 		return L_0;
 	}
 }
-// Method Definition Index: 11924
+// Method Definition Index: 11921
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086465* VisitContext_get_propertyPathInfos_mFEFFA4214B8DE54183835DFB3850D48373666FE3_inline (VisitContext_tD8792BE884AAACF8175FFE35CBE2AB831D3C77EA* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18825,7 +18869,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR List_1_t0EBD8BA582D3F66E8AC5DBDC4
 		return L_0;
 	}
 }
-// Method Definition Index: 64091
+// Method Definition Index: 64165
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 PropertyPath_AppendIndex_mDDEECBA50ABD5B4C699781BDBD0726BA9C3804F6_inline (PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79* ___0_path, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	PropertyPathPart_tFB308743948D2298957DC1898D90AF2ACFED9DFF V_0;
@@ -18843,7 +18887,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6
 		return L_3;
 	}
 }
-// Method Definition Index: 64093
+// Method Definition Index: 64167
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 PropertyPath_Pop_m65DD7F8826EEBE6D4CF039B3F4E5904C00FFC272_inline (PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79* ___0_path, const RuntimeMethod* method) 
 {
 	{
@@ -18857,7 +18901,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6
 		return L_3;
 	}
 }
-// Method Definition Index: 11939
+// Method Definition Index: 11936
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_resolvedType_m484445A58C07D18393F38BAD75C180FD57E3F8FE_inline (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, Type_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18868,7 +18912,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_resolved
 		return;
 	}
 }
-// Method Definition Index: 11938
+// Method Definition Index: 11935
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_Path_m50275DBEAAB0C5D03D316EFD56C1C52C7FCA71A0_inline (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18903,7 +18947,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_Path_m50
 		return;
 	}
 }
-// Method Definition Index: 11941
+// Method Definition Index: 11938
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_ReturnCode_m4BD0A1BF508D661CE97F4E2646A1D5DA8AEEDBA9_inline (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -18913,7 +18957,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypePathVisitor_set_ReturnCo
 		return;
 	}
 }
-// Method Definition Index: 11937
+// Method Definition Index: 11934
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79 TypePathVisitor_get_Path_m6BC0A732F2057444371812A4B9B952A9FEF74378_inline (TypePathVisitor_t654A63AF43DC56C53E3D776E5DAD7FE2C00DD81E* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18922,7 +18966,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PropertyPath_tA523CA2740853534DF6
 		return L_0;
 	}
 }
-// Method Definition Index: 64079
+// Method Definition Index: 64153
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t PropertyPath_get_Length_m9238E2C9AAFD16D7A74483CB4075AC7592B8889F_inline (PropertyPath_tA523CA2740853534DF6C009C588464B45A6D0A79* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18950,7 +18994,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ManipulatorActivationFilter_
 		return;
 	}
 }
-// Method Definition Index: 35548
+// Method Definition Index: 35546
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -18968,7 +19012,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 11955
+// Method Definition Index: 11952
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool ColumnMover_get_active_m53690CF499CEBA1D3F1DB6298248548C85184291_inline (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18977,7 +19021,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool ColumnMover_get_active_m5369
 		return L_0;
 	}
 }
-// Method Definition Index: 11957
+// Method Definition Index: 11954
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool ColumnMover_get_moving_mBFBDD99BD148F773EC1E1E952CF8BA83BE428AA2_inline (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -18986,7 +19030,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool ColumnMover_get_moving_mBFBD
 		return L_0;
 	}
 }
-// Method Definition Index: 12007
+// Method Definition Index: 12004
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Columns_t487EAF3B634F6D919D58F1927099A8883964831B* MultiColumnCollectionHeader_get_columns_mCD478DC5065BA9B43AD13D998169055EAF1C3655_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19004,7 +19048,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Columns_get_reorderable_m1C3
 		return L_0;
 	}
 }
-// Method Definition Index: 12000
+// Method Definition Index: 11997
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* MultiColumnCollectionHeader_get_columnLayout_m372E9CE3879D912E501701023DFDAAFD8C2E1CEE_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19013,7 +19057,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F97
 		return L_0;
 	}
 }
-// Method Definition Index: 11954
+// Method Definition Index: 11951
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnMover_set_columnLayout_m40A95913088B40305880B995E0C08BC31B9A2896_inline (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19024,7 +19068,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnMover_set_columnLayout
 		return;
 	}
 }
-// Method Definition Index: 11953
+// Method Definition Index: 11950
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ColumnMover_get_columnLayout_mE9AC5B30D6257335EA3071AE948417B4786A75C0_inline (ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19042,7 +19086,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Columns_t487EAF3B634F6D919D58F192
 		return L_0;
 	}
 }
-// Method Definition Index: 6845
+// Method Definition Index: 6846
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 VisualElement_get_hierarchy_m2E897DE4CFD349E65CFA38EFF6BAAFECE2F4E3E4_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19051,7 +19095,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C50
 		return L_0;
 	}
 }
-// Method Definition Index: 11985
+// Method Definition Index: 11982
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool ColumnResizer_get_preview_m12D3B74AD10459BB36874E8ADA4E576EAEC21295_inline (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19078,7 +19122,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Columns_get_resizePreview_mA
 		return L_0;
 	}
 }
-// Method Definition Index: 11986
+// Method Definition Index: 11983
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnResizer_set_preview_mB6836147C91FA68A6A937ABD7BFD243233D36C62_inline (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19088,7 +19132,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnResizer_set_preview_mB
 		return;
 	}
 }
-// Method Definition Index: 11984
+// Method Definition Index: 11981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnResizer_set_columnLayout_m5916AA50ECF0D28DBA5362D27F6EFC2BAF3ACCEF_inline (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19099,7 +19143,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnResizer_set_columnLayo
 		return;
 	}
 }
-// Method Definition Index: 11983
+// Method Definition Index: 11980
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F9720AF33516EBAFAB4400B4* ColumnResizer_get_columnLayout_m717D464317CDC3E4F17387192A7E600398B9B00D_inline (ColumnResizer_tA24C857E9E5A60F51969581DA49CE869DA2BF51A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19108,7 +19152,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnLayout_tF0A72BFB169B3329F97
 		return L_0;
 	}
 }
-// Method Definition Index: 12001
+// Method Definition Index: 11998
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnCollectionHeader_get_columnContainer_m33E41CBB68DF0781F002B266F332F8B8CF4BF179_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19117,7 +19161,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 12002
+// Method Definition Index: 11999
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnCollectionHeader_get_resizeHandleContainer_m9FA878F056A534B74CC914B2AE17E8FBBF6A58EE_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19126,13 +19170,13 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 6699
+// Method Definition Index: 6701
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 VisualElement_get_layoutSize_m9BD5E3873E98B8D66582571A7F62F890FE970F70_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
 	memset((&V_0), 0, sizeof(V_0));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1395>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1393>
 		LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* L_0;
 		L_0 = VisualElement_get_layoutNode_mDEB89DEE452812FE70D90C54203C03DC216A66CB(__this, NULL);
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_1;
@@ -19143,12 +19187,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 
 IL_000f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1396>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1394>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2 = V_0;
 		return L_2;
 	}
 }
-// Method Definition Index: 12008
+// Method Definition Index: 12005
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_get_sortingEnabled_m7CEDC3823FD83A515F3B5E7B7CAEF9A9A172E4AE_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19157,7 +19201,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MultiColumnCollectionHeader_
 		return L_0;
 	}
 }
-// Method Definition Index: 12005
+// Method Definition Index: 12002
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SortColumnDescriptions_tDC3FDF948D96F26E0BCB2C971C6EDA1E02BAB1EA* MultiColumnCollectionHeader_get_sortDescriptions_mC381BF9EEEC31262C1F9BC8510675F8698C25B6E_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19222,7 +19266,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Column_get_stretchable_m8BFD
 		return L_0;
 	}
 }
-// Method Definition Index: 11999
+// Method Definition Index: 11996
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Dictionary_2_t1C6F670EE6B3EEEEFF2CBA243476B8AC9C173D11* MultiColumnCollectionHeader_get_columnDataMap_mA525250831644003B806C2732E14BDA37BC1A862_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19231,7 +19275,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Dictionary_2_t1C6F670EE6B3EEEEFF2
 		return L_0;
 	}
 }
-// Method Definition Index: 12050
+// Method Definition Index: 12047
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* ColumnData_get_control_m2104649E1052F0506708BD93DC9DDAE2CA34B700_inline (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19258,7 +19302,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Length_t90BB06D47DD6DB461ED21BD3E
 		return L_0;
 	}
 }
-// Method Definition Index: 12052
+// Method Definition Index: 12049
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* ColumnData_get_resizeHandle_m3635E5A74654B97F64519A2C71655E27E70F2DEB_inline (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19303,7 +19347,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Column_get_visible_m013450BB
 		return L_0;
 	}
 }
-// Method Definition Index: 12070
+// Method Definition Index: 12067
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* MultiColumnHeaderColumn_get_clickable_m666BF00DCDD3C93AF24313728660EACEEAB6EB60_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19312,7 +19356,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Clickable_tED3E313565F64BDF5DA9D3
 		return L_0;
 	}
 }
-// Method Definition Index: 12072
+// Method Definition Index: 12069
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* MultiColumnHeaderColumn_get_mover_mFEADE86CF38D4094072FB2CE5264EB2EB7EA8958_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19321,7 +19365,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ColumnMover_tF8B270BEC7C26ECD780F
 		return L_0;
 	}
 }
-// Method Definition Index: 12096
+// Method Definition Index: 12093
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnHeaderColumnResizeHandle_get_dragArea_mAD2E4005E97F7BAB1D51123C330608E8B6CB25F5_inline (MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19330,7 +19374,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 12051
+// Method Definition Index: 12048
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnData_set_control_m4E96B6B3BE312C9DF0C8D0558A644F15603936EA_inline (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19341,7 +19385,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnData_set_control_m4E96
 		return;
 	}
 }
-// Method Definition Index: 12053
+// Method Definition Index: 12050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnData_set_resizeHandle_m208608154A3E812A3DF69D11B7C90EE311BA3E3A_inline (ColumnData_t0AB07CB43923527FF3700146C0F98D09B673492A* __this, MultiColumnHeaderColumnResizeHandle_t2512E81EB5479A2B0052C77741DB027E107F01C2* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19352,7 +19396,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ColumnData_set_resizeHandle_
 		return;
 	}
 }
-// Method Definition Index: 34003
+// Method Definition Index: 33993
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_Contains_mAB270D6B7E3B0009A50D142C569D63E8FE59F48B_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_point, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -19416,7 +19460,7 @@ IL_003b:
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA_inline (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1058>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0 = __this->___U3CmenuU3Ek__BackingField;
 		return L_0;
 	}
@@ -19448,7 +19492,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8
 		return L_0;
 	}
 }
-// Method Definition Index: 33989
+// Method Definition Index: 33979
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D67551372073C9C32C4C4624C2A5713F7F9A9_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19457,7 +19501,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D6755137
 		return L_0;
 	}
 }
-// Method Definition Index: 14018
+// Method Definition Index: 14015
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsNaN_mFE637F6ECA9F7697CE8EFF56427858F4C5EDF75D_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19468,7 +19512,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsNaN_mFE637F6ECA9F76
 		return (bool)((((int32_t)((int32_t)(L_1&((int32_t)2147483647LL)))) > ((int32_t)((int32_t)2139095040)))? 1 : 0);
 	}
 }
-// Method Definition Index: 33991
+// Method Definition Index: 33981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_height_mE1AA6C6C725CCD2D317BD2157396D3CF7D47C9D8_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19486,7 +19530,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t GeometryChangedEvent_get_
 		return L_0;
 	}
 }
-// Method Definition Index: 12075
+// Method Definition Index: 12072
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* MultiColumnHeaderColumn_get_column_mC2830961D571CC5AD223379819A2FC6A02DD7519_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19495,7 +19539,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Column_tD686764EBBB4AFE8473E2464D
 		return L_0;
 	}
 }
-// Method Definition Index: 33999
+// Method Definition Index: 33989
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA98A9B007F815F6E2059BA6BE425F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19523,7 +19567,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 35369
+// Method Definition Index: 35367
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	{
@@ -19540,14 +19584,14 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999E
 		return;
 	}
 }
-// Method Definition Index: 12699
+// Method Definition Index: 12696
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_Invoke_m7126A54DACA72B845424072887B5F3A51FC3808E_inline (Action_tD00B0A84D7945E50C2DFFC28EFEE6ED44ED2AD07* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 12003
+// Method Definition Index: 12000
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* MultiColumnCollectionHeader_get_sortedColumns_mC33C8CC43BB2674570116BDA529E2E27865907CB_inline (MultiColumnCollectionHeader_t0B041BD57A14950E8C33DCD854F3A3C2C3DA706D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19601,7 +19645,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Column_get_optional_m52B6592
 		return L_0;
 	}
 }
-// Method Definition Index: 12076
+// Method Definition Index: 12073
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_column_mBC6A73A2FDFE84735C41B17D8902F35DC78610F9_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Column_tD686764EBBB4AFE8473E2464D0039885E3A2EC6A* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19612,7 +19656,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_
 		return;
 	}
 }
-// Method Definition Index: 12073
+// Method Definition Index: 12070
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_mover_m9DFA7B4077E2BB24F4BE04FA75B5ADF7088E4E3D_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, ColumnMover_tF8B270BEC7C26ECD780F9EEAE6EC2A99BDC6986F* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19623,7 +19667,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_
 		return;
 	}
 }
-// Method Definition Index: 12071
+// Method Definition Index: 12068
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumn_set_clickable_m4D07B882D6BE89436D23BEB6FFF429E67806B025_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, Clickable_tED3E313565F64BDF5DA9D3FE0FEFFD0E17E53834* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19644,7 +19688,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ManipulatorActivationFilter_
 		return;
 	}
 }
-// Method Definition Index: 12077
+// Method Definition Index: 12074
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* MultiColumnHeaderColumn_get_content_m32525A35FEF1766316ABF021B00E36C7016A5149_inline (MultiColumnHeaderColumn_t6F44266EE1B6EEB83465A7FE3BA6A6C7CBF8F9B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19662,7 +19706,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Background_t3C720DED4FAF016332D29
 		return L_0;
 	}
 }
-// Method Definition Index: 12065
+// Method Definition Index: 12062
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_set_isImageInline_mD97ED05765110CCC0F80709BF736BD21820EDB00_inline (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -19672,7 +19716,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MultiColumnHeaderColumnIcon_
 		return;
 	}
 }
-// Method Definition Index: 12064
+// Method Definition Index: 12061
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool MultiColumnHeaderColumnIcon_get_isImageInline_mA8A194A1D7A36E9A709A35D18485843CC4EA7E40_inline (MultiColumnHeaderColumnIcon_tC4C958B7F3CE0D71B5A032DF3B7C81E6C707EF88* __this, const RuntimeMethod* method) 
 {
 	{
@@ -19717,7 +19761,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Action_1_t66B514BE877E216616DEDD4
 		return L_0;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR StyleValue_t56307594EC04E04EFBCC3220595B4AAD66FF93C5 Enumerator_get_Current_m2A71803E92C0B34206D38F91490F372EE7E8E999_gshared_inline (Enumerator_tB72DF0A1B1C0AE8C401AAA543550E6B7F4F8E091* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19726,7 +19770,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR StyleValue_t56307594EC04E04EFBCC3
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m5A359A0DA131E66D1A09B94FE5687CE31FD674B3_gshared_inline (List_1_t0EBD8BA582D3F66E8AC5DBDC4A635DEB08086465* __this, PropertyPathInfo_t4F516150FF223D10399DC8E09E5DA06F616C124C ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19765,14 +19809,14 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 12701
+// Method Definition Index: 12698
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_1_Invoke_mF2422B2DD29F74CE66F791C3F68E288EC7C3DB9E_gshared_inline (Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* __this, RuntimeObject* ___0_obj, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_obj, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_gshared_inline (List_1_t569CB45C96475FFA9C716A7CC2ADE24112D38121* __this, ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81 ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19847,7 +19891,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t KeyboardEventBase_1_get_k
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mAF5BD8A6F522C955DCE46B933758304D5018C7E6_gshared_inline (List_1_t8E88137DBF3559DC2CF17853F82E9C24C134B291* __this, SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19886,7 +19930,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21054
+// Method Definition Index: 21050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m16C1F2C61FED5955F10EB36BC1CB2DF34B128994_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19917,7 +19961,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SortedColumnState_t24958C451ECBAA5C6C868EA4881A27E45DEEA1AA Enumerator_get_Current_m637DAF0041A3979314CEAAA2668C318F48BDD35C_gshared_inline (Enumerator_t8534CC1E09AC7402C395E1215F04227DA8E4349F* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19926,7 +19970,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SortedColumnState_t24958C451ECBAA
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mEBCF994CC3814631017F46A387B1A192ED6C85C7_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19974,21 +20018,21 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 12703
+// Method Definition Index: 12700
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_2_Invoke_m7BFCE0BBCF67689D263059B56A8D79161B698587_gshared_inline (Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C* __this, RuntimeObject* ___0_arg1, RuntimeObject* ___1_arg2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, RuntimeObject*, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg1, ___1_arg2, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 12703
+// Method Definition Index: 12700
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_2_Invoke_m6A1C58E7C9CBF1445FD0C4813FC0B730B19752F0_gshared_inline (Action_2_t28390B369564138BA256B9D0831BFEC2F9FF1006* __this, int32_t ___0_arg1, float ___1_arg2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, int32_t, float, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg1, ___1_arg2, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C389F22B8CEC282C15D56516658746C383_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -19997,7 +20041,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C
 		return L_0;
 	}
 }
-// Method Definition Index: 20993
+// Method Definition Index: 20989
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Current_mB407E755F3B4C51C54D24338D00A352E5B16E7F3_gshared_inline (Enumerator_t44124D16E0B2F7308FF4069BE06369B5A83896EB* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20006,7 +20050,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Cur
 		return L_0;
 	}
 }
-// Method Definition Index: 21054
+// Method Definition Index: 21050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_mC17AB7F3BAC157D7364083286A1B496625068AD9_gshared_inline (List_1_t9FCF421D436E7388FC34EB04CC1A4AF55A14F565* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20037,7 +20081,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mA97FD9B61331596E4585203CFD321A5A614A089D_gshared_inline (List_1_t9FCF421D436E7388FC34EB04CC1A4AF55A14F565* __this, ColumnState_tC563C18EC36392C792E3E0645B1CE344DCC75957 ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20076,7 +20120,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mECD525A7CE3BC7B0E3FE954F13BC663410201A64_gshared_inline (List_1_t9FCF421D436E7388FC34EB04CC1A4AF55A14F565* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20085,7 +20129,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mECD525A
 		return L_0;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Current_m6330F15D18EE4F547C05DF9BF83C5EB710376027_gshared_inline (Enumerator_t9473BAB568A27E2339D48C1F91319E0F6D244D7A* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20094,14 +20138,14 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Cur
 		return L_0;
 	}
 }
-// Method Definition Index: 12713
+// Method Definition Index: 12710
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Func_1_Invoke_m1412272198DFA4066C83206E5B43353AF10A2EEE_gshared_inline (Func_1_tD5C081AE11746B200C711DD48DBEB00E3A9276D4* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef RuntimeObject* (*FunctionPointerType) (RuntimeObject*, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 11241
+// Method Definition Index: 11238
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 LayoutNode_GetLayoutSize_m9DD2A25D8C470FF99CF5CD4072986F190E5DDFF6_inline (LayoutNode_tADF081B0F16F76B66459DE38F3AD8EC098F22CBE* __this, const RuntimeMethod* method) 
 {
 	LayoutComputedData_t37CD62B9A6B59283679F1126AD9C4BB9FD15B9C1 V_0;
@@ -20157,7 +20201,7 @@ IL_004e:
 		return L_12;
 	}
 }
-// Method Definition Index: 34001
+// Method Definition Index: 33991
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD632AADD8B9EAF9FE3BA143F79CAF8E_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -20167,7 +20211,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD63
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 12797
+// Method Definition Index: 12794
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt32Bits_mC760C7CFC89725E3CF68DC45BE3A9A42A7E7DA73_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -20176,7 +20220,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt3
 		return L_0;
 	}
 }
-// Method Definition Index: 35520
+// Method Definition Index: 35518
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{

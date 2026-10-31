@@ -15,6 +15,9 @@ namespace Zone47
         Canvas menuCanvas;
         Camera menuCam;
         Light sun;
+        public static Light Sun, Fill;
+        public static Volume ScopeBlur;
+        public static Bloom BloomFx;
         Volume volume;
 
         void Awake()
@@ -40,18 +43,18 @@ namespace Zone47
             var R = Z47Refs.I;
             var sg = new GameObject("Sun");
             DontDestroyOnLoad(sg);
-            sun = sg.AddComponent<Light>();
+            sun = sg.AddComponent<Light>(); Sun = sun;
             sun.type = LightType.Directional;
             sun.color = new Color(1f, 0.86f, 0.7f);
             sun.intensity = 1.55f;
-            sun.shadows = Settings.Mobile && Settings.Quality < 3 ? LightShadows.Hard : LightShadows.Soft;
+            sun.shadows = Settings.SunShadows;
             sun.shadowStrength = 0.85f;
             sg.transform.rotation = Quaternion.Euler(32f, -38f, 0f);
             RenderSettings.sun = sun;
 
             // sky bounce: soft cool fill from the opposite side so shaded walls are never black
             var fg = new GameObject("SkyFill"); DontDestroyOnLoad(fg);
-            var fill = fg.AddComponent<Light>();
+            var fill = fg.AddComponent<Light>(); Fill = fill;
             fill.type = LightType.Directional; fill.shadows = LightShadows.None;
             fill.color = new Color(0.7f, 0.76f, 0.9f); fill.intensity = 0.12f;
             fg.transform.rotation = Quaternion.Euler(35f, 142f, 0f);
@@ -72,7 +75,7 @@ namespace Zone47
             volume.isGlobal = true; volume.priority = 1;
             var prof = ScriptableObject.CreateInstance<VolumeProfile>();
             var tm = prof.Add<Tonemapping>(true); tm.mode.Override(TonemappingMode.ACES);
-            var bl = prof.Add<Bloom>(true); bl.intensity.Override(0.55f); bl.threshold.Override(1.05f); bl.scatter.Override(0.6f); bl.highQualityFiltering.Override(!Settings.Mobile);
+            var bl = prof.Add<Bloom>(true); BloomFx = bl; bl.active = Settings.Quality >= 1; bl.intensity.Override(0.55f); bl.threshold.Override(1.05f); bl.scatter.Override(0.6f); bl.highQualityFiltering.Override(Settings.Quality >= 2);
             var ca = prof.Add<ColorAdjustments>(true); ca.postExposure.Override(Settings.ExposureValue); ca.contrast.Override(14f); ca.saturation.Override(-8f);
             Exposure = ca;
             ca.colorFilter.Override(new Color(1f, 0.95f, 0.88f));
@@ -80,6 +83,19 @@ namespace Zone47
             var sm = prof.Add<ShadowsMidtonesHighlights>(true);
             sm.shadows.Override(new Vector4(0.95f, 1f, 1.08f, 0f));
             volume.sharedProfile = prof;
+
+            // scope blur: everything outside the scope lens goes soft while looking through it
+            var bg = new GameObject("ScopeBlur");
+            DontDestroyOnLoad(bg);
+            int bl2 = LayerMask.NameToLayer("Viewmodel"); if (bl2 >= 0) bg.layer = bl2;
+            ScopeBlur = bg.AddComponent<Volume>();
+            ScopeBlur.isGlobal = true; ScopeBlur.priority = 5; ScopeBlur.weight = 0f;
+            var bp = ScriptableObject.CreateInstance<VolumeProfile>();
+            var dof = bp.Add<DepthOfField>(true);
+            dof.mode.Override(DepthOfFieldMode.Gaussian);
+            dof.gaussianStart.Override(0f); dof.gaussianEnd.Override(2.5f);
+            dof.gaussianMaxRadius.Override(1.5f); dof.highQualitySampling.Override(false);
+            ScopeBlur.sharedProfile = bp;
         }
 
         public static ColorAdjustments Exposure;
@@ -184,11 +200,13 @@ namespace Zone47
             string[] nameKeys = { "mapname", "mapname2", "mapname3" }, infoKeys = { "mapinfo", "mapinfo2", "mapinfo3" };
             float cw = (560f - (ids.Count - 1) * 10f) / ids.Count, ih = cw * 9f / 16f;
             var frames = new System.Collections.Generic.List<(Image frame, Image shade, GameObject sel, int id)>();
+            System.Action refreshWx = null;
             var info = UIK.Txt(col, "minfo", "", 18, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -36 - ih - 62), new Vector2(0, 26), true);
             System.Action refreshMaps = () =>
             {
                 foreach (var f in frames) { bool on = f.id == Settings.Map; f.frame.color = on ? Pal.Accent : new Color(1, 1, 1, 0.12f); f.shade.color = new Color(0, 0, 0, on ? 0f : 0.35f); f.sel.SetActive(on); }
                 info.text = L.S(infoKeys[Settings.Map]);
+                refreshWx?.Invoke();
             };
             for (int k = 0; k < ids.Count; k++)
             {
@@ -210,9 +228,38 @@ namespace Zone47
                 frames.Add((frame, shade, selTag.gameObject, id));
                 frame.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); Settings.Map = id; PlayerPrefs.Save(); refreshMaps(); });
             }
+            // weather picker: random / noon / foggy morning / sandstorm (desert only)
+            float wy = -36 - ih - 100;
+            UIK.Txt(col, "wh", L.S("weather"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, wy), new Vector2(0, 30), true);
+            var chips = new System.Collections.Generic.List<(Image bg, Text t, int w)>();
+            float chw = (560f - 3 * 8f) / 4f;
+            for (int w = 0; w < 4; w++)
+            {
+                int wi = w;
+                var bg = UIK.Img(col, "wx" + w, new Color(1, 1, 1, 0.06f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(w * (chw + 8f), wy - 34), new Vector2(chw, 40), true);
+                bg.rectTransform.pivot = new Vector2(0, 1); bg.rectTransform.anchoredPosition = new Vector2(w * (chw + 8f), wy - 34);
+                var t = UIK.Txt(bg.transform, "t", L.S("wx" + w), 15, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                chips.Add((bg, t, w));
+                bg.gameObject.AddComponent<Button>().onClick.AddListener(() =>
+                {
+                    if (!Weather.Valid(wi, Settings.Map)) return;
+                    Sfx.UI(); Settings.Weather = wi; PlayerPrefs.Save(); refreshWx();
+                });
+            }
+            refreshWx = () =>
+            {
+                if (!Weather.Valid(Settings.Weather, Settings.Map)) { Settings.Weather = Weather.Random; PlayerPrefs.Save(); }
+                foreach (var c in chips)
+                {
+                    bool on = c.w == Settings.Weather, ok = Weather.Valid(c.w, Settings.Map);
+                    c.bg.color = on ? Pal.Accent : new Color(1, 1, 1, ok ? 0.08f : 0.03f);
+                    c.t.color = on ? new Color(0.08f, 0.06f, 0.03f) : ok ? Pal.Text : new Color(1, 1, 1, 0.25f);
+                }
+            };
             refreshMaps();
-            float sqY = -36 - ih - 100;
+            float sqY = -36 - ih - 190;
 
+            MatchManager.RollNames();
             UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, sqY), new Vector2(0, 30), true);
             for (int t = 0; t < 2; t++)
             {
@@ -258,6 +305,7 @@ namespace Zone47
             var cd = menuCam.GetUniversalAdditionalCameraData();
             cd.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing;   // menu only: best AA, the scan + character edges shimmer otherwise
             cd.antialiasingQuality = AntialiasingQuality.High;
+            Weather.ApplyLobby();
             RenderSettings.fog = false;
             // stormy sky dome (inside-out sphere) behind everything
             if (R.lobbySkyMat != null && pc != null)
@@ -362,6 +410,9 @@ namespace Zone47
         public void StartMatch()
         {
             Time.timeScale = 1f; AudioListener.pause = false;
+            MatchManager.EnsureNames();
+            Weather.PrepareMatch();
+            LoadingScreen.Show();
             if (menuRoot != null) Destroy(menuRoot);
             menuRoot = null;
             if (matchRoot != null) Destroy(matchRoot);
@@ -424,6 +475,7 @@ namespace Zone47
             "Sounds (freesound.org): mnslugger20, 18hiltc, evanboyerman, synth2, gfl7, fastson,\n" +
             "rammbostein, fusionwolf3740, nicktermer, ogsoundfx, qubodup, designerschoice (Nicholas Judy), jaklocke, ceberation,\n" +
             "dirtjm, silverillusionist, baggonotes, patrick_corra, speakwithanimals (rain)\n" +
+            "Footsteps: \"Footsteps - Essentials\" by Nox Sound (CC0)\n" +
             "Music: \"Viking/Medieval Theme\" by Mark_Murray (freesound.org)\n\n" +
             "Fonts: Black Ops One, Rajdhani — SIL Open Font License\n" +
             "Licenses: creativecommons.org/licenses/by/4.0";

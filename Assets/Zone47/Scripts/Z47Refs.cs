@@ -33,6 +33,9 @@ namespace Zone47
         public Vector3 hipOffset = new Vector3(0.13f, -0.14f, 0.26f);
     }
 
+    [Serializable]
+    public class StepSet { public string name; public AudioClip[] walk, run, land; }
+
     public class Z47Refs : ScriptableObject
     {
         [Header("Characters")]
@@ -67,6 +70,7 @@ namespace Zone47
         [Header("Audio")]
         public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt, breath, heartbeat, hurt, headshot, equip, bounce, rain;
         public AudioClip[] steps;
+        public StepSet[] stepSets;     // Sand, Rock, Metal, Wood, Tile, Gravel, Dirt (Nox Sound, CC0)
         public AudioClip ambience, menuMusic;
 
         static Z47Refs _i;

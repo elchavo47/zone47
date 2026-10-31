@@ -352,7 +352,6 @@ UNITY_EXPORT extern "C" void UnityCleanupTrampoline()
     if (url)
     {
         notifData[@"url"] = url;
-        [self initUnityApplicationNoGraphics];
         UnitySetAbsoluteURL(url.absoluteString.UTF8String);
     }
     if (sourceApplication) notifData[@"sourceApplication"] = sourceApplication;
@@ -366,10 +365,7 @@ UNITY_EXPORT extern "C" void UnityCleanupTrampoline()
 {
     NSURL* url = userActivity.webpageURL;
     if (url)
-    {
-        [self initUnityApplicationNoGraphics];
         UnitySetAbsoluteURL(url.absoluteString.UTF8String);
-    }
     return YES;
 }
 

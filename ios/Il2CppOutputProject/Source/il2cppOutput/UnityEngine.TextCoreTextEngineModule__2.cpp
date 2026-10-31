@@ -3061,7 +3061,7 @@ struct FontAssetFactory_t920758F97E5325388D9D20FAA912323178304453_StaticFields
 {
 	HashSet_1_t0F9E80D21AAFF616DA484C2C7FEDA3D204D290D4* ___visitedFontAssets;
 };
-struct FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields
+struct FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields
 {
 	HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* ___k_SearchedAssets;
 };
@@ -5482,7 +5482,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 	bool V_1 = false;
 	Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* V_2 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:31>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:30>
 		bool L_0 = ___2_includeFallbacks;
 		V_0 = L_0;
 		bool L_1 = V_0;
@@ -5492,8 +5492,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:33>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_2 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:32>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_2 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		V_1 = (bool)((((RuntimeObject*)(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)L_2) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_3 = V_1;
 		if (!L_3)
@@ -5502,18 +5502,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:34>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:33>
 		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_4 = (HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)il2cpp_codegen_object_new(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2_il2cpp_TypeInfo_var);
 		HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF(L_4, HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF_RuntimeMethod_var);
-		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_4;
-		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_4);
+		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_4;
+		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_4);
 		goto IL_002a;
 	}
 
 IL_001f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:36>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_5 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:35>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_5 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		NullCheck(L_5);
 		HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92(L_5, HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92_RuntimeMethod_var);
 	}
@@ -5524,7 +5524,7 @@ IL_002a:
 
 IL_002b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:39>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:38>
 		uint32_t L_6 = ___0_unicode;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_7 = ___1_sourceFontAsset;
 		bool L_8 = ___2_includeFallbacks;
@@ -5540,7 +5540,7 @@ IL_002b:
 
 IL_003d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:40>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:39>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_14 = V_2;
 		return L_14;
 	}
@@ -5619,19 +5619,19 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 	int32_t G_B85_0 = 0;
 	int32_t G_B90_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:48>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:47>
 		bool L_0;
 		L_0 = TextGenerator_get_IsExecutingJob_m2570EC49336A66E65C8429B8516F8E79578A955C_inline(NULL);
 		V_0 = (bool)((((int32_t)L_0) == ((int32_t)0))? 1 : 0);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:49>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:48>
 		bool* L_1 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_1) = (int8_t)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:50>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:49>
 		V_1 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:54>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:53>
 		int32_t L_2 = ___3_fontStyle;
 		V_2 = (bool)((((int32_t)((int32_t)((int32_t)L_2&2))) == ((int32_t)2))? 1 : 0);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:56>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:55>
 		bool L_3 = V_2;
 		if (L_3)
 		{
@@ -5659,7 +5659,7 @@ IL_0029:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:58>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:57>
 		bool L_6 = V_0;
 		if (L_6)
 		{
@@ -5689,14 +5689,14 @@ IL_0040:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:59>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:58>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_004e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:61>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:60>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_10 = ___1_sourceFontAsset;
 		uint32_t L_11 = ___0_unicode;
 		int32_t L_12 = ___3_fontStyle;
@@ -5712,7 +5712,7 @@ IL_004e:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:63>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:62>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_16 = V_1;
 		NullCheck(L_16);
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_17;
@@ -5728,7 +5728,7 @@ IL_004e:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:64>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:63>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_20 = V_1;
 		V_8 = L_20;
 		goto IL_0430;
@@ -5736,7 +5736,7 @@ IL_004e:
 
 IL_007b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:66>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:65>
 		bool L_21 = V_0;
 		V_11 = (bool)((((int32_t)L_21) == ((int32_t)0))? 1 : 0);
 		bool L_22 = V_11;
@@ -5746,14 +5746,14 @@ IL_007b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:67>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:66>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_008d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:69>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:68>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_23 = ___1_sourceFontAsset;
 		uint32_t L_24 = ___0_unicode;
 		int32_t L_25 = ___3_fontStyle;
@@ -5764,18 +5764,18 @@ IL_008d:
 
 IL_0099:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:73>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:72>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_27 = ___1_sourceFontAsset;
 		NullCheck(L_27);
 		FontWeightPairU5BU5D_t76E8DB55C81EEBEFA2E6D1D3E3B3EA1FB4C4954F* L_28;
 		L_28 = FontAsset_get_fontWeightTable_m8DADE0BCE53D53EEECE27025F7E94FDD4BF00099(L_27, NULL);
 		V_4 = L_28;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:75>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:74>
 		int32_t L_29 = ___4_fontWeight;
 		int32_t L_30;
 		L_30 = TextUtilities_GetTextFontWeightIndex_m758569A41B59CA4E6A6EE3E73299B41C25FC4E67(L_29, NULL);
 		V_5 = L_30;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:77>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:76>
 		bool L_31 = V_2;
 		if (L_31)
 		{
@@ -5803,7 +5803,7 @@ IL_00bd:
 IL_00cb:
 	{
 		V_6 = G_B18_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:79>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:78>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_38 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_39;
@@ -5816,7 +5816,7 @@ IL_00cb:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:81>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:80>
 		bool L_41 = V_0;
 		if (L_41)
 		{
@@ -5846,14 +5846,14 @@ IL_00ef:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:82>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:81>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_00fd:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:84>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:83>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_45 = V_6;
 		uint32_t L_46 = ___0_unicode;
 		int32_t L_47 = ___3_fontStyle;
@@ -5869,7 +5869,7 @@ IL_00fd:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:86>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:85>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_51 = V_1;
 		NullCheck(L_51);
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_52;
@@ -5885,10 +5885,10 @@ IL_00fd:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:88>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:87>
 		bool* L_55 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_55) = (int8_t)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:89>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:88>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_56 = V_1;
 		V_8 = L_56;
 		goto IL_0430;
@@ -5896,7 +5896,7 @@ IL_00fd:
 
 IL_0130:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:92>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:91>
 		bool L_57 = V_0;
 		V_16 = (bool)((((int32_t)L_57) == ((int32_t)0))? 1 : 0);
 		bool L_58 = V_16;
@@ -5906,14 +5906,14 @@ IL_0130:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:93>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:92>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_0142:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:96>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:95>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_59 = V_6;
 		uint32_t L_60 = ___0_unicode;
 		int32_t L_61 = ___3_fontStyle;
@@ -5924,7 +5924,7 @@ IL_0142:
 
 IL_014f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:99>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:98>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_63 = V_6;
 		NullCheck(L_63);
 		int32_t L_64;
@@ -5958,7 +5958,7 @@ IL_0166:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:101>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:100>
 		bool L_68 = V_0;
 		V_18 = (bool)((((int32_t)L_68) == ((int32_t)0))? 1 : 0);
 		bool L_69 = V_18;
@@ -5968,7 +5968,7 @@ IL_0166:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:103>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:102>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_70 = V_6;
 		NullCheck(L_70);
 		HashSet_1_t5DD20B42149A11AEBF12A75505306E6EFC34943A* L_71 = L_70->___m_MissingUnicodesFromFontFile;
@@ -5984,7 +5984,7 @@ IL_0166:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:104>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:103>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
@@ -5996,7 +5996,7 @@ IL_0196:
 
 IL_0199:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:108>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:107>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_75 = V_6;
 		uint32_t L_76 = ___0_unicode;
 		int32_t L_77 = ___3_fontStyle;
@@ -6013,10 +6013,10 @@ IL_0199:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:110>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:109>
 		bool* L_82 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_82) = (int8_t)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:111>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:110>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_83 = V_1;
 		V_8 = L_83;
 		goto IL_0430;
@@ -6029,7 +6029,7 @@ IL_01bb:
 
 IL_01be:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:129>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:128>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_84 = V_6;
 		uint32_t L_85 = ___0_unicode;
 		NullCheck(L_84);
@@ -6043,7 +6043,7 @@ IL_01be:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:131>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:130>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_88 = V_1;
 		NullCheck(L_88);
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_89;
@@ -6059,10 +6059,10 @@ IL_01be:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:133>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:132>
 		bool* L_92 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_92) = (int8_t)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:134>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:133>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_93 = V_1;
 		V_8 = L_93;
 		goto IL_0430;
@@ -6070,7 +6070,7 @@ IL_01be:
 
 IL_01f4:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:137>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:136>
 		bool L_94 = V_0;
 		V_23 = (bool)((((int32_t)L_94) == ((int32_t)0))? 1 : 0);
 		bool L_95 = V_23;
@@ -6080,14 +6080,14 @@ IL_01f4:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:138>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:137>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_0206:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:140>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:139>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_96 = V_6;
 		uint32_t L_97 = ___0_unicode;
 		int32_t L_98 = ___3_fontStyle;
@@ -6098,7 +6098,7 @@ IL_0206:
 
 IL_0213:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:144>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:143>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_100 = V_6;
 		NullCheck(L_100);
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_101;
@@ -6135,14 +6135,14 @@ IL_022e:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:146>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:145>
 		V_25 = 0;
 		goto IL_028a;
 	}
 
 IL_023a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:148>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:147>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_106 = V_6;
 		NullCheck(L_106);
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_107;
@@ -6152,7 +6152,7 @@ IL_023a:
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_109;
 		L_109 = List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C(L_107, L_108, List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C_RuntimeMethod_var);
 		V_26 = L_109;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:149>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:148>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_110 = V_26;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_111;
@@ -6165,13 +6165,13 @@ IL_023a:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:150>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:149>
 		goto IL_0284;
 	}
 
 IL_025b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:152>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:151>
 		uint32_t L_113 = ___0_unicode;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_114 = V_26;
 		int32_t L_115 = ___3_fontStyle;
@@ -6181,7 +6181,7 @@ IL_025b:
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_119;
 		L_119 = FontAssetUtilities_GetCharacterFromFontAsset_Internal_mF5271CACE66EF55DB6D72E37102051F14202D90A(L_113, L_114, (bool)0, L_115, L_116, L_117, L_118, NULL);
 		V_1 = L_119;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:153>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:152>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_120 = V_1;
 		V_28 = (bool)((!(((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_120) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_121 = V_28;
@@ -6191,10 +6191,10 @@ IL_025b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:155>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:154>
 		bool* L_122 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_122) = (int8_t)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:156>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:155>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_123 = V_1;
 		V_8 = L_123;
 		goto IL_0430;
@@ -6206,14 +6206,14 @@ IL_0283:
 
 IL_0284:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:146>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:145>
 		int32_t L_124 = V_25;
 		V_25 = ((int32_t)il2cpp_codegen_add(L_124, 1));
 	}
 
 IL_028a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:146>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:145>
 		int32_t L_125 = V_25;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_126 = V_6;
 		NullCheck(L_126);
@@ -6242,7 +6242,7 @@ IL_02a2:
 
 IL_02a3:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:167>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:166>
 		bool L_130 = V_0;
 		if (L_130)
 		{
@@ -6272,14 +6272,14 @@ IL_02b2:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:168>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:167>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_02c0:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:171>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:170>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_134 = ___1_sourceFontAsset;
 		uint32_t L_135 = ___0_unicode;
 		NullCheck(L_134);
@@ -6293,7 +6293,7 @@ IL_02c0:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:173>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:172>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_138 = V_1;
 		NullCheck(L_138);
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_139;
@@ -6309,7 +6309,7 @@ IL_02c0:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:174>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:173>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_142 = V_1;
 		V_8 = L_142;
 		goto IL_0430;
@@ -6317,7 +6317,7 @@ IL_02c0:
 
 IL_02f0:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:176>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:175>
 		bool L_143 = V_0;
 		V_33 = (bool)((((int32_t)L_143) == ((int32_t)0))? 1 : 0);
 		bool L_144 = V_33;
@@ -6327,14 +6327,14 @@ IL_02f0:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:177>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:176>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_0302:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:179>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:178>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_145 = ___1_sourceFontAsset;
 		uint32_t L_146 = ___0_unicode;
 		NullCheck(L_145);
@@ -6343,7 +6343,7 @@ IL_0302:
 
 IL_0311:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:182>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:181>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_147 = ___1_sourceFontAsset;
 		NullCheck(L_147);
 		int32_t L_148;
@@ -6377,7 +6377,7 @@ IL_0326:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:184>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:183>
 		bool L_152 = V_0;
 		V_35 = (bool)((((int32_t)L_152) == ((int32_t)0))? 1 : 0);
 		bool L_153 = V_35;
@@ -6387,14 +6387,14 @@ IL_0326:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:185>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:184>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_033f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:187>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:186>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_154 = ___1_sourceFontAsset;
 		uint32_t L_155 = ___0_unicode;
 		bool L_156 = ___6_populateLigatures;
@@ -6409,7 +6409,7 @@ IL_033f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:188>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:187>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_159 = V_1;
 		V_8 = L_159;
 		goto IL_0430;
@@ -6421,7 +6421,7 @@ IL_035e:
 
 IL_035f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:191>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:190>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_160 = V_1;
 		if (L_160)
 		{
@@ -6449,14 +6449,14 @@ IL_0369:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:192>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:191>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_0377:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:195>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:194>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_163 = V_1;
 		bool L_164 = ___2_includeFallbacks;
 		if (!((int32_t)(((((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_163) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0)&(int32_t)L_164)))
@@ -6488,19 +6488,19 @@ IL_038b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:198>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:197>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_168 = ___1_sourceFontAsset;
 		NullCheck(L_168);
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_169;
 		L_169 = FontAsset_get_fallbackFontAssetTable_m43303BFBE8A8C55D8CE8A67C47EFAFF5A712CB69(L_168, NULL);
 		V_39 = L_169;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:199>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:198>
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_170 = V_39;
 		NullCheck(L_170);
 		int32_t L_171;
 		L_171 = List_1_get_Count_m654F4B0CF3BAA9A130BC72017949E6B5DA07AD86_inline(L_170, List_1_get_Count_m654F4B0CF3BAA9A130BC72017949E6B5DA07AD86_RuntimeMethod_var);
 		V_40 = L_171;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:201>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:200>
 		int32_t L_172 = V_40;
 		V_41 = (bool)((((int32_t)L_172) == ((int32_t)0))? 1 : 0);
 		bool L_173 = V_41;
@@ -6510,28 +6510,28 @@ IL_038b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:202>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:201>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_03b6:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:204>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:203>
 		V_42 = 0;
 		goto IL_041e;
 	}
 
 IL_03bb:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:206>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:205>
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_174 = V_39;
 		int32_t L_175 = V_42;
 		NullCheck(L_174);
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_176;
 		L_176 = List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C(L_174, L_175, List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C_RuntimeMethod_var);
 		V_43 = L_176;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:208>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:207>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_177 = V_43;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_178;
@@ -6544,20 +6544,20 @@ IL_03bb:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:209>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:208>
 		goto IL_0418;
 	}
 
 IL_03d7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:211>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:210>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_180 = V_43;
 		NullCheck(L_180);
 		int32_t L_181;
 		L_181 = VirtualFuncInvoker0< int32_t >::Invoke(2, L_180);
 		V_44 = L_181;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:214>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_182 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:213>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_182 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		int32_t L_183 = V_44;
 		NullCheck(L_182);
 		bool L_184;
@@ -6570,13 +6570,13 @@ IL_03d7:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:215>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:214>
 		goto IL_0418;
 	}
 
 IL_03f7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:220>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:219>
 		uint32_t L_186 = ___0_unicode;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_187 = V_43;
 		int32_t L_188 = ___3_fontStyle;
@@ -6586,7 +6586,7 @@ IL_03f7:
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_192;
 		L_192 = FontAssetUtilities_GetCharacterFromFontAsset_Internal_mF5271CACE66EF55DB6D72E37102051F14202D90A(L_186, L_187, (bool)1, L_188, L_189, L_190, L_191, NULL);
 		V_1 = L_192;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:222>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:221>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_193 = V_1;
 		V_47 = (bool)((!(((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_193) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_194 = V_47;
@@ -6596,7 +6596,7 @@ IL_03f7:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:223>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:222>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_195 = V_1;
 		V_8 = L_195;
 		goto IL_0430;
@@ -6608,14 +6608,14 @@ IL_0417:
 
 IL_0418:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:204>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:203>
 		int32_t L_196 = V_42;
 		V_42 = ((int32_t)il2cpp_codegen_add(L_196, 1));
 	}
 
 IL_041e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:204>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:203>
 		int32_t L_197 = V_42;
 		int32_t L_198 = V_40;
 		V_48 = (bool)((((int32_t)L_197) < ((int32_t)L_198))? 1 : 0);
@@ -6630,14 +6630,14 @@ IL_041e:
 
 IL_042b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:227>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:226>
 		V_8 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_0430;
 	}
 
 IL_0430:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:228>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:227>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_200 = V_8;
 		return L_200;
 	}
@@ -6660,10 +6660,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 	bool V_3 = false;
 	Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* V_4 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:251>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:250>
 		bool* L_0 = ___7_isAlternativeTypeface;
 		*((int8_t*)L_0) = (int8_t)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:253>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:252>
 		bool L_1 = ___4_includeFallbacks;
 		V_1 = L_1;
 		bool L_2 = V_1;
@@ -6673,8 +6673,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:255>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_3 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:254>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_3 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		V_2 = (bool)((((RuntimeObject*)(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)L_3) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_4 = V_2;
 		if (!L_4)
@@ -6683,18 +6683,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:256>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:255>
 		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_5 = (HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)il2cpp_codegen_object_new(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2_il2cpp_TypeInfo_var);
 		HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF(L_5, HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF_RuntimeMethod_var);
-		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_5;
-		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_5);
+		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_5;
+		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_5);
 		goto IL_002f;
 	}
 
 IL_0024:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:258>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_6 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:257>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_6 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		NullCheck(L_6);
 		HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92(L_6, HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92_RuntimeMethod_var);
 	}
@@ -6705,7 +6705,7 @@ IL_002f:
 
 IL_0030:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:261>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:260>
 		uint32_t L_7 = ___0_unicode;
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_8 = ___2_fontAssets;
 		bool L_9 = ___4_includeFallbacks;
@@ -6716,7 +6716,7 @@ IL_0030:
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_14;
 		L_14 = FontAssetUtilities_GetCharacterFromFontAssetsInternal_m3291A1DDB038692BCA5EDE6548043943E0EE1BD2(L_7, L_8, L_9, L_10, L_11, L_12, L_13, NULL);
 		V_0 = L_14;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:262>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:261>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_15 = V_0;
 		V_3 = (bool)((!(((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_15) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_16 = V_3;
@@ -6726,7 +6726,7 @@ IL_0030:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:263>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:262>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_17 = V_0;
 		V_4 = L_17;
 		goto IL_0064;
@@ -6734,7 +6734,7 @@ IL_0030:
 
 IL_004f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:265>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:264>
 		uint32_t L_18 = ___0_unicode;
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_19 = ___3_OSFallbackList;
 		bool L_20 = ___4_includeFallbacks;
@@ -6750,7 +6750,7 @@ IL_004f:
 
 IL_0064:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:266>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:265>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_26 = V_4;
 		return L_26;
 	}
@@ -6783,10 +6783,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Character_t9B671B493FAC8D43638C69AF6AE92CBD10
 	bool V_10 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:270>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:269>
 		bool* L_0 = ___5_isAlternativeTypeface;
 		*((int8_t*)L_0) = (int8_t)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:273>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:272>
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_1 = ___1_fontAssets;
 		if (!L_1)
 		{
@@ -6817,14 +6817,14 @@ IL_0014:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:274>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:273>
 		V_2 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_00aa;
 	}
 
 IL_001f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:276>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:275>
 		bool L_5 = ___2_includeFallbacks;
 		V_3 = L_5;
 		bool L_6 = V_3;
@@ -6834,8 +6834,8 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:278>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_7 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:277>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_7 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		V_4 = (bool)((((RuntimeObject*)(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)L_7) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_8 = V_4;
 		if (!L_8)
@@ -6844,18 +6844,18 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:279>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:278>
 		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_9 = (HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)il2cpp_codegen_object_new(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2_il2cpp_TypeInfo_var);
 		HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF(L_9, HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF_RuntimeMethod_var);
-		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_9;
-		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_9);
+		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_9;
+		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_9);
 		goto IL_004a;
 	}
 
 IL_003f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:281>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_10 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:280>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_10 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		NullCheck(L_10);
 		HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92(L_10, HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92_RuntimeMethod_var);
 	}
@@ -6866,27 +6866,27 @@ IL_004a:
 
 IL_004b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:284>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:283>
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_11 = ___1_fontAssets;
 		NullCheck(L_11);
 		int32_t L_12;
 		L_12 = List_1_get_Count_m654F4B0CF3BAA9A130BC72017949E6B5DA07AD86_inline(L_11, List_1_get_Count_m654F4B0CF3BAA9A130BC72017949E6B5DA07AD86_RuntimeMethod_var);
 		V_0 = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:286>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:285>
 		V_5 = 0;
 		goto IL_009b;
 	}
 
 IL_0057:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:288>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:287>
 		List_1_t55B85B981AC5FD6A5358491F90FE354F78BB97DE* L_13 = ___1_fontAssets;
 		int32_t L_14 = V_5;
 		NullCheck(L_13);
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_15;
 		L_15 = List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C(L_13, L_14, List_1_get_Item_m8EB1E335E30D31074BE270B7A29B78B121618E5C_RuntimeMethod_var);
 		V_6 = L_15;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:290>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:289>
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_16 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_17;
@@ -6899,13 +6899,13 @@ IL_0057:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:290>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:289>
 		goto IL_0095;
 	}
 
 IL_0072:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:295>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:294>
 		uint32_t L_19 = ___0_unicode;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_20 = V_6;
 		bool L_21 = ___2_includeFallbacks;
@@ -6916,7 +6916,7 @@ IL_0072:
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_26;
 		L_26 = FontAssetUtilities_GetCharacterFromFontAsset_Internal_mF5271CACE66EF55DB6D72E37102051F14202D90A(L_19, L_20, L_21, L_22, L_23, L_24, L_25, NULL);
 		V_7 = L_26;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:297>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:296>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_27 = V_7;
 		V_9 = (bool)((!(((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_27) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_28 = V_9;
@@ -6926,7 +6926,7 @@ IL_0072:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:298>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:297>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_29 = V_7;
 		V_2 = L_29;
 		goto IL_00aa;
@@ -6938,14 +6938,14 @@ IL_0094:
 
 IL_0095:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:286>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:285>
 		int32_t L_30 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_30, 1));
 	}
 
 IL_009b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:286>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:285>
 		int32_t L_31 = V_5;
 		int32_t L_32 = V_0;
 		V_10 = (bool)((((int32_t)L_31) < ((int32_t)L_32))? 1 : 0);
@@ -6956,14 +6956,14 @@ IL_009b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:301>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:300>
 		V_2 = (Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)NULL;
 		goto IL_00aa;
 	}
 
 IL_00aa:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:302>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:301>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_34 = V_2;
 		return L_34;
 	}
@@ -7004,10 +7004,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR TextElement_tCEF567A8810788262275B39DC39CBA6E
 	bool V_15 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:307>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:306>
 		bool* L_0 = ___6_isAlternativeTypeface;
 		*((int8_t*)L_0) = (int8_t)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:310>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:309>
 		List_1_tC211A4629C1B0DE52E7CE5E2D5E37E9D3A6194EB* L_1 = ___2_textAssets;
 		if (!L_1)
 		{
@@ -7038,14 +7038,14 @@ IL_0014:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:311>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:310>
 		V_2 = (TextElement_tCEF567A8810788262275B39DC39CBA6EBE7472DA*)NULL;
 		goto IL_0100;
 	}
 
 IL_001f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:313>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:312>
 		bool L_5 = ___3_includeFallbacks;
 		V_3 = L_5;
 		bool L_6 = V_3;
@@ -7055,8 +7055,8 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:315>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_7 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:314>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_7 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		V_4 = (bool)((((RuntimeObject*)(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)L_7) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_8 = V_4;
 		if (!L_8)
@@ -7065,18 +7065,18 @@ IL_001f:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:316>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:315>
 		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_9 = (HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)il2cpp_codegen_object_new(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2_il2cpp_TypeInfo_var);
 		HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF(L_9, HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF_RuntimeMethod_var);
-		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_9;
-		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_9);
+		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_9;
+		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_9);
 		goto IL_004a;
 	}
 
 IL_003f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:318>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_10 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:317>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_10 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		NullCheck(L_10);
 		HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92(L_10, HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92_RuntimeMethod_var);
 	}
@@ -7087,27 +7087,27 @@ IL_004a:
 
 IL_004b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:321>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:320>
 		List_1_tC211A4629C1B0DE52E7CE5E2D5E37E9D3A6194EB* L_11 = ___2_textAssets;
 		NullCheck(L_11);
 		int32_t L_12;
 		L_12 = List_1_get_Count_m41FAF4BAC9128841553F2CE1BA0CD7236D3000E5_inline(L_11, List_1_get_Count_m41FAF4BAC9128841553F2CE1BA0CD7236D3000E5_RuntimeMethod_var);
 		V_0 = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:323>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:322>
 		V_5 = 0;
 		goto IL_00ee;
 	}
 
 IL_005a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:325>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:324>
 		List_1_tC211A4629C1B0DE52E7CE5E2D5E37E9D3A6194EB* L_13 = ___2_textAssets;
 		int32_t L_14 = V_5;
 		NullCheck(L_13);
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_15;
 		L_15 = List_1_get_Item_m4C6EEE41ABC598BC14D2ECF1D6B74F4445D9FD05(L_13, L_14, List_1_get_Item_m4C6EEE41ABC598BC14D2ECF1D6B74F4445D9FD05_RuntimeMethod_var);
 		V_6 = L_15;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:327>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:326>
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_16 = V_6;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_17;
@@ -7120,13 +7120,13 @@ IL_005a:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:327>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:326>
 		goto IL_00e8;
 	}
 
 IL_0075:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:329>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:328>
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_19 = V_6;
 		NullCheck(L_19);
 		Type_t* L_20;
@@ -7145,10 +7145,10 @@ IL_0075:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:331>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:330>
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_25 = V_6;
 		V_9 = ((FontAsset_t61A6446D934E582651044E33D250EA8D306AB958*)IsInstClass((RuntimeObject*)L_25, FontAsset_t61A6446D934E582651044E33D250EA8D306AB958_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:332>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:331>
 		uint32_t L_26 = ___0_unicode;
 		FontAsset_t61A6446D934E582651044E33D250EA8D306AB958* L_27 = V_9;
 		bool L_28 = ___3_includeFallbacks;
@@ -7159,7 +7159,7 @@ IL_0075:
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_33;
 		L_33 = FontAssetUtilities_GetCharacterFromFontAsset_Internal_mF5271CACE66EF55DB6D72E37102051F14202D90A(L_26, L_27, L_28, L_29, L_30, L_31, L_32, NULL);
 		V_10 = L_33;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:334>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:333>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_34 = V_10;
 		V_11 = (bool)((!(((RuntimeObject*)(Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC*)L_34) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_35 = V_11;
@@ -7169,7 +7169,7 @@ IL_0075:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:335>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:334>
 		Character_t9B671B493FAC8D43638C69AF6AE92CBD103D80EC* L_36 = V_10;
 		V_2 = L_36;
 		goto IL_0100;
@@ -7182,16 +7182,16 @@ IL_00be:
 
 IL_00c1:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:339>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:338>
 		TextAsset_tB28F1843A877CCA74B89DC4F63EA532618B049B8* L_37 = V_6;
 		V_12 = ((SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313*)IsInstClass((RuntimeObject*)L_37, SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:340>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:339>
 		uint32_t L_38 = ___0_unicode;
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_39 = V_12;
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_40;
 		L_40 = FontAssetUtilities_GetSpriteCharacterFromSpriteAsset_Internal_m5A04BE23599904FF0B23061BC9F7EDBF6AC7DB88(L_38, L_39, (bool)1, NULL);
 		V_13 = L_40;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:342>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:341>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_41 = V_13;
 		V_14 = (bool)((!(((RuntimeObject*)(SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)L_41) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_42 = V_14;
@@ -7201,7 +7201,7 @@ IL_00c1:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:343>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:342>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_43 = V_13;
 		V_2 = L_43;
 		goto IL_0100;
@@ -7217,14 +7217,14 @@ IL_00e7:
 
 IL_00e8:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:323>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:322>
 		int32_t L_44 = V_5;
 		V_5 = ((int32_t)il2cpp_codegen_add(L_44, 1));
 	}
 
 IL_00ee:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:323>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:322>
 		int32_t L_45 = V_5;
 		int32_t L_46 = V_0;
 		V_15 = (bool)((((int32_t)L_45) < ((int32_t)L_46))? 1 : 0);
@@ -7235,14 +7235,14 @@ IL_00ee:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:347>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:346>
 		V_2 = (TextElement_tCEF567A8810788262275B39DC39CBA6EBE7472DA*)NULL;
 		goto IL_0100;
 	}
 
 IL_0100:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:348>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:347>
 		TextElement_tCEF567A8810788262275B39DC39CBA6EBE7472DA* L_48 = V_2;
 		return L_48;
 	}
@@ -7283,11 +7283,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752
 	bool V_16 = false;
 	int32_t G_B11_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:364>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:363>
 		bool L_0;
 		L_0 = TextGenerator_get_IsExecutingJob_m2570EC49336A66E65C8429B8516F8E79578A955C_inline(NULL);
 		V_0 = (bool)((((int32_t)L_0) == ((int32_t)0))? 1 : 0);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:366>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:365>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_1 = ___1_spriteAsset;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_2;
@@ -7300,14 +7300,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:367>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:366>
 		V_3 = (SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)NULL;
 		goto IL_0113;
 	}
 
 IL_001c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:372>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:371>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_4 = ___1_spriteAsset;
 		NullCheck(L_4);
 		Dictionary_2_tD4154357CA320908C5A7A35ED81FA2A9856C28D9* L_5;
@@ -7324,7 +7324,7 @@ IL_001c:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:373>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:372>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_9 = V_1;
 		V_3 = L_9;
 		goto IL_0113;
@@ -7332,7 +7332,7 @@ IL_001c:
 
 IL_0037:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:375>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:374>
 		bool L_10 = ___2_includeFallbacks;
 		V_5 = L_10;
 		bool L_11 = V_5;
@@ -7342,8 +7342,8 @@ IL_0037:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:378>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_12 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:377>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_12 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		V_7 = (bool)((((RuntimeObject*)(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)L_12) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 		bool L_13 = V_7;
 		if (!L_13)
@@ -7352,26 +7352,26 @@ IL_0037:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:379>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:378>
 		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_14 = (HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2*)il2cpp_codegen_object_new(HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2_il2cpp_TypeInfo_var);
 		HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF(L_14, HashSet_1__ctor_m90EA29D74B137C5317CDC485AA1D799F0B6726FF_RuntimeMethod_var);
-		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_14;
-		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_14);
+		((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets = L_14;
+		Il2CppCodeGenWriteBarrier((void**)(&((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets), (void*)L_14);
 		goto IL_0067;
 	}
 
 IL_005c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:381>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_15 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:380>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_15 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		NullCheck(L_15);
 		HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92(L_15, HashSet_1_Clear_m88C3BA6617F6667126635140414D44D76C42AE92_RuntimeMethod_var);
 	}
 
 IL_0067:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:384>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_16 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:383>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_16 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_17 = ___1_spriteAsset;
 		NullCheck(L_17);
 		int32_t L_18;
@@ -7379,12 +7379,12 @@ IL_0067:
 		NullCheck(L_16);
 		bool L_19;
 		L_19 = HashSet_1_Add_m9B0DD9902395EE95D3DC522264BE1EBBBD3513EB(L_16, L_18, HashSet_1_Add_m9B0DD9902395EE95D3DC522264BE1EBBBD3513EB_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:386>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:385>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_20 = ___1_spriteAsset;
 		NullCheck(L_20);
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_21 = L_20->___fallbackSpriteAssets;
 		V_6 = L_21;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:388>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:387>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_22 = V_6;
 		if (!L_22)
 		{
@@ -7415,27 +7415,27 @@ IL_0091:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:390>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:389>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_26 = V_6;
 		NullCheck(L_26);
 		int32_t L_27;
 		L_27 = List_1_get_Count_mF16D1455EF6FE696F6B244E0634400D4012232B6_inline(L_26, List_1_get_Count_mF16D1455EF6FE696F6B244E0634400D4012232B6_RuntimeMethod_var);
 		V_9 = L_27;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:392>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:391>
 		V_10 = 0;
 		goto IL_0101;
 	}
 
 IL_00a6:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:394>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:393>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_28 = V_6;
 		int32_t L_29 = V_10;
 		NullCheck(L_28);
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_30;
 		L_30 = List_1_get_Item_m7E010994D3CD892C59BD6AB707D14AF6EE307184(L_28, L_29, List_1_get_Item_m7E010994D3CD892C59BD6AB707D14AF6EE307184_RuntimeMethod_var);
 		V_11 = L_30;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:396>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:395>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_31 = V_11;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_32;
@@ -7448,20 +7448,20 @@ IL_00a6:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:397>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:396>
 		goto IL_00fb;
 	}
 
 IL_00c2:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:399>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:398>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_34 = V_11;
 		NullCheck(L_34);
 		int32_t L_35;
 		L_35 = VirtualFuncInvoker0< int32_t >::Invoke(2, L_34);
 		V_12 = L_35;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:402>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_36 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:401>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_36 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		int32_t L_37 = V_12;
 		NullCheck(L_36);
 		bool L_38;
@@ -7474,19 +7474,19 @@ IL_00c2:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:403>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:402>
 		goto IL_00fb;
 	}
 
 IL_00e2:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:405>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:404>
 		uint32_t L_40 = ___0_unicode;
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_41 = V_11;
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_42;
 		L_42 = FontAssetUtilities_GetSpriteCharacterFromSpriteAsset_Internal_m5A04BE23599904FF0B23061BC9F7EDBF6AC7DB88(L_40, L_41, (bool)1, NULL);
 		V_1 = L_42;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:407>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:406>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_43 = V_1;
 		V_15 = (bool)((!(((RuntimeObject*)(SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)L_43) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_44 = V_15;
@@ -7496,7 +7496,7 @@ IL_00e2:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:408>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:407>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_45 = V_1;
 		V_3 = L_45;
 		goto IL_0113;
@@ -7508,14 +7508,14 @@ IL_00fa:
 
 IL_00fb:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:392>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:391>
 		int32_t L_46 = V_10;
 		V_10 = ((int32_t)il2cpp_codegen_add(L_46, 1));
 	}
 
 IL_0101:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:392>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:391>
 		int32_t L_47 = V_10;
 		int32_t L_48 = V_9;
 		V_16 = (bool)((((int32_t)L_47) < ((int32_t)L_48))? 1 : 0);
@@ -7534,14 +7534,14 @@ IL_010e:
 
 IL_010f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:413>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:412>
 		V_3 = (SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)NULL;
 		goto IL_0113;
 	}
 
 IL_0113:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:414>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:413>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_50 = V_3;
 		return L_50;
 	}
@@ -7576,7 +7576,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752
 	bool V_13 = false;
 	int32_t G_B6_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:428>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:427>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_0 = ___1_spriteAsset;
 		NullCheck(L_0);
 		Dictionary_2_tD4154357CA320908C5A7A35ED81FA2A9856C28D9* L_1;
@@ -7593,7 +7593,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:429>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:428>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_5 = V_0;
 		V_2 = L_5;
 		goto IL_00be;
@@ -7601,7 +7601,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752
 
 IL_001a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:431>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:430>
 		bool L_6 = ___2_includeFallbacks;
 		V_3 = L_6;
 		bool L_7 = V_3;
@@ -7611,12 +7611,12 @@ IL_001a:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:433>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:432>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_8 = ___1_spriteAsset;
 		NullCheck(L_8);
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_9 = L_8->___fallbackSpriteAssets;
 		V_4 = L_9;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:435>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:434>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_10 = V_4;
 		if (!L_10)
 		{
@@ -7647,27 +7647,27 @@ IL_003c:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:437>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:436>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_14 = V_4;
 		NullCheck(L_14);
 		int32_t L_15;
 		L_15 = List_1_get_Count_mF16D1455EF6FE696F6B244E0634400D4012232B6_inline(L_14, List_1_get_Count_mF16D1455EF6FE696F6B244E0634400D4012232B6_RuntimeMethod_var);
 		V_6 = L_15;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:439>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:438>
 		V_7 = 0;
 		goto IL_00ac;
 	}
 
 IL_0051:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:441>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:440>
 		List_1_t3EE59C28A34FCD5060EF6B6BAFA85F2C9D01D320* L_16 = V_4;
 		int32_t L_17 = V_7;
 		NullCheck(L_16);
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_18;
 		L_18 = List_1_get_Item_m7E010994D3CD892C59BD6AB707D14AF6EE307184(L_16, L_17, List_1_get_Item_m7E010994D3CD892C59BD6AB707D14AF6EE307184_RuntimeMethod_var);
 		V_8 = L_18;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:443>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:442>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_19 = V_8;
 		il2cpp_codegen_runtime_class_init_inline(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
 		bool L_20;
@@ -7680,20 +7680,20 @@ IL_0051:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:444>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:443>
 		goto IL_00a6;
 	}
 
 IL_006d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:446>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:445>
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_22 = V_8;
 		NullCheck(L_22);
 		int32_t L_23;
 		L_23 = VirtualFuncInvoker0< int32_t >::Invoke(2, L_22);
 		V_9 = L_23;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:449>
-		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_24 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_ThreadStaticFields*)il2cpp_codegen_get_thread_static_data(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:448>
+		HashSet_1_t4A2F2B74276D0AD3ED0F873045BD61E9504ECAE2* L_24 = ((FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_StaticFields*)il2cpp_codegen_static_fields_for(FontAssetUtilities_t791E501B3F727200A3751332E495071520D393A6_il2cpp_TypeInfo_var))->___k_SearchedAssets;
 		int32_t L_25 = V_9;
 		NullCheck(L_24);
 		bool L_26;
@@ -7706,19 +7706,19 @@ IL_006d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:450>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:449>
 		goto IL_00a6;
 	}
 
 IL_008d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:452>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:451>
 		uint32_t L_28 = ___0_unicode;
 		SpriteAsset_t1D3CF1D9DC350A4690CB09DE228A8B59F2F02313* L_29 = V_8;
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_30;
 		L_30 = FontAssetUtilities_GetSpriteCharacterFromSpriteAsset_Internal_m5A04BE23599904FF0B23061BC9F7EDBF6AC7DB88(L_28, L_29, (bool)1, NULL);
 		V_0 = L_30;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:454>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:453>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_31 = V_0;
 		V_12 = (bool)((!(((RuntimeObject*)(SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)L_31) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_32 = V_12;
@@ -7728,7 +7728,7 @@ IL_008d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:455>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:454>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_33 = V_0;
 		V_2 = L_33;
 		goto IL_00be;
@@ -7740,14 +7740,14 @@ IL_00a5:
 
 IL_00a6:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:439>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:438>
 		int32_t L_34 = V_7;
 		V_7 = ((int32_t)il2cpp_codegen_add(L_34, 1));
 	}
 
 IL_00ac:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:439>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:438>
 		int32_t L_35 = V_7;
 		int32_t L_36 = V_6;
 		V_13 = (bool)((((int32_t)L_35) < ((int32_t)L_36))? 1 : 0);
@@ -7766,14 +7766,14 @@ IL_00b9:
 
 IL_00ba:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:460>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:459>
 		V_2 = (SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5*)NULL;
 		goto IL_00be;
 	}
 
 IL_00be:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:461>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:460>
 		SpriteCharacter_tB3516A25DBFA0AD68DD8E1432752D503FD1F40F5* L_38 = V_2;
 		return L_38;
 	}
@@ -7787,7 +7787,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t FontAssetUtilities_GetCodePoint_mC28
 	uint32_t V_3 = 0;
 	int32_t G_B4_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:465>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:464>
 		String_t* L_0 = ___0_text;
 		int32_t* L_1 = ___1_index;
 		int32_t L_2 = *((int32_t*)L_1);
@@ -7795,7 +7795,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t FontAssetUtilities_GetCodePoint_mC28
 		Il2CppChar L_3;
 		L_3 = String_get_Chars_mC49DF0CD2D3BE7BE97B3AD9C995BE3094F8E36D3(L_0, L_2, NULL);
 		V_0 = L_3;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:466>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:465>
 		Il2CppChar L_4 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(il2cpp_defaults.char_class);
 		bool L_5;
@@ -7846,7 +7846,7 @@ IL_0030:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:470>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:469>
 		Il2CppChar L_16 = V_0;
 		String_t* L_17 = ___0_text;
 		int32_t* L_18 = ___1_index;
@@ -7858,12 +7858,12 @@ IL_0030:
 		int32_t L_21;
 		L_21 = Char_ConvertToUtf32_m3AC1CA159EF0AAF7AA30F6C6BF4D752DD534C286(L_16, L_20, NULL);
 		V_2 = L_21;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:471>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:470>
 		int32_t* L_22 = ___1_index;
 		int32_t* L_23 = ___1_index;
 		int32_t L_24 = *((int32_t*)L_23);
 		*((int32_t*)L_22) = (int32_t)((int32_t)il2cpp_codegen_add(L_24, 1));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:472>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:471>
 		uint32_t L_25 = V_2;
 		V_3 = L_25;
 		goto IL_0054;
@@ -7871,7 +7871,7 @@ IL_0030:
 
 IL_0050:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:475>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:474>
 		Il2CppChar L_26 = V_0;
 		V_3 = L_26;
 		goto IL_0054;
@@ -7879,7 +7879,7 @@ IL_0050:
 
 IL_0054:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:476>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:475>
 		uint32_t L_27 = V_3;
 		return L_27;
 	}
@@ -7893,7 +7893,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t FontAssetUtilities_GetCodePoint_mB11
 	uint32_t V_3 = 0;
 	int32_t G_B4_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:480>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:479>
 		UInt32U5BU5D_t02FBD658AD156A17574ECE6106CF1FBFCC9807FA* L_0 = ___0_codesPoints;
 		int32_t* L_1 = ___1_index;
 		int32_t L_2 = *((int32_t*)L_1);
@@ -7901,7 +7901,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t FontAssetUtilities_GetCodePoint_mB11
 		int32_t L_3 = L_2;
 		uint32_t L_4 = (L_0)->GetAt(static_cast<il2cpp_array_size_t>(L_3));
 		V_0 = ((int32_t)(uint16_t)L_4);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:481>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:480>
 		Il2CppChar L_5 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(il2cpp_defaults.char_class);
 		bool L_6;
@@ -7950,7 +7950,7 @@ IL_0027:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:485>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:484>
 		Il2CppChar L_17 = V_0;
 		UInt32U5BU5D_t02FBD658AD156A17574ECE6106CF1FBFCC9807FA* L_18 = ___0_codesPoints;
 		int32_t* L_19 = ___1_index;
@@ -7962,12 +7962,12 @@ IL_0027:
 		int32_t L_23;
 		L_23 = Char_ConvertToUtf32_m3AC1CA159EF0AAF7AA30F6C6BF4D752DD534C286(L_17, ((int32_t)(uint16_t)L_22), NULL);
 		V_2 = L_23;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:486>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:485>
 		int32_t* L_24 = ___1_index;
 		int32_t* L_25 = ___1_index;
 		int32_t L_26 = *((int32_t*)L_25);
 		*((int32_t*)L_24) = (int32_t)((int32_t)il2cpp_codegen_add(L_26, 1));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:487>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:486>
 		uint32_t L_27 = V_2;
 		V_3 = L_27;
 		goto IL_0048;
@@ -7975,7 +7975,7 @@ IL_0027:
 
 IL_0044:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:490>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:489>
 		Il2CppChar L_28 = V_0;
 		V_3 = L_28;
 		goto IL_0048;
@@ -7983,7 +7983,7 @@ IL_0044:
 
 IL_0048:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:491>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/TextCoreTextEngine/Managed/TextAssets/FontAssetUtilities.cs:490>
 		uint32_t L_29 = V_3;
 		return L_29;
 	}
@@ -30964,7 +30964,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool TextGenerator_get_IsExecutin
 		return L_0;
 	}
 }
-// Method Definition Index: 12526
+// Method Definition Index: 12523
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline (String_t* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31011,7 +31011,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint32_t TextSettings_get_missing
 		return L_0;
 	}
 }
-// Method Definition Index: 15341
+// Method Definition Index: 15338
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Inequality_m90EFC9C4CAD9A33E309F2DDF98EE4E1DD253637B_inline (intptr_t ___0_value1, intptr_t ___1_value2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31021,7 +31021,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Inequality_m90EFC9
 		return (bool)((((int32_t)((((intptr_t)L_0) == ((intptr_t)L_1))? 1 : 0)) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 15340
+// Method Definition Index: 15337
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Equality_m7D9CDCDE9DC2A0C2C614633F4921E90187FAB271_inline (intptr_t ___0_value1, intptr_t ___1_value2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31031,7 +31031,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool IntPtr_op_Equality_m7D9CDCDE
 		return (bool)((((intptr_t)L_0) == ((intptr_t)L_1))? 1 : 0);
 	}
 }
-// Method Definition Index: 35258
+// Method Definition Index: 35255
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B Color32_op_Implicit_m79AF5E0BDE9CE041CAC4D89CBFA66E71C6DD1B70_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_c, const RuntimeMethod* method) 
 {
 	Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B V_0;
@@ -31071,7 +31071,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color32_t73C5004937BF5BB8AD55323D
 		return L_16;
 	}
 }
-// Method Definition Index: 35255
+// Method Definition Index: 35252
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline (const RuntimeMethod* method) 
 {
 	{
@@ -31141,7 +31141,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RenderedText_t727191BC1F93D4E7DF9
 		return L_0;
 	}
 }
-// Method Definition Index: 34013
+// Method Definition Index: 34003
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_Equals_mE725DE506D3F1DB92F58B876BDA42AACD4D991B5_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D ___0_other, const RuntimeMethod* method) 
 {
 	int32_t G_B5_0 = 0;
@@ -31199,7 +31199,7 @@ IL_004d:
 		return (bool)G_B5_0;
 	}
 }
-// Method Definition Index: 35232
+// Method Definition Index: 35229
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Color_Equals_mD297CAFFEBE9352C940873862FDF9A28F1F02435_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_other, const RuntimeMethod* method) 
 {
 	int32_t G_B5_0 = 0;
@@ -31266,7 +31266,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Il2CppChar Enumerator_get_Current
 		return L_0;
 	}
 }
-// Method Definition Index: 35513
+// Method Definition Index: 35511
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_NextPowerOfTwo_mA1CE7F3EEF9B0B07AB2D586C030ED236D578F485_inline (int32_t ___0_value, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -31307,7 +31307,7 @@ IL_0030:
 		return L_12;
 	}
 }
-// Method Definition Index: 35257
+// Method Definition Index: 35254
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color32__ctor_mC9C6B443F0C7CA3F8B174158B2AF6F05E18EAC4E_inline (Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B* __this, uint8_t ___0_r, uint8_t ___1_g, uint8_t ___2_b, uint8_t ___3_a, const RuntimeMethod* method) 
 {
 	{
@@ -31338,7 +31338,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR TextStyleSheet_t86A0FA5523897465F
 		return L_0;
 	}
 }
-// Method Definition Index: 33991
+// Method Definition Index: 33981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_height_mE1AA6C6C725CCD2D317BD2157396D3CF7D47C9D8_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31347,7 +31347,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_height_mE1AA6C6C72
 		return L_0;
 	}
 }
-// Method Definition Index: 35404
+// Method Definition Index: 35402
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31374,7 +31374,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 35635
+// Method Definition Index: 35633
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector4_op_Implicit_m6673D431FBCA5AFB6CF06CD9783D07A4C90CC2AA_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31392,7 +31392,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 35369
+// Method Definition Index: 35367
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	{
@@ -31409,7 +31409,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999E
 		return;
 	}
 }
-// Method Definition Index: 35405
+// Method Definition Index: 35403
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31436,7 +31436,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_12;
 	}
 }
-// Method Definition Index: 35226
+// Method Definition Index: 35223
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, float ___0_r, float ___1_g, float ___2_b, float ___3_a, const RuntimeMethod* method) 
 {
 	{
@@ -31456,7 +31456,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9C
 		return;
 	}
 }
-// Method Definition Index: 35520
+// Method Definition Index: 35518
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -31488,7 +31488,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float SpriteAsset_get_height_mF1E
 		return L_0;
 	}
 }
-// Method Definition Index: 35259
+// Method Definition Index: 35256
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color32_op_Implicit_m47CBB138122B400E0B1F4BFD7C30A6C2C00FCA3E_inline (Color32_t73C5004937BF5BB8AD55323D51AAA40A898EF48B ___0_c, const RuntimeMethod* method) 
 {
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
@@ -31512,7 +31512,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_8;
 	}
 }
-// Method Definition Index: 35237
+// Method Definition Index: 35234
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Color_op_Inequality_mF1C733BA10E60B086AB950A71143678AE76C4D92_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_lhs, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -31524,7 +31524,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Color_op_Inequality_mF1C733B
 		return (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 35540
+// Method Definition Index: 35538
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_m6FFFFF6A9E069A4FBCA7E098D88AE39C2B80D442_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31546,7 +31546,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35551
+// Method Definition Index: 35549
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_one_m9097EB8DC23C26118A591AF16702796C3EF51DFB_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -31561,7 +31561,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35539
+// Method Definition Index: 35537
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Subtraction_m44475FCDAD2DA2F98D78A6625EC2DCDFE8803837_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31583,7 +31583,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35538
+// Method Definition Index: 35536
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Addition_m8136742CE6EE33BA4EB81C5F584678455917D2AE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31647,7 +31647,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TextGenerationInfo_set_Curre
 		return;
 	}
 }
-// Method Definition Index: 35543
+// Method Definition Index: 35541
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31667,7 +31667,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_6;
 	}
 }
-// Method Definition Index: 35545
+// Method Definition Index: 35543
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31705,7 +31705,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR LinkedListNode_1_t6F3AFCF84169CF5
 		return L_0;
 	}
 }
-// Method Definition Index: 35482
+// Method Definition Index: 35479
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -31744,7 +31744,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 35480
+// Method Definition Index: 35477
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -31783,7 +31783,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 33978
+// Method Definition Index: 33968
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_x_mB267B718E0D067F2BAE31BA477647FBF964916EB_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31792,7 +31792,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_x_mB267B718E0D067F
 		return L_0;
 	}
 }
-// Method Definition Index: 33979
+// Method Definition Index: 33969
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_x_mAB91AB71898A20762BC66FD0723C4C739C4C3406_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -31802,7 +31802,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_x_mAB91AB71898A2076
 		return;
 	}
 }
-// Method Definition Index: 33980
+// Method Definition Index: 33970
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_y_mC733E8D49F3CE21B2A3D40A1B72D687F22C97F49_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31811,7 +31811,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_y_mC733E8D49F3CE21
 		return L_0;
 	}
 }
-// Method Definition Index: 33981
+// Method Definition Index: 33971
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_y_mDE91F4B98A6E8623EFB1250FF6526D5DB5855629_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -31821,7 +31821,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_y_mDE91F4B98A6E8623
 		return;
 	}
 }
-// Method Definition Index: 33989
+// Method Definition Index: 33979
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D67551372073C9C32C4C4624C2A5713F7F9A9_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -31830,7 +31830,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D6755137
 		return L_0;
 	}
 }
-// Method Definition Index: 33990
+// Method Definition Index: 33980
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_width_m93B6217CF3EFF89F9B0C81F34D7345DE90B93E5A_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -31840,7 +31840,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_width_m93B6217CF3EF
 		return;
 	}
 }
-// Method Definition Index: 33992
+// Method Definition Index: 33982
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_height_mD00038E6E06637137A5626CA8CD421924005BF03_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -31850,7 +31850,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect_set_height_mD00038E6E06
 		return;
 	}
 }
-// Method Definition Index: 35548
+// Method Definition Index: 35546
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -31868,7 +31868,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_4;
 	}
 }
-// Method Definition Index: 35549
+// Method Definition Index: 35547
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector2_op_Implicit_m6D9CABB2C791A192867D7A4559D132BE86DD3EB7_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_v, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -31887,7 +31887,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_4;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C389F22B8CEC282C15D56516658746C383_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31917,7 +31917,7 @@ IL_000f:
 		return L_2;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m342A468AD39C5C82EE5FAEFE64A8F7AA792966ED_gshared_inline (List_1_tA1547550E5FBA50050B20DA74245C38434654EE8* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31926,7 +31926,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m342A468
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mB2D37111DE090BEFD49CD8DAD4237D90C8681390_gshared_inline (List_1_tA1547550E5FBA50050B20DA74245C38434654EE8* __this, FontReferenceMap_t1C0CECF3F0F650BE4A881A50A25EFB26965E7831 ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -31965,7 +31965,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 14054
+// Method Definition Index: 14051
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_mA5FD20B3976541A2A758D81ED28834B6718B75A5_gshared_inline (Span_1_t1E317EB665016139E9E9B38B97D6EE8270DF7B68* __this, IntPtrU5BU5D_tFD177F8C806A6921AD7150264CCC62FA00CAD832* ___0_array, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32007,7 +32007,7 @@ IL_0037:
 		return;
 	}
 }
-// Method Definition Index: 14069
+// Method Definition Index: 14066
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m429BC42023241B4D851D65359CD7271BF938583F_gshared_inline (Span_1_t1E317EB665016139E9E9B38B97D6EE8270DF7B68* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32016,7 +32016,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m429BC4
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m40A676842DBAD96A16B8A64BE3ACB4F133CC81A7_gshared_inline (List_1_t6D4D3AAF46D9E2944E578579CE720FABFD990C26* __this, intptr_t ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32055,7 +32055,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mEBCF994CC3814631017F46A387B1A192ED6C85C7_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32094,7 +32094,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mD6A050A07715B63F87D5836164739C5F9B96AE4E_gshared_inline (List_1_tE3A859FDD017A2D25E8161269BA1167C22EC7EB9* __this, uint32_t ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32133,7 +32133,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 14054
+// Method Definition Index: 14051
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_m513968BDBFF3CFCE89F3F77FE44CAB22CA474EF9_gshared_inline (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305* __this, ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* ___0_array, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32174,7 +32174,7 @@ IL_0037:
 		return;
 	}
 }
-// Method Definition Index: 14069
+// Method Definition Index: 14066
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m8E944E4954E037877A25B9FF6B901F1F901D4769_gshared_inline (Span_1_tDADAC65069DFE6B57C458109115ECD795ED39305* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32183,7 +32183,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m8E944E
 		return L_0;
 	}
 }
-// Method Definition Index: 14069
+// Method Definition Index: 14066
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m3F1AFE07FD4C1A0D711DFCDC2530B6E1C0D14022_gshared_inline (Span_1_tB7891043882A2B127FCEDFC24C907550F7BF92EF* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32192,7 +32192,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m3F1AFE
 		return L_0;
 	}
 }
-// Method Definition Index: 14069
+// Method Definition Index: 14066
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_mAB8B8F731C3753B681689724D8C10D0F6706324A_gshared_inline (Span_1_t14EC2E77DBAA48290810774B64FB790F124E6948* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32201,7 +32201,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_mAB8B8F
 		return L_0;
 	}
 }
-// Method Definition Index: 13797
+// Method Definition Index: 13794
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Nullable_1_get_HasValue_mFAF0B4EEA878E596C80258FE3BDA57CEF40C8D7F_gshared_inline (Nullable_1_tEE83D90B507D40B6C58B5EEF5B9D44D377B44F11* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32210,7 +32210,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Nullable_1_get_HasValue_mFAF
 		return L_0;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m0248A96C5334E9A93E6994B7780478BCD994EA3D_gshared_inline (List_1_t05915E9237850A58106982B7FE4BC5DA4E872E73* __this, int32_t ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32249,7 +32249,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m5AAB6DCB6C30EB5769B4E8DB8170E50319F0A9ED_gshared_inline (List_1_t01207CE5982A7640E56B1F9F672A06F96B09367A* __this, bool ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32419,7 +32419,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR TextCacheEntry_tC0BAC63EDA88645C7
 		return L_0;
 	}
 }
-// Method Definition Index: 35498
+// Method Definition Index: 35495
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -32473,7 +32473,7 @@ IL_002d:
 		return L_5;
 	}
 }
-// Method Definition Index: 35236
+// Method Definition Index: 35233
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Color_op_Equality_mB2BDC39B0B367BA15AA8DF22F8CB0D02D20BDC71_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_lhs, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___1_rhs, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -32530,7 +32530,7 @@ IL_0057:
 		return L_25;
 	}
 }
-// Method Definition Index: 14709
+// Method Definition Index: 14706
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint8_t* Array_GetRawSzArrayData_m2F8F5B2A381AEF971F12866D9C0A6C4FBA59F6BB_inline (RuntimeArray* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32542,7 +32542,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint8_t* Array_GetRawSzArrayData_
 		return L_1;
 	}
 }
-// Method Definition Index: 14056
+// Method Definition Index: 14053
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_m38EECB636829D807B96005A9AA8E41063C877DA1_gshared_inline (Span_1_tA921127FB82E829329A2ACB82FDCCED88A4A97B2* __this, void* ___0_pointer, int32_t ___1_length, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32576,7 +32576,7 @@ IL_001f:
 		return;
 	}
 }
-// Method Definition Index: 14068
+// Method Definition Index: 14065
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RectU5BU5D_t83297CB2E61BDF9D27DCB1A3E5C78EBCE9F7C993* Span_1_ToArray_m9D9F21EB763577CCF4D66D30E5431BE1323FC6AE_gshared_inline (Span_1_tA921127FB82E829329A2ACB82FDCCED88A4A97B2* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -32614,7 +32614,7 @@ IL_000e:
 		return L_4;
 	}
 }
-// Method Definition Index: 14758
+// Method Definition Index: 14755
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RectU5BU5D_t83297CB2E61BDF9D27DCB1A3E5C78EBCE9F7C993* Array_Empty_TisRect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D_m85A5CFE26D5D127B03744735ED2B5FC30FCB1D59_gshared_inline (const RuntimeMethod* method) 
 {
 	il2cpp_rgctx_method_init(method);

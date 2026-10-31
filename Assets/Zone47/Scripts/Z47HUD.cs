@@ -142,6 +142,62 @@ namespace Zone47
         /// Sniper scope: crisp black reticle with mil-dots and thick posts, red centre dot,
         /// dark tube rim and a faint glass reflection.
         static Texture2D scope;
+        public const float ScopeOuterA = 0.32f;
+        static Texture2D housing;
+        /// Scope body around the lens (drawn 1500px wide, lens edge at r=0.72): matte metal tube with a lit bevel,
+        /// a ribbed rubber eyecup and an elevation turret on top. Outside is transparent so the world stays visible.
+        public static Texture2D ScopeHousing()
+        {
+            if (housing != null) return housing;
+            int n = 1024; var t = new Texture2D(n, n, TextureFormat.RGBA32, false);
+            var px = new Color32[n * n]; float pxw = 2f / n;
+            Vector2 light = new Vector2(-0.55f, 0.83f);
+            for (int y = 0; y < n; y++) for (int x = 0; x < n; x++)
+            {
+                float dx = (x + 0.5f) / n * 2 - 1, dy = (y + 0.5f) / n * 2 - 1; float r = Mathf.Sqrt(dx * dx + dy * dy);
+                Vector2 nrm = r > 0.0001f ? new Vector2(dx, dy) / r : Vector2.up;
+                float ang = Mathf.Atan2(dy, dx);
+                float a = 0f; float lum = 0f;
+                const float rIn = 0.715f, rBody = 0.84f, rCup = 0.93f;
+                if (r >= rIn - pxw && r <= rCup + pxw)
+                {
+                    a = Mathf.Clamp01((r - (rIn - pxw)) / pxw) * Mathf.Clamp01((rCup + pxw - r) / pxw);
+                    float lit = Vector2.Dot(nrm, light);
+                    if (r < rIn + 0.018f) lum = 0.02f;                                         // black inner lip
+                    else if (r < rBody)
+                    {
+                        float u = (r - rIn) / (rBody - rIn);                                    // body: rounded bevel catching the light
+                        float bevel = Mathf.Sin(u * Mathf.PI);
+                        lum = 0.07f + 0.09f * bevel * (0.5f + 0.5f * lit) + 0.05f * Mathf.Pow(Mathf.Max(0f, lit), 6f) * bevel;
+                    }
+                    else
+                    {
+                        float u = (r - rBody) / (rCup - rBody);                                 // rubber eyecup with ribs
+                        float rib = 0.5f + 0.5f * Mathf.Cos(ang * 90f);
+                        lum = 0.035f + 0.03f * rib + 0.03f * Mathf.Sin(u * Mathf.PI) * (0.5f + 0.5f * lit);
+                        if (u < 0.06f) lum *= 0.6f;
+                    }
+                }
+                // elevation turret on top, windage turret on the right
+                float tw = 0.075f;
+                bool top = Mathf.Abs(dx) < tw && dy > 0.8f && dy < 0.985f;
+                bool side = Mathf.Abs(dy) < tw && dx > 0.8f && dx < 0.97f;
+                if ((top || side) && r > rCup - 0.02f)
+                {
+                    float along = top ? dy : dx, across = top ? dx : dy;
+                    float edge = Mathf.Clamp01((tw - Mathf.Abs(across)) / pxw) * Mathf.Clamp01(((top ? 0.985f : 0.97f) - along) / pxw);
+                    float knurl = 0.5f + 0.5f * Mathf.Cos(across * 260f);
+                    float l2 = 0.06f + 0.05f * knurl + 0.06f * (1f - Mathf.Abs(across) / tw) * (top ? 1f : 0.6f);
+                    if (edge > a) { a = edge; lum = l2; }
+                }
+                // soft contact shadow just outside the eyecup
+                if (a < 0.01f && r > rCup && r < rCup + 0.06f) { a = 0.35f * (1f - (r - rCup) / 0.06f); lum = 0f; }
+                byte L = (byte)(Mathf.Clamp01(lum) * 255f);
+                px[y * n + x] = new Color32(L, L, (byte)Mathf.Min(255, L + 2), (byte)(Mathf.Clamp01(a) * 255f));
+            }
+            t.SetPixels32(px); t.Apply(); t.wrapMode = TextureWrapMode.Clamp;
+            return housing = t;
+        }
         public static Texture2D Scope()
         {
             if (scope != null) return scope;
@@ -153,8 +209,9 @@ namespace Zone47
                 float dx = (x + 0.5f) / n * 2 - 1, dy = (y + 0.5f) / n * 2 - 1; float r = Mathf.Sqrt(dx * dx + dy * dy);
                 float ax = Mathf.Abs(dx), ay = Mathf.Abs(dy);
                 // tube: solid outside, steep dark falloff on the inner rim
-                float rim = Mathf.Clamp01((r - 0.985f) / pxw);
-                float shade = Mathf.Pow(Mathf.Clamp01((r - 0.72f) / 0.27f), 2.2f) * 0.9f;
+                // outside the tube the world stays visible (blurred by the scope DoF), only dimmed a bit
+                float rim = r > 1f ? ScopeOuterA : Mathf.Clamp01((r - 0.965f) / pxw);
+                float shade = r < 1f ? Mathf.Pow(Mathf.Clamp01((r - 0.72f) / 0.27f), 2.2f) * 0.9f : 0f;
                 // reticle
                 float thin = 0.0028f, thick = 0.016f;
                 float lv = ay > 0.035f ? Mathf.Clamp01((thin - ax) / pxw + 0.5f) : 0f;
@@ -186,7 +243,7 @@ namespace Zone47
     /// Where the touch buttons sit. Saved per button (centre position + size) and editable in the layout editor.
     public static class HudLayout
     {
-        public class Item { public string id, label; public bool left, accent; public Vector2 pos; public float size; public Vector2 defPos; public float defSize; }
+        public class Item { public string id, label; public bool left, accent; public Vector2 pos; public float size, alpha = 1f; public Vector2 defPos; public float defSize; }
 
         public static Item[] Defaults() => new[]
         {
@@ -198,6 +255,9 @@ namespace Zone47
             new Item { id = "crouch",  label = "b_crouch",  left = false, pos = new Vector2(-357, 437), size = 115 },
             new Item { id = "reload",  label = "b_reload",  left = false, pos = new Vector2(-492, 382), size = 105 },
             new Item { id = "grenade", label = "b_grenade", left = false, pos = new Vector2(-612, 252), size = 105 },
+            new Item { id = "prone",   label = "b_prone",   left = false, pos = new Vector2(-285, 600), size = 95 },
+            new Item { id = "leanl",   label = "b_leanl",   left = true,  pos = new Vector2(340, 600),  size = 90 },
+            new Item { id = "leanr",   label = "b_leanr",   left = true,  pos = new Vector2(450, 600),  size = 90 },
         };
 
         public static Item[] Load()
@@ -208,7 +268,8 @@ namespace Zone47
                 it.defPos = it.pos; it.defSize = it.size;
                 var s = PlayerPrefs.GetString("z_L_" + it.id, "");
                 var p = s.Split(';');
-                if (p.Length == 3 && float.TryParse(p[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var x)
+                if (p.Length >= 4 && float.TryParse(p[3], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var al)) it.alpha = Mathf.Clamp(al, 0.2f, 1f);
+                if (p.Length >= 3 && float.TryParse(p[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var x)
                     && float.TryParse(p[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var y)
                     && float.TryParse(p[2], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var z))
                 { it.pos = new Vector2(x, y); it.size = z; }
@@ -219,7 +280,7 @@ namespace Zone47
         public static void Save(Item[] items)
         {
             var ci = System.Globalization.CultureInfo.InvariantCulture;
-            foreach (var it in items) PlayerPrefs.SetString("z_L_" + it.id, it.pos.x.ToString(ci) + ";" + it.pos.y.ToString(ci) + ";" + it.size.ToString(ci));
+            foreach (var it in items) PlayerPrefs.SetString("z_L_" + it.id, it.pos.x.ToString(ci) + ";" + it.pos.y.ToString(ci) + ";" + it.size.ToString(ci) + ";" + it.alpha.ToString(ci));
             PlayerPrefs.Save();
         }
 
@@ -240,7 +301,8 @@ namespace Zone47
         RectTransform[] xh = new RectTransform[4];
         Image hitMark; float hitT; bool hitKill;
         RawImage vignette; float dmgT;
-        RawImage scopeImg; Image scopeL, scopeR, scopeBlink; float blinkT; bool wasScoped;
+        RawImage scopeImg, scopeLens, scopeHousing; Image scopeLensMask; Image scopeL, scopeR, scopeBlink; float blinkT; bool wasScoped;
+        Image redDot, redGlow;
         RectTransform full, scopeGroup; Image centerDot, scopeT, scopeB; Vector2 scopeDrift; Vector3 lastFwd;
         AudioSource breathSrc, heartSrc; float lowHpT; float lastSat = -999f;
         int cMag = -1, cRes = -1, cS0 = -1, cS1 = -1, cTime = -1, cGren = -1; string cWep;
@@ -248,6 +310,14 @@ namespace Zone47
         readonly List<(Text t, float time)> feedItems = new List<(Text, float)>();
         GameObject deathPanel, endPanel, pausePanel;
         Text deathTxt, deathTimer;
+        // squad card (PUBG style), top-left above the kill feed: number, name, health with damage trail, kills, respawn timer
+        class SquadRow { public Actor a; public Image bg, stripe, fill, trail; public Text num, name, kills, dead; public RectTransform fillRt, trailRt; public GameObject bar; public bool wasAlive = true; public float shown = 1f; public int cK = -1, cDead = -1; public Color col; }
+        readonly List<SquadRow> squad = new List<SquadRow>();
+        RectTransform squadRoot; Text squadAlive; int cAlive = -1;
+        static readonly Color[] SquadCols = { new Color(0.98f, 0.82f, 0.2f), new Color(0.95f, 0.5f, 0.15f), new Color(0.3f, 0.65f, 1f), new Color(0.35f, 0.85f, 0.4f), new Color(0.85f, 0.4f, 0.95f), new Color(0.9f, 0.9f, 0.9f) };
+        public const float SquadW = 300f, SquadHead = 28f, SquadRowH = 30f, SquadGap = 3f;
+        public static float SquadHeight(int n) => SquadHead + 6f + n * (SquadRowH + SquadGap);
+        GameObject reloadBox; Text reloadTxt, reloadHint; RectTransform reloadFill; int cReload = -1;
         float deathAt;
         Image[] slotImgs = new Image[4];
         Text[] slotTxt = new Text[4];
@@ -260,7 +330,7 @@ namespace Zone47
         public bool AimToggled { get; private set; }
         public bool Paused { get; private set; }
         static bool TouchUI => Application.isMobilePlatform;
-        Image aimBtnImg;
+        Image aimBtnImg, leanLImg, leanRImg;
 
         public static void Create(MatchManager m)
         {
@@ -291,14 +361,22 @@ namespace Zone47
 
             // scope group moves as one piece (drift with look/movement); black bars overshoot the screen so no gaps show
             scopeGroup = UIK.Full(full, "scopeGroup");
-            var scopeR_ = UIK.Rect(scopeGroup, "scope", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1080, 1080));
+            // lens: what the scope camera sees, cut to a circle (PUBG style: world outside stays visible)
+            scopeLensMask = UIK.Img(scopeGroup, "lens", Color.white, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(825, 825));
+            scopeLensMask.sprite = Gfx.Circle; scopeLensMask.gameObject.AddComponent<Mask>().showMaskGraphic = false;
+            scopeLens = UIK.Rect(scopeLensMask.transform, "rt", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).gameObject.AddComponent<RawImage>();
+            scopeLens.raycastTarget = false;
+            var scopeR_ = UIK.Rect(scopeGroup, "scope", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(840, 840));
             scopeImg = scopeR_.gameObject.AddComponent<RawImage>(); scopeImg.texture = Gfx.Scope(); scopeImg.raycastTarget = false;
-            scopeL = UIK.Img(scopeGroup, "scopeL", Color.black, new Vector2(0, 0), new Vector2(0.5f, 1), Vector2.zero, Vector2.zero);
-            scopeL.rectTransform.offsetMin = new Vector2(-400, -400); scopeL.rectTransform.offsetMax = new Vector2(-539, 400);
-            scopeR = UIK.Img(scopeGroup, "scopeR", Color.black, new Vector2(0.5f, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero);
-            scopeR.rectTransform.offsetMin = new Vector2(539, -400); scopeR.rectTransform.offsetMax = new Vector2(400, 400);
-            scopeT = UIK.Img(scopeGroup, "scopeT", Color.black, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 539 + 200), new Vector2(1100, 400));
-            scopeB = UIK.Img(scopeGroup, "scopeB", Color.black, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -539 - 200), new Vector2(1100, 400));
+            scopeHousing = UIK.Rect(scopeGroup, "housing", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(1175, 1175)).gameObject.AddComponent<RawImage>();
+            scopeHousing.texture = Gfx.ScopeHousing(); scopeHousing.raycastTarget = false;
+            Color outer = new Color(0, 0, 0, Gfx.ScopeOuterA);
+            scopeL = UIK.Img(scopeGroup, "scopeL", outer, new Vector2(0, 0), new Vector2(0.5f, 1), Vector2.zero, Vector2.zero);
+            scopeL.rectTransform.offsetMin = new Vector2(-400, -400); scopeL.rectTransform.offsetMax = new Vector2(-420, 400);
+            scopeR = UIK.Img(scopeGroup, "scopeR", outer, new Vector2(0.5f, 0), new Vector2(1, 1), Vector2.zero, Vector2.zero);
+            scopeR.rectTransform.offsetMin = new Vector2(420, -400); scopeR.rectTransform.offsetMax = new Vector2(400, 400);
+            scopeT = UIK.Img(scopeGroup, "scopeT", outer, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 420 + 200), new Vector2(840, 400));
+            scopeB = UIK.Img(scopeGroup, "scopeB", outer, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -420 - 200), new Vector2(840, 400));
             scopeBlink = UIK.Img(full, "blink", new Color(0, 0, 0, 0), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
             SetScope(false);
 
@@ -310,6 +388,9 @@ namespace Zone47
                 xh[i] = im.rectTransform;
             }
             centerDot = UIK.Img(root, "dot", new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 3));
+            redGlow = UIK.Img(root, "redGlow", new Color(1f, 0.15f, 0.08f, 0.35f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(16, 16)); redGlow.sprite = Gfx.Circle;
+            redDot = UIK.Img(root, "redDot", new Color(1f, 0.12f, 0.06f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(6, 6)); redDot.sprite = Gfx.Circle;
+            redDot.enabled = redGlow.enabled = false;
             hitMark = UIK.Img(root, "hit", Color.white, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34));
             hitMark.color = new Color(1, 1, 1, 0);
             for (int i = 0; i < 4; i++)
@@ -329,7 +410,7 @@ namespace Zone47
             UIK.Txt(clock.transform, "goal", (Settings.Turkish ? "HEDEF " : "TARGET ") + MatchManager.KillTarget, 13, Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 14), new Vector2(118, 18), true);
 
             // kill feed
-            feed = UIK.Rect(root, "feed", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24), new Vector2(380, 200));
+            feed = UIK.Rect(root, "feed", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24 - SquadHeight(5) - 10), new Vector2(380, 160));
             var vl = feed.gameObject.AddComponent<VerticalLayoutGroup>();
             vl.childAlignment = TextAnchor.UpperLeft; vl.spacing = 6; vl.childControlHeight = false; vl.childControlWidth = false; vl.childForceExpandHeight = false;
 
@@ -365,7 +446,7 @@ namespace Zone47
 
             BuildPauseButton();
 
-            BuildDeath(); BuildPause();
+            BuildDeath(); BuildPause(); BuildReload();
             controls.gameObject.SetActive(TouchUI);
         }
 
@@ -427,6 +508,7 @@ namespace Zone47
             var mv = HudLayout.Get(lay, "move");
             joyBase = UIK.Img(controls, "joyBase", new Color(1, 1, 1, 0.16f), new Vector2(0, 0), new Vector2(0, 0), mv.pos, Vector2.one * mv.size).rectTransform;
             joyBase.pivot = new Vector2(0.5f, 0.5f); joyBase.anchoredPosition = mv.pos;
+            joyBase.gameObject.AddComponent<CanvasGroup>().alpha = mv.alpha;
             joyScale = mv.size / 260f;
             joyBase.GetComponent<Image>().sprite = Gfx.Circle;
             var ring = UIK.Img(joyBase, "ring", new Color(1, 1, 1, 0.4f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); ring.sprite = Gfx.Ring;
@@ -450,6 +532,9 @@ namespace Zone47
             RoundButton(HudLayout.Get(lay, "jump"), Color.white, false, () => PInput.jump = true);
             RoundButton(HudLayout.Get(lay, "crouch"), Color.white, false, () => PInput.crouchToggle = true);
             RoundButton(HudLayout.Get(lay, "reload"), Color.white, false, () => PInput.reload = true);
+            RoundButton(HudLayout.Get(lay, "prone"), Color.white, false, () => PInput.proneToggle = true);
+            leanLImg = RoundButton(HudLayout.Get(lay, "leanl"), Color.white, false, () => PInput.lean = PInput.lean == -1 ? 0 : -1);
+            leanRImg = RoundButton(HudLayout.Get(lay, "leanr"), Color.white, false, () => PInput.lean = PInput.lean == 1 ? 0 : 1);
             var gb = RoundButton(HudLayout.Get(lay, "grenade"), Color.white, false, () => PInput.grenade = true);
             grenadeTxt = UIK.Txt(gb.transform, "n", "2", 26, Pal.Accent, TextAnchor.UpperRight, Vector2.one, Vector2.one, new Vector2(-12, -10), new Vector2(40, 30), true);
             cGren = -1;
@@ -462,6 +547,7 @@ namespace Zone47
             Vector2 anchor = HudLayout.Anchor(it);
             var img = UIK.Img(controls, it.id, fill ? new Color(c.r, c.g, c.b, 0.55f) : new Color(0, 0, 0, 0.45f), anchor, anchor, it.pos, new Vector2(size, size), true);
             img.rectTransform.pivot = new Vector2(0.5f, 0.5f); img.rectTransform.anchoredPosition = it.pos;
+            img.gameObject.AddComponent<CanvasGroup>().alpha = it.alpha;
             img.sprite = Gfx.Circle;
             var ring = UIK.Img(img.transform, "ring", new Color(c.r, c.g, c.b, 0.85f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); ring.sprite = Gfx.Ring;
             var icon = IconFor(it.id);
@@ -480,7 +566,7 @@ namespace Zone47
             {
                 tp.down = e => { PInput.fireHeld = true; img.transform.localScale = Vector3.one * 0.92f; };
                 tp.up = e => { PInput.fireHeld = AnyFireHeld(tp); img.transform.localScale = Vector3.one; };
-                tp.drag = e => PInput.look += e.delta * (1080f / Screen.height);
+                tp.drag = e => { if (Settings.FireDragLook && e != null) PInput.look += e.delta * (1080f / Screen.height); };   // slide the firing thumb to steer
                 fireButtons.Add(tp);
             }
             else
@@ -503,6 +589,96 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ panels
+        /// Reload countdown under the crosshair, same style as the respawn timer.
+        void BuildReload()
+        {
+            reloadBox = UIK.Rect(root, "reload", new Vector2(0.5f, 0f), new Vector2(0.5f, 0f), new Vector2(0, 165), new Vector2(420, 100)).gameObject;   // just above the weapon slots, clear of kill/toast texts
+            reloadTxt = UIK.Txt(reloadBox.transform, "t", "", 22, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 30), new Vector2(420, 30), true);
+            reloadTxt.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.6f);
+            var bg = UIK.Img(reloadBox.transform, "bg", new Color(0, 0, 0, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 0), new Vector2(240, 6));
+            var fill = UIK.Img(bg.transform, "fill", Pal.Accent, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, Vector2.zero);
+            reloadFill = fill.rectTransform; reloadFill.pivot = new Vector2(0, 0.5f);
+            reloadHint = UIK.Txt(reloadBox.transform, "h", L.S("reload_cancel"), 16, new Color(1, 1, 1, 0.65f), TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -24), new Vector2(420, 24), true);
+            reloadBox.SetActive(false);
+        }
+
+        void BuildSquad(PlayerController me)
+        {
+            var mates = new List<Actor>();
+            mates.Add(me);
+            foreach (var a in Actor.All) if (a != null && a != me && a.team == me.team) mates.Add(a);
+            if (mates.Count < 2) return;          // bots not spawned yet: try again next frame
+            float h = SquadHeight(mates.Count);
+            squadRoot = UIK.Rect(root, "squad", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24), new Vector2(SquadW, h));
+            var card = UIK.Img(squadRoot, "card", new Color(0.03f, 0.035f, 0.03f, 0.55f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            UIK.Img(card.transform, "top", Pal.Ally, new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 3)).rectTransform.pivot = new Vector2(0.5f, 1);
+            UIK.Txt(card.transform, "h", L.S("sq_title"), 15, Pal.Ally, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(10, -17), new Vector2(160, 24), true);
+            squadAlive = UIK.Txt(card.transform, "al", "", 14, Pal.Dim, TextAnchor.MiddleRight, new Vector2(1, 1), new Vector2(1, 1), new Vector2(-10, -17), new Vector2(160, 24), true);
+            for (int i = 0; i < mates.Count; i++)
+            {
+                var a = mates[i]; var r = new SquadRow { a = a, col = SquadCols[i % SquadCols.Length] };
+                float y = -(SquadHead + 3f) - i * (SquadRowH + SquadGap);
+                r.bg = UIK.Img(card.transform, "row" + i, a == me ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.16f) : new Color(1, 1, 1, 0.04f), new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(-8, SquadRowH));
+                r.bg.rectTransform.pivot = new Vector2(0.5f, 1); r.bg.rectTransform.anchoredPosition = new Vector2(0, y);
+                r.stripe = UIK.Img(r.bg.transform, "s", r.col, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)); r.stripe.rectTransform.pivot = new Vector2(0, 0.5f);
+                r.num = UIK.Txt(r.bg.transform, "no", (i + 1).ToString(), 15, r.col, TextAnchor.MiddleCenter, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(18, 0), new Vector2(20, SquadRowH), true);
+                // one line: number · name · health bar · kills (nothing stacked, so nothing can overlap)
+                r.name = UIK.Txt(r.bg.transform, "n", a.callsign, 15, a == me ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(34, 0), new Vector2(122, SquadRowH), true);
+                r.name.rectTransform.pivot = new Vector2(0, 0.5f); r.name.rectTransform.anchoredPosition = new Vector2(34, 0);
+                r.name.horizontalOverflow = HorizontalWrapMode.Wrap; r.name.verticalOverflow = VerticalWrapMode.Truncate;
+                r.name.resizeTextForBestFit = true; r.name.resizeTextMinSize = 11; r.name.resizeTextMaxSize = 15;
+                // health: dark track, slow pale "damage trail", then the live fill
+                r.bar = UIK.Img(r.bg.transform, "bar", new Color(0, 0, 0, 0.55f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(162, 0), new Vector2(84, 7)).gameObject;
+                var barRt = (RectTransform)r.bar.transform; barRt.pivot = new Vector2(0, 0.5f); barRt.anchoredPosition = new Vector2(162, 0);
+                r.trail = UIK.Img(r.bar.transform, "tr", new Color(1f, 0.45f, 0.35f, 0.8f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+                r.trailRt = r.trail.rectTransform; r.trailRt.pivot = new Vector2(0, 0.5f); r.trailRt.anchoredPosition = Vector2.zero;
+                r.fill = UIK.Img(r.bar.transform, "hp", Color.white, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+                r.fillRt = r.fill.rectTransform; r.fillRt.pivot = new Vector2(0, 0.5f); r.fillRt.anchoredPosition = Vector2.zero;
+                r.kills = UIK.Txt(r.bg.transform, "k", "", 15, Pal.Text, TextAnchor.MiddleRight, new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-8, 0), new Vector2(40, SquadRowH), true);
+                r.kills.rectTransform.pivot = new Vector2(1, 0.5f); r.kills.rectTransform.anchoredPosition = new Vector2(-8, 0);
+                r.dead = UIK.Txt(r.bg.transform, "d", "", 13, new Color(1f, 0.42f, 0.36f), TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(162, 0), new Vector2(90, SquadRowH), true);
+                r.dead.rectTransform.pivot = new Vector2(0, 0.5f); r.dead.rectTransform.anchoredPosition = new Vector2(162, 0);
+                r.dead.gameObject.SetActive(false);
+                squad.Add(r);
+            }
+            // kill feed sits right under the card
+            if (feed != null) feed.anchoredPosition = new Vector2(24, -24 - h - 10);
+        }
+
+        void UpdateSquad()
+        {
+            int alive = 0;
+            foreach (var r in squad)
+            {
+                if (r.a == null) continue;
+                bool al = r.a.Alive; if (al) alive++;
+                if (al != r.wasAlive)
+                {
+                    r.wasAlive = al;
+                    r.dead.gameObject.SetActive(!al); r.bar.SetActive(al);
+                    r.name.color = !al ? Pal.Dim : r.a.isPlayer ? Pal.Accent : Pal.Text;
+                    r.stripe.color = al ? r.col : new Color(0.35f, 0.35f, 0.33f);
+                    r.num.color = r.stripe.color;
+                    if (al) { r.shown = 1f; r.cDead = -1; }
+                }
+                if (r.a.kills != r.cK) { r.cK = r.a.kills; r.kills.text = r.cK + " <size=11>K</size>"; }
+                if (!al)
+                {
+                    int left = Mathf.CeilToInt(r.a.respawnAt - Time.time);
+                    if (left != r.cDead) { r.cDead = left; r.dead.text = left > 0 ? L.S("sq_dead") + " · " + left : L.S("sq_dead"); }
+                    continue;
+                }
+                float f = Mathf.Clamp01(r.a.hp / r.a.maxHp);
+                r.shown = f > r.shown ? f : Mathf.MoveTowards(r.shown, f, Time.deltaTime * (Time.time - r.a.lastDamageTime > 0.4f ? 0.9f : 0f));
+                r.fillRt.localScale = new Vector3(f, 1, 1);
+                r.trailRt.localScale = new Vector3(r.shown, 1, 1);
+                Color c = f < 0.3f ? Color.Lerp(new Color(1f, 0.25f, 0.2f), new Color(1f, 0.6f, 0.55f), Mathf.PingPong(Time.time * 3f, 1f))
+                        : f < 0.6f ? new Color(1f, 0.85f, 0.4f) : Color.white;
+                r.fill.color = c;
+            }
+            if (alive != cAlive) { cAlive = alive; squadAlive.text = alive + "/" + squad.Count + " " + L.S("sq_alive"); }
+        }
+
         void BuildDeath()
         {
             deathPanel = UIK.Full(root, "death").gameObject;
@@ -769,6 +945,7 @@ namespace Zone47
                 if (dist > 70f || Vector3.Dot(to, cam.transform.forward) <= 0) continue;
                 bool ally = a.team == p.team;
                 if (!ally && Vector3.Angle(cam.transform.forward, a.ChestPos - cam.transform.position) > 2.5f) continue;
+                if (!ally && dist > Weather.SightRange * 0.85f) continue;      // fog / dust: no enemy name through the haze
                 // only show a tag when the soldier is actually visible (tags through containers looked like people stuck inside them)
                 Vector3 eyeTo = a.ChestPos + Vector3.up * 0.5f - cam.transform.position;
                 if (Ballistics.Cast(cam.transform.position, eyeTo.normalized, eyeTo.magnitude + 0.5f, p, out var h) && Actor.FromCollider(h.collider) != a) continue;
@@ -821,6 +998,9 @@ namespace Zone47
 
         void SetScope(bool on)
         {
+            scopeLensMask.enabled = on; scopeLens.enabled = on;
+            if (on) { var pl = PlayerController.Local; scopeLens.texture = pl != null ? pl.ScopeRT : null; }
+            scopeHousing.enabled = on;
             scopeImg.enabled = on; scopeL.enabled = on; scopeR.enabled = on; scopeT.enabled = on; scopeB.enabled = on;
         }
 
@@ -833,6 +1013,17 @@ namespace Zone47
             // only touch Text when the value changed: no per-frame string garbage / canvas rebuilds
             if (mm.score[0] != cS0) { cS0 = mm.score[0]; allyScore.text = cS0.ToString(); allyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS0 / (float)MatchManager.KillTarget), 1, 1); }
             if (mm.score[1] != cS1) { cS1 = mm.score[1]; enemyScore.text = cS1.ToString(); enemyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS1 / (float)MatchManager.KillTarget), 1, 1); }
+            if (squadRoot == null) BuildSquad(p); else UpdateSquad();
+            bool rl = p.Alive && p.Reloading;
+            if (reloadBox.activeSelf != rl) { reloadBox.SetActive(rl); cReload = -1; }
+            if (rl)
+            {
+                int tenths = Mathf.CeilToInt(p.ReloadLeft * 10f);
+                if (tenths != cReload) { cReload = tenths; reloadTxt.text = L.S("rl_timer") + "  " + (tenths / 10f).ToString("0.0"); }
+                reloadFill.sizeDelta = new Vector2(240f * p.ReloadProgress, 0f);
+                if (reloadHint.gameObject.activeSelf != p.ReloadCancelable) reloadHint.gameObject.SetActive(p.ReloadCancelable);
+            }
+
             int s = Mathf.CeilToInt(mm.timeLeft);
             if (s != cTime) { cTime = s; timer.text = (s / 60) + ":" + (s % 60).ToString("00"); }
 
@@ -852,6 +1043,8 @@ namespace Zone47
             }
             if (p.grenades != cGren) { cGren = p.grenades; grenadeTxt.text = cGren.ToString(); }
             if (aimBtnImg != null) aimBtnImg.color = AimToggled ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
+            if (leanLImg != null) leanLImg.color = PInput.lean == -1 ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
+            if (leanRImg != null) leanRImg.color = PInput.lean == 1 ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
 
             // crosshair
             bool scoped = p.Scoped;
@@ -879,6 +1072,9 @@ namespace Zone47
             xh[2].anchoredPosition = new Vector2(gap + 8, 0); xh[3].anchoredPosition = new Vector2(-gap - 8, 0);
             foreach (var x in xh) x.gameObject.SetActive(showX && p.Alive);
             centerDot.enabled = showX && p.Alive;
+            // carbine red dot: drawn exactly at the aim point while looking through the sight
+            bool rd = p.Alive && p.Aiming && p.Cur.id == "carbine" && p.AdsT > 0.8f;
+            redDot.enabled = redGlow.enabled = rd;
 
             if (hitT > 0)
             {
@@ -889,8 +1085,7 @@ namespace Zone47
 
             LowHealth(p);
 
-            if (p.Reloading) toast.text = L.S("reloading");
-            else if (toastT > 0) { toastT -= Time.deltaTime; if (toastT <= 0) toast.text = ""; }
+            if (toastT > 0) { toastT -= Time.deltaTime; if (toastT <= 0) toast.text = ""; }
             else if (p.Mag == 0 && p.Reserve == 0) toast.text = L.S("noammo");
             else toast.text = "";
 

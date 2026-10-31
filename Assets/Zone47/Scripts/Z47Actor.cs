@@ -19,6 +19,7 @@ namespace Zone47
         public Vector3 lastDamageFrom;
         public float lastShotTime = -99f;
         public float spawnTime;
+        public float respawnAt;       // when a dead actor comes back (squad card countdown)
         public bool Protected => Time.time - spawnTime < 2.5f;
 
         protected virtual void OnEnable() { if (!All.Contains(this)) All.Add(this); }

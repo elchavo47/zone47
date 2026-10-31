@@ -25,6 +25,12 @@ namespace Zone47
         Vector3 roamGoal; bool hasRoam;
         float stepAcc;
         Vector3 aimDir = Vector3.forward;
+        Transform rShoulder;
+        int ikFrame = -1;
+        Vector3 aimErr;                 // first shots at a new target are off, then tighten (human-like)
+        bool atCover; float peekT; bool peekHidden;
+        float stuckT, holdT;
+        float strafeSide = 1f;
 
         float Skill => Settings.Difficulty == 0 ? 0.55f : Settings.Difficulty == 1 ? 0.8f : 1f;
 
@@ -51,7 +57,7 @@ namespace Zone47
             anim.applyRootMotion = false;
             anim.cullingMode = AnimatorCullingMode.CullUpdateTransforms;
             rends = GetComponentsInChildren<Renderer>();
-            foreach (var r in rends) r.shadowCastingMode = Settings.Quality >= 2 ? ShadowCastingMode.On : ShadowCastingMode.Off;
+            foreach (var r in rends) r.shadowCastingMode = Settings.Quality >= 1 ? ShadowCastingMode.On : ShadowCastingMode.Off;
 
             col = gameObject.AddComponent<CapsuleCollider>();
             col.height = 1.8f; col.radius = 0.32f; col.center = new Vector3(0, 0.9f, 0);
@@ -66,6 +72,7 @@ namespace Zone47
             rHand = anim.GetBoneTransform(HumanBodyBones.RightHand);
             lHand = anim.GetBoneTransform(HumanBodyBones.LeftHand);
             spine = anim.GetBoneTransform(HumanBodyBones.Chest) ?? anim.GetBoneTransform(HumanBodyBones.Spine);
+            rShoulder = anim.GetBoneTransform(HumanBodyBones.RightUpperArm);
             SpawnGun();
             thinkT = Random.Range(0f, 0.3f);
         }
@@ -95,7 +102,7 @@ namespace Zone47
         {
             Vector3 from = EyePos, to = a.ChestPos;
             Vector3 d = to - from; float dist = d.magnitude;
-            if (dist > 85f) return false;
+            if (dist > Weather.SightRange) return false;
             float fov = Vector3.Angle(transform.forward, d);
             if (fov > 75f && dist > 6f && Time.time - lastDamageTime > 1.5f) return false;
             if (Ballistics.Cast(from, d / dist, dist + 0.5f, this, out var hit))
@@ -112,15 +119,35 @@ namespace Zone47
                 float d = Vector3.Distance(a.ChestPos, ChestPos);
                 if (d < bd && CanSee(a)) { bd = d; best = a; }
             }
-            if (best != target) reaction = 0f;
+            if (best != target)
+            {
+                reaction = 0f;
+                if (best != null)
+                {
+                    float d = Vector3.Distance(best.ChestPos, ChestPos);
+                    aimErr = Random.onUnitSphere * Mathf.Lerp(0.5f, 1.4f, Mathf.InverseLerp(8f, 60f, d)) * Mathf.Lerp(1.3f, 0.7f, Skill);
+                    // call it out: nearby teammates turn toward the contact
+                    foreach (var a in All)
+                        if (a != this && a.team == team && a.Alive && a is BotController mate && Vector3.Distance(a.ChestPos, ChestPos) < 35f) mate.Hear(best, 2f);
+                }
+            }
             target = best;
             if (target != null) { lastKnown = target.ChestPos; lastKnownT = Time.time; }
         }
 
-        public void Hear(Actor src)
+        /// Something was heard (gunshot, footsteps, teammate callout): go check it out if not already fighting.
+        public void Hear(Actor src, float error = 4f)
         {
-            if (target != null) return;
-            lastKnown = src.ChestPos; lastKnownT = Time.time;
+            if (target != null || src == null) return;
+            lastKnown = src.ChestPos + Random.insideUnitSphere.Flat() * error; lastKnownT = Time.time; holdT = 0f;
+        }
+
+        /// Gunshots carry far; enemy bots in range react to them.
+        public static void Noise(Actor src, float radius)
+        {
+            if (src == null) return;
+            foreach (var a in All)
+                if (a.team != src.team && a.Alive && a is BotController b && (a.ChestPos - src.ChestPos).sqrMagnitude < radius * radius) b.Hear(src, radius > 30f ? 6f : 3f);
         }
 
         // ------------------------------------------------------------ combat
@@ -138,17 +165,19 @@ namespace Zone47
                 return;
             }
             reaction += Time.deltaTime;
-            Vector3 aimAt = target.ChestPos + Vector3.up * (Random.value < 0.15f * Skill ? 0.4f : 0f);
+            aimErr = Vector3.MoveTowards(aimErr, Vector3.zero, Time.deltaTime * Mathf.Lerp(0.5f, 1.1f, Skill));
+            Vector3 aimAt = target.ChestPos + aimErr + Vector3.up * (Random.value < 0.15f * Skill ? 0.4f : 0f);
             aimDir = Vector3.Slerp(aimDir, (aimAt - EyePos).normalized, Time.deltaTime * 8f * Skill);
             float react = Mathf.Lerp(0.9f, 0.35f, Skill) + (weapon.kind == WeaponKind.Sniper ? 0.6f : 0f);
             if (reaction < react) return;
             if (mag <= 0) { StartReload(); return; }
+            if (atCover && peekHidden) return;               // ducked behind cover: no shooting
 
             if (burstPause > 0) { burstPause -= Time.deltaTime; return; }
             if (Time.time < nextShot) return;
 
             float dist = Vector3.Distance(target.ChestPos, EyePos);
-            float spread = Mathf.Lerp(4.2f, 1.4f, Skill) * (weapon.kind == WeaponKind.Sniper ? 0.25f : 1f) * (agent.velocity.magnitude > 1f ? 1.4f : 1f);
+            float spread = Mathf.Lerp(3.6f, 1.2f, Skill) * (weapon.kind == WeaponKind.Sniper ? 0.25f : 1f) * (agent.velocity.magnitude > 1f ? 1.4f : 1f);
             spread *= Mathf.Lerp(0.7f, 1.2f, Mathf.InverseLerp(5f, 60f, dist));
             if (target.isPlayer && Time.time - target.lastDamageTime < 0.25f) spread *= 1.3f;
             Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread), Random.Range(-spread, spread), 0) * aimDir;
@@ -170,6 +199,7 @@ namespace Zone47
                 if (burstLeft <= 0) burstPause = Random.Range(0.25f, 0.7f);
             }
             if (anim != null) anim.SetTrigger("Fire");
+            Noise(this, 55f);
         }
 
         void StartReload()
@@ -188,56 +218,113 @@ namespace Zone47
             repathT -= Time.deltaTime;
             var mm = MatchManager.I;
 
+            // unstick: wants to move, isn't moving
+            if (agent.hasPath && !agent.pathPending && agent.remainingDistance > 1f && agent.velocity.sqrMagnitude < 0.09f) stuckT += Time.deltaTime; else stuckT = 0f;
+            if (stuckT > 1.5f) { stuckT = 0f; hasRoam = false; strafeT = 0f; repathT = 0f; atCover = false; agent.ResetPath(); }
+
             if (target != null)
             {
                 float dist = Vector3.Distance(target.ChestPos, ChestPos);
+                Vector3 toT = (target.ChestPos - ChestPos).Flat().normalized;
                 agent.speed = 2.4f;
                 strafeT -= Time.deltaTime;
-                if (strafeT <= 0f)
+                holdT = 0f;
+
+                if (dist < 11f && !atCover)
+                {
+                    // close range: side-to-side strafing (ADAD), never stand still
+                    if (strafeT <= 0f)
+                    {
+                        strafeT = Random.Range(0.45f, 0.9f); strafeSide = -strafeSide;
+                        crouch = Random.value < 0.15f;
+                        Vector3 p = transform.position + Vector3.Cross(Vector3.up, toT) * strafeSide * Random.Range(1.8f, 3f) - toT * (dist < 5f ? 1.5f : 0f);
+                        if (NavMesh.SamplePosition(p, out var h, 1.5f, NavMesh.AllAreas)) agent.SetDestination(h.position);
+                    }
+                    agent.speed = 3.2f;
+                }
+                else if (strafeT <= 0f && !atCover)
                 {
                     strafeT = Random.Range(0.8f, 2f);
-                    crouch = weapon.kind == WeaponKind.Sniper ? Random.value < 0.7f : Random.value < 0.3f;
-                    Vector3 side = Vector3.Cross(Vector3.up, (target.ChestPos - ChestPos).normalized) * Random.Range(-3.5f, 3.5f);
-                    Vector3 fwd = (target.ChestPos - ChestPos).Flat().normalized * (dist > 30f ? 3f : dist < 10f ? -2.5f : 0f);
-                    Vector3 p = transform.position + side + fwd;
-                    if (hp < 35f) p = transform.position - (target.ChestPos - ChestPos).Flat().normalized * 6f;
-                    if ((hp < 70f || Random.value < 0.35f) && FindCover(target.ChestPos, out var cp)) { p = cp; crouch = true; }
+                    crouch = weapon.kind == WeaponKind.Sniper ? Random.value < 0.7f : Random.value < 0.25f;
+                    Vector3 p = transform.position + Vector3.Cross(Vector3.up, toT) * Random.Range(-3.5f, 3.5f) + toT * (dist > 30f ? 3f : 0f);
+                    bool wantCover = hp < 75f || mag < weapon.magSize * 0.35f || weapon.kind == WeaponKind.Sniper || Random.value < 0.55f;
+                    if (hp < 35f) p = transform.position - toT * 6f;
+                    if (wantCover && FindCover(target.ChestPos, out var cp)) { p = cp; atCover = true; peekHidden = true; peekT = 0.4f; }
                     if (NavMesh.SamplePosition(p, out var h, 2f, NavMesh.AllAreas)) agent.SetDestination(h.position);
+                }
+
+                if (atCover)
+                {
+                    // behind cover: duck to reload / recover, then pop up and shoot
+                    bool arrived = !agent.pathPending && agent.remainingDistance < 0.7f;
+                    if (arrived)
+                    {
+                        peekT -= Time.deltaTime;
+                        if (peekT <= 0f)
+                        {
+                            peekHidden = !peekHidden;
+                            peekT = peekHidden ? Random.Range(0.6f, 1.4f) : Random.Range(1.4f, weapon.kind == WeaponKind.Sniper ? 4f : 2.6f);
+                        }
+                        if (reloading || (hp < 45f && Time.time - lastDamageTime < 1.5f)) peekHidden = true;
+                        crouch = peekHidden;
+                        if (Time.time - lastDamageTime < 0.3f && hp < 60f) { peekHidden = true; peekT = 1.2f; }
+                    }
+                    else crouch = false;
+                    // leave cover now and then (or when the enemy got too close / walked around it)
+                    if (dist < 7f || (strafeT <= -6f && Random.value < 0.02f)) { atCover = false; strafeT = 0f; }
                 }
                 if (crouch) agent.speed = 0.9f;
                 Face(target.ChestPos);
             }
             else
             {
+                atCover = false;
                 crouch = false;
                 agent.speed = 4.4f;
+                if (mag < weapon.magSize * 0.6f && !reloading) StartReload();
                 if (Time.time - lastKnownT < 12f)
                 {
+                    // investigate: move in, weapon up toward where the enemy was (checks the corner instead of looking at the floor)
+                    agent.speed = 3.2f;
                     if (repathT <= 0f) { repathT = 1f; agent.SetDestination(lastKnown); }
                     if (Vector3.Distance(transform.position, lastKnown) < 2f) lastKnownT = -99f;
+                    Face(lastKnown);
+                    aimDir = Vector3.Slerp(aimDir, (lastKnown + Vector3.up * 1.2f - EyePos).normalized, Time.deltaTime * 5f);
                 }
                 else
                 {
-                    if (!hasRoam || (agent.remainingDistance < 1.5f && !agent.pathPending) || repathT < -15f)
+                    bool arrived = hasRoam && agent.remainingDistance < 1.5f && !agent.pathPending;
+                    if (arrived && weapon.kind == WeaponKind.Sniper && holdT <= 0f) holdT = Random.Range(6f, 12f);  // snipers hold an angle
+                    if (holdT > 0f)
                     {
-                        // drift toward the enemy half of the map
+                        holdT -= Time.deltaTime; crouch = true;
+                        Face(mm.spawnCenter[1 - team]);
+                        aimDir = Vector3.Slerp(aimDir, transform.forward, Time.deltaTime * 3f);
+                        if (holdT > 0f) goto Steps;
+                        hasRoam = false;
+                    }
+                    if (!hasRoam || arrived || repathT < -15f)
+                    {
+                        // drift toward the enemy half, but spread out: skip spots a teammate is already near
                         Vector3 enemySide = mm.spawnCenter[1 - team];
-                        Vector3 best = mm.waypoints[Random.Range(0, mm.waypoints.Count)];
-                        for (int i = 0; i < 3; i++)
+                        Vector3 best = mm.waypoints[Random.Range(0, mm.waypoints.Count)]; float bs = float.MaxValue;
+                        for (int i = 0; i < 6; i++)
                         {
                             var c = mm.waypoints[Random.Range(0, mm.waypoints.Count)];
-                            if (Vector3.Distance(c, enemySide) < Vector3.Distance(best, enemySide)) best = c;
+                            float sc = Vector3.Distance(c, enemySide) + Random.Range(0f, 12f);
+                            foreach (var a in All) if (a != this && a.team == team && a.Alive && Vector3.Distance(a.transform.position, c) < 9f) sc += 25f;
+                            if (sc < bs) { bs = sc; best = c; }
                         }
                         roamGoal = best; hasRoam = true; repathT = 0f;
                         agent.SetDestination(roamGoal);
                     }
+                    Vector3 v = agent.velocity.Flat();
+                    if (v.sqrMagnitude > 0.2f) Face(transform.position + v);
+                    aimDir = Vector3.Slerp(aimDir, transform.forward, Time.deltaTime * 4f);
                 }
-                Vector3 v = agent.velocity.Flat();
-                if (v.sqrMagnitude > 0.2f) Face(transform.position + v);
-                else if (Time.time - lastKnownT < 12f) Face(lastKnown);
-                aimDir = Vector3.Slerp(aimDir, transform.forward, Time.deltaTime * 4f);
             }
 
+            Steps:
             float sp = agent.velocity.magnitude;
             if (sp > 0.5f)
             {
@@ -245,8 +332,7 @@ namespace Zone47
                 if (stepAcc > 2.2f)
                 {
                     stepAcc = 0;
-                    var st = Z47Refs.I.steps;
-                    Sfx.Play3D(st[Random.Range(0, st.Length)], transform.position, 0.55f, 2f, 22f, 0.1f);
+                    Sfx.Play3D(Sfx.StepClip(transform.position, sp > 4f ? 1 : 0), transform.position, 0.7f, 2f, 24f, 0.08f);
                 }
             }
         }
@@ -284,29 +370,52 @@ namespace Zone47
             anim.SetFloat("Speed", Mathf.Clamp01(lv.magnitude / 1.5f));
         }
 
+        /// Rifle held from the shoulder along the aim line; hands are put on the grip and handguard with IK
+        /// (instead of the gun following whatever the hands do in each clip, which made it point sideways).
+        void OnAnimatorIK(int layer)
+        {
+            if (layer != 1 || !Alive || gun == null || anim == null) return;
+            ikFrame = Time.frameCount;
+            PlaceGun();
+            float leftW = reloading ? 0f : 1f;
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
+            anim.SetIKPosition(AvatarIKGoal.RightHand, gun.position);
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftW);
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, gun.TransformPoint(weapon.forePoint));
+            Vector3 sh = rShoulder != null ? rShoulder.position : transform.position + Vector3.up * 1.4f;
+            anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0.6f);
+            anim.SetIKHintPosition(AvatarIKHint.RightElbow, sh + transform.right * 0.25f + Vector3.down * 0.35f);
+            anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0.6f);
+            anim.SetIKHintPosition(AvatarIKHint.LeftElbow, sh - transform.right * 0.55f + Vector3.down * 0.4f + transform.forward * 0.15f);
+            anim.SetLookAtWeight(1f, target != null ? 0.45f : 0.2f, 0.8f, 0f, 0.5f);
+            anim.SetLookAtPosition(EyePos + aimDir * 10f);
+        }
+
+        void PlaceGun()
+        {
+            Vector3 fwd = aimDir.sqrMagnitude > 0.01f ? aimDir.normalized : transform.forward;
+            bool ready = target != null || Time.time - lastKnownT < 12f;
+            if (!ready) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.3f);         // low ready while walking around
+            if (reloading) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.45f);
+            var rot = Quaternion.LookRotation(fwd, Vector3.up);
+            if (!ready) rot = rot * Quaternion.Euler(0, -18f, 0);                              // muzzle turned slightly inward
+            Vector3 sh = rShoulder != null ? rShoulder.position : transform.position + Vector3.up * (crouch ? 1.0f : 1.42f) + transform.right * 0.18f;
+            gun.rotation = rot;
+            gun.position = sh + rot * new Vector3(-0.06f, -0.08f, 0.24f);                      // stock in the shoulder pocket, grip in front of it
+        }
+
         void LateUpdate()
         {
-            if (!Alive || rHand == null || lHand == null || gun == null) return;
-            // aim the upper body at the target (pitch)
-            if (spine != null && target != null)
-            {
-                Vector3 toT = aimDir;
-                float pitchDeg = -Mathf.Asin(Mathf.Clamp(toT.y, -1f, 1f)) * Mathf.Rad2Deg;
-                spine.rotation = Quaternion.AngleAxis(pitchDeg * 0.7f, transform.right) * spine.rotation;
-            }
-            Vector3 fwd = (lHand.position - rHand.position);
-            if (fwd.sqrMagnitude < 0.0001f) fwd = transform.forward;
-            Vector3 up = Vector3.Cross(fwd, transform.right);
-            if (Vector3.Dot(up, Vector3.up) < 0) up = -up;
-            gun.rotation = Quaternion.LookRotation(fwd.normalized, up);
-            gun.position = rHand.position + gun.rotation * new Vector3(0.0f, 0.04f, 0.03f);
+            // fallback when the animator has no IK pass (old controller): still hold the gun along the aim line
+            if (!Alive || gun == null || ikFrame == Time.frameCount) return;
+            PlaceGun();
         }
 
         void SpawnGun()
         {
             var g = Instantiate(weapon.prefab, transform);
             foreach (var c in g.GetComponentsInChildren<Collider>()) Destroy(c);
-            Util.SetShadows(g, Settings.Quality >= 2 ? ShadowCastingMode.On : ShadowCastingMode.Off);
+            Util.SetShadows(g, Settings.Quality >= 1 ? ShadowCastingMode.On : ShadowCastingMode.Off);
             gun = g.transform;
         }
 

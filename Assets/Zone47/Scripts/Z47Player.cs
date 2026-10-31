@@ -15,9 +15,10 @@ namespace Zone47
         public static Vector2 look;          // accumulated pixels this frame (consumed by player)
         public static bool fireHeld;
         public static bool aim;
-        public static bool jump, crouchToggle, reload, grenade, next;
+        public static bool jump, crouchToggle, proneToggle, reload, grenade, next;
+        public static int lean;              // -1 left, 0 none, 1 right (toggled by the HUD buttons)
         public static int select = -1;
-        public static void ResetEdges() { jump = crouchToggle = reload = grenade = next = false; select = -1; look = Vector2.zero; }
+        public static void ResetEdges() { jump = crouchToggle = proneToggle = reload = grenade = next = false; select = -1; look = Vector2.zero; }
     }
 
     public class PlayerController : Actor
@@ -34,10 +35,12 @@ namespace Zone47
         float stepDist;
         float shake;
         float recoilPitch, recoilYaw, recoilPitchVel, recoilYawVel;
-        float landDip;
+        float landDip; float camRoll;
+        bool prone; float leanT, leanMax = 1f;
+        float heat, fovKick, fovKickVel, wallT, breathT;
 
         // weapons
-        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; }
+        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; public Transform reticle; }
         Slot[] slots;
         int cur;
         float nextFire;
@@ -69,12 +72,16 @@ namespace Zone47
         public int Mag => slots[cur].mag;
         public int Reserve => slots[cur].reserve;
         public bool Reloading => reloading;
+        public float ReloadLeft => reloading ? Mathf.Max(0f, slots[cur].reloadDur - reloadT) : 0f;
+        public float ReloadProgress => reloading && slots[cur].reloadDur > 0f ? Mathf.Clamp01(reloadT / slots[cur].reloadDur) : 0f;
+        public bool ReloadCancelable => reloading && slots[cur].mag > 0;
         public bool Scoped => Aiming && Cur.scope && adsT > 0.85f;
+        public float AdsT => adsT;
         public float MoveSpeed => cc != null ? new Vector2(cc.velocity.x, cc.velocity.z).magnitude : 0f;
 
         public override Vector3 EyePos => cam != null ? cam.transform.position : transform.position + Vector3.up * 1.6f;
-        public override Vector3 ChestPos => transform.position + Vector3.up * (crouched ? 0.8f : 1.25f);
-        public override float HeadHeight => EyePos.y - 0.2f;
+        public override Vector3 ChestPos => transform.position + Vector3.up * (prone ? 0.3f : crouched ? 0.8f : 1.25f) + transform.right * leanT * 0.22f;
+        public override float HeadHeight => EyePos.y - (prone ? 0.12f : 0.2f);
 
         public static PlayerController Create(Vector3 pos, Quaternion rot)
         {
@@ -104,6 +111,9 @@ namespace Zone47
             var data = cam.GetUniversalAdditionalCameraData();
             data.renderPostProcessing = Settings.PostFx;
             data.antialiasing = Settings.AA;
+            int blurLayer = LayerMask.NameToLayer("Viewmodel");
+            if (blurLayer >= 0) data.volumeLayerMask = data.volumeLayerMask | (1 << blurLayer);    // main view also sees the scope-blur volume
+            Weather.SetupCamera(cam);
 
             viewRoot = new GameObject("ViewRoot").transform;
             viewRoot.SetParent(camGo.transform, false);
@@ -123,6 +133,7 @@ namespace Zone47
                                       anim = d.animated ? w.GetComponentInChildren<Animation>() : null, rends = w.GetComponentsInChildren<Renderer>(), reloadDur = d.reloadTime };
                 var adsRet = Util.FindDeep(w.transform, "ReticleADS");
                 if (adsRet != null) slots[i].adsReticle = adsRet.GetComponent<Renderer>();
+                slots[i].reticle = Util.FindDeep(w.transform, "Reticle");     // holo dot: bullets follow what the eye sees
                 if (slots[i].anim != null) { var an = slots[i].anim; an.playAutomatically = false; an.cullingType = AnimationCullingType.AlwaysAnimate; foreach (AnimationState st in an) st.wrapMode = st.name == "idle" || st.name == "hold" ? WrapMode.Loop : WrapMode.Once; }
             }
 
@@ -203,6 +214,9 @@ namespace Zone47
                 else if (HUD.I != null && !HUD.I.JoystickActive) PInput.move = Vector2.zero;
                 if (k.spaceKey.wasPressedThisFrame) PInput.jump = true;
                 if (k.cKey.wasPressedThisFrame) PInput.crouchToggle = true;
+                if (k.zKey.wasPressedThisFrame) PInput.proneToggle = true;
+                if (k.xKey.wasPressedThisFrame) PInput.lean = PInput.lean == -1 ? 0 : -1;
+                if (k.vKey.wasPressedThisFrame) PInput.lean = PInput.lean == 1 ? 0 : 1;
                 if (k.rKey.wasPressedThisFrame) PInput.reload = true;
                 if (k.gKey.wasPressedThisFrame) PInput.grenade = true;
                 if (k.digit1Key.wasPressedThisFrame) PInput.select = 0;
@@ -250,12 +264,51 @@ namespace Zone47
 
             shake = Mathf.MoveTowards(shake, 0, Time.deltaTime * 2.2f);
             Vector3 sh = shake > 0 ? new Vector3(Mathf.PerlinNoise(Time.time * 25f, 0) - 0.5f, Mathf.PerlinNoise(0, Time.time * 25f) - 0.5f, 0) * shake * 6f : Vector3.zero;
-            cam.transform.localRotation = Quaternion.Euler(pitch - recoilPitch + sh.y, recoilYaw + sh.x, 0);
+            camRoll = Mathf.Lerp(camRoll, -PInput.move.x * 1.2f * (1f - adsT), Time.deltaTime * 5f);
+            cam.transform.localRotation = Quaternion.Euler(pitch - recoilPitch + sh.y, recoilYaw + sh.x, -leanT * 11f + camRoll);
 
-            float fovT = Cur.scope ? 18f : Cur.adsFov;
+            float fovT = Cur.scope ? 52f : Cur.adsFov;      // scoped: the lens does the zooming, the world around it stays wide
             adsT = Mathf.MoveTowards(adsT, Aiming ? 1f : 0f, Time.deltaTime * 6f);
-            cam.fieldOfView = Mathf.Lerp(70f, fovT, adsT);
+            Spring(ref fovKick, ref fovKickVel, 180f, 16f, sdt);
+            cam.fieldOfView = Mathf.Lerp(70f, fovT, adsT) + fovKick * (Cur.scope ? 0.25f : 1f);
             if (vmCam != null) vmCam.fieldOfView = Mathf.Lerp(56f, 44f, adsT);
+            UpdateScopeCam();
+        }
+
+        Camera scopeCam; RenderTexture scopeRT;
+        public RenderTexture ScopeRT => scopeRT;
+        const float ScopeFov = 11f;
+
+        void UpdateScopeCam()
+        {
+            bool on = Scoped && Alive;
+            if (on && scopeCam == null)
+            {
+                int res = Settings.Quality >= 2 ? 1024 : 768;
+                scopeRT = new RenderTexture(res, res, 24) { name = "ScopeRT" };
+                var g = new GameObject("ScopeCam");
+                g.transform.SetParent(cam.transform, false);
+                scopeCam = g.AddComponent<Camera>();
+                scopeCam.cullingMask = cam.cullingMask;          // no viewmodel
+                scopeCam.nearClipPlane = 0.3f; scopeCam.aspect = 1f;
+                scopeCam.targetTexture = scopeRT;
+                scopeCam.depth = cam.depth - 1;
+                var sd = scopeCam.GetUniversalAdditionalCameraData();
+                sd.renderPostProcessing = Settings.PostFx;       // same colour grading as the main view, but not the blur volume
+                sd.antialiasing = AntialiasingMode.FastApproximateAntialiasing;
+                sd.renderShadows = Settings.Quality >= 2;
+            }
+            if (scopeCam != null)
+            {
+                scopeCam.enabled = on;
+                if (on)
+                {
+                    scopeCam.fieldOfView = ScopeFov;
+                    scopeCam.clearFlags = cam.clearFlags; scopeCam.backgroundColor = cam.backgroundColor;
+                    scopeCam.farClipPlane = cam.farClipPlane;
+                }
+            }
+            if (Boot.ScopeBlur != null) Boot.ScopeBlur.weight = on ? 1f : 0f;
         }
 
         /// Gyro aim (landscape): turning the phone left/right yaws, tilting it pitches. Degrees this frame.
@@ -294,50 +347,76 @@ namespace Zone47
 
         void Move()
         {
-            if (PInput.crouchToggle) crouched = !crouched;
+            // stances: stand / crouch / prone. Standing up needs head room.
+            if (PInput.proneToggle) { if (prone) { if (CanStand(1.2f)) prone = false; } else if (grounded) { prone = true; crouched = false; } }
+            if (PInput.crouchToggle) { if (prone) { if (CanStand(1.2f)) { prone = false; crouched = true; } } else if (!crouched || CanStand(1.8f)) crouched = !crouched; }
             Vector2 mv = Vector2.ClampMagnitude(PInput.move, 1f);
-            bool sprint = mv.y > 0.85f && Mathf.Abs(mv.x) < 0.5f && !Aiming && !Firing && !reloading;
-            if (sprint && crouched) crouched = false;
-            float speed = crouched ? 2.2f : Aiming ? 2.7f : sprint ? 6.4f : 4.3f;
+            // sprint anywhere in the forward 60deg cone (diagonal forward no longer drops to walk speed)
+            float mag = mv.magnitude;
+            bool sprint = mag > 0.88f && mv.y / Mathf.Max(mag, 0.001f) > 0.5f && !Aiming && !Firing && !reloading && !prone;
+            if (sprint && crouched) { if (CanStand(1.8f)) crouched = false; else sprint = false; }
+            if (sprint) PInput.lean = 0;
+            float speed = prone ? 1.1f : crouched ? 2.2f : Aiming ? 2.7f : sprint ? 6.4f : 4.3f;
+            // speed effectors: backing up and strafing are slower than walking forward
+            if (!sprint && mag > 0.01f) { float fw = mv.y / mag; speed *= fw < 0f ? Mathf.Lerp(1f, 0.72f, -fw) : Mathf.Lerp(0.86f, 1f, fw); }
             Vector3 wish = transform.TransformDirection(new Vector3(mv.x, 0, mv.y)) * speed;
 
             grounded = cc.isGrounded;
             if (grounded && velocity.y < 0)
             {
-                if (velocity.y < -6f) { landDip = Mathf.Clamp(-velocity.y * 0.02f, 0, 0.18f); Sfx.Play2D(Z47Refs.I.steps[0], 0.6f); }
+                if (velocity.y < -6f) { landDip = Mathf.Clamp(-velocity.y * 0.02f, 0, 0.18f); Sfx.Play2D(Sfx.StepClip(transform.position, 2), 0.75f, 0.06f); }
                 velocity.y = -2f;
             }
             float accel = grounded ? 14f : 3f;
             velocity.x = Mathf.Lerp(velocity.x, wish.x, Time.deltaTime * accel);
             velocity.z = Mathf.Lerp(velocity.z, wish.z, Time.deltaTime * accel);
-            if (PInput.jump && grounded) { velocity.y = Mathf.Sqrt(2f * 9.81f * 1.05f); crouched = false; }
+            if (PInput.jump && grounded && prone) { if (CanStand(1.2f)) { prone = false; crouched = true; } }
+            else if (PInput.jump && grounded && (!crouched || CanStand(1.8f))) { velocity.y = Mathf.Sqrt(2f * 9.81f * 1.05f); crouched = false; }
             velocity.y -= 9.81f * 1.6f * Time.deltaTime;
             cc.Move(velocity * Time.deltaTime);
 
-            float targetH = crouched ? 1.05f : 1.62f;
-            cc.height = Mathf.Lerp(cc.height, crouched ? 1.2f : 1.8f, Time.deltaTime * 10f);
+            float targetH = prone ? 0.42f : crouched ? 1.05f : 1.62f;
+            cc.height = Mathf.Lerp(cc.height, prone ? 0.6f : crouched ? 1.2f : 1.8f, Time.deltaTime * (prone ? 6f : 10f));
             cc.center = new Vector3(0, cc.height * 0.5f, 0);
             camH = Mathf.Lerp(camH, targetH, Time.deltaTime * 10f);
             landDip = Mathf.Lerp(landDip, 0, Time.deltaTime * 8f);
 
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
             float bob = grounded ? Mathf.Sin(Time.time * (sprint ? 13f : 9f)) * Mathf.Clamp01(hs / 6f) * 0.03f * (1f - adsT * 0.8f) : 0f;
-            cam.transform.localPosition = new Vector3(0, camH + bob - landDip, 0);
+            // lean: peek around corners, stopped early by walls so the camera never clips through
+            int lean = (prone || sprint || !Alive) ? 0 : PInput.lean;
+            if (lean != 0)
+            {
+                Vector3 head = transform.position + Vector3.up * camH;
+                leanMax = Physics.SphereCast(head, 0.15f, transform.right * lean, out var lh, 0.42f, ~0, QueryTriggerInteraction.Ignore) && !lh.collider.transform.IsChildOf(transform)
+                    ? Mathf.Clamp01((lh.distance - 0.05f) / 0.37f) : 1f;
+            }
+            leanT = Mathf.Lerp(leanT, lean * leanMax, Time.deltaTime * 8f);
+            cam.transform.localPosition = new Vector3(leanT * 0.37f, camH + bob - landDip - Mathf.Abs(leanT) * 0.06f, 0);
 
             if (grounded && hs > 0.5f)
             {
                 stepDist += hs * Time.deltaTime;
-                float stride = sprint ? 2.6f : crouched ? 1.5f : 2.0f;
+                float stride = sprint ? 2.6f : prone ? 1.0f : crouched ? 1.5f : 2.0f;
                 if (stepDist > stride)
                 {
                     stepDist = 0;
-                    var st = Z47Refs.I.steps;
-                    Sfx.Play2D(st[Random.Range(0, st.Length)], crouched ? 0.18f : sprint ? 0.5f : 0.33f, 0.1f);
+                    if (!crouched && !prone) BotController.Noise(this, sprint ? 18f : 10f);      // footsteps give you away (crouch to sneak)
+                    Sfx.Play2D(Sfx.StepClip(transform.position, sprint ? 1 : 0), prone ? 0.15f : crouched ? 0.22f : sprint ? 0.6f : 0.42f, 0.08f);
                 }
             }
             sprinting = sprint && hs > 3f;
         }
         bool sprinting;
+
+        bool CanStand(float h)
+        {
+            float r = cc != null ? cc.radius * 0.9f : 0.3f;
+            Vector3 a = transform.position + Vector3.up * (r + 0.35f), b = transform.position + Vector3.up * (h - r);
+            foreach (var c in Physics.OverlapCapsule(a, b, r, ~0, QueryTriggerInteraction.Ignore))
+                if (!c.transform.IsChildOf(transform) && Actor.FromCollider(c) == null) return false;
+            return true;
+        }
 
         // ------------------------------------------------------------ weapons
         void Weapons()
@@ -372,6 +451,14 @@ namespace Zone47
                 return;
             }
 
+            // fire cancels a reload as long as there is still a round in the mag (tap fire = shoot right now)
+            if (reloading && s.mag > 0 && Firing && !triggerWasDown && reloadT > 0.08f)
+            {
+                reloading = false; reloadT = 0f;
+                if (s.mag3d != null) s.mag3d.gameObject.SetActive(true);
+                if (s.anim != null) PlayAnim(s, s.anim["hold"] != null ? "hold" : "idle", 0.1f);
+            }
+
             // reload
             if ((PInput.reload || (s.mag == 0 && Firing && s.reserve > 0)) && !reloading && s.mag < d.magSize && s.reserve > 0)
             {
@@ -396,8 +483,9 @@ namespace Zone47
             }
 
             boltT -= Time.deltaTime;
+            heat = Mathf.MoveTowards(heat, 0f, Time.deltaTime * (Firing ? 0.35f : 1.6f));
             bool down = Firing && !sprinting;
-            float baseSpread = Mathf.Lerp(d.hipSpread, d.adsSpread, adsT) * (crouched ? 0.75f : 1f);
+            float baseSpread = Mathf.Lerp(d.hipSpread, d.adsSpread, adsT) * (prone ? 0.55f : crouched ? 0.75f : 1f);
             float moveSpread = new Vector2(cc.velocity.x, cc.velocity.z).magnitude * 0.25f * (1f - adsT * 0.7f);
             if (!grounded) moveSpread += 3f;
             spreadNow = Mathf.Lerp(spreadNow, baseSpread + moveSpread, Time.deltaTime * 10f);
@@ -430,16 +518,28 @@ namespace Zone47
             // aimed fire is honest: first round goes where the sight is, follow-ups bloom a little
             bool aimed = Aiming && adsT > 0.85f;
             float spread = Scoped ? 0.05f : aimed ? d.adsSpread * (Time.time - lastShotAt > 0.35f ? 0.2f : 1f) + Mathf.Max(0f, spreadNow - d.adsSpread) * 0.5f : spreadNow;
-            Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread) * 0.5f, Random.Range(-spread, spread) * 0.5f, 0) * cam.transform.forward;
+            // aimed through a holo: shoot exactly where the dot is drawn on screen (viewmodel cam has its own FOV)
+            Vector3 aimDir = cam.transform.forward;
+            if (aimed && s.reticle != null && vmCam != null)
+            {
+                Vector3 sp = vmCam.WorldToScreenPoint(s.reticle.position);
+                if (sp.z > 0f && Mathf.Abs(sp.x - Screen.width * 0.5f) < Screen.width * 0.1f && Mathf.Abs(sp.y - Screen.height * 0.5f) < Screen.height * 0.1f)
+                    aimDir = cam.ScreenPointToRay(sp).direction;
+            }
+            Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread) * 0.5f, Random.Range(-spread, spread) * 0.5f, 0) * aimDir;
             Vector3 muzzleWorld = s.go.transform.TransformPoint(d.muzzlePoint);
             // no tracer while aiming: a streak from the muzzle (below the eye) to the target read as "bullets going crooked"
             Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !aimed && Random.value < 0.5f, out _);
 
             Sfx.Play2D(d.shot, d.kind == WeaponKind.Sniper ? 1f : 0.85f, 0.05f);
+            BotController.Noise(this, 60f);
             if (Random.value < 0.5f) StartCoroutine(Delayed(0.35f, () => Sfx.Play2D(Z47Refs.I.casing, 0.12f, 0.2f)));
             if (d.kind == WeaponKind.Sniper) StartCoroutine(Delayed(0.45f, () => Sfx.Play2D(Z47Refs.I.awpBolt, 0.6f)));
 
-            float rk = d.recoil * (aimed ? 0.75f : 1f) * (crouched ? 0.8f : 1f);
+            // heat: long sprays kick harder, short bursts stay controllable; cools off quickly between bursts
+            heat = Mathf.Min(1f, heat + (d.kind == WeaponKind.Sniper ? 0.5f : 0.09f));
+            float rk = d.recoil * (aimed ? 0.75f : 1f) * (prone ? 0.6f : crouched ? 0.8f : 1f) * (1f + heat * 0.45f);
+            fovKickVel += (d.kind == WeaponKind.Sniper ? 30f : d.kind == WeaponKind.Pistol ? 9f : 7f) * (aimed ? 0.5f : 1f);
             if (Time.time - lastShotAt > 0.35f) shotIdx = 0;
             shotIdx++; lastShotAt = Time.time;
             float climb = Mathf.Lerp(1f, 0.6f, Mathf.Clamp01(shotIdx / 10f));      // first rounds climb most
@@ -518,7 +618,7 @@ namespace Zone47
             Quaternion rot = Quaternion.identity;
 
             // inertial sway (lags behind the view, springs back)
-            float aimK = 1f - adsT * 0.85f;
+            float aimK = 1f - adsT * 0.97f;
             Vector2 lk = Vector2.ClampMagnitude(PInput.look * 0.0006f, 0.035f);
             swayPos = Vector3.Lerp(swayPos, new Vector3(-lk.x, -lk.y, 0), Time.deltaTime * 9f);
             swayRot = Vector3.Lerp(swayRot, new Vector3(lk.y * 140f, -lk.x * 140f, -lk.x * 220f), Time.deltaTime * 9f);
@@ -531,7 +631,21 @@ namespace Zone47
             float bt = Time.time * (sprinting ? 13f : 9f);
             pos += new Vector3(Mathf.Cos(bt * 0.5f) * 0.012f, Mathf.Abs(Mathf.Sin(bt * 0.5f)) * 0.01f, 0) * Mathf.Clamp01(hs / 5f) * (1f - adsT * 0.9f);
             if (sprinting) { pos += new Vector3(-0.04f, -0.04f, -0.03f); rot *= Quaternion.Euler(10f, -28f, 12f); }
-            if (crouched) pos += new Vector3(-0.01f, 0.005f, 0);
+            if (crouched) pos += new Vector3(-0.01f, 0.005f, 0) * (1f - adsT);
+            if (prone && !Aiming) { pos += new Vector3(0.02f, -0.03f, 0); rot *= Quaternion.Euler(0, 0, -8f); }
+
+            // breathing: slow figure-eight drift, calmer when aiming, stronger when out of breath (sprinting)
+            breathT += Time.deltaTime * (sprinting ? 2.2f : 1f);
+            float bA = (sprinting ? 0.006f : 0.0028f) * (1f - adsT * 0.8f) * (prone ? 0.5f : crouched ? 0.75f : 1f);
+            pos += new Vector3(Mathf.Sin(breathT * 0.9f), Mathf.Sin(breathT * 1.8f + Mathf.PI) * 0.5f, 0) * bA;
+
+            // pull the gun back / up when standing against a wall instead of sticking it through
+            float wantWall = 0f;
+            if (Physics.SphereCast(cam.transform.position, 0.06f, cam.transform.forward, out var wh, 0.85f, ~0, QueryTriggerInteraction.Ignore)
+                && !wh.collider.transform.IsChildOf(transform) && Actor.FromCollider(wh.collider) == null)
+                wantWall = Mathf.Clamp01(1f - (wh.distance - 0.3f) / 0.5f);
+            wallT = Mathf.Lerp(wallT, wantWall, Time.deltaTime * 10f);
+            if (wallT > 0.01f) { pos += new Vector3(0.02f, -0.04f, -0.16f) * wallT * (1f - adsT * 0.6f); rot *= Quaternion.Euler(-28f * wallT * (1f - adsT), 12f * wallT * (1f - adsT), 0); }
 
             // kick
             // weapon kick springs: stiff and slightly under-damped -> crisp thump with a small settle
@@ -568,7 +682,7 @@ namespace Zone47
 
             bool hide = Scoped;
             foreach (var r in s.rends) r.enabled = !hide;
-            if (s.adsReticle != null) s.adsReticle.enabled = !hide && adsT > 0.65f;      // red dot only lights up when looking through it
+            if (s.adsReticle != null) s.adsReticle.enabled = false;      // red dot is drawn by the HUD at the exact aim point
             if (s.anim != null) AnimTick(s);
             if (arms != null)
             {
@@ -648,6 +762,7 @@ namespace Zone47
         {
             HUD.I?.Damaged(fromPos);
             Shake(0.25f);
+            recoilPitchVel += Random.Range(4f, 8f); recoilYawVel += Random.Range(-5f, 5f);    // flinch
         }
 
         protected override void OnDie(Actor k)
@@ -679,7 +794,7 @@ namespace Zone47
             cc.enabled = false;
             transform.SetPositionAndRotation(pos, rot);
             cc.enabled = true;
-            yaw = rot.eulerAngles.y; pitch = 0; velocity = Vector3.zero; crouched = false;
+            yaw = rot.eulerAngles.y; pitch = 0; velocity = Vector3.zero; crouched = false; prone = false; PInput.lean = 0; leanT = 0; heat = 0;
             cam.transform.localPosition = new Vector3(0, 1.62f, 0);
             cam.transform.localRotation = Quaternion.identity;
             hp = maxHp; grenades = 2; reloading = false; throwT = -1; switchT = 0; pendingSlot = -1;

@@ -12,8 +12,8 @@
 #include "vm/StackTrace.h"
 #include "vm/Thread.h"
 #include "vm/String.h"
+#include "gc/Allocator.h"
 #include "gc/GarbageCollector.h"
-#include "gc/GCTrackedVector.h"
 #include "gc/GCHandle.h"
 #include "gc/WriteBarrier.h"
 #include "utils/Memory.h"
@@ -33,7 +33,7 @@ namespace vm
 {
     Il2CppThread* Thread::s_MainThread = NULL;
 
-    typedef il2cpp::gc::GCTrackedVector<Il2CppThread*> GCTrackedThreadVector;
+    typedef std::vector<Il2CppThread*, il2cpp::gc::Allocator<Il2CppThread*> > GCTrackedThreadVector;
 
     // we need to allocate this ourselves so the CRT does not initialize it and try to allocate GC memory on startup before the GC is initialized
     static GCTrackedThreadVector* s_AttachedThreads;

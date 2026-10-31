@@ -19002,14 +19002,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void KeyDownEvent__cctor_m45C6ECEA49E975BF7C6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:274>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:284>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t8E991482770964D84486E1DB3E7EB0112FC0409E_il2cpp_TypeInfo_var);
 		U3CU3Ec_t8E991482770964D84486E1DB3E7EB0112FC0409E* L_0 = ((U3CU3Ec_t8E991482770964D84486E1DB3E7EB0112FC0409E_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t8E991482770964D84486E1DB3E7EB0112FC0409E_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tDCAD5338A8C2646978D18875F937C4FA317C2CF2* L_1 = (Func_1_tDCAD5338A8C2646978D18875F937C4FA317C2CF2*)il2cpp_codegen_object_new(Func_1_tDCAD5338A8C2646978D18875F937C4FA317C2CF2_il2cpp_TypeInfo_var);
 		Func_1__ctor_m4C02DCF93871B2EDE9DAEC1CA8001758C43BC571(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mA779D958761F69B3BF484ABD7DA2EC4CAE6107FE_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t730BB171C1C7F183359949BD5F4BA81AFE9A35CE_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m1549F00C3726E3CB7308169B3935CA4F938FA4AE(L_1, EventBase_1_SetCreateFunction_m1549F00C3726E3CB7308169B3935CA4F938FA4AE_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:275>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:285>
 		return;
 	}
 }
@@ -19028,10 +19028,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void KeyDownEvent_PostDispatch_mC77AEA05247FD
 	int32_t G_B4_0 = 0;
 	int32_t G_B6_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:295>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:305>
 		RuntimeObject* L_0 = ___0_panel;
 		EventBase_PostDispatch_mC830955EA32723BF0C10CCB37E01197CBADC07B3(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:301>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:311>
 		RuntimeObject* L_1 = ___0_panel;
 		NullCheck(L_1);
 		int32_t L_2;
@@ -19086,14 +19086,14 @@ IL_002e:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:303>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:313>
 		RuntimeObject* L_7 = ___0_panel;
 		KeyDownEvent_SendEquivalentNavigationEventIfAny_m6A7281864FF72D4B33DCC6A5775881526DAAF61A(__this, L_7, NULL);
 	}
 
 IL_003c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:305>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:315>
 		return;
 	}
 }
@@ -19134,7 +19134,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void KeyDownEvent_SendEquivalentNavigationEve
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 G_B44_0;
 	memset((&G_B44_0), 0, sizeof(G_B44_0));
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:309>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:319>
 		Il2CppChar L_0;
 		L_0 = KeyboardEventBase_1_get_character_m1E37E5E3AA11D7538A88E00209C4EAD83E128825_inline(__this, KeyboardEventBase_1_get_character_m1E37E5E3AA11D7538A88E00209C4EAD83E128825_RuntimeMethod_var);
 		if ((((int32_t)L_0) == ((int32_t)((int32_t)10))))
@@ -19180,7 +19180,7 @@ IL_002b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:311>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:321>
 		int32_t L_5;
 		L_5 = KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_inline(__this, KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_RuntimeMethod_var);
 		NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545B48962188505665BB1* L_6;
@@ -19214,13 +19214,13 @@ IL_0065:
 		});
 		try
 		{
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:313>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:323>
 			NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545B48962188505665BB1* L_9 = V_1;
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_10;
 			L_10 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 			NullCheck(L_9);
 			EventBase_set_elementTarget_m8BF8A4CD508F335210DB9FD2D034549A1EC084A8_inline(L_9, L_10, NULL);
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:314>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:324>
 			RuntimeObject* L_11 = ___0_panel;
 			NullCheck(L_11);
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_12;
@@ -19243,7 +19243,7 @@ IL_0066:
 
 IL_006c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:317>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:327>
 		int32_t L_14;
 		L_14 = KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_inline(__this, KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_RuntimeMethod_var);
 		V_2 = (bool)((((int32_t)L_14) == ((int32_t)((int32_t)27)))? 1 : 0);
@@ -19254,7 +19254,7 @@ IL_006c:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:319>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:329>
 		int32_t L_16;
 		L_16 = KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_inline(__this, KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_RuntimeMethod_var);
 		NavigationCancelEvent_tB8811EBDC85FD365D1034AEA30F07CBC3161E59E* L_17;
@@ -19288,13 +19288,13 @@ IL_00b0:
 		});
 		try
 		{
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:321>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:331>
 			NavigationCancelEvent_tB8811EBDC85FD365D1034AEA30F07CBC3161E59E* L_20 = V_3;
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_21;
 			L_21 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 			NullCheck(L_20);
 			EventBase_set_elementTarget_m8BF8A4CD508F335210DB9FD2D034549A1EC084A8_inline(L_20, L_21, NULL);
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:322>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:332>
 			RuntimeObject* L_22 = ___0_panel;
 			NullCheck(L_22);
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_23;
@@ -19317,7 +19317,7 @@ IL_00b1:
 
 IL_00b7:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:325>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:335>
 		bool L_25;
 		L_25 = KeyboardEventExtensions_ShouldSendNavigationMoveEvent_mA243DD2D952E466C4E9EDC85EBD5C1C9EE308049(__this, NULL);
 		V_4 = L_25;
@@ -19328,7 +19328,7 @@ IL_00b7:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:327>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:337>
 		bool L_27;
 		L_27 = KeyboardEventBase_1_get_shiftKey_m6F17812A43DB9076880B0ACA64DD5675FA30E418(__this, KeyboardEventBase_1_get_shiftKey_m6F17812A43DB9076880B0ACA64DD5675FA30E418_RuntimeMethod_var);
 		if (L_27)
@@ -19382,13 +19382,13 @@ IL_010a:
 		});
 		try
 		{
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:331>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:341>
 			NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_32 = V_5;
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_33;
 			L_33 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 			NullCheck(L_32);
 			EventBase_set_elementTarget_m8BF8A4CD508F335210DB9FD2D034549A1EC084A8_inline(L_32, L_33, NULL);
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:332>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:342>
 			RuntimeObject* L_34 = ___0_panel;
 			NullCheck(L_34);
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_35;
@@ -19411,7 +19411,7 @@ IL_010b:
 
 IL_0111:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:335>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:345>
 		int32_t L_37;
 		L_37 = KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_inline(__this, KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_RuntimeMethod_var);
 		if ((((int32_t)L_37) == ((int32_t)((int32_t)275))))
@@ -19457,7 +19457,7 @@ IL_0148:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:338>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:348>
 		int32_t L_42;
 		L_42 = KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_inline(__this, KeyboardEventBase_1_get_keyCode_m1F9724EFC75BE6E998EC0DB5515F7FD577257D6B_RuntimeMethod_var);
 		if ((((int32_t)L_42) == ((int32_t)((int32_t)275))))
@@ -19524,7 +19524,7 @@ IL_018e:
 IL_0193:
 	{
 		V_7 = G_B44_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:342>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:352>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_49 = V_7;
 		int32_t L_50;
 		L_50 = KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_inline(__this, KeyboardEventBase_1_get_modifiers_m0842BDF157A5124C4B011494F378B7DEA32E1AFB_RuntimeMethod_var);
@@ -19560,13 +19560,13 @@ IL_01d1:
 		});
 		try
 		{
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:344>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:354>
 			NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_54 = V_8;
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_55;
 			L_55 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 			NullCheck(L_54);
 			EventBase_set_elementTarget_m8BF8A4CD508F335210DB9FD2D034549A1EC084A8_inline(L_54, L_55, NULL);
-			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:345>
+			//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:355>
 			RuntimeObject* L_56 = ___0_panel;
 			NullCheck(L_56);
 			VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_57;
@@ -19588,7 +19588,7 @@ IL_01d2:
 
 IL_01d3:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:348>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:358>
 		return;
 	}
 }
@@ -19652,7 +19652,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:274>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:284>
 		KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C* L_0 = (KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C*)il2cpp_codegen_object_new(KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C_il2cpp_TypeInfo_var);
 		KeyDownEvent__ctor_mB618DF4885F2640228953AB6E95576445AF84505(L_0, NULL);
 		return L_0;
@@ -19682,7 +19682,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool KeyboardEventExtensions_ShouldSendNaviga
 	bool V_0 = false;
 	int32_t G_B6_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:358>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:368>
 		KeyDownEvent_t1971978254C8EE65CDDD992AF86B44E442CDD18C* L_0 = ___0_e;
 		NullCheck(L_0);
 		int32_t L_1;
@@ -19744,7 +19744,7 @@ IL_002f:
 
 IL_0032:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:359>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:369>
 		bool L_10 = V_0;
 		return L_10;
 	}
@@ -19755,7 +19755,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool KeyboardEventExtensions_ShouldSendNaviga
 	bool V_0 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:364>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:374>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_0 = ___0_e;
 		NullCheck(L_0);
 		int32_t L_1;
@@ -19787,7 +19787,7 @@ IL_0017:
 
 IL_001a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:365>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:375>
 		bool L_4 = V_0;
 		return L_4;
 	}
@@ -19814,14 +19814,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void KeyUpEvent__cctor_mDC703C0F452C189DFAFC6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:378>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:388>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tADE8BB9A3CE47C36E9082AE519CBCDEAD07A068A_il2cpp_TypeInfo_var);
 		U3CU3Ec_tADE8BB9A3CE47C36E9082AE519CBCDEAD07A068A* L_0 = ((U3CU3Ec_tADE8BB9A3CE47C36E9082AE519CBCDEAD07A068A_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tADE8BB9A3CE47C36E9082AE519CBCDEAD07A068A_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tC45D5BE218276C0AE4C088375FA0E30532DCF293* L_1 = (Func_1_tC45D5BE218276C0AE4C088375FA0E30532DCF293*)il2cpp_codegen_object_new(Func_1_tC45D5BE218276C0AE4C088375FA0E30532DCF293_il2cpp_TypeInfo_var);
 		Func_1__ctor_mF8CAF932E6F0B3F8EDBFD9D17F29706916A1E7C8(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m87B1D9CFEBBEBC5DF0903D16E5B5F913F71EF523_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t056EE42AB4A3D8793585737CC6974771FF692BED_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m1B08A000006C479995539881DC9069615FE07F74(L_1, EventBase_1_SetCreateFunction_m1B08A000006C479995539881DC9069615FE07F74_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:379>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:389>
 		return;
 	}
 }
@@ -19885,7 +19885,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR KeyUpEvent_tA037C42AEA6A8E0919BA60BD796B3AD1D
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:378>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/KeyboardEvents.cs:388>
 		KeyUpEvent_tA037C42AEA6A8E0919BA60BD796B3AD1DA506394* L_0 = (KeyUpEvent_tA037C42AEA6A8E0919BA60BD796B3AD1DA506394*)il2cpp_codegen_object_new(KeyUpEvent_tA037C42AEA6A8E0919BA60BD796B3AD1DA506394_il2cpp_TypeInfo_var);
 		KeyUpEvent__ctor_mC3FE99955FFF345F45584273203ACAE764751807(L_0, NULL);
 		return L_0;
@@ -20158,14 +20158,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseDownEvent__cctor_m5D48627A9144651CB
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:464>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:474>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t10469B057ED956C4C04CC02BA6845D323ABE3C98_il2cpp_TypeInfo_var);
 		U3CU3Ec_t10469B057ED956C4C04CC02BA6845D323ABE3C98* L_0 = ((U3CU3Ec_t10469B057ED956C4C04CC02BA6845D323ABE3C98_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t10469B057ED956C4C04CC02BA6845D323ABE3C98_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t5A9676ADE053EC7F5911B347C055595E0158FD64* L_1 = (Func_1_t5A9676ADE053EC7F5911B347C055595E0158FD64*)il2cpp_codegen_object_new(Func_1_t5A9676ADE053EC7F5911B347C055595E0158FD64_il2cpp_TypeInfo_var);
 		Func_1__ctor_m0D586498C3C1C6D34FD48EBCE5543E2FFE7465C9(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m1168A031091D2054CC414A4632B8F502E81E9127_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t3863B2426C83CF34F5037FA191495E8B16EDFF6C_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m34B592C44EC105A497E06F08DCF37592E6946A35(L_1, EventBase_1_SetCreateFunction_m34B592C44EC105A497E06F08DCF37592E6946A35_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:465>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:475>
 		return;
 	}
 }
@@ -20179,11 +20179,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseDownEvent_Init_m7AFD0967702DC7D4587
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:472>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:482>
 		MouseEventBase_1_Init_m4EC1DC92CBE25F2D096B5F8C553FB4347F6EDE54(__this, MouseEventBase_1_Init_m4EC1DC92CBE25F2D096B5F8C553FB4347F6EDE54_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:473>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:483>
 		MouseDownEvent_LocalInit_m572FAB81FAD2754FCC34F790390C5A0B33E40B32(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:474>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:484>
 		return;
 	}
 }
@@ -20197,11 +20197,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseDownEvent_LocalInit_m572FAB81FAD275
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:478>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:488>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:480>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:490>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m19A09EA6CECC4DFFEBAB2CEE1945395142EBE4A8_inline(__this, (bool)1, MouseEventBase_1_set_recomputeTopElementUnderMouse_m19A09EA6CECC4DFFEBAB2CEE1945395142EBE4A8_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:481>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:491>
 		return;
 	}
 }
@@ -20215,11 +20215,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseDownEvent__ctor_mAB09B2F8A9FC7D65FC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:486>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:496>
 		MouseEventBase_1__ctor_m19DE4DD0D8F81992FFEC61A6920378DA6E4BD9C4(__this, MouseEventBase_1__ctor_m19DE4DD0D8F81992FFEC61A6920378DA6E4BD9C4_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:488>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:498>
 		MouseDownEvent_LocalInit_m572FAB81FAD2754FCC34F790390C5A0B33E40B32(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:489>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:499>
 		return;
 	}
 }
@@ -20234,7 +20234,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 	}
 	MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:503>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:513>
 		RuntimeObject* L_0 = ___0_pointerEvent;
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_1;
 		L_1 = MouseEventBase_1_GetPooled_m713CBA226990F6E0FC54AE1E756CB12FCDB33265(L_0, MouseEventBase_1_GetPooled_m713CBA226990F6E0FC54AE1E756CB12FCDB33265_RuntimeMethod_var);
@@ -20244,7 +20244,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:504>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:514>
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_2 = V_0;
 		return L_2;
 	}
@@ -20260,7 +20260,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 	}
 	MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:508>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:518>
 		PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51* L_0 = ___0_pointerEvent;
 		il2cpp_codegen_runtime_class_init_inline(MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD_il2cpp_TypeInfo_var);
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_1;
@@ -20271,7 +20271,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:509>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:519>
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_2 = V_0;
 		return L_2;
 	}
@@ -20287,7 +20287,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 	}
 	MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:513>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:523>
 		PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* L_0 = ___0_pointerEvent;
 		il2cpp_codegen_runtime_class_init_inline(MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD_il2cpp_TypeInfo_var);
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_1;
@@ -20298,7 +20298,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:514>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:524>
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_2 = V_0;
 		return L_2;
 	}
@@ -20348,7 +20348,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseDownEvent_tD798610B9C34C7D1CA93C66034A67
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:464>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:474>
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_0 = (MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD*)il2cpp_codegen_object_new(MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD_il2cpp_TypeInfo_var);
 		MouseDownEvent__ctor_mAB09B2F8A9FC7D65FCA88D32B60A98C98AAB7BD0(L_0, NULL);
 		return L_0;
@@ -20376,14 +20376,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseUpEvent__cctor_m0E45182CB148EBEA37E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:530>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:540>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t3B140B6F08F375AC04A56F5ADB33E8D969B33F01_il2cpp_TypeInfo_var);
 		U3CU3Ec_t3B140B6F08F375AC04A56F5ADB33E8D969B33F01* L_0 = ((U3CU3Ec_t3B140B6F08F375AC04A56F5ADB33E8D969B33F01_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t3B140B6F08F375AC04A56F5ADB33E8D969B33F01_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t43EB48ECF14FED6C5326159EFEEAB365617B71C1* L_1 = (Func_1_t43EB48ECF14FED6C5326159EFEEAB365617B71C1*)il2cpp_codegen_object_new(Func_1_t43EB48ECF14FED6C5326159EFEEAB365617B71C1_il2cpp_TypeInfo_var);
 		Func_1__ctor_m50043D48E59D2D1D4676480EFD80895C817A9B3F(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m84466C658DA021EB679DEC3E6F0A765AB5890EAD_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t9ED9D70674CFE9504A67746757FB582440278391_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m14A0A769CB065291D74A1EE8F9DCAB13F301FE7B(L_1, EventBase_1_SetCreateFunction_m14A0A769CB065291D74A1EE8F9DCAB13F301FE7B_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:531>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:541>
 		return;
 	}
 }
@@ -20397,11 +20397,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseUpEvent_Init_m4A938B62B6C5DEC412909
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:538>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:548>
 		MouseEventBase_1_Init_mADB87BB99F95C493AFE5ACE6377E47F978226453(__this, MouseEventBase_1_Init_mADB87BB99F95C493AFE5ACE6377E47F978226453_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:539>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:549>
 		MouseUpEvent_LocalInit_m9D4351244B2C35DA661614AF2681EE5375BA0466(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:540>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:550>
 		return;
 	}
 }
@@ -20415,11 +20415,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseUpEvent_LocalInit_m9D4351244B2C35DA
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:544>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:554>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:546>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:556>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m07858CCF720F1983A353D0BF795798DD01438748_inline(__this, (bool)1, MouseEventBase_1_set_recomputeTopElementUnderMouse_m07858CCF720F1983A353D0BF795798DD01438748_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:547>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:557>
 		return;
 	}
 }
@@ -20433,11 +20433,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseUpEvent__ctor_m04A1E6E5491405D305AC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:552>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:562>
 		MouseEventBase_1__ctor_m4A8C93EF6FCE660673064A965E01B031FA8C153D(__this, MouseEventBase_1__ctor_m4A8C93EF6FCE660673064A965E01B031FA8C153D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:554>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:564>
 		MouseUpEvent_LocalInit_m9D4351244B2C35DA661614AF2681EE5375BA0466(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:555>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:565>
 		return;
 	}
 }
@@ -20452,7 +20452,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 	}
 	MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:569>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:579>
 		RuntimeObject* L_0 = ___0_pointerEvent;
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_1;
 		L_1 = MouseEventBase_1_GetPooled_m48E23E2CEC51FF7FA6E60C4A4073F3E9075848D9(L_0, MouseEventBase_1_GetPooled_m48E23E2CEC51FF7FA6E60C4A4073F3E9075848D9_RuntimeMethod_var);
@@ -20462,7 +20462,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:570>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:580>
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_2 = V_0;
 		return L_2;
 	}
@@ -20478,7 +20478,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 	}
 	MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:574>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:584>
 		PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9* L_0 = ___0_pointerEvent;
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_1;
@@ -20489,7 +20489,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:575>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:585>
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_2 = V_0;
 		return L_2;
 	}
@@ -20505,7 +20505,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 	}
 	MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:579>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:589>
 		PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* L_0 = ___0_pointerEvent;
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_1;
@@ -20516,7 +20516,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:580>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:590>
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_2 = V_0;
 		return L_2;
 	}
@@ -20532,7 +20532,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 	}
 	MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:584>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:594>
 		PointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51* L_0 = ___0_pointerEvent;
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_1;
@@ -20543,7 +20543,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:585>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:595>
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_2 = V_0;
 		return L_2;
 	}
@@ -20593,7 +20593,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:530>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:540>
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_0 = (MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811*)il2cpp_codegen_object_new(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent__ctor_m04A1E6E5491405D305AC3CC50B4125BDCFE3182C(L_0, NULL);
 		return L_0;
@@ -20621,14 +20621,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseMoveEvent__cctor_m17FA1DAC09C76E345
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:606>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:616>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t719C7CB8245835BE86245CA6441D3AECE182C40A_il2cpp_TypeInfo_var);
 		U3CU3Ec_t719C7CB8245835BE86245CA6441D3AECE182C40A* L_0 = ((U3CU3Ec_t719C7CB8245835BE86245CA6441D3AECE182C40A_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t719C7CB8245835BE86245CA6441D3AECE182C40A_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t15CA8E324B40DD3E1B015BDE62EA67E807412301* L_1 = (Func_1_t15CA8E324B40DD3E1B015BDE62EA67E807412301*)il2cpp_codegen_object_new(Func_1_t15CA8E324B40DD3E1B015BDE62EA67E807412301_il2cpp_TypeInfo_var);
 		Func_1__ctor_mC92B39A8B1686F29585CECC1966D7EEDED36223C(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m7865A4F1BA061303C4517BE28A5CAAB598329932_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tFF5ADBE25C7FD2806CE67DEAAA69B7AAACA73531_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mFFC0B898692C57CFFB69D5AF83E16DBC08061AD9(L_1, EventBase_1_SetCreateFunction_mFFC0B898692C57CFFB69D5AF83E16DBC08061AD9_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:607>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:617>
 		return;
 	}
 }
@@ -20642,11 +20642,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseMoveEvent_Init_m68F14067891E33D47B0
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:614>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:624>
 		MouseEventBase_1_Init_mFEAB9B469E99EDAA5E56F540357226049C5B9AFA(__this, MouseEventBase_1_Init_mFEAB9B469E99EDAA5E56F540357226049C5B9AFA_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:615>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:625>
 		MouseMoveEvent_LocalInit_m1159C3B901FC061B77C1C86AF01D4EDA5F779FB4(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:616>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:626>
 		return;
 	}
 }
@@ -20660,11 +20660,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseMoveEvent_LocalInit_m1159C3B901FC06
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:621>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:631>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:622>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:632>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m59DCF46FDDB1EC36238700164B93FC1B06D063E3_inline(__this, (bool)1, MouseEventBase_1_set_recomputeTopElementUnderMouse_m59DCF46FDDB1EC36238700164B93FC1B06D063E3_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:623>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:633>
 		return;
 	}
 }
@@ -20678,11 +20678,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseMoveEvent__ctor_m4A63D10DA7CD74EA58
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:628>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:638>
 		MouseEventBase_1__ctor_mB84A95F11F7DECE44659C5D099FE7C82773A2BB1(__this, MouseEventBase_1__ctor_mB84A95F11F7DECE44659C5D099FE7C82773A2BB1_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:630>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:640>
 		MouseMoveEvent_LocalInit_m1159C3B901FC061B77C1C86AF01D4EDA5F779FB4(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:631>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:641>
 		return;
 	}
 }
@@ -20697,7 +20697,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8
 	}
 	MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5* V_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:655>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:665>
 		PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* L_0 = ___0_pointerEvent;
 		MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5* L_1;
 		L_1 = MouseEventBase_1_GetPooled_mC2955840E38CF19566CC2F2D06178101E293F268(L_0, MouseEventBase_1_GetPooled_mC2955840E38CF19566CC2F2D06178101E293F268_RuntimeMethod_var);
@@ -20707,7 +20707,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8
 
 IL_000a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:656>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:666>
 		MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5* L_2 = V_0;
 		return L_2;
 	}
@@ -20757,7 +20757,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:606>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:616>
 		MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5* L_0 = (MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5*)il2cpp_codegen_object_new(MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5_il2cpp_TypeInfo_var);
 		MouseMoveEvent__ctor_m4A63D10DA7CD74EA5822D4B808CDD2F4B9CD2781(L_0, NULL);
 		return L_0;
@@ -20785,14 +20785,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextClickEvent__cctor_m7FB8209A7375B9
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:666>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:676>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t162A2A4556FA30715C23F27E830A3E9727C4EBCC_il2cpp_TypeInfo_var);
 		U3CU3Ec_t162A2A4556FA30715C23F27E830A3E9727C4EBCC* L_0 = ((U3CU3Ec_t162A2A4556FA30715C23F27E830A3E9727C4EBCC_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t162A2A4556FA30715C23F27E830A3E9727C4EBCC_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tF0FC34535C16319FF36BD582B649462EFE6A9B4F* L_1 = (Func_1_tF0FC34535C16319FF36BD582B649462EFE6A9B4F*)il2cpp_codegen_object_new(Func_1_tF0FC34535C16319FF36BD582B649462EFE6A9B4F_il2cpp_TypeInfo_var);
 		Func_1__ctor_m175837664F6C21B93B2773630F560731026B1CDD(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m2E9FF68D9B63F00B1E5B2B206FEDDE5535CC1C31_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t49DA49F09B95959C5E19486DC83822D8DAFB72CB_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mD225305FC3862CE44F41C6B6DA72570BAF9CE1CE(L_1, EventBase_1_SetCreateFunction_mD225305FC3862CE44F41C6B6DA72570BAF9CE1CE_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:667>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:677>
 		return;
 	}
 }
@@ -20806,11 +20806,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextClickEvent__ctor_m2B4C8FF4D4BEF93
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:672>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:682>
 		MouseEventBase_1__ctor_mD08FBD2DD5FD68ABF25E50B606C89B3EB46D8C82(__this, MouseEventBase_1__ctor_mD08FBD2DD5FD68ABF25E50B606C89B3EB46D8C82_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:674>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:684>
 		ContextClickEvent_LocalInit_mFFE09D8727DC8D975F3C86D2BB2B9F3A4E69E0BE(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:675>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:685>
 		return;
 	}
 }
@@ -20824,11 +20824,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextClickEvent_Init_m18C237D7E02EAFB1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:682>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:692>
 		MouseEventBase_1_Init_m6FF7819A7465786061922CCEBAB7387FA1D5EB03(__this, MouseEventBase_1_Init_m6FF7819A7465786061922CCEBAB7387FA1D5EB03_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:683>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:693>
 		ContextClickEvent_LocalInit_mFFE09D8727DC8D975F3C86D2BB2B9F3A4E69E0BE(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:684>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:694>
 		return;
 	}
 }
@@ -20836,7 +20836,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextClickEvent_Init_m18C237D7E02EAFB1
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextClickEvent_LocalInit_mFFE09D8727DC8D975F3C86D2BB2B9F3A4E69E0BE (ContextClickEvent_t06F36D1ACA5C8390D5085158C7D7C1BCF9549EA3* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:688>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:698>
 		return;
 	}
 }
@@ -20885,7 +20885,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextClickEvent_t06F36D1ACA5C8390D5085158C7
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:666>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:676>
 		ContextClickEvent_t06F36D1ACA5C8390D5085158C7D7C1BCF9549EA3* L_0 = (ContextClickEvent_t06F36D1ACA5C8390D5085158C7D7C1BCF9549EA3*)il2cpp_codegen_object_new(ContextClickEvent_t06F36D1ACA5C8390D5085158C7D7C1BCF9549EA3_il2cpp_TypeInfo_var);
 		ContextClickEvent__ctor_m2B4C8FF4D4BEF932835AE2EED510E07DF0B42E13(L_0, NULL);
 		return L_0;
@@ -20913,14 +20913,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent__cctor_m88C60518FABF4CFCEAFA6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:712>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:722>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t856624725DA5418B0F537E56F408847FF1DAB02B_il2cpp_TypeInfo_var);
 		U3CU3Ec_t856624725DA5418B0F537E56F408847FF1DAB02B* L_0 = ((U3CU3Ec_t856624725DA5418B0F537E56F408847FF1DAB02B_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t856624725DA5418B0F537E56F408847FF1DAB02B_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tBEDAE3873EBF31838AB21B839FDCD75A6AFFCB56* L_1 = (Func_1_tBEDAE3873EBF31838AB21B839FDCD75A6AFFCB56*)il2cpp_codegen_object_new(Func_1_tBEDAE3873EBF31838AB21B839FDCD75A6AFFCB56_il2cpp_TypeInfo_var);
 		Func_1__ctor_mD15BDE3DF0065D78F0BFCAA317E637C2BA806EB3(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__1_0_mB9F32688A560F09E5489C6E862E8011C46D9AFF7_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tD5612D4D9A3CAD26CDB27B9D024C6D018D72FBC9_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m503236B479ECD73265AB3CDA815187D274D2BE6B(L_1, EventBase_1_SetCreateFunction_m503236B479ECD73265AB3CDA815187D274D2BE6B_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:713>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:723>
 		return;
 	}
 }
@@ -20928,7 +20928,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent__cctor_m88C60518FABF4CFCEAFA6
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2 (WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:718>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:728>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = __this->___U3CdeltaU3Ek__BackingField;
 		return L_0;
 	}
@@ -20937,7 +20937,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent_set_delta_mF5242D2BF69D54052C8CCE4AA44BE4D591569B92 (WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:718>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:728>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = ___0_value;
 		__this->___U3CdeltaU3Ek__BackingField = L_0;
 		return;
@@ -20956,12 +20956,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 	bool V_1 = false;
 	WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* V_2 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:727>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:737>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_0 = ___0_systemEvent;
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_1;
 		L_1 = MouseEventBase_1_GetPooled_m76E4D98D003541CE0DF10D5800CD7CE4D1BDC6AD(L_0, MouseEventBase_1_GetPooled_m76E4D98D003541CE0DF10D5800CD7CE4D1BDC6AD_RuntimeMethod_var);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:728>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:738>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_2 = ___0_systemEvent;
 		V_1 = (bool)((!(((RuntimeObject*)(Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB*)L_2) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_3 = V_1;
@@ -20971,7 +20971,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:730>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:740>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_4 = V_0;
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_5 = ___0_systemEvent;
 		NullCheck(L_5);
@@ -20985,7 +20985,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 
 IL_0024:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:732>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:742>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_8 = V_0;
 		V_2 = L_8;
 		goto IL_0028;
@@ -20993,7 +20993,7 @@ IL_0024:
 
 IL_0028:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:733>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:743>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_9 = V_2;
 		return L_9;
 	}
@@ -21013,29 +21013,29 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 	WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* V_0 = NULL;
 	WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:737>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:747>
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tD5612D4D9A3CAD26CDB27B9D024C6D018D72FBC9_il2cpp_TypeInfo_var);
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_0;
 		L_0 = EventBase_1_GetPooled_m4CEDE9EC3B0E23BB6FB5C82DA2D321E312D0566F(EventBase_1_GetPooled_m4CEDE9EC3B0E23BB6FB5C82DA2D321E312D0566F_RuntimeMethod_var);
 		V_0 = L_0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:738>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:748>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_1 = V_0;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_2 = ___0_delta;
 		NullCheck(L_1);
 		WheelEvent_set_delta_mF5242D2BF69D54052C8CCE4AA44BE4D591569B92_inline(L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:739>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:749>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_3 = V_0;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_4 = ___1_mousePosition;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_5;
 		L_5 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_4, NULL);
 		NullCheck(L_3);
 		MouseEventBase_1_set_mousePosition_mE3CE0D3B1C9840E8195C1D8795DB072A12BC55ED_inline(L_3, L_5, MouseEventBase_1_set_mousePosition_mE3CE0D3B1C9840E8195C1D8795DB072A12BC55ED_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:740>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:750>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_6 = V_0;
 		int32_t L_7 = ___2_modifiers;
 		NullCheck(L_6);
 		MouseEventBase_1_set_modifiers_mB3E6A917A82D5BDA45FD85FC0CC0596580BAD25C_inline(L_6, L_7, MouseEventBase_1_set_modifiers_mB3E6A917A82D5BDA45FD85FC0CC0596580BAD25C_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:741>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:751>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_8 = V_0;
 		V_1 = L_8;
 		goto IL_0028;
@@ -21043,7 +21043,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 
 IL_0028:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:742>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:752>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_9 = V_1;
 		return L_9;
 	}
@@ -21060,17 +21060,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 	WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* V_0 = NULL;
 	WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:746>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:756>
 		RuntimeObject* L_0 = ___1_pointerEvent;
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_1;
 		L_1 = MouseEventBase_1_GetPooled_m4B99E18521DA00391AA9F80D8639D184C9ACA33C(L_0, MouseEventBase_1_GetPooled_m4B99E18521DA00391AA9F80D8639D184C9ACA33C_RuntimeMethod_var);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:747>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:757>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_2 = V_0;
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_3 = ___0_delta;
 		NullCheck(L_2);
 		WheelEvent_set_delta_mF5242D2BF69D54052C8CCE4AA44BE4D591569B92_inline(L_2, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:748>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:758>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_4 = V_0;
 		V_1 = L_4;
 		goto IL_0014;
@@ -21078,7 +21078,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 
 IL_0014:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:749>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:759>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_5 = V_1;
 		return L_5;
 	}
@@ -21093,11 +21093,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent_Init_mD54725B2612B5A09E26B9A6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:756>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:766>
 		MouseEventBase_1_Init_mF4545F4BE72A0550BDF8FD5757AC406A1BF716A4(__this, MouseEventBase_1_Init_mF4545F4BE72A0550BDF8FD5757AC406A1BF716A4_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:757>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:767>
 		WheelEvent_LocalInit_mED59C3380CDBD81DFBAE2DC2458C4118225C7A41(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:758>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:768>
 		return;
 	}
 }
@@ -21111,15 +21111,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent_LocalInit_mED59C3380CDBD81DFB
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:762>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:772>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:764>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:774>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0;
 		L_0 = Vector3_get_zero_m0C1249C3F25B1C70EAD3CC8B31259975A457AE39_inline(NULL);
 		WheelEvent_set_delta_mF5242D2BF69D54052C8CCE4AA44BE4D591569B92_inline(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:765>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:775>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m339DE824C1226AC54854BF48052F55B865BC996D_inline(__this, (bool)1, MouseEventBase_1_set_recomputeTopElementUnderMouse_m339DE824C1226AC54854BF48052F55B865BC996D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:766>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:776>
 		return;
 	}
 }
@@ -21133,11 +21133,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent__ctor_mD21D4AE005AEB2719EE3B1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:771>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:781>
 		MouseEventBase_1__ctor_mB7045D14E46AB980B352B696F07A3DE86F767129(__this, MouseEventBase_1__ctor_mB7045D14E46AB980B352B696F07A3DE86F767129_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:773>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:783>
 		WheelEvent_LocalInit_mED59C3380CDBD81DFBAE2DC2458C4118225C7A41(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:774>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:784>
 		return;
 	}
 }
@@ -21152,14 +21152,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WheelEvent_Dispatch_mC3CC46CE5228E798290
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:778>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:788>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		il2cpp_codegen_runtime_class_init_inline(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var);
 		int32_t L_1 = ((PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_StaticFields*)il2cpp_codegen_static_fields_for(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var))->___mousePointerId;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2;
 		L_2 = MouseEventBase_1_get_mousePosition_m2ECDEE885FD001CD3DC08B776F6C89C889487213_inline(__this, MouseEventBase_1_get_mousePosition_m2ECDEE885FD001CD3DC08B776F6C89C889487213_RuntimeMethod_var);
 		EventDispatchUtilities_DispatchToElementUnderPointerOrPanelRoot_mDC137CD72ABD4A0959F21F71CFEE1A7FF6711487(__this, L_0, L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:780>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:790>
 		return;
 	}
 }
@@ -21208,7 +21208,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:712>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:722>
 		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_0 = (WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E*)il2cpp_codegen_object_new(WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E_il2cpp_TypeInfo_var);
 		WheelEvent__ctor_mD21D4AE005AEB2719EE3B111C4CD7BD75EA19014(L_0, NULL);
 		return L_0;
@@ -21236,14 +21236,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent__cctor_m8EF54DC8BCCA964C
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:792>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:802>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t14F61DD792138869FD790665537731861A41131B_il2cpp_TypeInfo_var);
 		U3CU3Ec_t14F61DD792138869FD790665537731861A41131B* L_0 = ((U3CU3Ec_t14F61DD792138869FD790665537731861A41131B_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t14F61DD792138869FD790665537731861A41131B_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tDA0BA4C895290FAF4A6955182F023ADF4EA22DC9* L_1 = (Func_1_tDA0BA4C895290FAF4A6955182F023ADF4EA22DC9*)il2cpp_codegen_object_new(Func_1_tDA0BA4C895290FAF4A6955182F023ADF4EA22DC9_il2cpp_TypeInfo_var);
 		Func_1__ctor_mFF35FE534BCA34586148A52F2794494D047C8A8F(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m4560948F250093D60BFDA0396FE639C0C209E70E_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t3CD372C353265503211D0A03178379DA3D8C7086_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m0D7F556001F314381BD24D7881145C8A31CA87FB(L_1, EventBase_1_SetCreateFunction_m0D7F556001F314381BD24D7881145C8A31CA87FB_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:793>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:803>
 		return;
 	}
 }
@@ -21257,11 +21257,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent_Init_mA5069A243D11863569
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:800>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:810>
 		MouseEventBase_1_Init_m0B0AF66EF7846C4FAA09B86D9A04A72AA7559F3A(__this, MouseEventBase_1_Init_m0B0AF66EF7846C4FAA09B86D9A04A72AA7559F3A_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:801>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:811>
 		MouseEnterEvent_LocalInit_mFCFB0E12299ADB33B08857F6D621783E79951123(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:802>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:812>
 		return;
 	}
 }
@@ -21269,9 +21269,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent_Init_mA5069A243D11863569
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent_LocalInit_mFCFB0E12299ADB33B08857F6D621783E79951123 (MouseEnterEvent_t972DD23B5A1EBA882CFC53569413DBFC586A598E* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:806>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:816>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:807>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:817>
 		return;
 	}
 }
@@ -21285,11 +21285,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent__ctor_m9F6B256914C0B6533
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:812>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:822>
 		MouseEventBase_1__ctor_m3C6E232AD6D84E78DDADFCF1186821ED2C5B66FE(__this, MouseEventBase_1__ctor_m3C6E232AD6D84E78DDADFCF1186821ED2C5B66FE_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:814>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:824>
 		MouseEnterEvent_LocalInit_mFCFB0E12299ADB33B08857F6D621783E79951123(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:815>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:825>
 		return;
 	}
 }
@@ -21297,10 +21297,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent__ctor_m9F6B256914C0B6533
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterEvent_Dispatch_m61CEEBCF4FA2CF8AB31274F91712827DA6FE9258 (MouseEnterEvent_t972DD23B5A1EBA882CFC53569413DBFC586A598E* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:819>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:829>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:820>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:830>
 		return;
 	}
 }
@@ -21349,7 +21349,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseEnterEvent_t972DD23B5A1EBA882CFC53569413
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:792>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:802>
 		MouseEnterEvent_t972DD23B5A1EBA882CFC53569413DBFC586A598E* L_0 = (MouseEnterEvent_t972DD23B5A1EBA882CFC53569413DBFC586A598E*)il2cpp_codegen_object_new(MouseEnterEvent_t972DD23B5A1EBA882CFC53569413DBFC586A598E_il2cpp_TypeInfo_var);
 		MouseEnterEvent__ctor_m9F6B256914C0B653355E841EEDC8BC15B904C6B4(L_0, NULL);
 		return L_0;
@@ -21377,14 +21377,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent__cctor_mCC02AF7994A34D12
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:832>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:842>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t0C29012655706A14445E74D5FEED64FC31464247_il2cpp_TypeInfo_var);
 		U3CU3Ec_t0C29012655706A14445E74D5FEED64FC31464247* L_0 = ((U3CU3Ec_t0C29012655706A14445E74D5FEED64FC31464247_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t0C29012655706A14445E74D5FEED64FC31464247_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t155CEEB546C814E6B7B47A671FCED1F9DB75E24D* L_1 = (Func_1_t155CEEB546C814E6B7B47A671FCED1F9DB75E24D*)il2cpp_codegen_object_new(Func_1_t155CEEB546C814E6B7B47A671FCED1F9DB75E24D_il2cpp_TypeInfo_var);
 		Func_1__ctor_mD9AD811E932CE0DE620A3C51101C22137F781255(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mBB563CF3091D20EC1E7D1B6CBF33AB47A4C1FC08_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t17411A14F7A082E3C14EEADDE1585D1A60254BC3_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mF3B463F3795C79B4585C737343B5483D900E6804(L_1, EventBase_1_SetCreateFunction_mF3B463F3795C79B4585C737343B5483D900E6804_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:833>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:843>
 		return;
 	}
 }
@@ -21398,11 +21398,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent_Init_m7FBB1CF6C6862C6C0A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:840>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:850>
 		MouseEventBase_1_Init_m5FF50B43F529E49EFB22E44617739B8D414D8D25(__this, MouseEventBase_1_Init_m5FF50B43F529E49EFB22E44617739B8D414D8D25_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:841>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:851>
 		MouseLeaveEvent_LocalInit_m5A05E04EC6C8754DE7E7D17EB954D66918E34201(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:842>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:852>
 		return;
 	}
 }
@@ -21410,9 +21410,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent_Init_m7FBB1CF6C6862C6C0A
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent_LocalInit_m5A05E04EC6C8754DE7E7D17EB954D66918E34201 (MouseLeaveEvent_tECE38F87AF42C007350618F592806DFCC51B97D9* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:846>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:856>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:847>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:857>
 		return;
 	}
 }
@@ -21426,11 +21426,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent__ctor_m33A44A0C82B1C3A66
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:852>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:862>
 		MouseEventBase_1__ctor_mD86BD142A6E3495041FBDAB51EAC772A22BEA5EA(__this, MouseEventBase_1__ctor_mD86BD142A6E3495041FBDAB51EAC772A22BEA5EA_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:854>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:864>
 		MouseLeaveEvent_LocalInit_m5A05E04EC6C8754DE7E7D17EB954D66918E34201(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:855>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:865>
 		return;
 	}
 }
@@ -21438,10 +21438,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent__ctor_m33A44A0C82B1C3A66
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveEvent_Dispatch_m3988375CDD8F094364D74EDEA4CA4F07898A28E6 (MouseLeaveEvent_tECE38F87AF42C007350618F592806DFCC51B97D9* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:859>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:869>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:860>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:870>
 		return;
 	}
 }
@@ -21490,7 +21490,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseLeaveEvent_tECE38F87AF42C007350618F59280
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:832>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:842>
 		MouseLeaveEvent_tECE38F87AF42C007350618F592806DFCC51B97D9* L_0 = (MouseLeaveEvent_tECE38F87AF42C007350618F592806DFCC51B97D9*)il2cpp_codegen_object_new(MouseLeaveEvent_tECE38F87AF42C007350618F592806DFCC51B97D9_il2cpp_TypeInfo_var);
 		MouseLeaveEvent__ctor_m33A44A0C82B1C3A6619A9737B8D35FBD5F6378DF(L_0, NULL);
 		return L_0;
@@ -21518,14 +21518,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOverEvent__cctor_mFACE6C28491AA9489
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:872>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:882>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t0B883B53E2037CEDB00BBF385D06D5BC984C6507_il2cpp_TypeInfo_var);
 		U3CU3Ec_t0B883B53E2037CEDB00BBF385D06D5BC984C6507* L_0 = ((U3CU3Ec_t0B883B53E2037CEDB00BBF385D06D5BC984C6507_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t0B883B53E2037CEDB00BBF385D06D5BC984C6507_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t9D92C2F8710AC456BF9358F16F639AAD4F39A357* L_1 = (Func_1_t9D92C2F8710AC456BF9358F16F639AAD4F39A357*)il2cpp_codegen_object_new(Func_1_t9D92C2F8710AC456BF9358F16F639AAD4F39A357_il2cpp_TypeInfo_var);
 		Func_1__ctor_m5542F8747A958505050204754EBADDE1D3069386(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mA21B8DAC2BCF3A36C4679B0D63CA1794B47BD5BF_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t96C244E548BB513A57632B73B292C7E7C1CC404D_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mB4FAE19A6FA5573F62B7BD86F029338A6A30210F(L_1, EventBase_1_SetCreateFunction_mB4FAE19A6FA5573F62B7BD86F029338A6A30210F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:873>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:883>
 		return;
 	}
 }
@@ -21533,10 +21533,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOverEvent__cctor_mFACE6C28491AA9489
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOverEvent_Dispatch_mA5EB840934B3B382E8D526C35AD8E4F6C7954B32 (MouseOverEvent_t7B8F0B26E77632F3A33FDCBD26B39FF74A8558C2* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:877>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:887>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:878>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:888>
 		return;
 	}
 }
@@ -21550,17 +21550,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOverEvent_PreDispatch_m9BC8962360BA
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:882>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:892>
 		RuntimeObject* L_0 = ___0_panel;
 		MouseEventBase_1_PreDispatch_m36FF7D4726FBF1214DB858B38034694DBC930ACD(__this, L_0, MouseEventBase_1_PreDispatch_m36FF7D4726FBF1214DB858B38034694DBC930ACD_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:886>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:896>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1;
 		L_1 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		int64_t L_2;
 		L_2 = VirtualFuncInvoker0< int64_t >::Invoke(5, __this);
 		NullCheck(L_1);
 		VisualElement_UpdateCursorStyle_m3B9EFF888655F7CB0667EB6C62E277D449C961FD(L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:887>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:897>
 		return;
 	}
 }
@@ -21624,7 +21624,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseOverEvent_t7B8F0B26E77632F3A33FDCBD26B39
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:872>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:882>
 		MouseOverEvent_t7B8F0B26E77632F3A33FDCBD26B39FF74A8558C2* L_0 = (MouseOverEvent_t7B8F0B26E77632F3A33FDCBD26B39FF74A8558C2*)il2cpp_codegen_object_new(MouseOverEvent_t7B8F0B26E77632F3A33FDCBD26B39FF74A8558C2_il2cpp_TypeInfo_var);
 		MouseOverEvent__ctor_mFD3FC107F10118BE04B4E0983B7E1F87982D044F(L_0, NULL);
 		return L_0;
@@ -21652,14 +21652,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOutEvent__cctor_mD04BBAB4144E2C76ED
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:899>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:909>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t98EE3CDBD6793819F09F37A2E57805E27C10C740_il2cpp_TypeInfo_var);
 		U3CU3Ec_t98EE3CDBD6793819F09F37A2E57805E27C10C740* L_0 = ((U3CU3Ec_t98EE3CDBD6793819F09F37A2E57805E27C10C740_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t98EE3CDBD6793819F09F37A2E57805E27C10C740_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t185FD36A7D039DD168505FB50DB398ADA0DE6E96* L_1 = (Func_1_t185FD36A7D039DD168505FB50DB398ADA0DE6E96*)il2cpp_codegen_object_new(Func_1_t185FD36A7D039DD168505FB50DB398ADA0DE6E96_il2cpp_TypeInfo_var);
 		Func_1__ctor_mA394FB2B4B05B5D94D330E70371D98CD5F4C3904(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mA0C9366B2E163B5169D796530DBCB9B9D08ADB3D_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t96FB7E88831163AE4AFA79A213CB7BBA6200DD94_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m620F3A69192E5ABB2401317E4597734807032F19(L_1, EventBase_1_SetCreateFunction_m620F3A69192E5ABB2401317E4597734807032F19_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:900>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:910>
 		return;
 	}
 }
@@ -21667,10 +21667,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOutEvent__cctor_mD04BBAB4144E2C76ED
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOutEvent_Dispatch_m5E062AFE17D554FC34C31B723DBC6FF6EB186700 (MouseOutEvent_t6848AB296F36F86C5E44F248E1BDC10882D8EDBD* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:904>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:914>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:905>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:915>
 		return;
 	}
 }
@@ -21684,17 +21684,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseOutEvent_PreDispatch_mE8199C8E9F5AB
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:909>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:919>
 		RuntimeObject* L_0 = ___0_panel;
 		MouseEventBase_1_PreDispatch_mFABF2D2F73561904CBD9FD1F4031E68E8DDF0CD9(__this, L_0, MouseEventBase_1_PreDispatch_mFABF2D2F73561904CBD9FD1F4031E68E8DDF0CD9_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:913>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:923>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1;
 		L_1 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		int64_t L_2;
 		L_2 = VirtualFuncInvoker0< int64_t >::Invoke(5, __this);
 		NullCheck(L_1);
 		VisualElement_UpdateCursorStyle_m3B9EFF888655F7CB0667EB6C62E277D449C961FD(L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:914>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:924>
 		return;
 	}
 }
@@ -21758,7 +21758,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseOutEvent_t6848AB296F36F86C5E44F248E1BDC1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:899>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:909>
 		MouseOutEvent_t6848AB296F36F86C5E44F248E1BDC10882D8EDBD* L_0 = (MouseOutEvent_t6848AB296F36F86C5E44F248E1BDC10882D8EDBD*)il2cpp_codegen_object_new(MouseOutEvent_t6848AB296F36F86C5E44F248E1BDC10882D8EDBD_il2cpp_TypeInfo_var);
 		MouseOutEvent__ctor_m05FF30E214AF5C61887B050AA85BEF25B5FB19C0(L_0, NULL);
 		return L_0;
@@ -21786,14 +21786,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterWindowEvent__cctor_mCC2E4CF948
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:926>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:936>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t6851B9E09E06FD5C75BEC4E7E7423DCFAE7C662F_il2cpp_TypeInfo_var);
 		U3CU3Ec_t6851B9E09E06FD5C75BEC4E7E7423DCFAE7C662F* L_0 = ((U3CU3Ec_t6851B9E09E06FD5C75BEC4E7E7423DCFAE7C662F_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t6851B9E09E06FD5C75BEC4E7E7423DCFAE7C662F_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t06CCABAAB3108CA22DFBC3DBB32E60E0F40D50AF* L_1 = (Func_1_t06CCABAAB3108CA22DFBC3DBB32E60E0F40D50AF*)il2cpp_codegen_object_new(Func_1_t06CCABAAB3108CA22DFBC3DBB32E60E0F40D50AF_il2cpp_TypeInfo_var);
 		Func_1__ctor_m80FE64DBFB0D4007F33C4235C3959DCC26B664D4(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m7BF33CDB90B2B6F2A02D9DD0884B8C813DFB79D4_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t4813BB5FE5327C33AA6E02463510E8D2AA3721BA_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mB01337D8C122C7EFB3937EF5429F3D7C2004A910(L_1, EventBase_1_SetCreateFunction_mB01337D8C122C7EFB3937EF5429F3D7C2004A910_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:927>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:937>
 		return;
 	}
 }
@@ -21807,11 +21807,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterWindowEvent_Init_m6FE6557AB2CA
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:934>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:944>
 		MouseEventBase_1_Init_m5172307D4D848585DFF1EB18608B9B26AAAB7A47(__this, MouseEventBase_1_Init_m5172307D4D848585DFF1EB18608B9B26AAAB7A47_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:935>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:945>
 		MouseEnterWindowEvent_LocalInit_mB2A56A4CF9E7BAE2F0E404AE2CA863AA9B9FF262(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:936>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:946>
 		return;
 	}
 }
@@ -21825,11 +21825,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterWindowEvent_LocalInit_mB2A56A4
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:940>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:950>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 1, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:941>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:951>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m86DA7CC147E594F144C408C00DFC993E588CA2A2_inline(__this, (bool)1, MouseEventBase_1_set_recomputeTopElementUnderMouse_m86DA7CC147E594F144C408C00DFC993E588CA2A2_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:942>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:952>
 		return;
 	}
 }
@@ -21843,11 +21843,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterWindowEvent__ctor_mE3ABCA5310E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:947>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:957>
 		MouseEventBase_1__ctor_m604ECC785993566C6DBF24FE55F7050124B365DE(__this, MouseEventBase_1__ctor_m604ECC785993566C6DBF24FE55F7050124B365DE_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:949>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:959>
 		MouseEnterWindowEvent_LocalInit_mB2A56A4CF9E7BAE2F0E404AE2CA863AA9B9FF262(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:950>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:960>
 		return;
 	}
 }
@@ -21862,14 +21862,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseEnterWindowEvent_Dispatch_m67924600
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:954>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:964>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		il2cpp_codegen_runtime_class_init_inline(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var);
 		int32_t L_1 = ((PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_StaticFields*)il2cpp_codegen_static_fields_for(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var))->___mousePointerId;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2;
 		L_2 = MouseEventBase_1_get_mousePosition_m2E41AC2B57E0AFA1DB96E1F7840098CC940C231A_inline(__this, MouseEventBase_1_get_mousePosition_m2E41AC2B57E0AFA1DB96E1F7840098CC940C231A_RuntimeMethod_var);
 		EventDispatchUtilities_DispatchToElementUnderPointerOrPanelRoot_mDC137CD72ABD4A0959F21F71CFEE1A7FF6711487(__this, L_0, L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:956>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:966>
 		return;
 	}
 }
@@ -21918,7 +21918,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseEnterWindowEvent_t35235A8FC26FECB74331E4
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:926>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:936>
 		MouseEnterWindowEvent_t35235A8FC26FECB74331E4E5CF5E3ED9BBDD2FA6* L_0 = (MouseEnterWindowEvent_t35235A8FC26FECB74331E4E5CF5E3ED9BBDD2FA6*)il2cpp_codegen_object_new(MouseEnterWindowEvent_t35235A8FC26FECB74331E4E5CF5E3ED9BBDD2FA6_il2cpp_TypeInfo_var);
 		MouseEnterWindowEvent__ctor_mE3ABCA5310EAC1F3C6121F7131445A3F7BED7853(L_0, NULL);
 		return L_0;
@@ -21946,14 +21946,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent__cctor_m803E1218F1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:968>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:978>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tA406F201B3FE0C6C942440DCE7777CBD04EAFD05_il2cpp_TypeInfo_var);
 		U3CU3Ec_tA406F201B3FE0C6C942440DCE7777CBD04EAFD05* L_0 = ((U3CU3Ec_tA406F201B3FE0C6C942440DCE7777CBD04EAFD05_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tA406F201B3FE0C6C942440DCE7777CBD04EAFD05_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tA5DD3CF8AAEF3C02BB8A95AF022E1A77365A4F0E* L_1 = (Func_1_tA5DD3CF8AAEF3C02BB8A95AF022E1A77365A4F0E*)il2cpp_codegen_object_new(Func_1_tA5DD3CF8AAEF3C02BB8A95AF022E1A77365A4F0E_il2cpp_TypeInfo_var);
 		Func_1__ctor_m302D297C029F8E894068DCC1B90AA29AE82425F0(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m27D6DF5D191F32D3192940F71723AFB6C5896CCD_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tE1B3E6721ACE88C9A37AC57EDA370CC77ED38B6E_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mE917AA1428DA6D88840DCD5EE5E827EBAF153A37(L_1, EventBase_1_SetCreateFunction_mE917AA1428DA6D88840DCD5EE5E827EBAF153A37_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:969>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:979>
 		return;
 	}
 }
@@ -21967,11 +21967,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent_Init_m7E432C3F4BF0
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:976>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:986>
 		MouseEventBase_1_Init_mFFC1D5A84BBF1E43B3219E043EC13091772C4708(__this, MouseEventBase_1_Init_mFFC1D5A84BBF1E43B3219E043EC13091772C4708_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:977>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:987>
 		MouseLeaveWindowEvent_LocalInit_m2041C8ED9719EA11285AD22A3BD4FE69BE0CDE9B(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:978>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:988>
 		return;
 	}
 }
@@ -21985,11 +21985,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent_LocalInit_m2041C8E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:982>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:992>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 1, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:986>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:996>
 		MouseEventBase_1_set_recomputeTopElementUnderMouse_m0ADFD030155CF588AD84EFF5A6CC709476B9CF2B_inline(__this, (bool)0, MouseEventBase_1_set_recomputeTopElementUnderMouse_m0ADFD030155CF588AD84EFF5A6CC709476B9CF2B_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:987>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:997>
 		return;
 	}
 }
@@ -22003,11 +22003,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent__ctor_m1E173F3A3AF
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:992>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1002>
 		MouseEventBase_1__ctor_m6552D6F655A8E0E8C16FD2A907590F97F2DFF8A0(__this, MouseEventBase_1__ctor_m6552D6F655A8E0E8C16FD2A907590F97F2DFF8A0_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:994>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1004>
 		MouseLeaveWindowEvent_LocalInit_m2041C8ED9719EA11285AD22A3BD4FE69BE0CDE9B(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:995>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1005>
 		return;
 	}
 }
@@ -22025,7 +22025,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52
 	bool V_0 = false;
 	MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1004>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1014>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_0 = ___0_systemEvent;
 		V_0 = (bool)((!(((RuntimeObject*)(Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB*)L_0) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_1 = V_0;
@@ -22035,7 +22035,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1005>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1015>
 		il2cpp_codegen_runtime_class_init_inline(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var);
 		int32_t L_2 = ((PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_StaticFields*)il2cpp_codegen_static_fields_for(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var))->___mousePointerId;
 		il2cpp_codegen_runtime_class_init_inline(PointerDeviceState_tD94EF3C9710026DE8B7E83B6C842524C7C6EBA8C_il2cpp_TypeInfo_var);
@@ -22044,7 +22044,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52
 
 IL_0014:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1007>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1017>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_3 = ___0_systemEvent;
 		MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7* L_4;
 		L_4 = MouseEventBase_1_GetPooled_mDA2CD5EE5E56FDDF4ECBD5B5BEF7789AD73F52CD(L_3, MouseEventBase_1_GetPooled_mDA2CD5EE5E56FDDF4ECBD5B5BEF7789AD73F52CD_RuntimeMethod_var);
@@ -22054,7 +22054,7 @@ IL_0014:
 
 IL_001d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1008>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1018>
 		MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7* L_5 = V_1;
 		return L_5;
 	}
@@ -22075,7 +22075,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent_PostDispatch_mCF0B
 	bool V_1 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1017>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1027>
 		int32_t L_0;
 		L_0 = MouseEventBase_1_get_pressedButtons_m8ED52FD85DF854AB58002D2C73701D3DE177A657_inline(__this, MouseEventBase_1_get_pressedButtons_m8ED52FD85DF854AB58002D2C73701D3DE177A657_RuntimeMethod_var);
 		if (L_0)
@@ -22106,13 +22106,13 @@ IL_0017:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1019>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1029>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_4 = V_0;
 		il2cpp_codegen_runtime_class_init_inline(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var);
 		int32_t L_5 = ((PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_StaticFields*)il2cpp_codegen_static_fields_for(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var))->___mousePointerId;
 		NullCheck(L_4);
 		BaseVisualElementPanel_ClearCachedElementUnderPointer_m56ED8260C952BAB24740F95B280D2294BCC58539(L_4, L_5, __this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1021>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1031>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_6 = V_0;
 		NullCheck(L_6);
 		bool L_7;
@@ -22121,10 +22121,10 @@ IL_0017:
 
 IL_0031:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1024>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1034>
 		RuntimeObject* L_8 = ___0_panel;
 		MouseEventBase_1_PostDispatch_mE6988E33474F18D07624B92B3828903754A296E0(__this, L_8, MouseEventBase_1_PostDispatch_mE6988E33474F18D07624B92B3828903754A296E0_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1025>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1035>
 		return;
 	}
 }
@@ -22139,14 +22139,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MouseLeaveWindowEvent_Dispatch_m521FDADD
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1029>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1039>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		il2cpp_codegen_runtime_class_init_inline(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var);
 		int32_t L_1 = ((PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_StaticFields*)il2cpp_codegen_static_fields_for(PointerId_tE48DCDC5C36DD1F5595C28EE48C0243BA8BEF35C_il2cpp_TypeInfo_var))->___mousePointerId;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2;
 		L_2 = MouseEventBase_1_get_mousePosition_m7DA58FCF9A3BA819C5C12913CAD35F6F105D1C19_inline(__this, MouseEventBase_1_get_mousePosition_m7DA58FCF9A3BA819C5C12913CAD35F6F105D1C19_RuntimeMethod_var);
 		EventDispatchUtilities_DispatchToElementUnderPointerOrPanelRoot_mDC137CD72ABD4A0959F21F71CFEE1A7FF6711487(__this, L_0, L_1, L_2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1031>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1041>
 		return;
 	}
 }
@@ -22195,7 +22195,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:968>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:978>
 		MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7* L_0 = (MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7*)il2cpp_codegen_object_new(MouseLeaveWindowEvent_t29DA8DE08DB54EC65B5D52A2C149C761D7D113C7_il2cpp_TypeInfo_var);
 		MouseLeaveWindowEvent__ctor_m1E173F3A3AFE54BCDF42475D1EBB5218979E885C(L_0, NULL);
 		return L_0;
@@ -22223,14 +22223,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent__cctor_m50F2
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1042>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t387201505168F904C1B388E5203AD9FF8B21498A_il2cpp_TypeInfo_var);
 		U3CU3Ec_t387201505168F904C1B388E5203AD9FF8B21498A* L_0 = ((U3CU3Ec_t387201505168F904C1B388E5203AD9FF8B21498A_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t387201505168F904C1B388E5203AD9FF8B21498A_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tA32D6E1B8C59128597D919AA533CFE85ACD842D7* L_1 = (Func_1_tA32D6E1B8C59128597D919AA533CFE85ACD842D7*)il2cpp_codegen_object_new(Func_1_tA32D6E1B8C59128597D919AA533CFE85ACD842D7_il2cpp_TypeInfo_var);
 		Func_1__ctor_m7DB01AE0F968A9243EFF504875907D4F281259BB(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m4D00E8E4E6E128736237C341D1F0213E392D416A_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tFF13D0B80B4CBC6B9B6101B69E3A38EDB7D7A53E_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m950F872CF3F10C0A040544D25E9C94C3C295001D(L_1, EventBase_1_SetCreateFunction_m950F872CF3F10C0A040544D25E9C94C3C295001D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1043>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1053>
 		return;
 	}
 }
@@ -22238,7 +22238,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent__cctor_m50F2
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1058>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0 = __this->___U3CmenuU3Ek__BackingField;
 		return L_0;
 	}
@@ -22247,7 +22247,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92A
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_set_menu_m28709F7A74353EFEECFE1C28D708C6F619E84120 (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1058>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0 = ___0_value;
 		__this->___U3CmenuU3Ek__BackingField = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CmenuU3Ek__BackingField), (void*)L_0);
@@ -22258,7 +22258,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_set_menu_m28
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ContextualMenuPopulateEvent_get_triggerEvent_m305F0D2BD526250F749DF3B293ED234D9940C6AB (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1062>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0 = __this->___U3CtriggerEventU3Ek__BackingField;
 		return L_0;
 	}
@@ -22267,7 +22267,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR EventBase_tD7F89B936EB8074AE31E7B15976C072277
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_set_triggerEvent_m6AEDC5CEB93E6A8DA01BD7760D7DE05C90884E3A (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1062>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0 = ___0_value;
 		__this->___U3CtriggerEventU3Ek__BackingField = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CtriggerEventU3Ek__BackingField), (void*)L_0);
@@ -22301,13 +22301,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 	bool V_5 = false;
 	ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* V_6 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1066>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1076>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0 = ___0_triggerEvent;
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tFF13D0B80B4CBC6B9B6101B69E3A38EDB7D7A53E_il2cpp_TypeInfo_var);
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_1;
 		L_1 = EventBase_1_GetPooled_m16AC2FBA9539523F1C990E17DE71C3CF5794B034(L_0, EventBase_1_GetPooled_m16AC2FBA9539523F1C990E17DE71C3CF5794B034_RuntimeMethod_var);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1067>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1077>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_2 = ___0_triggerEvent;
 		V_1 = (bool)((!(((RuntimeObject*)(EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C*)L_2) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
 		bool L_3 = V_1;
@@ -22317,16 +22317,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1069>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1079>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_4 = ___0_triggerEvent;
 		NullCheck(L_4);
 		VirtualActionInvoker0::Invoke(14, L_4);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1070>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1080>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_5 = V_0;
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_6 = ___0_triggerEvent;
 		NullCheck(L_5);
 		ContextualMenuPopulateEvent_set_triggerEvent_m6AEDC5CEB93E6A8DA01BD7760D7DE05C90884E3A_inline(L_5, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1072>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1082>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_7 = ___0_triggerEvent;
 		V_2 = ((RuntimeObject*)IsInst((RuntimeObject*)L_7, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var));
 		RuntimeObject* L_8 = V_2;
@@ -22338,7 +22338,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1074>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1084>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_10 = V_0;
 		RuntimeObject* L_11 = V_2;
 		NullCheck(L_11);
@@ -22346,7 +22346,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		L_12 = InterfaceFuncInvoker0< int32_t >::Invoke(0, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var, L_11);
 		NullCheck(L_10);
 		MouseEventBase_1_set_modifiers_m519B5685A988F62B33D91275F2184837C141EA14_inline(L_10, L_12, MouseEventBase_1_set_modifiers_m519B5685A988F62B33D91275F2184837C141EA14_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1075>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1085>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_13 = V_0;
 		RuntimeObject* L_14 = V_2;
 		NullCheck(L_14);
@@ -22354,7 +22354,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		L_15 = InterfaceFuncInvoker0< Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 >::Invoke(1, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var, L_14);
 		NullCheck(L_13);
 		MouseEventBase_1_set_mousePosition_mDA4BA1D37843698B6A5ABAF948F4FEF9A208B41E_inline(L_13, L_15, MouseEventBase_1_set_mousePosition_mDA4BA1D37843698B6A5ABAF948F4FEF9A208B41E_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1076>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1086>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_16 = V_0;
 		RuntimeObject* L_17 = V_2;
 		NullCheck(L_17);
@@ -22362,7 +22362,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		L_18 = InterfaceFuncInvoker0< Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 >::Invoke(1, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var, L_17);
 		NullCheck(L_16);
 		MouseEventBase_1_set_localMousePosition_m64A7A425B60BF99BB6C51F5A1B033FDE7D9FED88_inline(L_16, L_18, MouseEventBase_1_set_localMousePosition_m64A7A425B60BF99BB6C51F5A1B033FDE7D9FED88_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1077>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1087>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_19 = V_0;
 		RuntimeObject* L_20 = V_2;
 		NullCheck(L_20);
@@ -22370,7 +22370,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		L_21 = InterfaceFuncInvoker0< Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 >::Invoke(3, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var, L_20);
 		NullCheck(L_19);
 		MouseEventBase_1_set_mouseDelta_mEE3400CD002512EFF81227F3E2411FB7E2ABCABB_inline(L_19, L_21, MouseEventBase_1_set_mouseDelta_mEE3400CD002512EFF81227F3E2411FB7E2ABCABB_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1078>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1088>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_22 = V_0;
 		RuntimeObject* L_23 = V_2;
 		NullCheck(L_23);
@@ -22378,7 +22378,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		L_24 = InterfaceFuncInvoker0< int32_t >::Invoke(5, IMouseEvent_tF59A3DD3CA593DB23B47764DF0521996D509A59E_il2cpp_TypeInfo_var, L_23);
 		NullCheck(L_22);
 		MouseEventBase_1_set_button_mD5FD234DE7E73712FF0E64F558F0621AB36EFFBA_inline(L_22, L_24, MouseEventBase_1_set_button_mD5FD234DE7E73712FF0E64F558F0621AB36EFFBA_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1079>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1089>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_25 = V_0;
 		RuntimeObject* L_26 = V_2;
 		NullCheck(L_26);
@@ -22391,7 +22391,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 
 IL_0084:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1081>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1091>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_28 = ___0_triggerEvent;
 		V_4 = ((RuntimeObject*)IsInst((RuntimeObject*)L_28, IPointerEvent_t934940574FFC2D6D155265ACC6D78BC48174D9B7_il2cpp_TypeInfo_var));
 		RuntimeObject* L_29 = V_4;
@@ -22403,7 +22403,7 @@ IL_0084:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1083>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1093>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_31 = V_0;
 		RuntimeObject* L_32 = V_4;
 		NullCheck(L_32);
@@ -22411,7 +22411,7 @@ IL_0084:
 		L_33 = InterfaceFuncInvoker0< int32_t >::Invoke(19, IPointerEvent_t934940574FFC2D6D155265ACC6D78BC48174D9B7_il2cpp_TypeInfo_var, L_32);
 		NullCheck(L_31);
 		MouseEventBase_1_set_modifiers_m519B5685A988F62B33D91275F2184837C141EA14_inline(L_31, L_33, MouseEventBase_1_set_modifiers_m519B5685A988F62B33D91275F2184837C141EA14_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1084>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1094>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_34 = V_0;
 		RuntimeObject* L_35 = V_4;
 		NullCheck(L_35);
@@ -22421,7 +22421,7 @@ IL_0084:
 		L_37 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_36, NULL);
 		NullCheck(L_34);
 		MouseEventBase_1_set_mousePosition_mDA4BA1D37843698B6A5ABAF948F4FEF9A208B41E_inline(L_34, L_37, MouseEventBase_1_set_mousePosition_mDA4BA1D37843698B6A5ABAF948F4FEF9A208B41E_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1085>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1095>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_38 = V_0;
 		RuntimeObject* L_39 = V_4;
 		NullCheck(L_39);
@@ -22431,7 +22431,7 @@ IL_0084:
 		L_41 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_40, NULL);
 		NullCheck(L_38);
 		MouseEventBase_1_set_localMousePosition_m64A7A425B60BF99BB6C51F5A1B033FDE7D9FED88_inline(L_38, L_41, MouseEventBase_1_set_localMousePosition_m64A7A425B60BF99BB6C51F5A1B033FDE7D9FED88_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1086>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1096>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_42 = V_0;
 		RuntimeObject* L_43 = V_4;
 		NullCheck(L_43);
@@ -22441,7 +22441,7 @@ IL_0084:
 		L_45 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_44, NULL);
 		NullCheck(L_42);
 		MouseEventBase_1_set_mouseDelta_mEE3400CD002512EFF81227F3E2411FB7E2ABCABB_inline(L_42, L_45, MouseEventBase_1_set_mouseDelta_mEE3400CD002512EFF81227F3E2411FB7E2ABCABB_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1087>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1097>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_46 = V_0;
 		RuntimeObject* L_47 = V_4;
 		NullCheck(L_47);
@@ -22449,7 +22449,7 @@ IL_0084:
 		L_48 = InterfaceFuncInvoker0< int32_t >::Invoke(3, IPointerEvent_t934940574FFC2D6D155265ACC6D78BC48174D9B7_il2cpp_TypeInfo_var, L_47);
 		NullCheck(L_46);
 		MouseEventBase_1_set_button_mD5FD234DE7E73712FF0E64F558F0621AB36EFFBA_inline(L_46, L_48, MouseEventBase_1_set_button_mD5FD234DE7E73712FF0E64F558F0621AB36EFFBA_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1088>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1098>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_49 = V_0;
 		RuntimeObject* L_50 = V_4;
 		NullCheck(L_50);
@@ -22465,23 +22465,23 @@ IL_00fc:
 
 IL_00fd:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1092>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1102>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_52 = V_0;
 		RuntimeObject* L_53 = ___2_target;
 		NullCheck(L_52);
 		EventBase_set_elementTarget_m8BF8A4CD508F335210DB9FD2D034549A1EC084A8_inline(L_52, ((VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)CastclassClass((RuntimeObject*)L_53, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var)), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1093>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1103>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_54 = V_0;
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_55 = ___1_menu;
 		NullCheck(L_54);
 		ContextualMenuPopulateEvent_set_menu_m28709F7A74353EFEECFE1C28D708C6F619E84120_inline(L_54, L_55, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1094>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1104>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_56 = V_0;
 		ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* L_57 = ___3_menuManager;
 		NullCheck(L_56);
 		L_56->___m_ContextualMenuManager = L_57;
 		Il2CppCodeGenWriteBarrier((void**)(&L_56->___m_ContextualMenuManager), (void*)L_57);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1096>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1106>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_58 = V_0;
 		V_6 = L_58;
 		goto IL_011e;
@@ -22489,7 +22489,7 @@ IL_00fd:
 
 IL_011e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1097>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1107>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_59 = V_6;
 		return L_59;
 	}
@@ -22504,11 +22504,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_Init_mC57C7F
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1104>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1114>
 		MouseEventBase_1_Init_mB557CC2D817400B27286C2D5FBAB71B25A0A8DD5(__this, MouseEventBase_1_Init_mB557CC2D817400B27286C2D5FBAB71B25A0A8DD5_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1105>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1115>
 		ContextualMenuPopulateEvent_LocalInit_m96F892D597CF3A54B393B7B5380800E93E632F3B(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1106>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1116>
 		return;
 	}
 }
@@ -22517,12 +22517,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_LocalInit_m9
 {
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1110>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1120>
 		ContextualMenuPopulateEvent_set_menu_m28709F7A74353EFEECFE1C28D708C6F619E84120_inline(__this, (DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2*)NULL, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1111>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1121>
 		__this->___m_ContextualMenuManager = (ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B*)NULL;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_ContextualMenuManager), (void*)(ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B*)NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1113>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1123>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0;
 		L_0 = ContextualMenuPopulateEvent_get_triggerEvent_m305F0D2BD526250F749DF3B293ED234D9940C6AB_inline(__this, NULL);
 		V_0 = (bool)((!(((RuntimeObject*)(EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C*)L_0) <= ((RuntimeObject*)(RuntimeObject*)NULL)))? 1 : 0);
@@ -22533,18 +22533,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_LocalInit_m9
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1115>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1125>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_2;
 		L_2 = ContextualMenuPopulateEvent_get_triggerEvent_m305F0D2BD526250F749DF3B293ED234D9940C6AB_inline(__this, NULL);
 		NullCheck(L_2);
 		VirtualActionInvoker0::Invoke(15, L_2);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1116>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1126>
 		ContextualMenuPopulateEvent_set_triggerEvent_m6AEDC5CEB93E6A8DA01BD7760D7DE05C90884E3A_inline(__this, (EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C*)NULL, NULL);
 	}
 
 IL_0033:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1118>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1128>
 		return;
 	}
 }
@@ -22558,11 +22558,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent__ctor_m50FDF
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1123>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1133>
 		MouseEventBase_1__ctor_mD3DE0C71E1F39D8D818A1EA52D607369F382C3BF(__this, MouseEventBase_1__ctor_mD3DE0C71E1F39D8D818A1EA52D607369F382C3BF_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1125>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1135>
 		ContextualMenuPopulateEvent_LocalInit_m96F892D597CF3A54B393B7B5380800E93E632F3B(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1126>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1136>
 		return;
 	}
 }
@@ -22578,7 +22578,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_PostDispatch
 	bool V_0 = false;
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1132>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1142>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0;
 		L_0 = ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA_inline(__this, NULL);
 		NullCheck(L_0);
@@ -22610,14 +22610,14 @@ IL_001b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1134>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1144>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_4;
 		L_4 = ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA_inline(__this, NULL);
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_5;
 		L_5 = ContextualMenuPopulateEvent_get_triggerEvent_m305F0D2BD526250F749DF3B293ED234D9940C6AB_inline(__this, NULL);
 		NullCheck(L_4);
 		DropdownMenu_PrepareForDisplay_m7217E1F33CE5D461B41D61239DBB1B8FCAB01DBF(L_4, L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1135>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1145>
 		ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* L_6 = __this->___m_ContextualMenuManager;
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_7;
 		L_7 = ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA_inline(__this, NULL);
@@ -22629,10 +22629,10 @@ IL_001b:
 
 IL_004b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1138>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1148>
 		RuntimeObject* L_9 = ___0_panel;
 		MouseEventBase_1_PostDispatch_mB75794FD55D2CD0C88E989577B3D4768393F353F(__this, L_9, MouseEventBase_1_PostDispatch_mB75794FD55D2CD0C88E989577B3D4768393F353F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1139>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1149>
 		return;
 	}
 }
@@ -22681,7 +22681,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ContextualMenuPopulateEvent_t72C856D9B3951E3A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1042>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
 		ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* L_0 = (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB*)il2cpp_codegen_object_new(ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB_il2cpp_TypeInfo_var);
 		ContextualMenuPopulateEvent__ctor_m50FDFA25DF6EAD42A71FDAE40F50758E0E143ACD(L_0, NULL);
 		return L_0;
@@ -23091,14 +23091,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent__cctor_mA5C8782BC3EE
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:218>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:229>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t60F2E43CA5738E8B7BA7398DFEC0BC1AC6562C8A_il2cpp_TypeInfo_var);
 		U3CU3Ec_t60F2E43CA5738E8B7BA7398DFEC0BC1AC6562C8A* L_0 = ((U3CU3Ec_t60F2E43CA5738E8B7BA7398DFEC0BC1AC6562C8A_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t60F2E43CA5738E8B7BA7398DFEC0BC1AC6562C8A_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t2CDC9BD29ED289E56882A977DD28EC0B32A266C6* L_1 = (Func_1_t2CDC9BD29ED289E56882A977DD28EC0B32A266C6*)il2cpp_codegen_object_new(Func_1_t2CDC9BD29ED289E56882A977DD28EC0B32A266C6_il2cpp_TypeInfo_var);
 		Func_1__ctor_m13170C3F7FCB73F3EADFA61F45D01704BF7E640E(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m78EF1E19F83803088B982A59825F4F3CB8F4459E_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tD898F1A47C14556B2F1F500078B600221F5D887E_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mD58B8F5D47C98EA07FE650E3B20204602E8EE445(L_1, EventBase_1_SetCreateFunction_mD58B8F5D47C98EA07FE650E3B20204602E8EE445_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:219>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:230>
 		return;
 	}
 }
@@ -23113,7 +23113,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t NavigationMoveEvent_DetermineMoveDire
 	bool V_4 = false;
 	bool V_5 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:260>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:271>
 		float L_0 = ___0_x;
 		float L_1 = ___1_y;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_2;
@@ -23132,14 +23132,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t NavigationMoveEvent_DetermineMoveDire
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:261>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:272>
 		V_2 = 0;
 		goto IL_005d;
 	}
 
 IL_001d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:263>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:274>
 		float L_7 = ___0_x;
 		float L_8;
 		L_8 = fabsf(L_7);
@@ -23154,7 +23154,7 @@ IL_001d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:265>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:276>
 		float L_12 = ___0_x;
 		V_4 = (bool)((((float)L_12) > ((float)(0.0f)))? 1 : 0);
 		bool L_13 = V_4;
@@ -23164,21 +23164,21 @@ IL_001d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:266>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:277>
 		V_2 = 3;
 		goto IL_005d;
 	}
 
 IL_0042:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:267>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:278>
 		V_2 = 1;
 		goto IL_005d;
 	}
 
 IL_0046:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:271>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:282>
 		float L_14 = ___1_y;
 		V_5 = (bool)((((float)L_14) > ((float)(0.0f)))? 1 : 0);
 		bool L_15 = V_5;
@@ -23188,21 +23188,21 @@ IL_0046:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:272>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:283>
 		V_2 = 2;
 		goto IL_005d;
 	}
 
 IL_0059:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:273>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:284>
 		V_2 = 4;
 		goto IL_005d;
 	}
 
 IL_005d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:275>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:286>
 		int32_t L_16 = V_2;
 		return L_16;
 	}
@@ -23211,7 +23211,7 @@ IL_005d:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t NavigationMoveEvent_get_direction_m16FD5A515392149F0E1891E69F32B30C49B457D3 (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:280>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:291>
 		int32_t L_0 = __this->___U3CdirectionU3Ek__BackingField;
 		return L_0;
 	}
@@ -23220,7 +23220,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t NavigationMoveEvent_get_direction_m16
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:280>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:291>
 		int32_t L_0 = ___0_value;
 		__this->___U3CdirectionU3Ek__BackingField = L_0;
 		return;
@@ -23230,7 +23230,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_direction_m712EB
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244 (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:289>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:300>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_0 = ___0_value;
 		__this->___U3CmoveU3Ek__BackingField = L_0;
 		return;
@@ -23249,13 +23249,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_0 = NULL;
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:309>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:320>
 		int32_t L_0 = ___1_deviceType;
 		int32_t L_1 = ___2_modifiers;
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_2;
 		L_2 = NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F(L_0, L_1, NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F_RuntimeMethod_var);
 		V_0 = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:310>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:321>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_3 = V_0;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_4 = ___0_moveVector;
 		float L_5 = L_4.___x;
@@ -23266,12 +23266,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 		L_8 = NavigationMoveEvent_DetermineMoveDirection_mED9C93FCB031403BE1A49CD7010C46A4EC860421(L_5, L_7, (0.600000024f), NULL);
 		NullCheck(L_3);
 		NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B_inline(L_3, L_8, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:311>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:322>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_9 = V_0;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_10 = ___0_moveVector;
 		NullCheck(L_9);
 		NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244_inline(L_9, L_10, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:312>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:323>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_11 = V_0;
 		V_1 = L_11;
 		goto IL_0032;
@@ -23279,7 +23279,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 
 IL_0032:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:313>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:324>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_12 = V_1;
 		return L_12;
 	}
@@ -23296,23 +23296,23 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_0 = NULL;
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:328>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:339>
 		int32_t L_0 = ___1_modifiers;
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_1;
 		L_1 = NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F(0, L_0, NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F_RuntimeMethod_var);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:329>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:340>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_2 = V_0;
 		int32_t L_3 = ___0_direction;
 		NullCheck(L_2);
 		NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B_inline(L_2, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:330>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:341>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_4 = V_0;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_5;
 		L_5 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_4);
 		NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244_inline(L_4, L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:331>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:342>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_6 = V_0;
 		V_1 = L_6;
 		goto IL_0021;
@@ -23320,7 +23320,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 
 IL_0021:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:332>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:343>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_7 = V_1;
 		return L_7;
 	}
@@ -23337,24 +23337,24 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_0 = NULL;
 	NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:336>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:347>
 		int32_t L_0 = ___1_deviceType;
 		int32_t L_1 = ___2_modifiers;
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_2;
 		L_2 = NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F(L_0, L_1, NavigationEventBase_1_GetPooled_mDEF8B4F91C64635C4EA94EFD8A4441619CFBCD0F_RuntimeMethod_var);
 		V_0 = L_2;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:337>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:348>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_3 = V_0;
 		int32_t L_4 = ___0_direction;
 		NullCheck(L_3);
 		NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B_inline(L_3, L_4, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:338>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:349>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_5 = V_0;
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_6;
 		L_6 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NullCheck(L_5);
 		NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244_inline(L_5, L_6, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:339>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:350>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_7 = V_0;
 		V_1 = L_7;
 		goto IL_0021;
@@ -23362,7 +23362,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 
 IL_0021:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:340>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:351>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_8 = V_1;
 		return L_8;
 	}
@@ -23377,11 +23377,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_Init_mCBAF5F4A6CD3BD
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:347>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:358>
 		NavigationEventBase_1_Init_m7B60279F83401BB6508A7B2658240EDA30D5EA8F(__this, NavigationEventBase_1_Init_m7B60279F83401BB6508A7B2658240EDA30D5EA8F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:348>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:359>
 		NavigationMoveEvent_LocalInit_m17864C8CB739B1E4A3CC6E67EF7889DD1D96FCBC(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:349>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:360>
 		return;
 	}
 }
@@ -23395,11 +23395,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent__ctor_mB523578ACF31E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:354>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:365>
 		NavigationEventBase_1__ctor_m4F9E95BC8D415DE106E1932FF4A82366CD25D8B9(__this, NavigationEventBase_1__ctor_m4F9E95BC8D415DE106E1932FF4A82366CD25D8B9_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:356>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:367>
 		NavigationMoveEvent_LocalInit_m17864C8CB739B1E4A3CC6E67EF7889DD1D96FCBC(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:357>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:368>
 		return;
 	}
 }
@@ -23407,13 +23407,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent__ctor_mB523578ACF31E
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_LocalInit_m17864C8CB739B1E4A3CC6E67EF7889DD1D96FCBC (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:361>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:372>
 		NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B_inline(__this, 0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:362>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:373>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_0;
 		L_0 = Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline(NULL);
 		NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244_inline(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:363>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:374>
 		return;
 	}
 }
@@ -23427,7 +23427,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_PostDispatch_mDB0B84
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:367>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:378>
 		RuntimeObject* L_0 = ___0_panel;
 		NullCheck(L_0);
 		FocusController_t5D2E45F2CCBE3B7082DE4088EE03C2E8F736011A* L_1;
@@ -23441,10 +23441,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationMoveEvent_PostDispatch_mDB0B84
 		L_4 = FocusController_GetLeafFocusedElement_m69566DBCE9BBD3167E76EC6A229D1FB53115748A(L_3, NULL);
 		NullCheck(L_1);
 		FocusController_SwitchFocusOnEvent_m2656D0225010A4C6B8776AAC565BBDFB7DAEBCA0(L_1, L_4, __this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:369>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:380>
 		RuntimeObject* L_5 = ___0_panel;
 		EventBase_PostDispatch_mC830955EA32723BF0C10CCB37E01197CBADC07B3(__this, L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:370>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:381>
 		return;
 	}
 }
@@ -23501,7 +23501,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationMoveEvent_t70F4AAAE0B5287449430A2A7
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:218>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:229>
 		NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* L_0 = (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF*)il2cpp_codegen_object_new(NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF_il2cpp_TypeInfo_var);
 		NavigationMoveEvent__ctor_mB523578ACF31ECC0BAEACE592F68F0A4E6534A52(L_0, NULL);
 		return L_0;
@@ -23529,14 +23529,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationCancelEvent__cctor_mE947C941AC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:380>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:391>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t1142166098325D971D87DA857EC88FD87F1D7053_il2cpp_TypeInfo_var);
 		U3CU3Ec_t1142166098325D971D87DA857EC88FD87F1D7053* L_0 = ((U3CU3Ec_t1142166098325D971D87DA857EC88FD87F1D7053_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t1142166098325D971D87DA857EC88FD87F1D7053_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t032F3EFF8CE18D7A904BE740C70F2432A5D28EFE* L_1 = (Func_1_t032F3EFF8CE18D7A904BE740C70F2432A5D28EFE*)il2cpp_codegen_object_new(Func_1_t032F3EFF8CE18D7A904BE740C70F2432A5D28EFE_il2cpp_TypeInfo_var);
 		Func_1__ctor_m265DB59749B362AC607CEF861F1A379441F44DB3(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mEA66E778C3A622A419FD2468CA373C793B16C809_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t06692607D03E5B5F275B33C5EACCE075D1C2AB05_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m9FE751B05B1A7670AFF089DC647194C7F9869910(L_1, EventBase_1_SetCreateFunction_m9FE751B05B1A7670AFF089DC647194C7F9869910_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:381>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:392>
 		return;
 	}
 }
@@ -23600,7 +23600,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationCancelEvent_tB8811EBDC85FD365D1034A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:380>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:391>
 		NavigationCancelEvent_tB8811EBDC85FD365D1034AEA30F07CBC3161E59E* L_0 = (NavigationCancelEvent_tB8811EBDC85FD365D1034AEA30F07CBC3161E59E*)il2cpp_codegen_object_new(NavigationCancelEvent_tB8811EBDC85FD365D1034AEA30F07CBC3161E59E_il2cpp_TypeInfo_var);
 		NavigationCancelEvent__ctor_m612A9638DEA5D850A2119CA7A992C03619ACA03F(L_0, NULL);
 		return L_0;
@@ -23628,14 +23628,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NavigationSubmitEvent__cctor_m352730060C
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:391>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:402>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t448CFE63A1C3BEE3A1ED3DF6CDBEAF74C84252A4_il2cpp_TypeInfo_var);
 		U3CU3Ec_t448CFE63A1C3BEE3A1ED3DF6CDBEAF74C84252A4* L_0 = ((U3CU3Ec_t448CFE63A1C3BEE3A1ED3DF6CDBEAF74C84252A4_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t448CFE63A1C3BEE3A1ED3DF6CDBEAF74C84252A4_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tEED37FD3AE4014DD7C9B7DED4A2D6DC599C690E6* L_1 = (Func_1_tEED37FD3AE4014DD7C9B7DED4A2D6DC599C690E6*)il2cpp_codegen_object_new(Func_1_tEED37FD3AE4014DD7C9B7DED4A2D6DC599C690E6_il2cpp_TypeInfo_var);
 		Func_1__ctor_m736FEEF97A38FCD8E0E9613FE321D2F45AD7EB8B(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mDF50A6F74F4FFE3813720F136D168D0F7863419C_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tF3176CA51B64DBB3010435BA1986B05039647C37_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m4B837CE470DE82BFFE9CDF3932610742AFEAE14F(L_1, EventBase_1_SetCreateFunction_m4B837CE470DE82BFFE9CDF3932610742AFEAE14F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:392>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:403>
 		return;
 	}
 }
@@ -23699,7 +23699,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:391>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:402>
 		NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545B48962188505665BB1* L_0 = (NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545B48962188505665BB1*)il2cpp_codegen_object_new(NavigationSubmitEvent_t193DCBDB6CBC8FF9F0A545B48962188505665BB1_il2cpp_TypeInfo_var);
 		NavigationSubmitEvent__ctor_m5A434BC4053B7763045411ECBBD525FFC2DEC206(L_0, NULL);
 		return L_0;
@@ -26115,14 +26115,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent__cctor_m6DBBBEC40D59963
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1377>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1388>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t75455AFF14B6651E8F37B1B6B54C31F51532CD3A_il2cpp_TypeInfo_var);
 		U3CU3Ec_t75455AFF14B6651E8F37B1B6B54C31F51532CD3A* L_0 = ((U3CU3Ec_t75455AFF14B6651E8F37B1B6B54C31F51532CD3A_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t75455AFF14B6651E8F37B1B6B54C31F51532CD3A_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t7EB6C97310DA2D249E63717A103CBE2D48503E7C* L_1 = (Func_1_t7EB6C97310DA2D249E63717A103CBE2D48503E7C*)il2cpp_codegen_object_new(Func_1_t7EB6C97310DA2D249E63717A103CBE2D48503E7C_il2cpp_TypeInfo_var);
 		Func_1__ctor_mE162055652F242587CEB834E73922B0FAAA7993A(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mCE642A70A9A79BDF9AFDDD7FC62DCAE579A1D264_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t7D3D212E8AD9C53105AAC51DBD4FA5F700586F68_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mBB4E27ED9DF6C8A2F52706CFA09425B5AA97462F(L_1, EventBase_1_SetCreateFunction_mBB4E27ED9DF6C8A2F52706CFA09425B5AA97462F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1378>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1389>
 		return;
 	}
 }
@@ -26136,11 +26136,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_Init_m7F91B066AE5A629B4
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1385>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1396>
 		PointerEventBase_1_Init_mA1E6CC3B61166169763B6912412A3E33CBF87E93(__this, PointerEventBase_1_Init_mA1E6CC3B61166169763B6912412A3E33CBF87E93_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1386>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1397>
 		PointerDownEvent_LocalInit_mA33241586037DFD52930AEAD5B3FD54CF31EE552(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1387>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1398>
 		return;
 	}
 }
@@ -26154,11 +26154,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_LocalInit_mA33241586037
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1391>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1402>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1393>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1404>
 		PointerEventBase_1_set_recomputeTopElementUnderPointer_mB88BE8E923CCD82259389D70CFA2F2A6D8B2FBBC_inline(__this, (bool)1, PointerEventBase_1_set_recomputeTopElementUnderPointer_mB88BE8E923CCD82259389D70CFA2F2A6D8B2FBBC_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1394>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1405>
 		return;
 	}
 }
@@ -26172,11 +26172,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent__ctor_m8327588407E759FA
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1399>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1410>
 		PointerEventBase_1__ctor_m998F76A42DE6E5246AEECA0095657850B41DA8A2(__this, PointerEventBase_1__ctor_m998F76A42DE6E5246AEECA0095657850B41DA8A2_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1401>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1412>
 		PointerDownEvent_LocalInit_mA33241586037DFD52930AEAD5B3FD54CF31EE552(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1402>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1413>
 		return;
 	}
 }
@@ -26190,7 +26190,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* PointerDownEvent_GetPooledComp
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1404>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1415>
 		il2cpp_codegen_runtime_class_init_inline(MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD_il2cpp_TypeInfo_var);
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_0;
 		L_0 = MouseDownEvent_GetPooled_m5DB89E406A11788647A9601FC5725F66895DC513(__this, NULL);
@@ -26212,7 +26212,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_PreDispatch_m5F5997B855
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B3_0 = NULL;
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B2_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1408>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1419>
 		RuntimeObject* L_0 = ___0_panel;
 		V_0 = ((Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9*)IsInstClass((RuntimeObject*)L_0, Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9_il2cpp_TypeInfo_var));
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_1 = V_0;
@@ -26224,7 +26224,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_PreDispatch_m5F5997B855
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1410>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1421>
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_3 = V_0;
 		NullCheck(L_3);
 		ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* L_4;
@@ -26253,10 +26253,10 @@ IL_0023:
 
 IL_0024:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1413>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1424>
 		RuntimeObject* L_6 = ___0_panel;
 		PointerEventBase_1_PreDispatch_mBD442FBFA010E0B340FEA16C7E064C065947302C(__this, L_6, PointerEventBase_1_PreDispatch_mBD442FBFA010E0B340FEA16C7E064C065947302C_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1414>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1425>
 		return;
 	}
 }
@@ -26272,7 +26272,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_PostDispatch_m5A0D5EB7F
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1418>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1429>
 		RuntimeObject* L_0 = ___0_panel;
 		NullCheck(L_0);
 		FocusController_t5D2E45F2CCBE3B7082DE4088EE03C2E8F736011A* L_1;
@@ -26286,7 +26286,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_PostDispatch_m5A0D5EB7F
 		L_4 = FocusController_GetLeafFocusedElement_m69566DBCE9BBD3167E76EC6A229D1FB53115748A(L_3, NULL);
 		NullCheck(L_1);
 		FocusController_SwitchFocusOnEvent_m2656D0225010A4C6B8776AAC565BBDFB7DAEBCA0(L_1, L_4, __this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1419>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1430>
 		RuntimeObject* L_5 = ___0_panel;
 		NullCheck(L_5);
 		EventDispatcher_t9BC38CC96E93EAD1D818EE751260FE4687B0D398* L_6;
@@ -26295,10 +26295,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_PostDispatch_m5A0D5EB7F
 		ClickDetector_t6B5A82C99CFD12E051D8E84A7C8F7488355B8F31* L_7 = L_6->___m_ClickDetector;
 		NullCheck(L_7);
 		ClickDetector_ProcessEvent_TisPointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51_mD694BEC4D31632D49480C99107B64E6E19A886D5(L_7, __this, ClickDetector_ProcessEvent_TisPointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51_mD694BEC4D31632D49480C99107B64E6E19A886D5_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1421>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1432>
 		RuntimeObject* L_8 = ___0_panel;
 		PointerEventBase_1_PostDispatch_mBBF8C65E6E8406C67A589BDB0E6F5E54DE46A426(__this, L_8, PointerEventBase_1_PostDispatch_mBBF8C65E6E8406C67A589BDB0E6F5E54DE46A426_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1422>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1433>
 		return;
 	}
 }
@@ -26313,7 +26313,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_Dispatch_m4C2D8BE9FA53F
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1426>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1437>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		int32_t L_1;
 		L_1 = PointerEventBase_1_get_pointerId_m2666488A68716BD85D3277905899BDE7CF3826C8_inline(__this, PointerEventBase_1_get_pointerId_m2666488A68716BD85D3277905899BDE7CF3826C8_RuntimeMethod_var);
@@ -26322,7 +26322,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerDownEvent_Dispatch_m4C2D8BE9FA53F
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3;
 		L_3 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_2, NULL);
 		EventDispatchUtilities_DispatchToCapturingElementOrElementUnderPointer_m1DB1C303971CD300023CEE6011018230F9047D4B(__this, L_0, L_1, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1427>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1438>
 		return;
 	}
 }
@@ -26371,7 +26371,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerDownEvent_tABAAD1BACBB98156D6BCCED51E1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1377>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1388>
 		PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51* L_0 = (PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51*)il2cpp_codegen_object_new(PointerDownEvent_tABAAD1BACBB98156D6BCCED51E11883EAFE03A51_il2cpp_TypeInfo_var);
 		PointerDownEvent__ctor_m8327588407E759FAFDDE9D997F5425BDC2B5A07D(L_0, NULL);
 		return L_0;
@@ -26399,14 +26399,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent__cctor_mBF5FB843579C9EF
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1453>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1464>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t66A4CB4376339AAB6A64EB8CC6534D86E0CD94B2_il2cpp_TypeInfo_var);
 		U3CU3Ec_t66A4CB4376339AAB6A64EB8CC6534D86E0CD94B2* L_0 = ((U3CU3Ec_t66A4CB4376339AAB6A64EB8CC6534D86E0CD94B2_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t66A4CB4376339AAB6A64EB8CC6534D86E0CD94B2_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t9BA00CF103B6BA9C2B76850E3D2BE012E375DC16* L_1 = (Func_1_t9BA00CF103B6BA9C2B76850E3D2BE012E375DC16*)il2cpp_codegen_object_new(Func_1_t9BA00CF103B6BA9C2B76850E3D2BE012E375DC16_il2cpp_TypeInfo_var);
 		Func_1__ctor_m01BBF18B1C5AD79C1772AFDC342161E6070DE0CC(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mC96E975CE869F5F0A107C723C023DCF5BC11AB55_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t4941B5AE834AA028696C83756491CE8884F30DDE_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m6BDED05D0F6DF443DBBE5AB282AFAF787ED041BD(L_1, EventBase_1_SetCreateFunction_m6BDED05D0F6DF443DBBE5AB282AFAF787ED041BD_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1454>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1465>
 		return;
 	}
 }
@@ -26414,7 +26414,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent__cctor_mBF5FB843579C9EF
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PointerMoveEvent_get_isHandledByDraggable_mCCA70E78328355F419734A13F7B4135F51E89D47 (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1459>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
 		bool L_0 = __this->___U3CisHandledByDraggableU3Ek__BackingField;
 		return L_0;
 	}
@@ -26423,7 +26423,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PointerMoveEvent_get_isHandledByDraggabl
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_set_isHandledByDraggable_m24AE525901E56FE8A7936EDA8F2046862BB3660D (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1459>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
 		bool L_0 = ___0_value;
 		__this->___U3CisHandledByDraggableU3Ek__BackingField = L_0;
 		return;
@@ -26441,7 +26441,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PointerMoveEvent_get_isPointerDown_m58E7
 	}
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1462>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1473>
 		int32_t L_0;
 		L_0 = PointerEventBase_1_get_button_m2C8D3EC8071AFDA85E4B71093A129E0E0A7FD25D_inline(__this, PointerEventBase_1_get_button_m2C8D3EC8071AFDA85E4B71093A129E0E0A7FD25D_RuntimeMethod_var);
 		if ((((int32_t)L_0) < ((int32_t)0)))
@@ -26480,7 +26480,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PointerMoveEvent_get_isPointerUp_m7ED386
 	}
 	int32_t G_B3_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1463>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1474>
 		int32_t L_0;
 		L_0 = PointerEventBase_1_get_button_m2C8D3EC8071AFDA85E4B71093A129E0E0A7FD25D_inline(__this, PointerEventBase_1_get_button_m2C8D3EC8071AFDA85E4B71093A129E0E0A7FD25D_RuntimeMethod_var);
 		if ((((int32_t)L_0) < ((int32_t)0)))
@@ -26517,11 +26517,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_Init_mFC6824E3B6FF0E2B6
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1481>
 		PointerEventBase_1_Init_mB7A2ABD885C3D09B64F29476C624D9AAAABF32C5(__this, PointerEventBase_1_Init_mB7A2ABD885C3D09B64F29476C624D9AAAABF32C5_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1471>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1482>
 		PointerMoveEvent_LocalInit_m2B3988A6E09A5484209BC512987D575F7EC02688(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1472>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1483>
 		return;
 	}
 }
@@ -26535,13 +26535,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_LocalInit_m2B3988A6E09A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1476>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1487>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1477>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1488>
 		PointerEventBase_1_set_recomputeTopElementUnderPointer_m7D6FF18036FD09C18EDA6C2B96B7D5F86B785085_inline(__this, (bool)1, PointerEventBase_1_set_recomputeTopElementUnderPointer_m7D6FF18036FD09C18EDA6C2B96B7D5F86B785085_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1478>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1489>
 		PointerMoveEvent_set_isHandledByDraggable_m24AE525901E56FE8A7936EDA8F2046862BB3660D_inline(__this, (bool)0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1479>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1490>
 		return;
 	}
 }
@@ -26555,11 +26555,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent__ctor_mD3557DFD831C3106
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1484>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1495>
 		PointerEventBase_1__ctor_mEEDD5DA0CB24E8B1539D7A8B7B6F478813511665(__this, PointerEventBase_1__ctor_mEEDD5DA0CB24E8B1539D7A8B7B6F478813511665_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1486>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1497>
 		PointerMoveEvent_LocalInit_m2B3988A6E09A5484209BC512987D575F7EC02688(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1487>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1498>
 		return;
 	}
 }
@@ -26580,7 +26580,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* PointerMoveEvent_GetPooledComp
 	int32_t G_B3_0 = 0;
 	int32_t G_B8_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1491>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1502>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_0;
 		L_0 = EventBase_get_imguiEvent_m45ABCDC6423D27EF44F7E29661B249D238765DB0(__this, NULL);
 		if (!L_0)
@@ -26613,7 +26613,7 @@ IL_001a:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1493>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1504>
 		il2cpp_codegen_runtime_class_init_inline(MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD_il2cpp_TypeInfo_var);
 		MouseDownEvent_tD798610B9C34C7D1CA93C66034A67D330D4A83CD* L_4;
 		L_4 = MouseDownEvent_GetPooled_m962419D9EB0246EB3C415A9A720BAB5BE470957F(__this, NULL);
@@ -26623,7 +26623,7 @@ IL_001a:
 
 IL_0028:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1495>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1506>
 		Event_tEBC6F24B56CE22B9C9AD1AC6C24A6B83BC3860CB* L_5;
 		L_5 = EventBase_get_imguiEvent_m45ABCDC6423D27EF44F7E29661B249D238765DB0(__this, NULL);
 		if (!L_5)
@@ -26656,7 +26656,7 @@ IL_0041:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1497>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1508>
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_9;
 		L_9 = MouseUpEvent_GetPooled_m9CA92EB7E0EAD8BC01901C30E5C496829A3B1D20(__this, NULL);
@@ -26666,7 +26666,7 @@ IL_0041:
 
 IL_004f:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1501>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1512>
 		il2cpp_codegen_runtime_class_init_inline(MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5_il2cpp_TypeInfo_var);
 		MouseMoveEvent_t1B41ADBDD7458D2369BF45AD02EE8FBE29F8E8A5* L_10;
 		L_10 = MouseMoveEvent_GetPooled_m6DD3C6A3D681222E98443C2D5483B7537B6E8ACA(__this, NULL);
@@ -26676,7 +26676,7 @@ IL_004f:
 
 IL_0059:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1503>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1514>
 		RuntimeObject* L_11 = V_1;
 		return L_11;
 	}
@@ -26691,10 +26691,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_PreDispatch_m892C169162
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1507>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1518>
 		RuntimeObject* L_0 = ___0_panel;
 		PointerEventBase_1_PreDispatch_mEA488D292999F132F203A8B265EADFD5CA680307(__this, L_0, PointerEventBase_1_PreDispatch_mEA488D292999F132F203A8B265EADFD5CA680307_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1508>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1519>
 		return;
 	}
 }
@@ -26710,7 +26710,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_PostDispatch_m68F7EA5AE
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1512>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1523>
 		RuntimeObject* L_0 = ___0_panel;
 		NullCheck(L_0);
 		EventDispatcher_t9BC38CC96E93EAD1D818EE751260FE4687B0D398* L_1;
@@ -26719,10 +26719,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_PostDispatch_m68F7EA5AE
 		ClickDetector_t6B5A82C99CFD12E051D8E84A7C8F7488355B8F31* L_2 = L_1->___m_ClickDetector;
 		NullCheck(L_2);
 		ClickDetector_ProcessEvent_TisPointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3_mE3569030DD6F4CF6561BAE1A2BBA286E9FBCE509(L_2, __this, ClickDetector_ProcessEvent_TisPointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3_mE3569030DD6F4CF6561BAE1A2BBA286E9FBCE509_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1513>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1524>
 		RuntimeObject* L_3 = ___0_panel;
 		PointerEventBase_1_PostDispatch_mDE64F12665D559442C1EFAEC9FCBFBCB7622494F(__this, L_3, PointerEventBase_1_PostDispatch_mDE64F12665D559442C1EFAEC9FCBFBCB7622494F_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1514>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1525>
 		return;
 	}
 }
@@ -26737,7 +26737,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_Dispatch_m5F725F9ACC4FC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1518>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1529>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		int32_t L_1;
 		L_1 = PointerEventBase_1_get_pointerId_mD0FD52357DFDC016B39149C06C87B3FA2F786783_inline(__this, PointerEventBase_1_get_pointerId_mD0FD52357DFDC016B39149C06C87B3FA2F786783_RuntimeMethod_var);
@@ -26746,7 +26746,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerMoveEvent_Dispatch_m5F725F9ACC4FC
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3;
 		L_3 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_2, NULL);
 		EventDispatchUtilities_DispatchToCapturingElementOrElementUnderPointer_m1DB1C303971CD300023CEE6011018230F9047D4B(__this, L_0, L_1, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1519>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1530>
 		return;
 	}
 }
@@ -26795,7 +26795,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1453>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1464>
 		PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* L_0 = (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3*)il2cpp_codegen_object_new(PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3_il2cpp_TypeInfo_var);
 		PointerMoveEvent__ctor_mD3557DFD831C3106671744B531BFA47353131515(L_0, NULL);
 		return L_0;
@@ -26823,14 +26823,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent__cctor_mAB115FA6A6BC8253A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1588>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1599>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t463A0CCBB2471455964DBAEAD4FC0612DB2270DE_il2cpp_TypeInfo_var);
 		U3CU3Ec_t463A0CCBB2471455964DBAEAD4FC0612DB2270DE* L_0 = ((U3CU3Ec_t463A0CCBB2471455964DBAEAD4FC0612DB2270DE_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t463A0CCBB2471455964DBAEAD4FC0612DB2270DE_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tE3DFCF82220AB9D5794ED90BE37518F542602C20* L_1 = (Func_1_tE3DFCF82220AB9D5794ED90BE37518F542602C20*)il2cpp_codegen_object_new(Func_1_tE3DFCF82220AB9D5794ED90BE37518F542602C20_il2cpp_TypeInfo_var);
 		Func_1__ctor_m6A63739C1A23C9DA27DA63B349CA5F3FDF755B67(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mD83A2F7294F6D20D573423D7912CDEBCEE7A9412_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t2637736704939772A86A2904BCFD1B314097DD1E_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m7C1A9FE7F1F913E9717B2083219011DCC4B4FD59(L_1, EventBase_1_SetCreateFunction_m7C1A9FE7F1F913E9717B2083219011DCC4B4FD59_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1589>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1600>
 		return;
 	}
 }
@@ -26844,11 +26844,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_Init_mA0BB3D5A2D7502A33A3
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1596>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1607>
 		PointerEventBase_1_Init_m6A5AAAB38F079D58A444E447671A79AD4098B98A(__this, PointerEventBase_1_Init_m6A5AAAB38F079D58A444E447671A79AD4098B98A_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1597>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1608>
 		PointerUpEvent_LocalInit_m8BAFF359C820A90203BBA8FEA3BE60F9A36A8EEB(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1598>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1609>
 		return;
 	}
 }
@@ -26862,11 +26862,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_LocalInit_m8BAFF359C820A9
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1602>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1613>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1604>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1615>
 		PointerEventBase_1_set_recomputeTopElementUnderPointer_m7605A5BE97312D2A74A3B26C948DDB4F2119F251_inline(__this, (bool)1, PointerEventBase_1_set_recomputeTopElementUnderPointer_m7605A5BE97312D2A74A3B26C948DDB4F2119F251_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1605>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1616>
 		return;
 	}
 }
@@ -26880,11 +26880,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent__ctor_mB8C7E204466C177B83
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1610>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1621>
 		PointerEventBase_1__ctor_mAE2D24192D8C6D25D241F42CC8435FBC28036695(__this, PointerEventBase_1__ctor_mAE2D24192D8C6D25D241F42CC8435FBC28036695_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1612>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1623>
 		PointerUpEvent_LocalInit_m8BAFF359C820A90203BBA8FEA3BE60F9A36A8EEB(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1613>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1624>
 		return;
 	}
 }
@@ -26898,7 +26898,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* PointerUpEvent_GetPooledCompat
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1615>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1626>
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_0;
 		L_0 = MouseUpEvent_GetPooled_mEEAD8C564A22C2CE82AD17A97F0DE7E4370F0669(__this, NULL);
@@ -26915,10 +26915,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_PreDispatch_mFBBF252956FB
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1619>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1630>
 		RuntimeObject* L_0 = ___0_panel;
 		PointerEventBase_1_PreDispatch_m0432E9C16CA939D60CF02B11C85B13FD15991C50(__this, L_0, PointerEventBase_1_PreDispatch_m0432E9C16CA939D60CF02B11C85B13FD15991C50_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1620>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1631>
 		return;
 	}
 }
@@ -26945,7 +26945,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_PostDispatch_mD7BAA6109D2
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B8_0 = NULL;
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B7_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1625>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1636>
 		RuntimeObject* L_0 = ___0_panel;
 		NullCheck(L_0);
 		EventDispatcher_t9BC38CC96E93EAD1D818EE751260FE4687B0D398* L_1;
@@ -26954,7 +26954,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_PostDispatch_mD7BAA6109D2
 		ClickDetector_t6B5A82C99CFD12E051D8E84A7C8F7488355B8F31* L_2 = L_1->___m_ClickDetector;
 		NullCheck(L_2);
 		ClickDetector_ProcessEvent_TisPointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9_m228B7CB6D811EF0325B3766DD0BB5DEC76705531(L_2, __this, ClickDetector_ProcessEvent_TisPointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9_m228B7CB6D811EF0325B3766DD0BB5DEC76705531_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1627>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1638>
 		String_t* L_3;
 		L_3 = PointerEventBase_1_get_pointerType_m8817EEF724FE7CE591C159986B913554E98E939A_inline(__this, PointerEventBase_1_get_pointerType_m8817EEF724FE7CE591C159986B913554E98E939A_RuntimeMethod_var);
 		il2cpp_codegen_runtime_class_init_inline(PointerType_t6E813E47699AA9C948D9EFEF36F481B5EDD5BCD4_il2cpp_TypeInfo_var);
@@ -26968,15 +26968,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_PostDispatch_mD7BAA6109D2
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1629>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1640>
 		RuntimeObject* L_6 = ___0_panel;
 		int32_t L_7;
 		L_7 = PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_inline(__this, PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_RuntimeMethod_var);
 		PointerCaptureHelper_ReleasePointer_mE9ABEA39360504C8B5A9CF1C067A63F7535CDECB(L_6, L_7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1630>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1641>
 		RuntimeObject* L_8 = ___0_panel;
 		V_2 = ((BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303*)IsInstClass((RuntimeObject*)L_8, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1631>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1642>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_9 = V_2;
 		if (L_9)
 		{
@@ -27002,7 +27002,7 @@ IL_004a:
 
 IL_004b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1634>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1645>
 		RuntimeObject* L_12 = ___0_panel;
 		V_0 = ((Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9*)IsInstClass((RuntimeObject*)L_12, Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9_il2cpp_TypeInfo_var));
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_13 = V_0;
@@ -27014,7 +27014,7 @@ IL_004b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1636>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1647>
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_15 = V_0;
 		NullCheck(L_15);
 		ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* L_16;
@@ -27043,15 +27043,15 @@ IL_006d:
 
 IL_006e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1639>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1650>
 		RuntimeObject* L_18 = ___0_panel;
 		PointerEventBase_1_PostDispatch_mAF5CD0D2EE756A1E0E7B0733E7EC352A320C0897(__this, L_18, PointerEventBase_1_PostDispatch_mAF5CD0D2EE756A1E0E7B0733E7EC352A320C0897_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1641>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1652>
 		RuntimeObject* L_19 = ___0_panel;
 		int32_t L_20;
 		L_20 = PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_inline(__this, PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_RuntimeMethod_var);
 		PointerCaptureHelper_ActivateCompatibilityMouseEvents_mB5506AB811F3B2AEC0452FEF0BD394BA2B13DEB1(L_19, L_20, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1642>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1653>
 		return;
 	}
 }
@@ -27066,7 +27066,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_Dispatch_m23149984D3C36FC
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1646>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1657>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		int32_t L_1;
 		L_1 = PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_inline(__this, PointerEventBase_1_get_pointerId_m494A184CC32780C69FAE61D8361DE5F4A53FF2C6_RuntimeMethod_var);
@@ -27075,7 +27075,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerUpEvent_Dispatch_m23149984D3C36FC
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3;
 		L_3 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_2, NULL);
 		EventDispatchUtilities_DispatchToCapturingElementOrElementUnderPointer_m1DB1C303971CD300023CEE6011018230F9047D4B(__this, L_0, L_1, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1647>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1658>
 		return;
 	}
 }
@@ -27124,7 +27124,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerUpEvent_tCE779E8B94675B6A2758B82F6A847
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1588>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1599>
 		PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9* L_0 = (PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9*)il2cpp_codegen_object_new(PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9_il2cpp_TypeInfo_var);
 		PointerUpEvent__ctor_mB8C7E204466C177B83948A55038D9E504642ECB3(L_0, NULL);
 		return L_0;
@@ -27152,14 +27152,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent__cctor_mA54C6B3527665
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1663>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1674>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t3F0DEFE655705648D1AB38F78F6D26B583866DB2_il2cpp_TypeInfo_var);
 		U3CU3Ec_t3F0DEFE655705648D1AB38F78F6D26B583866DB2* L_0 = ((U3CU3Ec_t3F0DEFE655705648D1AB38F78F6D26B583866DB2_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t3F0DEFE655705648D1AB38F78F6D26B583866DB2_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t62421530A130DFB7AD40F0ADF889DC344F44A42F* L_1 = (Func_1_t62421530A130DFB7AD40F0ADF889DC344F44A42F*)il2cpp_codegen_object_new(Func_1_t62421530A130DFB7AD40F0ADF889DC344F44A42F_il2cpp_TypeInfo_var);
 		Func_1__ctor_m4CABB456A3D7892FF8801BE34FE90213D7B5CC63(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m9E77F435810D4AF54F20E36887CD8E4DB0409624_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tB8AF17419B0E6B39E32F8925FCA535F5CF5C79D2_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m8D6907D6DDAB99911BBAEC9F649A611F016C4883(L_1, EventBase_1_SetCreateFunction_m8D6907D6DDAB99911BBAEC9F649A611F016C4883_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1664>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1675>
 		return;
 	}
 }
@@ -27173,11 +27173,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_Init_mC7C2A7450C44080
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1671>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1682>
 		PointerEventBase_1_Init_m7C39066C6FC58310E991F2C8C4491520EB6D013B(__this, PointerEventBase_1_Init_m7C39066C6FC58310E991F2C8C4491520EB6D013B_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1672>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1683>
 		PointerCancelEvent_LocalInit_m1C7DA0C8AF41E714D70C4BB760CFA3D1B1A9D3D8(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1673>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1684>
 		return;
 	}
 }
@@ -27191,11 +27191,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_LocalInit_m1C7DA0C8AF
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1677>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1688>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1679>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1690>
 		PointerEventBase_1_set_recomputeTopElementUnderPointer_m4F4F0654801C05FA77BE30CE37E38798830A6EEB_inline(__this, (bool)1, PointerEventBase_1_set_recomputeTopElementUnderPointer_m4F4F0654801C05FA77BE30CE37E38798830A6EEB_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1680>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1691>
 		return;
 	}
 }
@@ -27209,11 +27209,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent__ctor_mB440794EF06B78
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1685>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1696>
 		PointerEventBase_1__ctor_mDC2BA420399D1B05219425FA26A81E3C01EC983D(__this, PointerEventBase_1__ctor_mDC2BA420399D1B05219425FA26A81E3C01EC983D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1687>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1698>
 		PointerCancelEvent_LocalInit_m1C7DA0C8AF41E714D70C4BB760CFA3D1B1A9D3D8(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1688>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1699>
 		return;
 	}
 }
@@ -27227,7 +27227,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* PointerCancelEvent_GetPooledCo
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1690>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1701>
 		il2cpp_codegen_runtime_class_init_inline(MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811_il2cpp_TypeInfo_var);
 		MouseUpEvent_t3AC6C6A7A9CDB075A5FFE0C0F5E9B7C5D561A811* L_0;
 		L_0 = MouseUpEvent_GetPooled_mADEC2C8C9C69683139A261C5312A679E7F6B1D29(__this, NULL);
@@ -27244,10 +27244,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_PreDispatch_mBAAC2DBD
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1694>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1705>
 		RuntimeObject* L_0 = ___0_panel;
 		PointerEventBase_1_PreDispatch_m9DA801F7FADAD19B9984F363EA5C6AB8593B4424(__this, L_0, PointerEventBase_1_PreDispatch_m9DA801F7FADAD19B9984F363EA5C6AB8593B4424_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1695>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1706>
 		return;
 	}
 }
@@ -27276,7 +27276,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_PostDispatch_mA627375
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B10_0 = NULL;
 	ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* G_B9_0 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1699>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1710>
 		RuntimeObject* L_0 = ___0_panel;
 		NullCheck(L_0);
 		EventDispatcher_t9BC38CC96E93EAD1D818EE751260FE4687B0D398* L_1;
@@ -27285,7 +27285,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_PostDispatch_mA627375
 		ClickDetector_t6B5A82C99CFD12E051D8E84A7C8F7488355B8F31* L_2 = L_1->___m_ClickDetector;
 		NullCheck(L_2);
 		ClickDetector_ProcessEvent_TisPointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51_m4201944607C83402562D071989FE0ACEB9BD0BD0(L_2, __this, ClickDetector_ProcessEvent_TisPointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51_m4201944607C83402562D071989FE0ACEB9BD0BD0_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1701>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1712>
 		String_t* L_3;
 		L_3 = PointerEventBase_1_get_pointerType_m035E9ED854B5F58692E67128A759F3863D212795_inline(__this, PointerEventBase_1_get_pointerType_m035E9ED854B5F58692E67128A759F3863D212795_RuntimeMethod_var);
 		il2cpp_codegen_runtime_class_init_inline(PointerType_t6E813E47699AA9C948D9EFEF36F481B5EDD5BCD4_il2cpp_TypeInfo_var);
@@ -27299,15 +27299,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_PostDispatch_mA627375
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1703>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1714>
 		RuntimeObject* L_6 = ___0_panel;
 		int32_t L_7;
 		L_7 = PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_inline(__this, PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_RuntimeMethod_var);
 		PointerCaptureHelper_ReleasePointer_mE9ABEA39360504C8B5A9CF1C067A63F7535CDECB(L_6, L_7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1704>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1715>
 		RuntimeObject* L_8 = ___0_panel;
 		V_2 = ((BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303*)IsInstClass((RuntimeObject*)L_8, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303_il2cpp_TypeInfo_var));
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1705>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1716>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_9 = V_2;
 		if (L_9)
 		{
@@ -27333,7 +27333,7 @@ IL_004a:
 
 IL_004b:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1708>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1719>
 		String_t* L_12;
 		L_12 = PointerEventBase_1_get_pointerType_m035E9ED854B5F58692E67128A759F3863D212795_inline(__this, PointerEventBase_1_get_pointerType_m035E9ED854B5F58692E67128A759F3863D212795_RuntimeMethod_var);
 		il2cpp_codegen_runtime_class_init_inline(PointerType_t6E813E47699AA9C948D9EFEF36F481B5EDD5BCD4_il2cpp_TypeInfo_var);
@@ -27348,7 +27348,7 @@ IL_004b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1710>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1721>
 		int32_t L_16;
 		L_16 = PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_inline(__this, PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_RuntimeMethod_var);
 		il2cpp_codegen_runtime_class_init_inline(PointerDeviceState_tD94EF3C9710026DE8B7E83B6C842524C7C6EBA8C_il2cpp_TypeInfo_var);
@@ -27357,7 +27357,7 @@ IL_004b:
 
 IL_006d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1713>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1724>
 		RuntimeObject* L_17 = ___0_panel;
 		V_0 = ((Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9*)IsInstClass((RuntimeObject*)L_17, Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9_il2cpp_TypeInfo_var));
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_18 = V_0;
@@ -27369,7 +27369,7 @@ IL_006d:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1715>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1726>
 		Panel_t2B0DCF68A7A5EBC347FAE66F046EA98B53AF1AB9* L_20 = V_0;
 		NullCheck(L_20);
 		ContextualMenuManager_tEE3B1F33FFFD180705467CA625AEBA0F5D63154B* L_21;
@@ -27398,15 +27398,15 @@ IL_0091:
 
 IL_0092:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1718>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1729>
 		RuntimeObject* L_23 = ___0_panel;
 		PointerEventBase_1_PostDispatch_mCCE423FE41D58CBC68045348F89008943747FA2D(__this, L_23, PointerEventBase_1_PostDispatch_mCCE423FE41D58CBC68045348F89008943747FA2D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1720>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1731>
 		RuntimeObject* L_24 = ___0_panel;
 		int32_t L_25;
 		L_25 = PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_inline(__this, PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_RuntimeMethod_var);
 		PointerCaptureHelper_ActivateCompatibilityMouseEvents_mB5506AB811F3B2AEC0452FEF0BD394BA2B13DEB1(L_24, L_25, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1721>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1732>
 		return;
 	}
 }
@@ -27421,7 +27421,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_Dispatch_mE2115CAEF27
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1725>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1736>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		int32_t L_1;
 		L_1 = PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_inline(__this, PointerEventBase_1_get_pointerId_m10A301E89D623BE4E099DC7CE768AE0D12ADF5B4_RuntimeMethod_var);
@@ -27430,7 +27430,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerCancelEvent_Dispatch_mE2115CAEF27
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_3;
 		L_3 = Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline(L_2, NULL);
 		EventDispatchUtilities_DispatchToCapturingElementOrElementUnderPointer_m1DB1C303971CD300023CEE6011018230F9047D4B(__this, L_0, L_1, L_3, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1726>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1737>
 		return;
 	}
 }
@@ -27479,7 +27479,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerCancelEvent_t566D42065C3B376AD49A44A40
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1663>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1674>
 		PointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51* L_0 = (PointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51*)il2cpp_codegen_object_new(PointerCancelEvent_t566D42065C3B376AD49A44A406AFE929A6CFEE51_il2cpp_TypeInfo_var);
 		PointerCancelEvent__ctor_mB440794EF06B78F8560FA37755D344C3664339A7(L_0, NULL);
 		return L_0;
@@ -27507,14 +27507,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ClickEvent__cctor_m19B619E0AA25255AFEF3B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1748>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1759>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tF8A35C01C2123CBF108406C079AA5968A12B3547_il2cpp_TypeInfo_var);
 		U3CU3Ec_tF8A35C01C2123CBF108406C079AA5968A12B3547* L_0 = ((U3CU3Ec_tF8A35C01C2123CBF108406C079AA5968A12B3547_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tF8A35C01C2123CBF108406C079AA5968A12B3547_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t3382BD728955FC3D84B29FCF3CF638BA035E87BD* L_1 = (Func_1_t3382BD728955FC3D84B29FCF3CF638BA035E87BD*)il2cpp_codegen_object_new(Func_1_t3382BD728955FC3D84B29FCF3CF638BA035E87BD_il2cpp_TypeInfo_var);
 		Func_1__ctor_m975A4A2FD87579DE6F37F67C3A8D61AA16AB35DA(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m1E1AA957A73F40BA4A463B6E04BE179EA036469F_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t8C644CD99134CBBFDB84260302CD495995488415_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m677F404EBCCFF4775B3D1A82829AE93452625543(L_1, EventBase_1_SetCreateFunction_m677F404EBCCFF4775B3D1A82829AE93452625543_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1749>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1760>
 		return;
 	}
 }
@@ -27528,11 +27528,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ClickEvent_Init_m0E66220558D950B7CB4F13F
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1756>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1767>
 		PointerEventBase_1_Init_mECC6EFC54352B623BA3BCF96DC7ABCAA7109434C(__this, PointerEventBase_1_Init_mECC6EFC54352B623BA3BCF96DC7ABCAA7109434C_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1757>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1768>
 		ClickEvent_LocalInit_m62B68AB70576A5830F88BCCCCB3BB95934098492(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1758>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1769>
 		return;
 	}
 }
@@ -27540,9 +27540,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ClickEvent_Init_m0E66220558D950B7CB4F13F
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ClickEvent_LocalInit_m62B68AB70576A5830F88BCCCCB3BB95934098492 (ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1762>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1773>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 7, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1764>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1775>
 		return;
 	}
 }
@@ -27556,11 +27556,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ClickEvent__ctor_m5754A8AE2A3E6135392BD3
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1769>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1780>
 		PointerEventBase_1__ctor_mA70B3E8EEAAE5C2CDE62205CD8E5A55FD41A33C4(__this, PointerEventBase_1__ctor_mA70B3E8EEAAE5C2CDE62205CD8E5A55FD41A33C4_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1771>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1782>
 		ClickEvent_LocalInit_m62B68AB70576A5830F88BCCCCB3BB95934098492(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1772>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1783>
 		return;
 	}
 }
@@ -27577,17 +27577,17 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ClickEvent_t30651949F0BA68E61187B63F5D325323E
 	ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* V_0 = NULL;
 	ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* V_1 = NULL;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1776>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1787>
 		RuntimeObject* L_0 = ___0_pointerEvent;
 		ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* L_1;
 		L_1 = PointerEventBase_1_GetPooled_m5B7D3239A8C1E92C3045C41997EDAC47F757E8DA(L_0, PointerEventBase_1_GetPooled_m5B7D3239A8C1E92C3045C41997EDAC47F757E8DA_RuntimeMethod_var);
 		V_0 = L_1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1777>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1788>
 		ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* L_2 = V_0;
 		int32_t L_3 = ___1_clickCount;
 		NullCheck(L_2);
 		PointerEventBase_1_set_clickCount_m4D763377D2198E24049E18C07D680F3D5A858246_inline(L_2, L_3, PointerEventBase_1_set_clickCount_m4D763377D2198E24049E18C07D680F3D5A858246_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1778>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1789>
 		ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* L_4 = V_0;
 		V_1 = L_4;
 		goto IL_0014;
@@ -27595,7 +27595,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ClickEvent_t30651949F0BA68E61187B63F5D325323E
 
 IL_0014:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1779>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1790>
 		ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* L_5 = V_1;
 		return L_5;
 	}
@@ -27645,7 +27645,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ClickEvent_t30651949F0BA68E61187B63F5D325323E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1748>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1759>
 		ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318* L_0 = (ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318*)il2cpp_codegen_object_new(ClickEvent_t30651949F0BA68E61187B63F5D325323E92CC318_il2cpp_TypeInfo_var);
 		ClickEvent__ctor_m5754A8AE2A3E6135392BD381931B5DCB8865D4AC(L_0, NULL);
 		return L_0;
@@ -27673,14 +27673,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent__cctor_mD55BD8358E8E32
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1791>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1802>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tD4819C30B6AE327176F513289AC7140A4C859EAC_il2cpp_TypeInfo_var);
 		U3CU3Ec_tD4819C30B6AE327176F513289AC7140A4C859EAC* L_0 = ((U3CU3Ec_tD4819C30B6AE327176F513289AC7140A4C859EAC_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tD4819C30B6AE327176F513289AC7140A4C859EAC_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_tC6B1E9A3263610E4799CD35918CD6DFE16C737FA* L_1 = (Func_1_tC6B1E9A3263610E4799CD35918CD6DFE16C737FA*)il2cpp_codegen_object_new(Func_1_tC6B1E9A3263610E4799CD35918CD6DFE16C737FA_il2cpp_TypeInfo_var);
 		Func_1__ctor_m852F162A439BE30FD6B192E870C71FCDED25EB72(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m7487ECCEDD37501DE8E49EFF6462074B8D1E6EBE_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t1D0AAEBCAF4B558F0F7FDDA7060BF68A5C648C10_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mF026D403BD58A78996BCF0189CA19EAD7DD8EA66(L_1, EventBase_1_SetCreateFunction_mF026D403BD58A78996BCF0189CA19EAD7DD8EA66_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1792>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1803>
 		return;
 	}
 }
@@ -27694,11 +27694,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_Init_mD9C6CD1394132949
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1799>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1810>
 		PointerEventBase_1_Init_mB8033AF59D776B5968DD983BA8E2FEE5D7B2643A(__this, PointerEventBase_1_Init_mB8033AF59D776B5968DD983BA8E2FEE5D7B2643A_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1800>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1811>
 		PointerEnterEvent_LocalInit_m0BB2CA5C8996BFAA15C4502545054F9413BB6A51(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1801>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1812>
 		return;
 	}
 }
@@ -27706,9 +27706,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_Init_mD9C6CD1394132949
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_LocalInit_m0BB2CA5C8996BFAA15C4502545054F9413BB6A51 (PointerEnterEvent_t1B003E301A8969E273D1F5163242BE399B9E63DB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1805>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1816>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1806>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1817>
 		return;
 	}
 }
@@ -27722,11 +27722,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent__ctor_m4DB754D87278D9B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1811>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1822>
 		PointerEventBase_1__ctor_mA0557C9D68E527F40125701EA3A67DA52C805AA6(__this, PointerEventBase_1__ctor_mA0557C9D68E527F40125701EA3A67DA52C805AA6_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1813>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1824>
 		PointerEnterEvent_LocalInit_m0BB2CA5C8996BFAA15C4502545054F9413BB6A51(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1814>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1825>
 		return;
 	}
 }
@@ -27734,10 +27734,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent__ctor_m4DB754D87278D9B
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_Dispatch_mF35C6A7FC040B47FB5947F4B184864EA4BA0FCE2 (PointerEnterEvent_t1B003E301A8969E273D1F5163242BE399B9E63DB* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1818>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1829>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1819>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1830>
 		return;
 	}
 }
@@ -27752,10 +27752,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_PreDispatch_m7055F8B8B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1823>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1834>
 		RuntimeObject* L_0 = ___0_panel;
 		PointerEventBase_1_PreDispatch_mC802CD92EB516D2011A86185B2DD4C25027FC8A6(__this, L_0, PointerEventBase_1_PreDispatch_mC802CD92EB516D2011A86185B2DD4C25027FC8A6_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1825>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1836>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1;
 		L_1 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2 = L_1;
@@ -27766,12 +27766,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerEnterEvent_PreDispatch_m7055F8B8B
 		L_4 = PointerEventBase_1_get_pointerId_m66E12257BB47F506FC0FA375628C0DEAD53FBAFD_inline(__this, PointerEventBase_1_get_pointerId_m66E12257BB47F506FC0FA375628C0DEAD53FBAFD_RuntimeMethod_var);
 		NullCheck(L_2);
 		VisualElement_set_containedPointerIds_m218C9945649CFA077AF6870DAAC4084F02A93796_inline(L_2, ((int32_t)(L_3|((int32_t)(1<<((int32_t)(L_4&((int32_t)31))))))), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1826>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1837>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_5;
 		L_5 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		NullCheck(L_5);
 		VisualElement_UpdateHoverPseudoState_m918CA907CE8811A1C54A916A1EBF733E3321FA44(L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1827>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1838>
 		return;
 	}
 }
@@ -27820,7 +27820,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerEnterEvent_t1B003E301A8969E273D1F51632
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1791>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1802>
 		PointerEnterEvent_t1B003E301A8969E273D1F5163242BE399B9E63DB* L_0 = (PointerEnterEvent_t1B003E301A8969E273D1F5163242BE399B9E63DB*)il2cpp_codegen_object_new(PointerEnterEvent_t1B003E301A8969E273D1F5163242BE399B9E63DB_il2cpp_TypeInfo_var);
 		PointerEnterEvent__ctor_m4DB754D87278D9B698F6C357AA3BC48D09DE0256(L_0, NULL);
 		return L_0;
@@ -27848,14 +27848,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent__cctor_mFDABE99D96CE24
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1839>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1850>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tCF6135FE673910AFAA1040999B150BE7C9FF1F9B_il2cpp_TypeInfo_var);
 		U3CU3Ec_tCF6135FE673910AFAA1040999B150BE7C9FF1F9B* L_0 = ((U3CU3Ec_tCF6135FE673910AFAA1040999B150BE7C9FF1F9B_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tCF6135FE673910AFAA1040999B150BE7C9FF1F9B_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t2A9C9C0D1D9235E86765A230C3927949DE07B52D* L_1 = (Func_1_t2A9C9C0D1D9235E86765A230C3927949DE07B52D*)il2cpp_codegen_object_new(Func_1_t2A9C9C0D1D9235E86765A230C3927949DE07B52D_il2cpp_TypeInfo_var);
 		Func_1__ctor_m85C698383850D3EE6B624DDFDF7D5438C3F87B5F(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mD9E7852CEBF1899D0D9E5757EAAD32DBB9729499_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_t6C339E78DC90E37A13879F0EF1449D7E9412953C_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mC126AB129DFA1FB934C3F001CEBD562C3FB5E570(L_1, EventBase_1_SetCreateFunction_mC126AB129DFA1FB934C3F001CEBD562C3FB5E570_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1840>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1851>
 		return;
 	}
 }
@@ -27869,11 +27869,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_Init_m7E26F2DC41BE127D
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1847>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1858>
 		PointerEventBase_1_Init_m8C36DC066721E1AC99A205129551EBE2C65A432D(__this, PointerEventBase_1_Init_m8C36DC066721E1AC99A205129551EBE2C65A432D_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1848>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1859>
 		PointerLeaveEvent_LocalInit_m0CBA72A4644CF857E3DD2746EAC04EA8F74964A7(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1849>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1860>
 		return;
 	}
 }
@@ -27881,9 +27881,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_Init_m7E26F2DC41BE127D
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_LocalInit_m0CBA72A4644CF857E3DD2746EAC04EA8F74964A7 (PointerLeaveEvent_tA2426EF03A82E31DC06960A17E03E88E155AFD84* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1853>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1864>
 		EventBase_set_propagation_m1F5D2A6582B8A4D64F84F0B71F90790FA2BF7E8C_inline(__this, 2, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1854>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1865>
 		return;
 	}
 }
@@ -27897,11 +27897,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent__ctor_m629AB9B1E5E9A1D
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1859>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1870>
 		PointerEventBase_1__ctor_m5A717FB16CEBD963D885F99DBED915DBAD419F42(__this, PointerEventBase_1__ctor_m5A717FB16CEBD963D885F99DBED915DBAD419F42_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1861>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1872>
 		PointerLeaveEvent_LocalInit_m0CBA72A4644CF857E3DD2746EAC04EA8F74964A7(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1862>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1873>
 		return;
 	}
 }
@@ -27909,10 +27909,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent__ctor_m629AB9B1E5E9A1D
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_Dispatch_m96B00E68737842FED273FCF7BA22DC863E03FF68 (PointerLeaveEvent_tA2426EF03A82E31DC06960A17E03E88E155AFD84* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1866>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1877>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1867>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1878>
 		return;
 	}
 }
@@ -27927,10 +27927,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_PreDispatch_m2E3A8EDE1
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1871>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1882>
 		RuntimeObject* L_0 = ___0_panel;
 		PointerEventBase_1_PreDispatch_mE269925DB34571DEF6DE8172AA718EF397C327BC(__this, L_0, PointerEventBase_1_PreDispatch_mE269925DB34571DEF6DE8172AA718EF397C327BC_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1873>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1884>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1;
 		L_1 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_2 = L_1;
@@ -27941,12 +27941,12 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerLeaveEvent_PreDispatch_m2E3A8EDE1
 		L_4 = PointerEventBase_1_get_pointerId_mA24BF60F8312D1521DD3389696D2BE05A0D2C107_inline(__this, PointerEventBase_1_get_pointerId_mA24BF60F8312D1521DD3389696D2BE05A0D2C107_RuntimeMethod_var);
 		NullCheck(L_2);
 		VisualElement_set_containedPointerIds_m218C9945649CFA077AF6870DAAC4084F02A93796_inline(L_2, ((int32_t)(L_3&((~((int32_t)(1<<((int32_t)(L_4&((int32_t)31))))))))), NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1874>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1885>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_5;
 		L_5 = EventBase_get_elementTarget_mF6CFD6372FB247718797DB8927654F781821B94D_inline(__this, NULL);
 		NullCheck(L_5);
 		VisualElement_UpdateHoverPseudoState_m918CA907CE8811A1C54A916A1EBF733E3321FA44(L_5, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1875>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1886>
 		return;
 	}
 }
@@ -27995,7 +27995,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerLeaveEvent_tA2426EF03A82E31DC06960A17E
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1839>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1850>
 		PointerLeaveEvent_tA2426EF03A82E31DC06960A17E03E88E155AFD84* L_0 = (PointerLeaveEvent_tA2426EF03A82E31DC06960A17E03E88E155AFD84*)il2cpp_codegen_object_new(PointerLeaveEvent_tA2426EF03A82E31DC06960A17E03E88E155AFD84_il2cpp_TypeInfo_var);
 		PointerLeaveEvent__ctor_m629AB9B1E5E9A1DD04418F8EB8F13696256568CA(L_0, NULL);
 		return L_0;
@@ -28023,14 +28023,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOverEvent__cctor_m12D797F2691026A
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1887>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1898>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tD13809BDC2B5B90795D9EDB255A67C3AB271E17F_il2cpp_TypeInfo_var);
 		U3CU3Ec_tD13809BDC2B5B90795D9EDB255A67C3AB271E17F* L_0 = ((U3CU3Ec_tD13809BDC2B5B90795D9EDB255A67C3AB271E17F_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tD13809BDC2B5B90795D9EDB255A67C3AB271E17F_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t0EA9D2BB3A169F9DA3DE098401E04BB007693C72* L_1 = (Func_1_t0EA9D2BB3A169F9DA3DE098401E04BB007693C72*)il2cpp_codegen_object_new(Func_1_t0EA9D2BB3A169F9DA3DE098401E04BB007693C72_il2cpp_TypeInfo_var);
 		Func_1__ctor_m6D490CEA74E40A891C0CF8045D3EF42F8E2B0082(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_mF7D7116FBF53B049F085CE94DF270198B671341A_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tB0C64467E85CE95C90E60DB69E1D0B004FFB1A33_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_mD394F4CCE8A3775B6ECD3500C12F532E04542FA3(L_1, EventBase_1_SetCreateFunction_mD394F4CCE8A3775B6ECD3500C12F532E04542FA3_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1888>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1899>
 		return;
 	}
 }
@@ -28038,10 +28038,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOverEvent__cctor_m12D797F2691026A
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOverEvent_Dispatch_m496F03B2B8FFB1D0469D91DDF6A788D9B5F5B397 (PointerOverEvent_tC934C62D5296D77308014777170DE1D4072973E9* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1892>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1903>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1893>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1904>
 		return;
 	}
 }
@@ -28105,7 +28105,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOverEvent_tC934C62D5296D77308014777170
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1887>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1898>
 		PointerOverEvent_tC934C62D5296D77308014777170DE1D4072973E9* L_0 = (PointerOverEvent_tC934C62D5296D77308014777170DE1D4072973E9*)il2cpp_codegen_object_new(PointerOverEvent_tC934C62D5296D77308014777170DE1D4072973E9_il2cpp_TypeInfo_var);
 		PointerOverEvent__ctor_m9EDFCD7AB8896C99E94CD4F38C8EB119A002C300(L_0, NULL);
 		return L_0;
@@ -28133,14 +28133,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutEvent__cctor_m7634224C765D6A61
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1905>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1916>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_t5D4146C415DB281EAB15C175AF8909878BE40D47_il2cpp_TypeInfo_var);
 		U3CU3Ec_t5D4146C415DB281EAB15C175AF8909878BE40D47* L_0 = ((U3CU3Ec_t5D4146C415DB281EAB15C175AF8909878BE40D47_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_t5D4146C415DB281EAB15C175AF8909878BE40D47_il2cpp_TypeInfo_var))->___U3CU3E9;
 		Func_1_t92A3A1A8EE7E4D4D3FBDF09641034017EBAB9B8D* L_1 = (Func_1_t92A3A1A8EE7E4D4D3FBDF09641034017EBAB9B8D*)il2cpp_codegen_object_new(Func_1_t92A3A1A8EE7E4D4D3FBDF09641034017EBAB9B8D_il2cpp_TypeInfo_var);
 		Func_1__ctor_mA5B452D47202E8374A84E295E344A532B9308C73(L_1, L_0, (intptr_t)((void*)U3CU3Ec_U3C_cctorU3Eb__0_0_m0F386300FF2A83671C56C2764A859AB81C5A4BE3_RuntimeMethod_var), NULL);
 		il2cpp_codegen_runtime_class_init_inline(EventBase_1_tD501482DA0C705071241B3F48D0782E9B5188854_il2cpp_TypeInfo_var);
 		EventBase_1_SetCreateFunction_m7BE10EF82BF3FF0E207C2BA243602488E1506090(L_1, EventBase_1_SetCreateFunction_m7BE10EF82BF3FF0E207C2BA243602488E1506090_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1906>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1917>
 		return;
 	}
 }
@@ -28148,10 +28148,10 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutEvent__cctor_m7634224C765D6A61
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PointerOutEvent_Dispatch_m020B3200CE1D7EACA82AF0EFE0CD0FB4236DBBC5 (PointerOutEvent_t3B605B4A604A0FEEB3C660C9BFE38F4C0EBA03D5* __this, BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* ___0_panel, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1910>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1921>
 		BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* L_0 = ___0_panel;
 		EventDispatchUtilities_DispatchToAssignedTarget_mEB21AE10FF0C05D96C896BE8576B27B306AC0CA5(__this, L_0, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1911>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1922>
 		return;
 	}
 }
@@ -28215,7 +28215,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR PointerOutEvent_t3B605B4A604A0FEEB3C660C9BFE3
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1905>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1916>
 		PointerOutEvent_t3B605B4A604A0FEEB3C660C9BFE38F4C0EBA03D5* L_0 = (PointerOutEvent_t3B605B4A604A0FEEB3C660C9BFE38F4C0EBA03D5*)il2cpp_codegen_object_new(PointerOutEvent_t3B605B4A604A0FEEB3C660C9BFE38F4C0EBA03D5_il2cpp_TypeInfo_var);
 		PointerOutEvent__ctor_m309DAC9A9EFE6263E10EE246932DA028BA433A1B(L_0, NULL);
 		return L_0;
@@ -38896,7 +38896,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 35520
+// Method Definition Index: 35518
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -38910,7 +38910,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFF
 		return;
 	}
 }
-// Method Definition Index: 35548
+// Method Definition Index: 35546
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -38996,7 +38996,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35549
+// Method Definition Index: 35547
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector2_op_Implicit_m6D9CABB2C791A192867D7A4559D132BE86DD3EB7_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_v, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -39055,7 +39055,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void EventBase_set_propagationPha
 		return;
 	}
 }
-// Method Definition Index: 35550
+// Method Definition Index: 35548
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -39070,7 +39070,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35513
+// Method Definition Index: 35511
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_NextPowerOfTwo_mA1CE7F3EEF9B0B07AB2D586C030ED236D578F485_inline (int32_t ___0_value, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -39292,7 +39292,7 @@ IL_00d4:
 		return;
 	}
 }
-// Method Definition Index: 6853
+// Method Definition Index: 6854
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR BaseVisualElementPanel_tE3811F3D1474B72CB6CD5BCEECFF5B5CBEC1E303* VisualElement_get_elementPanel_m4B4A37001D55527E4D015E6C6132607071F32B01_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -40164,7 +40164,7 @@ IL_00b5:
 		return L_31;
 	}
 }
-// Method Definition Index: 6845
+// Method Definition Index: 6846
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 VisualElement_get_hierarchy_m2E897DE4CFD349E65CFA38EFF6BAAFECE2F4E3E4_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -40206,7 +40206,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void InputEvent_set_newData_m9ECF
 		return;
 	}
 }
-// Method Definition Index: 35553
+// Method Definition Index: 35551
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_down_m7672D87B9C778FB2AEF7BB79758142D01166B493_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40221,7 +40221,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35552
+// Method Definition Index: 35550
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_up_m41067879408BB378593EF7406AF2525F176F0ABF_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40236,7 +40236,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35554
+// Method Definition Index: 35552
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_left_m851D1A435131CE336F60115E19FC8C21480284BC_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40251,7 +40251,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 35555
+// Method Definition Index: 35553
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_right_m99043ED6B3D5AEA5033313FE3DA9571F39D1B280_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40286,7 +40286,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GeometryChangedEvent_set_new
 		return;
 	}
 }
-// Method Definition Index: 33976
+// Method Definition Index: 33966
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D Rect_get_zero_m5341D8B63DEF1F4C308A685EEC8CFEA12A396C8D_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40316,13 +40316,13 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GeometryChangedEvent_set_lay
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void WheelEvent_set_delta_mF5242D2BF69D54052C8CCE4AA44BE4D591569B92_inline (WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:718>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:728>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = ___0_value;
 		__this->___U3CdeltaU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 35396
+// Method Definition Index: 35394
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_zero_m0C1249C3F25B1C70EAD3CC8B31259975A457AE39_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40341,7 +40341,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_set_triggerEvent_m6AEDC5CEB93E6A8DA01BD7760D7DE05C90884E3A_inline (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1062>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0 = ___0_value;
 		__this->___U3CtriggerEventU3Ek__BackingField = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CtriggerEventU3Ek__BackingField), (void*)L_0);
@@ -40352,7 +40352,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_set_menu_m28709F7A74353EFEECFE1C28D708C6F619E84120_inline (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1058>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0 = ___0_value;
 		__this->___U3CmenuU3Ek__BackingField = L_0;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___U3CmenuU3Ek__BackingField), (void*)L_0);
@@ -40363,7 +40363,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void ContextualMenuPopulateEvent_
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* ContextualMenuPopulateEvent_get_triggerEvent_m305F0D2BD526250F749DF3B293ED234D9940C6AB_inline (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1052>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1062>
 		EventBase_tD7F89B936EB8074AE31E7B15976C072277371F7C* L_0 = __this->___U3CtriggerEventU3Ek__BackingField;
 		return L_0;
 	}
@@ -40372,12 +40372,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR EventBase_tD7F89B936EB8074AE31E7B
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* ContextualMenuPopulateEvent_get_menu_mDD978E1DE874D04B47708329654A7D37F88C37CA_inline (ContextualMenuPopulateEvent_t72C856D9B3951E3AA5901442A98BF6DE7F4258FB* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1048>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:1058>
 		DropdownMenu_tCC0483D2EB24641C3ADAE4BC122C92ABCFB186D2* L_0 = __this->___U3CmenuU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 35534
+// Method Definition Index: 35532
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA16336720C14EEF8BA9B55AE33B98C9EE2082BDC_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, const RuntimeMethod* method) 
 {
 	{
@@ -40393,7 +40393,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_direction_m712EBADD778DE12FB11A2E35FA160BA321A1804B_inline (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:280>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:291>
 		int32_t L_0 = ___0_value;
 		__this->___U3CdirectionU3Ek__BackingField = L_0;
 		return;
@@ -40403,7 +40403,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_dire
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void NavigationMoveEvent_set_move_mB6C278D3B4A3FE95F573E3E74DC3BCD066567244_inline (NavigationMoveEvent_t70F4AAAE0B5287449430A2A7A2DC78A2AF1364DF* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:289>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/NavigationEvents.cs:300>
 		Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 L_0 = ___0_value;
 		__this->___U3CmoveU3Ek__BackingField = L_0;
 		return;
@@ -40427,7 +40427,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 35405
+// Method Definition Index: 35403
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Subtraction_mE42023FF80067CB44A1D4A27EB7CF2B24CABB828_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -40503,7 +40503,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool BaseVisualElementPanel_get_i
 		return L_0;
 	}
 }
-// Method Definition Index: 34004
+// Method Definition Index: 33994
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Rect_Contains_mB1160CD465F3E9616AA4EED72AFFD611BD8D2B6B_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_point, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40563,7 +40563,7 @@ IL_003b:
 		return (bool)G_B5_0;
 	}
 }
-// Method Definition Index: 35398
+// Method Definition Index: 35396
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_get_forward_mAA55A7034304DF8B2152EAD49AE779FC4CA2EB4A_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40578,7 +40578,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 33966
+// Method Definition Index: 33956
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Ray__ctor_mE298992FD10A3894C38373198385F345C58BD64C_inline (Ray_t2B1742D7958DC05BDC3EFC7461D3593E1430DC00* __this, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_origin, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_direction, const RuntimeMethod* method) 
 {
 	{
@@ -40595,7 +40595,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Ray__ctor_mE298992FD10A3894C
 		return;
 	}
 }
-// Method Definition Index: 35433
+// Method Definition Index: 35431
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 Quaternion_get_identity_m7E701AE095ED10FD5EA0B50ABCFDE2EEFF2173A5_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -40623,26 +40623,26 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ContextualMenuManager_tEE3B1F33FF
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveEvent_set_isHandledByDraggable_m24AE525901E56FE8A7936EDA8F2046862BB3660D_inline (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1459>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
 		bool L_0 = ___0_value;
 		__this->___U3CisHandledByDraggableU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 6724
+// Method Definition Index: 6725
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t VisualElement_get_containedPointerIds_m84803849BB0BF517C919A0BCA8C2DD95442C23C3_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1729>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1698>
 		int32_t L_0 = __this->___U3CcontainedPointerIdsU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 6725
+// Method Definition Index: 6726
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void VisualElement_set_containedPointerIds_m218C9945649CFA077AF6870DAAC4084F02A93796_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1729>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:1698>
 		int32_t L_0 = ___0_value;
 		__this->___U3CcontainedPointerIdsU3Ek__BackingField = L_0;
 		return;
@@ -40669,7 +40669,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TooltipEvent_set_tooltip_m98
 		return;
 	}
 }
-// Method Definition Index: 33973
+// Method Definition Index: 33963
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Rect__ctor_m18C3033D135097BEE424AAA68D91C706D2647F23_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, float ___0_x, float ___1_y, float ___2_width, float ___3_height, const RuntimeMethod* method) 
 {
 	{
@@ -41089,7 +41089,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterFunctionDefinition_set
 		return;
 	}
 }
-// Method Definition Index: 5338
+// Method Definition Index: 5340
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterParameter_set_type_m55FDA5CE73F1735EC15EBBF24C119F58590BA8EF_inline (FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -41099,7 +41099,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterParameter_set_type_m55
 		return;
 	}
 }
-// Method Definition Index: 5340
+// Method Definition Index: 5342
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterParameter_set_floatValue_mB00B8AA8B980CB41257F76FF3B4A2F4498FD706F_inline (FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* __this, float ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -41140,7 +41140,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PostProcessingPassU5BU5D_t7F3B85D
 		return L_0;
 	}
 }
-// Method Definition Index: 35255
+// Method Definition Index: 35252
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_get_white_m068F5AF879B0FCA584E3693F762EA41BB65532C6_inline (const RuntimeMethod* method) 
 {
 	{
@@ -41151,7 +41151,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_0;
 	}
 }
-// Method Definition Index: 5342
+// Method Definition Index: 5344
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterParameter_set_colorValue_m1492BDE4C603267D233A78C1A91F6A7741077FA0_inline (FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* __this, Color_tD001788D726C3A7F1379BEED0260B9591F440C1F ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -41161,7 +41161,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void FilterParameter_set_colorVal
 		return;
 	}
 }
-// Method Definition Index: 5351
+// Method Definition Index: 5353
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR FixedBuffer4_1_tFD261E0E1A5ECEFC54C0B0B89FA6BFEE477E4D8C FilterFunction_get_parameters_m34D3E86D4F5C898CCE9D9F1A05849AD9FBD2A6C5_inline (FilterFunction_t32E0707BD9D9F770A2A7578985A5C163FC1AAEFF* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41170,7 +41170,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR FixedBuffer4_1_tFD261E0E1A5ECEFC5
 		return L_0;
 	}
 }
-// Method Definition Index: 5339
+// Method Definition Index: 5341
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float FilterParameter_get_floatValue_m7AB6C0728FDA6F6C5AA3C006DE802981A20F28C4_inline (FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41179,7 +41179,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float FilterParameter_get_floatVa
 		return L_0;
 	}
 }
-// Method Definition Index: 35492
+// Method Definition Index: 35489
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_CeilToInt_mF2BF9F4261B3431DC20E10A46CFEEED103C48963_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -41206,7 +41206,7 @@ IL_000c:
 		return L_2;
 	}
 }
-// Method Definition Index: 35349
+// Method Definition Index: 35346
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59AA700BCE10E2AED3E6 Matrix4x4_get_identity_m6568A73831F3E2D587420D20FF423959D7D8AB56_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -41221,7 +41221,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Matrix4x4_tDB70CF134A14BA38190C59
 		return L_0;
 	}
 }
-// Method Definition Index: 5349
+// Method Definition Index: 5351
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t FilterFunction_get_type_mC620937C6BE113146327D798A301A596B0C443E7_inline (FilterFunction_t32E0707BD9D9F770A2A7578985A5C163FC1AAEFF* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41230,7 +41230,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t FilterFunction_get_type_m
 		return L_0;
 	}
 }
-// Method Definition Index: 5341
+// Method Definition Index: 5343
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F FilterParameter_get_colorValue_mF5C1CE04FEB644F63CFD2BE2DC48AB88D5A3C31F_inline (FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41239,7 +41239,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_0;
 	}
 }
-// Method Definition Index: 35241
+// Method Definition Index: 35238
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED0260B9591F440C1F Color_get_linear_m76EB88E15DA4E00D615DF33D1CEE51092683117C_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, const RuntimeMethod* method) 
 {
 	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
@@ -41265,7 +41265,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Color_tD001788D726C3A7F1379BEED02
 		return L_7;
 	}
 }
-// Method Definition Index: 35498
+// Method Definition Index: 35495
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -41319,7 +41319,7 @@ IL_002d:
 		return L_5;
 	}
 }
-// Method Definition Index: 35607
+// Method Definition Index: 35605
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector4__ctor_m96B2CD8B862B271F513AF0BDC2EABD58E4DBC813_inline (Vector4_t58B63D32F48C0DBF50DE2C60794C4676C80EDBE3* __this, float ___0_x, float ___1_y, float ___2_z, float ___3_w, const RuntimeMethod* method) 
 {
 	{
@@ -41339,7 +41339,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector4__ctor_m96B2CD8B862B2
 		return;
 	}
 }
-// Method Definition Index: 35482
+// Method Definition Index: 35479
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -41465,7 +41465,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR PointerDispatchState_t145BB8BB026
 		return L_0;
 	}
 }
-// Method Definition Index: 35480
+// Method Definition Index: 35477
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -41504,7 +41504,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 33967
+// Method Definition Index: 33957
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Ray_get_origin_m97604A8F180316A410DCD77B7D74D04522FA1BA6_inline (Ray_t2B1742D7958DC05BDC3EFC7461D3593E1430DC00* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41513,7 +41513,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 33969
+// Method Definition Index: 33959
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Ray_get_direction_m21C2D22D3BD4A683BD4DC191AB22DD05F5EC2086_inline (Ray_t2B1742D7958DC05BDC3EFC7461D3593E1430DC00* __this, const RuntimeMethod* method) 
 {
 	{
@@ -41522,7 +41522,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_0;
 	}
 }
-// Method Definition Index: 35417
+// Method Definition Index: 35415
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 Quaternion_FromToRotation_mCB3100F93637E72455388B901C36EF8A25DFDB9A_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_fromDirection, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_toDirection, const RuntimeMethod* method) 
 {
 	{
@@ -41532,7 +41532,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Quaternion_tDA59F214EF07D7700B26E
 		return L_0;
 	}
 }
-// Method Definition Index: 35407
+// Method Definition Index: 35405
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Multiply_m87BA7C578F96C8E49BB07088DAAC4649F83B0353_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -41556,7 +41556,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D
 		return L_9;
 	}
 }
-// Method Definition Index: 35404
+// Method Definition Index: 35402
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_op_Addition_m78C0EC70CB66E8DCAC225743D82B268DAEE92067_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_a, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_b, const RuntimeMethod* method) 
 {
 	Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 V_0;
@@ -41592,7 +41592,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimePanel_t2ED2270758B54860F12
 		return L_0;
 	}
 }
-// Method Definition Index: 35369
+// Method Definition Index: 35367
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999EF1ECBE57D990A386303E2283DE0_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, float ___0_x, float ___1_y, float ___2_z, const RuntimeMethod* method) 
 {
 	{
@@ -41609,7 +41609,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3__ctor_m376936E6B999E
 		return;
 	}
 }
-// Method Definition Index: 14758
+// Method Definition Index: 14755
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* Array_Empty_TisRuntimeObject_mFB8A63D602BB6974D31E20300D9EB89C6FE7C278_gshared_inline (const RuntimeMethod* method) 
 {
 	il2cpp_rgctx_method_init(method);
@@ -41620,7 +41620,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR ObjectU5BU5D_t8061030B0A12A55D5AD
 		return L_0;
 	}
 }
-// Method Definition Index: 21121
+// Method Definition Index: 21117
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m08F50B5D83CD07085F9B86C829170F37FE7EF037_gshared_inline (Queue_1_t488F4FFC87B785BACAAF18A6B2E9307E5451DF68* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41638,7 +41638,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t PointerCaptureEventBase_1
 		return L_0;
 	}
 }
-// Method Definition Index: 21144
+// Method Definition Index: 21140
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Stack_1_get_Count_mD08AE71D49787D30DDD9D484BCD323D646744D2E_gshared_inline (Stack_1_tAD790A47551563636908E21E4F08C54C0C323EB5* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41647,7 +41647,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Stack_1_get_Count_mD08AE7
 		return L_0;
 	}
 }
-// Method Definition Index: 14055
+// Method Definition Index: 14052
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Span_1__ctor_mB699405722E96B949DE251894243517B81EDBBCD_gshared_inline (Span_1_t3F436092261253E8F2AF9867CA253C3B370766C2* __this, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* ___0_array, int32_t ___1_start, int32_t ___2_length, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41760,7 +41760,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mEBCF994CC3814631017F46A387B1A192ED6C85C7_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41799,7 +41799,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 14069
+// Method Definition Index: 14066
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m0B5336E05EEAAE122DF68A3A82C2D4359A2BE33D_gshared_inline (Span_1_t3F436092261253E8F2AF9867CA253C3B370766C2* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41808,7 +41808,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Span_1_get_Length_m0B5336
 		return L_0;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Current_m6330F15D18EE4F547C05DF9BF83C5EB710376027_gshared_inline (Enumerator_t9473BAB568A27E2339D48C1F91319E0F6D244D7A* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41817,7 +41817,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Cur
 		return L_0;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C389F22B8CEC282C15D56516658746C383_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -41875,7 +41875,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t KeyboardEventBase_1_get_k
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MouseEventBase_1_set_recomputeTopElementUnderMouse_mAA3AFB49FD4CED567F96657263091DA46C5A72A9_gshared_inline (MouseEventBase_1_t5B5081D29C8BECF72DF89EF50BB137E251C48228* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:214>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:224>
 		bool L_0 = ___0_value;
 		__this->___U3CrecomputeTopElementUnderMouseU3Ek__BackingField = L_0;
 		return;
@@ -41963,7 +41963,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void MouseEventBase_1_set_clickCo
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerEventBase_1_set_recomputeTopElementUnderPointer_m35FE3EA1D4751951241260612767219304D89187_gshared_inline (PointerEventBase_1_tCC99C5B34F8B8F012105435FC4A3CE4FD098045F* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:646>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:657>
 		bool L_0 = ___0_value;
 		__this->___U3CrecomputeTopElementUnderPointerU3Ek__BackingField = L_0;
 		return;
@@ -42024,7 +42024,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerEventBase_1_set_click
 		return;
 	}
 }
-// Method Definition Index: 21054
+// Method Definition Index: 21050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m16C1F2C61FED5955F10EB36BC1CB2DF34B128994_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42055,7 +42055,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR StylePropertyName_tCBE2B561C690538C8514BF56426AC486DC35B6FF Enumerator_get_Current_m4D5DE6032D2FE13FEB8F9A24DD665F4E7EAA3931_gshared_inline (Enumerator_t72FA0BD85114201DF7DC6AB5CD84F383CA13B94D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42064,7 +42064,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR StylePropertyName_tCBE2B561C69053
 		return L_0;
 	}
 }
-// Method Definition Index: 11400
+// Method Definition Index: 11397
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR FilterParameter_tC6BAE67835BA35634A769B28BF35314AF42BE060* FixedBuffer4_1_get_Item_mA13193D4507AC2DF48999A45C12B52EB8C8038A3_gshared_inline (FixedBuffer4_1_tFD261E0E1A5ECEFC54C0B0B89FA6BFEE477E4D8C* __this, int32_t ___0_index, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -42132,7 +42132,7 @@ IL_0035:
 		return L_9;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR FocusedElement_t1EE083A1C5276213C533A38C6B5DC02E9DE5CBEF Enumerator_get_Current_m77DBD0307C69F473DA6A47070D76091FABC89DBE_gshared_inline (Enumerator_tC40C530F62540E93BDAAFF42E8BDE3B3B3328EA0* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42141,7 +42141,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR FocusedElement_t1EE083A1C5276213C
 		return L_0;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mF80AAA806369D258F6DD70E7C312BDCB10A69A9B_gshared_inline (List_1_t1E327CB749CA1F2F2DA41B2D4DFF57FD6BE0FF66* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42150,7 +42150,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_mF80AAA8
 		return L_0;
 	}
 }
-// Method Definition Index: 21054
+// Method Definition Index: 21050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m6E8418F8671E7413DAF4337D72A04C4713AD4E99_gshared_inline (List_1_t1E327CB749CA1F2F2DA41B2D4DFF57FD6BE0FF66* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42181,7 +42181,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m9989CB26C4A11F3FBC18A300F9CC329897595091_gshared_inline (List_1_t1E327CB749CA1F2F2DA41B2D4DFF57FD6BE0FF66* __this, FocusedElement_t1EE083A1C5276213C533A38C6B5DC02E9DE5CBEF ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42220,7 +42220,7 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 14758
+// Method Definition Index: 14755
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Int32EnumU5BU5D_t87B7DB802810C38016332669039EF42C487A081F* Array_Empty_TisInt32Enum_tCBAC8BA2BFF3A845FA599F303093BBBA374B6F0C_m94E12BB613D748D2EEB9E1ABD961630D2F970385_gshared_inline (const RuntimeMethod* method) 
 {
 	il2cpp_rgctx_method_init(method);
@@ -42231,7 +42231,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Int32EnumU5BU5D_t87B7DB802810C380
 		return L_0;
 	}
 }
-// Method Definition Index: 33999
+// Method Definition Index: 33989
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA98A9B007F815F6E2059BA6BE425F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -42241,7 +42241,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 34001
+// Method Definition Index: 33991
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD632AADD8B9EAF9FE3BA143F79CAF8E_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -42251,7 +42251,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD63
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 35380
+// Method Definition Index: 35378
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector3_Normalize_mC749B887A4C74BA0A2E13E6377F17CCAEB0AADA8_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -42302,7 +42302,7 @@ IL_0065:
 		return;
 	}
 }
-// Method Definition Index: 35226
+// Method Definition Index: 35223
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9CFA544523A955870BD2A514C8C_inline (Color_tD001788D726C3A7F1379BEED0260B9591F440C1F* __this, float ___0_r, float ___1_g, float ___2_b, float ___3_a, const RuntimeMethod* method) 
 {
 	{
@@ -42322,7 +42322,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Color__ctor_m3786F0D6E510D9C
 		return;
 	}
 }
-// Method Definition Index: 14709
+// Method Definition Index: 14706
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint8_t* Array_GetRawSzArrayData_m2F8F5B2A381AEF971F12866D9C0A6C4FBA59F6BB_inline (RuntimeArray* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -42334,7 +42334,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR uint8_t* Array_GetRawSzArrayData_
 		return L_1;
 	}
 }
-// Method Definition Index: 35389
+// Method Definition Index: 35387
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector3_get_magnitude_mF0D6017E90B345F1F52D1CC564C640F1A847AF2D_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;

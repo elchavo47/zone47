@@ -1969,9 +1969,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = Debug;
@@ -2012,9 +2012,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = Release;
@@ -2056,9 +2056,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME_APP).app/$(PRODUCT_NAME_APP)";
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -2109,9 +2109,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME_APP).app/$(PRODUCT_NAME_APP)";
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -2156,7 +2156,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = ReleaseForRunning;
@@ -2197,9 +2197,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = ReleaseForRunning;
@@ -2241,9 +2241,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME_APP).app/$(PRODUCT_NAME_APP)";
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -2289,7 +2289,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = ReleaseForProfiling;
@@ -2330,9 +2330,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = ReleaseForProfiling;
@@ -2374,9 +2374,9 @@
 				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/$(PRODUCT_NAME_APP).app/$(PRODUCT_NAME_APP)";
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = xctest;
@@ -2577,7 +2577,7 @@
 					"-fno-strict-overflow",
 					"-DUNITY_VERSION_VER=6000",
 					"-DUNITY_VERSION_MAJ=3",
-					"-DUNITY_VERSION_MIN=27",
+					"-DUNITY_VERSION_MIN=25",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2596,9 +2596,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				WARNING_CFLAGS = "-Wno-missing-declarations";
 			};
@@ -2655,7 +2655,7 @@
 					"-fno-strict-overflow",
 					"-DUNITY_VERSION_VER=6000",
 					"-DUNITY_VERSION_MAJ=3",
-					"-DUNITY_VERSION_MIN=27",
+					"-DUNITY_VERSION_MIN=25",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2674,9 +2674,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				WARNING_CFLAGS = "-Wno-missing-declarations";
 			};
@@ -2733,7 +2733,7 @@
 					"-fno-strict-overflow",
 					"-DUNITY_VERSION_VER=6000",
 					"-DUNITY_VERSION_MAJ=3",
-					"-DUNITY_VERSION_MIN=27",
+					"-DUNITY_VERSION_MIN=25",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2752,9 +2752,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				WARNING_CFLAGS = "-Wno-missing-declarations";
 			};
@@ -2813,7 +2813,7 @@
 					"-fno-strict-overflow",
 					"-DUNITY_VERSION_VER=6000",
 					"-DUNITY_VERSION_MAJ=3",
-					"-DUNITY_VERSION_MIN=27",
+					"-DUNITY_VERSION_MIN=25",
 				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2832,9 +2832,9 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				UNITY_RUNTIME_VERSION = 6000.3.27f1;
+				UNITY_RUNTIME_VERSION = 6000.3.25f1;
 				UNITY_SCRIPTING_BACKEND = il2cpp;
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 				WARNING_CFLAGS = "-Wno-missing-declarations";
 			};
@@ -2880,7 +2880,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = Debug;
@@ -2924,7 +2924,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = iphoneos;
 				UNITY_CLOUD_PROJECT_ID = "f96b9802-34f3-46ae-b38c-2bc6fb21bef3";
-				USYM_UPLOAD_AUTH_TOKEN = "";
+				USYM_UPLOAD_AUTH_TOKEN = e4d01c6327afaf5d7a02fcdf7853b1144129311b53d3d0cae0ce5da771dbf457;
 				USYM_UPLOAD_URL_SOURCE = "https://perf-events.cloud.unity3d.com/url";
 			};
 			name = Release;

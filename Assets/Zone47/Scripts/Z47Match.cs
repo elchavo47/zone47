@@ -27,8 +27,57 @@ namespace Zone47
         public readonly List<Vector3> waypoints = new List<Vector3>();
         public Transform worldRoot;
 
-        public static readonly string[] AllyNames = { "Bozkurt", "Şahin", "Kartal", "Atmaca", "Pars", "Doğan", "Yıldırım", "Kaplan" };
-        public static readonly string[] EnemyNames = { "Viper", "Ghost", "Raven", "Cobra", "Jackal", "Wolf", "Reaper", "Hyena" };
+        // callsign pools: every match draws fresh, unique names (allies mostly Turkish, enemies mostly English, some mixing)
+        static readonly string[] NamesTR =
+        {
+            "Bozkurt", "Şahin", "Kartal", "Atmaca", "Pars", "Doğan", "Yıldırım", "Kaplan", "Akbaba", "Çakal", "Sırtlan", "Kurt", "Aslan", "Toros",
+            "Tufan", "Kasırga", "Fırtına", "Poyraz", "Rüzgar", "Yıldız", "Kılıç", "Hançer", "Mızrak", "Kalkan", "Zırh", "Demir", "Çelik", "Kaya",
+            "Granit", "Volkan", "Lav", "Ateş", "Kor", "Alev", "Duman", "Gölge", "Hayalet", "Sis", "Bora", "Tayfun", "Şimşek", "Gök",
+            "Bulut", "Turna", "Kuzgun", "Baykuş", "Puhu", "Delice", "Yaman", "Alp", "Batu", "Tolga", "Kaan", "Oğuz", "Atilla", "Mete",
+            "Tarkan", "Cengiz", "Timur", "Bülent", "Serkan", "Emre", "Mert", "Kerem", "Selim", "Burak", "Onur", "Umut", "Barış", "Cesur",
+            "Sarp", "Çağan", "Korkut", "Tuğrul", "Ertuğrul", "Alparslan", "Bilge", "Ayaz", "Kuzey", "Güney", "Yamaç", "Uçurum", "Vadi", "Ova",
+            "Çöl", "Kum", "Toz", "Bozkır", "Pusu", "Avcı", "Nişancı", "Komando", "Akıncı", "Sipahi", "Yeniçeri", "Mehmetçik", "Paşa", "Ağa",
+            "Reis", "Kaptan", "Çavuş", "Onbaşı", "Yüzbaşı", "Albay", "Dağcı", "Keşifçi", "Sızma", "Hücum", "Baskın", "Yarma", "Delik", "Mermi",
+            "Şarapnel", "Fişek", "Barut", "Tetik", "Namlu", "Dipçik", "Kundak", "Sürgü", "Şarjör", "Dürbün", "Radar", "Sonar", "Pusula", "Harita",
+            "Sınır", "Karakol", "Siper", "Mevzi", "Tabya", "Kale", "Burç", "Sur", "Kapı", "Köprü", "Tünel",
+        };
+        static readonly string[] NamesEN =
+        {
+            "Viper", "Ghost", "Raven", "Cobra", "Jackal", "Wolf", "Reaper", "Hyena", "Falcon", "Hawk", "Eagle", "Osprey", "Condor", "Vulture",
+            "Phantom", "Specter", "Shadow", "Shade", "Wraith", "Banshee", "Nomad", "Ranger", "Hunter", "Stalker", "Tracker", "Scout", "Sniper", "Gunner",
+            "Rook", "Bishop", "Knight", "Ace", "Joker", "Maverick", "Iceman", "Viking", "Spartan", "Titan", "Atlas", "Orion", "Apollo", "Hermes",
+            "Ares", "Zeus", "Odin", "Thor", "Loki", "Fenrir", "Kraken", "Hydra", "Basilisk", "Wyvern", "Dragon", "Griffin", "Sphinx", "Mamba",
+            "Python", "Rattler", "Scorpion", "Hornet", "Wasp", "Mantis", "Spider", "Panther", "Puma", "Jaguar", "Lynx", "Cougar", "Bobcat", "Bison",
+            "Rhino", "Grizzly", "Kodiak", "Badger", "Wolverine", "Mongoose", "Coyote", "Dingo", "Fox", "Ferret", "Raptor", "Talon", "Fang", "Claw",
+            "Blade", "Saber", "Dagger", "Arrow", "Bolt", "Spear", "Hammer", "Anvil", "Forge", "Steel", "Iron", "Cobalt", "Titanium", "Chrome",
+            "Onyx", "Flint", "Granite", "Boulder", "Ridge", "Canyon", "Mesa", "Dune", "Sandman", "Dust", "Storm", "Thunder", "Lightning", "Blitz",
+            "Tempest", "Cyclone", "Typhoon", "Hurricane", "Frost", "Blizzard", "Glacier", "Ember", "Blaze", "Inferno", "Cinder", "Ash", "Smoke", "Havoc",
+            "Chaos", "Mayhem", "Fury", "Rage", "Wrath", "Vandal", "Rogue", "Outlaw", "Bandit", "Mercenary", "Hitman", "Deadeye", "Bullseye", "Trigger",
+            "Recoil", "Ricochet", "Shrapnel", "Payload", "Warhead", "Rocket", "Missile", "Torpedo", "Cannon", "Mortar", "Howitzer", "Bravo", "Charlie", "Delta",
+            "Echo", "Foxtrot", "Kilo", "Lima", "Sierra", "Tango", "Victor", "Zulu", "Romeo", "Hotel", "India", "Yankee", "Xray", "Nova",
+            "Comet", "Meteor", "Quasar", "Pulsar", "Vortex", "Zenith", "Apex", "Summit", "Vector", "Cipher", "Enigma", "Matrix", "Proxy", "Glitch",
+            "Static", "Volt", "Surge", "Spark", "Fuse", "Tank", "Bulldog", "Mastiff", "Rottweiler", "Doberman", "Husky",
+        };
+        public static string[] AllyNames = new string[4], EnemyNames = new string[5];
+        static bool namesUsed = true;
+
+        /// Pick a new set of bot names (lobby shows them, the next match uses the same ones).
+        public static void RollNames()
+        {
+            var taken = new System.Collections.Generic.HashSet<string>(System.StringComparer.OrdinalIgnoreCase) { Settings.Callsign ?? "" };
+            string Pick(bool turkish)
+            {
+                var pool = (turkish ? Random.value < 0.8f : Random.value < 0.2f) ? NamesTR : NamesEN;
+                for (int tries = 0; tries < 50; tries++) { var n = pool[Random.Range(0, pool.Length)]; if (taken.Add(n)) return n; }
+                return pool[0] + Random.Range(10, 99);
+            }
+            if (AllyNames.Length != TeamSize - 1) AllyNames = new string[TeamSize - 1];
+            if (EnemyNames.Length != TeamSize) EnemyNames = new string[TeamSize];
+            for (int i = 0; i < AllyNames.Length; i++) AllyNames[i] = Pick(true);
+            for (int i = 0; i < EnemyNames.Length; i++) EnemyNames[i] = Pick(false);
+            namesUsed = false;
+        }
+        public static void EnsureNames() { if (namesUsed || AllyNames[0] == null) RollNames(); namesUsed = true; }
 
         public void Begin()
         {
@@ -42,21 +91,23 @@ namespace Zone47
             var R = Z47Refs.I;
             worldRoot = new GameObject("World").transform;
             worldRoot.SetParent(transform);
+            Sfx.ClearSurfaceCache();
+            Weather.ApplyMatch();
             var map = Instantiate(Settings.Map == 1 && R.portPrefab != null ? R.portPrefab : Settings.Map == 2 && R.cityPrefab != null ? R.cityPrefab : R.mapPrefab, worldRoot);
-            map.name = "Map";
+            map.name = "Map"; LoadingScreen.Progress(0.2f);
             Physics.SyncTransforms();
             yield return null;
 
             MeasureMap(map);
             BuildProps();
-            yield return StartCoroutine(MapSnapshot());
+            yield return StartCoroutine(MapSnapshot()); LoadingScreen.Progress(0.45f);
             BuildBounds();
             Physics.SyncTransforms();
             yield return null;
-            BakeNavMesh();
+            BakeNavMesh(); LoadingScreen.Progress(0.7f);
             yield return null;
             BuildWaypoints();
-            FixSpawns();
+            FixSpawns(); LoadingScreen.Progress(0.85f);
 
             // spawn teams
             var player = PlayerController.Create(SpawnPoint(0, 0), SpawnRot(0));
@@ -67,6 +118,8 @@ namespace Zone47
             HUD.Create(this);
             Sfx.Music(null, 0);
             Sfx.Ambience(R.ambience, 0.35f);
+            LoadingScreen.Done();
+            while (LoadingScreen.Visible) yield return null;        // countdown starts once the loading screen is gone
             foreach (var a in Actor.All) a.spawnTime = Time.time + countdown;
             while (countdown > 0f) { countdown -= Time.deltaTime; yield return null; }
             countdown = 0f;
@@ -267,7 +320,8 @@ namespace Zone47
 
         IEnumerator RespawnLater(Actor a)
         {
-            yield return new WaitForSeconds(a.isPlayer ? 4f : 5f);
+            float delay = a.isPlayer ? 4f : 5f; a.respawnAt = Time.time + delay;
+            yield return new WaitForSeconds(delay);
             if (Finished || a == null) yield break;
             // pick the spawn slot furthest from enemies
             Vector3 best = SpawnPoint(a.team, Random.Range(0, TeamSize)); float bestScore = -1;

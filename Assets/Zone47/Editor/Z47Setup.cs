@@ -26,7 +26,24 @@ namespace Zone47.EditorTools
                     if (EditorUtility.DisplayDialog("Zone 47", "Zone 47 kurulumu yapılsın mı?\n(Modeller, malzemeler, animasyonlar, sahne ve iOS ayarları otomatik hazırlanır. 1-3 dakika sürebilir.)", "Kur", "Sonra"))
                         Run();
                 }
+                else AutoUpdate();
             };
+            EditorApplication.playModeStateChanged += st => { if (st == PlayModeStateChange.EnteredEditMode) EditorApplication.delayCall += AutoUpdate; };
+        }
+
+        /// Bump this whenever a package brings new art/sounds or changes the setup code:
+        /// Unity then re-runs the setup by itself once per PC (no more clicking "Kurulumu Yap").
+        public const int SetupVersion = 14;
+        static string VerKey => "z47_setupver_" + Application.dataPath.GetHashCode();
+
+        static void AutoUpdate()
+        {
+            if (EditorApplication.isPlayingOrWillChangePlaymode || EditorApplication.isCompiling || EditorApplication.isUpdating) return;
+            FindRoot();
+            if (ROOT == null || !File.Exists(ROOT + "/Resources/Z47Refs.asset")) return;
+            if (EditorPrefs.GetInt(VerKey, 0) >= SetupVersion) return;
+            Debug.Log("[Zone47] Yeni paket algılandı, kurulum otomatik çalışıyor (v" + SetupVersion + ")");
+            Run();
         }
 
         static void FindRoot()
@@ -78,8 +95,9 @@ namespace Zone47.EditorTools
                 MakeScene();
                 PlayerSetup();
                 AssetDatabase.SaveAssets();
+                EditorPrefs.SetInt(VerKey, SetupVersion);
                 EditorUtility.ClearProgressBar();
-                EditorUtility.DisplayDialog("Zone 47", "Kurulum tamam! ▶ Play'e basarak deneyebilirsin.\n\nEditörde: WASD yürü, sağ tık basılı tut + fare = bak, F = ateş, Q = nişan, R = şarjör, G = bomba, 1/2/3 silah, Space zıpla, C eğil.", "Tamam");
+                EditorUtility.DisplayDialog("Zone 47", "Kurulum tamam! ▶ Play'e basarak deneyebilirsin.\n\nEditörde: WASD yürü, sağ tık basılı tut + fare = bak, F = ateş, Q = nişan, R = şarjör, G = bomba, 1/2/3 silah, Space zıpla, C çömel, Z yat, X/V sola/sağa eğil.", "Tamam");
             }
             catch (System.Exception e)
             {
@@ -419,7 +437,7 @@ namespace Zone47.EditorTools
 
             ctrl.AddLayer("Upper");
             var layers = ctrl.layers;
-            layers[1].avatarMask = mask; layers[1].defaultWeight = 1f; layers[1].blendingMode = AnimatorLayerBlendingMode.Override;
+            layers[1].avatarMask = mask; layers[1].defaultWeight = 1f; layers[1].blendingMode = AnimatorLayerBlendingMode.Override; layers[1].iKPass = true;   // bots: hands on the gun via IK
             ctrl.layers = layers;
             var us = ctrl.layers[1].stateMachine;
             var empty = us.AddState("Empty"); us.defaultState = empty;
@@ -1032,6 +1050,22 @@ namespace Zone47.EditorTools
             R.hurt = Load<AudioClip>(A + "hurt.wav"); R.headshot = Load<AudioClip>(A + "headshot.wav");
             R.equip = Load<AudioClip>(A + "equip.wav"); R.bounce = Load<AudioClip>(A + "bounce.wav");
             R.steps = new[] { Load<AudioClip>(A + "step1.wav"), Load<AudioClip>(A + "step2.wav"), Load<AudioClip>(A + "step3.wav"), Load<AudioClip>(A + "step4.wav") };
+            // surface footsteps (Nox Sound "Footsteps - Essentials", CC0)
+            var sets = new System.Collections.Generic.List<StepSet>();
+            foreach (var sn in new[] { "Sand", "Rock", "Metal", "Wood", "Tile", "Gravel", "Dirt" })
+            {
+                string dir = ROOT + "/" + A + "Steps/" + sn;
+                if (!Directory.Exists(dir)) continue;
+                System.Func<string, AudioClip[]> Clips = pre =>
+                {
+                    var l = new System.Collections.Generic.List<AudioClip>();
+                    var files = Directory.GetFiles(dir, pre + "_*.ogg"); System.Array.Sort(files);
+                    foreach (var f in files) { var c = AssetDatabase.LoadAssetAtPath<AudioClip>(f.Replace('\\', '/')); if (c != null) l.Add(c); }
+                    return l.ToArray();
+                };
+                sets.Add(new StepSet { name = sn, walk = Clips("walk"), run = Clips("run"), land = Clips("land") });
+            }
+            R.stepSets = sets.ToArray();
             R.ambience = Load<AudioClip>(A + "ambience.ogg"); R.menuMusic = Load<AudioClip>(A + "music_menu.ogg");
             EditorUtility.SetDirty(R);
             AssetDatabase.SaveAssets();

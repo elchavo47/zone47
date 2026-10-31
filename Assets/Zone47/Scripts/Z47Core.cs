@@ -11,7 +11,9 @@ namespace Zone47
     // ------------------------------------------------------------------ SETTINGS
     public static class Settings
     {
-        public static int Quality { get => PlayerPrefs.GetInt("z_q", 2); set => PlayerPrefs.SetInt("z_q", value); }      // 0..3
+        public static int Quality { get => PlayerPrefs.GetInt("z_q2", 1); set => PlayerPrefs.SetInt("z_q2", value); }    // 0..3, default MEDIUM
+        public static float ButtonAlpha { get => PlayerPrefs.GetFloat("z_balpha", 1f); set => PlayerPrefs.SetFloat("z_balpha", value); }
+        public static bool FireDragLook { get => PlayerPrefs.GetInt("z_firelook", 1) == 1; set => PlayerPrefs.SetInt("z_firelook", value ? 1 : 0); }
         public static int Fps { get => PlayerPrefs.GetInt("z_fps", 60); set => PlayerPrefs.SetInt("z_fps", value); }
         public static float Sens { get => PlayerPrefs.GetFloat("z_sens", 1f); set => PlayerPrefs.SetFloat("z_sens", value); }
         public static float AdsSens { get => PlayerPrefs.GetFloat("z_asens", 0.7f); set => PlayerPrefs.SetFloat("z_asens", value); }
@@ -31,6 +33,7 @@ namespace Zone47
         public static float GyroSens { get => PlayerPrefs.GetFloat("z_gsens", 1f); set => PlayerPrefs.SetFloat("z_gsens", value); }
         public static bool GyroInvert { get => PlayerPrefs.GetInt("z_ginv", 0) == 1; set => PlayerPrefs.SetInt("z_ginv", value ? 1 : 0); }
         public static bool Mobile => Application.isMobilePlatform;
+        public static int Weather { get => PlayerPrefs.GetInt("z_wx", 0); set => PlayerPrefs.SetInt("z_wx", value); }   // 0 random, 1 noon, 2 fog, 3 sandstorm
         public static int Map { get => PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
         public static string PlayerName { get => PlayerPrefs.GetString("z_name", ""); set => PlayerPrefs.SetString("z_name", value); }
         public static string Callsign => string.IsNullOrWhiteSpace(PlayerName) ? L.S("you") : PlayerName.Trim();
@@ -44,26 +47,31 @@ namespace Zone47
             {
                 // phones render at native ~2500px wide; full res + MSAA + SMAA + HDR is what cooked the device.
                 // Mobile presets keep the look (same lights/post) but render fewer pixels and cheaper shadows.
-                float[] scale = Mobile ? new[] { 0.55f, 0.65f, 0.75f, 0.85f } : new[] { 0.7f, 0.85f, 1f, 1f };
-                float[] shadow = Mobile ? new[] { 0f, 22f, 35f, 50f } : new[] { 0f, 35f, 60f, 90f };
-                int[] msaa = Mobile ? new[] { 1, 1, 1, 2 } : new[] { 1, 1, 2, 4 };
+                // fair tiers: every tier keeps the same look (colour grading, shadows, sharp-ish image);
+                // lower tiers save on shadow reach/resolution, edge smoothing, bloom and particles, not on looking blurry
+                float[] scale = Mobile ? new[] { 0.8f, 0.87f, 0.94f, 1f } : new[] { 0.85f, 0.92f, 1f, 1f };
+                float[] shadow = Mobile ? new[] { 22f, 32f, 48f, 70f } : new[] { 30f, 45f, 65f, 90f };
+                int[] msaa = { 1, 1, 2, 4 };
                 urp.renderScale = scale[Quality];
                 urp.shadowDistance = shadow[Quality];
                 urp.msaaSampleCount = msaa[Quality];
-                urp.shadowCascadeCount = Mobile || Quality < 2 ? 1 : 2;
+                urp.shadowCascadeCount = Quality < 3 ? 1 : 2;
                 urp.maxAdditionalLightsCount = Mobile ? 2 : 4;
                 // the iOS (Mobile) pipeline ships with HDR off; ACES tonemapping on LDR crushes the image dark
                 urp.supportsHDR = true;
             }
-            if (RenderSettings.sun != null) RenderSettings.sun.shadows = Mobile && Quality < 3 ? LightShadows.Hard : LightShadows.Soft;
+            if (RenderSettings.sun != null) RenderSettings.sun.shadows = SunShadows;
+            if (Boot.BloomFx != null) Boot.BloomFx.active = Quality >= 1;
             AudioListener.volume = 1f;
             PlayerPrefs.Save();
         }
 
         /// SMAA is expensive on phones; FXAA there, SMAA on desktop high+.
-        public static AntialiasingMode AA => !Mobile && Quality >= 2 ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
+        public static AntialiasingMode AA => Quality >= 3 || (!Mobile && Quality >= 2) ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
 
-        public static bool PostFx => Quality >= 1;
+        /// Colour grading is part of the game's look, so every tier keeps it (low only drops bloom).
+        public static bool PostFx => true;
+        public static LightShadows SunShadows => Quality >= 2 ? LightShadows.Soft : LightShadows.Hard;
     }
 
     // ------------------------------------------------------------------ LOCALIZATION
@@ -104,6 +112,16 @@ namespace Zone47
             {"hard", new[]{"ZOR","HARD"}},
             {"tdm", new[]{"TAKIM ÖLÜM MAÇI · 5v5","TEAM DEATHMATCH · 5v5"}},
             {"respawn", new[]{"YENİDEN DOĞMA","RESPAWN IN"}},
+            {"sq_dead", new[]{"ÖLÜ","DEAD"}},
+            {"sq_title", new[]{"TAKIMIM","MY SQUAD"}},
+            {"sq_alive", new[]{"HAYATTA","ALIVE"}},
+            {"weather", new[]{"HAVA","WEATHER"}},
+            {"wx0", new[]{"RASTGELE","RANDOM"}},
+            {"wx1", new[]{"ÖĞLE","NOON"}},
+            {"wx2", new[]{"SİSLİ SABAH","FOGGY"}},
+            {"wx3", new[]{"KUM FIRTINASI","SANDSTORM"}},
+            {"rl_timer", new[]{"ŞARJÖR DEĞİŞİYOR","RELOADING"}},
+            {"reload_cancel", new[]{"ateş et = iptal","fire to cancel"}},
             {"killedby", new[]{"SENİ ÖLDÜREN","KILLED BY"}},
             {"reloading", new[]{"ŞARJÖR DEĞİŞİYOR","RELOADING"}},
             {"noammo", new[]{"MERMİ YOK","NO AMMO"}},
@@ -156,6 +174,10 @@ namespace Zone47
             {"aimassist_l", new[]{"Nişan yardımı","Aim assist"}},
             {"leftfire_l", new[]{"Sol ateş tuşu","Left fire button"}},
             {"layout_l", new[]{"Tuş düzeni","Button layout"}},
+            {"opacity", new[]{"ŞEFFAFLIK","OPACITY"}},
+            {"applyall", new[]{"HEPSİNE UYGULA","APPLY TO ALL"}},
+            {"firelook_l", new[]{"Ateş tuşuyla nişan çevirme","Steer with the fire button"}},
+            {"firelook_d", new[]{"Ateş ederken parmağını kaydırarak dön","Slide your firing thumb to turn"}},
             {"layout_d", new[]{"Tuşların yerini ve boyutunu değiştir","Move and resize buttons"}},
             {"edit", new[]{"DÜZENLE","EDIT"}},
             {"music_l", new[]{"Müzik","Music"}},
@@ -168,13 +190,16 @@ namespace Zone47
             {"save", new[]{"KAYDET","SAVE"}},
             {"cancel", new[]{"İPTAL","CANCEL"}},
             {"size", new[]{"BOYUT","SIZE"}},
-            {"layout_hint", new[]{"Tuşu sürükleyip bırak · seçili tuşu BOYUT ile büyüt/küçült","Drag a button to move it · resize the selected one with SIZE"}},
+            {"layout_hint", new[]{"Tuşu sürükle · seçili tuşun BOYUT ve ŞEFFAFLIĞINI ayarla (seçim yoksa şeffaflık hepsine)","Drag a button · set SIZE and OPACITY of the selected one (no selection = all)"}},
             {"b_fire", new[]{"ATEŞ","FIRE"}},
             {"b_aim", new[]{"NİŞAN","AIM"}},
             {"b_jump", new[]{"ZIPLA","JUMP"}},
             {"b_crouch", new[]{"EĞİL","CROUCH"}},
             {"b_reload", new[]{"ŞARJÖR","RELOAD"}},
             {"b_grenade", new[]{"BOMBA","GRENADE"}},
+            {"b_prone", new[]{"YAT","PRONE"}},
+            {"b_leanl", new[]{"< SOL","< L"}},
+            {"b_leanr", new[]{"SAĞ >","R >"}},
             {"b_move", new[]{"HAREKET","MOVE"}},
         };
         public static string S(string k) => T.TryGetValue(k, out var v) ? v[Settings.Turkish ? 0 : 1] : k;
@@ -321,6 +346,66 @@ namespace Zone47
 
         public static Vector3 ListenerPos;
 
+        // ---------------------------------------------------------------- surface footsteps
+        static readonly Dictionary<int, int> surfCache = new Dictionary<int, int>();
+        public static void ClearSurfaceCache() { surfCache.Clear(); }
+
+        static int SetIndex(string n)
+        {
+            var R = Z47Refs.I;
+            if (R.stepSets != null) for (int i = 0; i < R.stepSets.Length; i++) if (R.stepSets[i] != null && R.stepSets[i].name == n) return i;
+            return -1;
+        }
+
+        static string Classify(string k)
+        {
+            if (k.Contains("cnt") || k.Contains("container") || k.Contains("crane") || k.Contains("fork") || k.Contains("metal") || k.Contains("shed")
+                || k.Contains("corrugated") || k.Contains("tank") || k.Contains("barrel") || k.Contains("paint") || k.Contains("steel")) return "Metal";
+            if (k.Contains("pal") || k.Contains("wood") || k.Contains("crate") || k.Contains("plank")) return "Wood";
+            if (k.Contains("sand")) return "Sand";
+            if (k.Contains("tile") || k.Contains("floor_") || k.Contains("ground_")) return "Tile";
+            if (k.Contains("gravel")) return "Gravel";
+            if (k.Contains("dirt") || k.Contains("mud")) return "Dirt";
+            if (k.Contains("asphalt") || k.Contains("concrete") || k.Contains("road") || k.Contains("rock") || k.Contains("stone") || k.Contains("build")) return "Rock";
+            return null;
+        }
+
+        /// Which footstep set to use under this point (raycast down, cached per collider).
+        public static int SurfaceAt(Vector3 feet)
+        {
+            var R = Z47Refs.I;
+            if (R.stepSets == null || R.stepSets.Length == 0) return -1;
+            int id = 0; string kind = null;
+            if (Physics.Raycast(feet + Vector3.up * 0.25f, Vector3.down, out var hit, 1.2f, ~0, QueryTriggerInteraction.Ignore))
+            {
+                id = hit.collider.GetInstanceID();
+                if (surfCache.TryGetValue(id, out int c)) return c;
+                var rend = hit.collider.GetComponent<Renderer>();
+                string k = (hit.collider.name + "|" + (rend != null && rend.sharedMaterial != null ? rend.sharedMaterial.name : "")).ToLowerInvariant();
+                kind = Classify(k);
+            }
+            if (kind == null) kind = Settings.Map == 0 ? "Sand" : "Rock";     // desert floor is sand; port and city are concrete
+            int idx = SetIndex(kind);
+            if (id != 0) surfCache[id] = idx;
+            return idx;
+        }
+
+        /// kind: 0 walk, 1 run, 2 land. Falls back to the old generic steps.
+        public static AudioClip StepClip(Vector3 feet, int kind)
+        {
+            var R = Z47Refs.I;
+            int i = SurfaceAt(feet);
+            if (i >= 0)
+            {
+                var set = R.stepSets[i];
+                var arr = kind == 2 ? set.land : kind == 1 ? set.run : set.walk;
+                if (arr == null || arr.Length == 0) arr = set.walk;
+                if (arr != null && arr.Length > 0) return arr[UnityEngine.Random.Range(0, arr.Length)];
+            }
+            var st = R.steps;
+            return st != null && st.Length > 0 ? st[UnityEngine.Random.Range(0, st.Length)] : null;
+        }
+
         public static void UI() { Play2D(Z47Refs.I.dryFire, 0.35f, 0.1f); }
 
         public static void Music(AudioClip c, float vol)
@@ -406,7 +491,6 @@ namespace Zone47
         public static void ClearHoles() { if (holeRoot != null) UnityEngine.Object.Destroy(holeRoot.gameObject); holeRoot = null; holes.Clear(); }
         public static void Hole(RaycastHit hit)
         {
-            if (Settings.Quality == 0) return;
             if (holeRoot == null) holeRoot = new GameObject("BulletHoles").transform;
             GameObject q;
             if (holes.Count >= 60) { q = holes.Dequeue(); if (q == null) return; }

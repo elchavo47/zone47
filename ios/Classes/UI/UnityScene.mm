@@ -112,7 +112,6 @@
     if (url == nil || url.absoluteString == nil)
         return;
 
-    [GetAppController() initUnityApplicationNoGraphics];
     UnitySetAbsoluteURL(url.absoluteString.UTF8String);
 
     NSMutableDictionary<NSString*, id>* notifData = [NSMutableDictionary dictionaryWithCapacity: 3];

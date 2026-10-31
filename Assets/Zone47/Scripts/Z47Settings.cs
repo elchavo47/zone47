@@ -95,6 +95,7 @@ namespace Zone47
                     Toggle(Row(content, row++, "gyroinv_l", null), () => Settings.GyroInvert, v => Settings.GyroInvert = v);
                     Toggle(Row(content, row++, "aimassist_l", null), () => Settings.AimAssist, v => Settings.AimAssist = v);
                     Toggle(Row(content, row++, "leftfire_l", null), () => Settings.LeftFire, v => { Settings.LeftFire = v; if (HUD.I != null) HUD.I.RebuildControls(); });
+                    Toggle(Row(content, row++, "firelook_l", "firelook_d"), () => Settings.FireDragLook, v => Settings.FireDragLook = v);
                     ActionBtn(Row(content, row++, "layout_l", "layout_d"), L.S("edit"), () =>
                     {
                         panel.gameObject.SetActive(false);
@@ -235,7 +236,7 @@ namespace Zone47
 
             var ws = new List<W>();
             W sel = null;
-            Text sizeTxt = null;
+            Text sizeTxt = null, alphaTxt = null;
             Action refresh = () =>
             {
                 foreach (var w in ws)
@@ -243,9 +244,11 @@ namespace Zone47
                     w.rt.anchoredPosition = w.it.pos;
                     w.rt.sizeDelta = Vector2.one * w.it.size;
                     w.ring.color = w == sel ? Pal.Accent : new Color(1, 1, 1, 0.7f);
+                    w.img.GetComponent<CanvasGroup>().alpha = w == sel ? Mathf.Max(0.55f, w.it.alpha) : w.it.alpha;   // selected stays findable
                     w.img.color = w == sel ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.35f) : (w.it.accent ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(0, 0, 0, 0.4f));
                 }
                 if (sizeTxt != null) sizeTxt.text = sel != null ? Mathf.RoundToInt(sel.it.size / sel.it.defSize * 100) + "%" : "—";
+                if (alphaTxt != null) alphaTxt.text = Mathf.RoundToInt((sel != null ? sel.it.alpha : ws.Count > 0 ? ws[0].it.alpha : 1f) * 100) + "%";
             };
 
             foreach (var it in items)
@@ -268,6 +271,7 @@ namespace Zone47
                     var ri = ic.gameObject.AddComponent<RawImage>(); ri.texture = ict; ri.color = Pal.Text; ri.raycastTarget = false;
                 }
                 else UIK.Txt(img.transform, "t", L.S(it.label), 24, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                img.gameObject.AddComponent<CanvasGroup>().alpha = it.alpha;
                 var w = new W { it = it, img = img, ring = ring, rt = img.rectTransform };
                 ws.Add(w);
                 var tp = img.gameObject.AddComponent<TouchPad>();
@@ -300,7 +304,7 @@ namespace Zone47
             tb(L.S("size") + "  −", 170, chip, Pal.Text, () => { if (sel != null) { sel.it.size = Mathf.Max(sel.it.defSize * 0.6f, sel.it.size - sel.it.defSize * 0.1f); refresh(); } });
             var st = tb("", 110, Color.clear, Pal.Accent, null); sizeTxt = st.GetComponentInChildren<Text>();
             tb(L.S("size") + "  +", 170, chip, Pal.Text, () => { if (sel != null) { sel.it.size = Mathf.Min(sel.it.defSize * 1.6f, sel.it.size + sel.it.defSize * 0.1f); refresh(); } });
-            tb(L.S("reset"), 200, chip, Pal.Text, () => { foreach (var w in ws) { w.it.pos = w.it.defPos; w.it.size = w.it.defSize; } refresh(); });
+            tb(L.S("reset"), 200, chip, Pal.Text, () => { foreach (var w in ws) { w.it.pos = w.it.defPos; w.it.size = w.it.defSize; w.it.alpha = 1f; } refresh(); });
             tb(L.S("cancel"), 200, chip, Pal.Text, () => { UnityEngine.Object.Destroy(panel.gameObject); onDone?.Invoke(); });
             tb(L.S("save"), 210, Pal.Accent, dark, () =>
             {
@@ -308,8 +312,30 @@ namespace Zone47
                 if (HUD.I != null) HUD.I.RebuildControls();
                 UnityEngine.Object.Destroy(panel.gameObject); onDone?.Invoke();
             });
-            UIK.Txt(safe, "hint", L.S("layout_hint"), 24, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -214), new Vector2(1400, 40));
-            bar.transform.SetAsLastSibling();
+            // second row: opacity (selected button, or every button)
+            var bar2 = UIK.Img(safe, "toolbar2", new Color(0.04f, 0.045f, 0.04f, 0.92f), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -206), new Vector2(1180, 86), true);
+            x = -590 + 20;
+            Func<string, float, Color, Color, Action, Image> tb2 = (label, wdt, bg, fg, act) =>
+            {
+                var b = UIK.Img(bar2.transform, label, bg, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(x + 590, 0), new Vector2(wdt, 62), true);
+                b.rectTransform.pivot = new Vector2(0, 0.5f); b.rectTransform.anchoredPosition = new Vector2(x + 590, 0);
+                UIK.Txt(b.transform, "t", label, 26, fg, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                if (act != null) b.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); act(); });
+                x += wdt + 12;
+                return b;
+            };
+            Action<float> stepAlpha = d =>
+            {
+                if (sel != null) sel.it.alpha = Mathf.Clamp(sel.it.alpha + d, 0.2f, 1f);
+                else foreach (var w in ws) w.it.alpha = Mathf.Clamp(w.it.alpha + d, 0.2f, 1f);
+                refresh();
+            };
+            tb2(L.S("opacity") + "  −", 250, chip, Pal.Text, () => stepAlpha(-0.1f));
+            var at = tb2("", 110, Color.clear, Pal.Accent, null); alphaTxt = at.GetComponentInChildren<Text>();
+            tb2(L.S("opacity") + "  +", 250, chip, Pal.Text, () => stepAlpha(0.1f));
+            tb2(L.S("applyall"), 330, chip, Pal.Text, () => { float a = sel != null ? sel.it.alpha : 1f; foreach (var w in ws) w.it.alpha = a; refresh(); });
+            UIK.Txt(safe, "hint", L.S("layout_hint"), 24, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -300), new Vector2(1400, 40));
+            bar.transform.SetAsLastSibling(); bar2.transform.SetAsLastSibling();
             refresh();
         }
 

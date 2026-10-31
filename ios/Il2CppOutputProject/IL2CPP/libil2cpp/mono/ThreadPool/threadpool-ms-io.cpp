@@ -33,7 +33,7 @@
 
 #include <vector>
 
-#include "gc/GCTrackedVector.h"
+#include "gc/Allocator.h"
 #include "mono/ThreadPool/threadpool-ms.h"
 #include "mono/ThreadPool/threadpool-ms-io.h"
 #include "mono/ThreadPool/threadpool-ms-io-poll.h"
@@ -49,7 +49,7 @@
 
 #define UPDATES_CAPACITY 128
 
-typedef il2cpp::gc::GCTrackedVector<Il2CppObject*> ManagedList;
+typedef std::vector<Il2CppObject*, il2cpp::gc::Allocator<Il2CppObject*> > ManagedList;
 
 struct ThreadPoolStateHasher
 {

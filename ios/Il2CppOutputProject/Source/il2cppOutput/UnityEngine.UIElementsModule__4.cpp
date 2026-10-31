@@ -4683,6 +4683,8 @@ inline void List_1__ctor_mCA8DD57EAC70C2B5923DBB9D5A77CEAC22E7068E (List_1_tF470
 {
 	((  void (*) (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD*, const RuntimeMethod*))List_1__ctor_m7F078BB342729BDF11327FD89D7872265328F690_gshared)(__this, method);
 }
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TabView_OnElementAdded_m6D0E53E4CC63B7C44DEFE741F9AE82B389667BDF (TabView_t3B7B40580E4AE714A5766774568BA256426F3252* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TabView_OnElementRemoved_mB89B1771712CFF1A52ED385BDDAFB1D7EB5FCAB2 (TabView_t3B7B40580E4AE714A5766774568BA256426F3252* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt32Bits_mC760C7CFC89725E3CF68DC45BE3A9A42A7E7DA73_inline (float ___0_value, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector3_op_Equality_mCDCBB8D2EDC3D3BF20F31A25ACB34705D352B479_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_rhs, const RuntimeMethod* method) ;
@@ -14114,53 +14116,51 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_OnScrollWheel_mE7FD49102D1BDB
 	bool V_0 = false;
 	bool V_1 = false;
 	bool V_2 = false;
-	bool V_3 = false;
+	float V_3 = 0.0f;
 	float V_4 = 0.0f;
-	float V_5 = 0.0f;
+	bool V_5 = false;
 	bool V_6 = false;
 	bool V_7 = false;
 	bool V_8 = false;
 	bool V_9 = false;
-	bool V_10 = false;
-	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* V_11 = NULL;
-	bool V_12 = false;
-	float V_13 = 0.0f;
+	VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* V_10 = NULL;
+	bool V_11 = false;
+	float V_12 = 0.0f;
+	bool V_13 = false;
 	bool V_14 = false;
-	bool V_15 = false;
-	float V_16 = 0.0f;
+	float V_15 = 0.0f;
+	bool V_16 = false;
 	bool V_17 = false;
-	bool V_18 = false;
 	int32_t G_B3_0 = 0;
 	int32_t G_B12_0 = 0;
 	int32_t G_B15_0 = 0;
-	int32_t G_B18_0 = 0;
-	float G_B22_0 = 0.0f;
-	int32_t G_B25_0 = 0;
-	int32_t G_B31_0 = 0;
-	int32_t G_B33_0 = 0;
+	float G_B19_0 = 0.0f;
+	int32_t G_B22_0 = 0;
+	int32_t G_B28_0 = 0;
+	int32_t G_B30_0 = 0;
+	float G_B36_0 = 0.0f;
 	float G_B39_0 = 0.0f;
-	float G_B42_0 = 0.0f;
-	float G_B42_1 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B42_2 = NULL;
-	float G_B41_0 = 0.0f;
-	float G_B41_1 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B41_2 = NULL;
-	float G_B43_0 = 0.0f;
-	float G_B43_1 = 0.0f;
-	float G_B43_2 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B43_3 = NULL;
-	int32_t G_B46_0 = 0;
-	float G_B52_0 = 0.0f;
-	float G_B52_1 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B52_2 = NULL;
-	float G_B51_0 = 0.0f;
-	float G_B51_1 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B51_2 = NULL;
-	float G_B53_0 = 0.0f;
-	float G_B53_1 = 0.0f;
-	float G_B53_2 = 0.0f;
-	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B53_3 = NULL;
-	int32_t G_B56_0 = 0;
+	float G_B39_1 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B39_2 = NULL;
+	float G_B38_0 = 0.0f;
+	float G_B38_1 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B38_2 = NULL;
+	float G_B40_0 = 0.0f;
+	float G_B40_1 = 0.0f;
+	float G_B40_2 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B40_3 = NULL;
+	int32_t G_B43_0 = 0;
+	float G_B49_0 = 0.0f;
+	float G_B49_1 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B49_2 = NULL;
+	float G_B48_0 = 0.0f;
+	float G_B48_1 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B48_2 = NULL;
+	float G_B50_0 = 0.0f;
+	float G_B50_1 = 0.0f;
+	float G_B50_2 = 0.0f;
+	Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* G_B50_3 = NULL;
+	int32_t G_B53_0 = 0;
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2003>
 		il2cpp_codegen_runtime_class_init_inline(Application_tDB03BE91CDF0ACA614A5E0B67CFB77C44EB19B21_il2cpp_TypeInfo_var);
@@ -14186,8 +14186,8 @@ IL_0012:
 
 IL_0013:
 	{
-		V_6 = (bool)G_B3_0;
-		bool L_2 = V_6;
+		V_5 = (bool)G_B3_0;
+		bool L_2 = V_5;
 		if (!L_2)
 		{
 			goto IL_002e;
@@ -14199,8 +14199,8 @@ IL_0013:
 		NullCheck(L_3);
 		bool L_4;
 		L_4 = MouseEventBase_1_get_commandKey_m2DABC0566828F2B88A1F864264D5095B0913EE8A(L_3, MouseEventBase_1_get_commandKey_m2DABC0566828F2B88A1F864264D5095B0913EE8A_RuntimeMethod_var);
-		V_7 = L_4;
-		bool L_5 = V_7;
+		V_6 = L_4;
+		bool L_5 = V_6;
 		if (!L_5)
 		{
 			goto IL_002b;
@@ -14208,7 +14208,7 @@ IL_0013:
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2006>
-		goto IL_0260;
+		goto IL_0234;
 	}
 
 IL_002b:
@@ -14223,8 +14223,8 @@ IL_002e:
 		NullCheck(L_6);
 		bool L_7;
 		L_7 = MouseEventBase_1_get_ctrlKey_m0BACC42B36A1096595E8D7CD9B1804DCC4A05DAB(L_6, MouseEventBase_1_get_ctrlKey_m0BACC42B36A1096595E8D7CD9B1804DCC4A05DAB_RuntimeMethod_var);
-		V_8 = L_7;
-		bool L_8 = V_8;
+		V_7 = L_7;
+		bool L_8 = V_7;
 		if (!L_8)
 		{
 			goto IL_0040;
@@ -14232,7 +14232,7 @@ IL_002e:
 	}
 	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2010>
-		goto IL_0260;
+		goto IL_0234;
 	}
 
 IL_0040:
@@ -14289,455 +14289,421 @@ IL_0074:
 		bool L_13 = V_2;
 		if (!L_13)
 		{
-			goto IL_007e;
+			goto IL_007b;
 		}
 	}
 	{
 		bool L_14 = V_1;
-		G_B18_0 = ((((int32_t)L_14) == ((int32_t)0))? 1 : 0);
-		goto IL_007f;
+		if (!L_14)
+		{
+			goto IL_0088;
+		}
 	}
 
-IL_007e:
+IL_007b:
 	{
-		G_B18_0 = 0;
+		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_15 = ___0_evt;
+		NullCheck(L_15);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_16;
+		L_16 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_15, NULL);
+		float L_17 = L_16.___x;
+		G_B19_0 = L_17;
+		goto IL_0093;
 	}
 
-IL_007f:
+IL_0088:
 	{
-		V_3 = (bool)G_B18_0;
+		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_18 = ___0_evt;
+		NullCheck(L_18);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_19;
+		L_19 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_18, NULL);
+		float L_20 = L_19.___y;
+		G_B19_0 = L_20;
+	}
+
+IL_0093:
+	{
+		V_3 = G_B19_0;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2018>
-		bool L_15 = V_3;
-		if (!L_15)
+		bool L_21 = V_2;
+		bool L_22 = V_1;
+		if (!((int32_t)((int32_t)L_21|(int32_t)L_22)))
 		{
-			goto IL_00a5;
+			goto IL_00a4;
 		}
 	}
 	{
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_16 = ___0_evt;
-		NullCheck(L_16);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_17;
-		L_17 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_16, NULL);
-		float L_18 = L_17.___y;
-		float L_19;
-		L_19 = fabsf(L_18);
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_20 = ___0_evt;
-		NullCheck(L_20);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_21;
-		L_21 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_20, NULL);
-		float L_22 = L_21.___x;
-		float L_23;
-		L_23 = fabsf(L_22);
-		if ((((float)L_19) > ((float)L_23)))
-		{
-			goto IL_00b2;
-		}
+		bool L_23 = __this->___m_MouseWheelScrollSizeIsInline;
+		G_B22_0 = ((((int32_t)L_23) == ((int32_t)0))? 1 : 0);
+		goto IL_00a5;
+	}
+
+IL_00a4:
+	{
+		G_B22_0 = 0;
 	}
 
 IL_00a5:
 	{
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_24 = ___0_evt;
-		NullCheck(L_24);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_25;
-		L_25 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_24, NULL);
-		float L_26 = L_25.___x;
-		G_B22_0 = L_26;
-		goto IL_00bd;
+		V_8 = (bool)G_B22_0;
+		bool L_24 = V_8;
+		if (!L_24)
+		{
+			goto IL_00f0;
+		}
 	}
-
-IL_00b2:
 	{
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_27 = ___0_evt;
-		NullCheck(L_27);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_28;
-		L_28 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_27, NULL);
-		float L_29 = L_28.___y;
-		G_B22_0 = L_29;
-	}
-
-IL_00bd:
-	{
-		V_4 = G_B22_0;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2020>
-		bool L_30 = V_2;
-		bool L_31 = V_1;
-		if (!((int32_t)((int32_t)L_30|(int32_t)L_31)))
+		bool L_25 = __this->___m_SingleLineHeightDirtyFlag;
+		if (L_25)
 		{
-			goto IL_00cf;
+			goto IL_00df;
 		}
 	}
 	{
-		bool L_32 = __this->___m_MouseWheelScrollSizeIsInline;
-		G_B25_0 = ((((int32_t)L_32) == ((int32_t)0))? 1 : 0);
-		goto IL_00d0;
-	}
-
-IL_00cf:
-	{
-		G_B25_0 = 0;
-	}
-
-IL_00d0:
-	{
-		V_9 = (bool)G_B25_0;
-		bool L_33 = V_9;
-		if (!L_33)
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_26;
+		L_26 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
+		V_10 = L_26;
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_27 = V_10;
+		if (!L_27)
 		{
-			goto IL_011b;
+			goto IL_00dc;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2022>
-		bool L_34 = __this->___m_SingleLineHeightDirtyFlag;
-		if (L_34)
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_28 = V_10;
+		NullCheck(L_28);
+		bool L_29;
+		L_29 = VisualElement_get_isRootVisualContainer_m6B7BF3D21F43821096037456F24802641E19E04E(L_28, NULL);
+		if (!L_29)
 		{
-			goto IL_010a;
+			goto IL_00dc;
 		}
 	}
 	{
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_35;
-		L_35 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
-		V_11 = L_35;
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_36 = V_11;
-		if (!L_36)
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_30;
+		L_30 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_31 = __this->___m_AttachedRootVisualContainer;
+		G_B28_0 = ((((int32_t)((((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_30) == ((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_31))? 1 : 0)) == ((int32_t)0))? 1 : 0);
+		goto IL_00dd;
+	}
+
+IL_00dc:
+	{
+		G_B28_0 = 0;
+	}
+
+IL_00dd:
+	{
+		G_B30_0 = G_B28_0;
+		goto IL_00e0;
+	}
+
+IL_00df:
+	{
+		G_B30_0 = 1;
+	}
+
+IL_00e0:
+	{
+		V_9 = (bool)G_B30_0;
+		bool L_32 = V_9;
+		if (!L_32)
 		{
-			goto IL_0107;
+			goto IL_00ef;
 		}
 	}
 	{
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_37 = V_11;
-		NullCheck(L_37);
-		bool L_38;
-		L_38 = VisualElement_get_isRootVisualContainer_m6B7BF3D21F43821096037456F24802641E19E04E(L_37, NULL);
-		if (!L_38)
-		{
-			goto IL_0107;
-		}
-	}
-	{
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_39;
-		L_39 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
-		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_40 = __this->___m_AttachedRootVisualContainer;
-		G_B31_0 = ((((int32_t)((((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_39) == ((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_40))? 1 : 0)) == ((int32_t)0))? 1 : 0);
-		goto IL_0108;
-	}
-
-IL_0107:
-	{
-		G_B31_0 = 0;
-	}
-
-IL_0108:
-	{
-		G_B33_0 = G_B31_0;
-		goto IL_010b;
-	}
-
-IL_010a:
-	{
-		G_B33_0 = 1;
-	}
-
-IL_010b:
-	{
-		V_10 = (bool)G_B33_0;
-		bool L_41 = V_10;
-		if (!L_41)
-		{
-			goto IL_011a;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2025>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2023>
 		ScrollView_ReadSingleLineHeight_m783A7990593C00F5BB92FA2AAAB8A8062D40DEFD(__this, NULL);
 	}
 
-IL_011a:
+IL_00ef:
 	{
 	}
 
-IL_011b:
+IL_00f0:
 	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2027>
+		bool L_33 = __this->___m_MouseWheelScrollSizeIsInline;
+		if (L_33)
+		{
+			goto IL_0100;
+		}
+	}
+	{
+		float L_34 = __this->___m_SingleLineHeight;
+		G_B36_0 = L_34;
+		goto IL_0106;
+	}
+
+IL_0100:
+	{
+		float L_35;
+		L_35 = ScrollView_get_mouseWheelScrollSize_m11FF4213777728025AADCA3D5C9E98F0C606B7A3(__this, NULL);
+		G_B36_0 = L_35;
+	}
+
+IL_0106:
+	{
+		V_4 = G_B36_0;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2029>
-		bool L_42 = __this->___m_MouseWheelScrollSizeIsInline;
-		if (L_42)
+		bool L_36 = V_1;
+		V_11 = L_36;
+		bool L_37 = V_11;
+		if (!L_37)
 		{
-			goto IL_012b;
+			goto IL_0199;
 		}
 	}
 	{
-		float L_43 = __this->___m_SingleLineHeight;
-		G_B39_0 = L_43;
-		goto IL_0131;
-	}
-
-IL_012b:
-	{
-		float L_44;
-		L_44 = ScrollView_get_mouseWheelScrollSize_m11FF4213777728025AADCA3D5C9E98F0C606B7A3(__this, NULL);
-		G_B39_0 = L_44;
-	}
-
-IL_0131:
-	{
-		V_5 = G_B39_0;
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2031>
-		bool L_45 = V_1;
-		V_12 = L_45;
-		bool L_46 = V_12;
-		if (!L_46)
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_38;
+		L_38 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
+		NullCheck(L_38);
+		float L_39;
+		L_39 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_38, NULL);
+		V_12 = L_39;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2032>
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_40;
+		L_40 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_41 = L_40;
+		NullCheck(L_41);
+		float L_42;
+		L_42 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_41, NULL);
+		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_43 = ___0_evt;
+		NullCheck(L_43);
+		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_44;
+		L_44 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_43, NULL);
+		float L_45 = L_44.___y;
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_46;
+		L_46 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
+		NullCheck(L_46);
+		float L_47;
+		L_47 = Scroller_get_lowValue_mBD4A8D06316BF0124C58CA4534B9031725CD946F(L_46, NULL);
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_48;
+		L_48 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
+		NullCheck(L_48);
+		float L_49;
+		L_49 = Scroller_get_highValue_m160229EAE9969337A4C92F543E53DEC6A944DE33(L_48, NULL);
+		if ((((float)L_47) < ((float)L_49)))
 		{
-			goto IL_01c4;
+			G_B39_0 = L_45;
+			G_B39_1 = L_42;
+			G_B39_2 = L_41;
+			goto IL_0156;
 		}
+		G_B38_0 = L_45;
+		G_B38_1 = L_42;
+		G_B38_2 = L_41;
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2033>
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_47;
-		L_47 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
-		NullCheck(L_47);
-		float L_48;
-		L_48 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_47, NULL);
-		V_13 = L_48;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2034>
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_49;
-		L_49 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_50 = L_49;
-		NullCheck(L_50);
-		float L_51;
-		L_51 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_50, NULL);
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_52 = ___0_evt;
-		NullCheck(L_52);
-		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_53;
-		L_53 = WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline(L_52, NULL);
-		float L_54 = L_53.___y;
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_55;
-		L_55 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
-		NullCheck(L_55);
-		float L_56;
-		L_56 = Scroller_get_lowValue_mBD4A8D06316BF0124C58CA4534B9031725CD946F(L_55, NULL);
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_57;
-		L_57 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
-		NullCheck(L_57);
-		float L_58;
-		L_58 = Scroller_get_highValue_m160229EAE9969337A4C92F543E53DEC6A944DE33(L_57, NULL);
-		if ((((float)L_56) < ((float)L_58)))
-		{
-			G_B42_0 = L_54;
-			G_B42_1 = L_51;
-			G_B42_2 = L_50;
-			goto IL_0181;
-		}
-		G_B41_0 = L_54;
-		G_B41_1 = L_51;
-		G_B41_2 = L_50;
-	}
-	{
-		G_B43_0 = (-1.0f);
-		G_B43_1 = G_B41_0;
-		G_B43_2 = G_B41_1;
-		G_B43_3 = G_B41_2;
-		goto IL_0186;
+		G_B40_0 = (-1.0f);
+		G_B40_1 = G_B38_0;
+		G_B40_2 = G_B38_1;
+		G_B40_3 = G_B38_2;
+		goto IL_015b;
 	}
 
-IL_0181:
+IL_0156:
 	{
-		G_B43_0 = (1.0f);
-		G_B43_1 = G_B42_0;
-		G_B43_2 = G_B42_1;
-		G_B43_3 = G_B42_2;
+		G_B40_0 = (1.0f);
+		G_B40_1 = G_B39_0;
+		G_B40_2 = G_B39_1;
+		G_B40_3 = G_B39_2;
+	}
+
+IL_015b:
+	{
+		float L_50 = V_4;
+		NullCheck(G_B40_3);
+		Scroller_set_value_mAC1D4CA0CA26776DE53ABC5FD8C745309750E713(G_B40_3, ((float)il2cpp_codegen_add(G_B40_2, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(G_B40_1, G_B40_0)), L_50)))), NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2034>
+		int32_t L_51;
+		L_51 = ScrollView_get_nestedInteractionKind_mD6F5A19E8A7D15A56F41AF034869AF295C3D79D6_inline(__this, NULL);
+		if ((((int32_t)L_51) == ((int32_t)1)))
+		{
+			goto IL_0186;
+		}
+	}
+	{
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_52;
+		L_52 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
+		NullCheck(L_52);
+		float L_53;
+		L_53 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_52, NULL);
+		float L_54 = V_12;
+		bool L_55;
+		L_55 = Mathf_Approximately_m1DADD012A8FC82E11FB282501AE2EBBF9A77150B_inline(L_53, L_54, NULL);
+		G_B43_0 = ((((int32_t)L_55) == ((int32_t)0))? 1 : 0);
+		goto IL_0187;
 	}
 
 IL_0186:
 	{
-		float L_59 = V_5;
-		NullCheck(G_B43_3);
-		Scroller_set_value_mAC1D4CA0CA26776DE53ABC5FD8C745309750E713(G_B43_3, ((float)il2cpp_codegen_add(G_B43_2, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(G_B43_1, G_B43_0)), L_59)))), NULL);
+		G_B43_0 = 1;
+	}
+
+IL_0187:
+	{
+		V_13 = (bool)G_B43_0;
+		bool L_56 = V_13;
+		if (!L_56)
+		{
+			goto IL_0198;
+		}
+	}
+	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2036>
-		int32_t L_60;
-		L_60 = ScrollView_get_nestedInteractionKind_mD6F5A19E8A7D15A56F41AF034869AF295C3D79D6_inline(__this, NULL);
-		if ((((int32_t)L_60) == ((int32_t)1)))
-		{
-			goto IL_01b1;
-		}
-	}
-	{
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_61;
-		L_61 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
-		NullCheck(L_61);
-		float L_62;
-		L_62 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_61, NULL);
-		float L_63 = V_13;
-		bool L_64;
-		L_64 = Mathf_Approximately_m1DADD012A8FC82E11FB282501AE2EBBF9A77150B_inline(L_62, L_63, NULL);
-		G_B46_0 = ((((int32_t)L_64) == ((int32_t)0))? 1 : 0);
-		goto IL_01b2;
-	}
-
-IL_01b1:
-	{
-		G_B46_0 = 1;
-	}
-
-IL_01b2:
-	{
-		V_14 = (bool)G_B46_0;
-		bool L_65 = V_14;
-		if (!L_65)
-		{
-			goto IL_01c3;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2038>
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_66 = ___0_evt;
-		NullCheck(L_66);
-		EventBase_StopPropagation_mEFC7E5AB7164157065FF19064A6ADCBB0D8AF6FB(L_66, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2039>
+		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_57 = ___0_evt;
+		NullCheck(L_57);
+		EventBase_StopPropagation_mEFC7E5AB7164157065FF19064A6ADCBB0D8AF6FB(L_57, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2037>
 		V_0 = (bool)1;
 	}
 
-IL_01c3:
+IL_0198:
 	{
 	}
 
-IL_01c4:
+IL_0199:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2043>
-		bool L_67 = V_2;
-		V_15 = L_67;
-		bool L_68 = V_15;
-		if (!L_68)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2041>
+		bool L_58 = V_2;
+		V_14 = L_58;
+		bool L_59 = V_14;
+		if (!L_59)
 		{
-			goto IL_0249;
+			goto IL_021d;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2045>
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_69;
-		L_69 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
-		NullCheck(L_69);
-		float L_70;
-		L_70 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_69, NULL);
-		V_16 = L_70;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2043>
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_60;
+		L_60 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
+		NullCheck(L_60);
+		float L_61;
+		L_61 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_60, NULL);
+		V_15 = L_61;
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2044>
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_62;
+		L_62 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_63 = L_62;
+		NullCheck(L_63);
+		float L_64;
+		L_64 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_63, NULL);
+		float L_65 = V_3;
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_66;
+		L_66 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
+		NullCheck(L_66);
+		float L_67;
+		L_67 = Scroller_get_lowValue_mBD4A8D06316BF0124C58CA4534B9031725CD946F(L_66, NULL);
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_68;
+		L_68 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
+		NullCheck(L_68);
+		float L_69;
+		L_69 = Scroller_get_highValue_m160229EAE9969337A4C92F543E53DEC6A944DE33(L_68, NULL);
+		if ((((float)L_67) < ((float)L_69)))
+		{
+			G_B49_0 = L_65;
+			G_B49_1 = L_64;
+			G_B49_2 = L_63;
+			goto IL_01da;
+		}
+		G_B48_0 = L_65;
+		G_B48_1 = L_64;
+		G_B48_2 = L_63;
+	}
+	{
+		G_B50_0 = (-1.0f);
+		G_B50_1 = G_B48_0;
+		G_B50_2 = G_B48_1;
+		G_B50_3 = G_B48_2;
+		goto IL_01df;
+	}
+
+IL_01da:
+	{
+		G_B50_0 = (1.0f);
+		G_B50_1 = G_B49_0;
+		G_B50_2 = G_B49_1;
+		G_B50_3 = G_B49_2;
+	}
+
+IL_01df:
+	{
+		float L_70 = V_4;
+		NullCheck(G_B50_3);
+		Scroller_set_value_mAC1D4CA0CA26776DE53ABC5FD8C745309750E713(G_B50_3, ((float)il2cpp_codegen_add(G_B50_2, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(G_B50_1, G_B50_0)), L_70)))), NULL);
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2046>
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_71;
-		L_71 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_72 = L_71;
+		int32_t L_71;
+		L_71 = ScrollView_get_nestedInteractionKind_mD6F5A19E8A7D15A56F41AF034869AF295C3D79D6_inline(__this, NULL);
+		if ((((int32_t)L_71) == ((int32_t)1)))
+		{
+			goto IL_020a;
+		}
+	}
+	{
+		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_72;
+		L_72 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
 		NullCheck(L_72);
 		float L_73;
 		L_73 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_72, NULL);
-		float L_74 = V_4;
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_75;
-		L_75 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
-		NullCheck(L_75);
-		float L_76;
-		L_76 = Scroller_get_lowValue_mBD4A8D06316BF0124C58CA4534B9031725CD946F(L_75, NULL);
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_77;
-		L_77 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
-		NullCheck(L_77);
-		float L_78;
-		L_78 = Scroller_get_highValue_m160229EAE9969337A4C92F543E53DEC6A944DE33(L_77, NULL);
-		if ((((float)L_76) < ((float)L_78)))
-		{
-			G_B52_0 = L_74;
-			G_B52_1 = L_73;
-			G_B52_2 = L_72;
-			goto IL_0206;
-		}
-		G_B51_0 = L_74;
-		G_B51_1 = L_73;
-		G_B51_2 = L_72;
-	}
-	{
-		G_B53_0 = (-1.0f);
-		G_B53_1 = G_B51_0;
-		G_B53_2 = G_B51_1;
-		G_B53_3 = G_B51_2;
+		float L_74 = V_15;
+		bool L_75;
+		L_75 = Mathf_Approximately_m1DADD012A8FC82E11FB282501AE2EBBF9A77150B_inline(L_73, L_74, NULL);
+		G_B53_0 = ((((int32_t)L_75) == ((int32_t)0))? 1 : 0);
 		goto IL_020b;
 	}
 
-IL_0206:
+IL_020a:
 	{
-		G_B53_0 = (1.0f);
-		G_B53_1 = G_B52_0;
-		G_B53_2 = G_B52_1;
-		G_B53_3 = G_B52_2;
+		G_B53_0 = 1;
 	}
 
 IL_020b:
 	{
-		float L_79 = V_5;
-		NullCheck(G_B53_3);
-		Scroller_set_value_mAC1D4CA0CA26776DE53ABC5FD8C745309750E713(G_B53_3, ((float)il2cpp_codegen_add(G_B53_2, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(G_B53_1, G_B53_0)), L_79)))), NULL);
+		V_16 = (bool)G_B53_0;
+		bool L_76 = V_16;
+		if (!L_76)
+		{
+			goto IL_021c;
+		}
+	}
+	{
 		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2048>
-		int32_t L_80;
-		L_80 = ScrollView_get_nestedInteractionKind_mD6F5A19E8A7D15A56F41AF034869AF295C3D79D6_inline(__this, NULL);
-		if ((((int32_t)L_80) == ((int32_t)1)))
-		{
-			goto IL_0236;
-		}
-	}
-	{
-		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_81;
-		L_81 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
-		NullCheck(L_81);
-		float L_82;
-		L_82 = Scroller_get_value_mAFF18513ACF92E73BAEF5D6254A295D0D33A3E8D(L_81, NULL);
-		float L_83 = V_16;
-		bool L_84;
-		L_84 = Mathf_Approximately_m1DADD012A8FC82E11FB282501AE2EBBF9A77150B_inline(L_82, L_83, NULL);
-		G_B56_0 = ((((int32_t)L_84) == ((int32_t)0))? 1 : 0);
-		goto IL_0237;
-	}
-
-IL_0236:
-	{
-		G_B56_0 = 1;
-	}
-
-IL_0237:
-	{
-		V_17 = (bool)G_B56_0;
-		bool L_85 = V_17;
-		if (!L_85)
-		{
-			goto IL_0248;
-		}
-	}
-	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2050>
-		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_86 = ___0_evt;
-		NullCheck(L_86);
-		EventBase_StopPropagation_mEFC7E5AB7164157065FF19064A6ADCBB0D8AF6FB(L_86, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2051>
+		WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* L_77 = ___0_evt;
+		NullCheck(L_77);
+		EventBase_StopPropagation_mEFC7E5AB7164157065FF19064A6ADCBB0D8AF6FB(L_77, NULL);
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2049>
 		V_0 = (bool)1;
 	}
 
-IL_0248:
+IL_021c:
 	{
 	}
 
-IL_0249:
+IL_021d:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2055>
-		bool L_87 = V_0;
-		V_18 = L_87;
-		bool L_88 = V_18;
-		if (!L_88)
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2053>
+		bool L_78 = V_0;
+		V_17 = L_78;
+		bool L_79 = V_17;
+		if (!L_79)
 		{
-			goto IL_0260;
+			goto IL_0234;
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2057>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2055>
 		ScrollView_UpdateElasticBehaviour_m5D1C43E1A85749D0D02DFA3718AB41D7F7651DE3(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2058>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2056>
 		ScrollView_UpdateContentViewTransform_mA0BD7263D725191B2DFFBE0C03A19B8DF9781A29(__this, NULL);
 	}
 
-IL_0260:
+IL_0234:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2060>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2058>
 		return;
 	}
 }
@@ -14745,9 +14711,9 @@ IL_0260:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_OnRootCustomStyleResolved_m642D11FAF224044B78F02D19FDEC62DD34AAF601 (ScrollView_t7CE209084E084FAA0E8DF3CD8E3B8BB9EB27E8D9* __this, CustomStyleResolvedEvent_t54D095D62773F628A6A05A4531DEE990166062E6* ___0_evt, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2065>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2063>
 		ScrollView_MarkSingleLineHeightDirty_mD0B9A1F1048B66A9ADCD3D58294FD07A575AA1D8(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2066>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2064>
 		return;
 	}
 }
@@ -14755,9 +14721,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_OnRootCustomStyleResolved_m64
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_MarkSingleLineHeightDirty_mD0B9A1F1048B66A9ADCD3D58294FD07A575AA1D8 (ScrollView_t7CE209084E084FAA0E8DF3CD8E3B8BB9EB27E8D9* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2070>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2068>
 		__this->___m_SingleLineHeightDirtyFlag = (bool)1;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2071>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2069>
 		return;
 	}
 }
@@ -14765,9 +14731,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_MarkSingleLineHeightDirty_mD0
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_OnRootPointerUp_m84F587F1462A4DD0DCA1311839A4B04C8B500669 (ScrollView_t7CE209084E084FAA0E8DF3CD8E3B8BB9EB27E8D9* __this, PointerUpEvent_tCE779E8B94675B6A2758B82F6A84771CB26913D9* ___0_evt, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2075>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2073>
 		__this->___m_TouchPointerMoveAllowed = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2076>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2074>
 		return;
 	}
 }
@@ -14811,7 +14777,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_ReadSingleLineHeight_m783A799
 	ScrollView_t7CE209084E084FAA0E8DF3CD8E3B8BB9EB27E8D9* G_B8_1 = NULL;
 	int32_t G_B15_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2080>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2078>
 		ComputedStyle_t8B08CCCEE20525528B3FFDAC6D3F58F101AAF54C* L_0;
 		L_0 = VisualElement_get_computedStyle_m8124059EC4D72CCEDE7107FFF72A614131604C3A(__this, NULL);
 		Dictionary_2_t645C7B1DAE2D839B52A5E387C165CE13D5465B00* L_1 = L_0->___customProperties;
@@ -14846,9 +14812,9 @@ IL_0028:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2083>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2081>
 		__this->___m_SingleLineHeightDirtyFlag = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2084>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2082>
 		StylePropertyValue_tED32F617FABE99611B213BFCF9D1D909E7F141C2 L_6 = V_0;
 		StyleSheet_t6FAF43FCDB45BC6BED0522A222FD4C1A9BB10428* L_7 = L_6.___sheet;
 		StylePropertyValue_tED32F617FABE99611B213BFCF9D1D909E7F141C2 L_8 = V_0;
@@ -14864,11 +14830,11 @@ IL_0028:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2086>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2084>
 		Dimension_t5B1EAB500AE32C3789A2BCC4D43F7A29996DF3F8 L_12 = V_4;
 		float L_13 = L_12.___value;
 		__this->___m_SingleLineHeight = L_13;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2087>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2085>
 		goto IL_015c;
 	}
 
@@ -14878,7 +14844,7 @@ IL_0060:
 
 IL_0061:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2091>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2089>
 		il2cpp_codegen_runtime_class_init_inline(U3CU3Ec_tD86EEAA4B511DCB81306B5B36A9CBA598C27A3DF_il2cpp_TypeInfo_var);
 		Predicate_1_tF5216C9C70EFD06FB1CDEA02D3F190DEFD98745B* L_14 = ((U3CU3Ec_tD86EEAA4B511DCB81306B5B36A9CBA598C27A3DF_StaticFields*)il2cpp_codegen_static_fields_for(U3CU3Ec_tD86EEAA4B511DCB81306B5B36A9CBA598C27A3DF_il2cpp_TypeInfo_var))->___U3CU3E9__209_0;
 		Predicate_1_tF5216C9C70EFD06FB1CDEA02D3F190DEFD98745B* L_15 = L_14;
@@ -14909,7 +14875,7 @@ IL_0081:
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_19;
 		L_19 = VisualElement_GetFirstAncestorWhere_m1436E31782BCBD9ED85E782B1B0DD9284E254485(G_B9_1, G_B9_0, NULL);
 		V_1 = L_19;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2094>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2092>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_20 = V_1;
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_21 = __this->___m_AttachedRootVisualContainer;
 		V_6 = (bool)((((int32_t)((((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_20) == ((RuntimeObject*)(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115*)L_21))? 1 : 0)) == ((int32_t)0))? 1 : 0);
@@ -14920,17 +14886,17 @@ IL_0081:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2096>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2094>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_23 = __this->___m_AttachedRootVisualContainer;
 		EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F* L_24 = (EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F*)il2cpp_codegen_object_new(EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F_il2cpp_TypeInfo_var);
 		EventCallback_1__ctor_mA03324C646FE93909402ABA6C660D14D22ACE4F8(L_24, __this, (intptr_t)((void*)ScrollView_OnRootCustomStyleResolved_m642D11FAF224044B78F02D19FDEC62DD34AAF601_RuntimeMethod_var), NULL);
 		NullCheck(L_23);
 		CallbackEventHandler_UnregisterCallback_TisCustomStyleResolvedEvent_t54D095D62773F628A6A05A4531DEE990166062E6_mB14ACC6BD1F5BF5F4568528EDC87D98AB719AFC2(L_23, L_24, 0, CallbackEventHandler_UnregisterCallback_TisCustomStyleResolvedEvent_t54D095D62773F628A6A05A4531DEE990166062E6_mB14ACC6BD1F5BF5F4568528EDC87D98AB719AFC2_RuntimeMethod_var);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2097>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2095>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_25 = V_1;
 		__this->___m_AttachedRootVisualContainer = L_25;
 		Il2CppCodeGenWriteBarrier((void**)(&__this->___m_AttachedRootVisualContainer), (void*)L_25);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2098>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2096>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_26 = __this->___m_AttachedRootVisualContainer;
 		EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F* L_27 = (EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F*)il2cpp_codegen_object_new(EventCallback_1_tDE93D01AB4244ED03015ADF985CF61A9E3CA060F_il2cpp_TypeInfo_var);
 		EventCallback_1__ctor_mA03324C646FE93909402ABA6C660D14D22ACE4F8(L_27, __this, (intptr_t)((void*)ScrollView_OnRootCustomStyleResolved_m642D11FAF224044B78F02D19FDEC62DD34AAF601_RuntimeMethod_var), NULL);
@@ -14940,7 +14906,7 @@ IL_0081:
 
 IL_00d4:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2101>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2099>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_28 = __this->___m_AttachedRootVisualContainer;
 		V_8 = L_28;
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_29 = V_8;
@@ -14989,9 +14955,9 @@ IL_0112:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2105>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2103>
 		__this->___m_SingleLineHeightDirtyFlag = (bool)0;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2106>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2104>
 		StylePropertyValue_tED32F617FABE99611B213BFCF9D1D909E7F141C2 L_39 = V_2;
 		StyleSheet_t6FAF43FCDB45BC6BED0522A222FD4C1A9BB10428* L_40 = L_39.___sheet;
 		StylePropertyValue_tED32F617FABE99611B213BFCF9D1D909E7F141C2 L_41 = V_2;
@@ -15007,11 +14973,11 @@ IL_0112:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2108>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2106>
 		Dimension_t5B1EAB500AE32C3789A2BCC4D43F7A29996DF3F8 L_45 = V_9;
 		float L_46 = L_45.___value;
 		__this->___m_SingleLineHeight = L_46;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2109>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2107>
 		goto IL_015c;
 	}
 
@@ -15021,17 +14987,17 @@ IL_0149:
 
 IL_014a:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2112>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2110>
 		il2cpp_codegen_runtime_class_init_inline(UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var);
 		float L_47 = ((UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_StaticFields*)il2cpp_codegen_static_fields_for(UIElementsUtility_t03323144D50362C6BF96652D3355728749769293_il2cpp_TypeInfo_var))->___singleLineHeight;
 		__this->___m_SingleLineHeight = L_47;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2113>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2111>
 		__this->___m_SingleLineHeightDirtyFlag = (bool)0;
 	}
 
 IL_015c:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2114>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2112>
 		return;
 	}
 }
@@ -15040,7 +15006,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_UpdateElasticBehaviour_m5D1C4
 {
 	bool V_0 = false;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2118>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2116>
 		int32_t L_0;
 		L_0 = ScrollView_get_touchScrollBehavior_mAC366117C8504A56A60CABA42EC6826E18BCF764(__this, NULL);
 		V_0 = (bool)((((int32_t)L_0) == ((int32_t)1))? 1 : 0);
@@ -15051,15 +15017,15 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_UpdateElasticBehaviour_m5D1C4
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2120>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2118>
 		ScrollView_UpdateTouchScrollingBounds_m4729CFBC5B7BC436D4CD5BCF8AAB7C54E078A382(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2122>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2120>
 		ScrollView_ExecuteElasticSpringAnimation_mB2898BCD6B15622B00D384C77A5A06D39F2244EF(__this, NULL);
 	}
 
 IL_001e:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2124>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2122>
 		return;
 	}
 }
@@ -15067,7 +15033,7 @@ IL_001e:
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_SetScrollOffsetWithoutNotify_mA077CCFA6D3758169D3E966B7E795A867F77E8A5 (ScrollView_t7CE209084E084FAA0E8DF3CD8E3B8BB9EB27E8D9* __this, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2128>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2126>
 		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_0;
 		L_0 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
 		NullCheck(L_0);
@@ -15077,7 +15043,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_SetScrollOffsetWithoutNotify_
 		float L_3 = L_2.___x;
 		NullCheck(L_1);
 		VirtualActionInvoker1< float >::Invoke(159, L_1, L_3);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2129>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2127>
 		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_4;
 		L_4 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
 		NullCheck(L_4);
@@ -15087,7 +15053,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_SetScrollOffsetWithoutNotify_
 		float L_7 = L_6.___y;
 		NullCheck(L_5);
 		VirtualActionInvoker1< float >::Invoke(159, L_5, L_7);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2131>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2129>
 		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_8;
 		L_8 = ScrollView_get_horizontalScroller_mF0791CC587E399B708C24885E89301F2633712E8_inline(__this, NULL);
 		NullCheck(L_8);
@@ -15102,9 +15068,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_SetScrollOffsetWithoutNotify_
 		memset((&L_12), 0, sizeof(L_12));
 		Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline((&L_12), L_9, L_11, NULL);
 		__this->___m_ScrollOffset = L_12;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2132>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2130>
 		VisualElement_SaveViewData_m6F18758E27148CBC3B9E4FCB1F33798AAB427CD6(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2133>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2131>
 		return;
 	}
 }
@@ -15115,9 +15081,9 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ScrollView_OnViewDataReady_m22E7BB175A78
 	bool V_1 = false;
 	int32_t G_B5_0 = 0;
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2137>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2135>
 		VisualElement_OnViewDataReady_mC163AC6CDC322CCB2941C1DEFC6EF3900C332C79(__this, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2142>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2140>
 		Scroller_tFE2BC2FCB5D2BD623828C332E0BBF95D472D99A8* L_0;
 		L_0 = ScrollView_get_verticalScroller_mDCBC1E09B2754C31BF917818CB07E5F36EC0D13A_inline(__this, NULL);
 		NullCheck(L_0);
@@ -15189,26 +15155,26 @@ IL_005b:
 		}
 	}
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2147>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2145>
 		goto IL_0079;
 	}
 
 IL_0062:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2150>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2148>
 		String_t* L_15;
 		L_15 = VisualElement_GetFullHierarchicalViewDataKey_m36E019EF47770CE6BC054BB606CD224517028A8F(__this, NULL);
 		V_0 = L_15;
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2151>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2149>
 		String_t* L_16 = V_0;
 		VisualElement_OverwriteFromViewData_mF7BC9343789BED5307CCE900D7F05A62D6027AB3(__this, __this, L_16, NULL);
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2152>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2150>
 		ScrollView_UpdateContentViewTransform_mA0BD7263D725191B2DFFBE0C03A19B8DF9781A29(__this, NULL);
 	}
 
 IL_0079:
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2153>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2151>
 		return;
 	}
 }
@@ -16215,7 +16181,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__ctor_mB400785648344279872E62F3D
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool U3CU3Ec_U3CReadSingleLineHeightU3Eb__209_0_mCB3209ACF55A294EFAB3B1C6290504504BB88A15 (U3CU3Ec_tD86EEAA4B511DCB81306B5B36A9CBA598C27A3DF* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_x, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2091>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/ScrollView.cs:2089>
 		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0 = ___0_x;
 		NullCheck(L_0);
 		bool L_1;
@@ -24998,6 +24964,68 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ViewState__ctor_mD3F34BAFCCDF346545E67DA
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+// Method Definition Index: 2566
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TabViewContentContainer_OnChildAdded_m5FB0475DBD6466470B942FBE767CCA27B4A45821 (TabViewContentContainer_t6991480DE76479CAE1BA653B582F081581538990* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/TabView.cs:371>
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0;
+		L_0 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1 = ___0_ve;
+		NullCheck(((TabView_t3B7B40580E4AE714A5766774568BA256426F3252*)CastclassClass((RuntimeObject*)L_0, TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var)));
+		TabView_OnElementAdded_m6D0E53E4CC63B7C44DEFE741F9AE82B389667BDF(((TabView_t3B7B40580E4AE714A5766774568BA256426F3252*)CastclassClass((RuntimeObject*)L_0, TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var)), L_1, NULL);
+		return;
+	}
+}
+// Method Definition Index: 2567
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TabViewContentContainer_OnChildRemoved_m0B8DBC075074948A95AB29BBD49ABA4DC08FEE55 (TabViewContentContainer_t6991480DE76479CAE1BA653B582F081581538990* __this, VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* ___0_ve, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	{
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Controls/TabView.cs:372>
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_0;
+		L_0 = VisualElement_get_parent_m80978E6D0A928AB4885EE4CD0E2295C72AA73000(__this, NULL);
+		VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* L_1 = ___0_ve;
+		NullCheck(((TabView_t3B7B40580E4AE714A5766774568BA256426F3252*)CastclassClass((RuntimeObject*)L_0, TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var)));
+		TabView_OnElementRemoved_mB89B1771712CFF1A52ED385BDDAFB1D7EB5FCAB2(((TabView_t3B7B40580E4AE714A5766774568BA256426F3252*)CastclassClass((RuntimeObject*)L_0, TabView_t3B7B40580E4AE714A5766774568BA256426F3252_il2cpp_TypeInfo_var)), L_1, NULL);
+		return;
+	}
+}
+// Method Definition Index: 2568
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void TabViewContentContainer__ctor_mAA3D011ACF4E8E451A03453ECC4CA3316E095FA0 (TabViewContentContainer_t6991480DE76479CAE1BA653B582F081581538990* __this, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
+		s_Il2CppMethodInitialized = true;
+	}
+	//<source_info:<no-source>:1>
+	{
+		il2cpp_codegen_runtime_class_init_inline(VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115_il2cpp_TypeInfo_var);
+		VisualElement__ctor_m4C59A7BA0CE74223A61F07C39A60071DD0207E2D(__this, NULL);
+		return;
+	}
+}
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 // Method Definition Index: 9785
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void UxmlAttributeDescription_set_name_mCE9C58621BAD7AB4E59D83DD21224A8FA6517E3E_inline (UxmlAttributeDescription_t742D021489DB2B564142146CAAAC3F9191825EF2* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
@@ -25018,7 +25046,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Slider_t5891706383A14955E3FAD68A7
 		return L_0;
 	}
 }
-// Method Definition Index: 35503
+// Method Definition Index: 35500
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Mathf_Approximately_m1DADD012A8FC82E11FB282501AE2EBBF9A77150B_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -25074,7 +25102,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RepeatButton_t2CF59798FF30EF6DB80
 		return L_0;
 	}
 }
-// Method Definition Index: 35496
+// Method Definition Index: 35493
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp_mEB9AEA827D27D20FCC787F7375156AF46BB12BBF_inline (float ___0_value, float ___1_min, float ___2_max, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -25158,7 +25186,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Scroller_tFE2BC2FCB5D2BD623828C33
 		return L_0;
 	}
 }
-// Method Definition Index: 35547
+// Method Definition Index: 35545
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Inequality_mBEA93B5A0E954FEFB863DC61CB209119980EC713_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -25170,7 +25198,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Inequality_mBEA93
 		return (bool)((((int32_t)L_2) == ((int32_t)0))? 1 : 0);
 	}
 }
-// Method Definition Index: 35520
+// Method Definition Index: 35518
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFFE3254B303A40997A56DEEB6F548_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, float ___0_x, float ___1_y, const RuntimeMethod* method) 
 {
 	{
@@ -25184,7 +25212,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Vector2__ctor_m9525B79969AFF
 		return;
 	}
 }
-// Method Definition Index: 33991
+// Method Definition Index: 33981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_height_mE1AA6C6C725CCD2D317BD2157396D3CF7D47C9D8_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25202,7 +25230,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 33989
+// Method Definition Index: 33979
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D67551372073C9C32C4C4624C2A5713F7F9A9_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25211,7 +25239,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_width_m620D6755137
 		return L_0;
 	}
 }
-// Method Definition Index: 35482
+// Method Definition Index: 35479
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Max_mF5379E63D2BBAC76D090748695D833934F8AD051_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -25259,7 +25287,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8
 		return L_0;
 	}
 }
-// Method Definition Index: 33993
+// Method Definition Index: 33983
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Rect_get_size_mFB990FFC0FE0152179C8C74A59E4AC258CB44267_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25284,7 +25312,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Rect_tA04E0F8A1830E767F40FB27ECD8
 		return L_0;
 	}
 }
-// Method Definition Index: 35546
+// Method Definition Index: 35544
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector2_op_Equality_m6F2E069A50E787D131261E5CB25FC9E03F95B5E1_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -25319,7 +25347,7 @@ IL_002e:
 		return L_12;
 	}
 }
-// Method Definition Index: 35550
+// Method Definition Index: 35548
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_get_zero_m32506C40EC2EE7D5D4410BF40D3EE683A3D5F32C_inline (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -25334,7 +25362,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_0;
 	}
 }
-// Method Definition Index: 33995
+// Method Definition Index: 33985
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMin_mE89C40702926D016A633399E20DB9501E251630D_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25343,7 +25371,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMin_mE89C40702926
 		return L_0;
 	}
 }
-// Method Definition Index: 33999
+// Method Definition Index: 33989
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA98A9B007F815F6E2059BA6BE425F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25353,7 +25381,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_xMax_m2339C7D2FCDA
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 14018
+// Method Definition Index: 14015
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsNaN_mFE637F6ECA9F7697CE8EFF56427858F4C5EDF75D_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -25364,7 +25392,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsNaN_mFE637F6ECA9F76
 		return (bool)((((int32_t)((int32_t)(L_1&((int32_t)2147483647LL)))) > ((int32_t)((int32_t)2139095040)))? 1 : 0);
 	}
 }
-// Method Definition Index: 33997
+// Method Definition Index: 33987
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMin_mB19848FB25DE61EDF958F7A22CFDD86DE103062F_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25373,7 +25401,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMin_mB19848FB25DE
 		return L_0;
 	}
 }
-// Method Definition Index: 34001
+// Method Definition Index: 33991
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD632AADD8B9EAF9FE3BA143F79CAF8E_inline (Rect_tA04E0F8A1830E767F40FB27ECD8D309303571F0D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25383,7 +25411,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Rect_get_yMax_mBC37BEE1CD63
 		return ((float)il2cpp_codegen_add(L_0, L_1));
 	}
 }
-// Method Definition Index: 6845
+// Method Definition Index: 6846
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Hierarchy_t4CF226F0EDE9C117C51C505730FC80641B1F1677 VisualElement_get_hierarchy_m2E897DE4CFD349E65CFA38EFF6BAAFECE2F4E3E4_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25410,7 +25438,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t GeometryChangedEvent_get_
 		return L_0;
 	}
 }
-// Method Definition Index: 35480
+// Method Definition Index: 35477
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Min_m747CA71A9483CDB394B13BD0AD048EE17E48FFE4_inline (float ___0_a, float ___1_b, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -25449,7 +25477,7 @@ IL_000c:
 		return L_4;
 	}
 }
-// Method Definition Index: 35543
+// Method Definition Index: 35541
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Multiply_m2D984B613020089BF5165BA4CA10988E2DC771FE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25469,7 +25497,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_6;
 	}
 }
-// Method Definition Index: 35538
+// Method Definition Index: 35536
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Addition_m8136742CE6EE33BA4EB81C5F584678455917D2AE_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25491,7 +25519,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35548
+// Method Definition Index: 35546
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Implicit_mE8EBEE9291F11BB02F062D6E000F4798968CBD96_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_v, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25513,12 +25541,12 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool PointerMoveEvent_get_isHandledByDraggable_mCCA70E78328355F419734A13F7B4135F51E89D47_inline (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1459>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
 		bool L_0 = __this->___U3CisHandledByDraggableU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 35539
+// Method Definition Index: 35537
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Subtraction_m44475FCDAD2DA2F98D78A6625EC2DCDFE8803837_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25540,7 +25568,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_8;
 	}
 }
-// Method Definition Index: 35534
+// Method Definition Index: 35532
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA16336720C14EEF8BA9B55AE33B98C9EE2082BDC_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7* __this, const RuntimeMethod* method) 
 {
 	{
@@ -25556,13 +25584,13 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Vector2_get_sqrMagnitude_mA
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PointerMoveEvent_set_isHandledByDraggable_m24AE525901E56FE8A7936EDA8F2046862BB3660D_inline (PointerMoveEvent_t2C1E2E20A07034638F48C3EB94B8520549D770C3* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1459>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/PointerEvents.cs:1470>
 		bool L_0 = ___0_value;
 		__this->___U3CisHandledByDraggableU3Ek__BackingField = L_0;
 		return;
 	}
 }
-// Method Definition Index: 35537
+// Method Definition Index: 35535
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Max_m1E906743ECA6478A2EDCCFECD9D509898F66152B_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25588,7 +25616,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 		return L_10;
 	}
 }
-// Method Definition Index: 35536
+// Method Definition Index: 35534
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Min_m2D222BC18ACD4F965981EC93451DDD1D7ADFDDA0_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_lhs, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_rhs, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25623,7 +25651,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t ScrollView_get_nestedInte
 		return L_0;
 	}
 }
-// Method Definition Index: 35521
+// Method Definition Index: 35519
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_Lerp_m1A36103F7967F653A929556E26E6D052C298C00C_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25667,7 +25695,7 @@ IL_0047:
 		return L_17;
 	}
 }
-// Method Definition Index: 35545
+// Method Definition Index: 35543
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 Vector2_op_Division_m57A2DCD71E0CE7420851D705D1951F9238902AAB_inline (Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 ___0_a, float ___1_d, const RuntimeMethod* method) 
 {
 	Vector2_t1FD6F485C871E832B347AB2DC8CBA08B739D8DF7 V_0;
@@ -25691,21 +25719,21 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector2_t1FD6F485C871E832B347AB2D
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 WheelEvent_get_delta_mDFB7F45FA5ED7D711EBB3F8FADC88C4F451088B2_inline (WheelEvent_tDD5DB3A6F5F6FDB59AD7FF27491502FF18B9775E* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:718>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/Events/MouseEvents.cs:728>
 		Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 L_0 = __this->___U3CdeltaU3Ek__BackingField;
 		return L_0;
 	}
 }
-// Method Definition Index: 6650
+// Method Definition Index: 6652
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR String_t* VisualElement_get_viewDataKey_m1F990A70B7861D0071A4462C62477363C69223F5_inline (VisualElement_t2667F9D19E62C7A315927506C06F223AB9234115* __this, const RuntimeMethod* method) 
 {
 	{
-		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:562>
+		//<source_info:/Users/bokken/build/output/unity/unity/Modules/UIElements/Core/VisualElement.cs:560>
 		String_t* L_0 = __this->___m_ViewDataKey;
 		return L_0;
 	}
 }
-// Method Definition Index: 35500
+// Method Definition Index: 35497
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_LerpUnclamped_mF35042F9D25A221BDD4B3FD6251224610AFC1F35_inline (float ___0_a, float ___1_b, float ___2_t, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
@@ -25726,7 +25754,7 @@ IL_000b:
 		return L_4;
 	}
 }
-// Method Definition Index: 35493
+// Method Definition Index: 35490
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_FloorToInt_m2A39AE881CAEE6B6A4B3BFEF9CA1ED40625F5AB7_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -25753,7 +25781,7 @@ IL_000c:
 		return L_2;
 	}
 }
-// Method Definition Index: 35497
+// Method Definition Index: 35494
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_Clamp_m4DC36EEFDBE5F07C16249DA568023C5ECCFF0E7B_inline (int32_t ___0_value, int32_t ___1_min, int32_t ___2_max, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -25810,7 +25838,7 @@ IL_001d:
 		return L_9;
 	}
 }
-// Method Definition Index: 35494
+// Method Definition Index: 35491
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Mathf_RoundToInt_m60F8B66CF27F1FA75AA219342BD184B75771EB4B_inline (float ___0_f, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -26038,7 +26066,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RepeatButton_t2CF59798FF30EF6DB80
 		return L_0;
 	}
 }
-// Method Definition Index: 35411
+// Method Definition Index: 35409
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector3_op_Inequality_m9F170CDFBF1E490E559DA5D06D6547501A402BBF_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_rhs, const RuntimeMethod* method) 
 {
 	{
@@ -26087,7 +26115,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Tab_get_index_m83DC74170E
 		return L_0;
 	}
 }
-// Method Definition Index: 21095
+// Method Definition Index: 21091
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* Enumerator_get_Current_m6330F15D18EE4F547C05DF9BF83C5EB710376027_gshared_inline (Enumerator_t9473BAB568A27E2339D48C1F91319E0F6D244D7A* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26105,7 +26133,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float ChangeEvent_1_get_newValue_
 		return L_0;
 	}
 }
-// Method Definition Index: 12701
+// Method Definition Index: 12698
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_1_Invoke_mA8F89FB04FEA0F48A4F22EC84B5F9ADB2914341F_gshared_inline (Action_1_t310F18CB4338A2740CA701F160C62E2C3198E66A* __this, float ___0_obj, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26250,7 +26278,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR VisualElement_t2667F9D19E62C7A315
 		return L_0;
 	}
 }
-// Method Definition Index: 12701
+// Method Definition Index: 12698
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_1_Invoke_mF2422B2DD29F74CE66F791C3F68E288EC7C3DB9E_gshared_inline (Action_1_t6F9EB113EB3F16226AEF811A2744F4111C116C87* __this, RuntimeObject* ___0_obj, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26314,7 +26342,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void TypedUxmlAttributeDescriptio
 		return;
 	}
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_mEBCF994CC3814631017F46A387B1A192ED6C85C7_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, RuntimeObject* ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26353,14 +26381,14 @@ IL_0034:
 		return;
 	}
 }
-// Method Definition Index: 12713
+// Method Definition Index: 12710
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Func_1_Invoke_mBB7F37C468451AF57FAF31635C544D6B8C4373B2_gshared_inline (Func_1_t2BE7F58348C9CC544A8973B3A9E55541DE43C457* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef bool (*FunctionPointerType) (RuntimeObject*, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 21046
+// Method Definition Index: 21042
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Add_m312FE437F125C20E59CB1E48C69BF7F40ADE12C0_gshared_inline (List_1_t569CB45C96475FFA9C716A7CC2ADE24112D38121* __this, ManipulatorActivationFilter_t866A0295DA75EA271B30BDC1F9EEA2C4FDEB1A81 ___0_item, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26417,7 +26445,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t KeyboardEventBase_1_get_k
 		return L_0;
 	}
 }
-// Method Definition Index: 21036
+// Method Definition Index: 21032
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C389F22B8CEC282C15D56516658746C383_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26426,28 +26454,28 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t List_1_get_Count_m4407E4C
 		return L_0;
 	}
 }
-// Method Definition Index: 12703
+// Method Definition Index: 12700
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_2_Invoke_m7BFCE0BBCF67689D263059B56A8D79161B698587_gshared_inline (Action_2_t156C43F079E7E68155FCDCD12DC77DD11AEF7E3C* __this, RuntimeObject* ___0_arg1, RuntimeObject* ___1_arg2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, RuntimeObject*, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg1, ___1_arg2, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 12703
+// Method Definition Index: 12700
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_2_Invoke_m88484A213EB00FF7254FE3DB935BFB06DD3F5753_gshared_inline (Action_2_tAC461AE4F7B507965CE2E6A32853473F8C02CD75* __this, RuntimeObject* ___0_arg1, int32_t ___1_arg2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, int32_t, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg1, ___1_arg2, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 12703
+// Method Definition Index: 12700
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void Action_2_Invoke_m728A2437F181FBC56F4D617249B47F513AC9FC43_gshared_inline (Action_2_tD7438462601D3939500ED67463331FE00CFFBDB8* __this, int32_t ___0_arg1, int32_t ___1_arg2, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
 	typedef void (*FunctionPointerType) (RuntimeObject*, int32_t, int32_t, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg1, ___1_arg2, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 21054
+// Method Definition Index: 21050
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void List_1_Clear_m16C1F2C61FED5955F10EB36BC1CB2DF34B128994_gshared_inline (List_1_tA239CB83DE5615F348BB0507E45F490F4F7C9A8D* __this, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26478,7 +26506,7 @@ IL_003c:
 		return;
 	}
 }
-// Method Definition Index: 12797
+// Method Definition Index: 12794
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt32Bits_mC760C7CFC89725E3CF68DC45BE3A9A42A7E7DA73_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	//<source_info:<no-source>:1>
@@ -26487,7 +26515,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt3
 		return L_0;
 	}
 }
-// Method Definition Index: 35498
+// Method Definition Index: 35495
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) 
 {
 	bool V_0 = false;
@@ -26541,7 +26569,7 @@ IL_002d:
 		return L_5;
 	}
 }
-// Method Definition Index: 35410
+// Method Definition Index: 35408
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Vector3_op_Equality_mCDCBB8D2EDC3D3BF20F31A25ACB34705D352B479_inline (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___0_lhs, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 ___1_rhs, const RuntimeMethod* method) 
 {
 	float V_0 = 0.0f;
