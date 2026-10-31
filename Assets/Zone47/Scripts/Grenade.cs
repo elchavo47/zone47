@@ -8,6 +8,11 @@ namespace Zone47
         public Actor owner;
         public float fuse = 2.6f;
         float t;
+        public const float BlastR = 7.5f;
+        public static readonly System.Collections.Generic.List<Grenade> Live = new System.Collections.Generic.List<Grenade>();
+        public float TimeLeft => fuse - t;
+        void OnEnable() { Live.Add(this); }
+        void OnDisable() { Live.Remove(this); }
         bool done;
 
         void Update()
@@ -39,7 +44,7 @@ namespace Zone47
                     if (hitA != a) continue;
                 }
                 float dmg = Mathf.Lerp(150f, 15f, d / 7.5f);
-                a.Damage(dmg, owner, p, false);
+                Actor.ExplosionDamage = true; a.Damage(dmg, owner, p, false); Actor.ExplosionDamage = false;
             }
             var pl = PlayerController.Local;
             if (pl != null) pl.Shake(Mathf.Clamp01(1f - Vector3.Distance(pl.EyePos, p) / 30f) * 1.2f);

@@ -39,7 +39,13 @@ MonoBehaviour:
     range: 180
     adsFov: 52
     scope: 0
+    pellets: 1
+    falloffStart: 30
+    falloffEnd: 120
+    falloffMin: 0.7
     shot: {fileID: 8300000, guid: bf35955b7c2ce284c85d9f37eaef4367, type: 3}
+    reloadClip: {fileID: 0}
+    pumpClip: {fileID: 0}
     hipOffset: {x: 0.115, y: -0.125, z: 0.2}
   - id: ak
     displayName: AK-47
@@ -62,7 +68,13 @@ MonoBehaviour:
     range: 170
     adsFov: 52
     scope: 0
+    pellets: 1
+    falloffStart: 30
+    falloffEnd: 120
+    falloffMin: 0.7
     shot: {fileID: 8300000, guid: 19820df5afd7aa443b5f57d23d39bb1b, type: 3}
+    reloadClip: {fileID: 0}
+    pumpClip: {fileID: 0}
     hipOffset: {x: 0.12, y: -0.14, z: 0.2}
   - id: awp
     displayName: AWP
@@ -85,7 +97,13 @@ MonoBehaviour:
     range: 320
     adsFov: 18
     scope: 1
+    pellets: 1
+    falloffStart: 30
+    falloffEnd: 120
+    falloffMin: 0.7
     shot: {fileID: 8300000, guid: 7dc5e17ed401b3b4894e234d64a13258, type: 3}
+    reloadClip: {fileID: 0}
+    pumpClip: {fileID: 0}
     hipOffset: {x: 0.115, y: -0.13, z: 0.17}
   - id: glock
     displayName: GLOCK 17
@@ -108,8 +126,43 @@ MonoBehaviour:
     range: 90
     adsFov: 60
     scope: 0
+    pellets: 1
+    falloffStart: 30
+    falloffEnd: 120
+    falloffMin: 0.7
     shot: {fileID: 8300000, guid: 663894afa7a67ed4f9e89f6e43e023c6, type: 3}
+    reloadClip: {fileID: 0}
+    pumpClip: {fileID: 0}
     hipOffset: {x: 0.1, y: -0.11, z: 0.26}
+  - id: shotgun
+    displayName: POMPALI
+    kind: 3
+    prefab: {fileID: 247533216734984370, guid: 88738016db56ceb458afa8128d35c4ba, type: 3}
+    forePoint: {x: -0.000000056447963, y: -0.01471168, z: 0.38237655}
+    muzzlePoint: {x: -0.00000011964103, y: -0.000000013038516, z: 0.58000004}
+    topY: 0.08490058
+    adsZ: 0
+    animated: 0
+    damage: 15
+    fireInterval: 0.9
+    automatic: 0
+    magSize: 7
+    reserve: 35
+    reloadTime: 2.6
+    hipSpread: 5.5
+    adsSpread: 3.6
+    recoil: 3.4
+    range: 55
+    adsFov: 60
+    scope: 0
+    pellets: 8
+    falloffStart: 7
+    falloffEnd: 32
+    falloffMin: 0.15
+    shot: {fileID: 8300000, guid: 819ae33b4272fad42b9cbf1528c882a4, type: 3}
+    reloadClip: {fileID: 8300000, guid: c183586ee3c33924a9f99c6114b7affd, type: 3}
+    pumpClip: {fileID: 8300000, guid: 2a8113271cb25184d9cb88140d66dc78, type: 3}
+    hipOffset: {x: 0.12, y: -0.135, z: 0.24}
   - id: carbine
     displayName: "KARAB\u0130NA"
     kind: 0
@@ -131,7 +184,13 @@ MonoBehaviour:
     range: 170
     adsFov: 54
     scope: 0
+    pellets: 1
+    falloffStart: 30
+    falloffEnd: 120
+    falloffMin: 0.7
     shot: {fileID: 8300000, guid: bf35955b7c2ce284c85d9f37eaef4367, type: 3}
+    reloadClip: {fileID: 0}
+    pumpClip: {fileID: 0}
     hipOffset: {x: 0.115, y: -0.165, z: 0.21}
   grenadePrefab: {fileID: 3087410195533179847, guid: 9da8f611bd6d513439d88c1f58af8fa9, type: 3}
   mapPrefab: {fileID: 6743131410289090053, guid: 333594f531904fd4fa1e60e336c4bbfd, type: 3}
@@ -144,6 +203,29 @@ MonoBehaviour:
   - {fileID: 2800000, guid: b5c4207445d96c3418494349d4ee08c0, type: 3}
   lobbySkyMat: {fileID: 2100000, guid: edd80e5047b5a534c8a01d1df8615c8d, type: 2}
   rainMat: {fileID: 2100000, guid: 9e56521ec01336f42a2829701aab639e, type: 2}
+  lobbyVideo: {fileID: 32900000, guid: 3b66f864e4000314e86c97e29685d55e, type: 3}
+  dronePrefab: {fileID: 919132149155446097, guid: 86858d45dfe41cc4a828ef2e2cae72e2, type: 3}
+  heliPrefab: {fileID: 0}
+  bombPrefab: {fileID: 919132149155446097, guid: 52e6b3a870cdb9a4cb5452af411be499, type: 3}
+  bombTex: {fileID: 2800000, guid: f899ce5189a2979469446cb1d0c79fd0, type: 3}
+  killIcons:
+  - {fileID: 2800000, guid: ccfd20e292aac7e4fad6add9c626c04b, type: 3}
+  - {fileID: 2800000, guid: 46b3fb96f63b16f4e9dca7033250490b, type: 3}
+  - {fileID: 2800000, guid: f96227bd089423541b0a8fcb39f245b8, type: 3}
+  - {fileID: 2800000, guid: 5723459018bfcc74fab536bf2d429035, type: 3}
+  - {fileID: 2800000, guid: 9dbe2f9016ccbb8468bfee907adcb65a, type: 3}
+  - {fileID: 2800000, guid: 79ddde3ce73199f4fa9f2d21cd6f3866, type: 3}
+  - {fileID: 2800000, guid: ea718d28d2cee8e4fa2312301b85d0d2, type: 3}
+  - {fileID: 2800000, guid: 0438c7753ba9dc643bf4be42140b0d9b, type: 3}
+  killIconIds:
+  - m4
+  - awp
+  - ak
+  - glock
+  - carbine
+  - shotgun
+  - gren
+  - drone
   skybox: {fileID: 2100000, guid: 0ec8709e5f6bf8143bc23a6f78a45624, type: 2}
   crateMat: {fileID: 2100000, guid: e44aa72f32e65f64eadbb6c6f18e6e79, type: 2}
   concreteMat: {fileID: 2100000, guid: 99d828f6600219e45820674450d9bd4d, type: 2}
@@ -183,6 +265,10 @@ MonoBehaviour:
   equip: {fileID: 8300000, guid: c4e2a82465b51d044b9de8fc7d86fa38, type: 3}
   bounce: {fileID: 8300000, guid: 68435bd4414b33c4ea884a2e77e5bb74, type: 3}
   rain: {fileID: 0}
+  siren: {fileID: 8300000, guid: 607a8c1871ed1b947bc8ca2caeab06f3, type: 3}
+  droneLoop: {fileID: 8300000, guid: c95f64d286c56604f927c9f230dc01e2, type: 3}
+  bombWhistle: {fileID: 8300000, guid: 507c53374f7ee054bba04c699124f0e0, type: 3}
+  heliLoop: {fileID: 8300000, guid: 38d47d132e57f0f46b5ffcedbe920aaf, type: 3}
   steps:
   - {fileID: 8300000, guid: 7dc833b9fc4b5fb48adfb51cf364a25a, type: 3}
   - {fileID: 8300000, guid: b2852a9c3a8911340b38e235ef601769, type: 3}

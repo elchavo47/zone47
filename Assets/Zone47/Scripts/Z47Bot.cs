@@ -31,7 +31,10 @@ namespace Zone47
         bool atCover; float peekT; bool peekHidden;
         float stuckT, holdT;
         float strafeSide = 1f;
+        Ragdoll ragdoll;
+        int nades = 2; float nextNade;
 
+        public override string WeaponId => weapon != null ? weapon.id : null;
         float Skill => Settings.Difficulty == 0 ? 0.55f : Settings.Difficulty == 1 ? 0.8f : 1f;
 
         public override Vector3 EyePos => transform.position + Vector3.up * (crouch ? 1.05f : 1.6f);
@@ -74,6 +77,7 @@ namespace Zone47
             spine = anim.GetBoneTransform(HumanBodyBones.Chest) ?? anim.GetBoneTransform(HumanBodyBones.Spine);
             rShoulder = anim.GetBoneTransform(HumanBodyBones.RightUpperArm);
             SpawnGun();
+            ragdoll = gameObject.AddComponent<Ragdoll>(); ragdoll.Build(anim);
             thinkT = Random.Range(0f, 0.3f);
         }
 
@@ -133,6 +137,50 @@ namespace Zone47
             }
             target = best;
             if (target != null) { lastKnown = target.ChestPos; lastKnownT = Time.time; }
+            NadeLogic();
+        }
+
+        // ------------------------------------------------------------ grenades
+        void NadeLogic()
+        {
+            // get away from any live grenade (theirs or ours)
+            foreach (var g in Grenade.Live)
+                if (g != null && (g.transform.position - transform.position).sqrMagnitude < (Grenade.BlastR + 1.5f) * (Grenade.BlastR + 1.5f) && Time.time > fleeUntil)
+                    Flee(g.transform.position, Grenade.BlastR + 1.5f, Mathf.Max(0.5f, g.TimeLeft));
+
+            if (nades <= 0 || Time.time < nextNade || reloading || Z47Refs.I.grenadePrefab == null || Time.time < fleeUntil) return;
+            Vector3 at; bool want;
+            if (target != null)
+            {
+                // someone camping behind cover at medium range
+                float d = Vector3.Distance(target.transform.position, transform.position);
+                want = d > 9f && d < 26f && Random.value < (atCover ? 0.06f : 0.035f) * Skill;
+                at = target.transform.position;
+            }
+            else
+            {
+                // just lost sight of them: flush them out of where they hid
+                float since = Time.time - lastKnownT, d = Vector3.Distance(lastKnown, transform.position);
+                want = since > 0.6f && since < 4f && d > 8f && d < 24f && Random.value < 0.12f * Skill;
+                at = lastKnown;
+            }
+            if (!want) return;
+            foreach (var a in All) if (a != this && a.team == team && a.Alive && (a.transform.position - at).sqrMagnitude < 7f * 7f) return;   // teammates there
+            ThrowNade(at);
+        }
+
+        void ThrowNade(Vector3 at)
+        {
+            nades--; nextNade = Time.time + Random.Range(14f, 22f);
+            Face(at);
+            Vector3 from = EyePos + transform.forward * 0.55f + Vector3.up * 0.1f;
+            at += Random.insideUnitSphere.Flat() * Mathf.Lerp(3f, 1f, Skill);
+            float T = Mathf.Clamp(Vector3.Distance(from, at) / 13f, 0.7f, 1.6f);
+            Vector3 v = (at - from - 0.5f * Physics.gravity * T * T) / T;          // lands at `at` after T seconds
+            var go = Instantiate(Z47Refs.I.grenadePrefab, from, Random.rotation);
+            var gr = go.GetComponent<Grenade>(); if (gr != null) gr.owner = this;
+            var rb = go.GetComponent<Rigidbody>(); if (rb != null) { rb.linearVelocity = v; rb.angularVelocity = Random.insideUnitSphere * 10f; }
+            if (Z47Refs.I.pin != null) Sfx.Play3D(Z47Refs.I.pin, transform.position + Vector3.up, 0.7f, 2f, 22f);
         }
 
         /// Something was heard (gunshot, footsteps, teammate callout): go check it out if not already fighting.
@@ -140,6 +188,21 @@ namespace Zone47
         {
             if (target != null || src == null) return;
             lastKnown = src.ChestPos + Random.insideUnitSphere.Flat() * error; lastKnownT = Time.time; holdT = 0f;
+        }
+
+        float fleeUntil;
+        /// Get out of a blast radius (air strike marker).
+        public void Flee(Vector3 danger, float radius, float seconds)
+        {
+            if (!Alive || agent == null || !agent.isOnNavMesh) return;
+            Vector3 away = (transform.position - danger).Flat();
+            if (away.sqrMagnitude < 0.1f) away = Random.insideUnitSphere.Flat();
+            Vector3 p = danger + away.normalized * (radius + 2f);
+            for (int i = 0; i < 4; i++)
+            {
+                if (NavMesh.SamplePosition(p, out var h, 4f, NavMesh.AllAreas)) { agent.SetDestination(h.position); fleeUntil = Time.time + seconds + 0.5f; return; }
+                p = danger + Quaternion.Euler(0, 45f * (i + 1), 0) * away.normalized * (radius + 2f);
+            }
         }
 
         /// Gunshots carry far; enemy bots in range react to them.
@@ -177,7 +240,7 @@ namespace Zone47
             if (Time.time < nextShot) return;
 
             float dist = Vector3.Distance(target.ChestPos, EyePos);
-            float spread = Mathf.Lerp(3.6f, 1.2f, Skill) * (weapon.kind == WeaponKind.Sniper ? 0.25f : 1f) * (agent.velocity.magnitude > 1f ? 1.4f : 1f);
+            float spread = MatchManager.HandicapSpread(team) * Mathf.Lerp(3.6f, 1.2f, Skill) * (weapon.kind == WeaponKind.Sniper ? 0.25f : 1f) * (agent.velocity.magnitude > 1f ? 1.4f : 1f);
             spread *= Mathf.Lerp(0.7f, 1.2f, Mathf.InverseLerp(5f, 60f, dist));
             if (target.isPlayer && Time.time - target.lastDamageTime < 0.25f) spread *= 1.3f;
             Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread), Random.Range(-spread, spread), 0) * aimDir;
@@ -187,7 +250,7 @@ namespace Zone47
                 if (blocker != null && blocker.team == team) { strafeT = 0f; nextShot = Time.time + 0.3f; return; }
             }
             Vector3 muzzle = gun.TransformPoint(weapon.muzzlePoint);
-            Ballistics.Fire(this, EyePos, dir, weapon.range, weapon.damage * Mathf.Lerp(0.6f, 0.85f, Skill), muzzle, true, out _);
+            Ballistics.Fire(this, EyePos, dir, weapon.range, weapon.damage * Mathf.Lerp(0.6f, 0.85f, Skill) * MatchManager.HandicapDamage(team), muzzle, true, out _);
             Sfx.Play3D(weapon.shot, muzzle, 1f, 6f, 140f, 0.07f);
             FX.MuzzleFlash(muzzle, gun.forward, weapon.kind == WeaponKind.Sniper ? 0.45f : 0.32f);
             mag--;
@@ -217,6 +280,15 @@ namespace Zone47
             agent.isStopped = false;
             repathT -= Time.deltaTime;
             var mm = MatchManager.I;
+
+            if (Time.time < fleeUntil)
+            {
+                // run from a marked bomb spot, then carry on
+                agent.speed = 5.6f; crouch = false; atCover = false;
+                Vector3 v0 = agent.velocity.Flat();
+                if (v0.sqrMagnitude > 0.2f) Face(transform.position + v0);
+                goto Steps;
+            }
 
             // unstick: wants to move, isn't moving
             if (agent.hasPath && !agent.pathPending && agent.remainingDistance > 1f && agent.velocity.sqrMagnitude < 0.09f) stuckT += Time.deltaTime; else stuckT = 0f;
@@ -432,7 +504,8 @@ namespace Zone47
             rb.mass = 3.5f;
             rb.linearVelocity = transform.forward * 0.6f + Vector3.up * 0.8f;
             rb.angularVelocity = Random.insideUnitSphere * 3f;
-            Destroy(g, 7f);
+            // stays on the ground for a while; walk over it to take its ammo if it fits one of your guns
+            var pk = g.AddComponent<WeaponPickup>(); pk.ammo = WeaponPickup.AmmoOf(weapon.id); pk.amount = Mathf.Max(weapon.magSize, mag + weapon.magSize / 2);
         }
 
         protected override void OnHurt(Actor from, Vector3 fromPos)
@@ -444,9 +517,16 @@ namespace Zone47
         protected override void OnDie(Actor killer)
         {
             deadT = 0f;
-            anim.SetTrigger("Die");
-            anim.SetBool("Dead", true);
+            Vector3 carry = agent != null && agent.enabled ? agent.velocity : Vector3.zero;
             col.enabled = false;
+            if (ragdoll != null && ragdoll.Built)
+            {
+                // physical fall: pushed away from the shot (harder for snipers / headshots), or thrown by the blast
+                float strength = lastHitExplosive ? 7f : Mathf.Lerp(35f, 95f, Mathf.InverseLerp(20f, 110f, lastHitAmount)) * (lastHitHead ? 1.25f : 1f);
+                anim.SetBool("Dead", true);
+                ragdoll.Activate(lastDamageFrom, strength, lastHitHead, lastHitExplosive, carry);
+            }
+            else { anim.SetTrigger("Die"); anim.SetBool("Dead", true); }
             if (agent.isOnNavMesh) agent.isStopped = true;
             agent.enabled = false;
             target = null;
@@ -460,9 +540,10 @@ namespace Zone47
             agent.Warp(pos);
             transform.rotation = rot;
             col.enabled = true;
-            hp = maxHp; mag = weapon.magSize; reloading = false; target = null; lastKnownT = -99f; hasRoam = false;
+            hp = maxHp; mag = weapon.magSize; reloading = false; target = null; lastKnownT = -99f; hasRoam = false; nades = 2; fleeUntil = 0f;
             foreach (var r in rends) r.enabled = true;
             if (gun == null) SpawnGun();
+            if (ragdoll != null) ragdoll.Deactivate();
             anim.SetBool("Dead", false);
             anim.Rebind();
         }

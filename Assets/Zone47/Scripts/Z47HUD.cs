@@ -305,6 +305,7 @@ namespace Zone47
         Image redDot, redGlow;
         RectTransform full, scopeGroup; Image centerDot, scopeT, scopeB; Vector2 scopeDrift; Vector3 lastFwd;
         AudioSource breathSrc, heartSrc; float lowHpT; float lastSat = -999f;
+        string cAmmoWep;
         int cMag = -1, cRes = -1, cS0 = -1, cS1 = -1, cTime = -1, cGren = -1; string cWep;
         RectTransform feed;
         readonly List<(Text t, float time)> feedItems = new List<(Text, float)>();
@@ -315,12 +316,15 @@ namespace Zone47
         readonly List<SquadRow> squad = new List<SquadRow>();
         RectTransform squadRoot; Text squadAlive; int cAlive = -1;
         static readonly Color[] SquadCols = { new Color(0.98f, 0.82f, 0.2f), new Color(0.95f, 0.5f, 0.15f), new Color(0.3f, 0.65f, 1f), new Color(0.35f, 0.85f, 0.4f), new Color(0.85f, 0.4f, 0.95f), new Color(0.9f, 0.9f, 0.9f) };
-        public const float SquadW = 300f, SquadHead = 28f, SquadRowH = 30f, SquadGap = 3f;
+        public const float SquadW = 300f, SquadHead = 28f, SquadGap = 3f;
+        public static float SquadRowH => MatchManager.AllySize > 5 ? 21f : 30f;      // 10-man squads get compact rows
+        static int SquadFont => MatchManager.AllySize > 5 ? 12 : 15;
         public static float SquadHeight(int n) => SquadHead + 6f + n * (SquadRowH + SquadGap);
         GameObject reloadBox; Text reloadTxt, reloadHint; RectTransform reloadFill; int cReload = -1;
         float deathAt;
-        Image[] slotImgs = new Image[4];
-        Text[] slotTxt = new Text[4];
+        Image[] slotImgs = new Image[5];
+        Text[] slotTxt = new Text[5];
+        RawImage[] slotIcons = new RawImage[5];
         int slotN = 3;
 
         // joystick
@@ -380,18 +384,18 @@ namespace Zone47
             scopeBlink = UIK.Img(full, "blink", new Color(0, 0, 0, 0), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
             SetScope(false);
 
-            // crosshair
+            // crosshair: on the full-screen layer (not the safe-area one), so its centre is the real screen centre the bullets use
             for (int i = 0; i < 4; i++)
             {
-                var im = UIK.Img(root, "xh" + i, new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, i < 2 ? new Vector2(3, 16) : new Vector2(16, 3));
+                var im = UIK.Img(full, "xh" + i, new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, i < 2 ? new Vector2(3, 16) : new Vector2(16, 3));
                 im.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.5f);
                 xh[i] = im.rectTransform;
             }
-            centerDot = UIK.Img(root, "dot", new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 3));
-            redGlow = UIK.Img(root, "redGlow", new Color(1f, 0.15f, 0.08f, 0.35f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(16, 16)); redGlow.sprite = Gfx.Circle;
-            redDot = UIK.Img(root, "redDot", new Color(1f, 0.12f, 0.06f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(6, 6)); redDot.sprite = Gfx.Circle;
+            centerDot = UIK.Img(full, "dot", new Color(1, 1, 1, 0.9f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(3, 3));
+            redGlow = UIK.Img(full, "redGlow", new Color(1f, 0.15f, 0.08f, 0.35f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(16, 16)); redGlow.sprite = Gfx.Circle;
+            redDot = UIK.Img(full, "redDot", new Color(1f, 0.12f, 0.06f, 1f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(6, 6)); redDot.sprite = Gfx.Circle;
             redDot.enabled = redGlow.enabled = false;
-            hitMark = UIK.Img(root, "hit", Color.white, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34));
+            hitMark = UIK.Img(full, "hit", Color.white, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34));
             hitMark.color = new Color(1, 1, 1, 0);
             for (int i = 0; i < 4; i++)
             {
@@ -410,7 +414,7 @@ namespace Zone47
             UIK.Txt(clock.transform, "goal", (Settings.Turkish ? "HEDEF " : "TARGET ") + MatchManager.KillTarget, 13, Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 14), new Vector2(118, 18), true);
 
             // kill feed
-            feed = UIK.Rect(root, "feed", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24 - SquadHeight(5) - 10), new Vector2(380, 160));
+            feed = UIK.Rect(root, "feed", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24 - SquadHeight(MatchManager.AllySize) - 10), new Vector2(380, 160));
             var vl = feed.gameObject.AddComponent<VerticalLayoutGroup>();
             vl.childAlignment = TextAnchor.UpperLeft; vl.spacing = 6; vl.childControlHeight = false; vl.childControlWidth = false; vl.childForceExpandHeight = false;
 
@@ -429,7 +433,15 @@ namespace Zone47
                 if (nm == "GLOCK 17") nm = "GLOCK";
                 var b = UIK.Img(root, "slot" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i - (slotN - 1) * 0.5f) * 128, 78), new Vector2(120, 42), true);
                 slotImgs[i] = b;
-                slotTxt[i] = UIK.Txt(b.transform, "t", nm, 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                // weapon silhouette (same as the kill feed); text only if there's no icon
+                var ico = lp0 != null ? Z47Refs.I.KillIcon(lp0.SlotDef(i).id) : null;
+                if (ico != null)
+                {
+                    float ih = 28f, iw = Mathf.Min(108f, ih * ico.width / (float)Mathf.Max(1, ico.height)); ih = iw * ico.height / (float)ico.width;
+                    var ir = UIK.Rect(b.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(iw, ih));
+                    slotIcons[i] = ir.gameObject.AddComponent<RawImage>(); slotIcons[i].texture = ico; slotIcons[i].raycastTarget = false; slotIcons[i].color = Pal.Text;
+                }
+                else slotTxt[i] = UIK.Txt(b.transform, "t", nm, 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
                 var tp = b.gameObject.AddComponent<TouchPad>(); tp.down = e => PInput.select = idx;
             }
 
@@ -446,7 +458,7 @@ namespace Zone47
 
             BuildPauseButton();
 
-            BuildDeath(); BuildPause(); BuildReload();
+            BuildDeath(); BuildPause(); BuildReload(); BuildGrenadeWarn();
             controls.gameObject.SetActive(TouchUI);
         }
 
@@ -607,7 +619,7 @@ namespace Zone47
             var mates = new List<Actor>();
             mates.Add(me);
             foreach (var a in Actor.All) if (a != null && a != me && a.team == me.team) mates.Add(a);
-            if (mates.Count < 2) return;          // bots not spawned yet: try again next frame
+            if (mates.Count < MatchManager.AllySize) return;          // bots not spawned yet: try again next frame
             float h = SquadHeight(mates.Count);
             squadRoot = UIK.Rect(root, "squad", new Vector2(0, 1), new Vector2(0, 1), new Vector2(24, -24), new Vector2(SquadW, h));
             var card = UIK.Img(squadRoot, "card", new Color(0.03f, 0.035f, 0.03f, 0.55f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
@@ -621,12 +633,12 @@ namespace Zone47
                 r.bg = UIK.Img(card.transform, "row" + i, a == me ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.16f) : new Color(1, 1, 1, 0.04f), new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(-8, SquadRowH));
                 r.bg.rectTransform.pivot = new Vector2(0.5f, 1); r.bg.rectTransform.anchoredPosition = new Vector2(0, y);
                 r.stripe = UIK.Img(r.bg.transform, "s", r.col, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)); r.stripe.rectTransform.pivot = new Vector2(0, 0.5f);
-                r.num = UIK.Txt(r.bg.transform, "no", (i + 1).ToString(), 15, r.col, TextAnchor.MiddleCenter, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(18, 0), new Vector2(20, SquadRowH), true);
+                r.num = UIK.Txt(r.bg.transform, "no", (i + 1).ToString(), SquadFont, r.col, TextAnchor.MiddleCenter, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(18, 0), new Vector2(20, SquadRowH), true);
                 // one line: number · name · health bar · kills (nothing stacked, so nothing can overlap)
-                r.name = UIK.Txt(r.bg.transform, "n", a.callsign, 15, a == me ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(34, 0), new Vector2(122, SquadRowH), true);
+                r.name = UIK.Txt(r.bg.transform, "n", a.callsign, SquadFont, a == me ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(34, 0), new Vector2(122, SquadRowH), true);
                 r.name.rectTransform.pivot = new Vector2(0, 0.5f); r.name.rectTransform.anchoredPosition = new Vector2(34, 0);
                 r.name.horizontalOverflow = HorizontalWrapMode.Wrap; r.name.verticalOverflow = VerticalWrapMode.Truncate;
-                r.name.resizeTextForBestFit = true; r.name.resizeTextMinSize = 11; r.name.resizeTextMaxSize = 15;
+                r.name.resizeTextForBestFit = true; r.name.resizeTextMinSize = 9; r.name.resizeTextMaxSize = SquadFont;
                 // health: dark track, slow pale "damage trail", then the live fill
                 r.bar = UIK.Img(r.bg.transform, "bar", new Color(0, 0, 0, 0.55f), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(162, 0), new Vector2(84, 7)).gameObject;
                 var barRt = (RectTransform)r.bar.transform; barRt.pivot = new Vector2(0, 0.5f); barRt.anchoredPosition = new Vector2(162, 0);
@@ -634,7 +646,7 @@ namespace Zone47
                 r.trailRt = r.trail.rectTransform; r.trailRt.pivot = new Vector2(0, 0.5f); r.trailRt.anchoredPosition = Vector2.zero;
                 r.fill = UIK.Img(r.bar.transform, "hp", Color.white, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
                 r.fillRt = r.fill.rectTransform; r.fillRt.pivot = new Vector2(0, 0.5f); r.fillRt.anchoredPosition = Vector2.zero;
-                r.kills = UIK.Txt(r.bg.transform, "k", "", 15, Pal.Text, TextAnchor.MiddleRight, new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-8, 0), new Vector2(40, SquadRowH), true);
+                r.kills = UIK.Txt(r.bg.transform, "k", "", SquadFont, Pal.Text, TextAnchor.MiddleRight, new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-8, 0), new Vector2(40, SquadRowH), true);
                 r.kills.rectTransform.pivot = new Vector2(1, 0.5f); r.kills.rectTransform.anchoredPosition = new Vector2(-8, 0);
                 r.dead = UIK.Txt(r.bg.transform, "d", "", 13, new Color(1f, 0.42f, 0.36f), TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(162, 0), new Vector2(90, SquadRowH), true);
                 r.dead.rectTransform.pivot = new Vector2(0, 0.5f); r.dead.rectTransform.anchoredPosition = new Vector2(162, 0);
@@ -679,6 +691,63 @@ namespace Zone47
             if (alive != cAlive) { cAlive = alive; squadAlive.text = alive + "/" + squad.Count + " " + L.S("sq_alive"); }
         }
 
+        // ------------------------------------------------------------ grenade warning (any grenade, own ones too)
+        // CoD style: grenade icon on a ring around the crosshair, arrow pointing toward it, distance underneath.
+        readonly List<(RectTransform root, RectTransform arrow, Image bg, Image arrowImg, Text dist)> gWarn = new List<(RectTransform, RectTransform, Image, Image, Text)>();
+        const float GrenadeWarnR = 12f;
+
+        void BuildGrenadeWarn()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                var r = UIK.Rect(full, "gwarn" + i, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(80, 80));
+                var arrow = UIK.Img(r, "arrow", new Color(1f, 0.2f, 0.1f, 0.95f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(30, 30));
+                arrow.sprite = Gfx.Arrow;
+                var bg = UIK.Img(r, "bg", new Color(0.8f, 0.1f, 0.05f, 0.85f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(52, 52));
+                bg.sprite = Gfx.Circle;
+                if (Z47Refs.I.icGrenade != null)
+                {
+                    var ic = UIK.Rect(bg.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(34, 34)).gameObject.AddComponent<RawImage>();
+                    ic.texture = Z47Refs.I.icGrenade; ic.raycastTarget = false;
+                }
+                var d = UIK.Txt(r, "d", "", 17, Color.white, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -40), new Vector2(100, 24), true);
+                d.gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.85f);
+                r.gameObject.SetActive(false);
+                gWarn.Add((r, arrow.rectTransform, bg, arrow, d));
+            }
+        }
+
+        void UpdateGrenadeWarn(PlayerController p)
+        {
+            int n = 0;
+            if (p.Alive && p.cam != null)
+            {
+                foreach (var g in Grenade.Live)
+                {
+                    if (g == null || n >= gWarn.Count) continue;
+                    Vector3 to = g.transform.position - p.transform.position;
+                    float dist = to.magnitude;
+                    if (dist > GrenadeWarnR) continue;
+                    var w = gWarn[n++];
+                    w.root.gameObject.SetActive(true);
+                    // direction relative to where the player is looking (flat), placed on a ring around the crosshair
+                    Vector3 local = p.cam.transform.InverseTransformDirection(to); local.y = 0f;
+                    float ang = local.sqrMagnitude > 0.0001f ? Mathf.Atan2(local.x, local.z) : 0f;
+                    Vector2 dir = new Vector2(Mathf.Sin(ang), Mathf.Cos(ang));
+                    w.root.anchoredPosition = dir * 175f;
+                    w.arrow.anchoredPosition = dir * 40f;
+                    w.arrow.localRotation = Quaternion.Euler(0, 0, -ang * Mathf.Rad2Deg);
+                    bool lethal = dist < Grenade.BlastR;
+                    Color c = lethal ? new Color(1f, 0.12f, 0.06f, 0.92f) : new Color(1f, 0.55f, 0.1f, 0.88f);
+                    w.bg.color = c; w.arrowImg.color = c;
+                    float urgency = Mathf.Clamp01(1f - g.TimeLeft / 2.6f);
+                    w.root.localScale = Vector3.one * (1f + 0.12f * Mathf.Sin(Time.time * (10f + urgency * 14f)));
+                    w.dist.text = Mathf.Max(1, Mathf.RoundToInt(dist)) + "m";
+                }
+            }
+            for (; n < gWarn.Count; n++) if (gWarn[n].root.gameObject.activeSelf) gWarn[n].root.gameObject.SetActive(false);
+        }
+
         void BuildDeath()
         {
             deathPanel = UIK.Full(root, "death").gameObject;
@@ -713,11 +782,14 @@ namespace Zone47
         {
             deathPanel.SetActive(true);
             deathAt = Time.time;
-            string kn = killer != null && killer != PlayerController.Local ? killer.callsign : "—";
+            string kn = killer != null && killer != PlayerController.Local ? killer.callsign : Actor.HazardName ?? "—";
             deathTxt.text = L.S("killedby") + "  <color=#FF5040>" + kn.ToUpper() + "</color>";
             controls.gameObject.SetActive(false);
             PInput.fireHeld = false; PInput.move = Vector2.zero;
         }
+
+        /// Drop out of aim/scope (death, match end).
+        public void ResetAim() { AimToggled = false; PInput.aim = false; SetScope(false); scopeBlink.color = new Color(0, 0, 0, 0); }
 
         public void HideDeath()
         {
@@ -732,29 +804,105 @@ namespace Zone47
             controls.gameObject.SetActive(false);
             deathPanel.SetActive(false);
             PInput.fireHeld = false; PInput.move = Vector2.zero;
+            bool tr = Settings.Turkish;
+            var me = PlayerController.Local;
             endPanel = UIK.Full(root, "end").gameObject;
-            UIK.Img(endPanel.transform, "bg", new Color(0, 0, 0, 0.82f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            var P = endPanel.transform;
+            UIK.Img(P, "bg", new Color(0, 0, 0, 0.86f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
             string title = result > 0 ? L.S("victory") : result < 0 ? L.S("defeat") : L.S("draw");
-            UIK.Txt(endPanel.transform, "title", title, 130, result > 0 ? Pal.Accent : result < 0 ? Pal.Enemy : Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -140), new Vector2(1400, 160), true);
-            UIK.Txt(endPanel.transform, "score", mm.score[0] + "  —  " + mm.score[1], 70, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -250), new Vector2(800, 90), true);
+            UIK.Txt(P, "title", title, 96, result > 0 ? Pal.Accent : result < 0 ? Pal.Enemy : Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -95), new Vector2(1400, 120), true);
+            UIK.Txt(P, "score", "<color=#5AB8FF>" + mm.score[0] + "</color>  —  <color=#FF5040>" + mm.score[1] + "</color>", 52, Pal.Text, TextAnchor.MiddleCenter, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -180), new Vector2(800, 64), true).supportRichText = true;
 
+            // MVP: best kills/deaths/headshots across both teams
+            Actor mvp = null; float best = float.MinValue;
+            foreach (var a in Actor.All) { float sc = a.kills * 3f - a.deaths + a.headshotKills; if (sc > best) { best = sc; mvp = a; } }
+            if (mvp != null)
+            {
+                var mb = UIK.Img(P, "mvp", new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.95f), new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -238), new Vector2(520, 40));
+                UIK.Txt(mb.transform, "t", "MVP  ·  " + mvp.callsign.ToUpper() + "  ·  " + mvp.kills + (tr ? " LEŞ" : " KILLS"), 22, new Color(0.08f, 0.06f, 0.03f), TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            }
+
+            // ---- left: your match + XP
+            var card = UIK.Img(P, "mine", new Color(1, 1, 1, 0.05f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-520, -60), new Vector2(620, 560));
+            var C = card.transform;
+            UIK.Img(C, "top", Pal.Accent, new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 4)).rectTransform.pivot = new Vector2(0.5f, 1);
+            UIK.Txt(C, "h", L.S("end_mine"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, -30), new Vector2(-48, 34), true);
+            int kills = me != null ? me.kills : 0, deaths = me != null ? me.deaths : 0, hsk = me != null ? me.headshotKills : 0;
+            float acc = me != null && me.shotsFired > 0 ? me.shotsHit / (float)me.shotsFired : 0f;
+            string[,] rows =
+            {
+                { L.S("st_kd"), kills + " / " + deaths + "   <color=#9E998C>(" + (deaths > 0 ? (kills / (float)deaths).ToString("0.00") : kills.ToString("0.00")) + ")</color>" },
+                { L.S("st_acc"), "%" + Mathf.RoundToInt(acc * 100f) },
+                { L.S("st_hs"), hsk.ToString() },
+                { L.S("st_long"), me != null ? Mathf.RoundToInt(me.longestKill) + " m" : "-" },
+                { L.S("st_dmg"), me != null ? Mathf.RoundToInt(me.damageDealt).ToString() : "0" },
+            };
+            for (int i = 0; i < rows.GetLength(0); i++)
+            {
+                float y = -78 - i * 40;
+                UIK.Txt(C, "l" + i, rows[i, 0], 22, Pal.Dim, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, y), new Vector2(-48, 34), false);
+                UIK.Txt(C, "v" + i, rows[i, 1], 24, Pal.Text, TextAnchor.MiddleRight, new Vector2(0, 1), new Vector2(1, 1), new Vector2(-24, y), new Vector2(-48, 34), true).supportRichText = true;
+            }
+
+            // XP for this match
+            bool isMvp = mvp != null && mvp == me;
+            int xKills = kills * 100, xHs = hsk * 50, xRes = result > 0 ? 500 : 150, xMvp = isMvp ? 300 : 0;
+            int gained = xKills + xHs + xRes + xMvp;
+            int before = Progress.XP; Progress.XP = before + gained;
+            UIK.Img(C, "sep", new Color(1, 1, 1, 0.12f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -290), new Vector2(-48, 2));
+            string xl = L.S("xp_kills") + "  +" + xKills + "     " + L.S("xp_hs") + "  +" + xHs + "\n" + L.S(result > 0 ? "xp_win" : "xp_play") + "  +" + xRes + (isMvp ? "     " + L.S("xp_mvp") + "  +" + xMvp : "");
+            UIK.Txt(C, "xpl", xl, 19, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, -330), new Vector2(-48, 60), false);
+            UIK.Txt(C, "xpt", L.S("xp_total") + "  <color=#F29E1F>+" + gained + "</color>", 26, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, -400), new Vector2(-48, 36), true).supportRichText = true;
+            var lvl = UIK.Txt(C, "lvl", "", 22, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(24, -450), new Vector2(-48, 30), true);
+            var lvlNum = UIK.Txt(C, "lvln", "", 18, Pal.Dim, TextAnchor.MiddleRight, new Vector2(0, 1), new Vector2(1, 1), new Vector2(-24, -450), new Vector2(-48, 30), false);
+            var track = UIK.Img(C, "track", new Color(1, 1, 1, 0.1f), new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, -484), new Vector2(-48, 12));
+            var fill = UIK.Img(track.transform, "fill", Pal.Accent, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).rectTransform;
+            fill.pivot = new Vector2(0, 0.5f); fill.anchoredPosition = Vector2.zero; fill.localScale = new Vector3(0, 1, 1);
+            var up = UIK.Txt(C, "up", "", 30, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 30), new Vector2(0, 40), true);
+            StartCoroutine(XpBar(before, before + gained, lvl, lvlNum, fill, up));
+
+            // ---- right: both teams
             for (int t = 0; t < 2; t++)
             {
                 var list = new List<Actor>();
                 foreach (var a in Actor.All) if (a.team == t) list.Add(a);
-                list.Sort((x, y) => y.kills.CompareTo(x.kills));
-                float x0 = t == 0 ? -330 : 330;
-                UIK.Txt(endPanel.transform, "h" + t, L.S(t == 0 ? "allies" : "enemies") + "      " + L.S("kills") + "   " + L.S("deaths"), 30, t == 0 ? Pal.Ally : Pal.Enemy, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 150), new Vector2(600, 40), true);
+                list.Sort((x, y) => y.kills != x.kills ? y.kills.CompareTo(x.kills) : x.deaths.CompareTo(y.deaths));
+                float x0 = t == 0 ? 90 : 560, rh = list.Count > 5 ? 34f : 46f;
+                UIK.Txt(P, "h" + t, L.S(t == 0 ? "allies" : "enemies"), 24, t == 0 ? Pal.Ally : Pal.Enemy, TextAnchor.MiddleLeft, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 200), new Vector2(440, 36), true);
+                UIK.Txt(P, "hk" + t, L.S("kills") + "     " + L.S("deaths"), 20, Pal.Dim, TextAnchor.MiddleRight, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 200), new Vector2(440, 36), true);
                 for (int i = 0; i < list.Count; i++)
                 {
                     var a = list[i];
-                    var row = UIK.Img(endPanel.transform, "r", a.isPlayer ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.35f) : new Color(1, 1, 1, 0.06f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 95 - i * 56), new Vector2(600, 50));
-                    UIK.Txt(row.transform, "n", a.callsign, 32, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(20, 0), new Vector2(-40, 0));
-                    UIK.Txt(row.transform, "k", a.kills + "      " + a.deaths, 32, Pal.Text, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-30, 0), new Vector2(-60, 0));
+                    var row = UIK.Img(P, "r", a.isPlayer ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.35f) : new Color(1, 1, 1, 0.06f), new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(x0, 160 - i * (rh + 4)), new Vector2(440, rh));
+                    UIK.Img(row.transform, "s", t == 0 ? Pal.Ally : Pal.Enemy, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
+                    UIK.Txt(row.transform, "n", (a == mvp ? "★ " : "") + a.callsign, rh > 40 ? 24 : 19, a == mvp ? Pal.Accent : Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(18, 0), new Vector2(-36, 0), true);
+                    UIK.Txt(row.transform, "k", a.kills + "        " + a.deaths, rh > 40 ? 24 : 19, Pal.Text, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-22, 0), new Vector2(-44, 0), true);
                 }
             }
-            UIK.Btn(endPanel.transform, L.S("again"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-280, 110), new Vector2(500, 100), () => Boot.I.StartMatch(), 44, true);
-            UIK.Btn(endPanel.transform, L.S("mainmenu"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(280, 110), new Vector2(500, 100), () => Boot.I.ToMenu(), 44);
+            UIK.Btn(P, L.S("again"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(-280, 80), new Vector2(500, 96), () => Boot.I.StartMatch(), 42, true);
+            UIK.Btn(P, L.S("mainmenu"), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(280, 80), new Vector2(500, 96), () => Boot.I.ToMenu(), 42);
+        }
+
+        /// XP bar fills from the old total to the new one, wrapping (and celebrating) on each level up.
+        System.Collections.IEnumerator XpBar(int from, int to, Text lvl, Text num, RectTransform fill, Text up)
+        {
+            yield return new WaitForSeconds(0.6f);
+            float t = 0f, dur = 1.8f; int lastLevel = -1;
+            while (true)
+            {
+                t += Time.unscaledDeltaTime;
+                float k = Mathf.Clamp01(t / dur); k = 1f - (1f - k) * (1f - k);
+                int xp = Mathf.RoundToInt(Mathf.Lerp(from, to, k));
+                Progress.Split(xp, out int level, out int into, out int need);
+                if (lastLevel >= 0 && level > lastLevel) { up.text = L.S("levelup") + "  " + level; Sfx.Play2D(Z47Refs.I.headshot, 0.8f); up.transform.localScale = Vector3.one * 1.4f; }
+                lastLevel = level;
+                lvl.text = L.S("level") + " " + level;
+                num.text = into + " / " + need + " XP";
+                fill.localScale = new Vector3(into / (float)need, 1, 1);
+                up.transform.localScale = Vector3.Lerp(up.transform.localScale, Vector3.one, Time.unscaledDeltaTime * 6f);
+                if (k >= 1f && up.transform.localScale.x < 1.01f) break;
+                yield return null;
+            }
         }
 
         // ------------------------------------------------------------ events
@@ -781,19 +929,44 @@ namespace Zone47
 
         public void Fired() { }
 
-        public void KillFeed(Actor killer, Actor victim, bool headshot)
+        /// "killer  [weapon icon]  victim  [headshot]" — the icon of whatever did the kill (gun, grenade, drone).
+        public void KillFeed(Actor killer, Actor victim, bool headshot, string hazard = null, string weaponId = null)
         {
-            string kn = killer != null && killer != victim ? Colored(killer) : "";
+            string kn = hazard != null ? "<color=#F29E1F>" + hazard + "</color>" : killer != null && killer != victim ? Colored(killer) : "";
             bool hsIcon = headshot && Z47Refs.I.icHeadshot != null;
-            string line = (kn != "" ? kn + "  <color=#B0A890>»</color>  " : "") + Colored(victim) + (headshot && !hsIcon ? "  <color=#F29E1F>[" + L.S("headshot") + "]</color>" : "");
+            var icon = Z47Refs.I.KillIcon(weaponId);
             var bg = UIK.Img(feed, "k", new Color(0, 0, 0, 0.45f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(380, 30));
-            var t = UIK.Txt(bg.transform, "t", line, 19, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(14, 0), new Vector2(-28, 0));
-            t.supportRichText = true;
+            float x = 12f;
+            Text Part(string s)
+            {
+                var tx = UIK.Txt(bg.transform, "t", s, 19, Pal.Text, TextAnchor.MiddleLeft, new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(10, 30));
+                tx.supportRichText = true;
+                float w = Mathf.Max(8f, tx.preferredWidth);
+                tx.rectTransform.pivot = new Vector2(0, 0.5f); tx.rectTransform.sizeDelta = new Vector2(w, 30); tx.rectTransform.anchoredPosition = new Vector2(x, 0);
+                x += w + 8f;
+                return tx;
+            }
+            Text t = null;
+            if (kn != "") t = Part(kn);
+            if (icon != null)
+            {
+                float ih = 20f, iw = ih * icon.width / (float)Mathf.Max(1, icon.height);
+                var ir = UIK.Rect(bg.transform, "wi", new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(iw, ih));
+                ir.pivot = new Vector2(0, 0.5f); ir.anchoredPosition = new Vector2(x, 0);
+                var ri = ir.gameObject.AddComponent<RawImage>(); ri.texture = icon; ri.raycastTarget = false; ri.color = new Color(0.92f, 0.9f, 0.84f);
+                x += iw + 8f;
+            }
+            else if (kn != "") Part("<color=#B0A890>»</color>");
+            var vt = Part(Colored(victim) + (headshot && !hsIcon ? "  <color=#F29E1F>[" + L.S("headshot") + "]</color>" : ""));
+            if (t == null) t = vt;
             if (hsIcon)
             {
-                var hi = UIK.Rect(bg.transform, "hs", new Vector2(1, 0.5f), new Vector2(1, 0.5f), new Vector2(-18, 0), new Vector2(24, 24)).gameObject.AddComponent<RawImage>();
-                hi.texture = Z47Refs.I.icHeadshot; hi.color = Pal.Accent; hi.raycastTarget = false;
+                var hi = UIK.Rect(bg.transform, "hs", new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(22, 22));
+                hi.pivot = new Vector2(0, 0.5f); hi.anchoredPosition = new Vector2(x - 2f, 0);
+                var hri = hi.gameObject.AddComponent<RawImage>(); hri.texture = Z47Refs.I.icHeadshot; hri.color = Pal.Accent; hri.raycastTarget = false;
+                x += 26f;
             }
+            bg.rectTransform.sizeDelta = new Vector2(Mathf.Max(120f, x + 4f), 30f);
             bg.transform.SetAsFirstSibling();
             feedItems.Add((t, Time.time));
             if (feedItems.Count > 5) { Destroy(feedItems[0].t.transform.parent.gameObject); feedItems.RemoveAt(0); }
@@ -831,11 +1004,23 @@ namespace Zone47
         }
 
         float toastT;
-        Text bigText, killText; float bigT, killT;
-        public void ShowToastBig(string s) { bigText.text = s; bigT = 1.6f; bigText.transform.localScale = Vector3.one * 1.4f; }
+        Text bigText, killText; float bigT, killT; Color bigCol = Pal.Accent;
+        public void ShowToastBig(string s) => ShowToastBig(s, Pal.Accent, 1.6f);
+        Image flashImg; float flashA;
+        /// White-out from a close blast (fades in ~0.6 s).
+        public void Flash(float amount)
+        {
+            if (flashImg == null) { flashImg = UIK.Img(full, "flash", new Color(1, 0.97f, 0.9f, 0), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero); flashImg.gameObject.AddComponent<FlashFade>().hud = this; }
+            flashA = Mathf.Max(flashA, Mathf.Clamp01(amount) * 0.85f);
+            flashImg.transform.SetAsLastSibling();
+        }
+        public void TickFlash() { if (flashImg == null) return; flashA = Mathf.MoveTowards(flashA, 0f, Time.deltaTime * 1.4f); flashImg.color = new Color(1, 0.97f, 0.9f, flashA); }
+        public void ShowToastBig(string s, Color c, float dur = 3f) { bigText.text = s; bigT = dur; bigCol = c; bigText.transform.localScale = Vector3.one * 1.4f; }
 
         // ------------------------------------------------------------ radar / minimap
-        RectTransform radar, radarRot; RawImage mapImg; Image[] dots = new Image[12];
+        /// Kill-streak radar: enemies visible on the minimap until this time.
+        public float RadarUntil;
+        RectTransform radar, radarRot; RawImage mapImg; Image[] dots = new Image[24];
         const float RadarR = 105f, RadarRange = 45f;          // half-size in px, metres shown from centre to edge
         float Px => RadarR / RadarRange;                       // pixels per metre
         void BuildRadar()
@@ -878,13 +1063,14 @@ namespace Zone47
             {
                 if (a == p || !a.Alive || n >= dots.Length) continue;
                 bool ally = a.team == p.team;
-                if (!ally && Time.time - a.lastShotTime >= 2.2f) continue;
+                bool radarOn = Time.time < RadarUntil;
+                if (!ally && !radarOn && Time.time - a.lastShotTime >= 2.2f) continue;
                 Vector3 rel = a.transform.position - me;
                 if (new Vector2(rel.x, rel.z).magnitude > RadarRange * 1.45f) continue;
                 var d = dots[n++];
                 d.enabled = true;
                 d.rectTransform.anchoredPosition = new Vector2(rel.x, rel.z) * Px;
-                float fade = ally ? 1f : Mathf.Clamp01((2.2f - (Time.time - a.lastShotTime)) / 0.6f);
+                float fade = ally || radarOn ? 1f : Mathf.Clamp01((2.2f - (Time.time - a.lastShotTime)) / 0.6f);
                 var c = ally ? Pal.Ally : Pal.Enemy; d.color = new Color(c.r, c.g, c.b, fade);
                 d.rectTransform.sizeDelta = Vector2.one * (ally ? 10f : 12f);
             }
@@ -923,12 +1109,12 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ name tags
-        Text[] tags = new Text[10];
+        Text[] tags = new Text[20];
         void BuildTags()
         {
             for (int i = 0; i < tags.Length; i++)
             {
-                tags[i] = UIK.Txt(root, "tag", "", 18, Pal.Ally, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 30), true);
+                tags[i] = UIK.Txt(full, "tag", "", 18, Pal.Ally, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(300, 30), true);
                 tags[i].gameObject.AddComponent<Outline>().effectColor = new Color(0, 0, 0, 0.7f);
             }
         }
@@ -950,7 +1136,7 @@ namespace Zone47
                 Vector3 eyeTo = a.ChestPos + Vector3.up * 0.5f - cam.transform.position;
                 if (Ballistics.Cast(cam.transform.position, eyeTo.normalized, eyeTo.magnitude + 0.5f, p, out var h) && Actor.FromCollider(h.collider) != a) continue;
                 Vector3 sp = cam.WorldToScreenPoint(head);
-                if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(root, sp, null, out var lp)) continue;
+                if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(full, sp, null, out var lp)) continue;
                 var t = tags[n++];
                 t.enabled = true;
                 t.text = a.callsign;
@@ -961,6 +1147,7 @@ namespace Zone47
             for (; n < tags.Length; n++) tags[n].enabled = false;
         }
         void ShowToast(string s, float t) { toast.text = s; toastT = t; }
+        public void Pickup(string s) { ShowToast(s, 1.4f); }
 
         // ------------------------------------------------------------ low health: blood, heavy breathing, heartbeat, colour drain
         void LowHealth(PlayerController p)
@@ -1014,6 +1201,7 @@ namespace Zone47
             if (mm.score[0] != cS0) { cS0 = mm.score[0]; allyScore.text = cS0.ToString(); allyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS0 / (float)MatchManager.KillTarget), 1, 1); }
             if (mm.score[1] != cS1) { cS1 = mm.score[1]; enemyScore.text = cS1.ToString(); enemyBar.rectTransform.localScale = new Vector3(Mathf.Clamp01(cS1 / (float)MatchManager.KillTarget), 1, 1); }
             if (squadRoot == null) BuildSquad(p); else UpdateSquad();
+            UpdateGrenadeWarn(p);
             bool rl = p.Alive && p.Reloading;
             if (reloadBox.activeSelf != rl) { reloadBox.SetActive(rl); cReload = -1; }
             if (rl)
@@ -1031,7 +1219,15 @@ namespace Zone47
             hpFill.color = p.hp < 35 ? Pal.Enemy : Pal.Text;
 
             var d = p.Cur;
-            if (p.Mag != cMag || p.Reserve != cRes) { cMag = p.Mag; cRes = p.Reserve; ammo.supportRichText = true; ammo.text = cMag + "<size=40><color=#9E998C> / " + cRes + "</color></size>"; }
+            if (p.Mag != cMag || p.Reserve != cRes || p.Cur.id != cAmmoWep)
+            {
+                cMag = p.Mag; cRes = p.Reserve; cAmmoWep = p.Cur.id; ammo.supportRichText = true;
+                int ms = Mathf.Max(1, p.Cur.magSize);
+                // mag: red when empty, orange when low (<=30%); reserve: red when empty, orange when less than one mag left
+                string mc = cMag == 0 ? "#FF4A3D" : cMag <= Mathf.CeilToInt(ms * 0.3f) ? "#FFA028" : "#EDE8D9";
+                string rc = cRes == 0 ? "#FF4A3D" : cRes < ms ? "#FFA028" : "#9E998C";
+                ammo.text = "<color=" + mc + ">" + cMag + "</color><size=40><color=#9E998C> / </color><color=" + rc + ">" + cRes + "</color></size>";
+            }
             if (d.id != cWep)
             {
                 cWep = d.id; weaponName.text = d.displayName;
@@ -1039,6 +1235,7 @@ namespace Zone47
                 {
                     bool on = i == p.CurSlot;
                     slotImgs[i].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.8f) : Pal.Panel;
+                    if (slotIcons[i] != null) slotIcons[i].color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
                 }
             }
             if (p.grenades != cGren) { cGren = p.grenades; grenadeTxt.text = cGren.ToString(); }
@@ -1096,8 +1293,8 @@ namespace Zone47
             }
 
             UpdateRadar(p); UpdateIndicators(p); UpdateTags(p);
-            if (!mm.Running && !mm.Finished && mm.countdown > 0f) { bigText.text = Mathf.CeilToInt(mm.countdown).ToString(); bigT = 0.3f; bigText.transform.localScale = Vector3.one * (1f + (mm.countdown % 1f) * 0.4f); }
-            if (bigT > 0) { bigT -= Time.deltaTime; bigText.color = new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, Mathf.Clamp01(bigT * 2f)); bigText.transform.localScale = Vector3.Lerp(bigText.transform.localScale, Vector3.one, Time.deltaTime * 8f); }
+            if (!mm.Running && !mm.Finished && mm.countdown > 0f) { bigText.text = Mathf.CeilToInt(mm.countdown).ToString(); bigT = 0.3f; bigCol = Pal.Accent; bigText.transform.localScale = Vector3.one * (1f + (mm.countdown % 1f) * 0.4f); }
+            if (bigT > 0) { bigT -= Time.deltaTime; bigText.color = new Color(bigCol.r, bigCol.g, bigCol.b, Mathf.Clamp01(bigT * 2f)); bigText.transform.localScale = Vector3.Lerp(bigText.transform.localScale, Vector3.one, Time.deltaTime * 8f); }
             else bigText.text = "";
             if (killT > 0) { killT -= Time.deltaTime; killText.color = new Color(1, 1, 1, Mathf.Clamp01(killT * 2f)); killText.transform.localScale = Vector3.Lerp(killText.transform.localScale, Vector3.one, Time.deltaTime * 10f); }
             else killText.text = "";
@@ -1125,4 +1322,6 @@ namespace Zone47
             r.anchorMin = min; r.anchorMax = max; r.offsetMin = r.offsetMax = Vector2.zero;
         }
     }
+
+    public class FlashFade : MonoBehaviour { public HUD hud; void Update() { if (hud != null) hud.TickFlash(); } }
 }

@@ -146,7 +146,15 @@ namespace Zone47
             menuCam = camGo.AddComponent<Camera>(); menuCam.fieldOfView = 50; menuCam.farClipPlane = 500;
             ApplyCameraFx(menuCam);
 
-            if (R.lobbyPrefab != null) BuildLobbyScene(R, camGo);
+            bool video = VideoBg.Available;
+            if (video)
+            {
+                // video lobby: nothing 3D to draw (cheaper, cooler phone); the camera only clears to black
+                menuCam.cullingMask = 0; menuCam.clearFlags = CameraClearFlags.SolidColor; menuCam.backgroundColor = Color.black;
+                Weather.ApplyLobby(); RenderSettings.fog = false;
+                if (R.rain != null) Sfx.Ambience(R.rain, 0.45f);
+            }
+            else if (R.lobbyPrefab != null) BuildLobbyScene(R, camGo);
             else
             {
                 var map = Instantiate(R.mapPrefab, menuRoot.transform);
@@ -156,6 +164,7 @@ namespace Zone47
             menuCanvas = UIK.Canvas("MenuCanvas", 20);
             menuCanvas.transform.SetParent(menuRoot.transform);
             var full = UIK.Full(menuCanvas.transform, "full");
+            if (video) VideoBg.AddTo(full, 0.15f);
             // readability: dark band behind the left menu and the right info column
             // soft side gradients (dark at the screen edge, fading to clear) instead of flat grey slabs
             var gl = UIK.Rect(full, "shadeL", new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(1000, 0)); gl.pivot = new Vector2(0, 0.5f); gl.anchoredPosition = Vector2.zero;
@@ -182,7 +191,14 @@ namespace Zone47
             nameTxt = UIK.Txt(chip.transform, "name", Settings.Callsign.ToUpper(), 38, Pal.Text, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(24, 10), new Vector2(-48, -20), true);
             UIK.Txt(chip.transform, "edit", L.S("change"), 18, Pal.Accent, TextAnchor.MiddleRight, Vector2.zero, Vector2.one, new Vector2(-20, 0), new Vector2(-40, 0), true);
             chip.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); ShowNameDialog(false); });
-            UIK.Txt(root, "mode", L.S("tdm"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(84, -400), new Vector2(700, 36), true);
+            // level + XP progress on the callsign chip
+            Progress.Split(Progress.XP, out int plv, out int pin, out int pneed);
+            UIK.Txt(chip.transform, "lv", L.S("level") + " " + plv, 17, Pal.Accent, TextAnchor.UpperRight, Vector2.zero, Vector2.one, new Vector2(-20, -12), new Vector2(-40, -24), true);
+            var xpTrack = UIK.Img(chip.transform, "xpt", new Color(1, 1, 1, 0.1f), new Vector2(0, 0), new Vector2(1, 0), new Vector2(3, 2), new Vector2(-6, 4));
+            xpTrack.rectTransform.pivot = new Vector2(0.5f, 0);
+            var xpFill = UIK.Img(xpTrack.transform, "f", Pal.Accent, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).rectTransform;
+            xpFill.pivot = new Vector2(0, 0.5f); xpFill.anchoredPosition = Vector2.zero; xpFill.localScale = new Vector3(pin / (float)pneed, 1, 1);
+            var tdmTxt = UIK.Txt(root, "mode", L.S("tdm"), 24, Pal.Accent, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(84, -400), new Vector2(700, 36), true);
 
             UIK.Btn(root, L.S("deploy"), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -30), new Vector2(560, 110), StartMatch, 52, true);
             var diffBtn = UIK.Btn(root, DiffLabel(), new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(80, -152), new Vector2(560, 80), null, 30);
@@ -257,25 +273,66 @@ namespace Zone47
                 }
             };
             refreshMaps();
-            float sqY = -36 - ih - 190;
 
-            MatchManager.RollNames();
-            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, sqY), new Vector2(0, 30), true);
-            for (int t = 0; t < 2; t++)
+            // team size picker (1v1 ... 10v10); target and time come with it
+            float my = -36 - ih - 190;
+            UIK.Txt(col, "mh2", L.S("mode"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, my), new Vector2(0, 30), true);
+            var modeChips = new System.Collections.Generic.List<(Image bg, Text t)>();
+            int np = MatchManager.Presets.Length; float mw = (560f - (np - 1) * 6f) / np;
+            var modeInfo = UIK.Txt(col, "minfo2", "", 17, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, my - 82), new Vector2(0, 26), true);
+            RectTransform rosterRoot = null;
+            float sqY = -36 - ih - 310;
+            System.Action buildRoster = null;
+            System.Action refreshModes = () =>
             {
-                var c = t == 0 ? Pal.Ally : Pal.Enemy;
-                float x0 = t == 0 ? 0 : 290;
-                UIK.Txt(col, "th" + t, L.S(t == 0 ? "allies" : "enemies"), 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 40), new Vector2(270, 32), true);
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < modeChips.Count; i++)
                 {
-                    string n = t == 0 ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[(i - 1) % MatchManager.AllyNames.Length]) : MatchManager.EnemyNames[i % MatchManager.EnemyNames.Length];
-                    var row = UIK.Img(col, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 80 - i * 46), new Vector2(270, 40));
-                    UIK.Img(row.transform, "s", c, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
-                    var tx = UIK.Txt(row.transform, "n", n, 22, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-24, 0), false);
-                    tx.fontStyle = FontStyle.Bold;
-                    if (t == 0 && i == 0) rosterMe = tx;
+                    bool on = i == Settings.TeamPreset;
+                    modeChips[i].bg.color = on ? Pal.Accent : new Color(1, 1, 1, 0.08f);
+                    modeChips[i].t.color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
                 }
+                var cp = MatchManager.Cur; bool tr = Settings.Turkish;
+                tdmTxt.text = (tr ? "TAKIM ÖLÜM MAÇI · " : "TEAM DEATHMATCH · ") + cp.label;
+                modeInfo.text = (tr ? "HEDEF " : "TARGET ") + cp.target + "   ·   " + Mathf.RoundToInt(cp.time / 60f) + (tr ? " DK" : " MIN") + (cp.a < cp.e ? (tr ? "   ·   DÜŞMAN KALABALIK, BİRAZ DAHA AZ İSABETLİ" : "   ·   OUTNUMBERED: ENEMIES AIM A BIT WORSE") : "");
+            };
+            for (int i = 0; i < np; i++)
+            {
+                int pi = i;
+                var bg = UIK.Img(col, "mode" + i, new Color(1, 1, 1, 0.08f), new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(mw, 40), true);
+                bg.rectTransform.pivot = new Vector2(0, 1); bg.rectTransform.anchoredPosition = new Vector2(i * (mw + 6f), my - 34);
+                var t = UIK.Txt(bg.transform, "t", MatchManager.Presets[i].label, 17, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+                modeChips.Add((bg, t));
+                bg.gameObject.AddComponent<Button>().onClick.AddListener(() => { Sfx.UI(); Settings.TeamPreset = pi; PlayerPrefs.Save(); refreshModes(); buildRoster(); });
             }
+
+            UIK.Txt(col, "sh", L.S("squads"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(0, sqY), new Vector2(0, 30), true);
+            buildRoster = () =>
+            {
+                if (rosterRoot != null) Destroy(rosterRoot.gameObject);
+                rosterRoot = UIK.Rect(col, "roster", new Vector2(0, 1), new Vector2(1, 1), Vector2.zero, new Vector2(0, 0));
+                rosterRoot.pivot = new Vector2(0.5f, 1); rosterRoot.anchoredPosition = Vector2.zero;
+                MatchManager.RollNames();
+                bool big = MatchManager.EnemySize > 5 || MatchManager.AllySize > 5;
+                float rh = big ? 26f : 40f, step = big ? 30f : 46f; int fs = big ? 17 : 22;
+                for (int t = 0; t < 2; t++)
+                {
+                    var c = t == 0 ? Pal.Ally : Pal.Enemy;
+                    float x0 = t == 0 ? 0 : 290;
+                    int count = t == 0 ? MatchManager.AllySize : MatchManager.EnemySize;
+                    UIK.Txt(rosterRoot, "th" + t, L.S(t == 0 ? "allies" : "enemies") + "  " + count, 22, c, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 40), new Vector2(270, 32), true);
+                    for (int i = 0; i < count; i++)
+                    {
+                        string n = t == 0 ? (i == 0 ? Settings.Callsign : MatchManager.AllyNames[i - 1]) : MatchManager.EnemyNames[i];
+                        var row = UIK.Img(rosterRoot, "r", t == 0 && i == 0 ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.3f) : new Color(1, 1, 1, 0.05f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(x0, sqY - 80 - i * step), new Vector2(270, rh));
+                        UIK.Img(row.transform, "s", c, new Vector2(0, 0), new Vector2(0, 1), Vector2.zero, new Vector2(4, 0)).rectTransform.pivot = new Vector2(0, 0.5f);
+                        var tx = UIK.Txt(row.transform, "n", n, fs, Pal.Text, TextAnchor.MiddleLeft, Vector2.zero, Vector2.one, new Vector2(16, 0), new Vector2(-24, 0), false);
+                        tx.fontStyle = FontStyle.Bold;
+                        if (t == 0 && i == 0) rosterMe = tx;
+                    }
+                }
+            };
+            refreshModes();
+            buildRoster();
             UIK.Txt(root, "foot", "AYD WORKS GAMES  ·  v0.9", 20, Pal.Dim, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 24), new Vector2(420, 30), true);
 
             Sfx.Music(R.menuMusic, R.lobbyPrefab != null && R.rain != null ? 0.4f : 0.7f);
@@ -474,8 +531,13 @@ namespace Zone47
             "Characters & animations: Mixamo (Adobe)\n\n" +
             "Sounds (freesound.org): mnslugger20, 18hiltc, evanboyerman, synth2, gfl7, fastson,\n" +
             "rammbostein, fusionwolf3740, nicktermer, ogsoundfx, qubodup, designerschoice (Nicholas Judy), jaklocke, ceberation,\n" +
-            "dirtjm, silverillusionist, baggonotes, patrick_corra, speakwithanimals (rain)\n" +
+            "dirtjm, silverillusionist, baggonotes, patrick_corra, speakwithanimals (rain),\n" +
+            "cell31_sound_productions (drone), morganpurkis (bomb), antumdeluge (helicopter), nimlos (siren),\n" +
+            "lemudcrab (shotgun), jumbosizedfish (shotgun reload)\n" +
             "Footsteps: \"Footsteps - Essentials\" by Nox Sound (CC0)\n" +
+            "Drone: \"MQ9 Ripper military drone\" by Giperione (CC BY 4.0, skfb.ly/oBAH8)\n" +
+            "Bomb: \"MK2 Grenade Drone Bomb\" by yousef.hameed (CC BY 4.0, skfb.ly/oUNp7)\n" +
+            "Shotgun: \"Shotgun\" by Pieter Ferreira (CC BY 4.0, skfb.ly/6WTnO)\n" +
             "Music: \"Viking/Medieval Theme\" by Mark_Murray (freesound.org)\n\n" +
             "Fonts: Black Ops One, Rajdhani — SIL Open Font License\n" +
             "Licenses: creativecommons.org/licenses/by/4.0";

@@ -37,6 +37,7 @@ namespace Zone47
         float recoilPitch, recoilYaw, recoilPitchVel, recoilYawVel;
         float landDip; float camRoll;
         bool prone; float leanT, leanMax = 1f;
+        Transform glanceAt; float glanceT, glanceDur, glanceYaw, glancePitch;
         float heat, fovKick, fovKickVel, wallT, breathT;
 
         // weapons
@@ -66,6 +67,7 @@ namespace Zone47
 
         public bool Aiming => PInput.aim && !reloading && switchT <= 0 && throwT < 0;
         public WeaponDef Cur => slots[cur].def;
+        public override string WeaponId => slots != null ? slots[cur].def.id : null;
         public int SlotCount => slots.Length;
         public WeaponDef SlotDef(int i) => slots[i].def;
         public int CurSlot => cur;
@@ -75,7 +77,7 @@ namespace Zone47
         public float ReloadLeft => reloading ? Mathf.Max(0f, slots[cur].reloadDur - reloadT) : 0f;
         public float ReloadProgress => reloading && slots[cur].reloadDur > 0f ? Mathf.Clamp01(reloadT / slots[cur].reloadDur) : 0f;
         public bool ReloadCancelable => reloading && slots[cur].mag > 0;
-        public bool Scoped => Aiming && Cur.scope && adsT > 0.85f;
+        public bool Scoped => Alive && Aiming && Cur.scope && adsT > 0.85f;
         public float AdsT => adsT;
         public float MoveSpeed => cc != null ? new Vector2(cc.velocity.x, cc.velocity.z).magnitude : 0f;
 
@@ -119,7 +121,10 @@ namespace Zone47
             viewRoot.SetParent(camGo.transform, false);
 
             var R = Z47Refs.I;
-            string[] ids = R.HasWeapon("carbine") ? new[] { "m4", "awp", "glock", "carbine" } : new[] { "m4", "awp", "glock" };
+            var idl = new System.Collections.Generic.List<string> { "m4", "awp", "glock" };
+            if (R.HasWeapon("carbine")) idl.Add("carbine");
+            if (R.HasWeapon("shotgun")) idl.Add("shotgun");
+            string[] ids = idl.ToArray();
             slots = new Slot[ids.Length];
             for (int i = 0; i < ids.Length; i++)
             {
@@ -219,10 +224,12 @@ namespace Zone47
                 if (k.vKey.wasPressedThisFrame) PInput.lean = PInput.lean == 1 ? 0 : 1;
                 if (k.rKey.wasPressedThisFrame) PInput.reload = true;
                 if (k.gKey.wasPressedThisFrame) PInput.grenade = true;
+                if (Application.isEditor && k.bKey.wasPressedThisFrame) { if (AirStrikes.I == null && MatchManager.I != null) AirStrikes.Begin(MatchManager.I); AirStrikes.I?.TriggerNow(); }   // test: drone strike now
                 if (k.digit1Key.wasPressedThisFrame) PInput.select = 0;
                 if (k.digit2Key.wasPressedThisFrame) PInput.select = 1;
                 if (k.digit3Key.wasPressedThisFrame) PInput.select = 2;
                 if (k.digit4Key.wasPressedThisFrame) PInput.select = 3;
+                if (k.digit5Key.wasPressedThisFrame) PInput.select = 4;
                 if (k.iKey.wasPressedThisFrame && slots[cur].anim != null && !reloading && switchT <= 0) PlayAnim(slots[cur], "inspect", 0.15f);
                 if (k.escapeKey.wasPressedThisFrame) HUD.I?.TogglePause();
                 if (Mouse.current != null) { float sc = Mouse.current.scroll.ReadValue().y; if (sc < -0.1f) PInput.next = true; else if (sc > 0.1f) PInput.select = (cur + slots.Length - 1) % slots.Length; }
@@ -255,6 +262,19 @@ namespace Zone47
             d += GyroDelta() * (Aiming ? (Cur.scope ? 0.5f : 0.8f) : 1f);
             yaw += d.x;
             pitch = Mathf.Clamp(pitch - d.y, -80f, 80f);
+            if (glanceT > 0f && glanceAt != null && Alive)
+            {
+                // short cinematic look at something (the UAV): ease in, track it, then hand the view back where it was
+                glanceT -= Time.deltaTime;
+                Vector3 to = glanceAt.position - cam.transform.position;
+                float gy = Mathf.Atan2(to.x, to.z) * Mathf.Rad2Deg, gp = Mathf.Clamp(-Mathf.Atan2(to.y, new Vector2(to.x, to.z).magnitude) * Mathf.Rad2Deg, -80f, 80f);
+                float el = glanceDur - glanceT;
+                float w = el < 0.45f ? el / 0.45f : glanceT < 0.45f ? glanceT / 0.45f : 1f;
+                w = w * w * (3f - 2f * w);
+                yaw = Mathf.LerpAngle(glanceYaw, gy, w);
+                pitch = Mathf.Lerp(glancePitch, gp, w);
+                if (glanceT <= 0f) { yaw = glanceYaw; pitch = glancePitch; glanceAt = null; }
+            }
 
             // camera recoil on a spring: sharp kick, slight overshoot, settles (feels like a real stock in the shoulder)
             float sdt = Mathf.Min(Time.deltaTime, 0.033f);
@@ -468,7 +488,7 @@ namespace Zone47
                     string clip = s.mag == 0 && s.anim["reload_empty"] != null ? "reload_empty" : "reload";
                     if (s.anim[clip] != null) { s.reloadDur = s.anim[clip].length; PlayAnim(s, clip, 0.08f); }
                 }
-                Sfx.Play2D(d.kind == WeaponKind.Sniper ? Z47Refs.I.awpBolt : Z47Refs.I.reload, 0.8f, 0.02f);
+                Sfx.Play2D(d.reloadClip != null ? d.reloadClip : d.kind == WeaponKind.Sniper ? Z47Refs.I.awpBolt : Z47Refs.I.reload, 0.8f, 0.02f);
             }
             if (reloading)
             {
@@ -529,7 +549,19 @@ namespace Zone47
             Vector3 dir = Quaternion.Euler(Random.Range(-spread, spread) * 0.5f, Random.Range(-spread, spread) * 0.5f, 0) * aimDir;
             Vector3 muzzleWorld = s.go.transform.TransformPoint(d.muzzlePoint);
             // no tracer while aiming: a streak from the muzzle (below the eye) to the target read as "bullets going crooked"
-            Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !aimed && Random.value < 0.5f, out _);
+            if (d.pellets > 1)
+            {
+                // shotgun: a fixed cone of pellets (tighter when aimed), each with steep distance falloff
+                float cone = aimed ? d.adsSpread : d.hipSpread;
+                for (int pi = 0; pi < d.pellets; pi++)
+                {
+                    Vector2 r = Random.insideUnitCircle * cone * 0.5f;
+                    Vector3 pd = Quaternion.Euler(r.y, r.x, 0) * aimDir;
+                    Ballistics.Fire(this, cam.transform.position, pd, d.range, d.damage, muzzleWorld, pi < 3, out _, d.falloffStart, d.falloffEnd, d.falloffMin);
+                }
+                if (d.pumpClip != null) StartCoroutine(Delayed(0.38f, () => Sfx.Play2D(d.pumpClip, 0.55f, 0.04f)));
+            }
+            else Ballistics.Fire(this, cam.transform.position, dir, d.range, d.damage, muzzleWorld, !aimed && Random.value < 0.5f, out _, d.falloffStart, d.falloffEnd, d.falloffMin);
 
             Sfx.Play2D(d.shot, d.kind == WeaponKind.Sniper ? 1f : 0.85f, 0.05f);
             BotController.Noise(this, 60f);
@@ -558,6 +590,9 @@ namespace Zone47
                 case WeaponKind.Sniper:
                     kp = new Vector3(0f, 0.012f, -0.1f); kr = 11f; kroll = Random.Range(-2f, 2f); kyaw = Random.Range(-1f, 1f);
                     shake = Mathf.Max(shake, 0.18f); break;
+                case WeaponKind.Shotgun:
+                    kp = new Vector3(0f, 0.02f, -0.11f); kr = aimed ? 7f : 13f; kroll = Random.Range(-2.5f, 2.5f); kyaw = Random.Range(-1.5f, 1.5f);
+                    shake = Mathf.Max(shake, 0.16f); break;
                 case WeaponKind.Pistol:
                     kp = aimed ? new Vector3(0f, 0.008f, -0.035f) : new Vector3(Random.Range(-0.003f, 0.004f), 0.014f, -0.05f);
                     kr = aimed ? Random.Range(5f, 7f) : Random.Range(12f, 16f);
@@ -758,6 +793,31 @@ namespace Zone47
 
         public void Shake(float a) { shake = Mathf.Max(shake, a); }
 
+        /// Ammo from a dropped gun: fills every carried weapon that uses the same rounds (up to 2x its starting reserve).
+        public int GiveAmmo(string ammo, int amount)
+        {
+            int total = 0;
+            if (!Alive || slots == null) return 0;
+            foreach (var sl in slots)
+            {
+                if (amount <= 0) break;
+                if (WeaponPickup.AmmoOf(sl.def.id) != ammo) continue;
+                int add = Mathf.Min(amount, sl.def.reserve * 2 - sl.reserve);
+                if (add <= 0) continue;
+                sl.reserve += add; amount -= add; total += add;
+            }
+            return total;
+        }
+
+        public bool UsesAmmo(string ammo) { if (slots != null) foreach (var sl in slots) if (WeaponPickup.AmmoOf(sl.def.id) == ammo) return true; return false; }
+
+        /// Briefly turn the view toward `t` and back (skipped while aiming / in a firefight).
+        public void Glance(Transform t, float dur)
+        {
+            if (!Alive || Aiming || Firing || Time.time - lastShotAt < 1f || Time.time - lastDamageTime < 1f) return;
+            glanceAt = t; glanceT = glanceDur = dur; glanceYaw = yaw; glancePitch = pitch;
+        }
+
         protected override void OnHurt(Actor from, Vector3 fromPos)
         {
             HUD.I?.Damaged(fromPos);
@@ -769,6 +829,11 @@ namespace Zone47
         {
             killer = k;
             cc.enabled = false;
+            // leave the scope / ADS immediately: the death view must not stay zoomed or blurred
+            HUD.I?.ResetAim(); PInput.fireHeld = false;
+            adsT = 0f; fovKick = fovKickVel = 0f; cam.fieldOfView = 70f;
+            if (scopeCam != null) scopeCam.enabled = false;
+            if (Boot.ScopeBlur != null) Boot.ScopeBlur.weight = 0f;
             foreach (var sl in slots) sl.go.SetActive(false);
             if (arms != null) arms.Visible = false;
             Sfx.Play2D(Z47Refs.I.bodyFall, 0.8f);

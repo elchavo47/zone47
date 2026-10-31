@@ -10,12 +10,29 @@ namespace Zone47
     {
         public static MatchManager I;
 
-        public const int KillTarget = 40;
-        public const float MatchTime = 480f;
-        public const int TeamSize = 5;
+        // team-size presets: kill target and time grow with the number of players
+        public struct Preset { public int a, e, target; public float time; public string label; public Preset(int a, int e, int target, float time, string label) { this.a = a; this.e = e; this.target = target; this.time = time; this.label = label; } }
+        public static readonly Preset[] Presets =
+        {
+            new Preset(1, 1, 15, 300f, "1v1"),
+            new Preset(1, 5, 25, 420f, "1v5"),
+            new Preset(3, 3, 30, 420f, "3v3"),
+            new Preset(5, 5, 40, 480f, "5v5"),
+            new Preset(5, 10, 60, 600f, "5v10"),
+            new Preset(10, 10, 80, 720f, "10v10"),
+        };
+        public static Preset Cur => Presets[Mathf.Clamp(Settings.TeamPreset, 0, Presets.Length - 1)];
+        public static int KillTarget => Cur.target;
+        public static float MatchTime => Cur.time;
+        public static int AllySize => Cur.a;
+        public static int EnemySize => Cur.e;
+        public static int SizeOf(int team) => team == 0 ? AllySize : EnemySize;
+        /// Outnumbered player team: the bigger side shoots a bit worse / softer so 1v5 stays winnable.
+        public static float HandicapSpread(int team) { float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f + 0.14f * (r - 1f) : 1f; }
+        public static float HandicapDamage(int team) { float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f / (1f + 0.12f * (r - 1f)) : 1f; }
 
         public int[] score = new int[2];
-        public float timeLeft = MatchTime;
+        public float timeLeft = 480f;      // set from the chosen preset in Begin() (PlayerPrefs can't be read in field initializers)
         public bool Running { get; private set; }
         public float countdown = 3.5f;
         public readonly List<Vector3> covers = new List<Vector3>();
@@ -58,7 +75,7 @@ namespace Zone47
             "Comet", "Meteor", "Quasar", "Pulsar", "Vortex", "Zenith", "Apex", "Summit", "Vector", "Cipher", "Enigma", "Matrix", "Proxy", "Glitch",
             "Static", "Volt", "Surge", "Spark", "Fuse", "Tank", "Bulldog", "Mastiff", "Rottweiler", "Doberman", "Husky",
         };
-        public static string[] AllyNames = new string[4], EnemyNames = new string[5];
+        public static string[] AllyNames = new string[0], EnemyNames = new string[0];
         static bool namesUsed = true;
 
         /// Pick a new set of bot names (lobby shows them, the next match uses the same ones).
@@ -71,16 +88,17 @@ namespace Zone47
                 for (int tries = 0; tries < 50; tries++) { var n = pool[Random.Range(0, pool.Length)]; if (taken.Add(n)) return n; }
                 return pool[0] + Random.Range(10, 99);
             }
-            if (AllyNames.Length != TeamSize - 1) AllyNames = new string[TeamSize - 1];
-            if (EnemyNames.Length != TeamSize) EnemyNames = new string[TeamSize];
+            if (AllyNames.Length != AllySize - 1) AllyNames = new string[AllySize - 1];
+            if (EnemyNames.Length != EnemySize) EnemyNames = new string[EnemySize];
             for (int i = 0; i < AllyNames.Length; i++) AllyNames[i] = Pick(true);
             for (int i = 0; i < EnemyNames.Length; i++) EnemyNames[i] = Pick(false);
             namesUsed = false;
         }
-        public static void EnsureNames() { if (namesUsed || AllyNames[0] == null) RollNames(); namesUsed = true; }
+        public static void EnsureNames() { if (namesUsed || AllyNames.Length != AllySize - 1 || EnemyNames.Length != EnemySize || (AllyNames.Length > 0 && AllyNames[0] == null) || (EnemyNames.Length > 0 && EnemyNames[0] == null)) RollNames(); namesUsed = true; }
 
         public void Begin()
         {
+            timeLeft = MatchTime;
             I = this;
             FX.ClearHoles();
             StartCoroutine(Setup());
@@ -99,6 +117,7 @@ namespace Zone47
             yield return null;
 
             MeasureMap(map);
+            if (!VideoBg.Available) LoadingScreen.ShowWorld(mapCenter, mapRadius);   // live in-map view only when there is no background video
             BuildProps();
             yield return StartCoroutine(MapSnapshot()); LoadingScreen.Progress(0.45f);
             BuildBounds();
@@ -112,8 +131,8 @@ namespace Zone47
             // spawn teams
             var player = PlayerController.Create(SpawnPoint(0, 0), SpawnRot(0));
             player.transform.SetParent(transform);
-            for (int i = 1; i < TeamSize; i++) SpawnBot(0, i, i == 3 ? "awp" : "m4", AllyNames[(i - 1) % AllyNames.Length]);
-            for (int i = 0; i < TeamSize; i++) SpawnBot(1, i, i == 2 ? "awp" : "ak", EnemyNames[i % EnemyNames.Length]);
+            for (int i = 1; i < AllySize; i++) SpawnBot(0, i, i % 4 == 3 ? "awp" : "m4", AllyNames[(i - 1) % AllyNames.Length]);
+            for (int i = 0; i < EnemySize; i++) SpawnBot(1, i, i % 5 == 2 ? "awp" : "ak", EnemyNames[i % EnemyNames.Length]);
 
             HUD.Create(this);
             Sfx.Music(null, 0);
@@ -125,6 +144,7 @@ namespace Zone47
             countdown = 0f;
             Running = true;
             HUD.I?.ShowToastBig(Settings.Turkish ? "SAVAŞ BAŞLADI" : "FIGHT!");
+            AirStrikes.Begin(this);                       // always on
         }
 
         void SpawnBot(int team, int idx, string weapon, string name)
@@ -164,7 +184,7 @@ namespace Zone47
             for (int tries = 0; tries < 24; tries++)
             {
                 float spread = tries < 12 ? 1f : 2f;
-                Vector3 p = spawnCenter[team] + side * ((idx - 2) * 2.2f + Random.Range(-1.5f, 1.5f)) * spread + Random.insideUnitSphere.Flat() * 2.5f * spread;
+                Vector3 p = spawnCenter[team] + side * ((idx - (SizeOf(team) - 1) * 0.5f) * 2.2f + Random.Range(-1.5f, 1.5f)) * spread + Random.insideUnitSphere.Flat() * 2.5f * spread;
                 if (!NavMesh.SamplePosition(p, out var h, 4f, NavMesh.AllAreas)) continue;
                 // must be on the ground (not a container roof) and free of any solid object
                 if (h.position.y > spawnCenter[team].y + 1f) continue;
@@ -311,11 +331,58 @@ namespace Zone47
 
         public void OnKill(Actor killer, Actor victim, bool headshot)
         {
+            if (killer == null && Actor.HazardName != null)
+            {
+                HUD.I?.KillFeed(null, victim, false, Actor.HazardName, "drone");        // air strike: no team scores
+                StartCoroutine(RespawnLater(victim));
+                return;
+            }
             int scoringTeam = killer != null && killer != victim ? killer.team : 1 - victim.team;
             score[scoringTeam]++;
-            HUD.I?.KillFeed(killer, victim, headshot);
+            if (killer != null && killer != victim)
+            {
+                if (headshot) killer.headshotKills++;
+                if (!victim.lastHitExplosive) killer.longestKill = Mathf.Max(killer.longestKill, Vector3.Distance(killer.ChestPos, victim.ChestPos));
+            }
+            string wid = victim.lastHitDrone ? "drone" : victim.lastHitExplosive ? "gren" : killer != null ? killer.WeaponId : null;
+            HUD.I?.KillFeed(killer, victim, headshot, null, wid);
+            if (killer != null && killer != victim && killer.Alive) StartCoroutine(StreakReward(killer, killer.streak));
             StartCoroutine(RespawnLater(victim));
             if (score[scoringTeam] >= KillTarget) End();
+        }
+
+        /// Kill streaks (bots too): 3 = radar for that side for 15 s, 5 = that side calls in a drone strike on the enemy.
+        IEnumerator StreakReward(Actor a, int streak)
+        {
+            if (streak != 3 && streak != 5) yield break;
+            yield return new WaitForSeconds(1.3f);              // let the "triple kill" banner show first
+            if (Finished || a == null) yield break;
+            var pl = PlayerController.Local; bool mine = pl != null && a.team == pl.team; bool tr = Settings.Turkish;
+            if (streak == 3)
+            {
+                if (mine)
+                {
+                    if (HUD.I != null) HUD.I.RadarUntil = Time.time + 15f;
+                    HUD.I?.ShowToastBig(a.isPlayer ? (tr ? "RADAR AKTİF" : "RADAR ONLINE") : (tr ? "TAKIM RADARI AKTİF" : "TEAM RADAR ONLINE"), new Color(0.35f, 0.75f, 1f), 2.5f);
+                }
+                else
+                {
+                    // enemy radar: their bots learn where your side is
+                    foreach (var o in Actor.All)
+                        if (o is BotController b && o.team == a.team && o.Alive)
+                        {
+                            Actor near = null; float nd = float.MaxValue;
+                            foreach (var e in Actor.All) if (e.team != a.team && e.Alive) { float d = (e.ChestPos - o.ChestPos).sqrMagnitude; if (d < nd) { nd = d; near = e; } }
+                            if (near != null) b.Hear(near, 3f);
+                        }
+                    HUD.I?.ShowToastBig(tr ? "DÜŞMAN RADARI! YERİN BELLİ" : "ENEMY RADAR! YOU'RE SPOTTED", new Color(1f, 0.3f, 0.2f), 2.5f);
+                }
+            }
+            else
+            {
+                if (AirStrikes.I == null) AirStrikes.Begin(this);
+                AirStrikes.I.Call(a);
+            }
         }
 
         IEnumerator RespawnLater(Actor a)
@@ -324,10 +391,10 @@ namespace Zone47
             yield return new WaitForSeconds(delay);
             if (Finished || a == null) yield break;
             // pick the spawn slot furthest from enemies
-            Vector3 best = SpawnPoint(a.team, Random.Range(0, TeamSize)); float bestScore = -1;
+            Vector3 best = SpawnPoint(a.team, Random.Range(0, SizeOf(a.team))); float bestScore = -1;
             for (int i = 0; i < 4; i++)
             {
-                Vector3 p = SpawnPoint(a.team, Random.Range(0, TeamSize));
+                Vector3 p = SpawnPoint(a.team, Random.Range(0, SizeOf(a.team)));
                 float m = 999f;
                 foreach (var o in Actor.All) if (o.team != a.team && o.Alive) m = Mathf.Min(m, Vector3.Distance(o.ChestPos, p));
                 if (m > bestScore) { bestScore = m; best = p; }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Zone47
 {
-    public enum WeaponKind { Rifle, Sniper, Pistol }
+    public enum WeaponKind { Rifle, Sniper, Pistol, Shotgun }
 
     [Serializable]
     public class WeaponDef
@@ -29,7 +29,9 @@ namespace Zone47
         public float range = 160f;
         public float adsFov = 50f;
         public bool scope;
-        public AudioClip shot;
+        public int pellets = 1;            // shotgun: several pellets per shot
+        public float falloffStart = 30f, falloffEnd = 120f, falloffMin = 0.7f;
+        public AudioClip shot, reloadClip, pumpClip;
         public Vector3 hipOffset = new Vector3(0.13f, -0.14f, 0.26f);
     }
 
@@ -55,6 +57,17 @@ namespace Zone47
         public GameObject portPrefab, cityPrefab;
         public Texture2D[] mapThumbs;
         public Material lobbySkyMat, rainMat;
+        public UnityEngine.Video.VideoClip lobbyVideo;      // looping lobby / loading background
+        public GameObject dronePrefab, heliPrefab, bombPrefab;
+        public Texture2D bombTex;
+        public Texture2D[] killIcons; public string[] killIconIds;     // kill feed weapon silhouettes
+        public Texture2D KillIcon(string id)
+        {
+            if (id == null || killIcons == null || killIconIds == null) return null;
+            if (id == "m4holo") id = "m4";
+            for (int i = 0; i < killIconIds.Length && i < killIcons.Length; i++) if (killIconIds[i] == id) return killIcons[i];
+            return null;
+        }          // optional: air strike UAV, intro helicopter
         public Material skybox;
         public Material crateMat, concreteMat, sandbagMat, barrelMat;
 
@@ -68,7 +81,7 @@ namespace Zone47
         public Texture2D icFire, icAim, icReload, icGrenade, icCrouch, icJump, icHeadshot, icPause;
 
         [Header("Audio")]
-        public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt, breath, heartbeat, hurt, headshot, equip, bounce, rain;
+        public AudioClip reload, dryFire, explosion, impact, flyby, pin, casing, bodyFall, awpBolt, breath, heartbeat, hurt, headshot, equip, bounce, rain, siren, droneLoop, bombWhistle, heliLoop;
         public AudioClip[] steps;
         public StepSet[] stepSets;     // Sand, Rock, Metal, Wood, Tile, Gravel, Dirt (Nox Sound, CC0)
         public AudioClip ambience, menuMusic;

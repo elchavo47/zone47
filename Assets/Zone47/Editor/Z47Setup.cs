@@ -33,7 +33,7 @@ namespace Zone47.EditorTools
 
         /// Bump this whenever a package brings new art/sounds or changes the setup code:
         /// Unity then re-runs the setup by itself once per PC (no more clicking "Kurulumu Yap").
-        public const int SetupVersion = 14;
+        public const int SetupVersion = 21;
         static string VerKey => "z47_setupver_" + Application.dataPath.GetHashCode();
 
         static void AutoUpdate()
@@ -265,6 +265,7 @@ namespace Zone47.EditorTools
                 M["m4_" + part] = LitMetal("M4_" + part, Tex(W + "m4_" + part + "_base.png"), Tex(W + "m4_" + part + "_mask.png"), Tex(W + "m4_" + part + "_normal.png"));
             M["ak"] = LitMetal("AK47", Tex(W + "ak_base.png"), Tex(W + "ak_mask.png"), Tex(W + "ak_normal.png"));
             M["glock"] = LitMetal("Glock", Tex(W + "glock_base.png"), Tex(W + "glock_mask.png"), Tex(W + "glock_normal.png"));
+            M["shotgun"] = LitMetal("Shotgun", Tex(W + "shotgun_base.png"), null, Tex(W + "shotgun_normal.png"), 0.45f);
             M["gren"] = LitMetal("Grenade", Tex(W + "gren_base.png"), Tex(W + "gren_mask.png"), Tex(W + "gren_normal.png"), 0.6f);
             for (int i = 0; i < 10; i++)
             {
@@ -475,7 +476,7 @@ namespace Zone47.EditorTools
         }
 
         // ---------------------------------------------------------------- weapons
-        static readonly Dictionary<string, float> MuzzleDist = new Dictionary<string, float> { { "m4", 0.5504f }, { "ak", 0.6517f }, { "awp", 0.8366f }, { "glock", 0.178f } };
+        static readonly Dictionary<string, float> MuzzleDist = new Dictionary<string, float> { { "m4", 0.5504f }, { "ak", 0.6517f }, { "awp", 0.8366f }, { "glock", 0.178f }, { "shotgun", 0.58f } };
 
         static GameObject Prefab(GameObject root, string name)
         {
@@ -498,7 +499,9 @@ namespace Zone47.EditorTools
         static WeaponDef[] MakeWeapons(Mats M, out GameObject grenade)
         {
             var list = new List<WeaponDef>();
-            foreach (var id in new[] { "m4", "ak", "awp", "glock" })
+            var weaponIds = new List<string> { "m4", "ak", "awp", "glock" };
+            if (File.Exists(ROOT + "/Art/Weapons/shotgun.fbx")) weaponIds.Add("shotgun");     // "Shotgun" by Pieter Ferreira (CC BY)
+            foreach (var id in weaponIds)
             {
                 string path = ROOT + "/Art/Weapons/" + id + ".fbx";
                 PrepModel(path);
@@ -681,6 +684,12 @@ namespace Zone47.EditorTools
                     d.displayName = "GLOCK 17"; d.kind = WeaponKind.Pistol; d.damage = 22; d.fireInterval = 0.14f; d.automatic = false;
                     d.magSize = 15; d.reserve = 75; d.reloadTime = 1.6f; d.hipSpread = 1.6f; d.adsSpread = 0.5f; d.recoil = 1.6f; d.range = 90; d.adsFov = 60;
                     d.hipOffset = new Vector3(0.1f, -0.11f, 0.26f); d.shot = Load<AudioClip>(A + "glock_shot.wav"); break;
+                case "shotgun":
+                    d.displayName = Settings.Turkish ? "POMPALI" : "SHOTGUN"; d.kind = WeaponKind.Shotgun; d.damage = 15; d.pellets = 8; d.fireInterval = 0.9f; d.automatic = false;
+                    d.magSize = 7; d.reserve = 35; d.reloadTime = 2.6f; d.hipSpread = 5.5f; d.adsSpread = 3.6f; d.recoil = 3.4f; d.range = 55; d.adsFov = 60;
+                    d.falloffStart = 7f; d.falloffEnd = 32f; d.falloffMin = 0.15f;          // deadly up close, weak at range
+                    d.hipOffset = new Vector3(0.12f, -0.135f, 0.24f);
+                    d.shot = Load<AudioClip>(A + "shotgun_shot.wav"); d.reloadClip = Load<AudioClip>(A + "shotgun_reload.wav"); d.pumpClip = Load<AudioClip>(A + "awp_bolt.wav"); break;
                 case "carbine":
                     d.displayName = Settings.Turkish ? "KARABİNA" : "CARBINE"; d.kind = WeaponKind.Rifle; d.damage = 25; d.fireInterval = 0.078f; d.automatic = true;
                     d.magSize = 30; d.reserve = 150; d.reloadTime = 2.1f; d.hipSpread = 2.2f; d.adsSpread = 0.3f; d.recoil = 0.8f; d.range = 170; d.adsFov = 54;
@@ -1027,6 +1036,16 @@ namespace Zone47.EditorTools
             R.lobbySkyMat = SaveMat(skyM, "Lobby_Sky");
             R.rainMat = FXMat("FX_Rain", Tex("Art/FX/rain.png"), false, new Color(0.82f, 0.86f, 0.9f, 0.32f), true);
             R.rain = Load<AudioClip>("Art/Audio/rain.ogg");
+            R.droneLoop = Load<AudioClip>("Art/Audio/drone_loop.ogg");
+            R.siren = Load<AudioClip>("Art/Audio/siren.ogg");
+            R.bombWhistle = Load<AudioClip>("Art/Audio/bomb_whistle.ogg");
+            R.heliLoop = Load<AudioClip>("Art/Audio/heli_loop.ogg");
+            R.lobbyVideo = Load<UnityEngine.Video.VideoClip>("Art/Video/lobby_bg.mp4");
+            R.dronePrefab = Load<GameObject>("Art/Drone/drone.fbx");
+            var kIds = new System.Collections.Generic.List<string>(); var kTex = new System.Collections.Generic.List<Texture2D>();
+            foreach (var kid in new[] { "m4", "awp", "ak", "glock", "carbine", "shotgun", "gren", "drone" }) { var kt = Tex("Art/UI/KillIcons/kill_" + kid + ".png"); if (kt != null) { kIds.Add(kid); kTex.Add(kt); } }
+            R.killIconIds = kIds.ToArray(); R.killIcons = kTex.ToArray();
+            R.bombPrefab = Load<GameObject>("Art/Bomb/bomb.fbx"); R.bombTex = Tex("Art/Bomb/bomb_albedo.png");      // "MK2 Grenade Drone Bomb" by yousef.hameed (CC BY)      // "MQ9 Ripper military drone" by Giperione (CC BY)
             R.portPrefab = MakePort();
             R.cityPrefab = MakeCity();
             R.mapThumbs = new[] { Tex("Art/UI/Maps/map_desert.png"), Tex("Art/UI/Maps/map_port.png"), Tex("Art/UI/Maps/map_city.png") };
@@ -1097,6 +1116,19 @@ namespace Zone47.EditorTools
             PlayerSettings.bundleVersion = "0.1.0";
             PlayerSettings.iOS.buildNumber = "1";
             try { PlayerSettings.SplashScreen.show = false; } catch { }
+            // shadows: sharper shadow map + soft-shadow support on every URP asset (jagged staircase edges otherwise)
+            foreach (var guid in AssetDatabase.FindAssets("t:UniversalRenderPipelineAsset"))
+            {
+                var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset>(AssetDatabase.GUIDToAssetPath(guid));
+                if (asset == null) continue;
+                var aso = new SerializedObject(asset);
+                var res = aso.FindProperty("m_MainLightShadowmapResolution"); if (res != null) res.intValue = 2048;
+                var soft = aso.FindProperty("m_SoftShadowsSupported"); if (soft != null) soft.boolValue = true;
+                var sq = aso.FindProperty("m_SoftShadowQuality"); if (sq != null) sq.intValue = 2;          // medium
+                var nb = aso.FindProperty("m_ShadowNormalBias"); if (nb != null) nb.floatValue = 0.6f;
+                aso.ApplyModifiedPropertiesWithoutUndo();
+                EditorUtility.SetDirty(asset);
+            }
             var icon = Tex("Art/UI/AppIcon.png");
             if (icon != null)
             {

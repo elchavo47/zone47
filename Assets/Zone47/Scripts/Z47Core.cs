@@ -33,6 +33,8 @@ namespace Zone47
         public static float GyroSens { get => PlayerPrefs.GetFloat("z_gsens", 1f); set => PlayerPrefs.SetFloat("z_gsens", value); }
         public static bool GyroInvert { get => PlayerPrefs.GetInt("z_ginv", 0) == 1; set => PlayerPrefs.SetInt("z_ginv", value ? 1 : 0); }
         public static bool Mobile => Application.isMobilePlatform;
+        public static bool AirStrikes { get => PlayerPrefs.GetInt("z_strikes", 1) == 1; set => PlayerPrefs.SetInt("z_strikes", value ? 1 : 0); }
+        public static int TeamPreset { get => PlayerPrefs.GetInt("z_teams", 3); set => PlayerPrefs.SetInt("z_teams", value); }   // index into MatchManager.Presets (3 = 5v5)
         public static int Weather { get => PlayerPrefs.GetInt("z_wx", 0); set => PlayerPrefs.SetInt("z_wx", value); }   // 0 random, 1 noon, 2 fog, 3 sandstorm
         public static int Map { get => PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
         public static string PlayerName { get => PlayerPrefs.GetString("z_name", ""); set => PlayerPrefs.SetString("z_name", value); }
@@ -50,12 +52,12 @@ namespace Zone47
                 // fair tiers: every tier keeps the same look (colour grading, shadows, sharp-ish image);
                 // lower tiers save on shadow reach/resolution, edge smoothing, bloom and particles, not on looking blurry
                 float[] scale = Mobile ? new[] { 0.8f, 0.87f, 0.94f, 1f } : new[] { 0.85f, 0.92f, 1f, 1f };
-                float[] shadow = Mobile ? new[] { 22f, 32f, 48f, 70f } : new[] { 30f, 45f, 65f, 90f };
+                float[] shadow = Mobile ? new[] { 22f, 32f, 45f, 60f } : new[] { 30f, 40f, 50f, 70f };
                 int[] msaa = { 1, 1, 2, 4 };
                 urp.renderScale = scale[Quality];
                 urp.shadowDistance = shadow[Quality];
                 urp.msaaSampleCount = msaa[Quality];
-                urp.shadowCascadeCount = Quality < 3 ? 1 : 2;
+                urp.shadowCascadeCount = Quality >= 1 ? 2 : 1;          // near cascade keeps close shadows crisp
                 urp.maxAdditionalLightsCount = Mobile ? 2 : 4;
                 // the iOS (Mobile) pipeline ships with HDR off; ACES tonemapping on LDR crushes the image dark
                 urp.supportsHDR = true;
@@ -71,7 +73,23 @@ namespace Zone47
 
         /// Colour grading is part of the game's look, so every tier keeps it (low only drops bloom).
         public static bool PostFx => true;
-        public static LightShadows SunShadows => Quality >= 2 ? LightShadows.Soft : LightShadows.Hard;
+        public static LightShadows SunShadows => LightShadows.Soft;   // soft on every tier: hard edges show the shadow-map staircase
+    }
+
+    // ------------------------------------------------------------------ PROGRESSION
+    /// Player XP / level, stored on the device. Level n needs 1000 + 250*(n-1) XP.
+    public static class Progress
+    {
+        public static int XP { get => PlayerPrefs.GetInt("z_xp", 0); set { PlayerPrefs.SetInt("z_xp", Mathf.Max(0, value)); PlayerPrefs.Save(); } }
+        public static int Need(int level) => 1000 + 250 * (level - 1);
+        /// level, xp into that level, xp needed for the next one
+        public static void Split(int xp, out int level, out int into, out int need)
+        {
+            level = 1; need = Need(1);
+            while (xp >= need && level < 999) { xp -= need; level++; need = Need(level); }
+            into = xp;
+        }
+        public static int Level { get { Split(XP, out int l, out _, out _); return l; } }
     }
 
     // ------------------------------------------------------------------ LOCALIZATION
@@ -87,6 +105,20 @@ namespace Zone47
             {"mainmenu", new[]{"ANA MENÜ","MAIN MENU"}},
             {"again", new[]{"TEKRAR OYNA","PLAY AGAIN"}},
             {"victory", new[]{"ZAFER","VICTORY"}},
+            {"end_mine", new[]{"SENİN MAÇIN","YOUR MATCH"}},
+            {"st_kd", new[]{"Öldürme / Ölüm","Kills / Deaths"}},
+            {"st_acc", new[]{"İsabet","Accuracy"}},
+            {"st_hs", new[]{"Kafadan öldürme","Headshot kills"}},
+            {"st_long", new[]{"En uzun atış","Longest kill"}},
+            {"st_dmg", new[]{"Verilen hasar","Damage dealt"}},
+            {"xp_kills", new[]{"Öldürmeler","Kills"}},
+            {"xp_hs", new[]{"Kafadan vuruşlar","Headshots"}},
+            {"xp_win", new[]{"Galibiyet","Victory"}},
+            {"xp_play", new[]{"Maç tamamlandı","Match played"}},
+            {"xp_mvp", new[]{"MVP","MVP"}},
+            {"xp_total", new[]{"TOPLAM XP","TOTAL XP"}},
+            {"level", new[]{"SEVİYE","LEVEL"}},
+            {"levelup", new[]{"SEVİYE ATLADIN!","LEVEL UP!"}},
             {"defeat", new[]{"YENİLGİ","DEFEAT"}},
             {"draw", new[]{"BERABERE","DRAW"}},
             {"graphics", new[]{"GRAFİK","GRAPHICS"}},
@@ -116,6 +148,7 @@ namespace Zone47
             {"sq_title", new[]{"TAKIMIM","MY SQUAD"}},
             {"sq_alive", new[]{"HAYATTA","ALIVE"}},
             {"weather", new[]{"HAVA","WEATHER"}},
+            {"mode", new[]{"TAKIM BOYUTU","TEAM SIZE"}},
             {"wx0", new[]{"RASTGELE","RANDOM"}},
             {"wx1", new[]{"ÖĞLE","NOON"}},
             {"wx2", new[]{"SİSLİ SABAH","FOGGY"}},
@@ -176,6 +209,8 @@ namespace Zone47
             {"layout_l", new[]{"Tuş düzeni","Button layout"}},
             {"opacity", new[]{"ŞEFFAFLIK","OPACITY"}},
             {"applyall", new[]{"HEPSİNE UYGULA","APPLY TO ALL"}},
+            {"strikes_l", new[]{"İHA saldırıları","Drone strikes"}},
+            {"strikes_d", new[]{"Maç sırasında rastgele hava saldırıları","Random air strikes during matches"}},
             {"firelook_l", new[]{"Ateş tuşuyla nişan çevirme","Steer with the fire button"}},
             {"firelook_d", new[]{"Ateş ederken parmağını kaydırarak dön","Slide your firing thumb to turn"}},
             {"layout_d", new[]{"Tuşların yerini ve boyutunu değiştir","Move and resize buttons"}},
@@ -591,6 +626,84 @@ namespace Zone47
             lg.transform.position = p + Vector3.up;
             var l = lg.AddComponent<Light>(); l.type = LightType.Point; l.color = new Color(1f, 0.6f, 0.3f); l.range = 14; l.intensity = 12;
             lg.AddComponent<LightFade>().life = 0.35f;
+        }
+
+        /// Air-strike bomb: big fireball, tall rising smoke column, ground dust ring, flying dirt, sparks, bright flash.
+        public static void BigExplosion(Vector3 p)
+        {
+            var R = Z47Refs.I;
+            bool low = Settings.Quality == 0;
+            // fireball
+            var f = MakePS("bigFire", R.fireMat, p + Vector3.up * 1f, Quaternion.identity, 3f);
+            var m = f.main;
+            m.startLifetime = new ParticleSystem.MinMaxCurve(0.5f, 1.2f);
+            m.startSpeed = new ParticleSystem.MinMaxCurve(5f, 16f);
+            m.startSize = new ParticleSystem.MinMaxCurve(3.5f, 8f);
+            m.startColor = new Color(1f, 0.62f, 0.25f);
+            m.gravityModifier = -0.25f;
+            var sh = f.shape; sh.shapeType = ParticleSystemShapeType.Hemisphere; sh.radius = 1.5f;
+            var em = f.emission; em.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(low ? 30 : 55)) });
+            var col = f.colorOverLifetime; col.enabled = true; col.color = Fade(new Color(1f, 0.92f, 0.65f), new Color(0.45f, 0.1f, 0.03f));
+            var sz = f.sizeOverLifetime; sz.enabled = true; sz.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.EaseInOut(0, 0.4f, 1, 1.6f));
+            f.Play();
+
+            // rising smoke column (lingers)
+            var c = MakePS("bigSmoke", R.smokeMat, p + Vector3.up * 1.5f, Quaternion.identity, 14f);
+            var cm = c.main;
+            cm.startLifetime = new ParticleSystem.MinMaxCurve(6f, 11f);
+            cm.startSpeed = new ParticleSystem.MinMaxCurve(1.5f, 5f);
+            cm.startSize = new ParticleSystem.MinMaxCurve(5f, 11f);
+            cm.startColor = new Color(0.17f, 0.15f, 0.14f, 0.85f);
+            cm.gravityModifier = -0.12f;
+            var cs = c.shape; cs.shapeType = ParticleSystemShapeType.Cone; cs.angle = 18f; cs.radius = 1.8f; c.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            var ce = c.emission; ce.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(low ? 14 : 26)), new ParticleSystem.Burst(0.25f, (short)(low ? 6 : 12)) });
+            var cc = c.colorOverLifetime; cc.enabled = true; cc.color = Fade(Color.white, Color.white);
+            var csz = c.sizeOverLifetime; csz.enabled = true; csz.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.5f, 1, 2.2f));
+            c.Play();
+
+            // dust ring rolling out along the ground
+            var d = MakePS("bigDust", R.smokeMat, p + Vector3.up * 0.4f, Quaternion.Euler(-90, 0, 0), 7f);
+            var dm = d.main;
+            dm.startLifetime = new ParticleSystem.MinMaxCurve(2.5f, 4.5f);
+            dm.startSpeed = new ParticleSystem.MinMaxCurve(9f, 16f);
+            dm.startSize = new ParticleSystem.MinMaxCurve(3f, 6f);
+            dm.startColor = new Color(0.55f, 0.47f, 0.36f, 0.7f);
+            var ds = d.shape; ds.shapeType = ParticleSystemShapeType.Circle; ds.radius = 1.5f; ds.radiusThickness = 0f;
+            var de = d.emission; de.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(low ? 16 : 32)) });
+            var dl = d.limitVelocityOverLifetime; dl.enabled = true; dl.limit = 1.2f; dl.dampen = 0.12f;
+            var dc = d.colorOverLifetime; dc.enabled = true; dc.color = Fade(Color.white, Color.white);
+            var dsz = d.sizeOverLifetime; dsz.enabled = true; dsz.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.6f, 1, 1.8f));
+            d.Play();
+
+            // dirt chunks thrown up
+            var k = MakePS("bigDirt", R.smokeMat, p + Vector3.up * 0.3f, Quaternion.Euler(-90, 0, 0), 4f);
+            var km = k.main;
+            km.startLifetime = new ParticleSystem.MinMaxCurve(1.2f, 2.4f);
+            km.startSpeed = new ParticleSystem.MinMaxCurve(10f, 24f);
+            km.startSize = new ParticleSystem.MinMaxCurve(0.25f, 0.7f);
+            km.startColor = new Color(0.2f, 0.16f, 0.12f, 1f);
+            km.gravityModifier = 2.2f;
+            var ks = k.shape; ks.shapeType = ParticleSystemShapeType.Cone; ks.angle = 32f; ks.radius = 1f;
+            var ke = k.emission; ke.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(low ? 25 : 50)) });
+            k.Play();
+
+            // sparks
+            var sp = MakePS("bigSparks", R.sparkMat, p + Vector3.up * 0.5f, Quaternion.identity, 3f);
+            var sm = sp.main;
+            sm.startLifetime = new ParticleSystem.MinMaxCurve(0.8f, 1.8f);
+            sm.startSpeed = new ParticleSystem.MinMaxCurve(10f, 28f);
+            sm.startSize = new ParticleSystem.MinMaxCurve(0.06f, 0.14f);
+            sm.startColor = new Color(1f, 0.75f, 0.35f);
+            sm.gravityModifier = 1.6f;
+            var ss = sp.shape; ss.shapeType = ParticleSystemShapeType.Hemisphere; ss.radius = 0.6f;
+            var se = sp.emission; se.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(low ? 30 : 70)) });
+            var sr = sp.GetComponent<ParticleSystemRenderer>(); sr.renderMode = ParticleSystemRenderMode.Stretch; sr.velocityScale = 0.06f;
+            sp.Play();
+
+            var lg = new GameObject("bigBoomLight");
+            lg.transform.position = p + Vector3.up * 3f;
+            var l = lg.AddComponent<Light>(); l.type = LightType.Point; l.color = new Color(1f, 0.62f, 0.3f); l.range = 45; l.intensity = 30;
+            lg.AddComponent<LightFade>().life = 0.6f;
         }
     }
 

@@ -13,10 +13,16 @@ namespace Zone47
         public float maxHp = 100f;
         public float hp = 100f;
         public int kills, deaths, streak;
+        // match stats (end screen)
+        public int shotsFired, shotsHit, headshotKills; public float longestKill, damageDealt;
         public bool Alive => hp > 0f;
         public bool isPlayer;
         public float lastDamageTime = -99f;
         public Vector3 lastDamageFrom;
+        public bool lastHitHead, lastHitExplosive, lastHitDrone; public float lastHitAmount;
+        public virtual string WeaponId => null;
+        /// set by explosions / air strikes around their Damage() calls (ragdoll force, kill feed)
+        public static bool ExplosionDamage, DroneDamage; public static string HazardName;
         public float lastShotTime = -99f;
         public float spawnTime;
         public float respawnAt;       // when a dead actor comes back (squad card countdown)
@@ -35,9 +41,10 @@ namespace Zone47
             if (!Alive || MatchManager.I == null || !MatchManager.I.Running) return;
             if (from != null && from != this && from.team == team) return; // no friendly fire
             if (Protected) return;
+            if (from != null && from != this) from.damageDealt += Mathf.Min(amount, hp);
             hp -= amount;
             lastDamageTime = Time.time;
-            lastDamageFrom = fromPos;
+            lastDamageFrom = fromPos; lastHitHead = headshot; lastHitAmount = amount; lastHitExplosive = ExplosionDamage; lastHitDrone = DroneDamage;
             OnHurt(from, fromPos);
             if (Time.time - lastGrunt > 0.55f)
             {
@@ -89,10 +96,11 @@ namespace Zone47
         }
 
         /// Fires one bullet. Returns the actor hit (if any).
-        public static Actor Fire(Actor shooter, Vector3 origin, Vector3 dir, float range, float damage, Vector3 tracerFrom, bool tracer, out bool killed)
+        public static Actor Fire(Actor shooter, Vector3 origin, Vector3 dir, float range, float damage, Vector3 tracerFrom, bool tracer, out bool killed, float fallStart = 30f, float fallEnd = 120f, float fallMin = 0.7f)
         {
             killed = false;
             Vector3 end = origin + dir * range;
+            if (shooter != null) shooter.shotsFired++;
             Actor victim = null;
             if (Cast(origin, dir, range, shooter, out var hit))
             {
@@ -100,8 +108,9 @@ namespace Zone47
                 victim = Actor.FromCollider(hit.collider);
                 if (victim != null)
                 {
+                    if (shooter != null && victim.team != shooter.team) shooter.shotsHit++;
                     bool head = hit.point.y >= victim.HeadHeight;
-                    float falloff = Mathf.Lerp(1f, 0.7f, Mathf.InverseLerp(30f, 120f, hit.distance));
+                    float falloff = Mathf.Lerp(1f, fallMin, Mathf.InverseLerp(fallStart, fallEnd, hit.distance));
                     bool wasAlive = victim.Alive;
                     victim.Damage(damage * falloff * (head ? 2.2f : 1f), shooter, origin, head);
                     killed = wasAlive && !victim.Alive;
