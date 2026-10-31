@@ -171,6 +171,71 @@ namespace Zone47
             refreshMaps();
         }
 
+        // ------------------------------------------------------------ armory (loadout)
+        /// Pick the two main weapons you start with (the Glock always comes along). In a match a gun on the ground can
+        /// be swapped in with the TAKE button.
+        void ShowArmory()
+        {
+            var R = Z47Refs.I;
+            var root = MakeScreen("Armory", T("CEPHANELİK", "ARMORY"), T("SİLAH YÜKÜ", "LOADOUT"), RebuildMenu);
+            var ids = new List<string>(); foreach (var id in Settings.Primaries) if (R.HasWeapon(id)) ids.Add(id);
+            var cards = new List<(Image img, Outline ol, string id, int row)>();
+            Action refresh = () =>
+            {
+                foreach (var c in cards)
+                {
+                    bool on = (c.row == 0 ? Settings.Loadout1 : Settings.Loadout2) == c.id;
+                    c.img.color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.22f) : new Color(1, 1, 1, 0.05f);
+                    c.ol.effectColor = on ? Pal.Accent : new Color(0, 0, 0, 0);
+                }
+            };
+            for (int row = 0; row < 2; row++)
+            {
+                float y = -170f - row * 262f;
+                UIK.Txt(root, "h" + row, row == 0 ? T("1. ANA SİLAH", "MAIN WEAPON 1") : T("2. ANA SİLAH", "MAIN WEAPON 2"), 20, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, y), new Vector2(500, 28), true).rectTransform.pivot = new Vector2(0, 1);
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    string id = ids[i]; int r = row; var d = R.Weapon(id);
+                    var c = UIK.Img(root, "w" + row + i, Color.white, new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(300, 206), true);
+                    c.rectTransform.pivot = new Vector2(0, 1); c.rectTransform.anchoredPosition = new Vector2(70 + i * 316, y - 36);
+                    var ol = c.gameObject.AddComponent<Outline>(); ol.effectDistance = new Vector2(3, 3);
+                    var ico = R.KillIcon(id);
+                    if (ico != null)
+                    {
+                        var ri = UIK.Rect(c.transform, "ic", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -58), new Vector2(240, 70)).gameObject.AddComponent<RawImage>();
+                        ri.texture = ico; ri.raycastTarget = false; ri.color = Pal.Text;
+                        float ih = 64f, iw = ih * ico.width / (float)ico.height; if (iw > 250f) { iw = 250f; ih = iw * ico.height / (float)ico.width; }
+                        ri.rectTransform.sizeDelta = new Vector2(iw, ih);
+                    }
+                    UIK.Txt(c.transform, "n", d.displayName, 26, Color.white, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(1, 1), new Vector2(16, -110), new Vector2(-32, 32), true).rectTransform.pivot = new Vector2(0.5f, 1);
+                    // two stat bars: damage per shot and fire rate
+                    float dmg = Mathf.Clamp01(d.damage * Mathf.Max(1, d.pellets) / 120f), rate = Mathf.Clamp01(1f / Mathf.Max(0.05f, d.fireInterval) / 13f);
+                    (string k, float v)[] st = { (T("HASAR", "DAMAGE"), dmg), (T("ATIŞ HIZI", "FIRE RATE"), rate) };
+                    for (int k = 0; k < st.Length; k++)
+                    {
+                        float sy = -152f - k * 24f;
+                        UIK.Txt(c.transform, "sk" + k, st[k].k, 13, Pal.Dim, TextAnchor.MiddleLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(16, sy), new Vector2(110, 18), true).rectTransform.pivot = new Vector2(0, 0.5f);
+                        var tr = UIK.Img(c.transform, "st" + k, new Color(1, 1, 1, 0.12f), new Vector2(0, 1), new Vector2(0, 1), new Vector2(124, sy), new Vector2(160, 8));
+                        tr.rectTransform.pivot = new Vector2(0, 0.5f);
+                        var f = UIK.Img(tr.transform, "f", Pal.Accent, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero).rectTransform;
+                        f.pivot = new Vector2(0, 0.5f); f.anchoredPosition = Vector2.zero; f.localScale = new Vector3(Mathf.Max(0.05f, st[k].v), 1, 1);
+                    }
+                    cards.Add((c, ol, id, row));
+                    c.gameObject.AddComponent<Button>().onClick.AddListener(() =>
+                    {
+                        Sfx.UI();
+                        string a1 = Settings.Loadout1, a2 = Settings.Loadout2;
+                        if (r == 0) { if (id == a2) Settings.Loadout2 = a1; Settings.Loadout1 = id; }      // picking the other row's gun swaps them
+                        else { if (id == a1) Settings.Loadout1 = a2; Settings.Loadout2 = id; }
+                        PlayerPrefs.Save(); refresh();
+                    });
+                }
+            }
+            UIK.Txt(root, "pistol", T("TABANCA:  <color=#F29E1F>GLOCK 17</color>  ·  her zaman yanında", "PISTOL:  <color=#F29E1F>GLOCK 17</color>  ·  always carried"), 22, Pal.Text, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, -720), new Vector2(1400, 30), true).supportRichText = true;
+            UIK.Txt(root, "hint", T("Maçta yere düşmüş bir silahın yanına gelince ekranda çıkan AL tuşuyla elindekiyle değiştirebilirsin.", "In a match, stand next to a gun on the ground and tap TAKE to swap it with the one in your hands."), 18, Pal.Dim, TextAnchor.UpperLeft, new Vector2(0, 1), new Vector2(0, 1), new Vector2(70, -758), new Vector2(1500, 28), false);
+            refresh();
+        }
+
         // ------------------------------------------------------------ profile
         void ShowProfile()
         {
@@ -418,7 +483,7 @@ namespace Zone47
             (string t, string s, Action a, bool soon)[] nav =
             {
                 (T("OYNA", "PLAY"), T("TAKIM ÖLÜM MAÇI", "TEAM DEATHMATCH"), null, false),
-                (T("CEPHANELİK", "ARMORY"), T("SİLAHLAR · KAMUFLAJ", "WEAPONS · CAMO"), () => Toast(T("CEPHANELİK YAKINDA", "ARMORY COMING SOON")), false),
+                (T("CEPHANELİK", "ARMORY"), T("SİLAH YÜKÜ · 2 SİLAH + GLOCK", "LOADOUT · 2 GUNS + GLOCK"), () => ShowArmory(), false),
                 (T("KOSTÜMLER", "OUTFITS"), T("YAKINDA", "COMING SOON"), () => Toast(T("KOSTÜMLER YAKINDA", "OUTFITS COMING SOON")), true),
                 (T("PROFİL", "PROFILE"), T("SEVİYE · BAŞARIMLAR", "LEVEL · ACHIEVEMENTS"), () => ShowProfile(), false),
                 (T("AYARLAR", "SETTINGS"), T("GRAFİK · KONTROL · SES", "GRAPHICS · CONTROLS · AUDIO"), () => ShowSettings(menuCanvas.transform, RebuildMenu), false),

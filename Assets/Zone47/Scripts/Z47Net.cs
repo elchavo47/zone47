@@ -62,7 +62,7 @@ namespace Zone47
     /// every phone simulates its own soldier and sends where it is. No NetworkObjects: everything goes through one named message.
     public static class Net
     {
-        public const int Version = 3;                          // 3: drone strikes follow players (TRACK / DROP)
+        public const int Version = 4;                          // 3: drone strikes follow players (TRACK / DROP), 4: smoke / flash grenades
         public const int MaxPlayers = 10;
         public static readonly string[] Weapons = { "m4", "ak", "awp", "glock", "carbine", "shotgun" };
         public static int WeaponIndex(string id) { int i = Array.IndexOf(Weapons, id); return i < 0 ? 0 : i; }
@@ -467,10 +467,10 @@ namespace Zone47
             if (IsHost) SendAll(w, false); else SendHost(w, false);
         }
 
-        public static void SendNade(Actor owner, Vector3 pos, Vector3 vel)
+        public static void SendNade(Actor owner, Vector3 pos, Vector3 vel, int kind = 0)
         {
             if (!InMatch || owner == null || owner.remote || owner.netId < 0) return;
-            var w = new NetW().U8(NADE).I16(owner.netId).V3(pos).V3(vel);
+            var w = new NetW().U8(NADE).I16(owner.netId).V3(pos).V3(vel).U8(kind);
             if (IsHost) SendAll(w, true); else SendHost(w, true);
         }
 
@@ -693,12 +693,12 @@ namespace Zone47
                 }
                 case NADE:
                 {
-                    int id = r.I16(); var pos = r.V3(); var vel = r.V3();
+                    int id = r.I16(); var pos = r.V3(); var vel = r.V3(); int kind = r.U8();
                     if (!r.Ok) return;
                     var a = ById(id);
                     if (a == null) return;
-                    if (IsHost) { if (!OwnedBy(a, sender)) return; SendAll(new NetW().U8(NADE).I16(id).V3(pos).V3(vel), true, sender); }
-                    Grenade.Spawn(a, pos, vel);
+                    if (IsHost) { if (!OwnedBy(a, sender)) return; SendAll(new NetW().U8(NADE).I16(id).V3(pos).V3(vel).U8(kind), true, sender); }
+                    Grenade.Spawn(a, pos, vel, kind);
                     return;
                 }
                 case DMG:

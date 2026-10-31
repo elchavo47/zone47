@@ -363,7 +363,7 @@ namespace Zone47
 
         void OnDestroy()
         {
-            if (mapTex != null) mapTex.Release();
+            if (mapTex != null) { mapTex.Release(); Destroy(mapTex); }
             if (navInst.valid) NavMesh.RemoveNavMeshData(navInst);
             if (I == this) I = null;
         }

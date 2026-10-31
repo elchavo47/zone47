@@ -114,9 +114,21 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ perception
+        float blindUntil = -99f;
+        public bool Blinded => Time.time < blindUntil;
+        /// Flashbang: sees nothing for a while (and loses the target).
+        public void Blind(float dur)
+        {
+            blindUntil = Mathf.Max(blindUntil, Time.time + dur);
+            target = null; reaction = 0f;
+            if (anim != null) anim.SetTrigger("Hit");
+        }
+
         bool CanSee(Actor a)
         {
+            if (Blinded) return false;
             Vector3 from = EyePos, to = a.ChestPos;
+            if (SmokeCloud.Blocks(from, to)) return false;
             Vector3 d = to - from; float dist = d.magnitude;
             if (dist > Weather.SightRange) return false;
             float fov = Vector3.Angle(transform.forward, d);
@@ -157,12 +169,18 @@ namespace Zone47
         {
             // get away from any live grenade (theirs or ours)
             foreach (var g in Grenade.Live)
-                if (g != null && (g.transform.position - transform.position).sqrMagnitude < (Grenade.BlastR + 1.5f) * (Grenade.BlastR + 1.5f) && Time.time > fleeUntil)
+                if (g != null && g.Lethal && (g.transform.position - transform.position).sqrMagnitude < (Grenade.BlastR + 1.5f) * (Grenade.BlastR + 1.5f) && Time.time > fleeUntil)
                     Flee(g.transform.position, Grenade.BlastR + 1.5f, Mathf.Max(0.5f, g.TimeLeft));
 
             if (nades <= 0 || Time.time < nextNade || reloading || Z47Refs.I.grenadePrefab == null || Time.time < fleeUntil) return;
             if (Time.time - teamNadeAt[team & 1] < 12f) return;           // a teammate just threw one
             Vector3 at; bool want;
+            // badly hurt and under fire: smoke between us and them, then fall back behind it
+            if (target != null && hp < 45f && Time.time - lastDamageTime < 2f && Random.value < 0.05f * Skill)
+            {
+                float dd = Vector3.Distance(target.transform.position, transform.position);
+                if (dd > 10f && dd < 40f) { ThrowNade(Vector3.Lerp(transform.position, target.transform.position, 0.35f), Throwable.Smoke); return; }
+            }
             if (target != null)
             {
                 // someone camping behind cover at medium range
@@ -179,10 +197,12 @@ namespace Zone47
             }
             if (!want) return;
             foreach (var a in All) if (a != this && a.team == team && a.Alive && (a.transform.position - at).sqrMagnitude < 7f * 7f) return;   // teammates there
-            ThrowNade(at);
+            // up close: sometimes a flashbang instead of a frag
+            int kind = Vector3.Distance(at, transform.position) < 18f && Random.value < 0.3f ? Throwable.Flash : Throwable.Frag;
+            ThrowNade(at, kind);
         }
 
-        void ThrowNade(Vector3 at)
+        void ThrowNade(Vector3 at, int kind = 0)
         {
             nades--; nextNade = Time.time + Random.Range(35f, 55f); teamNadeAt[team & 1] = Time.time;
             Face(at);
@@ -190,10 +210,8 @@ namespace Zone47
             at += Random.insideUnitSphere.Flat() * Mathf.Lerp(3f, 1f, Skill);
             float T = Mathf.Clamp(Vector3.Distance(from, at) / 13f, 0.7f, 1.6f);
             Vector3 v = (at - from - 0.5f * Physics.gravity * T * T) / T;          // lands at `at` after T seconds
-            var go = Instantiate(Z47Refs.I.grenadePrefab, from, Random.rotation);
-            var gr = go.GetComponent<Grenade>(); if (gr != null) gr.owner = this;
-            var rb = go.GetComponent<Rigidbody>(); if (rb != null) { rb.linearVelocity = v; rb.angularVelocity = Random.insideUnitSphere * 10f; }
-            Net.SendNade(this, from, v);
+            Grenade.Spawn(this, from, v, kind);
+            Net.SendNade(this, from, v, kind);
             if (Z47Refs.I.pin != null) Sfx.Play3D(Z47Refs.I.pin, transform.position + Vector3.up, 0.7f, 2f, 22f);
         }
 
@@ -241,6 +259,7 @@ namespace Zone47
                 if (mag < weapon.magSize * 0.5f) StartReload();
                 return;
             }
+            if (Blinded) return;                                       // flashed: no shooting
             reaction += Time.deltaTime;
             aimErr = Vector3.MoveTowards(aimErr, Vector3.zero, Time.deltaTime * Mathf.Lerp(0.5f, 1.1f, Skill));
             Vector3 aimAt = target.ChestPos + aimErr + Vector3.up * (Random.value < 0.15f * Skill ? 0.4f : 0f);
@@ -524,7 +543,7 @@ namespace Zone47
             rb.linearVelocity = transform.forward * 0.6f + Vector3.up * 0.8f;
             rb.angularVelocity = Random.insideUnitSphere * 3f;
             // stays on the ground for a while; walk over it to take its ammo if it fits one of your guns
-            var pk = g.AddComponent<WeaponPickup>(); pk.ammo = WeaponPickup.AmmoOf(weapon.id); pk.amount = Mathf.Max(weapon.magSize, mag + weapon.magSize / 2);
+            var pk = g.AddComponent<WeaponPickup>(); pk.ammo = WeaponPickup.AmmoOf(weapon.id); pk.amount = Mathf.Max(weapon.magSize, mag + weapon.magSize / 2); pk.weaponId = weapon.id;
         }
 
         protected override void OnHurt(Actor from, Vector3 fromPos)

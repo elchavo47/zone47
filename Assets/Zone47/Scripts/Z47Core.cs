@@ -38,6 +38,11 @@ namespace Zone47
         public static int Weather { get => PlayerPrefs.GetInt("z_wx", 0); set => PlayerPrefs.SetInt("z_wx", value); }   // 0 random, 1 noon, 2 fog, 3 sandstorm
         public static int Map { get => Net.MapOverride >= 0 ? Net.MapOverride : PlayerPrefs.GetInt("z_map", 0); set => PlayerPrefs.SetInt("z_map", value); }   // 0 desert town, 1 port
         public static string PlayerName { get => PlayerPrefs.GetString("z_name", ""); set => PlayerPrefs.SetString("z_name", value); }
+        // loadout: two main weapons (the Glock always comes along)
+        public static readonly string[] Primaries = { "m4", "ak", "carbine", "awp", "shotgun" };
+        public static string Loadout1 { get => Valid(PlayerPrefs.GetString("z_w1", "m4"), "m4"); set => PlayerPrefs.SetString("z_w1", value); }
+        public static string Loadout2 { get { string w = Valid(PlayerPrefs.GetString("z_w2", "awp"), "awp"); return w == Loadout1 ? (Loadout1 == "awp" ? "m4" : "awp") : w; } set => PlayerPrefs.SetString("z_w2", value); }
+        static string Valid(string id, string fallback) => System.Array.IndexOf(Primaries, id) >= 0 && Z47Refs.I.HasWeapon(id) ? id : fallback;
         public static string Callsign => string.IsNullOrWhiteSpace(PlayerName) ? L.S("you") : PlayerName.Trim();
 
         public static void Apply()
@@ -491,34 +496,61 @@ namespace Zone47
             return g;
         }
 
-        public static void Impact(Vector3 p, Vector3 n, bool flesh)
+        // Pooled bullet impacts: 28 reusable emitter pairs (sparks/blood + dust puff), set up once and replayed.
+        // Every hit used to create two new GameObjects with particle systems (10v10 = hundreds per second, GC hitches on phones).
+        class ImpactFx { public GameObject go; public ParticleSystem spark, dust; public ParticleSystemRenderer sparkR; }
+        static readonly ImpactFx[] impacts = new ImpactFx[28];
+        static int impactNext;
+
+        static ParticleSystem PooledPS(string name, Transform parent, Material mat)
+        {
+            var go = new GameObject(name); go.transform.SetParent(parent, false);
+            var ps = go.AddComponent<ParticleSystem>();
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            var main = ps.main; main.playOnAwake = false; main.loop = false; main.duration = 0.2f; main.simulationSpace = ParticleSystemSimulationSpace.World;
+            main.stopAction = ParticleSystemStopAction.None; main.maxParticles = 20;
+            var em = ps.emission; em.rateOverTime = 0;
+            var r = go.GetComponent<ParticleSystemRenderer>(); r.sharedMaterial = mat; r.shadowCastingMode = ShadowCastingMode.Off; r.receiveShadows = false;
+            return ps;
+        }
+
+        static ImpactFx NewImpact()
         {
             var R = Z47Refs.I;
-            var rot = Quaternion.LookRotation(n);
-            // sparks / blood
-            var ps = MakePS("impact", R.sparkMat, p + n * 0.02f, rot, 1.5f);
-            var m = ps.main;
-            m.startLifetime = new ParticleSystem.MinMaxCurve(0.15f, 0.45f);
+            var fx = new ImpactFx { go = new GameObject("impactFx") };
+            UnityEngine.Object.DontDestroyOnLoad(fx.go);
+            fx.spark = PooledPS("spark", fx.go.transform, R.sparkMat);
+            var m = fx.spark.main; m.startLifetime = new ParticleSystem.MinMaxCurve(0.15f, 0.45f); m.gravityModifier = 1.4f;
+            var sh = fx.spark.shape; sh.shapeType = ParticleSystemShapeType.Cone; sh.angle = 35; sh.radius = 0.01f;
+            fx.sparkR = fx.spark.GetComponent<ParticleSystemRenderer>(); fx.sparkR.velocityScale = 0.04f; fx.sparkR.lengthScale = 1f;
+            fx.dust = PooledPS("dust", fx.go.transform, R.smokeMat);
+            var dm = fx.dust.main; dm.startLifetime = new ParticleSystem.MinMaxCurve(0.6f, 1.2f); dm.startSpeed = new ParticleSystem.MinMaxCurve(0.3f, 1.2f); dm.startSize = new ParticleSystem.MinMaxCurve(0.25f, 0.55f);
+            var ds = fx.dust.shape; ds.shapeType = ParticleSystemShapeType.Cone; ds.angle = 25; ds.radius = 0.02f;
+            var de = fx.dust.emission; de.SetBursts(new[] { new ParticleSystem.Burst(0, 3) });
+            var col = fx.dust.colorOverLifetime; col.enabled = true; col.color = Fade(Color.white, Color.white);
+            var sz = fx.dust.sizeOverLifetime; sz.enabled = true; sz.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.6f, 1, 1.6f));
+            return fx;
+        }
+
+        public static void Impact(Vector3 p, Vector3 n, bool flesh)
+        {
+            var fx = impacts[impactNext];
+            if (fx == null || fx.go == null) fx = impacts[impactNext] = NewImpact();
+            impactNext = (impactNext + 1) % impacts.Length;
+            fx.go.transform.SetPositionAndRotation(p + n * 0.02f, Quaternion.LookRotation(n));
+            // sparks (stone / metal) or blood (flesh)
+            var m = fx.spark.main;
             m.startSpeed = new ParticleSystem.MinMaxCurve(flesh ? 1f : 3f, flesh ? 3f : 9f);
             m.startSize = new ParticleSystem.MinMaxCurve(flesh ? 0.05f : 0.02f, flesh ? 0.12f : 0.05f);
             m.startColor = flesh ? new Color(0.45f, 0.03f, 0.02f) : new Color(1f, 0.75f, 0.35f);
-            m.gravityModifier = 1.4f;
-            var sh = ps.shape; sh.shapeType = ParticleSystemShapeType.Cone; sh.angle = 35; sh.radius = 0.01f;
-            var em = ps.emission; em.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(flesh ? 10 : 14)) });
-            if (!flesh) { var rr = ps.GetComponent<ParticleSystemRenderer>(); rr.renderMode = ParticleSystemRenderMode.Stretch; rr.velocityScale = 0.04f; rr.lengthScale = 1f; }
-            ps.Play();
+            var em = fx.spark.emission; em.SetBursts(new[] { new ParticleSystem.Burst(0, (short)(flesh ? 10 : 14)) });
+            fx.sparkR.renderMode = flesh ? ParticleSystemRenderMode.Billboard : ParticleSystemRenderMode.Stretch;
             // dust puff
-            var d = MakePS("dust", R.smokeMat, p + n * 0.05f, rot, 2.5f);
-            var dm = d.main;
-            dm.startLifetime = new ParticleSystem.MinMaxCurve(0.6f, 1.2f);
-            dm.startSpeed = new ParticleSystem.MinMaxCurve(0.3f, 1.2f);
-            dm.startSize = new ParticleSystem.MinMaxCurve(0.25f, 0.55f);
+            var dm = fx.dust.main;
             dm.startColor = flesh ? new Color(0.35f, 0.05f, 0.04f, 0.6f) : new Color(0.62f, 0.6f, 0.55f, 0.55f);
-            var ds = d.shape; ds.shapeType = ParticleSystemShapeType.Cone; ds.angle = 25; ds.radius = 0.02f;
-            var de = d.emission; de.SetBursts(new[] { new ParticleSystem.Burst(0, 3) });
-            var col = d.colorOverLifetime; col.enabled = true; col.color = Fade(Color.white, Color.white);
-            var sz = d.sizeOverLifetime; sz.enabled = true; sz.size = new ParticleSystem.MinMaxCurve(1f, AnimationCurve.Linear(0, 0.6f, 1, 1.6f));
-            d.Play();
+            fx.dust.transform.position = p + n * 0.05f;
+            fx.spark.Clear(); fx.dust.Clear();
+            fx.spark.Play(); fx.dust.Play();
         }
 
         static Transform holeRoot;
@@ -542,12 +574,20 @@ namespace Zone47
             var r = q.GetComponent<MeshRenderer>(); r.sharedMaterial = Z47Refs.I.holeMat; r.shadowCastingMode = ShadowCastingMode.Off;
         }
 
+        // pooled tracers (a new GameObject + LineRenderer per shot before)
+        static readonly Queue<TracerFly> tracers = new Queue<TracerFly>();
         public static void Tracer(Vector3 a, Vector3 b)
         {
-            var go = new GameObject("tracer");
-            var lr = go.AddComponent<LineRenderer>();
-            lr.sharedMaterial = Z47Refs.I.tracerMat;
-            lr.positionCount = 2;
+            TracerFly tf = null;
+            while (tracers.Count > 0 && tf == null) tf = tracers.Dequeue();
+            if (tf == null)
+            {
+                var g = new GameObject("tracer"); UnityEngine.Object.DontDestroyOnLoad(g);
+                var l = g.AddComponent<LineRenderer>(); l.sharedMaterial = Z47Refs.I.tracerMat; l.positionCount = 2;
+                tf = g.AddComponent<TracerFly>();
+            }
+            var go = tf.gameObject; go.SetActive(true);
+            var lr = go.GetComponent<LineRenderer>();
             Vector3 dir = (b - a);
             float len = Mathf.Min(dir.magnitude, 6f);
             Vector3 start = a + dir.normalized * Mathf.Min(1.5f, dir.magnitude * 0.3f);
@@ -555,8 +595,9 @@ namespace Zone47
             lr.startWidth = 0.025f; lr.endWidth = 0.008f;
             lr.startColor = new Color(1f, 0.85f, 0.5f, 0.9f); lr.endColor = new Color(1f, 0.6f, 0.2f, 0f);
             lr.shadowCastingMode = ShadowCastingMode.Off;
-            go.AddComponent<TracerFly>().Init(start, dir.normalized, dir.magnitude, len);
+            tf.Init(start, dir.normalized, dir.magnitude, len);
         }
+        public static void TracerDone(TracerFly t) { t.gameObject.SetActive(false); tracers.Enqueue(t); }
 
         static readonly Queue<Transform> flashes = new Queue<Transform>();
         /// Short-lived muzzle flash for third-person weapons (pooled).
@@ -716,13 +757,13 @@ namespace Zone47
     public class TracerFly : MonoBehaviour
     {
         Vector3 s, d; float dist, len, t; LineRenderer lr;
-        public void Init(Vector3 start, Vector3 dir, float distance, float length) { s = start; d = dir; dist = distance; len = length; lr = GetComponent<LineRenderer>(); }
+        public void Init(Vector3 start, Vector3 dir, float distance, float length) { s = start; d = dir; dist = distance; len = length; t = 0f; lr = GetComponent<LineRenderer>(); }
         void Update()
         {
             t += Time.deltaTime * 320f;
             float a = Mathf.Min(t, dist), b = Mathf.Min(t + len, dist);
             lr.SetPosition(0, s + d * a); lr.SetPosition(1, s + d * b);
-            if (t >= dist) Destroy(gameObject);
+            if (t >= dist) FX.TracerDone(this);
         }
     }
 

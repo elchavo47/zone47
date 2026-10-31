@@ -14,8 +14,8 @@ namespace Zone47
         static float Speed => Thick ? 20f : 24f;
         // fog / sandstorm: fly much lower and tighter so the drone is still seen through the haze (at 85 m it was ~110 m away = invisible)
         static bool Thick => Weather.Current == Weather.Fog || Weather.Current == Weather.Sandstorm;
-        static float Alt => Thick ? 55f : 80f;
-        static float OrbitR => Thick ? 42f : 70f;
+        static float Alt => Thick ? 62f : 92f;
+        static float OrbitR => Thick ? 45f : 72f;
 
         /// Live aim of one strike. The host keeps moving it onto where the people are (and tells the other phones),
         /// then fixes the final target and the exact bomb spots right before the bombing run.
@@ -423,7 +423,7 @@ namespace Zone47
                     b = rends[0].bounds; foreach (var r in rends) b.Encapsulate(r.bounds);
                 }
                 float span = Mathf.Max(b.size.x, b.size.z);
-                if (span > 0.01f) wrap.transform.localScale = Vector3.one * (12f / span);      // ~12 m wingspan (was 17)
+                if (span > 0.01f) wrap.transform.localScale = Vector3.one * (16f / span);      // ~16 m wingspan
                 if (droneMat == null && R.concreteMat != null)
                 {
                     droneMat = new Material(R.concreteMat) { name = "DronePaint" };
@@ -432,6 +432,7 @@ namespace Zone47
                 }
                 foreach (var r in rends) { if (droneMat != null) { var mats = r.sharedMaterials; for (int i = 0; i < mats.Length; i++) mats[i] = droneMat; r.sharedMaterials = mats; } r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off; }
                 DroneBeacon.Add(wrap);
+                if (Thick) DroneHaze.Apply(wrap);
                 return wrap;
             }
             var root = new GameObject("Drone");
@@ -448,6 +449,7 @@ namespace Zone47
             Part(new Vector3(0, 0.6f, -3.6f), new Vector3(0.1f, 1.2f, 0.9f), PrimitiveType.Cube); // tail fin
             Part(new Vector3(0, 0.1f, -3.8f), new Vector3(3.2f, 0.1f, 0.7f), PrimitiveType.Cube); // tail plane
             DroneBeacon.Add(root);
+            if (Thick) DroneHaze.Apply(root);
             return root;
         }
 
@@ -487,4 +489,40 @@ namespace Zone47
             r.enabled = flash || t > 0.5f;
         }
     }
+
+    /// Sandstorm / fog: the drone's lit material is fogged like the rest of the scene, and at ~70 m the dust swallowed it
+    /// completely. Here it gets an unlit dark material whose haze is computed by hand and capped at 55%:
+    /// a dusty but always readable silhouette, the way a plane looks through a sandstorm.
+    public class DroneHaze : MonoBehaviour
+    {
+        static readonly Color Body = new Color(0.17f, 0.17f, 0.16f, 1f);
+        const float MaxHaze = 0.55f;
+        Material mat;
+
+        public static void Apply(GameObject drone)
+        {
+            var src = Z47Refs.I.smokeMat;                   // Zone47/FXAlpha: unlit, no scene fog
+            if (src == null) return;
+            var h = drone.AddComponent<DroneHaze>();
+            h.mat = new Material(src) { name = "DroneHaze" };
+            h.mat.SetTexture("_BaseMap", null); h.mat.SetFloat("_VC", 0f); h.mat.SetColor("_BaseColor", Body);
+            foreach (var r in drone.GetComponentsInChildren<Renderer>())
+            {
+                if (r.name == "Beacon") continue;
+                var m = r.sharedMaterials; for (int i = 0; i < m.Length; i++) m[i] = h.mat; r.sharedMaterials = m;
+            }
+        }
+
+        void LateUpdate()
+        {
+            var cam = Camera.main; if (cam == null || mat == null) return;
+            float d = Vector3.Distance(cam.transform.position, transform.position);
+            float f = 1f - Mathf.Exp(-Mathf.Pow(RenderSettings.fogDensity * d, 2f));     // same curve as the scene fog (exp2)
+            var c = Color.Lerp(Body, RenderSettings.fogColor, Mathf.Min(f, MaxHaze)); c.a = 1f;
+            mat.SetColor("_BaseColor", c);
+        }
+
+        void OnDestroy() { if (mat != null) Destroy(mat); }
+    }
 }
+

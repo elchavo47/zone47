@@ -29,6 +29,41 @@ namespace Zone47
         static Texture2D leanL, leanR, proneIc;
         public static Texture2D LeanIcon(int dir) => dir < 0 ? (leanL ??= DrawIcon(LeanShape(-1))) : (leanR ??= DrawIcon(LeanShape(1)));
         public static Texture2D ProneIcon => proneIc ??= DrawIcon(ProneShape);
+        static Texture2D smokeIc, flashIc;
+        public static Texture2D SmokeIcon => smokeIc ??= DrawIcon(SmokeShape);
+        public static Texture2D FlashIcon => flashIc ??= DrawIcon(FlashShape);
+
+        static float Box(Vector2 p, Vector2 c, Vector2 half, float r)
+        {
+            float qx = Mathf.Abs(p.x - c.x) - half.x + r, qy = Mathf.Abs(p.y - c.y) - half.y + r;
+            return new Vector2(Mathf.Max(qx, 0f), Mathf.Max(qy, 0f)).magnitude + Mathf.Min(Mathf.Max(qx, qy), 0f) - r;
+        }
+        /// Grenade canister with its cap and spoon (lever).
+        static float Can(Vector2 p, float cy)
+        {
+            float d = Box(p, new Vector2(0f, cy), new Vector2(0.2f, 0.36f), 0.08f);
+            d = Mathf.Min(d, Box(p, new Vector2(0f, cy + 0.42f), new Vector2(0.1f, 0.07f), 0.03f));
+            return Mathf.Min(d, Seg(p, new Vector2(0.1f, cy + 0.42f), new Vector2(0.3f, cy + 0.1f)) - 0.04f);
+        }
+        static float SmokeShape(Vector2 p)
+        {
+            float d = Can(p, -0.5f);
+            d = Mathf.Min(d, (p - new Vector2(-0.3f, 0.28f)).magnitude - 0.24f);
+            d = Mathf.Min(d, (p - new Vector2(0.08f, 0.45f)).magnitude - 0.29f);
+            d = Mathf.Min(d, (p - new Vector2(0.42f, 0.22f)).magnitude - 0.21f);
+            return Mathf.Min(d, (p - new Vector2(-0.05f, 0.12f)).magnitude - 0.2f);
+        }
+        static float FlashShape(Vector2 p)
+        {
+            float d = Can(p, -0.42f);
+            var c = new Vector2(0f, 0.3f);
+            for (int i = 0; i < 7; i++)
+            {
+                float a = i * 30f * Mathf.Deg2Rad; var dir = new Vector2(Mathf.Cos(a), Mathf.Sin(a));
+                d = Mathf.Min(d, Seg(p, c + dir * 0.24f, c + dir * 0.6f) - 0.05f);
+            }
+            return d;
+        }
 
         static float Seg(Vector2 p, Vector2 a, Vector2 b)
         {
@@ -313,7 +348,6 @@ namespace Zone47
             new Item { id = "jump",    label = "b_jump",    left = false, pos = new Vector2(-170, 490), size = 120 },
             new Item { id = "crouch",  label = "b_crouch",  left = false, pos = new Vector2(-357, 437), size = 115 },
             new Item { id = "reload",  label = "b_reload",  left = false, pos = new Vector2(-492, 382), size = 105 },
-            new Item { id = "grenade", label = "b_grenade", left = false, pos = new Vector2(-612, 252), size = 105 },
             new Item { id = "prone",   label = "b_prone",   left = false, pos = new Vector2(-285, 600), size = 95 },
             new Item { id = "leanl",   label = "b_leanl",   left = true,  pos = new Vector2(340, 600),  size = 90 },
             new Item { id = "leanr",   label = "b_leanr",   left = true,  pos = new Vector2(450, 600),  size = 90 },
@@ -382,6 +416,23 @@ namespace Zone47
         GameObject reloadBox; Text reloadTxt, reloadHint; RectTransform reloadFill; int cReload = -1;
         float deathAt;
         Image[] slotImgs = new Image[5];
+        const float CardW = 250f, CardH = 76f, CardGap = 10f, BarY = 20f, BarH = 18f;
+        const float CardY = BarY + BarH + 8f + CardH * 0.5f;          // centre of the weapon cards
+        readonly Outline[] cardOutline = new Outline[2];
+        readonly Text[] cardAmmo = new Text[2];
+        readonly int[] cCardMag = { -1, -1 }, cCardRes = { -1, -1 };
+        Image fireTab, takeBtn; Text fireTxt, takeTxt;
+        WeaponPickup offered; float offeredAt = -9f;
+
+        /// A gun on the ground is in reach: show the TAKE button for it this frame.
+        public void OfferWeapon(WeaponPickup pk) { offered = pk; offeredAt = Time.time; }
+
+        static void FitIcon(RawImage ri, Texture2D t, float maxW, float maxH)
+        {
+            float ih = maxH, iw = ih * t.width / (float)Mathf.Max(1, t.height);
+            if (iw > maxW) { iw = maxW; ih = iw * t.height / (float)Mathf.Max(1, t.width); }
+            ri.rectTransform.sizeDelta = new Vector2(iw, ih);
+        }
         Text[] slotTxt = new Text[5];
         RawImage[] slotIcons = new RawImage[5];
         int slotN = 3;
@@ -477,35 +528,51 @@ namespace Zone47
             var vl = feed.gameObject.AddComponent<VerticalLayoutGroup>();
             vl.childAlignment = TextAnchor.UpperLeft; vl.spacing = 6; vl.childControlHeight = false; vl.childControlWidth = false; vl.childForceExpandHeight = false;
 
-            // health
-            hpBack = UIK.Img(root, "hpBack", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 26), new Vector2(380, 10));
+            // ---- weapon panel (PUBG style): two main-weapon cards, the pistol tab on their top right, the fire-mode tab
+            //      above the one in hand, and a thick health bar across the bottom of the panel
+            float halfPanel = CardW + CardGap * 0.5f;
+            hpBack = UIK.Img(root, "hpBack", new Color(0f, 0f, 0f, 0.55f), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, BarY + BarH * 0.5f), new Vector2(halfPanel * 2f, BarH));
             hpFill = UIK.Img(hpBack.transform, "fill", Pal.Text, new Vector2(0, 0), new Vector2(1, 1), Vector2.zero, new Vector2(-4, -4));
             hpFill.rectTransform.pivot = new Vector2(0, 0.5f); hpFill.rectTransform.anchoredPosition = new Vector2(2, 0);
 
-            // weapon slots
             var lp0 = PlayerController.Local;
-            slotN = lp0 != null ? Mathf.Min(lp0.SlotCount, slotImgs.Length) : 3;
-            for (int i = 0; i < slotN; i++)
+            slotN = 3;
+            for (int i = 0; i < 2; i++)
             {
                 int idx = i;
-                string nm = lp0 != null ? lp0.SlotDef(i).displayName : "";
-                if (nm == "GLOCK 17") nm = "GLOCK";
-                var b = UIK.Img(root, "slot" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i - (slotN - 1) * 0.5f) * 128, 78), new Vector2(120, 42), true);
+                var b = UIK.Img(root, "card" + i, Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2((i == 0 ? -1f : 1f) * (CardW + CardGap) * 0.5f, CardY), new Vector2(CardW, CardH), true);
                 slotImgs[i] = b;
-                // weapon silhouette (same as the kill feed); text only if there's no icon
-                var ico = lp0 != null ? Z47Refs.I.KillIcon(lp0.SlotDef(i).id) : null;
-                if (ico != null)
-                {
-                    float ih = 28f, iw = Mathf.Min(108f, ih * ico.width / (float)Mathf.Max(1, ico.height)); ih = iw * ico.height / (float)ico.width;
-                    var ir = UIK.Rect(b.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(iw, ih));
-                    slotIcons[i] = ir.gameObject.AddComponent<RawImage>(); slotIcons[i].texture = ico; slotIcons[i].raycastTarget = false; slotIcons[i].color = Pal.Text;
-                }
-                else slotTxt[i] = UIK.Txt(b.transform, "t", nm, 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
-                var tp = b.gameObject.AddComponent<TouchPad>(); tp.down = e => PInput.select = idx;
+                cardOutline[i] = b.gameObject.AddComponent<Outline>(); cardOutline[i].effectDistance = new Vector2(3, 3); cardOutline[i].effectColor = new Color(0, 0, 0, 0);
+                var ir = UIK.Rect(b.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(18, 8), new Vector2(150, 40));
+                slotIcons[i] = ir.gameObject.AddComponent<RawImage>(); slotIcons[i].raycastTarget = false; slotIcons[i].color = Pal.Text;
+                cardAmmo[i] = UIK.Txt(b.transform, "am", "", 20, Pal.Text, TextAnchor.LowerLeft, Vector2.zero, Vector2.one, new Vector2(12, 6), new Vector2(-24, -12), true);
+                cardAmmo[i].supportRichText = true;
+                b.gameObject.AddComponent<TouchPad>().down = e => PInput.select = idx;
             }
+            // pistol tab (Glock, always carried)
+            var pt = UIK.Img(root, "pistol", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(halfPanel - 52f, CardY + CardH * 0.5f + 4f + 18f), new Vector2(104, 36), true);
+            slotImgs[2] = pt;
+            var pir = UIK.Rect(pt.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(46, 28));
+            slotIcons[2] = pir.gameObject.AddComponent<RawImage>(); slotIcons[2].raycastTarget = false; slotIcons[2].color = Pal.Text;
+            var gico = Z47Refs.I.KillIcon("glock"); if (gico != null) { slotIcons[2].texture = gico; FitIcon(slotIcons[2], gico, 60f, 28f); }
+            pt.gameObject.AddComponent<TouchPad>().down = e => PInput.select = 2;
+            // fire mode tab (OTO / TEK), sits above the weapon in hand
+            fireTab = UIK.Img(root, "fmode", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), Vector2.zero, new Vector2(96, 34), true);
+            fireTxt = UIK.Txt(fireTab.transform, "t", "OTO", 20, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            fireTab.gameObject.AddComponent<TouchPad>().down = e => PInput.fireMode = true;
+            // TAKE button for a gun on the ground (shows while you stand over one)
+            takeBtn = UIK.Img(root, "take", new Color(0.04f, 0.045f, 0.04f, 0.85f), new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, CardY + CardH * 0.5f + 120f), new Vector2(300, 64), true);
+            takeBtn.gameObject.AddComponent<Outline>().effectColor = Pal.Accent;
+            takeTxt = UIK.Txt(takeBtn.transform, "t", "", 24, Pal.Text, TextAnchor.MiddleCenter, Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, true);
+            takeTxt.supportRichText = true;
+            takeBtn.gameObject.AddComponent<TouchPad>().down = e => { if (offered != null && PlayerController.Local != null) PlayerController.Local.TakeWeapon(offered); offered = null; };
+            takeBtn.gameObject.SetActive(false);
+
+            BuildThrowables();
 
             ammo = UIK.Txt(root, "ammo", "30 / 120", 44, Pal.Text, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 30), new Vector2(360, 60), true);
             weaponName = UIK.Txt(root, "wname", "M4A1", 18, Pal.Accent, TextAnchor.LowerRight, new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 86), new Vector2(360, 30), true);
+            ammo.gameObject.SetActive(false); weaponName.gameObject.SetActive(false);      // shown in the weapon cards now
             toast = UIK.Txt(root, "toast", "", 24, Pal.Accent, TextAnchor.MiddleCenter, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, -120), new Vector2(800, 50), true);
 
             BuildRadar(); BuildIndicators(); BuildTags();
@@ -519,6 +586,97 @@ namespace Zone47
 
             BuildDeath(); BuildPause(); BuildReload(); BuildGrenadeWarn();
             controls.gameObject.SetActive(TouchUI);
+        }
+
+        // ------------------------------------------------------------ throwables (PUBG style)
+        // One slot next to the weapons. Tap: take the selected grenade in hand (FIRE throws it, a weapon slot puts it away).
+        // ▲ next to it: next type. Hold the slot (or slide up from it): a menu opens above it; slide left/right without
+        // lifting the finger and let go on the one you want.
+        Image nadeSlot; RawImage nadeIcon; Text nadeCount; TouchPad nadeTp;
+        RectTransform nadeMenu; readonly List<Image> nadeCells = new List<Image>(); int nadeHover = -1;
+        float nadeDownAt; Vector2 nadeDownPos; int cNadeKey = -1;
+
+        void BuildThrowables()
+        {
+            float x = CardW + CardGap * 0.5f + 12f + 46f;
+            nadeSlot = UIK.Img(root, "nade", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(x, CardY), new Vector2(92, CardH), true);
+            var ir = UIK.Rect(nadeSlot.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(-6, 6), new Vector2(46, 46));
+            nadeIcon = ir.gameObject.AddComponent<RawImage>(); nadeIcon.raycastTarget = false; nadeIcon.color = Pal.Text;
+            nadeCount = UIK.Txt(nadeSlot.transform, "n", "2", 22, Pal.Text, TextAnchor.LowerRight, Vector2.zero, Vector2.one, new Vector2(-8, 4), new Vector2(-12, -8), true);
+            nadeTp = nadeSlot.gameObject.AddComponent<TouchPad>();
+            nadeTp.down = e => { nadeDownAt = Time.unscaledTime; nadeDownPos = e != null ? e.position : Vector2.zero; };
+            nadeTp.drag = e =>
+            {
+                if (e == null) return;
+                if (nadeMenu == null && e.position.y - nadeDownPos.y > 30f * Screen.height / 1080f) OpenNadeMenu();
+                if (nadeMenu != null) HoverNade(e.position);
+            };
+            nadeTp.up = e =>
+            {
+                if (nadeMenu != null)
+                {
+                    var p = PlayerController.Local;
+                    if (nadeHover >= 0 && p != null && p.Nades(nadeHover) > 0) PInput.nadeSelect = nadeHover;
+                    CloseNadeMenu();
+                }
+                else if (e != null) PInput.nadeEquip = true;          // plain tap
+            };
+            // ▲ next type
+            var nb = UIK.Img(root, "nadeNext", Pal.Panel, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(x, CardY + CardH * 0.5f + 4f + 17f), new Vector2(92, 34), true);
+            var ar = UIK.Img(nb.transform, "a", Pal.Accent, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(22, 22)); ar.sprite = Gfx.Arrow;
+            nb.gameObject.AddComponent<TouchPad>().down = e => PInput.nadeNext = true;
+        }
+
+        void OpenNadeMenu()
+        {
+            CloseNadeMenu();
+            var p = PlayerController.Local; if (p == null) return;
+            var sr = nadeSlot.rectTransform;
+            nadeMenu = UIK.Rect(root, "nadeMenu", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(sr.anchoredPosition.x, CardY + CardH * 0.5f + 4f + 34f + 10f + 54f), new Vector2(3 * 116 + 8, 108));
+            UIK.Img(nadeMenu, "bg", new Color(0.03f, 0.035f, 0.03f, 0.85f), Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero);
+            for (int k = 0; k < Throwable.Count; k++)
+            {
+                var c = UIK.Img(nadeMenu, "c" + k, Pal.Panel, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2((k - 1) * 116f, 0), new Vector2(110, 96));
+                bool has = p.Nades(k) > 0;
+                var ic = UIK.Rect(c.transform, "ic", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 14), new Vector2(46, 46)).gameObject.AddComponent<RawImage>();
+                ic.texture = Throwable.Icon(k); ic.raycastTarget = false; ic.color = has ? Color.white : new Color(1, 1, 1, 0.25f);
+                UIK.Txt(c.transform, "n", Throwable.Name(k) + "  " + p.Nades(k), 17, has ? Pal.Text : Pal.Dim, TextAnchor.MiddleCenter, new Vector2(0, 0), new Vector2(1, 0), new Vector2(0, 16), new Vector2(0, 24), true);
+                nadeCells.Add(c);
+            }
+            nadeHover = p.NadeSel; PaintNadeMenu();
+        }
+
+        void HoverNade(Vector2 screen)
+        {
+            if (nadeMenu == null) return;
+            if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(nadeMenu, screen, null, out var local)) return;
+            int k = Mathf.Clamp(Mathf.RoundToInt(local.x / 116f) + 1, 0, Throwable.Count - 1);
+            if (k != nadeHover) { nadeHover = k; PaintNadeMenu(); }
+        }
+
+        void PaintNadeMenu()
+        {
+            for (int k = 0; k < nadeCells.Count; k++)
+                nadeCells[k].color = k == nadeHover ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.85f) : Pal.Panel;
+        }
+
+        void CloseNadeMenu() { if (nadeMenu != null) Destroy(nadeMenu.gameObject); nadeMenu = null; nadeCells.Clear(); nadeHover = -1; }
+
+        void UpdateThrowables(PlayerController p)
+        {
+            if (nadeSlot == null) return;
+            // holding the slot without moving also opens the menu
+            if (nadeMenu == null && nadeTp != null && nadeTp.held && Time.unscaledTime - nadeDownAt > 0.32f) OpenNadeMenu();
+            int key = p.NadeSel * 1000 + p.Nades(p.NadeSel) * 10 + (p.NadeEquipped ? 1 : 0);
+            if (key == cNadeKey) return;
+            cNadeKey = key;
+            nadeIcon.texture = Throwable.Icon(p.NadeSel);
+            nadeCount.text = p.Nades(p.NadeSel).ToString();
+            bool on = p.NadeEquipped;
+            nadeSlot.color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.8f) : Pal.Panel;
+            nadeIcon.color = on ? new Color(0.08f, 0.06f, 0.03f) : p.Nades(p.NadeSel) > 0 ? Pal.Text : new Color(1, 1, 1, 0.3f);
+            nadeCount.color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
+            cWep = null;                                          // repaint the weapon slots (they dim while a grenade is in hand)
         }
 
         // ------------------------------------------------------------ touch controls
@@ -609,9 +767,7 @@ namespace Zone47
             RoundButton(HudLayout.Get(lay, "prone"), Color.white, false, () => PInput.proneToggle = true);
             leanLImg = RoundButton(HudLayout.Get(lay, "leanl"), Color.white, false, () => PInput.lean = PInput.lean == -1 ? 0 : -1);
             leanRImg = RoundButton(HudLayout.Get(lay, "leanr"), Color.white, false, () => PInput.lean = PInput.lean == 1 ? 0 : 1);
-            var gb = RoundButton(HudLayout.Get(lay, "grenade"), Color.white, false, () => PInput.grenade = true);
-            grenadeTxt = UIK.Txt(gb.transform, "n", "2", 26, Pal.Accent, TextAnchor.UpperRight, Vector2.one, Vector2.one, new Vector2(-12, -10), new Vector2(40, 30), true);
-            cGren = -1;
+            // (grenades: the throwable slot next to the weapons, see BuildThrowables)
         }
         float joyScale = 1f;
 
@@ -790,6 +946,7 @@ namespace Zone47
             {
                 foreach (var g in Grenade.Live)
                 {
+                    if (g == null || !g.Lethal) continue;
                     if (g == null || n >= gWarn.Count) continue;
                     Vector3 to = g.transform.position - p.transform.position;
                     float dist = to.magnitude;
@@ -1028,10 +1185,14 @@ namespace Zone47
             if (kn != "") t = Part(kn);
             if (icon != null)
             {
-                float ih = 20f, iw = ih * icon.width / (float)Mathf.Max(1, icon.height);
+                // the grenade picture lies on its side (fuse to the right): stand it up, fuse on top
+                bool upright = weaponId == "gren";
+                float ih = upright ? 24f : 20f, iw = upright ? ih * icon.height / (float)Mathf.Max(1, icon.width) : ih * icon.width / (float)Mathf.Max(1, icon.height);
                 var ir = UIK.Rect(bg.transform, "wi", new Vector2(0, 0.5f), new Vector2(0, 0.5f), Vector2.zero, new Vector2(iw, ih));
                 ir.pivot = new Vector2(0, 0.5f); ir.anchoredPosition = new Vector2(x, 0);
-                var ri = ir.gameObject.AddComponent<RawImage>(); ri.texture = icon; ri.raycastTarget = false; ri.color = new Color(0.92f, 0.9f, 0.84f);
+                var pic = upright ? UIK.Rect(ir, "r", new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(ih, iw)) : ir;
+                if (upright) pic.localRotation = Quaternion.Euler(0, 0, 90f);
+                var ri = pic.gameObject.AddComponent<RawImage>(); ri.texture = icon; ri.raycastTarget = false; ri.color = new Color(0.92f, 0.9f, 0.84f);
                 x += iw + 8f;
             }
             else if (kn != "") Part("<color=#B0A890>»</color>");
@@ -1092,7 +1253,40 @@ namespace Zone47
             flashA = Mathf.Max(flashA, Mathf.Clamp01(amount) * 0.85f);
             flashImg.transform.SetAsLastSibling();
         }
-        public void TickFlash() { if (flashImg == null) return; flashA = Mathf.MoveTowards(flashA, 0f, Time.deltaTime * 1.4f); flashImg.color = new Color(1, 0.97f, 0.9f, flashA); }
+        public void TickFlash()
+        {
+            if (flashImg == null) return;
+            if (Time.time < flashHold) flashA = 1f;                                       // flashbang: blind (pure white)
+            else flashA = Mathf.MoveTowards(flashA, 0f, Time.deltaTime * (flashSlow ? 0.75f : 1.4f));
+            if (flashA <= 0f) flashSlow = false;
+            flashImg.color = new Color(1, 0.98f, 0.94f, flashA);
+        }
+        float flashHold; bool flashSlow;
+
+        /// Flashbang: fully white for `dur` seconds, then the sight slowly comes back; muffled ringing ears meanwhile.
+        public void Flashbang(float dur)
+        {
+            Flash(0f);                                                                    // makes sure the overlay exists
+            flashHold = Mathf.Max(flashHold, Time.time + dur); flashSlow = true; flashA = 1f;
+            flashImg.transform.SetAsLastSibling();
+            StartCoroutine(Ringing(dur + 1.5f));
+        }
+
+        System.Collections.IEnumerator Ringing(float dur)
+        {
+            var l = FindFirstObjectByType<AudioListener>(); if (l == null) yield break;
+            var lp = l.GetComponent<AudioLowPassFilter>() ?? l.gameObject.AddComponent<AudioLowPassFilter>();
+            float t = 0f;
+            while (t < dur && lp != null)
+            {
+                t += Time.deltaTime;
+                float k = Mathf.Clamp01(1f - t / dur);
+                lp.cutoffFrequency = Mathf.Min(lp.cutoffFrequency, Mathf.Lerp(22000f, 500f, k * k));
+                yield return null;
+                if (lp != null) lp.cutoffFrequency = 22000f;
+            }
+            if (lp != null) lp.cutoffFrequency = 22000f;
+        }
         public void ShowToastBig(string s, Color c, float dur = 3f) { bigText.text = s; bigT = dur; bigCol = c; bigText.transform.localScale = Vector3.one * 1.4f; }
 
         // ------------------------------------------------------------ radar / minimap
@@ -1306,17 +1500,52 @@ namespace Zone47
                 string rc = cRes == 0 ? "#FF4A3D" : cRes < ms ? "#FFA028" : "#9E998C";
                 ammo.text = "<color=" + mc + ">" + cMag + "</color><size=40><color=#9E998C> / </color><color=" + rc + ">" + cRes + "</color></size>";
             }
-            if (d.id != cWep)
+            // ammo in each card (the one in hand colours up when low)
+            for (int i = 0; i < 2; i++)
             {
-                cWep = d.id; weaponName.text = d.displayName;
-                for (int i = 0; i < slotN; i++)
+                int m = p.SlotMag(i), r = p.SlotReserve(i);
+                if (m == cCardMag[i] && r == cCardRes[i]) continue;
+                cCardMag[i] = m; cCardRes[i] = r;
+                int ms = Mathf.Max(1, p.SlotDef(i).magSize);
+                string mc = m == 0 ? "#FF4A3D" : m <= Mathf.CeilToInt(ms * 0.3f) ? "#FFA028" : "#EDE8D9";
+                cardAmmo[i].text = "<color=" + mc + ">" + m + "</color><size=16><color=#9E998C> / " + r + "</color></size>";
+            }
+            // TAKE button
+            bool offer = offered != null && Time.time - offeredAt < 0.25f && p.Alive;
+            if (takeBtn.gameObject.activeSelf != offer) takeBtn.gameObject.SetActive(offer);
+            if (offer) { string nm = Z47Refs.I.Weapon(offered.weaponId).displayName; string tt = (Settings.Turkish ? "AL  ·  " : "TAKE  ·  ") + "<color=#F29E1F>" + nm + "</color>"; if (takeTxt.text != tt) takeTxt.text = tt; }
+
+            string key = p.CurSlot + "|" + p.NadeEquipped + "|" + p.SlotDef(0).id + "|" + p.SlotDef(1).id + "|" + p.FireAuto;
+            if (key != cWep)
+            {
+                cWep = key; weaponName.text = d.displayName;
+                for (int i = 0; i < 3; i++)
                 {
-                    bool on = i == p.CurSlot;
-                    slotImgs[i].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.8f) : Pal.Panel;
-                    if (slotIcons[i] != null) slotIcons[i].color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
+                    bool on = i == p.CurSlot && !p.NadeEquipped;
+                    if (i < 2)
+                    {
+                        var ic = Z47Refs.I.KillIcon(p.SlotDef(i).id);
+                        if (ic != null && slotIcons[i].texture != ic) { slotIcons[i].texture = ic; FitIcon(slotIcons[i], ic, 150f, 40f); }
+                        slotImgs[i].color = on ? new Color(0.13f, 0.12f, 0.09f, 0.85f) : Pal.Panel;
+                        cardOutline[i].effectColor = on ? Pal.Accent : new Color(0, 0, 0, 0);
+                        slotIcons[i].color = on ? Color.white : new Color(0.75f, 0.73f, 0.68f, 0.75f);
+                    }
+                    else
+                    {
+                        slotImgs[2].color = on ? new Color(Pal.Accent.r, Pal.Accent.g, Pal.Accent.b, 0.85f) : Pal.Panel;
+                        slotIcons[2].color = on ? new Color(0.08f, 0.06f, 0.03f) : Pal.Text;
+                    }
+                }
+                // fire mode tab over the main weapon in hand (automatic weapons only)
+                bool showFire = p.CurSlot < 2 && !p.NadeEquipped && p.CanSwitchFireMode;
+                fireTab.gameObject.SetActive(showFire);
+                if (showFire)
+                {
+                    fireTab.rectTransform.anchoredPosition = new Vector2((p.CurSlot == 0 ? -1f : 1f) * (CardW + CardGap) * 0.5f - CardW * 0.5f + 48f, CardY + CardH * 0.5f + 4f + 17f);
+                    fireTxt.text = p.FireAuto ? (Settings.Turkish ? "OTO" : "AUTO") : (Settings.Turkish ? "TEK" : "SINGLE");
                 }
             }
-            if (p.grenades != cGren) { cGren = p.grenades; grenadeTxt.text = cGren.ToString(); }
+            UpdateThrowables(p);
             if (aimBtnImg != null) aimBtnImg.color = AimToggled ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
             if (leanLImg != null) leanLImg.color = PInput.lean == -1 ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);
             if (leanRImg != null) leanRImg.color = PInput.lean == 1 ? new Color(1, 1, 1, 0.45f) : new Color(0, 0, 0, 0.35f);

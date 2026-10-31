@@ -1298,6 +1298,10 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.AudioLowPassFilter
 
+		//System.Single UnityEngine.AudioLowPassFilter::get_cutoffFrequency_Injected(System.IntPtr)
+		void Register_UnityEngine_AudioLowPassFilter_get_cutoffFrequency_Injected();
+		Register_UnityEngine_AudioLowPassFilter_get_cutoffFrequency_Injected();
+
 		//System.Void UnityEngine.AudioLowPassFilter::set_cutoffFrequency_Injected(System.IntPtr,System.Single)
 		void Register_UnityEngine_AudioLowPassFilter_set_cutoffFrequency_Injected();
 		Register_UnityEngine_AudioLowPassFilter_set_cutoffFrequency_Injected();
@@ -4754,6 +4758,10 @@ void RegisterAllStrippedInternalCalls()
 
 	//Start Registrations for type : UnityEngine.ParticleSystem
 
+		//System.Void UnityEngine.ParticleSystem::Clear_Injected(System.IntPtr,System.Boolean)
+		void Register_UnityEngine_ParticleSystem_Clear_Injected();
+		Register_UnityEngine_ParticleSystem_Clear_Injected();
+
 		//System.Void UnityEngine.ParticleSystem::EmitOld_Internal_Injected(System.IntPtr,UnityEngine.ParticleSystem/Particle&)
 		void Register_UnityEngine_ParticleSystem_EmitOld_Internal_Injected();
 		Register_UnityEngine_ParticleSystem_EmitOld_Internal_Injected();
@@ -5517,6 +5525,10 @@ void RegisterAllStrippedInternalCalls()
 		//System.Void UnityEngine.Renderer::set_smallMeshCulling_Injected(System.IntPtr,System.Boolean)
 		void Register_UnityEngine_Renderer_set_smallMeshCulling_Injected();
 		Register_UnityEngine_Renderer_set_smallMeshCulling_Injected();
+
+		//UnityEngine.Material[] UnityEngine.Renderer::GetMaterialArray_Injected(System.IntPtr)
+		void Register_UnityEngine_Renderer_GetMaterialArray_Injected();
+		Register_UnityEngine_Renderer_GetMaterialArray_Injected();
 
 		//UnityEngine.Material[] UnityEngine.Renderer::GetSharedMaterialArray_Injected(System.IntPtr)
 		void Register_UnityEngine_Renderer_GetSharedMaterialArray_Injected();

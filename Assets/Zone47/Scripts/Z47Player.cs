@@ -18,7 +18,10 @@ namespace Zone47
         public static bool jump, crouchToggle, proneToggle, reload, grenade, next;
         public static int lean;              // -1 left, 0 none, 1 right (toggled by the HUD buttons)
         public static int select = -1;
-        public static void ResetEdges() { jump = crouchToggle = proneToggle = reload = grenade = next = false; select = -1; look = Vector2.zero; }
+        public static bool nadeEquip, nadeNext;           // throwable slot tapped / ▲ next type
+        public static bool fireMode;                       // OTO / TEK tab tapped
+        public static int nadeSelect = -1;               // picked from the throwable menu
+        public static void ResetEdges() { jump = crouchToggle = proneToggle = reload = grenade = next = nadeEquip = nadeNext = fireMode = false; select = -1; nadeSelect = -1; look = Vector2.zero; }
     }
 
     public class PlayerController : Actor
@@ -41,7 +44,8 @@ namespace Zone47
         float heat, fovKick, fovKickVel, wallT, breathT;
 
         // weapons
-        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; public Transform reticle; }
+        class Slot { public WeaponDef def; public GameObject go; public int mag, reserve; public Transform mag3d; public Animation anim; public Renderer[] rends; public float reloadDur; public Renderer adsReticle; public Transform reticle; public bool semi; }
+        int lastPrimary;                                   // the main weapon a gun from the ground replaces when the pistol is in hand
         Slot[] slots;
         int cur;
         float nextFire;
@@ -49,7 +53,12 @@ namespace Zone47
         float switchT;        // >0 while lowering/raising
         int pendingSlot = -1;
         float boltT;
-        public int grenades = 2;
+        // throwables (frag / smoke / flash): counts, which one the slot shows, and whether it's in hand right now
+        readonly int[] nades = (int[])Throwable.Start.Clone();
+        int nadeSel; bool nadeEquipped; float nadeT; int throwKind; GameObject nadeVis;
+        public int Nades(int k) => k >= 0 && k < nades.Length ? nades[k] : 0;
+        public int NadeSel => nadeSel;
+        public bool NadeEquipped => nadeEquipped;
         float throwT = -1f;
         Vector3 kickPos, kickPosVel; float kickRot, kickRoll, kickYaw, kickRotVel, kickRollVel, kickYawVel;
         static void Spring(ref float x, ref float v, float k, float c, float dt) { v += (-k * x - c * v) * dt; x += v * dt; }
@@ -63,16 +72,21 @@ namespace Zone47
         bool lockNext = true, wasLocked;
         bool Firing => PInput.fireHeld || keyFire;
         public float spreadNow;
-        Transform flash; float flashT;
+        Transform flash; float flashT; Light muzzleLight;
         ArmsRig arms;
         Actor killer;
 
-        public bool Aiming => PInput.aim && !reloading && switchT <= 0 && throwT < 0;
+        public bool Aiming => PInput.aim && !reloading && switchT <= 0 && throwT < 0 && !nadeEquipped;
         public WeaponDef Cur => slots[cur].def;
         public override string WeaponId => slots != null ? slots[cur].def.id : null;
         public int SlotCount => slots.Length;
         public WeaponDef SlotDef(int i) => slots[i].def;
         public int CurSlot => cur;
+        public int SlotMag(int i) => slots[i].mag;
+        public int SlotReserve(int i) => slots[i].reserve;
+        /// Automatic weapons can be switched to single shots (OTO / TEK tab).
+        public bool FireAuto => slots[cur].def.automatic && !slots[cur].semi;
+        public bool CanSwitchFireMode => slots[cur].def.automatic;
         public int Mag => slots[cur].mag;
         public int Reserve => slots[cur].reserve;
         public bool Reloading => reloading;
@@ -123,26 +137,10 @@ namespace Zone47
             viewRoot.SetParent(camGo.transform, false);
 
             var R = Z47Refs.I;
-            var idl = new System.Collections.Generic.List<string> { "m4", "awp", "glock" };
-            if (R.HasWeapon("carbine")) idl.Add("carbine");
-            if (R.HasWeapon("shotgun")) idl.Add("shotgun");
-            string[] ids = idl.ToArray();
+            // loadout: the two main weapons picked in the armory + the Glock (slot 2, always)
+            string[] ids = { Settings.Loadout1, Settings.Loadout2, "glock" };
             slots = new Slot[ids.Length];
-            for (int i = 0; i < ids.Length; i++)
-            {
-                var d = R.Weapon(ids[i]);
-                var w = Instantiate(d.prefab, viewRoot);
-                w.name = "VM_" + d.id;
-                Util.SetShadows(w, ShadowCastingMode.Off);
-                foreach (var c in w.GetComponentsInChildren<Collider>()) Destroy(c);
-                w.SetActive(i == 0);
-                slots[i] = new Slot { def = d, go = w, mag = d.magSize, reserve = d.reserve, mag3d = Util.FindDeep(w.transform, "Mag"),
-                                      anim = d.animated ? w.GetComponentInChildren<Animation>() : null, rends = w.GetComponentsInChildren<Renderer>(), reloadDur = d.reloadTime };
-                var adsRet = Util.FindDeep(w.transform, "ReticleADS");
-                if (adsRet != null) slots[i].adsReticle = adsRet.GetComponent<Renderer>();
-                slots[i].reticle = Util.FindDeep(w.transform, "Reticle");     // holo dot: bullets follow what the eye sees
-                if (slots[i].anim != null) { var an = slots[i].anim; an.playAutomatically = false; an.cullingType = AnimationCullingType.AlwaysAnimate; foreach (AnimationState st in an) st.wrapMode = st.name == "idle" || st.name == "hold" ? WrapMode.Loop : WrapMode.Once; }
-            }
+            for (int i = 0; i < ids.Length; i++) slots[i] = MakeSlot(R.Weapon(ids[i]), i == 0);
 
             // muzzle flash quad
             var fq = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -151,12 +149,69 @@ namespace Zone47
             fq.GetComponent<Renderer>().sharedMaterial = R.flashMat;
             fq.GetComponent<Renderer>().shadowCastingMode = ShadowCastingMode.Off;
             flash = fq.transform; flash.gameObject.SetActive(false);
+            // one muzzle light that blinks with the flash (it used to create and destroy a light object per shot)
+            var lgo = new GameObject("MuzzleLight"); lgo.transform.SetParent(flash, false);
+            muzzleLight = lgo.AddComponent<Light>(); muzzleLight.type = LightType.Point; muzzleLight.range = 6f; muzzleLight.intensity = 3f;
+            muzzleLight.color = new Color(1f, 0.75f, 0.4f); muzzleLight.shadows = LightShadows.None; muzzleLight.enabled = false;
 
             if (Settings.ShowArms) arms = ArmsRig.Create(cam.transform);
             SetupViewmodelCamera();
 
             yaw = transform.eulerAngles.y;
             AttachFlash();
+        }
+
+        /// A first-person weapon in the hands' rig (inactive unless it's the one in hand).
+        Slot MakeSlot(WeaponDef d, bool active)
+        {
+            var w = Instantiate(d.prefab, viewRoot);
+            w.name = "VM_" + d.id;
+            Util.SetShadows(w, ShadowCastingMode.Off);
+            foreach (var c in w.GetComponentsInChildren<Collider>()) Destroy(c);
+            w.SetActive(active);
+            var sl = new Slot { def = d, go = w, mag = d.magSize, reserve = d.reserve, mag3d = Util.FindDeep(w.transform, "Mag"),
+                                anim = d.animated ? w.GetComponentInChildren<Animation>() : null, rends = w.GetComponentsInChildren<Renderer>(), reloadDur = d.reloadTime };
+            var adsRet = Util.FindDeep(w.transform, "ReticleADS");
+            if (adsRet != null) sl.adsReticle = adsRet.GetComponent<Renderer>();
+            sl.reticle = Util.FindDeep(w.transform, "Reticle");     // holo dot: bullets follow what the eye sees
+            if (sl.anim != null) { var an = sl.anim; an.playAutomatically = false; an.cullingType = AnimationCullingType.AlwaysAnimate; foreach (AnimationState st in an) st.wrapMode = st.name == "idle" || st.name == "hold" ? WrapMode.Loop : WrapMode.Once; }
+            int vm = LayerMask.NameToLayer("Viewmodel");
+            if (vm >= 0 && vmCam != null) foreach (var t in w.GetComponentsInChildren<Transform>(true)) t.gameObject.layer = vm;   // (slots made at start get their layer in SetupViewmodelCamera)
+            return sl;
+        }
+
+        /// A main weapon you don't already carry (so it can be swapped in from the ground).
+        public bool CanTake(string id)
+        {
+            if (slots == null || !Alive) return false;
+            var d = Z47Refs.I.Weapon(id); if (d == null || d.id != id || d.kind == WeaponKind.Pistol) return false;
+            foreach (var sl in slots) if (sl.def.id == id) return false;
+            return true;
+        }
+
+        /// Pick up a main weapon from the ground (PUBG style): it replaces the main weapon in hand (or the last one used
+        /// while holding the pistol); the old one is dropped where you stand.
+        public bool TakeWeapon(WeaponPickup pk)
+        {
+            if (!Alive || pk == null || string.IsNullOrEmpty(pk.weaponId) || throwT >= 0) return false;
+            var nd = Z47Refs.I.Weapon(pk.weaponId);
+            if (nd == null || nd.id != pk.weaponId || nd.kind == WeaponKind.Pistol) return false;
+            for (int i = 0; i < slots.Length; i++) if (slots[i].def.id == nd.id) return false;      // already carried: its ammo is taken instead
+            int si = cur < 2 ? cur : lastPrimary;
+            var old = slots[si];
+            WeaponPickup.Drop(old.def, transform.position + transform.forward * 0.6f + Vector3.up * 0.4f, old.mag + old.reserve);
+            bool inHand = si == cur;
+            flash.SetParent(viewRoot, false);                 // the muzzle flash rides on the gun in hand: don't destroy it with the old one
+            Destroy(old.go);
+            if (nadeEquipped) PutNadeAway();
+            reloading = false; switchT = 0f; pendingSlot = -1;
+            var sl = MakeSlot(nd, false);
+            sl.mag = Mathf.Min(nd.magSize, pk.amount); sl.reserve = Mathf.Clamp(pk.amount - sl.mag, 0, nd.reserve);
+            slots[si] = sl;
+            if (inHand) { slots[cur].go.SetActive(true); AttachFlash(); PlayAnim(slots[cur], "draw", 0f); Sfx.Play2D(Z47Refs.I.equip, 0.6f, 0.05f); }
+            else BeginSwitch(si);
+            Destroy(pk.gameObject);
+            return true;
         }
 
         Camera vmCam;
@@ -226,6 +281,7 @@ namespace Zone47
                 if (k.vKey.wasPressedThisFrame) PInput.lean = PInput.lean == 1 ? 0 : 1;
                 if (k.rKey.wasPressedThisFrame) PInput.reload = true;
                 if (k.gKey.wasPressedThisFrame) PInput.grenade = true;
+                if (k.tKey.wasPressedThisFrame) PInput.nadeNext = true;
                 if (Application.isEditor && k.bKey.wasPressedThisFrame) { if (AirStrikes.I == null && MatchManager.I != null) AirStrikes.Begin(MatchManager.I); AirStrikes.I?.TriggerNow(); }   // test: drone strike now
                 if (k.digit1Key.wasPressedThisFrame) PInput.select = 0;
                 if (k.digit2Key.wasPressedThisFrame) PInput.select = 1;
@@ -362,6 +418,7 @@ namespace Zone47
                 if (a.team == team || !a.Alive) continue;
                 Vector3 to = a.ChestPos - cam.transform.position;
                 if (to.magnitude > 80f) continue;
+                if (SmokeCloud.Blocks(cam.transform.position, a.ChestPos)) continue;
                 if (Vector3.Angle(cam.transform.forward, to) < deg) return a;
             }
             return null;
@@ -377,7 +434,14 @@ namespace Zone47
             float mag = mv.magnitude;
             float fwdRatio = mv.y / Mathf.Max(mag, 0.001f);
             sprintLatch = sprintLatch ? (mag > 0.72f && fwdRatio > 0.35f) : (mag > 0.9f && fwdRatio > 0.5f);   // hysteresis: no flicker at the edge
-            bool sprint = sprintLatch && !Aiming && !Firing && !reloading && !prone;
+            bool wantSprint = sprintLatch && !Firing && !reloading && !prone && !nadeEquipped;
+            if (wantSprint)
+            {
+                // starting to run drops the scope / aim (toggle) and straightens up from a lean, like PUBG
+                if (HUD.I != null && HUD.I.AimToggled) HUD.I.ResetAim();
+                PInput.lean = 0;
+            }
+            bool sprint = wantSprint && !Aiming;
             if (sprint && crouched) { if (CanStand(1.8f)) crouched = false; else sprint = false; }
             if (sprint) PInput.lean = 0;
             float speed = prone ? 1.1f : crouched ? 2.2f : Aiming ? 2.7f : sprint ? 6.4f : 4.3f;
@@ -448,6 +512,12 @@ namespace Zone47
             var s = slots[cur];
             var d = s.def;
 
+            // throwables: pick / take in hand / put away
+            if (Throwables()) return;
+
+            if (PInput.fireMode && s.def.automatic) { s.semi = !s.semi; Sfx.Play2D(Z47Refs.I.dryFire, 0.5f, 0.05f); HUD.I?.ShowToast(s.semi ? (Settings.Turkish ? "TEK ATIŞ" : "SINGLE") : (Settings.Turkish ? "OTOMATİK" : "AUTO")); }
+            if (cur < 2) lastPrimary = cur;
+
             // switching
             if (PInput.select >= 0 && PInput.select != cur && PInput.select < slots.Length) BeginSwitch(PInput.select);
             if (PInput.next) BeginSwitch((cur + 1) % slots.Length);
@@ -465,15 +535,7 @@ namespace Zone47
                 return;
             }
 
-            // grenade
-            if (PInput.grenade && grenades > 0 && throwT < 0 && !reloading) { throwT = 0f; Sfx.Play2D(Z47Refs.I.pin, 0.7f); }
-            if (throwT >= 0)
-            {
-                throwT += Time.deltaTime;
-                if (throwT >= 0.45f && throwT - Time.deltaTime < 0.45f) ThrowGrenade();
-                if (throwT >= 0.9f) throwT = -1f;
-                return;
-            }
+            
 
             // fire cancels a reload as long as there is still a round in the mag (tap fire = shoot right now)
             if (reloading && s.mag > 0 && Firing && !triggerWasDown && reloadT > 0.08f)
@@ -514,14 +576,14 @@ namespace Zone47
             if (!grounded) moveSpread += 3f;
             spreadNow = Mathf.Lerp(spreadNow, baseSpread + moveSpread, Time.deltaTime * 10f);
 
-            if (down && !reloading && Time.time >= nextFire && boltT <= 0 && (d.automatic || !triggerWasDown))
+            if (down && !reloading && Time.time >= nextFire && boltT <= 0 && ((d.automatic && !s.semi) || !triggerWasDown))
             {
                 if (s.mag > 0) Shoot(s);
                 else if (!triggerWasDown) Sfx.Play2D(Z47Refs.I.dryFire, 0.6f);
             }
             triggerWasDown = down;
 
-            if (flashT > 0) { flashT -= Time.deltaTime; if (flashT <= 0) flash.gameObject.SetActive(false); }
+            if (flashT > 0) { flashT -= Time.deltaTime; if (flashT <= 0) { flash.gameObject.SetActive(false); if (muzzleLight != null) muzzleLight.enabled = false; } }
         }
 
         void BeginSwitch(int to)
@@ -621,28 +683,100 @@ namespace Zone47
                 flash.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
                 flash.localScale = Vector3.one * Random.Range(0.14f, 0.22f) * (d.kind == WeaponKind.Pistol ? 0.7f : 1f);
                 flashT = 0.045f;
-                if (Settings.Quality >= 1)
-                {
-                    var lg = new GameObject("mf");
-                    lg.transform.position = muzzleWorld;
-                    var l = lg.AddComponent<Light>(); l.type = LightType.Point; l.range = 6f; l.intensity = 3f; l.color = new Color(1f, 0.75f, 0.4f);
-                    lg.AddComponent<LightFade>().life = 0.05f;
-                }
+                if (muzzleLight != null) muzzleLight.enabled = Settings.Quality >= 1;
             }
             HUD.I?.Fired();
         }
 
         IEnumerator Delayed(float t, System.Action a) { yield return new WaitForSeconds(t); a(); }
 
-        void ThrowGrenade()
+        /// Throwable handling. Returns true while it owns the hands (gun logic skipped).
+        bool Throwables()
         {
-            grenades--;
-            var g = Instantiate(Z47Refs.I.grenadePrefab, cam.transform.position + cam.transform.forward * 0.5f + cam.transform.right * 0.15f, Random.rotation);
-            g.GetComponent<Grenade>().owner = this;
-            var rb = g.GetComponent<Rigidbody>();
-            rb.linearVelocity = cam.transform.forward * 16f + Vector3.up * 3.5f + cc.velocity * 0.5f;
-            rb.angularVelocity = Random.insideUnitSphere * 10f;
-            Net.SendNade(this, g.transform.position, rb.linearVelocity);
+            // a throw in progress: release at 0.45 s, back to the gun at 0.9 s
+            if (throwT >= 0)
+            {
+                throwT += Time.deltaTime;
+                if (throwT >= 0.45f && throwT - Time.deltaTime < 0.45f) { ThrowGrenade(throwKind); if (nadeVis != null) nadeVis.SetActive(false); }
+                if (throwT >= 0.9f) { throwT = -1f; PutNadeAway(); }
+                triggerWasDown = Firing;
+                return true;
+            }
+            if (PInput.nadeNext) { NextNade(); if (nadeEquipped) ShowNadeInHand(); }
+            if (PInput.nadeSelect >= 0 && PInput.nadeSelect < nades.Length && nades[PInput.nadeSelect] > 0) { nadeSel = PInput.nadeSelect; TakeNade(); }
+            if (PInput.nadeEquip)
+            {
+                if (nadeEquipped) PutNadeAway();
+                else
+                {
+                    if (nades[nadeSel] <= 0) NextNade();
+                    if (nades[nadeSel] > 0) TakeNade(); else HUD.I?.ShowToast(Settings.Turkish ? "BOMBA KALMADI" : "NO GRENADES LEFT");
+                }
+            }
+            // keyboard G: quick throw of the selected one
+            if (PInput.grenade && !nadeEquipped) { if (nades[nadeSel] <= 0) NextNade(); if (nades[nadeSel] > 0) { TakeNade(); StartThrow(); return true; } }
+            if (!nadeEquipped) return false;
+            // in hand: a weapon slot puts it away (and switches), FIRE throws it
+            if ((PInput.select >= 0 && PInput.select < slots.Length) || PInput.next) { PutNadeAway(); return false; }
+            if (Firing && !triggerWasDown) StartThrow();
+            triggerWasDown = Firing;
+            return true;
+        }
+
+        void NextNade()
+        {
+            for (int i = 1; i <= nades.Length; i++) { int k = (nadeSel + i) % nades.Length; if (nades[k] > 0) { nadeSel = k; return; } }
+        }
+
+        void TakeNade()
+        {
+            if (nades[nadeSel] <= 0) return;
+            if (!nadeEquipped) Sfx.Play2D(Z47Refs.I.equip, 0.5f, 0.06f);
+            nadeEquipped = true;
+            if (reloading) { reloading = false; if (slots[cur].mag3d != null) slots[cur].mag3d.gameObject.SetActive(true); }
+            ShowNadeInHand();
+        }
+
+        void StartThrow()
+        {
+            if (throwT >= 0 || nades[nadeSel] <= 0) return;
+            throwKind = nadeSel; throwT = 0f;
+            Sfx.Play2D(Z47Refs.I.pin, 0.7f);
+        }
+
+        void PutNadeAway()
+        {
+            nadeEquipped = false;
+            if (nadeVis != null) { Destroy(nadeVis); nadeVis = null; }
+            if (nades[nadeSel] <= 0) NextNade();
+        }
+
+        /// The grenade model in the right hand (viewmodel layer), tinted per type.
+        void ShowNadeInHand()
+        {
+            if (nadeVis != null) Destroy(nadeVis);
+            var R = Z47Refs.I; if (R.grenadePrefab == null) return;
+            nadeVis = Instantiate(R.grenadePrefab, viewRoot);
+            foreach (var g in nadeVis.GetComponentsInChildren<Grenade>()) DestroyImmediate(g);
+            foreach (var rb in nadeVis.GetComponentsInChildren<Rigidbody>()) DestroyImmediate(rb);
+            foreach (var c in nadeVis.GetComponentsInChildren<Collider>()) DestroyImmediate(c);
+            nadeVis.name = "VM_nade";
+            if (nadeSel != Throwable.Frag) Grenade.Paint(nadeVis, Throwable.Tint(nadeSel));
+            Util.SetShadows(nadeVis, ShadowCastingMode.Off);
+            int vm = LayerMask.NameToLayer("Viewmodel");
+            if (vm >= 0) foreach (var t in nadeVis.GetComponentsInChildren<Transform>(true)) t.gameObject.layer = vm;
+            nadeVis.transform.localPosition = new Vector3(0.16f, -0.17f, 0.36f);
+            nadeVis.transform.localRotation = Quaternion.Euler(-10f, 20f, 0f);
+        }
+
+        void ThrowGrenade(int kind)
+        {
+            if (nades[kind] <= 0) return;
+            nades[kind]--;
+            Vector3 pos = cam.transform.position + cam.transform.forward * 0.5f + cam.transform.right * 0.15f;
+            Vector3 vel = cam.transform.forward * 16f + Vector3.up * 3.5f + cc.velocity * 0.5f;
+            Grenade.Spawn(this, pos, vel, kind);
+            Net.SendNade(this, pos, vel, kind);
         }
 
         public override void GetNetState(out Vector3 pos, out float y, out float p, out int flags, out int weapon)
@@ -723,10 +857,14 @@ namespace Zone47
                 float w = pendingSlot >= 0 ? 1f - Mathf.Clamp01((switchT - 0.2f) / 0.25f) : Mathf.Clamp01(switchT / 0.2f);
                 pos += new Vector3(0, -0.25f, 0) * w; rot *= Quaternion.Euler(30f * w, 0, 0);
             }
-            if (throwT >= 0)
+            nadeT = Mathf.MoveTowards(nadeT, nadeEquipped || throwT >= 0 ? 1f : 0f, Time.deltaTime * 5f);
+            if (nadeT > 0f) { float w = nadeT * nadeT * (3f - 2f * nadeT); pos += new Vector3(0, -0.32f, 0) * w; rot *= Quaternion.Euler(38f * w, 0, 0); }
+            if (nadeVis != null)
             {
-                float w = Mathf.Sin(Mathf.Clamp01(throwT / 0.9f) * Mathf.PI);
-                pos += new Vector3(0, -0.3f, 0) * w; rot *= Quaternion.Euler(40f * w, 0, 0);
+                // ready by the right shoulder; on FIRE it draws back, then is thrown (released at 0.45 s)
+                Vector3 hold = new Vector3(0.16f, -0.17f, 0.36f) + new Vector3(0f, -0.25f, 0f) * (1f - nadeT);
+                if (throwT >= 0f) { float k = Mathf.Clamp01(throwT / 0.4f); hold = Vector3.Lerp(hold, new Vector3(0.24f, 0.02f, 0.1f), Mathf.Sin(k * Mathf.PI * 0.5f)); }
+                nadeVis.transform.localPosition = hold + swayPos * 0.6f;
             }
 
             var tr = s.go.transform;
@@ -739,11 +877,13 @@ namespace Zone47
             if (s.anim != null) AnimTick(s);
             if (arms != null)
             {
-                arms.Visible = !hide && s.anim == null;          // animated weapons bring their own arms
+                arms.Visible = !hide && (s.anim == null || nadeVis != null);          // animated weapons bring their own arms
                 float leftW = 1f;
                 if (reloading) { float t = reloadT / s.reloadDur; leftW = (t > 0.2f && t < 0.7f) ? 0f : 1f; }
-                if (throwT >= 0) leftW = 0f;
-                arms.SetTargets(tr.TransformPoint(Vector3.zero), tr.TransformPoint(d.forePoint), tr.rotation, leftW, d.kind == WeaponKind.Pistol);
+                if (throwT >= 0 || nadeEquipped) leftW = 0f;
+                if (nadeVis != null && nadeVis.activeSelf && nadeT > 0.4f)
+                    arms.SetTargets(nadeVis.transform.position - cam.transform.forward * 0.03f, nadeVis.transform.position, cam.transform.rotation, 0f, true);   // right hand on the grenade, left hand down
+                else arms.SetTargets(tr.TransformPoint(Vector3.zero), tr.TransformPoint(d.forePoint), tr.rotation, leftW, d.kind == WeaponKind.Pistol);
             }
         }
 
@@ -853,6 +993,7 @@ namespace Zone47
             if (scopeCam != null) scopeCam.enabled = false;
             if (Boot.ScopeBlur != null) Boot.ScopeBlur.weight = 0f;
             foreach (var sl in slots) sl.go.SetActive(false);
+            PutNadeAway(); throwT = -1f;
             if (arms != null) arms.Visible = false;
             Sfx.Play2D(Z47Refs.I.bodyFall, 0.8f);
             deathT = 0f;
@@ -880,7 +1021,7 @@ namespace Zone47
             yaw = rot.eulerAngles.y; pitch = 0; velocity = Vector3.zero; crouched = false; prone = false; PInput.lean = 0; leanT = 0; heat = 0;
             cam.transform.localPosition = new Vector3(0, 1.62f, 0);
             cam.transform.localRotation = Quaternion.identity;
-            hp = maxHp; grenades = 2; reloading = false; throwT = -1; switchT = 0; pendingSlot = -1;
+            hp = maxHp; for (int k = 0; k < nades.Length; k++) nades[k] = Throwable.Start[k]; nadeSel = Throwable.Frag; PutNadeAway(); nadeT = 0f; reloading = false; throwT = -1; switchT = 0; pendingSlot = -1;
             foreach (var sl in slots) { sl.mag = sl.def.magSize; sl.reserve = sl.def.reserve; sl.go.SetActive(false); if (sl.mag3d) sl.mag3d.gameObject.SetActive(true); }
             slots[cur].go.SetActive(true); AttachFlash();      // keep the weapon you died with
             foreach (var sl in slots) if (sl.anim != null) sl.anim.Stop();
@@ -891,6 +1032,8 @@ namespace Zone47
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            // the scope's render texture lives outside the scene: free it, or every match where you scoped leaks one
+            if (scopeRT != null) { if (scopeCam != null) scopeCam.targetTexture = null; scopeRT.Release(); Destroy(scopeRT); scopeRT = null; }
             Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
             if (Local == this) Local = null;
         }
