@@ -1141,8 +1141,8 @@ namespace Zone47
 
             // left hand: under the handguard (rifles) or cupping the grip (pistol)
             Vector3 lp, lfd, lpalm;
-            if (pistol) { lp = gripT - gr * 0.095f - gu * 0.055f + gf * 0.055f; lp = Vector3.Lerp(lp, gripT - gu * 0.13f - gr * 0.015f, reloadK);   // reload: left hand goes under the grip to swap the magazine
-                    lfd = (gf * 0.97f + gu * 0.12f + gr * 0.05f).normalized; lpalm = gr; }   // support hand: left side + lower on the grip, fingers forward, palm toward the gun (no longer inside the shooting hand)
+            if (pistol) { lp = gripT - gr * 0.055f - gu * 0.06f + gf * 0.04f; lp = Vector3.Lerp(lp, gripT - gu * 0.13f - gr * 0.015f, reloadK);   // reload: left hand goes under the grip to swap the magazine
+                    lfd = (gf * 0.85f + gr * 0.45f + gu * 0.05f).normalized; lpalm = (gr * 0.9f + gu * 0.2f).normalized; }   // support hand: left side + lower on the grip, fingers forward, palm toward the gun (no longer inside the shooting hand)
             else { lp = foreT - gr * 0.025f - gu * 0.046f;   // hand wraps the left/under side of the handguard instead of sinking into it
                    lfd = (gf * 0.85f + gr * 0.5f).normalized; lpalm = (gu + gr * 0.35f).normalized; }
             Vector3 lowered = cam.TransformPoint(new Vector3(-0.16f, -0.42f, 0.12f));      // hand drops away during reload/throw
