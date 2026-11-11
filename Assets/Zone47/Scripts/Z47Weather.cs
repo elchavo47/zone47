@@ -48,7 +48,7 @@ namespace Zone47
                     Set(sun, new Color(1f, 0.97f, 0.92f), 1.75f, 56f, 0.9f);
                     Fill(fill, new Color(0.62f, 0.72f, 0.95f), 0.18f);
                     Amb(new Color(0.5f, 0.58f, 0.7f), new Color(0.46f, 0.48f, 0.5f), new Color(0.2f, 0.19f, 0.18f));
-                    FogSet(new Color(0.62f, 0.67f, 0.73f), 0.0026f);
+                    FogSet(new Color(0.42f, 0.44f, 0.47f), 0.0024f);
                     Sky(new Color(0.45f, 0.5f, 0.58f), 0.9f, 1.3f);
                     Grade(ca, new Color(1f, 1f, 1f), 0f, 12f);
                     break;
