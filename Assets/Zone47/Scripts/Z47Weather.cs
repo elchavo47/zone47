@@ -100,6 +100,7 @@ namespace Zone47
             cam.clearFlags = thick ? CameraClearFlags.SolidColor : CameraClearFlags.Skybox;
             cam.backgroundColor = RenderSettings.fogColor;
             if (thick) cam.farClipPlane = Current == Fog ? 150f : 130f;     // nothing visible past the fog anyway: cheaper
+            else if (Settings.Map == 0) cam.farClipPlane = 700f;       // the desert's far mountains are ~500 m out
             if (Current == Sandstorm && dust == null) dust = MakeDust(cam.transform);
         }
 
