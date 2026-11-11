@@ -39,11 +39,13 @@ namespace Zone47
         IEnumerator Loop()
         {
             if (Net.IsClient) yield break;                 // online: only the host decides when drones come
-            yield return new WaitForSeconds(Random.Range(30f, 45f));
+            // small modes get far fewer drones: x3 apart in 1v1, x1 in the biggest matches
+            float gap = Mathf.Lerp(3f, 1f, Mathf.InverseLerp(2f, 20f, MatchManager.Cur.a + MatchManager.Cur.e));
+            yield return new WaitForSeconds(Random.Range(30f, 45f) * gap);
             while (MatchManager.I != null && !MatchManager.I.Finished)
             {
                 if (MatchManager.I.Running && !striking) yield return StartCoroutine(Strike(null));
-                yield return new WaitForSeconds(Random.Range(40f, 70f));
+                yield return new WaitForSeconds(Random.Range(40f, 70f) * gap);
             }
         }
 
