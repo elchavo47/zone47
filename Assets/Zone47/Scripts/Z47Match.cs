@@ -137,7 +137,7 @@ namespace Zone47
             yield return null;
             BuildWaypoints();
             FixSpawns(); LoadingScreen.Progress(0.85f);
-            Surroundings.Build(worldRoot, mapAllBounds, mapGroundY, mapProtoMat, mapGroundMat, Settings.Map);      // trees, hills, mountains outside the playable bounds
+            if (Settings.Map == 1) Surroundings.Build(worldRoot, mapAllBounds, mapGroundY, mapProtoMat, mapGroundMat, Settings.Map);      // trees, hills, mountains outside the playable bounds
 
             // spawn teams
             if (Net.InMatch) SpawnOnline();
