@@ -44,25 +44,13 @@ namespace Zone47
             // values: sun colour, intensity, pitch, shadow strength | ambient sky/equator/ground | fog colour, density | sky tint, thickness, exposure | colour filter, saturation
             switch (w)
             {
-                case Noon:
-                    if (Settings.Map == 0)      // only the desert map is overcast and gloomy; the others keep normal daylight
-                    {
-                        Set(sun, new Color(0.92f, 0.86f, 0.78f), 1.0f, 46f, 0.8f);
-                        Fill(fill, new Color(0.55f, 0.6f, 0.7f), 0.1f);
-                        Amb(new Color(0.30f, 0.32f, 0.35f), new Color(0.27f, 0.27f, 0.28f), new Color(0.12f, 0.11f, 0.10f));
-                        FogSet(new Color(0.30f, 0.29f, 0.28f), 0.0085f);
-                        Sky(new Color(0.30f, 0.31f, 0.34f), 1.8f, 0.78f);
-                        Grade(ca, new Color(0.96f, 0.94f, 0.92f), -22f, 16f);
-                    }
-                    else
-                    {
-                        Set(sun, new Color(1f, 0.97f, 0.92f), 1.75f, 56f, 0.9f);
-                        Fill(fill, new Color(0.62f, 0.72f, 0.95f), 0.18f);
-                        Amb(new Color(0.5f, 0.58f, 0.7f), new Color(0.46f, 0.48f, 0.5f), new Color(0.2f, 0.19f, 0.18f));
-                        FogSet(new Color(0.7f, 0.78f, 0.88f), 0.0035f);
-                        Sky(new Color(0.45f, 0.5f, 0.58f), 0.9f, 1.3f);
-                        Grade(ca, new Color(1f, 1f, 1f), 0f, 12f);
-                    }
+                case Noon:      // normal clear daylight for the map itself; the light haze lets the far desert mountains show
+                    Set(sun, new Color(1f, 0.97f, 0.92f), 1.75f, 56f, 0.9f);
+                    Fill(fill, new Color(0.62f, 0.72f, 0.95f), 0.18f);
+                    Amb(new Color(0.5f, 0.58f, 0.7f), new Color(0.46f, 0.48f, 0.5f), new Color(0.2f, 0.19f, 0.18f));
+                    FogSet(new Color(0.62f, 0.67f, 0.73f), 0.0026f);
+                    Sky(new Color(0.45f, 0.5f, 0.58f), 0.9f, 1.3f);
+                    Grade(ca, new Color(1f, 1f, 1f), 0f, 12f);
                     break;
                 case Fog:
                     Set(sun, new Color(0.85f, 0.9f, 1f), 0.8f, 18f, 0.45f);
