@@ -803,6 +803,7 @@ namespace Zone47
         }
 
         // ------------------------------------------------------------ viewmodel
+        const float PistolLevel = 22f;      // degrees: raise the pistol muzzle (tune if it still droops / points up)
         void ViewModel()
         {
             var s = slots[cur]; var d = s.def;
@@ -813,6 +814,15 @@ namespace Zone47
                 : new Vector3(0f, -d.topY + 0.002f, d.kind == WeaponKind.Pistol ? 0.24f : d.kind == WeaponKind.Sniper ? 0.12f : 0.13f);
             Vector3 pos = Vector3.Lerp(hip, ads, adsT);
             Quaternion rot = Quaternion.identity;
+            if (d.kind == WeaponKind.Pistol)
+            {
+                // the pistol model is baked with its barrel axis measured from the palm, so the muzzle droops: tilt it level again,
+                // pivoting about the rear-sight point so the sights stay where the aim position put them
+                var lvl = Quaternion.Euler(-PistolLevel, 0f, 0f);
+                Vector3 sp = new Vector3(0f, d.topY, 0.06f);
+                rot = lvl;
+                pos += (sp - lvl * sp) * adsT;
+            }
 
             // inertial sway (lags behind the view, springs back)
             float aimK = 1f - adsT * 0.97f;
@@ -1131,7 +1141,7 @@ namespace Zone47
 
             // left hand: under the handguard (rifles) or cupping the grip (pistol)
             Vector3 lp, lfd, lpalm;
-            if (pistol) { lp = gripT - gr * 0.05f - gu * 0.09f + gf * 0.012f; lp = Vector3.Lerp(lp, gripT - gu * 0.13f - gr * 0.015f, reloadK);   // reload: left hand goes under the grip to swap the magazine
+            if (pistol) { lp = gripT - gr * 0.07f - gu * 0.07f + gf * 0.022f; lp = Vector3.Lerp(lp, gripT - gu * 0.13f - gr * 0.015f, reloadK);   // reload: left hand goes under the grip to swap the magazine
                     lfd = (gf * 0.92f - gu * 0.25f + gr * 0.12f).normalized; lpalm = (gr + gu * 0.15f).normalized; }   // support hand: left side + lower on the grip, fingers forward, palm toward the gun (no longer inside the shooting hand)
             else { lp = foreT - gr * 0.025f - gu * 0.046f;   // hand wraps the left/under side of the handguard instead of sinking into it
                    lfd = (gf * 0.85f + gr * 0.5f).normalized; lpalm = (gu + gr * 0.35f).normalized; }
