@@ -212,7 +212,16 @@ namespace Zone47
                 if (r.name.ToLower().Contains("ground") && (ground == null || r.bounds.size.x * r.bounds.size.z > ground.bounds.size.x * ground.bounds.size.z)) ground = r;
             }
             var gb = ground != null ? ground.bounds : b;
-            mapAllBounds = b; mapGroundY = gb.max.y; mapGroundMat = ground != null ? ground.sharedMaterial : null;
+            // the playable area = everything except the big ground plane (that plane can be huge and would hide the terrain around the town)
+            Bounds bp = new Bounds(Vector3.zero, Vector3.zero); bool fp = true;
+            foreach (var r in map.GetComponentsInChildren<Renderer>())
+            {
+                if (r == ground) continue;
+                if (fp) { bp = r.bounds; fp = false; } else bp.Encapsulate(r.bounds);
+            }
+            if (fp) bp = b;
+            Debug.Log("[Zone47] harita: hepsi " + b.size + " zemin " + gb.size + " oyun alani " + bp.size);
+            mapAllBounds = bp; mapGroundY = gb.max.y; mapGroundMat = ground != null ? ground.sharedMaterial : null;
             // lit material of the map itself = a shader that is guaranteed to be in the build (Shader.Find can be stripped on iOS)
             foreach (var rr in map.GetComponentsInChildren<Renderer>())
             {
