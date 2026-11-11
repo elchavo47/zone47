@@ -113,7 +113,7 @@ namespace Zone47
                 var go = new GameObject("Terrain"); go.transform.SetParent(root, false);
                 go.AddComponent<MeshFilter>().sharedMesh = tmesh;
                 var mr = go.AddComponent<MeshRenderer>();
-                mr.sharedMaterials = new[] { Tex(new Color(0.50f, 0.45f, 0.38f), 0.35f), Tex(new Color(0.34f, 0.30f, 0.26f), 0.25f), Tex(new Color(0.20f, 0.18f, 0.16f), 0.15f) };
+                mr.sharedMaterials = new[] { Tex(new Color(0.40f, 0.36f, 0.30f), 0.35f), Tex(new Color(0.22f, 0.19f, 0.16f), 0.25f), Tex(new Color(0.11f, 0.10f, 0.09f), 0.15f) };
                 mr.shadowCastingMode = ShadowCastingMode.Off; mr.receiveShadows = true;
             }
             Emit("Horizon", Disk(c + Vector3.down * 0.3f, 1400f, 32), Tex(new Color(0.30f, 0.27f, 0.23f), 0.3f), false);
