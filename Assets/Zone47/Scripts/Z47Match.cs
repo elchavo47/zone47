@@ -15,11 +15,11 @@ namespace Zone47
         public static readonly Preset[] Presets =
         {
             new Preset(1, 1, 15, 300f, "1v1"),
-            new Preset(1, 5, 25, 420f, "1v5"),
+            new Preset(1, 3, 15, 420f, "1v3"),
             new Preset(3, 3, 30, 420f, "3v3"),
             new Preset(5, 5, 40, 480f, "5v5"),
-            new Preset(5, 10, 60, 600f, "5v10"),
-            new Preset(10, 10, 80, 720f, "10v10"),
+            new Preset(5, 7, 40, 600f, "5v7"),
+            new Preset(8, 8, 60, 720f, "8v8"),
         };
         public static Preset Cur => Presets[Mathf.Clamp(Net.InMatch ? Net.MatchPreset : Settings.TeamPreset, 0, Presets.Length - 1)];
         public static int KillTarget => Cur.target;
@@ -28,7 +28,7 @@ namespace Zone47
         public static int EnemySize => SizeOf(1);
         /// Team size in local terms (online: my team is always 0, sizes come from the host's line-up).
         public static int SizeOf(int team) => Net.InMatch ? Net.TeamSize[(team ^ Net.Flip) & 1] : team == 0 ? Cur.a : Cur.e;
-        /// Outnumbered player team: the bigger side shoots a bit worse / softer so 1v5 stays winnable. (Not online: humans on both sides.)
+        /// Outnumbered player team: the bigger side shoots a bit worse / softer so 1v3 stays winnable. (Not online: humans on both sides.)
         public static float HandicapSpread(int team) { if (Net.InMatch) return 1f; float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f + 0.14f * (r - 1f) : 1f; }
         public static float HandicapDamage(int team) { if (Net.InMatch) return 1f; float r = team == 1 ? EnemySize / (float)AllySize : AllySize / (float)EnemySize; return r > 1f ? 1f / (1f + 0.12f * (r - 1f)) : 1f; }
 
