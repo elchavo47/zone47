@@ -1,7 +1,7 @@
 name: Unity iOS build + TestFlight (bilgisayarsiz)
 
 # Bilgisayar gerekmez: GitHub'da Unity acilir, iOS Xcode projesini uretir, ardindan TestFlight'a gonderir.
-# Gerekli ek gizli anahtarlar (Settings > Secrets > Actions): UNITY_LICENSE, UNITY_EMAIL, UNITY_PASSWORD  (adimlar: UNITY_LISANS.md)
+# Gerekli ek gizli anahtarlar (Settings > Secrets > Actions): UNITY_USERNAME, UNITY_PASSWORD  (adimlar: UNITY_LISANS.md)
 on:
   workflow_dispatch:
 
@@ -22,17 +22,26 @@ jobs:
           key: Library-iOS-${{ hashFiles('Packages/manifest.json', 'ProjectSettings/ProjectVersion.txt') }}
           restore-keys: Library-iOS-
 
-      - uses: game-ci/unity-builder@v4
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+      # GameCI'nin manuel lisans yolu kapandi; Unity'yi ve lisansi kendimiz kuruyoruz (Unity ID ile)
+      - name: Install Unity (iOS module)
+        uses: RageAgainstThePixel/unity-setup@v1
         with:
-          unityVersion: 6000.3.27f1
-          targetPlatform: iOS
-          buildsPath: build
-          versioning: None
-          allowDirtyBuild: true
+          version-file: ProjectSettings/ProjectVersion.txt
+          build-targets: iOS
+
+      - name: Activate Unity Personal license
+        uses: RageAgainstThePixel/activate-unity-license@v1
+        with:
+          license: Personal
+          username: ${{ secrets.UNITY_USERNAME }}
+          password: ${{ secrets.UNITY_PASSWORD }}
+
+      - name: Build iOS Xcode project
+        uses: RageAgainstThePixel/unity-action@v1
+        with:
+          build-target: iOS
+          log-name: ios-build
+          args: -quit -batchmode -nographics -executeMethod Zone47.EditorTools.Z47CIBuild.BuildIOS
 
       - uses: actions/upload-artifact@v4
         with:

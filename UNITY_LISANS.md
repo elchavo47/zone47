@@ -1,16 +1,9 @@
-# Bilgisayarsız build: Unity lisansı kurulumu
-
-Workflow: Actions > "Unity iOS build + TestFlight (bilgisayarsiz)" > Run workflow.
-
-GitHub'da Unity'nin açılması için ücretsiz (Personal) lisansı bir kere aktive edip GitHub'a 3 gizli anahtar olarak eklemek gerekir.
+# Bilgisayarsız build: Unity hesabı kurulumu
 
 Settings > Secrets and variables > Actions > New repository secret:
-- `UNITY_EMAIL`    Unity hesabının e-postası
-- `UNITY_PASSWORD` Unity hesabının şifresi
-- `UNITY_LICENSE`  Aşağıdaki adımlarla alınan .ulf dosyasının TÜM içeriği
+- `UNITY_USERNAME`  Unity ID e-postası
+- `UNITY_PASSWORD`  Unity ID şifresi
 
-## UNITY_LICENSE nasıl alınır
-1. Actions sekmesinden "Unity lisans dosyası iste (bir kere)" workflow'unu çalıştır.
-2. Bittiğinde sayfanın altındaki Artifacts'ten `Unity_v6000.3.27f1.alf` dosyasını indir.
-3. https://license.unity3d.com/manual adresinde bu .alf dosyasını yükle, Personal'ı seç, `.ulf` dosyasını indir.
-4. .ulf dosyasını metin olarak aç, tüm yazıyı kopyalayıp `UNITY_LICENSE` secret'ına yapıştır.
+Sonra Actions > "Unity iOS build + TestFlight (bilgisayarsiz)" > Run workflow.
+
+Notlar: Unity ID'de iki adımlı doğrulama (2FA) açıksa bu yöntem takılabilir. Ücretsiz lisans kullanıcıları için Unity bu tür otomatik girişte arada engel koyabiliyor; olursa log'u bana at.
