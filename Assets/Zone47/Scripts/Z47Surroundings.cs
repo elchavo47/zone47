@@ -8,7 +8,7 @@ namespace Zone47
     /// that sit OUTSIDE the playable bounds. All procedural (no extra assets): one combined mesh per material, so it costs ~6 draw calls.
     public static class Surroundings
     {
-        public static void Build(Transform parent, Bounds mb, float groundY, Material proto, int seed)
+        public static void Build(Transform parent, Bounds mb, float groundY, Material proto, Material groundMat, int seed)
         {
             if (proto == null) return;
             var rng = new System.Random(seed * 7919 + 13);
@@ -24,6 +24,16 @@ namespace Zone47
                 m.DisableKeyword("_NORMALMAP"); m.DisableKeyword("_EMISSION");
                 if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", smooth);
                 if (m.HasProperty("_Metallic")) m.SetFloat("_Metallic", 0f);
+                return m;
+            }
+            Material Tex(Color tint, float tile)
+            {
+                if (groundMat == null) return Mat(tint);
+                var m = new Material(groundMat);
+                if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", tint); else m.color = tint;
+                m.mainTextureScale = new Vector2(tile, tile);
+                if (m.HasProperty("_BumpMap")) m.SetTextureScale("_BumpMap", new Vector2(tile, tile));
+                if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", 0.02f);
                 return m;
             }
             void Emit(string name, Mesh mesh, Material mat, bool cast)
@@ -45,11 +55,11 @@ namespace Zone47
             }
 
             // 1) huge ground disk just under the map floor: no more void / flat grey beyond the edge
-            Emit("Ground", Disk(c + Vector3.down * 0.06f, 900f, 40), Mat(new Color(0.50f, 0.42f, 0.31f), 0.02f), false);
+            Emit("Ground", Disk(c + Vector3.down * 0.06f, 900f, 40), Tex(new Color(0.78f, 0.74f, 0.68f), 1f), false);
 
             // 2) rolling hills close to the map + a taller mountain ring far away
-            Emit("Hills", Ring(c, Edge, 14f, 70f, 12f, 48, groundY, rng, 5f, 13f), Mat(new Color(0.52f, 0.44f, 0.32f), 0.02f), false);
-            Emit("Mountains", Ring(c, Edge, 150f, 90f, 18f, 72, groundY, rng, 55f, 140f), Mat(new Color(0.42f, 0.36f, 0.31f), 0.02f), false);
+            Emit("Hills", Ring(c, Edge, 14f, 70f, 12f, 48, groundY, rng, 5f, 13f), Tex(new Color(0.70f, 0.64f, 0.56f), 0.8f), false);
+            Emit("Mountains", Ring(c, Edge, 150f, 90f, 18f, 72, groundY, rng, 55f, 140f), Tex(new Color(0.40f, 0.34f, 0.29f), 0.12f), false);
 
             // 3) vegetation clusters outside the bounds
             var pine = Pine(); var trunk = Cyl(0.16f, 1.8f, 6); var deadTrunk = DeadTree(); var bush = Cone(1.0f, 0.9f, 7, 0.25f); var rock = Rock();
@@ -65,7 +75,7 @@ namespace Zone47
                 float cx, cz; int guard = 0;
                 do { cx = c.x + R(-span, span); cz = c.z + R(-span, span); } while (Inside(cx, cz, 14f) && ++guard < 60);
                 if (Inside(cx, cz, 10f)) continue;
-                float rad = R(12f, 34f); int n = rng.Next(14, 36); bool pines = rng.NextDouble() < 0.6;
+                float rad = R(12f, 34f); int n = rng.Next(14, 36); bool pines = false;
                 for (int i = 0; i < n; i++)
                 {
                     float a = R(0f, 6.283f), d = Mathf.Sqrt((float)rng.NextDouble()) * rad;
@@ -93,11 +103,11 @@ namespace Zone47
                 mesh.CombineMeshes(l.ToArray(), true, true); mesh.RecalculateBounds();
                 Emit(name, mesh, m, cast);
             }
-            Flush("PineLeaves", leaf, Mat(new Color(0.13f, 0.23f, 0.11f)), true);
+            Flush("PineLeaves", leaf, Mat(new Color(0.10f, 0.15f, 0.08f)), true);
             Flush("Trunks", wood, Mat(new Color(0.24f, 0.17f, 0.11f)), true);
-            Flush("DeadTrees", dry, Mat(new Color(0.36f, 0.31f, 0.26f)), true);
-            Flush("Scrub", scrub, Mat(new Color(0.30f, 0.33f, 0.16f)), false);
-            Flush("Rocks", stone, Mat(new Color(0.40f, 0.38f, 0.35f), 0.08f), true);
+            Flush("DeadTrees", dry, Mat(new Color(0.22f, 0.18f, 0.14f)), true);
+            Flush("Scrub", scrub, Mat(new Color(0.24f, 0.24f, 0.13f)), false);
+            Flush("Rocks", stone, Tex(new Color(0.55f, 0.52f, 0.48f), 0.5f), true);
         }
 
         // ------------------------------------------------------------------ meshes
@@ -106,7 +116,7 @@ namespace Zone47
             var v = new List<Vector3> { centre }; var t = new List<int>();
             for (int i = 0; i < seg; i++) { float a = i / (float)seg * Mathf.PI * 2f; v.Add(centre + new Vector3(Mathf.Cos(a) * radius, 0, Mathf.Sin(a) * radius)); }
             for (int i = 0; i < seg; i++) { t.Add(0); t.Add(1 + (i + 1) % seg); t.Add(1 + i); }
-            var m = new Mesh { name = "Disk" }; m.SetVertices(v); m.SetTriangles(t, 0); m.RecalculateNormals(); m.RecalculateBounds(); return m;
+            var m = new Mesh { name = "Disk" }; m.SetVertices(v); m.SetUVs(0, PlanarUV(v)); m.SetTriangles(t, 0); m.RecalculateNormals(); m.RecalculateBounds(); return m;
         }
 
         /// Noisy ridge: starts `gap` metres outside the map edge, rises over `width` metres to a random peak height.
@@ -136,11 +146,18 @@ namespace Zone47
                     int a0 = s * rows + r, a1 = s * rows + r + 1, b0 = ((s + 1) % seg) * rows + r, b1 = ((s + 1) % seg) * rows + r + 1;
                     t.Add(a0); t.Add(b0); t.Add(a1); t.Add(a1); t.Add(b0); t.Add(b1);
                 }
-            var m = new Mesh { name = "Ridge", indexFormat = IndexFormat.UInt32 }; m.SetVertices(v); m.SetTriangles(t, 0); m.RecalculateNormals(); m.RecalculateBounds();
+            var m = new Mesh { name = "Ridge", indexFormat = IndexFormat.UInt32 }; m.SetVertices(v); m.SetUVs(0, PlanarUV(v)); m.SetTriangles(t, 0); m.RecalculateNormals(); m.RecalculateBounds();
             // faces must point up; flip if the winding came out downward
             var n = m.normals; int up = 0; for (int i = 0; i < n.Length; i++) if (n[i].y > 0) up++;
             if (up < n.Length / 2) { var tt = m.GetTriangles(0); for (int i = 0; i < tt.Length; i += 3) { int x = tt[i]; tt[i] = tt[i + 2]; tt[i + 2] = x; } m.SetTriangles(tt, 0); m.RecalculateNormals(); }
             return m;
+        }
+
+        static List<Vector2> PlanarUV(List<Vector3> v)
+        {
+            var uv = new List<Vector2>(v.Count);
+            for (int i = 0; i < v.Count; i++) uv.Add(new Vector2(v[i].x, v[i].z) * 0.1f);
+            return uv;
         }
 
         static Mesh Cone(float radius, float height, int sides, float baseY)
@@ -187,7 +204,7 @@ namespace Zone47
             var v = new List<Vector3>(); var tr = new List<int>(); var rn = new System.Random(5);
             for (int i = 0; i < p.Length; i++) v.Add(p[i].normalized * (0.75f + (float)rn.NextDouble() * 0.35f));
             tr.AddRange(f);
-            var m = new Mesh { name = "Rock" }; m.SetVertices(v); m.SetTriangles(tr, 0); m.RecalculateNormals(); m.RecalculateBounds(); return m;
+            var m = new Mesh { name = "Rock" }; m.SetVertices(v); m.SetUVs(0, PlanarUV(v)); m.SetTriangles(tr, 0); m.RecalculateNormals(); m.RecalculateBounds(); return m;
         }
     }
 }
