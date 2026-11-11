@@ -23,6 +23,26 @@ jobs:
           restore-keys: Library-iOS-
 
       # GameCI'nin manuel lisans yolu kapandi; Unity'yi ve lisansi kendimiz kuruyoruz (Unity ID ile)
+      - name: Install Unity Hub (1st try; the action expects an old Hub path)
+        id: hub1
+        continue-on-error: true
+        uses: RageAgainstThePixel/unity-setup@v1
+        with:
+          version-file: ProjectSettings/ProjectVersion.txt
+          build-targets: iOS
+
+      - name: Fix Unity Hub path
+        if: steps.hub1.outcome == 'failure'
+        run: |
+          dpkg -L unityhub | grep -i -E "bin|unityhub$" | head -30
+          REAL=$(dpkg -L unityhub | grep -E "/(unityhub|unityhub-bin)$" | while read f; do [ -f "$f" ] && [ -x "$f" ] && echo "$f" && break; done)
+          [ -z "$REAL" ] && REAL=$(command -v unityhub || true)
+          echo "Hub binary: $REAL"
+          [ -n "$REAL" ] || { echo "::error::Unity Hub binary not found"; exit 1; }
+          sudo mkdir -p /opt/unityhub
+          [ "$REAL" = /opt/unityhub/unityhub ] || sudo ln -sf "$REAL" /opt/unityhub/unityhub
+          ls -la /opt/unityhub | head
+
       - name: Install Unity (iOS module)
         uses: RageAgainstThePixel/unity-setup@v1
         with:
