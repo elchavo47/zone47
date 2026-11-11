@@ -41,6 +41,7 @@ namespace Zone47
 
         public Vector3[] spawnCenter = new Vector3[2];
         public Vector3 mapCenter;
+        Bounds mapAllBounds; float mapGroundY; Material mapProtoMat;
         public float mapRadius = 50f;
         public readonly List<Vector3> waypoints = new List<Vector3>();
         public Transform worldRoot;
@@ -136,6 +137,7 @@ namespace Zone47
             yield return null;
             BuildWaypoints();
             FixSpawns(); LoadingScreen.Progress(0.85f);
+            Surroundings.Build(worldRoot, mapAllBounds, mapGroundY, mapProtoMat, Settings.Map);      // trees, hills, mountains outside the playable bounds
 
             // spawn teams
             if (Net.InMatch) SpawnOnline();
@@ -210,6 +212,15 @@ namespace Zone47
                 if (r.name.ToLower().Contains("ground") && (ground == null || r.bounds.size.x * r.bounds.size.z > ground.bounds.size.x * ground.bounds.size.z)) ground = r;
             }
             var gb = ground != null ? ground.bounds : b;
+            mapAllBounds = b; mapGroundY = gb.max.y;
+            // lit material of the map itself = a shader that is guaranteed to be in the build (Shader.Find can be stripped on iOS)
+            foreach (var rr in map.GetComponentsInChildren<Renderer>())
+            {
+                var sm = rr.sharedMaterial; if (sm == null || sm.shader == null) continue;
+                string sn = sm.shader.name;
+                if (sn.Contains("Lit") && !sn.Contains("Unlit")) { mapProtoMat = sm; break; }
+                if (mapProtoMat == null) mapProtoMat = sm;
+            }
             mapCenter = new Vector3(gb.center.x, 0, gb.center.z);
             mapRadius = Mathf.Min(gb.extents.x, gb.extents.z) * 0.92f;
             // spawns at opposite ends along the longer axis of the building layout
