@@ -312,7 +312,8 @@ namespace Zone47
         {
             if (reloading) return;
             reloading = true; reloadT = 0;
-            anim.SetTrigger("Reload");
+            // no "Reload" clip trigger: the Mixamo clip waves both arms around a gun that isn't there.
+            // The reload is done procedurally in PlaceGun / OnAnimatorIK (gun tilted at the chest, left hand swaps the mag).
             Sfx.Play3D(Z47Refs.I.reload, transform.position + Vector3.up, 0.6f, 2f, 25f);
         }
 
@@ -492,11 +493,10 @@ namespace Zone47
             if (layer != 1 || !Alive || gun == null || anim == null) return;
             ikFrame = Time.frameCount;
             PlaceGun();
-            float leftW = reloading ? 0f : 1f;
             anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
             anim.SetIKPosition(AvatarIKGoal.RightHand, gun.position);
-            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftW);
-            anim.SetIKPosition(AvatarIKGoal.LeftHand, gun.TransformPoint(weapon.forePoint));
+            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
+            anim.SetIKPosition(AvatarIKGoal.LeftHand, LeftHandTarget());
             Vector3 sh = rShoulder != null ? rShoulder.position : transform.position + Vector3.up * 1.4f;
             anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0.6f);
             anim.SetIKHintPosition(AvatarIKHint.RightElbow, sh + transform.right * 0.25f + Vector3.down * 0.35f);
@@ -506,14 +506,43 @@ namespace Zone47
             anim.SetLookAtPosition(EyePos + aimDir * 10f);
         }
 
+        // reload phase 0..1 (own clock so network puppets animate it too)
+        bool wasReloading; float reloadStart;
+        float ReloadPhase()
+        {
+            if (reloading && !wasReloading) reloadStart = Time.time;
+            wasReloading = reloading;
+            if (!reloading) return 0f;
+            return Mathf.Clamp01((Time.time - reloadStart) / Mathf.Max(0.5f, weapon.reloadTime));
+        }
+        static float Ease(float a, float b, float t) { t = Mathf.Clamp01((t - a) / (b - a)); return t * t * (3f - 2f * t); }
+        /// how far the gun is rolled into the "reload" pose (in quickly, out at the end)
+        float ReloadBlend(float t) => reloading ? Ease(0f, 0.12f, t) * (1f - Ease(0.85f, 1f, t)) : 0f;
+
+        /// fore grip -> mag well -> belt pouch -> mag well -> fore grip
+        Vector3 LeftHandTarget()
+        {
+            Vector3 fore = gun.TransformPoint(weapon.forePoint);
+            if (!reloading) return fore;
+            float t = ReloadPhase();
+            Vector3 well = gun.TransformPoint(weapon.forePoint * 0.45f + new Vector3(0f, -0.09f, 0f));
+            Vector3 pouch = transform.position + Vector3.up * (crouch ? 0.6f : 0.95f) - transform.right * 0.12f + transform.forward * 0.12f;
+            Vector3 p = Vector3.Lerp(fore, well, Ease(0f, 0.15f, t));
+            p = Vector3.Lerp(p, pouch, Ease(0.18f, 0.38f, t));          // pull the empty mag, reach for a new one
+            p = Vector3.Lerp(p, well, Ease(0.5f, 0.72f, t));            // seat it
+            p = Vector3.Lerp(p, fore, Ease(0.82f, 1f, t));              // back on the handguard
+            return p;
+        }
+
         void PlaceGun()
         {
             Vector3 fwd = aimDir.sqrMagnitude > 0.01f ? aimDir.normalized : transform.forward;
             bool ready = Ready;
-            if (!ready) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.3f);         // low ready while walking around
-            if (reloading) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.45f);
+            float rb = ReloadBlend(ReloadPhase());
+            if (!ready || rb > 0f) fwd = Vector3.Slerp(transform.forward, Vector3.down, 0.3f);         // low ready while walking around
             var rot = Quaternion.LookRotation(fwd, Vector3.up);
-            if (!ready) rot = rot * Quaternion.Euler(0, -18f, 0);                              // muzzle turned slightly inward
+            if (!ready || rb > 0f) rot = rot * Quaternion.Euler(0, -18f, 0);                              // muzzle turned slightly inward
+            if (rb > 0f) rot = rot * Quaternion.Euler(-12f * rb, -10f * rb, 30f * rb);                    // tilt the mag well toward the left hand
             Vector3 sh = rShoulder != null ? rShoulder.position : transform.position + Vector3.up * (crouch ? 1.0f : 1.42f) + transform.right * 0.18f;
             gun.rotation = rot;
             gun.position = sh + rot * new Vector3(-0.06f, -0.08f, 0.24f);                      // stock in the shoulder pocket, grip in front of it

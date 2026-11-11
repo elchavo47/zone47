@@ -457,7 +457,7 @@ namespace Zone47
         public Transform gun;
         public WeaponDef def;
         Animator a; float baseYaw; bool ok;
-        Transform hips, spine, neck, lUp, lLo, lHand, rUp, rLo, rHand, lMid;
+        Transform hips, spine, neck, lUp, lLo, lHand, rUp, rLo, rHand, lMid, lIdx, lLit;
         Transform lThigh, lKnee, lFoot, rThigh, rKnee, rFoot, lToes, rToes;
 
         void Start()
@@ -469,7 +469,7 @@ namespace Zone47
             hips = B(HumanBodyBones.Hips); spine = B(HumanBodyBones.Spine); neck = B(HumanBodyBones.Neck);
             lUp = B(HumanBodyBones.LeftUpperArm); lLo = B(HumanBodyBones.LeftLowerArm); lHand = B(HumanBodyBones.LeftHand);
             rUp = B(HumanBodyBones.RightUpperArm); rLo = B(HumanBodyBones.RightLowerArm); rHand = B(HumanBodyBones.RightHand);
-            lMid = B(HumanBodyBones.LeftMiddleProximal);
+            lMid = B(HumanBodyBones.LeftMiddleProximal); lIdx = B(HumanBodyBones.LeftIndexProximal); lLit = B(HumanBodyBones.LeftLittleProximal);
             lThigh = B(HumanBodyBones.LeftUpperLeg); lKnee = B(HumanBodyBones.LeftLowerLeg); lFoot = B(HumanBodyBones.LeftFoot);
             rThigh = B(HumanBodyBones.RightUpperLeg); rKnee = B(HumanBodyBones.RightLowerLeg); rFoot = B(HumanBodyBones.RightFoot);
             lToes = B(HumanBodyBones.LeftToes); rToes = B(HumanBodyBones.RightToes);
@@ -533,9 +533,30 @@ namespace Zone47
             Vector3 palm = Vector3.zero;
             for (int pass = 0; pass < 2; pass++)
             {
-                Arm(lUp, lLo, lHand, fore - palm, gr * relL, -up * 0.7f - right * 0.6f - fwd * 0.1f);
+                Solve(lUp, lLo, lHand, fore - palm, -up * 0.7f - right * 0.6f - fwd * 0.1f);
+                lHand.rotation = LeftGrip(gr, gunUp, muzzle, gr * relL);
                 palm = lMid != null ? (lMid.position - lHand.position) * 0.5f : Vector3.zero;   // the gun sits in the palm, not at the wrist
             }
+        }
+
+        /// Left hand built from the hand's real shape (finger and knuckle bones) instead of copying the idle clip's wrist angle:
+        /// palm flat against the underside of the handguard, fingers wrapping the side, turned as little as possible away
+        /// from the forearm. (Copying the clip's angle onto a rifle held in a different direction twisted the wrist backwards.)
+        Quaternion LeftGrip(Quaternion gr, Vector3 gunUp, Vector3 muzzle, Quaternion fallback)
+        {
+            if (lMid == null || lIdx == null || lLit == null) return fallback;
+            Vector3 fCur = lMid.position - lHand.position, across = lIdx.position - lLit.position;
+            if (fCur.sqrMagnitude < 1e-6f || across.sqrMagnitude < 1e-6f) return fallback;
+            Vector3 backCur = Vector3.Cross(fCur, across);                       // back of a left hand
+            if (backCur.sqrMagnitude < 1e-8f) return fallback;
+            Vector3 forearm = (lHand.position - lLo.position).normalized;
+            Vector3 gunRight = gr * Vector3.right;
+            if (Vector3.Dot(gunRight, forearm) < -0.2f) gunRight = -gunRight;    // wrap the side the arm comes toward, never bend back over the wrist
+            Vector3 wantF = Vector3.ProjectOnPlane(gunRight * 0.55f + forearm * 0.7f + muzzle * 0.15f, gunUp);
+            if (wantF.sqrMagnitude < 1e-6f) return fallback;
+            Quaternion cur = Quaternion.LookRotation(fCur.normalized, backCur.normalized);
+            Quaternion want = Quaternion.LookRotation(wantF.normalized, -gunUp);  // palm up into the handguard, back of the hand down
+            return want * Quaternion.Inverse(cur) * lHand.rotation;
         }
 
         static void Arm(Transform up, Transform lo, Transform hand, Vector3 wrist, Quaternion handRot, Vector3 pole)

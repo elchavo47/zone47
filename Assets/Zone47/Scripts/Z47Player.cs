@@ -63,6 +63,10 @@ namespace Zone47
         static void Spring(ref float x, ref float v, float k, float c, float dt) { v += (-k * x - c * v) * dt; x += v * dt; }
         int shotIdx; float lastShotAt = -9f;
         Vector3 swayPos; Vector3 swayRot; float strafeTilt;
+        Vector2 lookVel;                     // smoothed look speed (deg/s): touch drags arrive in uneven chunks, raw deltas made the gun shake
+        float moveX;                         // smoothed stick X so strafing doesn't flick the gun/camera
+        float camKickRoll, camKickRollVel; Vector3 camKickPos, camKickPosVel;   // per-shot camera punch
+        float bobPhase;
         float sprintT, crouchT, proneT;      // 0..1 blends: the weapon eases into the run / crouch / prone pose instead of snapping
         bool sprintLatch;                    // sprint starts at a full push and only stops when the stick clearly comes back
         float adsT;
@@ -332,14 +336,24 @@ namespace Zone47
 
             // camera recoil on a spring: sharp kick, slight overshoot, settles (feels like a real stock in the shoulder)
             float sdt = Mathf.Min(Time.deltaTime, 0.033f);
-            Spring(ref recoilPitch, ref recoilPitchVel, 110f, 17f, sdt);
-            Spring(ref recoilYaw, ref recoilYawVel, 110f, 17f, sdt);
+            Spring(ref recoilPitch, ref recoilPitchVel, 70f, 11f, sdt);
+            Spring(ref recoilYaw, ref recoilYawVel, 70f, 11f, sdt);
+            Spring(ref camKickRoll, ref camKickRollVel, 120f, 12f, sdt);
+            Spring(ref camKickPos.x, ref camKickPosVel.x, 160f, 16f, sdt);
+            Spring(ref camKickPos.y, ref camKickPosVel.y, 160f, 16f, sdt);
+            Spring(ref camKickPos.z, ref camKickPosVel.z, 160f, 16f, sdt);
+            lookVel = Vector2.Lerp(lookVel, d / Mathf.Max(Time.deltaTime, 0.001f), 1f - Mathf.Exp(-Time.deltaTime * 14f));
+            moveX = Mathf.Lerp(moveX, Mathf.Abs(PInput.move.x) < 0.15f ? 0f : PInput.move.x, 1f - Mathf.Exp(-Time.deltaTime * 6f));
             transform.rotation = Quaternion.Euler(0, yaw, 0);
 
             shake = Mathf.MoveTowards(shake, 0, Time.deltaTime * 2.2f);
             Vector3 sh = shake > 0 ? new Vector3(Mathf.PerlinNoise(Time.time * 25f, 0) - 0.5f, Mathf.PerlinNoise(0, Time.time * 25f) - 0.5f, 0) * shake * 6f : Vector3.zero;
-            camRoll = Mathf.Lerp(camRoll, -PInput.move.x * 1.2f * (1f - adsT), Time.deltaTime * 5f);
-            cam.transform.localRotation = Quaternion.Euler(pitch - recoilPitch + sh.y, recoilYaw + sh.x, -leanT * 11f + camRoll);
+            float hsp = cc != null ? new Vector2(cc.velocity.x, cc.velocity.z).magnitude : 0f;
+            float walkK = grounded ? Mathf.Clamp01(hsp / 5f) * (1f - adsT * 0.85f) : 0f;
+            float bobRoll = Mathf.Sin(bobPhase * 0.5f) * 0.9f * walkK * (1f + sprintT * 0.6f);   // head sways side to side with the steps
+            float bobPitch = Mathf.Sin(bobPhase) * 0.35f * walkK;
+            camRoll = Mathf.Lerp(camRoll, -moveX * 1.5f * (1f - adsT), Time.deltaTime * 5f);
+            cam.transform.localRotation = Quaternion.Euler(pitch - recoilPitch + sh.y + bobPitch, recoilYaw + sh.x, -leanT * 11f + camRoll + bobRoll + camKickRoll);
 
             float fovT = Cur.scope ? 52f : Cur.adsFov;      // scoped: the lens does the zooming, the world around it stays wide
             adsT = Mathf.MoveTowards(adsT, Aiming ? 1f : 0f, Time.deltaTime * 6f);
@@ -466,7 +480,10 @@ namespace Zone47
             landDip = Mathf.Lerp(landDip, 0, Time.deltaTime * 8f);
 
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
-            float bob = grounded ? Mathf.Sin(Time.time * Mathf.Lerp(9f, 13f, sprintT)) * Mathf.Clamp01(hs / 6f) * 0.03f * (1f - adsT * 0.8f) : 0f;
+            if (grounded) bobPhase += Time.deltaTime * Mathf.Lerp(9f, 13f, sprintT) * Mathf.Clamp01(hs / 3f + 0.2f);
+            float bobK = grounded ? Mathf.Clamp01(hs / 6f) * (1f - adsT * 0.8f) : 0f;
+            float bob = Mathf.Sin(bobPhase) * 0.035f * bobK;
+            float bobX = Mathf.Cos(bobPhase * 0.5f) * 0.025f * bobK;
             // lean: peek around corners, stopped early by walls so the camera never clips through
             int lean = (prone || sprint || !Alive) ? 0 : PInput.lean;
             if (lean != 0)
@@ -476,7 +493,7 @@ namespace Zone47
                     ? Mathf.Clamp01((lh.distance - 0.05f) / 0.37f) : 1f;
             }
             leanT = Mathf.Lerp(leanT, lean * leanMax, Time.deltaTime * 8f);
-            cam.transform.localPosition = new Vector3(leanT * 0.37f, camH + bob - landDip - Mathf.Abs(leanT) * 0.06f, 0);
+            cam.transform.localPosition = new Vector3(leanT * 0.37f + bobX, camH + bob - landDip - Mathf.Abs(leanT) * 0.06f, 0) + camKickPos;
 
             if (grounded && hs > 0.5f)
             {
@@ -637,7 +654,11 @@ namespace Zone47
             shotIdx++; lastShotAt = Time.time;
             float climb = Mathf.Lerp(1f, 0.6f, Mathf.Clamp01(shotIdx / 10f));      // first rounds climb most
             // camera: impulse into the spring (visual kick) + a permanent share the player has to pull down
-            recoilPitchVel += rk * climb * 22f;
+            recoilPitchVel += rk * climb * 34f;
+            // camera punch: the whole view jolts back and rolls a little, not just the gun
+            float pk = aimed ? 0.6f : 1f;
+            camKickRollVel += Random.Range(-1f, 1f) * rk * 14f * pk;
+            camKickPosVel += new Vector3(Random.Range(-0.15f, 0.15f), 0.12f, -0.6f) * rk * pk;
             pitch -= rk * 0.3f * climb;
             float side = Mathf.Sin(shotIdx * 0.8f) * 0.5f + Random.Range(-0.25f, 0.25f);
             recoilYawVel += rk * side * 9f; yaw += rk * side * 0.1f;
@@ -795,16 +816,17 @@ namespace Zone47
 
             // inertial sway (lags behind the view, springs back)
             float aimK = 1f - adsT * 0.97f;
-            Vector2 lk = Vector2.ClampMagnitude(PInput.look * 0.0006f, 0.035f);
-            swayPos = Vector3.Lerp(swayPos, new Vector3(-lk.x, -lk.y, 0), Time.deltaTime * 9f);
-            swayRot = Vector3.Lerp(swayRot, new Vector3(lk.y * 140f, -lk.x * 140f, -lk.x * 220f), Time.deltaTime * 9f);
-            strafeTilt = Mathf.Lerp(strafeTilt, -PInput.move.x * 4f, Time.deltaTime * 6f);
+            Vector2 lk = Vector2.ClampMagnitude(lookVel * 0.00012f, 0.03f);
+            float sw = 1f - Mathf.Exp(-Time.deltaTime * 8f);
+            swayPos = Vector3.Lerp(swayPos, new Vector3(-lk.x, -lk.y, 0), sw);
+            swayRot = Vector3.Lerp(swayRot, new Vector3(lk.y * 120f, -lk.x * 120f, -lk.x * 160f), sw);
+            strafeTilt = Mathf.Lerp(strafeTilt, -moveX * 4f, 1f - Mathf.Exp(-Time.deltaTime * 6f));
             pos += swayPos * aimK;
             rot *= Quaternion.Euler(swayRot.x * aimK, swayRot.y * aimK, (swayRot.z + strafeTilt) * aimK);
             if (!grounded) pos += new Vector3(0, -Mathf.Clamp(velocity.y, -6f, 6f) * 0.004f, 0) * aimK;
             pos += new Vector3(0, -landDip * 0.25f, 0);
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
-            float bt = Time.time * Mathf.Lerp(9f, 13f, sprintT);
+            float bt = bobPhase;
             pos += new Vector3(Mathf.Cos(bt * 0.5f) * 0.012f, Mathf.Abs(Mathf.Sin(bt * 0.5f)) * 0.01f, 0) * Mathf.Clamp01(hs / 5f) * (1f - adsT * 0.9f);
             // stance poses blend in/out over ~0.25 s (they used to switch in a single frame)
             float sm = 1f - Mathf.Exp(-Time.deltaTime * 9f);
