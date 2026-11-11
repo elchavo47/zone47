@@ -50,7 +50,7 @@ namespace Zone47
             }
 
             Vector3 c = new Vector3(mb.center.x, groundY, mb.center.z);
-            float ex = mb.extents.x, ez = mb.extents.z;
+            float ex = mb.extents.x + 30f, ez = mb.extents.z + 30f;       // town + a margin
             // distance from the map centre to the map edge along a direction (rectangle), so shapes follow any layout
             float Edge(float dx, float dz)
             {
@@ -82,7 +82,7 @@ namespace Zone47
                 ridge = ridge * ridge;
                 float big = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((d - 150f) / 220f));
                 float rock = Fbm(x, z, 0.03f, 3, so + 120f) * 18f * foot;
-                float h = m0 * (dunes + 3f) + foot * 14f * Fbm(x, z, 0.008f, 3, so + 200f) + rock + big * (25f + 150f * ridge) * (0.6f + 0.8f * Fbm(x, z, 0.0025f, 2, so + 300f));
+                float h = m0 * (dunes + 5f) + foot * 14f * Fbm(x, z, 0.008f, 3, so + 200f) + rock + big * (25f + 150f * ridge) * (0.6f + 0.8f * Fbm(x, z, 0.0025f, 2, so + 300f));
                 float r = Mathf.Sqrt((x - c.x) * (x - c.x) + (z - c.z) * (z - c.z));
                 h *= 1f - Mathf.SmoothStep(0f, 1f, Mathf.Clamp01((r - 560f) / 140f));       // settle back to the horizon floor
                 return Mathf.Max(h, 0f) * (d < 5f ? 0f : 1f) + (d < 5f ? -0.06f : 0f);
