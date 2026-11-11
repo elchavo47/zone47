@@ -45,7 +45,7 @@ namespace Zone47
             switch (w)
             {
                 case Noon:
-                    if (Settings.Map == 1)      // only the 2nd map is overcast and gloomy; the 1st map keeps its normal daylight
+                    if (Settings.Map == 0)      // only the desert map is overcast and gloomy; the others keep normal daylight
                     {
                         Set(sun, new Color(0.92f, 0.86f, 0.78f), 1.0f, 46f, 0.8f);
                         Fill(fill, new Color(0.55f, 0.6f, 0.7f), 0.1f);
