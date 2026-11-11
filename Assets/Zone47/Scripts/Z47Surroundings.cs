@@ -33,7 +33,11 @@ namespace Zone47
                 if (m.HasProperty("_BaseColor")) m.SetColor("_BaseColor", tint); else m.color = tint;
                 m.mainTextureScale = new Vector2(tile, tile);
                 if (m.HasProperty("_BumpMap")) m.SetTextureScale("_BumpMap", new Vector2(tile, tile));
-                if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", 0.02f);
+                if (m.HasProperty("_Smoothness")) m.SetFloat("_Smoothness", 0f);
+                if (m.HasProperty("_Metallic")) m.SetFloat("_Metallic", 0f);
+                if (m.HasProperty("_SpecularHighlights")) m.SetFloat("_SpecularHighlights", 0f);       // no sun glints on the far ground
+                if (m.HasProperty("_EnvironmentReflections")) m.SetFloat("_EnvironmentReflections", 0f);
+                m.EnableKeyword("_SPECULARHIGHLIGHTS_OFF"); m.EnableKeyword("_ENVIRONMENTREFLECTIONS_OFF");
                 return m;
             }
             void Emit(string name, Mesh mesh, Material mat, bool cast)
@@ -55,11 +59,11 @@ namespace Zone47
             }
 
             // 1) huge ground disk just under the map floor: no more void / flat grey beyond the edge
-            Emit("Ground", Disk(c + Vector3.down * 0.06f, 900f, 40), Tex(new Color(0.78f, 0.74f, 0.68f), 1f), false);
+            Emit("Ground", Disk(c + Vector3.down * 0.06f, 900f, 40), Tex(new Color(0.55f, 0.52f, 0.48f), 1f), false);
 
             // 2) rolling hills close to the map + a taller mountain ring far away
-            Emit("Hills", Ring(c, Edge, 14f, 70f, 12f, 48, groundY, rng, 5f, 13f), Tex(new Color(0.70f, 0.64f, 0.56f), 0.8f), false);
-            Emit("Mountains", Ring(c, Edge, 150f, 90f, 18f, 72, groundY, rng, 55f, 140f), Tex(new Color(0.40f, 0.34f, 0.29f), 0.12f), false);
+            Emit("Hills", Ring(c, Edge, 14f, 70f, 12f, 48, groundY, rng, 5f, 13f), Tex(new Color(0.42f, 0.38f, 0.34f), 0.8f), false);
+            Emit("Mountains", Ring(c, Edge, 150f, 90f, 18f, 72, groundY, rng, 55f, 140f), Tex(new Color(0.20f, 0.18f, 0.16f), 0.12f), false);
 
             // 3) vegetation clusters outside the bounds
             var pine = Pine(); var trunk = Cyl(0.16f, 1.8f, 6); var deadTrunk = DeadTree(); var bush = Cone(1.0f, 0.9f, 7, 0.25f); var rock = Rock();
