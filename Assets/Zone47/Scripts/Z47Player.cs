@@ -350,9 +350,9 @@ namespace Zone47
             Vector3 sh = shake > 0 ? new Vector3(Mathf.PerlinNoise(Time.time * 25f, 0) - 0.5f, Mathf.PerlinNoise(0, Time.time * 25f) - 0.5f, 0) * shake * 6f : Vector3.zero;
             float hsp = cc != null ? new Vector2(cc.velocity.x, cc.velocity.z).magnitude : 0f;
             float walkK = grounded ? Mathf.Clamp01(hsp / 5f) * (1f - adsT * 0.85f) : 0f;
-            float bobRoll = Mathf.Sin(bobPhase * 0.5f) * 0.9f * walkK * (1f + sprintT * 0.6f);   // head sways side to side with the steps
-            float bobPitch = Mathf.Sin(bobPhase) * 0.35f * walkK;
-            camRoll = Mathf.Lerp(camRoll, -moveX * 1.5f * (1f - adsT), Time.deltaTime * 5f);
+            float bobRoll = Mathf.Sin(bobPhase * 0.5f) * 0.12f * walkK * (1f + sprintT * 0.4f);   // head sways side to side with the steps
+            float bobPitch = Mathf.Sin(bobPhase) * 0.08f * walkK;
+            camRoll = Mathf.Lerp(camRoll, -moveX * 0.5f * (1f - adsT), Time.deltaTime * 5f);
             cam.transform.localRotation = Quaternion.Euler(pitch - recoilPitch + sh.y + bobPitch, recoilYaw + sh.x, -leanT * 11f + camRoll + bobRoll + camKickRoll);
 
             float fovT = Cur.scope ? 52f : Cur.adsFov;      // scoped: the lens does the zooming, the world around it stays wide
@@ -482,8 +482,8 @@ namespace Zone47
             float hs = new Vector2(cc.velocity.x, cc.velocity.z).magnitude;
             if (grounded) bobPhase += Time.deltaTime * Mathf.Lerp(9f, 13f, sprintT) * Mathf.Clamp01(hs / 3f + 0.2f);
             float bobK = grounded ? Mathf.Clamp01(hs / 6f) * (1f - adsT * 0.8f) : 0f;
-            float bob = Mathf.Sin(bobPhase) * 0.035f * bobK;
-            float bobX = Mathf.Cos(bobPhase * 0.5f) * 0.025f * bobK;
+            float bob = Mathf.Sin(bobPhase) * 0.018f * bobK;
+            float bobX = Mathf.Cos(bobPhase * 0.5f) * 0.004f * bobK;
             // lean: peek around corners, stopped early by walls so the camera never clips through
             int lean = (prone || sprint || !Alive) ? 0 : PInput.lean;
             if (lean != 0)
@@ -654,14 +654,14 @@ namespace Zone47
             shotIdx++; lastShotAt = Time.time;
             float climb = Mathf.Lerp(1f, 0.6f, Mathf.Clamp01(shotIdx / 10f));      // first rounds climb most
             // camera: impulse into the spring (visual kick) + a permanent share the player has to pull down
-            recoilPitchVel += rk * climb * 34f;
+            recoilPitchVel += rk * climb * 62f;
             // camera punch: the whole view jolts back and rolls a little, not just the gun
             float pk = aimed ? 0.6f : 1f;
-            camKickRollVel += Random.Range(-1f, 1f) * rk * 14f * pk;
-            camKickPosVel += new Vector3(Random.Range(-0.15f, 0.15f), 0.12f, -0.6f) * rk * pk;
+            camKickRollVel += Random.Range(-1f, 1f) * rk * 24f * pk;
+            camKickPosVel += new Vector3(Random.Range(-0.25f, 0.25f), 0.2f, -1.1f) * rk * pk;
             pitch -= rk * 0.3f * climb;
             float side = Mathf.Sin(shotIdx * 0.8f) * 0.5f + Random.Range(-0.25f, 0.25f);
-            recoilYawVel += rk * side * 9f; yaw += rk * side * 0.1f;
+            recoilYawVel += rk * side * 15f; yaw += rk * side * 0.1f;
             EjectCasing(s);
             if (s.anim != null) PlayAnim(s, "fire", 0f);
 
