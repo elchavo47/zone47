@@ -56,10 +56,12 @@ namespace Zone47
                 // Mobile presets keep the look (same lights/post) but render fewer pixels and cheaper shadows.
                 // fair tiers: every tier keeps the same look (colour grading, shadows, sharp-ish image);
                 // lower tiers save on shadow reach/resolution, edge smoothing, bloom and particles, not on looking blurry
-                float[] scale = Mobile ? new[] { 0.8f, 0.87f, 0.94f, 1f } : new[] { 0.85f, 0.92f, 1f, 1f };
+                float[] scale = Mobile ? new[] { 0.9f, 0.95f, 1f, 1f } : new[] { 1f, 1f, 1f, 1f };      // desktop never renders below native resolution (that was the blur)
                 float[] shadow = Mobile ? new[] { 22f, 32f, 45f, 60f } : new[] { 30f, 40f, 50f, 70f };
-                int[] msaa = { 1, 1, 2, 4 };
+                int[] msaa = Mobile ? new[] { 1, 1, 2, 4 } : new[] { 2, 4, 4, 4 };
                 urp.renderScale = scale[Quality];
+                QualitySettings.globalTextureMipmapLimit = 0;                      // full-resolution textures on every tier
+                QualitySettings.anisotropicFiltering = AnisotropicFiltering.ForceEnable;   // sharp ground/walls at grazing angles
                 urp.shadowDistance = shadow[Quality];
                 urp.msaaSampleCount = msaa[Quality];
                 urp.shadowCascadeCount = Quality >= 1 ? 2 : 1;          // near cascade keeps close shadows crisp
@@ -74,7 +76,7 @@ namespace Zone47
         }
 
         /// SMAA is expensive on phones; FXAA there, SMAA on desktop high+.
-        public static AntialiasingMode AA => Quality >= 3 || (!Mobile && Quality >= 2) ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
+        public static AntialiasingMode AA => Quality >= 3 || !Mobile || Quality >= 2 ? AntialiasingMode.SubpixelMorphologicalAntiAliasing : AntialiasingMode.FastApproximateAntialiasing;
 
         /// Colour grading is part of the game's look, so every tier keeps it (low only drops bloom).
         public static bool PostFx => true;

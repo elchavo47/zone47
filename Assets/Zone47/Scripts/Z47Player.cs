@@ -866,8 +866,9 @@ namespace Zone47
             if (reloading && s.anim == null)
             {
                 float t = reloadT / s.reloadDur; float w = Mathf.Sin(Mathf.Clamp01(t) * Mathf.PI);
-                pos += new Vector3(-0.03f, -0.07f, -0.02f) * w;
-                rot *= Quaternion.Euler(18f * w, 10f * w, 32f * w);
+                bool pst = d.kind == WeaponKind.Pistol;
+                pos += (pst ? new Vector3(-0.02f, 0.01f, -0.03f) : new Vector3(-0.03f, -0.07f, -0.02f)) * w;
+                rot *= pst ? Quaternion.Euler(-8f * w, 6f * w, 14f * w) : Quaternion.Euler(18f * w, 10f * w, 32f * w);   // pistol: bring it up toward the chest, only a slight tilt
             }
             if (switchT > 0)
             {
@@ -896,7 +897,8 @@ namespace Zone47
             {
                 arms.Visible = !hide && (s.anim == null || nadeVis != null);          // animated weapons bring their own arms
                 float leftW = 1f;
-                if (reloading) { float t = reloadT / s.reloadDur; leftW = (t > 0.2f && t < 0.7f) ? 0f : 1f; }
+                if (reloading) { float t = reloadT / s.reloadDur; leftW = (d.kind != WeaponKind.Pistol && t > 0.2f && t < 0.7f) ? 0f : 1f; }
+                if (arms != null) arms.reloadK = reloading && d.kind == WeaponKind.Pistol ? Mathf.Sin(Mathf.Clamp01(reloadT / s.reloadDur) * Mathf.PI) : 0f;
                 if (throwT >= 0 || nadeEquipped) leftW = 0f;
                 if (nadeVis != null && nadeVis.activeSelf && nadeT > 0.4f)
                     arms.SetTargets(nadeVis.transform.position - cam.transform.forward * 0.03f, nadeVis.transform.position, cam.transform.rotation, 0f, true);   // right hand on the grenade, left hand down
@@ -1069,7 +1071,7 @@ namespace Zone47
         Transform[] bones; Quaternion[] restRot;
         Renderer[] rends;
         bool visible = true;
-        Vector3 gripT, foreT; Quaternion gunRot; float leftW = 1f; bool pistol; bool hasTarget;
+        Vector3 gripT, foreT; Quaternion gunRot; float leftW = 1f; bool pistol; bool hasTarget; public float reloadK;
 
         public bool Visible
         {
@@ -1129,7 +1131,8 @@ namespace Zone47
 
             // left hand: under the handguard (rifles) or cupping the grip (pistol)
             Vector3 lp, lfd, lpalm;
-            if (pistol) { lp = gripT - gr * 0.03f - gu * 0.035f; lfd = (gf * 0.6f - gu * 0.5f + gr * 0.4f).normalized; lpalm = (gu * 0.4f + gr).normalized; }
+            if (pistol) { lp = gripT - gr * 0.03f - gu * 0.035f; lp = Vector3.Lerp(lp, gripT - gu * 0.13f - gr * 0.015f, reloadK);   // reload: left hand goes under the grip to swap the magazine
+                    lfd = (gf * 0.6f - gu * 0.5f + gr * 0.4f).normalized; lpalm = (gu * 0.4f + gr).normalized; }
             else { lp = foreT - gr * 0.025f - gu * 0.046f;   // hand wraps the left/under side of the handguard instead of sinking into it
                    lfd = (gf * 0.85f + gr * 0.5f).normalized; lpalm = (gu + gr * 0.35f).normalized; }
             Vector3 lowered = cam.TransformPoint(new Vector3(-0.16f, -0.42f, 0.12f));      // hand drops away during reload/throw
